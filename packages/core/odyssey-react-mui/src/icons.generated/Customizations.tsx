@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -31,7 +31,7 @@ const CustomizationsIcon = forwardRef<SVGSVGElement, CustomizationsIconProps>(
         <>
           <path
             clipRule="evenodd"
-            d="M10.667 3.333a1 1 0 1 1 2 0 1 1 0 0 1-2 0ZM9.43 4H2V2.667h7.43A2.334 2.334 0 1 1 9.43 4Zm-2.86 9.333a2.334 2.334 0 1 1 0-1.333H14v1.333H6.57ZM4 8.667H2V7.333h3.763a2.334 2.334 0 0 1 4.474 0H14v1.334h-3.763a2.334 2.334 0 0 1-4.474 0H4ZM8 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm-4.667 5.667a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"
+            d="M10.667 3.333a1 1 0 1 1 2 0 1 1 0 0 1-2 0M9.43 4H2V2.667h7.43A2.334 2.334 0 1 1 9.43 4m-2.86 9.333a2.334 2.334 0 1 1 0-1.333H14v1.333zM4 8.667H2V7.333h3.763a2.334 2.334 0 0 1 4.474 0H14v1.334h-3.763a2.334 2.334 0 0 1-4.474 0zM8 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-4.667 5.667a1 1 0 1 1 2 0 1 1 0 0 1-2 0"
             fill="currentColor"
             fillRule="evenodd"
           />

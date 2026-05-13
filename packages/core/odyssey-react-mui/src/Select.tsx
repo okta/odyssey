@@ -461,6 +461,7 @@ const Select = <
           {...inputValues}
           aria-describedby={ariaDescribedBy}
           aria-errormessage={errorMessageElementId}
+          disabled={isDisabled}
           displayEmpty
           id={id}
           inputProps={{

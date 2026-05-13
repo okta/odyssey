@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -33,7 +33,7 @@ const InformationCircleIcon = forwardRef<
       <>
         <path
           clipRule="evenodd"
-          d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2ZM.667 8a7.333 7.333 0 1 1 14.666 0A7.333 7.333 0 0 1 .667 8ZM8 5.833a.833.833 0 1 0 0-1.666.833.833 0 0 0 0 1.666Zm.667 1.834a.667.667 0 0 0-1.334 0v4h1.334v-4Z"
+          d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2M.667 8a7.333 7.333 0 1 1 14.666 0A7.333 7.333 0 0 1 .667 8M8 5.833a.833.833 0 1 0 0-1.666.833.833 0 0 0 0 1.666m.667 1.834a.667.667 0 0 0-1.334 0v4h1.334z"
           fill="currentColor"
           fillRule="evenodd"
         />

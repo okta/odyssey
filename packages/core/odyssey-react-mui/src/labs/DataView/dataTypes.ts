@@ -14,6 +14,7 @@ import {
   MRT_Cell,
   MRT_Column,
   MRT_ColumnDef,
+  MRT_Row,
   MRT_RowData,
   MRT_RowSelectionState,
   MRT_SortingState,
@@ -61,6 +62,12 @@ export type DataColumns<
 > = DataTableColumn<TData, TValue>[];
 
 export type DataRow = MRT_RowData;
+
+export type GetRowId<TData extends MRT_RowData> = (
+  originalRow: TData,
+  index: number,
+  parentRow?: MRT_Row<TData>,
+) => string;
 
 export type DataGetDataType = {
   filters?: DataFilter[];

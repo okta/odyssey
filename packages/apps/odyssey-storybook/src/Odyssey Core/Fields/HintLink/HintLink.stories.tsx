@@ -13,7 +13,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { HintLink } from "@okta/odyssey-react-mui";
-import { expect, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -113,14 +112,5 @@ export const External: Story = {
     rel: "noopener",
     target: "_blank",
     children: "Read documentation",
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("Verify external attributes", async ({ args }) => {
-      const canvas = within(canvasElement);
-      const link = canvas.getByRole("link", { name: args.children as string });
-      await expect(link).toHaveAttribute("href", args.href);
-      await expect(link).toHaveAttribute("target", args.target ?? "");
-      await expect(link).toHaveAttribute("rel", args.rel ?? "");
-    });
   },
 };

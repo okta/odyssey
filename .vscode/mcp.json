@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "playwright": {
+      "command": "yarn",
+      "args": ["workspace", "@okta/odyssey-prototype", "playwright-mcp"]
+    }
+  }
+}

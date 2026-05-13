@@ -10,8 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { act, renderHook, waitFor } from "@testing-library/react";
+import { renderHook } from "vitest-browser-react";
 
+import { appendToSandbox } from "../test-utils/appendToSandbox.js";
 import {
   getIsScrollHeightElement,
   getIsYAxisScrollContainer,
@@ -48,7 +49,8 @@ const renderElements = ({
   childElement.style.setProperty("height", scrollableElementHeight);
 
   // For these Elements to have height, they need to be appended to the DOM.
-  document.body.append(containerElement);
+  // Tagged via `appendToSandbox` so the global afterEach removes it.
+  appendToSandbox(containerElement);
   containerElement.append(childElement);
 
   return {
@@ -58,17 +60,13 @@ const renderElements = ({
 };
 
 describe(getIsScrollHeightElement.name, () => {
-  afterEach(() => {
-    document.body.innerHTML = "";
-  });
-
   test("is scroll height when equal height", async () => {
     const { containerElement, scrollableElement } = renderElements({
       containerElementHeight: "100px",
       scrollableElementHeight: "100px",
     });
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(
         getIsScrollHeightElement({
           containerElement,
@@ -84,7 +82,7 @@ describe(getIsScrollHeightElement.name, () => {
       scrollableElementHeight: "101px",
     });
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(
         getIsScrollHeightElement({
           containerElement,
@@ -100,7 +98,7 @@ describe(getIsScrollHeightElement.name, () => {
       scrollableElementHeight: "99px",
     });
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(
         getIsScrollHeightElement({
           containerElement,
@@ -112,10 +110,6 @@ describe(getIsScrollHeightElement.name, () => {
 });
 
 describe(getIsYAxisScrollContainer.name, () => {
-  afterEach(() => {
-    document.body.innerHTML = "";
-  });
-
   describe("is not y-axis scroll container", () => {
     test("when overflow visible", async () => {
       const { containerElement } = renderElements({
@@ -125,7 +119,7 @@ describe(getIsYAxisScrollContainer.name, () => {
 
       containerElement.style.setProperty("overflow", "visible");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrollContainer(containerElement)).toBe(false);
       });
     });
@@ -138,7 +132,7 @@ describe(getIsYAxisScrollContainer.name, () => {
 
       containerElement.style.setProperty("overflow-y", "visible");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrollContainer(containerElement)).toBe(false);
       });
     });
@@ -151,7 +145,7 @@ describe(getIsYAxisScrollContainer.name, () => {
 
       containerElement.style.setProperty("overflow", "hidden");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrollContainer(containerElement)).toBe(false);
       });
     });
@@ -164,7 +158,7 @@ describe(getIsYAxisScrollContainer.name, () => {
 
       containerElement.style.setProperty("overflow-y", "hidden");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrollContainer(containerElement)).toBe(false);
       });
     });
@@ -179,7 +173,7 @@ describe(getIsYAxisScrollContainer.name, () => {
 
       containerElement.style.setProperty("overflow", "auto");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrollContainer(containerElement)).toBe(true);
       });
     });
@@ -192,7 +186,7 @@ describe(getIsYAxisScrollContainer.name, () => {
 
       containerElement.style.setProperty("overflow-y", "auto");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrollContainer(containerElement)).toBe(true);
       });
     });
@@ -205,7 +199,7 @@ describe(getIsYAxisScrollContainer.name, () => {
 
       containerElement.style.setProperty("overflow", "scroll");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrollContainer(containerElement)).toBe(true);
       });
     });
@@ -218,7 +212,7 @@ describe(getIsYAxisScrollContainer.name, () => {
 
       containerElement.style.setProperty("overflow-y", "scroll");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrollContainer(containerElement)).toBe(true);
       });
     });
@@ -226,10 +220,6 @@ describe(getIsYAxisScrollContainer.name, () => {
 });
 
 describe(getIsYAxisScrolling.name, () => {
-  afterEach(() => {
-    document.body.innerHTML = "";
-  });
-
   describe("is not y-axis scrolling", () => {
     test("when content shorter", async () => {
       const { containerElement } = renderElements({
@@ -239,7 +229,7 @@ describe(getIsYAxisScrolling.name, () => {
 
       containerElement.style.setProperty("overflow", "auto");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrolling(containerElement)).toBe(false);
       });
     });
@@ -252,7 +242,7 @@ describe(getIsYAxisScrolling.name, () => {
 
       containerElement.style.setProperty("overflow", "auto");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrolling(containerElement)).toBe(false);
       });
     });
@@ -263,7 +253,7 @@ describe(getIsYAxisScrolling.name, () => {
         scrollableElementHeight: "101px",
       });
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrolling(containerElement)).toBe(false);
       });
     });
@@ -276,7 +266,7 @@ describe(getIsYAxisScrolling.name, () => {
 
       containerElement.style.setProperty("overflow", "visible");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrolling(containerElement)).toBe(false);
       });
     });
@@ -289,7 +279,7 @@ describe(getIsYAxisScrolling.name, () => {
 
       containerElement.style.setProperty("overflow", "hidden");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrolling(containerElement)).toBe(false);
       });
     });
@@ -304,7 +294,7 @@ describe(getIsYAxisScrolling.name, () => {
 
       containerElement.style.setProperty("overflow", "auto");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrolling(containerElement)).toBe(true);
       });
     });
@@ -317,7 +307,7 @@ describe(getIsYAxisScrolling.name, () => {
 
       containerElement.style.setProperty("overflow-y", "auto");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrolling(containerElement)).toBe(true);
       });
     });
@@ -330,7 +320,7 @@ describe(getIsYAxisScrolling.name, () => {
 
       containerElement.style.setProperty("overflow", "scroll");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrolling(containerElement)).toBe(true);
       });
     });
@@ -343,7 +333,7 @@ describe(getIsYAxisScrolling.name, () => {
 
       containerElement.style.setProperty("overflow-y", "scroll");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getIsYAxisScrolling(containerElement)).toBe(true);
       });
     });
@@ -351,10 +341,6 @@ describe(getIsYAxisScrolling.name, () => {
 });
 
 describe(getNestedScrollContainers.name, () => {
-  afterEach(() => {
-    document.body.innerHTML = "";
-  });
-
   test("finds scroll container when content has overflow", async () => {
     const { containerElement, scrollableElement } = renderElements({
       containerElementHeight: "100px",
@@ -365,7 +351,7 @@ describe(getNestedScrollContainers.name, () => {
     containerElement.style.setProperty("overflow-y", "auto");
     scrollableElement.style.setProperty("overflow-y", "auto");
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(getNestedScrollContainers(containerElement)).toEqual([
         scrollableElement,
       ]);
@@ -394,7 +380,7 @@ describe(getNestedScrollContainers.name, () => {
       containerElement.style.setProperty("overflow-y", "auto");
       nestedScrollableElement.style.setProperty("overflow-y", "auto");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getNestedScrollContainers(containerElement)).toEqual([
           nestedScrollableElement,
         ]);
@@ -424,7 +410,7 @@ describe(getNestedScrollContainers.name, () => {
       nestedContainerElement.style.setProperty("overflow-y", "auto");
       nestedScrollableElement.style.setProperty("overflow-y", "auto");
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(getNestedScrollContainers(containerElement)).toEqual([
           scrollableElement,
           nestedContainerElement,
@@ -440,22 +426,13 @@ describe(getNestedScrollContainers.name, () => {
       scrollableElementHeight: "100px",
     });
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(getNestedScrollContainers(containerElement)).toEqual([]);
     });
   });
 });
 
 describe(useScrollState.name, () => {
-  afterEach(async () => {
-    // This needs to be wrapped in `act` because the web component unmounts the React app, and React events have to be wrapped in `act`.
-    await act(async () => {
-      // Remove any appended elements because of this hacky process of rendering to the global DOM.
-      document.body.innerHTML = "";
-      return Promise.resolve();
-    });
-  });
-
   describe("is scrolling", () => {
     test("when container scrolled", async () => {
       const { containerElement } = renderElements({
@@ -465,13 +442,15 @@ describe(useScrollState.name, () => {
 
       containerElement.style.setProperty("overflow-y", "auto");
 
-      const { result } = renderHook(() => useScrollState(containerElement));
+      const { result } = await renderHook(() =>
+        useScrollState(containerElement),
+      );
 
       expect(result.current.isContentScrolled).toBe(false);
 
       containerElement.scrollTo(0, 1);
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(result.current.isContentScrolled).toBe(true);
       });
     });
@@ -491,13 +470,15 @@ describe(useScrollState.name, () => {
       scrollableElement.append(nestedContainerElement);
       scrollableElement.style.setProperty("overflow-y", "auto");
 
-      const { result } = renderHook(() => useScrollState(containerElement));
+      const { result } = await renderHook(() =>
+        useScrollState(containerElement),
+      );
 
       expect(result.current.isContentScrolled).toBe(false);
 
       scrollableElement.scrollTo(0, 1);
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(result.current.isContentScrolled).toBe(true);
       });
     });
@@ -519,7 +500,9 @@ describe(useScrollState.name, () => {
 
       scrollableElement.append(nestedContainerElement);
 
-      const { result } = renderHook(() => useScrollState(containerElement));
+      const { result } = await renderHook(() =>
+        useScrollState(containerElement),
+      );
 
       expect(result.current.isContentScrolled).toBe(false);
 
@@ -531,7 +514,7 @@ describe(useScrollState.name, () => {
 
       nestedContainerElement.scrollTo(0, 1);
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(result.current.isContentScrolled).toBe(true);
       });
     });
@@ -560,25 +543,27 @@ describe(useScrollState.name, () => {
       adjacentContainerElement.style.setProperty("overflow-y", "auto");
       containerElement.append(adjacentContainerElement);
 
-      const { result } = renderHook(() => useScrollState(containerElement));
+      const { result } = await renderHook(() =>
+        useScrollState(containerElement),
+      );
 
       expect(result.current.isContentScrolled).toBe(false);
 
       scrollableElement.scrollTo(0, 1);
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(result.current.isContentScrolled).toBe(true);
       });
 
       scrollableElement.scrollTo(0, 0);
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(result.current.isContentScrolled).toBe(false);
       });
 
       adjacentContainerElement.scrollTo(0, 1);
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(result.current.isContentScrolled).toBe(true);
       });
     });
@@ -600,25 +585,27 @@ describe(useScrollState.name, () => {
 
       scrollableElement.append(nestedContainerElement);
 
-      const { result } = renderHook(() => useScrollState(containerElement));
+      const { result } = await renderHook(() =>
+        useScrollState(containerElement),
+      );
 
       expect(result.current.isContentScrolled).toBe(false);
 
       scrollableElement.scrollTo(0, 1);
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(result.current.isContentScrolled).toBe(true);
       });
 
       scrollableElement.scrollTo(0, 0);
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(result.current.isContentScrolled).toBe(false);
       });
 
       nestedContainerElement.scrollTo(0, 1);
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(result.current.isContentScrolled).toBe(true);
       });
     });
@@ -637,7 +624,9 @@ describe(useScrollState.name, () => {
         scrollableElementHeight: "0px",
       });
 
-      const { result } = renderHook(() => useScrollState(containerElement));
+      const { result } = await renderHook(() =>
+        useScrollState(containerElement),
+      );
 
       expect(result.current.isContentScrolled).toBe(false);
 
@@ -651,7 +640,7 @@ describe(useScrollState.name, () => {
       scrollableElement.append(nestedContainerElement);
       scrollableElement.scrollTo(0, 1);
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(result.current.isContentScrolled).toBe(true);
       });
     });
@@ -668,7 +657,9 @@ describe(useScrollState.name, () => {
         scrollableElementHeight: "0px",
       });
 
-      const { result } = renderHook(() => useScrollState(containerElement));
+      const { result } = await renderHook(() =>
+        useScrollState(containerElement),
+      );
 
       expect(result.current.isContentScrolled).toBe(false);
 
@@ -682,7 +673,7 @@ describe(useScrollState.name, () => {
       scrollableElement.style.setProperty("overflow-y", "auto");
       scrollableElement.scrollTo(0, 1);
 
-      await waitFor(() => {
+      await vi.waitFor(() => {
         expect(result.current.isContentScrolled).toBe(true);
       });
     });
@@ -697,7 +688,9 @@ describe(useScrollState.name, () => {
 
       containerElement.style.setProperty("overflow-y", "auto");
 
-      const { result } = renderHook(() => useScrollState(containerElement));
+      const { result } = await renderHook(() =>
+        useScrollState(containerElement),
+      );
 
       expect(result.current.isContentScrolled).toBe(false);
 
@@ -723,7 +716,9 @@ describe(useScrollState.name, () => {
       scrollableElement.append(nestedContainerElement);
       scrollableElement.style.setProperty("overflow-y", "auto");
 
-      const { result } = renderHook(() => useScrollState(containerElement));
+      const { result } = await renderHook(() =>
+        useScrollState(containerElement),
+      );
 
       expect(result.current.isContentScrolled).toBe(false);
 
@@ -748,7 +743,9 @@ describe(useScrollState.name, () => {
 
       adjacentContainerElement.style.setProperty("overflow-y", "auto");
 
-      const { result } = renderHook(() => useScrollState(containerElement));
+      const { result } = await renderHook(() =>
+        useScrollState(containerElement),
+      );
 
       expect(result.current.isContentScrolled).toBe(false);
 

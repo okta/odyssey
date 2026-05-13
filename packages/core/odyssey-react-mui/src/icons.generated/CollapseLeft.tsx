@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -31,7 +31,7 @@ const CollapseLeftIcon = forwardRef<SVGSVGElement, CollapseLeftIconProps>(
         <>
           <path
             clipRule="evenodd"
-            d="M1.333 14.667V1.333h1.334v13.334H1.333Zm4.943-6h9.057V7.333H6.276l3.529-3.528-.943-.943-4.29 4.29-.01.01a3.522 3.522 0 0 0-.178.187 1.005 1.005 0 0 0-.197.342 1 1 0 0 0 0 .618 1 1 0 0 0 .197.342c.054.063.121.13.177.187l.011.01 4.29 4.29.943-.943-3.529-3.528Z"
+            d="M1.333 14.667V1.333h1.334v13.334zm4.943-6h9.057V7.333H6.276l3.529-3.528-.943-.943-4.29 4.29-.01.01a4 4 0 0 0-.178.187 1 1 0 0 0-.197.342 1 1 0 0 0 0 .618 1 1 0 0 0 .197.342c.054.063.121.13.177.187l.011.01 4.29 4.29.943-.943z"
             fill="currentColor"
             fillRule="evenodd"
           />

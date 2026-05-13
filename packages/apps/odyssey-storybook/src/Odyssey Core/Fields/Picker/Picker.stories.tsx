@@ -23,6 +23,7 @@ import {
   PickerProps,
 } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react-vite";
+import { screen, userEvent, within } from "storybook/test";
 
 import { StrictArgTypes } from "../../../../.storybook/types.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
@@ -132,17 +133,36 @@ type Story<T extends PickerOptionTypes = PickerOptionTypes> = StoryObj<
   StoryPickerProps<T>
 >;
 
-export const LabelOnly: Story = {};
+export const LabelOnly: Story = {
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
+  },
+};
 
 export const WithDescription: Story = {
   args: {
     options: languagesNoMetadata,
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
   },
 };
 
 export const WithMetadata: Story = {
   args: {
     options: languagesKitchenSink,
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
   },
 };
 
@@ -156,11 +176,24 @@ export const WithGroups: Story<Required<OptionLabelOnly>> = {
     ],
     groupOptionsBy: (option) => option.group,
   },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
+  },
 };
 
 export const MultipleSelect: Story = {
   args: {
     hasMultipleChoices: true,
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+      await userEvent.click(screen.getByRole("option", { name: "English" }));
+    });
   },
 };
 
@@ -168,6 +201,12 @@ export const Loading: Story = {
   args: {
     isLoading: true,
     options: [],
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
   },
 };
 

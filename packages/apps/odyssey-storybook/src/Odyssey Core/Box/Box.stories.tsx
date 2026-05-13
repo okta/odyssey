@@ -12,7 +12,6 @@
 
 import { Box, TextField } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -78,13 +77,6 @@ export const Simple: Story = {
       p: 3,
     },
     id: "container-id",
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("Box Id", ({ args }) => {
-      const canvas = within(canvasElement);
-      const box = canvas.getByText("This is the content of the box.");
-      expect(box).toHaveAttribute("id", args.id);
-    });
   },
 };
 

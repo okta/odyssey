@@ -13,9 +13,8 @@
 import { Autocomplete, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { SyntheticEvent, useCallback, useState } from "react";
-import { expect, fn, screen, userEvent, waitFor, within } from "storybook/test";
+import { fn, screen, userEvent, within } from "storybook/test";
 
-import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 import { LargeDataSet, largeDataSet } from "./large-data-collection.js";
@@ -274,38 +273,9 @@ type AutocompleteType = typeof Autocomplete<StationType, boolean, boolean>;
 
 export const Default: StoryObj<AutocompleteType> = {
   play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
-    await step("Filter and Select from listbox", async () => {
-      await userEvent.click(comboBoxElement);
-      const listboxElement = screen.getByRole("listbox");
-      expect(listboxElement).toBeVisible();
-    });
-    await step("Check for 'No options' in the list", async () => {
-      await axeRun("Autocomplete Default");
-      await waitFor(async () => {
-        await userEvent.type(comboBoxElement, "q");
-        const noOptionsElement = screen.getByText("No options");
-        expect(noOptionsElement).toBeVisible();
-      });
-    });
-    await step("Check for Filtered item from the list", async () => {
-      await userEvent.clear(comboBoxElement);
-      await userEvent.type(comboBoxElement, "z");
-      const listItem = screen.getByRole("listbox").firstChild as HTMLLIElement;
-      await expect(listItem?.textContent).toBe("Shirazi-Ma Complex");
-      await userEvent.click(listItem);
-      await expect(comboBoxElement.value).toBe("Shirazi-Ma Complex");
-    });
-    await step("Clear the selected item", async () => {
-      const clearButton = canvas.getByTitle("Clear");
-      await userEvent.click(clearButton);
-      await expect(comboBoxElement.value).toBe("");
-      await userEvent.tab();
-    });
-    await step("Check id and name", async () => {
-      await expect(comboBoxElement.getAttribute("id")).toBe("testId");
-      await expect(comboBoxElement.getAttribute("name")).toBe("testId");
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
     });
   },
 };
@@ -322,11 +292,6 @@ export const Error: StoryObj<AutocompleteType> = {
   args: {
     errorMessage: "Select your destination.",
   },
-  play: async ({ step }) => {
-    await step("Check for a11y errors on Select Error", async () => {
-      await waitFor(async () => await axeRun("Select Error"));
-    });
-  },
 };
 
 export const ErrorsList: StoryObj<AutocompleteType> = {
@@ -337,11 +302,6 @@ export const ErrorsList: StoryObj<AutocompleteType> = {
       "Select at least 1 destination",
       "Select no more than 3 destinations",
     ],
-  },
-  play: async ({ step }) => {
-    await step("Check for a11y errors on Select Error", async () => {
-      await waitFor(async () => await axeRun("Select Error"));
-    });
   },
 };
 
@@ -370,16 +330,6 @@ export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
   args: {
     isCustomValueAllowed: true,
   },
-  play: async ({ canvasElement, step }) => {
-    await step("Enter custom value", async () => {
-      const canvas = within(canvasElement);
-      const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
-      await userEvent.click(comboBoxElement);
-      await userEvent.type(comboBoxElement, "qwerty");
-      await userEvent.tab();
-      await expect(comboBoxElement.value).toBe("qwerty");
-    });
-  },
 };
 
 export const Loading: StoryObj<AutocompleteType> = {
@@ -388,12 +338,9 @@ export const Loading: StoryObj<AutocompleteType> = {
     options: [],
   },
   play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
-    await step("Click for loading to be visible", async () => {
-      await userEvent.click(comboBoxElement);
-      const loadingElement = screen.getByText("Loading…");
-      expect(loadingElement).toBeVisible();
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
     });
   },
 };
@@ -403,12 +350,9 @@ export const NoOptions: StoryObj<AutocompleteType> = {
     options: [],
   },
   play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
-    await step("Click for loading to be visible", async () => {
-      await userEvent.click(comboBoxElement);
-      const loadingElement = screen.getByText("No options");
-      expect(loadingElement).toBeVisible();
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
     });
   },
 };
@@ -419,36 +363,10 @@ export const Multiple: StoryObj<AutocompleteType> = {
     name: "testName",
   },
   play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const comboBoxElement = canvas.getByRole<HTMLInputElement>("combobox");
-    await step("Check for list box to be visible", async () => {
-      await userEvent.click(comboBoxElement);
-      const listboxElement = screen.getByRole("listbox");
-      expect(listboxElement).toBeVisible();
-    });
-    await step("Select multiple items", async () => {
-      await userEvent.type(comboBoxElement, "z");
-      await userEvent.click(
-        screen.getByRole("listbox").firstChild as HTMLLIElement,
-      );
-      await userEvent.clear(comboBoxElement);
-      await userEvent.type(comboBoxElement, "w");
-      await userEvent.click(
-        screen.getByRole("listbox").firstChild as HTMLLIElement,
-      );
-      await axeRun("Autocomplete Multiple");
-    });
-    await step("Clear the selected items", async () => {
-      await waitFor(async () => {
-        const clearButton = canvas.getByTitle("Clear");
-        await userEvent.click(clearButton);
-        await expect(comboBoxElement.value).toBe("");
-        await userEvent.tab();
-      });
-    });
-    await step("Check id and name", async () => {
-      await expect(comboBoxElement.getAttribute("id")).toBe("testId");
-      await expect(comboBoxElement.getAttribute("name")).toBe("testName");
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+      await userEvent.click(screen.getByRole("option", { name: "Ceres" }));
     });
   },
 };

@@ -10,7 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen } from "@testing-library/react";
+import { render } from "vitest-browser-react";
+import { page } from "vitest/browser";
 
 import {
   translate as odysseyTranslate,
@@ -19,27 +20,27 @@ import {
 import { TextField } from "./TextField.js";
 
 describe(OdysseyTranslationProvider.name, () => {
-  it("defaults to 'en' translation bundle", () => {
-    render(
+  test("defaults to 'en' translation bundle", async () => {
+    await render(
       <OdysseyTranslationProvider>
         <span>{odysseyTranslate("fieldlabel.optional.text")}</span>
       </OdysseyTranslationProvider>,
     );
 
-    expect(screen.getByText("Optional"));
+    await expect.element(page.getByText("Optional")).toBeVisible();
   });
 
-  it("defaults to 'en' for unsupported languages", () => {
-    render(
+  test("defaults to 'en' for unsupported languages", async () => {
+    await render(
       <OdysseyTranslationProvider languageCode="test">
         <span>{odysseyTranslate("fieldlabel.optional.text")}</span>
       </OdysseyTranslationProvider>,
     );
 
-    expect(screen.getByText("Optional"));
+    await expect.element(page.getByText("Optional")).toBeVisible();
   });
 
-  it("allows translations for non-okta supported languages for existing keys", () => {
+  test("allows translations for non-okta supported languages for existing keys", async () => {
     const translationOverrides = {
       ar: {
         "fieldlabel.optional.text":
@@ -47,7 +48,7 @@ describe(OdysseyTranslationProvider.name, () => {
       },
     };
 
-    render(
+    await render(
       <OdysseyTranslationProvider<"ar">
         languageCode="ar"
         translationOverrides={translationOverrides}
@@ -56,35 +57,37 @@ describe(OdysseyTranslationProvider.name, () => {
       </OdysseyTranslationProvider>,
     );
 
-    expect(
-      screen.getByText("\u063A\u064A\u0631 \u0645\u0637\u0644\u0648\u0628"),
-    );
+    await expect
+      .element(
+        page.getByText("\u063A\u064A\u0631 \u0645\u0637\u0644\u0648\u0628"),
+      )
+      .toBeVisible();
   });
 
-  it("can modify a translation bundle with translationOverrides", () => {
+  test("can modify a translation bundle with translationOverrides", async () => {
     const translationOverrides = {
       en: {
         "fieldlabel.optional.text": "Non Required",
       },
     };
 
-    render(
+    await render(
       <OdysseyTranslationProvider translationOverrides={translationOverrides}>
         <TextField isOptional label="" />
       </OdysseyTranslationProvider>,
     );
 
-    expect(screen.getByText("Non Required"));
+    await expect.element(page.getByText("Non Required")).toBeVisible();
   });
 
-  it("can change the displayed language with languageCode", () => {
+  test("can change the displayed language with languageCode", async () => {
     const translationOverrides = {
       fr: {
         "fieldlabel.optional.text": "Optionnel",
       },
     };
 
-    render(
+    await render(
       <OdysseyTranslationProvider
         languageCode="fr"
         translationOverrides={translationOverrides}
@@ -93,6 +96,6 @@ describe(OdysseyTranslationProvider.name, () => {
       </OdysseyTranslationProvider>,
     );
 
-    expect(screen.getByText("Optionnel"));
+    await expect.element(page.getByText("Optionnel")).toBeVisible();
   });
 });

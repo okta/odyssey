@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -31,7 +31,7 @@ const DragIndicatorIcon = forwardRef<SVGSVGElement, DragIndicatorIconProps>(
         <>
           <path
             clipRule="evenodd"
-            d="M6 2.333a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm0 3.778a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm1 2.778a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 4.778a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM5 7.11a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm1 2.78a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 4.778a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+            d="M6 2.333a1 1 0 1 1-2 0 1 1 0 0 1 2 0m5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 3.778a1 1 0 1 0 0-2 1 1 0 0 0 0 2m1 2.778a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1 4.778a1 1 0 1 0 0-2 1 1 0 0 0 0 2M5 7.11a1 1 0 1 0 0-2 1 1 0 0 0 0 2m1 2.78a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1 4.778a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
             fill="currentColor"
             fillRule="evenodd"
           />

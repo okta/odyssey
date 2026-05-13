@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const UnlockIcon = forwardRef<SVGSVGElement, UnlockIconProps>((props, ref) => {
       <>
         <path
           clipRule="evenodd"
-          d="M6 4v2h8v6a3.333 3.333 0 0 1-3.333 3.333H5.333A3.333 3.333 0 0 1 2 12V6h2.667V4a3.333 3.333 0 1 1 6.666 0v.333H10V4a2 2 0 1 0-4 0ZM3.333 7.333V12a2 2 0 0 0 2 2h5.334a2 2 0 0 0 2-2V7.333H3.333ZM8 11.667a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+          d="M6 4v2h8v6a3.333 3.333 0 0 1-3.333 3.333H5.333A3.333 3.333 0 0 1 2 12V6h2.667V4a3.333 3.333 0 1 1 6.666 0v.333H10V4a2 2 0 1 0-4 0M3.333 7.333V12a2 2 0 0 0 2 2h5.334a2 2 0 0 0 2-2V7.333zM8 11.667a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
           fill="currentColor"
           fillRule="evenodd"
         />

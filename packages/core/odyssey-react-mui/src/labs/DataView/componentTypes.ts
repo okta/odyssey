@@ -32,6 +32,7 @@ import {
   DataOnReorderRowsType,
   DataRowSelectionState,
   DataTableColumn,
+  GetRowId,
 } from "./dataTypes.js";
 import { RowActionsProps } from "./RowActions.js";
 
@@ -59,7 +60,7 @@ export type UniversalProps<TData extends MRT_RowData> = {
     filters,
     sort,
   }: DataGetDataType) => TData[] | Promise<TData[]>;
-  getRowId?: MRT_TableOptions<TData>["getRowId"];
+  getRowId?: GetRowId<TData>;
   hasFilters?: boolean;
   hasPagination?: boolean;
   hasRowReordering?: boolean;

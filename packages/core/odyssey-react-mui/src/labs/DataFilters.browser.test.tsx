@@ -10,206 +10,212 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen, within } from "@testing-library/react";
-import { userEvent } from "@vitest/browser/context";
-import { describe, test } from "vitest";
+import { page, userEvent } from "vitest/browser";
 
 import { Button } from "../Buttons/Button.js";
-import { OdysseyProvider } from "../OdysseyProvider.js";
+import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import { DataFilters } from "./DataFilters.js";
 
 describe("DataFilters", () => {
-  test("renders filter tags using option labels for option object values", () => {
-    render(
-      <OdysseyProvider>
-        <DataFilters
-          filters={[
-            {
-              id: "priority",
-              label: "Priority",
-              options: [
-                { label: "Low", value: "low" },
-                { label: "Medium", value: "medium" },
-                { label: "High", value: "high" },
-              ],
-              value: [{ label: "Low", value: "low" }],
-              variant: "multi-select",
-            },
-          ]}
-          onChangeFilters={() => {}}
-        />
-      </OdysseyProvider>,
+  test("renders filter tags using option labels for option object values", async () => {
+    const { container } = await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[
+          {
+            id: "priority",
+            label: "Priority",
+            options: [
+              { label: "Low", value: "low" },
+              { label: "Medium", value: "medium" },
+              { label: "High", value: "high" },
+            ],
+            value: [{ label: "Low", value: "low" }],
+            variant: "multi-select",
+          },
+        ]}
+        onChangeFilters={() => {}}
+      />,
     );
 
-    const activeFiltersList = screen.getByRole("list", {
+    // TODO: fix — active filters <ul> has direct role=button children violating list structure (list)
+    await expect(container).toBeAccessible({ disabledRules: ["list"] });
+
+    const activeFiltersList = page.getByRole("list", {
       name: "Active filters",
     });
-    expect(activeFiltersList).toBeVisible();
-    expect(
-      within(activeFiltersList).getByRole("button", {
-        name: "Priority: Low Remove tag",
-      }),
-    ).toBeVisible();
+    await expect.element(activeFiltersList).toBeVisible();
+    await expect
+      .element(
+        activeFiltersList.getByRole("button", {
+          name: "Priority: Low Remove tag",
+        }),
+      )
+      .toBeVisible();
 
-    expect(screen.queryByText("Priority: low")).not.toBeInTheDocument();
+    await expect
+      .element(page.getByText("Priority: low", { exact: true }))
+      .not.toBeInTheDocument();
   });
 
-  test("renders searchbox only", () => {
-    render(
-      <OdysseyProvider>
-        <DataFilters onChangeSearch={vi.fn()} />
-      </OdysseyProvider>,
-    );
+  test("renders searchbox only", async () => {
+    await renderWithOdysseyProvider(<DataFilters onChangeSearch={vi.fn()} />);
 
-    expect(screen.getByRole("searchbox")).toBeVisible();
-    expect(
-      screen.queryByRole("button", { name: "Search" }),
-    ).not.toBeInTheDocument();
-    expect(screen.queryByLabelText("Filters")).not.toBeInTheDocument();
+    await expect.element(page.getByRole("searchbox")).toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: "Search" }))
+      .not.toBeInTheDocument();
+    await expect
+      .element(page.getByLabelText("Filters"))
+      .not.toBeInTheDocument();
   });
 
-  test("renders filters only", () => {
-    render(
-      <OdysseyProvider>
-        <DataFilters
-          filters={[
-            {
-              id: "text-filter",
-              label: "Text filter",
-              variant: "text",
-            },
-          ]}
-          onChangeFilters={vi.fn()}
-        />
-      </OdysseyProvider>,
+  test("renders filters only", async () => {
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[
+          {
+            id: "text-filter",
+            label: "Text filter",
+            variant: "text",
+          },
+        ]}
+        onChangeFilters={vi.fn()}
+      />,
     );
-    expect(screen.getByLabelText("Filters")).toBeVisible();
-    expect(screen.queryByRole("searchbox")).not.toBeInTheDocument();
-    expect(
-      screen.queryByRole("button", { name: "Search" }),
-    ).not.toBeInTheDocument();
+    await expect.element(page.getByLabelText("Filters")).toBeVisible();
+    await expect.element(page.getByRole("searchbox")).not.toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: "Search" }))
+      .not.toBeInTheDocument();
   });
 
-  test("renders all options", () => {
-    render(
-      <OdysseyProvider>
-        <DataFilters
-          additionalActions={
-            <Button label="Another button" variant="secondary" />
-          }
-          filters={[
-            {
-              id: "text-filter",
-              label: "Text filter",
-              variant: "text",
-            },
-          ]}
-          hasSearchSubmitButton
-          onChangeFilters={vi.fn()}
-          onChangeSearch={vi.fn()}
-        />
-      </OdysseyProvider>,
+  test("renders all options", async () => {
+    await renderWithOdysseyProvider(
+      <DataFilters
+        additionalActions={
+          <Button label="Another button" variant="secondary" />
+        }
+        filters={[
+          {
+            id: "text-filter",
+            label: "Text filter",
+            variant: "text",
+          },
+        ]}
+        hasSearchSubmitButton
+        onChangeFilters={vi.fn()}
+        onChangeSearch={vi.fn()}
+      />,
     );
 
-    expect(screen.getByRole("searchbox")).toBeVisible();
-    expect(screen.getByRole("button", { name: "Search" })).toBeVisible();
-    expect(
-      screen.getByRole("button", { name: "Another button" }),
-    ).toBeVisible();
-    expect(screen.getByLabelText("Filters")).toBeVisible();
+    await expect.element(page.getByRole("searchbox")).toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: "Search" }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: "Another button" }))
+      .toBeVisible();
+    await expect.element(page.getByLabelText("Filters")).toBeVisible();
   });
 
-  test("custom searchFieldLabel on search field", () => {
-    render(
-      <OdysseyProvider>
-        <DataFilters
-          hasSearchSubmitButton
-          onChangeSearch={vi.fn()}
-          searchFieldLabel="Search applications"
-        />
-      </OdysseyProvider>,
+  test("custom searchFieldLabel on search field", async () => {
+    await renderWithOdysseyProvider(
+      <DataFilters
+        hasSearchSubmitButton
+        onChangeSearch={vi.fn()}
+        searchFieldLabel="Search applications"
+      />,
     );
 
-    expect(screen.getByRole("searchbox")).toHaveAttribute(
-      "placeholder",
-      "Search applications",
-    );
-    expect(screen.getByRole("button", { name: "Search" })).toBeVisible();
+    await expect
+      .element(page.getByRole("searchbox"))
+      .toHaveAttribute("placeholder", "Search applications");
+    await expect
+      .element(page.getByRole("button", { name: "Search" }))
+      .toBeVisible();
   });
 
-  test("renders disabled state", () => {
-    render(
-      <OdysseyProvider>
-        <DataFilters
-          filters={[
-            {
-              id: "text-filter",
-              label: "Text filter",
-              variant: "text",
-            },
-          ]}
-          hasSearchSubmitButton
-          isDisabled
-          onChangeFilters={vi.fn()}
-          onChangeSearch={vi.fn()}
-        />
-      </OdysseyProvider>,
+  test("renders disabled state", async () => {
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[
+          {
+            id: "text-filter",
+            label: "Text filter",
+            variant: "text",
+          },
+        ]}
+        hasSearchSubmitButton
+        isDisabled
+        onChangeFilters={vi.fn()}
+        onChangeSearch={vi.fn()}
+      />,
     );
 
-    expect(screen.getByRole("searchbox")).toBeDisabled();
-    expect(screen.getByRole("button", { name: "Search" })).toBeDisabled();
-    expect(screen.getByLabelText("Filters")).toBeDisabled();
+    await expect.element(page.getByRole("searchbox")).toBeDisabled();
+    await expect
+      .element(page.getByRole("button", { name: "Search" }))
+      .toBeDisabled();
+    await expect
+      .element(page.getByLabelText("Filters", { exact: true }))
+      .toBeDisabled();
   });
 
-  const renderFilterWithDescription = ({ value }: { value?: string } = {}) => {
-    render(
-      <OdysseyProvider>
-        <DataFilters
-          filters={[
-            {
-              id: "app-filter",
-              label: "Application",
-              description:
-                "Filter by the application an AI agent is imported from",
-              variant: "select",
-              options: [
-                { label: "App 1", value: "app1" },
-                { label: "App 2", value: "app2" },
-              ],
-              value,
-            },
-          ]}
-          onChangeFilters={vi.fn()}
-        />
-      </OdysseyProvider>,
+  const renderFilterWithDescription = async ({
+    value,
+  }: { value?: string } = {}) => {
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[
+          {
+            id: "app-filter",
+            label: "Application",
+            description:
+              "Filter by the application an AI agent is imported from",
+            variant: "select",
+            options: [
+              { label: "App 1", value: "app1" },
+              { label: "App 2", value: "app2" },
+            ],
+            value,
+          },
+        ]}
+        onChangeFilters={vi.fn()}
+      />,
     );
   };
 
   test("filter with description and no value shows description and dynamic text", async () => {
-    renderFilterWithDescription();
+    await renderFilterWithDescription();
 
-    await userEvent.click(screen.getByLabelText("Filters"));
+    await userEvent.click(page.getByLabelText("Filters"));
 
-    const filterMenu = screen.getByRole("menu");
-    expect(
-      within(filterMenu).getByText(
-        "Filter by the application an AI agent is imported from",
-      ),
-    ).toBeInTheDocument();
-    expect(within(filterMenu).getByText("Any application")).toBeInTheDocument();
+    const filterMenu = page.getByRole("menu");
+    await expect
+      .element(
+        filterMenu.getByText(
+          "Filter by the application an AI agent is imported from",
+        ),
+      )
+      .toBeInTheDocument();
+    await expect
+      .element(filterMenu.getByText("Any application"))
+      .toBeInTheDocument();
   });
 
   test("filter with description and selected value shows description and selected value", async () => {
-    renderFilterWithDescription({ value: "app1" });
+    await renderFilterWithDescription({ value: "app1" });
 
-    await userEvent.click(screen.getByLabelText("Filters"));
+    await userEvent.click(page.getByLabelText("Filters", { exact: true }));
 
-    const filterMenu = screen.getByRole("menu");
-    expect(
-      within(filterMenu).getByText(
-        "Filter by the application an AI agent is imported from",
-      ),
-    ).toBeInTheDocument();
-    expect(within(filterMenu).getByText("app1")).toBeInTheDocument();
+    const filterMenu = page.getByRole("menu");
+    await expect
+      .element(
+        filterMenu.getByText(
+          "Filter by the application an AI agent is imported from",
+        ),
+      )
+      .toBeInTheDocument();
+    await expect.element(filterMenu.getByText("app1")).toBeInTheDocument();
   });
 });

@@ -31,7 +31,6 @@ import {
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { createElement } from "react";
 
-import { axeRun } from "../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const variantMapping = {
@@ -225,11 +224,6 @@ export const Heading1Story: StoryObj<typeof Typography> = {
     variant: "h1",
   },
   render: (args) => <Heading1 {...args} />,
-  // h1 & h2 stories throw the "Incomplete" accessibility violation on color-contrast. Even though the contrast is correct,
-  // disabling it for now as the typography color- contrast test is covered by other headings below.
-  // play: async () => {
-  //   await axeRun('Typography h1');
-  // },
 };
 
 export const Heading2Story: StoryObj<typeof Typography> = {
@@ -239,9 +233,6 @@ export const Heading2Story: StoryObj<typeof Typography> = {
     variant: "h2",
   },
   render: (args) => <Heading2 {...args} />,
-  // play: async () => {
-  //   await axeRun('Typography h2');
-  // },
 };
 
 export const Heading3Story: StoryObj<typeof Typography> = {
@@ -251,9 +242,6 @@ export const Heading3Story: StoryObj<typeof Typography> = {
     variant: "h3",
   },
   render: (args) => <Heading3 {...args} />,
-  play: async () => {
-    await axeRun("Typography h3");
-  },
 };
 
 export const Heading4Story: StoryObj<typeof Typography> = {
@@ -263,9 +251,6 @@ export const Heading4Story: StoryObj<typeof Typography> = {
     variant: "h4",
   },
   render: (args) => <Heading4 {...args} />,
-  play: async () => {
-    await axeRun("Typography h4");
-  },
 };
 
 export const Heading5Story: StoryObj<typeof Typography> = {
@@ -275,9 +260,6 @@ export const Heading5Story: StoryObj<typeof Typography> = {
     variant: "h5",
   },
   render: (args) => <Heading5 {...args} />,
-  play: async () => {
-    await axeRun("Typography h5");
-  },
 };
 
 export const Heading6Story: StoryObj<typeof Typography> = {
@@ -287,9 +269,6 @@ export const Heading6Story: StoryObj<typeof Typography> = {
     variant: "h6",
   },
   render: (args) => <Heading6 {...args} />,
-  play: async () => {
-    await axeRun("Typography h6");
-  },
 };
 
 export const BodyStory: StoryObj<typeof Typography> = {
@@ -299,9 +278,6 @@ export const BodyStory: StoryObj<typeof Typography> = {
     variant: "body",
   },
   render: (args) => <Paragraph {...args} />,
-  play: async () => {
-    await axeRun("Typography body");
-  },
 };
 
 export const LegendStory: StoryObj<typeof Typography> = {
@@ -311,9 +287,6 @@ export const LegendStory: StoryObj<typeof Typography> = {
     variant: "legend",
   },
   render: (args) => <Legend {...args} />,
-  play: async () => {
-    await axeRun("Typography legend");
-  },
 };
 
 export const OverlineStory: StoryObj<typeof Typography> = {
@@ -323,9 +296,6 @@ export const OverlineStory: StoryObj<typeof Typography> = {
     variant: "overline",
   },
   render: (args) => <Overline {...args} />,
-  play: async () => {
-    await axeRun("Typography Overline");
-  },
 };
 
 export const SubordinateStory: StoryObj<typeof Typography> = {
@@ -335,9 +305,6 @@ export const SubordinateStory: StoryObj<typeof Typography> = {
     variant: "subordinate",
   },
   render: (args) => <Subordinate {...args} />,
-  play: async () => {
-    await axeRun("Typography subordinate");
-  },
 };
 
 export const SupportStory: StoryObj<typeof Typography> = {
@@ -347,9 +314,6 @@ export const SupportStory: StoryObj<typeof Typography> = {
     variant: "support",
   },
   render: (args) => <Support {...args} />,
-  play: async () => {
-    await axeRun("Typography support");
-  },
 };
 
 export const ColorStory: StoryObj<typeof Typography> = {

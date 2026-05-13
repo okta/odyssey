@@ -10,17 +10,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen, waitFor, within } from "@testing-library/react";
-import { userEvent } from "@testing-library/user-event";
+import type { ReactElement } from "react";
+import type { RenderResult } from "vitest-browser-react";
+
 import { MRT_RowSelectionState } from "material-react-table";
-import { describe, test } from "vitest";
+import { page, userEvent } from "vitest/browser";
 
 import { Button } from "../../Buttons/Button.js";
 import { MenuItem } from "../../Buttons/MenuItem.js";
 import { EmptyState } from "../../EmptyState.js";
 import { DataTableRowData } from "../../index.js";
-import { OdysseyProvider } from "../../OdysseyProvider.js";
-import { getControlledElement } from "../../test-selectors/linkedHtmlSelectors.js";
+import { renderWithOdysseyProvider } from "../../test-utils/renderWithOdysseyProvider.js";
 import {
   type CardLayoutProps,
   type TableLayoutProps,
@@ -49,294 +49,263 @@ const gridItemProps: CardLayoutProps<Person>["itemProps"] = (row) => ({
   overline: "Grid card",
 });
 
-const waitUntilTableLoadedHack = async () =>
-  await waitFor(async () =>
-    expect(await screen.findByText(data[0].name)).toBeVisible(),
-  );
+const renderDataView = async (ui: ReactElement): Promise<RenderResult> => {
+  const result = await renderWithOdysseyProvider(ui);
+
+  await expect.element(page.getByRole("progressbar")).not.toBeInTheDocument();
+
+  return result;
+};
 
 describe("DataView", { timeout: 10000 }, () => {
   describe("DataView layouts", () => {
     test("displays a table view", async () => {
-      const { container } = render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      await expect(document.body).toBeAccessible();
 
-      expect(within(container).queryByRole("table")).toBeVisible();
-      expect(within(container).queryByRole("list")).not.toBeInTheDocument();
+      await expect.element(page.getByRole("table")).toBeVisible();
+      await expect.element(page.getByRole("list")).not.toBeInTheDocument();
     });
 
     test("displays a list view", async () => {
-      const { container } = render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["list"]}
-            cardLayoutOptions={{
-              itemProps: listItemProps,
-            }}
-            getData={getData}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["list"]}
+          cardLayoutOptions={{
+            itemProps: listItemProps,
+          }}
+          getData={getData}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
-
-      expect(within(container).queryByRole("table")).not.toBeInTheDocument();
-      expect(within(container).queryByRole("list")).toBeVisible();
+      await expect.element(page.getByRole("table")).not.toBeInTheDocument();
+      await expect.element(page.getByRole("list")).toBeVisible();
     });
 
     test("displays a grid view", async () => {
-      const { container } = render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["grid"]}
-            cardLayoutOptions={{
-              itemProps: gridItemProps,
-            }}
-            getData={getData}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["grid"]}
+          cardLayoutOptions={{
+            itemProps: gridItemProps,
+          }}
+          getData={getData}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      await expect(document.body).toBeAccessible();
 
-      expect(within(container).queryByRole("table")).not.toBeInTheDocument();
-      expect(within(container).queryByRole("list")).toBeVisible();
+      await expect.element(page.getByRole("table")).not.toBeInTheDocument();
+      await expect.element(page.getByRole("list")).toBeVisible();
     });
 
     test("displays the layout switcher", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table", "list"]}
-            cardLayoutOptions={{
-              itemProps: listItemProps,
-            }}
-            getData={getData}
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table", "list"]}
+          cardLayoutOptions={{
+            itemProps: listItemProps,
+          }}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      const layoutSwitcherButton = screen.getByLabelText("Layout", {
-        selector: "button",
-      });
-      await user.click(layoutSwitcherButton);
+      const layoutSwitcherButton = page.getByRole("button", { name: "Layout" });
+      await userEvent.click(layoutSwitcherButton);
 
-      const layoutSwitcherMenu = getControlledElement({
-        element: layoutSwitcherButton,
-      });
+      const menuLocator = page.getByRole("menu");
 
-      await waitFor(() => {
-        expect(
-          within(layoutSwitcherMenu).getAllByRole("menuitem"),
-        ).toHaveLength(2);
+      await expect.element(menuLocator.getByRole("menuitem")).toHaveLength(2);
 
-        expect(
-          within(layoutSwitcherMenu).getByRole("menuitem", { name: "Table" }),
-        ).toBeVisible();
+      await expect
+        .element(menuLocator.getByRole("menuitem", { name: "Table" }))
+        .toBeVisible();
+      await expect
+        .element(menuLocator.getByRole("menuitem", { name: "List" }))
+        .toBeVisible();
 
-        expect(
-          within(layoutSwitcherMenu).getByRole("menuitem", { name: "List" }),
-        ).toBeVisible();
-      });
+      await expect.element(menuLocator).toBeAccessible();
     });
   });
 
   test("can display meta text", async () => {
     const metaText = "Last updated 12 hours ago";
 
-    render(
-      <OdysseyProvider>
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          metaText={metaText}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />
-      </OdysseyProvider>,
+    await renderDataView(
+      <DataView
+        availableLayouts={["table"]}
+        getData={getData}
+        metaText={metaText}
+        tableLayoutOptions={{
+          columns,
+        }}
+      />,
     );
 
-    await waitUntilTableLoadedHack();
-
-    expect(screen.getByText(metaText)).toBeVisible();
+    await expect(document.body).toBeAccessible();
+    await expect.element(page.getByText(metaText)).toBeVisible();
   });
 
   describe("Filter and search", () => {
     test("can filter rows", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasFilters
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasFilters
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      const table = await screen.findByRole("table");
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect.element(page.getByText(data[1].name)).toBeVisible();
 
-      expect(await screen.findByText(data[0].name)).toBeVisible();
-      expect(await screen.findByText(data[1].name)).toBeVisible();
-      expect(await within(table).findAllByRole("row")).toHaveLength(7);
+      const rows = page.getByRole("table").getByRole("row");
 
-      const filterButton = screen.getByLabelText("Filters", {
-        selector: "button",
-      });
-      await user.click(filterButton);
+      await expect.element(rows).toHaveLength(7);
 
-      const filterMenu = getControlledElement({ element: filterButton });
-      const nameMenuItem = within(filterMenu).getByRole("menuitem", {
+      const filterButton = page.getByRole("button", { name: "Filters" });
+      await userEvent.click(filterButton);
+      const filterMenu = page.getByRole("menu");
+      await expect.element(filterMenu).toBeAccessible();
+      const nameMenuItem = filterMenu.getByRole("menuitem", {
         name: /Name/i,
       });
-      await user.click(nameMenuItem);
+      await userEvent.click(nameMenuItem);
 
-      const nameFilterMenu = getControlledElement({ element: nameMenuItem });
-      const nameInput = within(nameFilterMenu).getByLabelText("Name");
-      const submitButton = within(nameFilterMenu).getByRole("button");
+      const nameInput = page.getByLabelText("Name");
+      const submitButton = page.getByRole("button", { name: "Submit" });
 
-      await user.type(nameInput, data[1].name);
-      await user.click(submitButton);
+      await userEvent.fill(nameInput, data[1].name);
+      await userEvent.click(submitButton);
 
-      expect(await screen.findByText("Clear filters")).toBeVisible();
+      await expect.element(page.getByText("Clear filters")).toBeVisible();
 
-      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
-      expect(await within(table).findByText(data[1].name)).toBeVisible();
-      expect(await within(table).findAllByRole("row")).toHaveLength(2);
+      await expect
+        .element(page.getByText(data[0].name))
+        .not.toBeInTheDocument();
+      await expect
+        .element(page.getByRole("table").getByText(data[1].name))
+        .toBeVisible();
+
+      await expect.element(rows).toHaveLength(2);
     });
 
     test("can search rows", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasSearch
-            hasSearchSubmitButton
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasSearch
+          hasSearchSubmitButton
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      expect(await screen.findByText(data[0].name)).toBeVisible();
-      expect(await screen.findByText(data[1].name)).toBeVisible();
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect.element(page.getByText(data[1].name)).toBeVisible();
 
-      const searchInput = screen.getByPlaceholderText(/Search/i);
-      const submitButton = screen.getByText("Search", { selector: "button" });
-      await user.click(searchInput);
-      await user.keyboard(`${data[1].name}`);
-      await user.click(submitButton);
+      const searchInput = page.getByPlaceholder(/Search/i);
+      const submitButton = page.getByRole("button", { name: "Search" });
+      await userEvent.fill(searchInput, data[1].name);
+      await userEvent.click(submitButton);
 
-      const table = screen.getByRole("table");
-      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
-      expect(await within(table).findByText(data[1].name)).toBeVisible();
+      await expect
+        .element(page.getByText(data[0].name))
+        .not.toBeInTheDocument();
+      await expect
+        .element(page.getByRole("table").getByText(data[1].name))
+        .toBeVisible();
     });
 
     test("can clear the search input", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasSearch
-            hasSearchSubmitButton
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasSearch
+          hasSearchSubmitButton
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      expect(await screen.findByText(data[0].name)).toBeVisible();
-      expect(await screen.findByText(data[1].name)).toBeVisible();
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect.element(page.getByText(data[1].name)).toBeVisible();
 
-      const searchInput = screen.getByPlaceholderText(/Search/i);
-      const submitButton = screen.getByText("Search", { selector: "button" });
-      await user.click(searchInput);
-      await user.keyboard(`${data[1].name}`);
-      await user.click(submitButton);
+      const searchInput = page.getByPlaceholder(/Search/i);
+      const submitButton = page.getByRole("button", { name: "Search" });
+      await userEvent.fill(searchInput, data[1].name);
+      await userEvent.click(submitButton);
 
-      const table = screen.getByRole("table");
-      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
-      expect(await within(table).findByText(data[1].name)).toBeVisible();
+      await expect
+        .element(page.getByText(data[0].name))
+        .not.toBeInTheDocument();
+      await expect
+        .element(page.getByRole("table").getByText(data[1].name))
+        .toBeVisible();
 
-      const clearButton = screen.getByLabelText("Clear", {
-        selector: "button",
-      });
-      await user.click(clearButton);
+      const clearButton = page.getByRole("button", { name: "Clear" });
+      await userEvent.click(clearButton);
 
-      await waitFor(() => {
-        expect(searchInput).toHaveValue("");
-        expect(screen.getAllByRole("row")).toHaveLength(7);
-        expect(screen.getByText(data[0].name)).toBeVisible();
-        expect(screen.getByText(data[1].name)).toBeVisible();
-      });
+      await expect.element(searchInput).toHaveValue("");
+
+      await expect.element(page.getByRole("row")).toHaveLength(7);
+
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect.element(page.getByText(data[1].name)).toBeVisible();
     });
   });
 
   describe("Row actions", () => {
     test("can display row action menu", async () => {
-      const user = userEvent.setup();
-
       const rowActionMenuItems: TableLayoutProps<Person>["rowActionMenuItems"] =
         (row) => <MenuItem>Action for {row.name}</MenuItem>;
 
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            tableLayoutOptions={{
-              columns,
-              rowActionMenuItems,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            rowActionMenuItems,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      // nth(1) because row[0] is the th row
+      const firstBodyRowActionButton = page
+        .getByRole("row")
+        .nth(1)
+        .getByRole("button");
+      await userEvent.click(firstBodyRowActionButton);
 
-      // Index 1 because row[0] is the th row
-      const firstBodyRow = (await screen.findAllByRole("row"))[1];
-      const firstBodyRowActionButton = within(firstBodyRow).getByRole("button");
-      await user.click(firstBodyRowActionButton);
+      const actionMenuLocator = page.getByRole("menu");
 
-      const actionMenu = getControlledElement({
-        element: firstBodyRowActionButton,
-      });
-      const actionMenuItem = within(actionMenu).getByRole("menuitem");
-
-      await waitFor(() => {
-        expect(
-          within(actionMenuItem).getByText(`Action for ${data[0].name}`),
-        ).toBeVisible();
-      });
+      await expect
+        .element(
+          actionMenuLocator
+            .getByRole("menuitem")
+            .getByText(`Action for ${data[0].name}`),
+        )
+        .toBeVisible();
     });
 
     test("can display row action buttons", async () => {
@@ -344,242 +313,269 @@ describe("DataView", { timeout: 10000 }, () => {
         row,
       ) => <Button label={`Button for ${row?.name}`} variant="primary" />;
 
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            tableLayoutOptions={{
-              columns,
-              rowActionButtons,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            rowActionButtons,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      // nth(1) because row[0] is the th row
+      const firstBodyRowActionButton = page
+        .getByRole("row")
+        .nth(1)
+        .getByRole("button", { name: `Button for ${data[0].name}` });
 
-      // Index 1 because row[0] is the th row
-      const firstBodyRow = (await screen.findAllByRole("row"))[1];
-      const firstBodyRowActionButton = within(firstBodyRow).getByText(
-        `Button for ${data[0].name}`,
-        { selector: "button" },
-      );
-
-      expect(firstBodyRowActionButton).toBeVisible();
+      await expect.element(firstBodyRowActionButton).toBeVisible();
     });
   });
 
   describe("Row selection", () => {
     test("can select table rows", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasRowSelection
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      await userEvent.click(page.getByRole("checkbox").nth(1));
 
-      const checkboxes = screen.getAllByRole("checkbox");
-      await user.click(checkboxes[1]);
-
-      const selectedText = screen.getByText("1 selected", {
-        selector: "button",
-      });
-      expect(selectedText).toBeVisible();
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent("1 selected");
     });
 
     test("can select all rows", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasRowSelection
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      await userEvent.click(page.getByRole("checkbox").nth(0));
 
-      const checkboxes = screen.getAllByRole("checkbox");
-      await user.click(checkboxes[0]);
-
-      const selectedText = screen.getByText(`${data.length} selected`, {
-        selector: "button",
-      });
-      expect(selectedText).toBeVisible();
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent(`${data.length} selected`);
     });
 
     test("can select card rows", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["grid"]}
-            cardLayoutOptions={{
-              itemProps: gridItemProps,
-            }}
-            getData={getData}
-            hasRowSelection
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["grid"]}
+          cardLayoutOptions={{
+            itemProps: gridItemProps,
+          }}
+          getData={getData}
+          hasRowSelection
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      await userEvent.click(page.getByRole("checkbox").nth(1));
 
-      const checkboxes = screen.getAllByRole("checkbox");
-      await user.click(checkboxes[1]);
-
-      const selectedText = screen.getByText("1 selected", {
-        selector: "button",
-      });
-      expect(selectedText).toBeVisible();
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent("1 selected");
     });
 
     test("can select all card rows", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasRowSelection
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      await userEvent.click(page.getByRole("checkbox").nth(0));
 
-      const checkboxes = screen.getAllByRole("checkbox");
-      await user.click(checkboxes[0]);
-
-      const selectedText = screen.getByText(`${data.length} selected`, {
-        selector: "button",
-      });
-      expect(selectedText).toBeVisible();
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent(`${data.length} selected`);
     });
 
     test("can deselect rows", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasRowSelection
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      await userEvent.click(page.getByRole("checkbox").nth(1));
+      await userEvent.click(page.getByRole("checkbox").nth(2));
 
-      const checkboxes = screen.getAllByRole("checkbox");
-      await user.click(checkboxes[1]);
-      await user.click(checkboxes[2]);
+      const selectionButton = page.getByRole("button", {
+        name: "More actions",
+      });
+      await expect.element(selectionButton).toHaveTextContent("2 selected");
 
-      expect(
-        screen.getByText("2 selected", { selector: "button" }),
-      ).toBeVisible();
+      await userEvent.click(page.getByRole("checkbox").nth(1));
 
-      await user.click(checkboxes[1]);
-
-      expect(
-        screen.getByText("1 selected", { selector: "button" }),
-      ).toBeVisible();
+      await expect.element(selectionButton).toHaveTextContent("1 selected");
     });
 
     test("can deselect all rows", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasRowSelection
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      await userEvent.click(page.getByRole("checkbox").nth(0));
 
-      const checkboxes = screen.getAllByRole("checkbox");
-      await user.click(checkboxes[0]);
-
-      const selectedText = screen.getByText(`${data.length} selected`, {
-        selector: "button",
+      const selectionButton = page.getByRole("button", {
+        name: "More actions",
       });
-      expect(selectedText).toBeVisible();
+      await expect
+        .element(selectionButton)
+        .toHaveTextContent(`${data.length} selected`);
 
-      await user.click(checkboxes[0]);
+      await userEvent.click(page.getByRole("checkbox").nth(0));
 
-      expect(
-        screen.queryByText(`${data.length} selected`, { selector: "button" }),
-      ).not.toBeInTheDocument();
+      await expect.element(selectionButton).not.toBeInTheDocument();
+    });
+
+    test("Select none button deselects all rows", async () => {
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await userEvent.click(page.getByRole("checkbox").first());
+
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toBeVisible();
+
+      await userEvent.click(page.getByRole("button", { name: "Select none" }));
+
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .not.toBeInTheDocument();
+    });
+
+    test("Select all button keys selection state using getRowId", async () => {
+      const mockOnRowSelectionChange = vi.fn();
+      const getCustomRowId = (row: Person) => `custom-${row.name}`;
+      const bulkActionMenuItems = (selectedRows: MRT_RowSelectionState) => (
+        <MenuItem>Selected {Object.keys(selectedRows).length}</MenuItem>
+      );
+
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          bulkActionMenuItems={bulkActionMenuItems}
+          getData={getData}
+          getRowId={getCustomRowId}
+          hasRowSelection
+          onRowSelectionChange={mockOnRowSelectionChange}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await userEvent.click(page.getByRole("button", { name: "Select all" }));
+
+      const expectedSelection = Object.fromEntries(
+        data.map((row) => [`custom-${row.name}`, true]),
+      );
+      expect(mockOnRowSelectionChange).toHaveBeenLastCalledWith(
+        expectedSelection,
+      );
+
+      const selectedButton = page.getByRole("button", { name: "More actions" });
+      await userEvent.click(selectedButton);
+
+      const bulkActionsMenuLocator = page.getByRole("menu");
+      await expect
+        .element(bulkActionsMenuLocator.getByRole("menuitem"))
+        .toHaveTextContent(`Selected ${data.length}`);
+    });
+
+    test("onChangeRowSelection is called when row selection changes", async () => {
+      const mockOnRowSelectionChange = vi.fn();
+
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          onRowSelectionChange={mockOnRowSelectionChange}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await userEvent.click(page.getByRole("checkbox").nth(1));
+
+      expect(mockOnRowSelectionChange).toHaveBeenLastCalledWith({
+        [data[0].id]: true,
+      });
     });
 
     test("can perform bulk actions on rows", async () => {
-      const user = userEvent.setup();
-
       const bulkActionMenuItems = (selectedRows: MRT_RowSelectionState) => (
         <MenuItem>Bulk action for {Object.keys(selectedRows).length}</MenuItem>
       );
 
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            bulkActionMenuItems={bulkActionMenuItems}
-            getData={getData}
-            hasRowSelection
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          bulkActionMenuItems={bulkActionMenuItems}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      await userEvent.click(page.getByRole("button", { name: "Select all" }));
 
-      const selectAllButton = screen.getByText("Select all", {
-        selector: "button",
+      const selectedButton = page.getByRole("button", {
+        name: "More actions",
       });
-      await user.click(selectAllButton);
+      await userEvent.click(selectedButton);
 
-      const selectedButton = screen.getByText(`${data.length} selected`, {
-        selector: "button",
-      });
-      await user.click(selectedButton);
-
-      const bulkActionsMenu = getControlledElement({ element: selectedButton });
-      const bulkActionsMenuItem = within(bulkActionsMenu).getByRole("menuitem");
+      const bulkActionsMenuLocator = page.getByRole("menu");
+      const bulkActionsMenuItem = bulkActionsMenuLocator
+        .getByRole("menuitem")
+        .element();
       expect(bulkActionsMenuItem.textContent).toBe(
         `Bulk action for ${data.length}`,
       );
@@ -588,8 +584,6 @@ describe("DataView", { timeout: 10000 }, () => {
 
   describe("Row reordering", () => {
     test("can reorder rows", async () => {
-      const user = userEvent.setup();
-
       let updatedData = data.slice();
 
       const handleReorderRows = ({
@@ -599,46 +593,42 @@ describe("DataView", { timeout: 10000 }, () => {
         updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
       };
 
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={() => updatedData}
-            hasRowReordering
-            onReorderRows={handleReorderRows}
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={() => updatedData}
+          hasRowReordering
+          onReorderRows={handleReorderRows}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      expect(await screen.findByText(data[0].name)).toBeVisible();
-      expect(await screen.findByText(data[1].name)).toBeVisible();
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect.element(page.getByText(data[1].name)).toBeVisible();
 
-      const moreActionsButton = within(
-        screen.getAllByRole("row")[2],
-      ).getByLabelText("More actions", { selector: "button" });
-      await user.click(moreActionsButton);
+      const moreActionsButton = page
+        .getByRole("row")
+        .nth(2)
+        .getByRole("button", { name: "More actions" });
+      await userEvent.click(moreActionsButton);
 
-      const moreActionsMenu = getControlledElement({
-        element: moreActionsButton,
-      });
-      const moveForwardButton = within(moreActionsMenu).getByRole("menuitem", {
-        name: "Bring forward",
-      });
-      await user.click(moveForwardButton);
-
-      const updatedRows = await screen.findAllByRole("row");
+      const moreActionsMenuLocator = page.getByRole("menu");
+      await userEvent.click(
+        moreActionsMenuLocator.getByRole("menuitem", { name: "Bring forward" }),
+      );
 
       // Confirm that the first two rows have swapped
-      expect(updatedRows[1].textContent).toContain(data[1].name);
-      expect(updatedRows[2].textContent).toContain(data[0].name);
+      await expect
+        .element(page.getByRole("row").nth(1))
+        .toHaveTextContent(data[1].name);
+      await expect
+        .element(page.getByRole("row").nth(2))
+        .toHaveTextContent(data[0].name);
     });
 
     test("can reorder to front", async () => {
-      const user = userEvent.setup();
-
       let updatedData = data.slice();
 
       const handleReorderRows = ({
@@ -648,46 +638,44 @@ describe("DataView", { timeout: 10000 }, () => {
         updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
       };
 
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={() => updatedData}
-            hasRowReordering
-            onReorderRows={handleReorderRows}
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={() => updatedData}
+          hasRowReordering
+          onReorderRows={handleReorderRows}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      expect(await screen.findByText(data[0].name)).toBeVisible();
-      expect(await screen.findByText(data[5].name)).toBeVisible();
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect.element(page.getByText(data[5].name)).toBeVisible();
 
-      const moreActionsButton = within(
-        screen.getAllByRole("row")[6],
-      ).getByLabelText("More actions", { selector: "button" });
-      await user.click(moreActionsButton);
+      const moreActionsButton = page
+        .getByRole("row")
+        .nth(6)
+        .getByRole("button", { name: "More actions" });
+      await userEvent.click(moreActionsButton);
 
-      const moreActionsMenu = getControlledElement({
-        element: moreActionsButton,
-      });
-      const moveToFrontButton = within(moreActionsMenu).getByRole("menuitem", {
-        name: "Bring to front",
-      });
-      await user.click(moveToFrontButton);
-
-      const updatedRows = await screen.findAllByRole("row");
+      const moreActionsMenuLocator = page.getByRole("menu");
+      await userEvent.click(
+        moreActionsMenuLocator.getByRole("menuitem", {
+          name: "Bring to front",
+        }),
+      );
 
       // Confirm that the first two rows have swapped
-      expect(updatedRows[1].textContent).toContain(data[5].name);
-      expect(updatedRows[2].textContent).toContain(data[0].name);
+      await expect
+        .element(page.getByRole("row").nth(1))
+        .toHaveTextContent(data[5].name);
+      await expect
+        .element(page.getByRole("row").nth(2))
+        .toHaveTextContent(data[0].name);
     });
 
     test("can reorder to back", async () => {
-      const user = userEvent.setup();
-
       let updatedData = data.slice();
 
       const handleReorderRows = ({
@@ -697,320 +685,279 @@ describe("DataView", { timeout: 10000 }, () => {
         updatedData = reorderData({ data: updatedData, rowId, newRowIndex });
       };
 
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={() => updatedData}
-            hasRowReordering
-            onReorderRows={handleReorderRows}
-            tableLayoutOptions={{
-              columns,
-            }}
-            totalRows={updatedData.length}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={() => updatedData}
+          hasRowReordering
+          onReorderRows={handleReorderRows}
+          tableLayoutOptions={{
+            columns,
+          }}
+          totalRows={updatedData.length}
+        />,
       );
 
-      expect(await screen.findByText(data[0].name)).toBeVisible();
-      expect(await screen.findByText(data[5].name)).toBeVisible();
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect.element(page.getByText(data[5].name)).toBeVisible();
 
-      const moreActionsButton = within(
-        screen.getAllByRole("row")[1],
-      ).getByLabelText("More actions", { selector: "button" });
-      await user.click(moreActionsButton);
+      const moreActionsButton = page
+        .getByRole("row")
+        .nth(1)
+        .getByRole("button", { name: "More actions" });
+      await userEvent.click(moreActionsButton);
 
-      const moreActionsMenu = getControlledElement({
-        element: moreActionsButton,
-      });
-      const moveToBackButton = within(moreActionsMenu).getByRole("menuitem", {
-        name: "Send to back",
-      });
-      await user.click(moveToBackButton);
+      const moreActionsMenuLocator = page.getByRole("menu");
+      await userEvent.click(
+        moreActionsMenuLocator.getByRole("menuitem", { name: "Send to back" }),
+      );
 
-      const updatedRows = await screen.findAllByRole("row");
-
-      expect(updatedRows[6].textContent).toContain(data[0].name);
-      expect(updatedRows[5].textContent).toContain(data[5].name);
+      await expect
+        .element(page.getByRole("row").nth(6))
+        .toHaveTextContent(data[0].name);
+      await expect
+        .element(page.getByRole("row").nth(5))
+        .toHaveTextContent(data[5].name);
     });
 
     test("can expand table rows", async () => {
-      const user = userEvent.setup();
-
       const tableDetails: TableLayoutProps<Person>["renderDetailPanel"] = ({
         row,
       }) => {
         return <p>This is additional content for {row.original.name}</p>;
       };
 
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            tableLayoutOptions={{
-              columns,
-              renderDetailPanel: tableDetails,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            renderDetailPanel: tableDetails,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
-      expect(
-        screen.queryByText(`This is additional content for ${data[0].name}`),
-      ).not.toBeInTheDocument();
+      await expect
+        .element(
+          page.getByText(`This is additional content for ${data[0].name}`),
+        )
+        .not.toBeInTheDocument();
 
-      const firstBodyRow = (await screen.findAllByRole("row"))[1];
-      const firstBodyRowExpandButton = within(firstBodyRow).getByLabelText(
-        "Expand",
-        { selector: "button" },
-      );
-      await user.click(firstBodyRowExpandButton);
+      // nth(1) because row[0] is the th row
+      const firstBodyRowExpandButton = page
+        .getByRole("row")
+        .nth(1)
+        .getByRole("button", { name: "Expand" });
+      await userEvent.click(firstBodyRowExpandButton);
 
-      expect(
-        screen.queryByText(`This is additional content for ${data[0].name}`),
-      ).toBeVisible();
+      await expect
+        .element(
+          page.getByText(`This is additional content for ${data[0].name}`),
+        )
+        .toBeVisible();
     });
   });
 
   test("can expand card rows", async () => {
-    const user = userEvent.setup();
-
     const cardDetails = ({ row }: { row: DataTableRowData }) => {
       return <p>This is additional content for {row.name}</p>;
     };
 
-    render(
-      <OdysseyProvider>
-        <DataView
-          availableLayouts={["grid"]}
-          cardLayoutOptions={{
-            itemProps: gridItemProps,
-            renderDetailPanel: cardDetails,
-          }}
-          getData={getData}
-        />
-      </OdysseyProvider>,
+    await renderDataView(
+      <DataView
+        availableLayouts={["grid"]}
+        cardLayoutOptions={{
+          itemProps: gridItemProps,
+          renderDetailPanel: cardDetails,
+        }}
+        getData={getData}
+      />,
     );
 
-    expect(await screen.findAllByText(data[0].name)).toHaveLength(1);
-    expect(
-      screen.queryByText(`This is additional content for ${data[0].name}`),
-    ).not.toBeInTheDocument();
+    await expect.element(page.getByText(data[0].name)).toBeVisible();
+    await expect
+      .element(page.getByText(`This is additional content for ${data[0].name}`))
+      .not.toBeInTheDocument();
 
-    const firstCard = (await screen.findAllByRole("listitem"))[0];
-    const firstCardExpandButton = within(firstCard).getByLabelText("Expand", {
-      selector: "button",
-    });
-    await user.click(firstCardExpandButton);
+    const firstCardExpandButton = page
+      .getByRole("listitem")
+      .nth(0)
+      .getByRole("button", { name: "Expand" });
+    await userEvent.click(firstCardExpandButton);
 
-    expect(
-      screen.queryByText(`This is additional content for ${data[0].name}`),
-    ).toBeVisible();
+    await expect
+      .element(page.getByText(`This is additional content for ${data[0].name}`))
+      .toBeVisible();
   });
 
   test("can display empty state", async () => {
     const emptyText = "This is the empty state text.";
 
-    render(
-      <OdysseyProvider>
-        <DataView
-          availableLayouts={["table"]}
-          emptyPlaceholder={
-            <EmptyState description={emptyText} heading="Empty" />
-          }
-          getData={() => []}
-          tableLayoutOptions={{
-            columns,
-          }}
-        />
-      </OdysseyProvider>,
+    await renderDataView(
+      <DataView
+        availableLayouts={["table"]}
+        emptyPlaceholder={
+          <EmptyState description={emptyText} heading="Empty" />
+        }
+        getData={() => []}
+        tableLayoutOptions={{
+          columns,
+        }}
+      />,
     );
 
-    expect(await screen.findByText(emptyText)).toBeVisible();
+    await expect.element(page.getByText(emptyText)).toBeVisible();
   });
 
   test("can display no-results state", async () => {
     const noResultsText = "This is the no results state text.";
 
-    render(
-      <OdysseyProvider>
-        <DataView
-          availableLayouts={["table"]}
-          getData={() => []}
-          noResultsPlaceholder={
-            <EmptyState description={noResultsText} heading="No results" />
-          }
-          tableLayoutOptions={{
-            columns,
-          }}
-        />
-      </OdysseyProvider>,
+    await renderDataView(
+      <DataView
+        availableLayouts={["table"]}
+        getData={() => []}
+        noResultsPlaceholder={
+          <EmptyState description={noResultsText} heading="No results" />
+        }
+        tableLayoutOptions={{
+          columns,
+        }}
+      />,
     );
 
-    expect(await screen.findByText(noResultsText)).toBeVisible();
+    await expect.element(page.getByText(noResultsText)).toBeVisible();
   });
 
   test("can sort rows", async () => {
-    const user = userEvent.setup();
-
-    render(
-      <OdysseyProvider>
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-            hasSorting: true,
-          }}
-        />
-      </OdysseyProvider>,
+    await renderDataView(
+      <DataView
+        availableLayouts={["table"]}
+        getData={getData}
+        tableLayoutOptions={{
+          columns,
+          hasSorting: true,
+        }}
+      />,
     );
 
-    await waitUntilTableLoadedHack();
-
-    const initialRows = screen.getAllByRole("row");
+    const initialRows = page.getByRole("row").elements();
     expect(initialRows[1].textContent).toContain(data[0].name);
 
-    const idHeader = screen.getByRole("button", {
-      name: "Sort by ID descending",
-    });
-    await user.click(idHeader);
+    await userEvent.click(
+      page.getByRole("button", { name: "Sort by ID descending" }),
+    );
 
-    expect(await screen.findByText(data[0].name)).toBeVisible();
+    await expect.element(page.getByText(data[0].name)).toBeVisible();
 
-    const sortedRows = screen.getAllByRole("row");
-    expect(sortedRows[6].textContent).toContain(data[0].name);
+    await expect
+      .element(page.getByRole("row").nth(6))
+      .toHaveTextContent(data[0].name);
   });
 
   test("can change row density", async () => {
-    const user = userEvent.setup();
-
-    render(
-      <OdysseyProvider>
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-            hasChangeableDensity: true,
-          }}
-        />
-      </OdysseyProvider>,
+    await renderDataView(
+      <DataView
+        availableLayouts={["table"]}
+        getData={getData}
+        tableLayoutOptions={{
+          columns,
+          hasChangeableDensity: true,
+        }}
+      />,
     );
-
-    await waitUntilTableLoadedHack();
 
     // Since table density is a purely visible attribute, there's no ARIA
     // attribute to target here. We're forced to use the className directly.
-    const tBody = screen.getAllByRole("row")[1].parentElement;
+    const tBody = page.getByRole("row").elements()[1].parentElement;
     expect(tBody?.className).not.toContain("MuiTableBody-compact");
 
-    const densityButton = screen.getByLabelText("Table density", {
-      selector: "button",
-    });
-    await user.click(densityButton);
+    const densityButton = page.getByRole("button", { name: "Table density" });
+    await userEvent.click(densityButton);
 
-    const densityMenu = getControlledElement({ element: densityButton });
-    const densityCompact = within(densityMenu).getByRole("menuitem", {
-      name: "Compact",
-    });
-    await user.click(densityCompact);
+    const densityMenuLocator = page.getByRole("menu");
+    await userEvent.click(
+      densityMenuLocator.getByRole("menuitem", { name: "Compact" }),
+    );
 
     expect(tBody?.className).toContain("MuiTableBody-compact");
   });
 
   describe("Column visibility", () => {
     test("can change column visibility", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            tableLayoutOptions={{
-              columns,
-              hasColumnVisibility: true,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            hasColumnVisibility: true,
+          }}
+        />,
       );
 
       // Detect if the data has loaded in
-      await screen.findByText(data[0].city);
+      await expect.element(page.getByText(data[0].city)).toBeVisible();
 
-      const visibilityButton = screen.getByLabelText("Show/hide columns", {
-        selector: "button",
+      const visibilityButton = page.getByRole("button", {
+        name: "Show/hide columns",
       });
-      await user.click(visibilityButton);
+      await userEvent.click(visibilityButton);
 
-      const visibilityMenu = getControlledElement({
-        element: visibilityButton,
-      });
+      const visibilityMenuLocator = page.getByRole("menu");
+      await userEvent.click(visibilityMenuLocator.getByText("City"));
 
-      const cityCheckbox = within(visibilityMenu).getByText("City");
-      await user.click(cityCheckbox);
-
-      expect(screen.queryByText(data[0].city)).not.toBeInTheDocument();
+      await expect
+        .element(page.getByText(data[0].city))
+        .not.toBeInTheDocument();
     });
 
     test("initialColumnVisibility hides specified columns on mount", async () => {
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            tableLayoutOptions={{
-              columns,
-              hasColumnVisibility: true,
-              initialColumnVisibility: { city: false },
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          tableLayoutOptions={{
+            columns,
+            hasColumnVisibility: true,
+            initialColumnVisibility: { city: false },
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
-
-      expect(screen.queryByText(data[0].city)).not.toBeInTheDocument();
+      await expect
+        .element(page.getByText(data[0].city))
+        .not.toBeInTheDocument();
     });
 
     test("onColumnVisibilityChange called when column is toggled", async () => {
-      const user = userEvent.setup();
-
       const mockOnColumnVisibilityChange = vi.fn();
 
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            onColumnVisibilityChange={mockOnColumnVisibilityChange}
-            tableLayoutOptions={{
-              columns,
-              hasColumnVisibility: true,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          onColumnVisibilityChange={mockOnColumnVisibilityChange}
+          tableLayoutOptions={{
+            columns,
+            hasColumnVisibility: true,
+          }}
+        />,
       );
 
-      await screen.findByText(data[0].city);
+      await expect.element(page.getByText(data[0].city)).toBeVisible();
 
-      const visibilityButton = screen.getByLabelText("Show/hide columns", {
-        selector: "button",
+      const visibilityButton = page.getByRole("button", {
+        name: "Show/hide columns",
       });
-      await user.click(visibilityButton);
+      await userEvent.click(visibilityButton);
 
-      const visibilityMenu = getControlledElement({
-        element: visibilityButton,
-      });
-      const cityLabel = within(visibilityMenu).getByText("City");
-      await user.click(cityLabel);
+      const visibilityMenuLocator = page.getByRole("menu");
+      await userEvent.click(visibilityMenuLocator.getByText("City"));
 
-      await waitFor(() => {
-        expect(screen.queryByText(data[0].city)).not.toBeInTheDocument();
-      });
+      await expect
+        .element(page.getByText(data[0].city, { exact: true }))
+        .not.toBeInTheDocument();
       expect(mockOnColumnVisibilityChange).toHaveBeenCalledWith({
         city: false,
       });
@@ -1018,23 +965,18 @@ describe("DataView", { timeout: 10000 }, () => {
   });
 
   test("can resize columns", async () => {
-    render(
-      <OdysseyProvider>
-        <DataView
-          availableLayouts={["table"]}
-          getData={getData}
-          tableLayoutOptions={{
-            columns,
-            hasColumnResizing: true,
-          }}
-        />
-      </OdysseyProvider>,
+    await renderDataView(
+      <DataView
+        availableLayouts={["table"]}
+        getData={getData}
+        tableLayoutOptions={{
+          columns,
+          hasColumnResizing: true,
+        }}
+      />,
     );
 
-    await waitUntilTableLoadedHack();
-
-    const rows = await screen.findAllByRole("row");
-    const tHead = rows[0].parentElement;
+    const tHead = page.getByRole("row").elements()[0].parentElement;
 
     // Ensure that the resize handle is displayed when
     // hasColumnResizing is true
@@ -1044,201 +986,158 @@ describe("DataView", { timeout: 10000 }, () => {
 
   describe("Pagination", () => {
     test("displays paged pagination", async () => {
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasPagination
-            paginationType="paged"
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          paginationType="paged"
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
-
-      const paginationContainer = await screen.findByLabelText("Pagination", {
-        selector: "nav",
-      });
-      expect(
-        within(paginationContainer).getByLabelText("Next page", {
-          selector: "button",
-        }),
-      ).toBeVisible();
+      await expect
+        .element(
+          page
+            .getByRole("navigation", { name: "Pagination" })
+            .getByRole("button", { name: "Next page" }),
+        )
+        .toBeVisible();
     });
 
     test("displays loadMore pagination", async () => {
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            enableVirtualization={false}
-            getData={getData}
-            hasPagination
-            paginationType="loadMore"
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          enableVirtualization={false}
+          getData={getData}
+          hasPagination
+          paginationType="loadMore"
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
-
-      expect(
-        screen.getByText("Show more", { selector: "button" }),
-      ).toBeVisible();
+      await expect
+        .element(page.getByRole("button", { name: "Show more" }))
+        .toBeVisible();
     });
 
     test("can load more rows via loadMore pagination", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            enableVirtualization={false}
-            getData={getData}
-            hasPagination
-            paginationType="loadMore"
-            resultsPerPage={3}
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          enableVirtualization={false}
+          getData={getData}
+          hasPagination
+          paginationType="loadMore"
+          resultsPerPage={3}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      expect(page.getByRole("row").elements()).toHaveLength(4);
 
-      expect(screen.getAllByRole("row")).toHaveLength(4);
+      await userEvent.click(page.getByRole("button", { name: "Show more" }));
 
-      const loadMoreButton = screen.getByText("Show more", {
-        selector: "button",
-      });
-      await user.click(loadMoreButton);
-
-      await waitFor(() => {
-        expect(screen.getAllByRole("row")).toHaveLength(7); // 6 data rows + header row
-      });
+      await expect.element(page.getByRole("row")).toHaveLength(7); // 6 data rows + header row
     });
 
     test("can go to the next page", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasPagination
-            paginationType="paged"
-            resultsPerPage={2}
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          paginationType="paged"
+          resultsPerPage={2}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect
+        .element(page.getByText(data[2].name))
+        .not.toBeInTheDocument();
 
-      expect(screen.queryByText(data[0].name)).toBeVisible();
-      expect(screen.queryByText(data[2].name)).not.toBeInTheDocument();
+      await userEvent.click(page.getByRole("button", { name: "Next page" }));
 
-      const nextPageButton = screen.getByLabelText("Next page", {
-        selector: "button",
-      });
-      await user.click(nextPageButton);
-
-      await screen.findByText(data[2].name);
-
-      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
-      expect(screen.queryByText(data[2].name)).toBeVisible();
+      await expect.element(page.getByText(data[2].name)).toBeVisible();
+      await expect
+        .element(page.getByText(data[0].name))
+        .not.toBeInTheDocument();
     });
 
     test("can go to the previous page", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasPagination
-            paginationType="paged"
-            resultsPerPage={2}
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          paginationType="paged"
+          resultsPerPage={2}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect
+        .element(page.getByText(data[2].name))
+        .not.toBeInTheDocument();
 
-      expect(screen.queryByText(data[0].name)).toBeVisible();
-      expect(screen.queryByText(data[2].name)).not.toBeInTheDocument();
+      await userEvent.click(page.getByRole("button", { name: "Next page" }));
 
-      const nextPageButton = screen.getByLabelText("Next page", {
-        selector: "button",
-      });
-      await user.click(nextPageButton);
+      await expect.element(page.getByText(data[2].name)).toBeVisible();
+      await expect
+        .element(page.getByText(data[0].name))
+        .not.toBeInTheDocument();
 
-      await screen.findByText(data[2].name);
+      await userEvent.click(
+        page.getByRole("button", { name: "Previous page" }),
+      );
 
-      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
-      expect(screen.queryByText(data[2].name)).toBeVisible();
-
-      const prevPageButton = screen.getByLabelText("Previous page", {
-        selector: "button",
-      });
-      await user.click(prevPageButton);
-
-      await waitUntilTableLoadedHack();
-
-      expect(screen.queryByText(data[0].name)).toBeVisible();
-      expect(screen.queryByText(data[2].name)).not.toBeInTheDocument();
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect
+        .element(page.getByText(data[2].name))
+        .not.toBeInTheDocument();
     });
 
     test("can disable the next page button based on max rows", async () => {
-      const user = userEvent.setup();
-
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={getData}
-            hasPagination
-            paginationType="paged"
-            resultsPerPage={data.length - 1}
-            tableLayoutOptions={{
-              columns,
-            }}
-            totalRows={data.length}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          paginationType="paged"
+          resultsPerPage={data.length - 1}
+          tableLayoutOptions={{
+            columns,
+          }}
+          totalRows={data.length}
+        />,
       );
 
-      await waitUntilTableLoadedHack();
-
-      const nextPageButton = screen.getByLabelText("Next page", {
-        selector: "button",
-      });
-      const prevPageButton = screen.getByLabelText("Previous page", {
-        selector: "button",
+      const nextPageButton = page.getByRole("button", { name: "Next page" });
+      const prevPageButton = page.getByRole("button", {
+        name: "Previous page",
       });
 
-      expect(prevPageButton).toBeDisabled();
-      expect(nextPageButton).not.toBeDisabled();
+      await expect.element(prevPageButton).toBeDisabled();
+      await expect.element(nextPageButton).not.toBeDisabled();
 
-      await user.click(nextPageButton);
+      await userEvent.click(nextPageButton);
 
-      expect(prevPageButton).not.toBeDisabled();
-      expect(nextPageButton).toBeDisabled();
+      await expect.element(prevPageButton).not.toBeDisabled();
+      await expect.element(nextPageButton).toBeDisabled();
     });
   });
 
@@ -1246,99 +1145,94 @@ describe("DataView", { timeout: 10000 }, () => {
     test("isEmpty={false} suppresses empty placeholder after async fetch resolves with no rows", async () => {
       const emptyText = "Custom empty placeholder";
 
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            emptyPlaceholder={
-              <EmptyState description={emptyText} heading="Empty" />
-            }
-            getData={() => []}
-            isEmpty={false}
-            tableLayoutOptions={{
-              columns,
-            }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          emptyPlaceholder={
+            <EmptyState description={emptyText} heading="Empty" />
+          }
+          getData={() => []}
+          isEmpty={false}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
       );
 
       // Wait for loading to finish (progressbar disappears when isLoading becomes false)
-      await waitFor(() => {
-        expect(screen.queryByRole("progressbar")).not.toBeInTheDocument();
-      });
+      await expect
+        .element(page.getByRole("progressbar"))
+        .not.toBeInTheDocument();
 
       // Since isEmpty={false}, we will see the no results placeholder, rather than isEmpty placeholder
-      expect(await screen.findByText("There are no results.")).toBeVisible();
-      expect(screen.queryByText(emptyText)).not.toBeInTheDocument();
+      await expect
+        .element(page.getByText("There are no results."))
+        .toBeVisible();
+      await expect.element(page.getByText(emptyText)).not.toBeInTheDocument();
     });
 
     test("isNoResults={false} suppresses no-results placeholder when getData returns no rows", async () => {
       const noResultsText = "Custom no results placeholder";
 
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={() => []}
-            isEmpty={false}
-            isNoResults={false}
-            noResultsPlaceholder={
-              <EmptyState description={noResultsText} heading="No results" />
-            }
-            tableLayoutOptions={{ columns }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={() => []}
+          isEmpty={false}
+          isNoResults={false}
+          noResultsPlaceholder={
+            <EmptyState description={noResultsText} heading="No results" />
+          }
+          tableLayoutOptions={{ columns }}
+        />,
       );
 
       // Wait for loading to finish
-      await waitFor(() => {
-        expect(screen.queryByRole("progressbar")).not.toBeInTheDocument();
-      });
+      await expect
+        .element(page.getByRole("progressbar"))
+        .not.toBeInTheDocument();
 
-      expect(screen.queryByText(noResultsText)).not.toBeInTheDocument();
+      await expect
+        .element(page.getByText(noResultsText))
+        .not.toBeInTheDocument();
     });
 
     test("isLoading={false} keeps rows visible when dataQueryParams change triggers a refetch", async () => {
-      const user = userEvent.setup();
-
       const asyncGetData = ({ ...props }) =>
         new Promise<Person[]>((resolve) =>
           setTimeout(() => resolve(filterData({ data, ...props })), 50),
         );
 
-      render(
-        <OdysseyProvider>
-          <DataView
-            availableLayouts={["table"]}
-            getData={asyncGetData}
-            hasPagination
-            isLoading={false}
-            paginationType="paged"
-            resultsPerPage={2}
-            tableLayoutOptions={{ columns }}
-          />
-        </OdysseyProvider>,
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={asyncGetData}
+          hasPagination
+          isLoading={false}
+          paginationType="paged"
+          resultsPerPage={2}
+          tableLayoutOptions={{ columns }}
+        />,
       );
 
-      await waitFor(() => {
-        expect(screen.getByText(data[0].name)).toBeVisible();
-      });
-      expect(screen.queryByText(data[2].name)).not.toBeInTheDocument();
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect
+        .element(page.getByText(data[2].name))
+        .not.toBeInTheDocument();
 
-      const nextPageButton = screen.getByLabelText("Next page", {
-        selector: "button",
-      });
-      await user.click(nextPageButton);
+      await userEvent.click(page.getByRole("button", { name: "Next page" }));
 
       // The async fetch for page 2 has started but not resolved yet (50 ms delay).
       // With the bug, fetchData calls setIsLoading(true) which causes MRT to replace
       // the actual rows with skeleton placeholders, making data[0].name disappear.
       // With the fix, setIsLoading is not passed to fetchData when isLoading is controlled,
       // so the previous page rows remain visible throughout.
-      expect(screen.getByText(data[0].name)).toBeVisible();
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
 
-      await screen.findByText(data[2].name);
-      expect(screen.queryByText(data[0].name)).not.toBeInTheDocument();
+      await expect.element(page.getByText(data[2].name)).toBeVisible();
+      await expect
+        .element(page.getByText(data[0].name))
+        .not.toBeInTheDocument();
     });
   });
 });

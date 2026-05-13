@@ -198,6 +198,9 @@ export const Default: Story = {
 
 export const AutoFocusedTopBar: Story = {
   decorators: [OdysseyStorybookThemeDecorator],
+  play: async () => {
+    await userEvent.tab();
+  },
   render: function C() {
     const [appElement, setAppElement] = useState<HTMLDivElement | null>(null);
     const odysseyDesignTokens = useOdysseyDesignTokens();
@@ -238,6 +241,9 @@ export const AutoFocusedTopBar: Story = {
 
 export const WithNavigation: Story = {
   decorators: [OdysseyStorybookThemeDecorator],
+  play: async () => {
+    await userEvent.tab();
+  },
   render: function C() {
     const [appElement, setAppElement] = useState<HTMLDivElement | null>(null);
     const odysseyDesignTokens = useOdysseyDesignTokens();

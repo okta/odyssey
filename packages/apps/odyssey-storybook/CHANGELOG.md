@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.60.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.59.0...v1.60.0) (2026-05-13)
+
+### Features
+
+- implement ImageUploader component with cropping functionality and styles ([#272](https://github.com/atko-eng/odyssey-design-system/issues/272)) ([97ec506](https://github.com/atko-eng/odyssey-design-system/commit/97ec506f4f9760b2c8020f186eb65da126a09307))
+- move tests to vitest 4 browser mode ([#258](https://github.com/atko-eng/odyssey-design-system/issues/258)) ([baff3b8](https://github.com/atko-eng/odyssey-design-system/commit/baff3b8d07995859298f5ee9745010064149294e))
+- split icons and logos into separate folders ([#284](https://github.com/atko-eng/odyssey-design-system/issues/284)) ([2457134](https://github.com/atko-eng/odyssey-design-system/commit/2457134a3c49f77505712ad566f3a2fb5caa5799))
+
+### Bug Fixes
+
+- autocomplete bottom margin spacing ([#291](https://github.com/atko-eng/odyssey-design-system/issues/291)) ([70ef35a](https://github.com/atko-eng/odyssey-design-system/commit/70ef35ae0c3474e4b53b243f827d876381bcfbf4))
+- remove sx prop in Stack component's type ([#287](https://github.com/atko-eng/odyssey-design-system/issues/287)) ([4c4206a](https://github.com/atko-eng/odyssey-design-system/commit/4c4206a182cd35ac2110e68b2deb7e24c9127ecf))
+- shorten long picker adornment story descriptions ([#292](https://github.com/atko-eng/odyssey-design-system/issues/292)) ([50aeeea](https://github.com/atko-eng/odyssey-design-system/commit/50aeeea81a8e480412aa9edbb5cfaebc36a721ff))
+
 ## [1.59.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.58.0...v1.59.0) (2026-04-29)
 
 ### Features

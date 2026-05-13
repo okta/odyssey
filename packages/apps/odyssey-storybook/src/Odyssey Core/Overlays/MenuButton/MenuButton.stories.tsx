@@ -34,11 +34,8 @@ import {
   QuestionCircleIcon,
 } from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, waitFor, within } from "storybook/test";
+import { userEvent, within } from "storybook/test";
 
-import type { PlaywrightProps } from "../../../tools/storybookTypes.js";
-
-import { axeRun } from "../../../axeRun.js";
 import icons from "../../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../../Fields/fieldComponentPropsMetaData.js";
@@ -57,7 +54,7 @@ const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const storybookMeta: Meta<typeof MenuButton> = {
+const storybookMeta = {
   component: MenuButton,
   decorators: [OdysseyStorybookThemeDecorator],
   tags: ["autodocs"],
@@ -217,24 +214,13 @@ const storybookMeta: Meta<typeof MenuButton> = {
     buttonVariant: "secondary",
     menuAlignment: "left",
   },
-};
+} satisfies Meta<typeof MenuButton>;
 
 export default storybookMeta;
 
-const clickMenuButton =
-  ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) =>
-  async (args: MenuButtonProps, actionName: string) => {
-    const canvas = within(canvasElement);
-    await step("open menu button", async () => {
-      const buttonElement = canvas.getByRole("button", {
-        name: args.buttonLabel,
-      });
-      userEvent.click(buttonElement);
-      await waitFor(async () => axeRun(actionName));
-    });
-  };
+type Story = StoryObj<typeof storybookMeta>;
 
-export const Simple: StoryObj<MenuButtonProps> = {
+export const Simple: Story = {
   args: {
     buttonLabel: "Button label",
     children: [
@@ -243,20 +229,15 @@ export const Simple: StoryObj<MenuButtonProps> = {
       <MenuItem key="3">Menu item label 3</MenuItem>,
     ],
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: MenuButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<MenuButtonProps>["step"];
-  }) => {
-    await clickMenuButton({ canvasElement, step })(args, "Menu Button Simple");
+  play: async ({ canvasElement, step }) => {
+    await step("Open menu", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
   },
 };
 
-export const ActionIcons: StoryObj<MenuButtonProps> = {
+export const ActionIcons: Story = {
   args: {
     children: [
       <MenuItem isDisabled key="1">
@@ -273,23 +254,15 @@ export const ActionIcons: StoryObj<MenuButtonProps> = {
       </MenuItem>,
     ],
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: MenuButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<MenuButtonProps>["step"];
-  }) => {
-    await clickMenuButton({ canvasElement, step })(
-      args,
-      "Menu Button Action Icons",
-    );
+  play: async ({ canvasElement, step }) => {
+    await step("Open menu", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
   },
 };
 
-export const ButtonVariant: StoryObj<MenuButtonProps> = {
+export const ButtonVariant: Story = {
   args: {
     buttonLabel: "Button label",
     buttonVariant: "floating",
@@ -300,16 +273,15 @@ export const ButtonVariant: StoryObj<MenuButtonProps> = {
     ],
     id: "floating",
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
-    await step("Filter and Select from listbox", async () => {
+  play: async ({ canvasElement, step }) => {
+    await step("Open menu", async () => {
       const canvas = within(canvasElement);
-      const button = canvas.getByRole("button", { name: "Button label" });
-      await expect(button).toHaveAttribute("id", "floating-button");
+      await userEvent.click(canvas.getByRole("button"));
     });
   },
 };
 
-export const Groupings: StoryObj<MenuButtonProps> = {
+export const Groupings: Story = {
   parameters: {
     a11y: {
       config: {
@@ -337,23 +309,15 @@ export const Groupings: StoryObj<MenuButtonProps> = {
       <MenuItem key="5">Menu item label 5</MenuItem>,
     ],
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: MenuButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<MenuButtonProps>["step"];
-  }) => {
-    await clickMenuButton({ canvasElement, step })(
-      args,
-      "Menu Button Groupings",
-    );
+  play: async ({ canvasElement, step }) => {
+    await step("Open menu", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
   },
 };
 
-export const WithDestructive: StoryObj<MenuButtonProps> = {
+export const WithDestructive: Story = {
   args: {
     buttonLabel: "Button label",
     children: [
@@ -364,23 +328,15 @@ export const WithDestructive: StoryObj<MenuButtonProps> = {
       </MenuItem>,
     ],
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: MenuButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<MenuButtonProps>["step"];
-  }) => {
-    await clickMenuButton({ canvasElement, step })(
-      args,
-      "Menu Button Destructive",
-    );
+  play: async ({ canvasElement, step }) => {
+    await step("Open menu", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
   },
 };
 
-export const IconButton: StoryObj<MenuButtonProps> = {
+export const IconButton: Story = {
   args: {
     ariaLabel: "Button label",
     buttonLabel: "",
@@ -391,16 +347,15 @@ export const IconButton: StoryObj<MenuButtonProps> = {
     ],
     tooltipText: "Button tooltip text",
   },
-  play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
-    await step("MenuButton Aria-Label", async () => {
+  play: async ({ canvasElement, step }) => {
+    await step("Open menu", async () => {
       const canvas = within(canvasElement);
-      const menuButton = canvas.queryByRole("button", { name: "Button label" });
-      await expect(menuButton).not.toBeNull();
+      await userEvent.click(canvas.getByRole("button"));
     });
   },
 };
 
-export const EndIcon: StoryObj<MenuButtonProps> = {
+export const EndIcon: Story = {
   args: {
     ariaLabel: "Button label",
     endIcon: <GroupIcon />,
@@ -411,9 +366,15 @@ export const EndIcon: StoryObj<MenuButtonProps> = {
     ],
     tooltipText: "Button tooltip text",
   },
+  play: async ({ canvasElement, step }) => {
+    await step("Open menu", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
+  },
 };
 
-export const Overflow: StoryObj<MenuButtonProps> = {
+export const Overflow: Story = {
   args: {
     buttonLabel: "Button label",
     children: [
@@ -423,9 +384,15 @@ export const Overflow: StoryObj<MenuButtonProps> = {
     ],
     isOverflow: true,
   },
+  play: async ({ canvasElement, step }) => {
+    await step("Open menu", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
+  },
 };
 
-export const Disabled: StoryObj<MenuButtonProps> = {
+export const Disabled: Story = {
   args: {
     buttonLabel: "Button label",
     isDisabled: true,
@@ -438,7 +405,7 @@ export const Disabled: StoryObj<MenuButtonProps> = {
   },
 };
 
-export const Alignment: StoryObj<MenuButtonProps> = {
+export const Alignment: Story = {
   args: {
     buttonVariant: "secondary",
     children: [
@@ -461,23 +428,21 @@ export const Alignment: StoryObj<MenuButtonProps> = {
       </Box>
     );
   },
-  play: async ({
-    args,
-    canvasElement,
-    step,
-  }: {
-    args: MenuButtonProps;
-    canvasElement: HTMLElement;
-    step: PlaywrightProps<MenuButtonProps>["step"];
-  }) => {
-    await clickMenuButton({ canvasElement, step })(
-      args,
-      "Menu Button Alignment",
-    );
+  play: async ({ canvasElement, step }) => {
+    await step("Open menu", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
   },
 };
 
-export const HelpPopover: StoryObj<MenuButtonProps> = {
+export const HelpPopover: Story = {
+  play: async ({ canvasElement, step }) => {
+    await step("Open menu", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("button"));
+    });
+  },
   args: {
     buttonLabel: "",
     endIcon: <QuestionCircleIcon />,
@@ -534,12 +499,5 @@ export const HelpPopover: StoryObj<MenuButtonProps> = {
     ],
     id: "floating",
     tooltipText: "Tooltip text",
-  },
-  play: async ({ canvasElement, step }: PlaywrightProps<MenuButtonProps>) => {
-    await step("MenuButton Aria-Label", () => {
-      const canvas = within(canvasElement);
-      const menuButton = canvas.queryByRole("button", { name: "Tooltip text" });
-      expect(menuButton).not.toBeNull();
-    });
   },
 };

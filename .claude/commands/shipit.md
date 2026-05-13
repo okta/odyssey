@@ -15,6 +15,13 @@ End-to-end workflow for shipping a small fix or task. Starting from uncommitted 
 - A single conventional commit
 - A pull request with the Jira link and summary pre-filled
 
+**Optional arguments** (parse from `$ARGUMENTS` before starting):
+
+- `--jira <KEY>` — skip Steps 3–7b (Jira ticket creation, transitions, priority, epic, sprint) and use this existing ticket key throughout.
+- `--branch <name>` — skip Step 8 (branch creation) and check out this existing branch instead.
+
+Both flags are optional and independent — either, both, or neither may be provided.
+
 Execute the following steps in order. Do not skip steps or batch them — complete each one before moving to the next.
 
 ---
@@ -44,13 +51,16 @@ Present slug, summary, and description to the user and ask them to confirm or co
 
 ## Step 3: Gather Jira task details
 
+**If `--jira <KEY>` was provided:** skip Steps 3 through 6 entirely. Use the provided key as the ticket key for all subsequent steps.
+
+---
+
 Use AskUserQuestion to collect the following. Ask all at once if possible:
 
 1. **Issue type** — Task or Bug
 2. **Priority** — P0, P1, P2, P3, P4, or leave empty (will be untriaged)
-3. **Parent epic** — OKTA-XXXX ticket key, an epic name to search for, or leave empty
 
-Default for priority and parent is empty. Issue type is required.
+Default priority is empty. Issue type is required.
 
 ### If issue type is Bug, ask two additional questions:
 
@@ -116,6 +126,36 @@ Map Bug Q5 to the `--is-regression` flag as follows:
 
 Capture the returned ticket key (e.g. `OKTA-1151880`).
 
+### Step 5a: Assign to self
+
+```bash
+$JIRA_SKILL/scripts/write/assign_jira.sh <key> --me
+```
+
+### Step 5b: Transition to Triaged
+
+New tickets start in Open. Move to Triaged using the "Accept Priority" transition:
+
+```bash
+$JIRA_SKILL/scripts/write/transition_jira.sh <key> --transition "Accept Priority"
+```
+
+If this fails, run `--list` to discover available transitions from Open and pick the one that moves to Triaged:
+
+```bash
+$JIRA_SKILL/scripts/write/transition_jira.sh <key> --list
+```
+
+### Step 5c: Transition to In Progress
+
+From Triaged, move to In Progress:
+
+```bash
+$JIRA_SKILL/scripts/write/transition_jira.sh <key> --transition "In Progress"
+```
+
+If this fails, run `--list` to discover the correct transition name from Triaged and use that instead.
+
 ---
 
 ## Step 6: Set priority (if provided)
@@ -130,29 +170,19 @@ Skip this step if left empty.
 
 ---
 
-## Step 7: Set parent epic (if provided)
+## Step 8: Create the branch
 
-If the user provided an `OKTA-XXXX` key directly:
-
-```bash
-$JIRA_SKILL/scripts/write/edit_jira.sh <key> --field parent --value <epic-key>
-```
-
-If they provided a name, search first:
+**If `--branch <name>` was provided:** check out that branch instead of creating one.
 
 ```bash
-$JIRA_SKILL/scripts/read/search_jira_jql.sh "project=OKTA AND issuetype=Epic AND summary ~ \"<name>\"" "key,summary" --limit 5
+git checkout <name>
 ```
 
-Show results, confirm the right one with the user, then set it.
-
-Skip this step if left empty.
+Skip the rest of this step.
 
 ---
 
-## Step 8: Create the branch
-
-Default base branch is `master` unless the user specifies otherwise.
+**Otherwise** — default base branch is `master` unless the user specifies otherwise.
 
 If there are uncommitted changes, stash them first so the branch switch succeeds:
 

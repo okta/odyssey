@@ -144,6 +144,10 @@ Key top-level files:
 - Most feature code lives in `packages/*`.
 - Storybook app: `packages/apps/odyssey-storybook`.
 
+### MUI Theme Component Overrides
+
+MUI component style overrides for `odyssey-react-mui` live in `packages/core/odyssey-react-mui/src/theme/components/`. Each component has its own file (e.g. `Button.tsx`, `Input.tsx`), and they are all imported and composed in a single entry point. When looking up or modifying a specific component's CSS overrides, go directly to its named file — do not look for a monolithic `components.tsx`.
+
 ### Design System
 
 - Use existing design tokens and components.
@@ -205,6 +209,33 @@ Key top-level files:
   };
   ```
 
+### Storybook Visual Regression Testing (VRT)
+
+Applitools Eyes captures a screenshot of each story after its `play` function completes (Storybook emits `STORY_RENDERED` post-play). Components with transient visual states — dropdowns, menus, dialogs, drawers, toasts, tooltips, calendars — must have a lightweight `play` function that produces the visible state, otherwise Applitools only captures the resting/closed state.
+
+- **When to add a play function**: any story where a meaningful part of the component is hidden until the user interacts (opens a menu, triggers a toast, hovers for a tooltip, toggles password visibility, etc.). Also add play functions to variant stories that render different option layouts in a dropdown (e.g., Picker with descriptions vs. metadata vs. groups).
+- **When NOT to add a play function**: static stories (Disabled, ReadOnly, Error) where the visual state is already in the initial render, and components with no hidden transient UI (Banner, Badge, Card layout, etc.).
+- **Keep play functions minimal**: one click or hover to produce the visual state. No assertions, no axe checks, no returning to resting state. Import `userEvent` and `within` from `"storybook/test"`.
+- **Do not type into controlled inputs** inside play functions — `useArgs` re-renders can swallow keystrokes. Use clicks and hovers only.
+
+  ```tsx
+  // Good — opens dropdown for VRT capture
+  play: async ({ canvasElement, step }) => {
+    await step("Open dropdown", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByRole("combobox"));
+    });
+  },
+
+  // Good — shows tooltip for VRT capture
+  play: async ({ canvasElement, step }) => {
+    await step("Show tooltip", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.hover(canvas.getByRole("button", { name: "Info" }));
+    });
+  },
+  ```
+
 ---
 
 ## 6. Testing
@@ -216,8 +247,8 @@ Key top-level files:
 - For button label assertions in unit tests, use `odysseyTranslate` from `i18n.generated/i18n.js` for localized strings (e.g., `odysseyTranslate("topnav.sidenavmenu.toggle")`).
 - Only use mocks in tests if absolutely required. Prefer real implementations and real localStorage over mocked modules.
 - Avoid `data-testid` queries when testing existing components; prefer accessible queries (`getByRole`, `getByLabelText`, etc.). Using `data-testid` is acceptable when creating test-only elements within the test.
-- Use `userEvent` from Testing Library for simulating user interactions (keyboard, clicks, typing). Do not use `fireEvent` directly or native DOM events; `userEvent` provides more realistic user behavior simulation.
-- In browser tests (vitest browser mode), import `userEvent` from `@vitest/browser/context`, not from `@testing-library/user-event`.
+- Use `userEvent` from Testing Library for simulating user interactions (keyboard, clicks, typing). Do not use `fireEvent` directly or native DOM events; `userEvent` provides more realistic user behavior simulation. When Playwright's actionability checks block interaction (e.g. `aria-disabled` elements), use `userEvent.click(locator, { force: true })` — not `element().click()`. Do not use `{ force: true }` when the test is validating that an element becomes visible or enabled before interaction — that explicit setup step is the behavior under test (e.g. SkipToContent calls `locator.element().focus()` to reveal the sr-only button, asserts `toBeVisible()`, then clicks normally; collapsing that into a force-click removes the visibility assertion).
+- In browser tests (vitest browser mode), import `userEvent` from `"vitest/browser"` (vitest 4+) or `"@vitest/browser/context"` (vitest 3), not from `@testing-library/user-event`.
 
 ### Test style (Node/Vitest)
 
@@ -225,10 +256,39 @@ Key top-level files:
 - Name tests to describe the **scenario**, not the expected outcome — the assertions handle expectations.
   - Wrong: `test("passes when component is older than 3 months")`
   - Right: `test("component source directory older than 3 months")`
-- Use `describe(functionName.name, () => { ... })` — pass the imported function's `.name` property, not a string literal. This links the suite to the function so an IDE rename either updates the string automatically or surfaces a TypeScript error.
+- For plain functions/utilities, use `describe(functionName.name, () => { ... })` — links the suite to the function so an IDE rename updates it automatically.
+- For React components in `odyssey-react-mui`, use `describe(ComponentName.displayName!, () => { ... })` — exported components are `React.memo()` wrappers, so `.name` returns `"MemoizedX"`. `.displayName` is the human-readable name explicitly set on every exported component.
 - No module mocks (`vi.mock`). Design functions with dependency injection (see Coding Standards above) and pass lightweight inline fakes in tests instead.
 - Tests must be pure and side-effect-free. Never collect call args via `.push()` or other mutation — express the same assertion through the function's return value instead (e.g. resolve only when the expected args are received, reject otherwise).
 - Always assert the **exact** result. Never use partial matchers (`expect.stringContaining`, `expect.objectContaining`, `expect.arrayContaining`) — they hide fields and let regressions through silently. Assert the full object, the full string, the full array.
+
+### Browser tests in odyssey-react-mui
+
+Use `renderWithOdysseyProvider` from `./test-utils/renderWithOdysseyProvider.js` as the default render wrapper — it provides an `OdysseyProvider` context and disables MUI transitions for deterministic tests. Using `render` directly with `OdysseyProvider` is acceptable when `renderWithOdysseyProvider` is not a good fit, but this should be the exception.
+
+All browser tests must include `toBeAccessible` assertions to catch accessibility regressions. The matcher is registered in `vitest-browser-setup.ts` and runs axe-core under the hood.
+
+- **When to assert**: on initial render AND after each meaningful state change (open menu, selected option, focused input, expanded accordion, visible tooltip).
+- **`disabledRules`**: pass rule IDs for known false positives or known issues that need to be fixed later (e.g., `"color-contrast"` for overlay components like Toast, Dialog, DatePicker calendar). Always add a comment above explaining what the issue is and whether it's a false positive or a known issue to fix.
+- **Scoping**: pass a specific DOM element to scope the check to a region (e.g., an open dialog). Use `expect.element(locator)` for vitest locators.
+- **Portal-rendered components**: MUI components that portal to `document.body` (Dialog, Drawer, Toast, Menu, Autocomplete listbox, DatePicker calendar) render **outside** the `container` returned by `renderWithOdysseyProvider`. Using `expect(container).toBeAccessible()` on these will silently scan an empty wrapper and never find violations. Always scope to the actual rendered element: `expect.element(page.getByRole("dialog"))`, `expect.element(page.getByRole("menu"))`, etc.
+
+  ```tsx
+  test("menu opened via keyboard", async () => {
+    const { container } = await renderWithOdysseyProvider(<MyComponent />);
+    // Axe on initial render
+    await expect(container).toBeAccessible();
+    // Open the menu
+    const trigger = page.getByRole("button", { name: "Options" });
+    await userEvent.keyboard("{Enter}");
+    // Axe scoped to the open menu — color-contrast disabled for overlay backdrop
+    const menu = page.getByRole("menu");
+    // TODO: fix — overlay has insufficient color contrast
+    await expect
+      .element(menu)
+      .toBeAccessible({ disabledRules: ["button-name"] });
+  });
+  ```
 
 ---
 
@@ -287,7 +347,60 @@ If your AI system supports includes, place a small file that points here, e.g.
 
 ---
 
-## 10. When in Doubt
+## 10. `odyssey-react-mui` Package — Browser Test Specifics
+
+This package is the only one currently running **vitest 4 browser mode** with the Playwright provider. It has a custom matcher registered in `vitest-browser-setup.ts` that covers a gap in the built-in assertion set.
+
+### `toBeAccessible`
+
+Use `await expect(element).toBeAccessible()` to assert that a DOM element passes axe-core accessibility checks. This is the required accessibility assertion for all browser tests.
+
+```ts
+// basic — assert initial render is accessible
+const { container } = await renderWithOdysseyProvider(<MyComponent />);
+await expect(container).toBeAccessible();
+
+// scoped to a specific region via a Locator — expect.element() resolves it first
+const dialog = page.getByRole("dialog");
+await expect.element(dialog).toBeAccessible();
+
+// disable known-broken rules (always add a comment explaining why)
+// TODO: fix — DatePicker calendar has insufficient color contrast
+await expect.element(dialog).toBeAccessible({ disabledRules: ["button-name"] });
+```
+
+`toBeAccessible` takes a DOM `Element`. Use `expect.element(locator)` when you have a vitest `Locator` — it pre-resolves the locator to an element before calling the matcher. Use `expect(container)` when you already have a DOM element (e.g. the `container` from `renderWithOdysseyProvider`). `expect.element()` is safe here because the element is always expected to exist.
+
+### Asserting hidden or absent state
+
+- Element removed from DOM (popover unmount, conditional render):
+  - `await expect.element(locator).not.toBeInTheDocument()` — async, with retry. Use to assert an element has been removed from the DOM. Pass the `Locator` directly.
+  - `await expect.poll(() => locator.query()).toBeNull()` — async with retry. Use when removal may be delayed (e.g. exit animations that keep the element in the DOM briefly before unmounting).
+- Element in DOM but not visible (MUI Collapse, CSS height:0, display:none): `await expect.element(locator).not.toBeVisible()`
+  - Playwright's `not.toBeVisible()` detects an empty bounding box (height:0, display:none) and `visibility:hidden`. It does **not** detect `opacity:0` — see the note below.
+  - `getByText` finds elements regardless of `aria-hidden`, so `expect.element(page.getByText("x")).not.toBeVisible()` works for MUI Collapse (height:0), even though the element has `aria-hidden="true"` set on a parent.
+  - For `getByRole` locators: `aria-hidden` prevents them from matching by default. Add `{ includeHidden: true }` so the locator can resolve: `page.getByRole("region", { includeHidden: true })`
+
+**Important — `opacity` does not count as "not visible":** An element is considered visible when it has a non-empty bounding box and does not have `visibility:hidden` computed style. Elements of zero size or with `display:none` are not considered visible. `opacity:0` has no impact on Playwright visibility — elements at `opacity:0` are still announced by screen readers and other assistive technologies, so they are correctly treated as visible. If a component hides content using only `opacity:0`, assert the CSS directly (`toHaveStyle("opacity: 0")`) and add a `// TODO` comment noting that the component should use `visibility:hidden` or remove content from the DOM instead, so assistive technologies do not announce hidden content.
+
+### Import note
+
+Use `"vitest/browser"` for all vitest browser imports — `Locator`, `utils`, `page`, `userEvent`, etc. The older `"@vitest/browser/context"` package is deprecated and will stop working in the next major version.
+
+---
+
+## 11. Package-Specific Instructions
+
+Some packages have their own agent instruction files that extend or override these
+repo-wide rules. Only load a package-specific file when you are working in that package.
+
+| Package                           | Instructions                                           | When to use                                                         |
+| --------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------- |
+| `packages/apps/odyssey-prototype` | [AGENTS.md](packages/apps/odyssey-prototype/AGENTS.md) | Only when modifying files inside `packages/apps/odyssey-prototype/` |
+
+---
+
+## 12. When in Doubt
 
 - Prefer small, safe changes.
 - Ask for clarification only when blocking.

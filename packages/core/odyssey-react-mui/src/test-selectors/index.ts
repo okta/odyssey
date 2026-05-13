@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+/**
+ * @deprecated Use `getControlledElement` from `test-utils/getControlledElement.ts` instead.
+ */
 export * from "./linkedHtmlSelectors.js";
-export * from "./queryOdysseySelector.js";
-export * from "./querySelector.js";
-export * from "./testSelector.js";

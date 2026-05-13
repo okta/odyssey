@@ -10,15 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { act, renderHook } from "@testing-library/react";
+import { renderHook } from "vitest-browser-react";
 
 import { useMountLifecycleEffect } from "./useMountLifecycleEffect.js";
 
 describe(useMountLifecycleEffect.name, () => {
-  test("calls `onMount` when rendered", () => {
+  test("calls `onMount` when rendered", async () => {
     const onMount = vi.fn();
 
-    renderHook(() =>
+    await renderHook(() =>
       useMountLifecycleEffect({
         onMount,
       }),
@@ -28,10 +28,10 @@ describe(useMountLifecycleEffect.name, () => {
     expect(onMount).toHaveBeenCalledWith();
   });
 
-  test("only calls `onMount` on first render", () => {
+  test("only calls `onMount` on first render", async () => {
     const onMount = vi.fn();
 
-    const { rerender } = renderHook(
+    const { rerender } = await renderHook(
       (onUpdate) =>
         useMountLifecycleEffect({
           onMount,
@@ -42,18 +42,16 @@ describe(useMountLifecycleEffect.name, () => {
       },
     );
 
-    act(() => {
-      rerender(() => {});
-    });
+    await rerender(() => {});
 
     expect(onMount).toHaveBeenCalledTimes(1);
     expect(onMount).toHaveBeenCalledWith();
   });
 
-  test("doesn't call `onMount` on change", () => {
+  test("doesn't call `onMount` on change", async () => {
     const onMount2 = vi.fn();
 
-    const { rerender } = renderHook(
+    const { rerender } = await renderHook(
       (onMount) =>
         useMountLifecycleEffect({
           onMount,
@@ -63,17 +61,15 @@ describe(useMountLifecycleEffect.name, () => {
       },
     );
 
-    act(() => {
-      rerender(onMount2);
-    });
+    await rerender(onMount2);
 
     expect(onMount2).toHaveBeenCalledTimes(0);
   });
 
-  test("`onUpdate` not called on first render", () => {
+  test("`onUpdate` not called on first render", async () => {
     const onUpdate = vi.fn();
 
-    renderHook(() =>
+    await renderHook(() =>
       useMountLifecycleEffect({
         onUpdate,
       }),
@@ -82,11 +78,11 @@ describe(useMountLifecycleEffect.name, () => {
     expect(onUpdate).toHaveBeenCalledTimes(0);
   });
 
-  test("only calls `onUpdate` when updated", () => {
+  test("only calls `onUpdate` when updated", async () => {
     const onUpdate1 = vi.fn();
     const onUpdate2 = vi.fn();
 
-    const { rerender } = renderHook(
+    const { rerender } = await renderHook(
       (onUpdate) =>
         useMountLifecycleEffect({
           onUpdate,
@@ -96,9 +92,7 @@ describe(useMountLifecycleEffect.name, () => {
       },
     );
 
-    act(() => {
-      rerender(onUpdate2);
-    });
+    await rerender(onUpdate2);
 
     expect(onUpdate2).toHaveBeenCalledTimes(1);
     expect(onUpdate2).toHaveBeenCalledWith();

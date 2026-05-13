@@ -20,8 +20,7 @@ import { memo, useId, useMemo, useState } from "react";
 
 import { Card, CardProps } from "../../Card.js";
 import { useTranslation } from "../../i18n.generated/i18n.js";
-import { ChevronDownIcon } from "../../icons.generated/ChevronDown.js";
-import { ChevronUpIcon } from "../../icons.generated/ChevronUp.js";
+import { ChevronDownIcon, ChevronUpIcon } from "../../icons.generated/index.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,

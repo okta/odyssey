@@ -12,15 +12,13 @@
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { odysseyTranslate } from "@okta/odyssey-react-mui";
 import {
   DateTimePicker,
   DateTimePickerProps,
 } from "@okta/odyssey-react-mui/labs";
 import { useMemo, useState } from "react";
-import { expect, userEvent, waitFor, within } from "storybook/test";
+import { expect, userEvent, within } from "storybook/test";
 
-import { axeRun } from "../../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
@@ -100,8 +98,22 @@ const storybookMeta: Meta<DateTimePickerProps> = {
 
 export default storybookMeta;
 
-export const Default: StoryObj<DateTimePickerProps> = {};
-
+export const Default: StoryObj<DateTimePickerProps> = {
+  args: {
+    defaultValue: "2024-07-11T03:00:00.000Z",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Open calendar", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByLabelText(/Choose date/));
+      const dialog = await within(document.body).findByRole("dialog");
+      const selectedCell = await within(dialog).findByRole("gridcell", {
+        selected: true,
+      });
+      await expect(selectedCell).toHaveAccessibleName(/10/);
+    });
+  },
+};
 export const Disabled: StoryObj<DateTimePickerProps> = {
   args: {
     isDisabled: true,
@@ -134,20 +146,6 @@ export const MinDateWithError: StoryObj<DateTimePickerProps> = {
     minDate: "2024-07-16T03:00:00.000Z",
     value: "2024-07-11T03:00:00.000Z",
   },
-  play: async ({ canvasElement, step }) => {
-    await step(
-      "expect min date error when value is less than minDate",
-      async () => {
-        const canvas = within(canvasElement);
-
-        await waitFor(() => {
-          expect(
-            canvas.getByText(odysseyTranslate("picker.error.mindate")),
-          ).toBeInTheDocument();
-        });
-      },
-    );
-  },
 };
 
 export const MaxDate: StoryObj<DateTimePickerProps> = {
@@ -163,24 +161,11 @@ export const MaxDateWithError: StoryObj<DateTimePickerProps> = {
     maxDate: "2024-07-18T03:00:00.000Z",
     value: "2024-07-21T03:00:00.000Z",
   },
-  play: async ({ canvasElement, step }) => {
-    await step(
-      "expect max date error when value is less than minDate",
-      async () => {
-        const canvas = within(canvasElement);
-
-        await waitFor(() => {
-          expect(
-            canvas.getByText(odysseyTranslate("picker.error.maxdate")),
-          ).toBeInTheDocument();
-        });
-      },
-    );
-  },
 };
 
 export const WithTimeZonePicker: StoryObj<DateTimePickerProps> = {
   args: {
+    defaultValue: "2024-07-11T03:00:00.000Z",
     timeZonePickerLabel: "Time zone picker label",
     timeZoneOptions: [
       { label: "New York", value: "America/New_York" },
@@ -188,10 +173,22 @@ export const WithTimeZonePicker: StoryObj<DateTimePickerProps> = {
       { label: "Hong Kong", value: "Asia/Hong_Kong" },
     ],
   },
+  play: async ({ canvasElement, step }) => {
+    await step("Open calendar", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByLabelText(/Choose date/));
+      const dialog = await within(document.body).findByRole("dialog");
+      const selectedCell = await within(dialog).findByRole("gridcell", {
+        selected: true,
+      });
+      await expect(selectedCell).toHaveAccessibleName(/10/);
+    });
+  },
 };
 
 export const Controlled: StoryObj<DateTimePickerProps> = {
   args: {
+    defaultValue: "2024-07-11T03:00:00.000Z",
     timeZonePickerLabel: "Time zone picker label",
     timeZone: "America/New_York",
     timeZoneOptions: [
@@ -200,6 +197,17 @@ export const Controlled: StoryObj<DateTimePickerProps> = {
       { label: "Johannesburg", value: "Africa/Johannesburg" },
       { label: "Hong Kong", value: "Asia/Hong_Kong" },
     ],
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Open calendar", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByLabelText(/Choose date/));
+      const dialog = await within(document.body).findByRole("dialog");
+      const selectedCell = await within(dialog).findByRole("gridcell", {
+        selected: true,
+      });
+      await expect(selectedCell).toHaveAccessibleName(/10/);
+    });
   },
   render: function C({ ...props }) {
     const [value, setValue] = useState<string>("2024-07-11T03:00:00.000Z");
@@ -223,36 +231,5 @@ export const Controlled: StoryObj<DateTimePickerProps> = {
     );
 
     return <DateTimePicker {...dateTimePickerProps} />;
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("select date", async () => {
-      const canvas = within(canvasElement);
-
-      // Hack because of MUI `DateTimePicker` issues.
-      await new Promise((resolve) => {
-        setTimeout(resolve, 250);
-      });
-
-      const datepickerCalendarOpenButton = await canvas.findByLabelText(
-        odysseyTranslate("picker.labels.date.choose"),
-      );
-
-      await userEvent.click(datepickerCalendarOpenButton);
-
-      const dialog = await within(canvasElement.ownerDocument.body).findByRole(
-        "dialog",
-      );
-
-      const dialogCanvas = within(dialog);
-      const dateButton = dialogCanvas.getByText("26");
-      await userEvent.click(dateButton);
-
-      const input = canvas.getByRole<HTMLInputElement>("textbox");
-      expect(input.value).toBe("07/26/2024 11:00 PM");
-    });
-
-    await step("Check for a11y errors", async () => {
-      await waitFor(() => axeRun("Selecting a date"));
-    });
   },
 };

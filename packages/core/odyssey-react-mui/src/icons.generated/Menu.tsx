@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const MenuIcon = forwardRef<SVGSVGElement, MenuIconProps>((props, ref) => {
       <>
         <path
           clipRule="evenodd"
-          d="M15 3.333H1V2h14v1.333Zm0 5.334H1V7.333h14v1.334ZM1 14h14v-1.333H1V14Z"
+          d="M15 3.333H1V2h14zm0 5.334H1V7.333h14zM1 14h14v-1.333H1z"
           fill="currentColor"
           fillRule="evenodd"
         />

@@ -22,7 +22,6 @@ import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { Box } from "../../Box.js";
 import { MenuButton } from "../../Buttons/MenuButton.js";
 import { Callout } from "../../Callout.js";
-import { createUniqueId } from "../../createUniqueId.js";
 import { useRowReordering } from "../../DataTable/useRowReordering.js";
 import { EmptyState } from "../../EmptyState.js";
 import { useTranslation } from "../../i18n.generated/i18n.js";
@@ -47,6 +46,7 @@ import {
   availableLayouts as allAvailableLayouts,
   densityValues,
 } from "./constants.js";
+import { GetRowId } from "./dataTypes.js";
 import { fetchData } from "./fetchData.js";
 import { LayoutSwitcher } from "./LayoutSwitcher.js";
 import { TableLayoutContent } from "./TableLayoutContent.js";
@@ -255,15 +255,15 @@ const DataView = <TData extends MRT_RowData>({
     ],
   );
 
-  const getRowId = useCallback<Required<UniversalProps<TData>>["getRowId"]>(
-    (row, index, parentRow) => {
+  const getRowId = useCallback<GetRowId<TData>>(
+    (row, index, parentRow?) => {
       if (getRowIdProp) {
         return getRowIdProp(row, index, parentRow);
       }
       if (row.id) {
         return row.id as string;
       }
-      return createUniqueId();
+      return String(index);
     },
     [getRowIdProp],
   );
@@ -442,6 +442,7 @@ const DataView = <TData extends MRT_RowData>({
         <StyledBulkActionsContainer>
           <BulkActionsMenu
             data={data}
+            getRowId={getRowId}
             menuItems={bulkActionMenuItems}
             rowSelection={rowSelection}
             setRowSelection={setRowSelection}

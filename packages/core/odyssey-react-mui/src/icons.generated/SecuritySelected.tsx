@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -33,7 +33,7 @@ const SecuritySelectedIcon = forwardRef<
       <>
         <path
           clipRule="evenodd"
-          d="M8.162.687a.667.667 0 0 0-.324 0L2.505 2.02A.667.667 0 0 0 2 2.667V8c0 2.298 1.521 4.134 2.894 5.335a15.135 15.135 0 0 0 2.736 1.891l.05.026.015.008.004.002h.002L8 14.668l-.298.596a.667.667 0 0 0 .596 0L8 14.667l.299.596.002-.001.004-.002.014-.008.05-.026.183-.098a15.136 15.136 0 0 0 2.554-1.792C12.479 12.133 14 10.297 14 8V2.667a.667.667 0 0 0-.505-.647L8.162.687Z"
+          d="M8.162.687a.7.7 0 0 0-.324 0L2.505 2.02A.67.67 0 0 0 2 2.667V8c0 2.298 1.521 4.134 2.894 5.335a15 15 0 0 0 2.736 1.891l.05.026.015.008.004.002h.002L8 14.668l-.298.596a.67.67 0 0 0 .596 0L8 14.667l.299.596.002-.001.004-.002.014-.008.05-.026.183-.098a15 15 0 0 0 2.554-1.792C12.479 12.133 14 10.297 14 8V2.667a.67.67 0 0 0-.505-.647z"
           fill="currentColor"
           fillRule="evenodd"
         />

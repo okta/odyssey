@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -33,7 +33,7 @@ const CustomizationsSelectedIcon = forwardRef<
       <>
         <path
           clipRule="evenodd"
-          d="M2 4h7.43a2.334 2.334 0 1 0 0-1.333H2V4Zm2.333 11c1.057 0 1.95-.703 2.237-1.667H14V12H6.57a2.334 2.334 0 1 0-2.237 3ZM2 8.667h3.763a2.334 2.334 0 0 0 4.474 0H14V7.333h-3.763a2.334 2.334 0 0 0-4.474 0H2v1.334Z"
+          d="M2 4h7.43a2.334 2.334 0 1 0 0-1.333H2zm2.333 11c1.057 0 1.95-.703 2.237-1.667H14V12H6.57a2.334 2.334 0 1 0-2.237 3M2 8.667h3.763a2.334 2.334 0 0 0 4.474 0H14V7.333h-3.763a2.334 2.334 0 0 0-4.474 0H2z"
           fill="currentColor"
           fillRule="evenodd"
         />

@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen, within } from "@testing-library/react";
 import { ReactNode } from "react";
-import { describe, expect, test } from "vitest";
+import { render } from "vitest-browser-react";
+import { page } from "vitest/browser";
 
 import { ConditionalWrapper } from "./ConditionalWrapper.js";
 
@@ -23,27 +23,29 @@ describe(ConditionalWrapper.name, () => {
   );
 
   const CHILD_TEXT = "Hello World";
-  test("children render without wrapper when condition is false", () => {
-    render(
+  test("children render without wrapper when condition is false", async () => {
+    await render(
       <ConditionalWrapper isWrapped={false} Wrapper={Wrapper}>
         <span>{CHILD_TEXT}</span>
       </ConditionalWrapper>,
     );
 
-    expect(screen.queryByTestId(WRAPPER_TEST_ID)).toBeNull();
-    expect(screen.getByText(CHILD_TEXT)).toBeInTheDocument();
+    await expect
+      .element(page.getByTestId(WRAPPER_TEST_ID))
+      .not.toBeInTheDocument();
+    await expect.element(page.getByText(CHILD_TEXT)).toBeInTheDocument();
   });
 
-  test("children render inside wrapper when condition is true", () => {
-    render(
+  test("children render inside wrapper when condition is true", async () => {
+    await render(
       <ConditionalWrapper isWrapped={true} Wrapper={Wrapper}>
         <span>{CHILD_TEXT}</span>
       </ConditionalWrapper>,
     );
 
-    const wrapperComponent = screen.getByTestId(WRAPPER_TEST_ID);
-    expect(wrapperComponent).toBeInTheDocument();
-
-    expect(within(wrapperComponent).getByText(CHILD_TEXT)).toBeInTheDocument();
+    await expect.element(page.getByTestId(WRAPPER_TEST_ID)).toBeInTheDocument();
+    await expect
+      .element(page.getByTestId(WRAPPER_TEST_ID).getByText(CHILD_TEXT))
+      .toBeInTheDocument();
   });
 });

@@ -12,12 +12,10 @@
 
 import type { ComponentProps } from "react";
 
-import { render, screen } from "@testing-library/react";
-import { userEvent } from "@vitest/browser/context";
 import { useState } from "react";
-import { vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
 
-import { OdysseyProvider } from "./OdysseyProvider.js";
+import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 import { TextField } from "./TextField.js";
 
 describe("TextField", () => {
@@ -25,15 +23,13 @@ describe("TextField", () => {
     const [value, setValue] = useState("");
 
     return (
-      <OdysseyProvider>
-        <TextField
-          label="Label"
-          name="example"
-          onChange={(event) => setValue(event.target.value)}
-          value={value}
-          {...props}
-        />
-      </OdysseyProvider>
+      <TextField
+        label="Label"
+        name="example"
+        onChange={(event) => setValue(event.target.value)}
+        value={value}
+        {...props}
+      />
     );
   };
 
@@ -41,34 +37,36 @@ describe("TextField", () => {
     const onFocus = vi.fn();
     const onBlur = vi.fn();
 
-    render(<Template onBlur={onBlur} onFocus={onFocus} />);
+    const { container } = await renderWithOdysseyProvider(
+      <Template onBlur={onBlur} onFocus={onFocus} />,
+    );
 
-    const textbox = (await screen.findByRole(
-      "textbox",
-    )) satisfies HTMLInputElement;
+    await expect(container).toBeAccessible();
+
+    const textbox = page.getByRole("textbox");
 
     await userEvent.click(textbox);
     expect(onFocus).toHaveBeenCalledTimes(1);
 
     await userEvent.type(textbox, "value");
-    expect(textbox.value).toBe("value");
+    await expect.element(textbox).toHaveValue("value");
 
     await userEvent.clear(textbox);
-    expect(textbox.value).toBe("");
+    await expect.element(textbox).toHaveValue("");
 
     await userEvent.tab();
     expect(onBlur).toHaveBeenCalledTimes(1);
   });
 
   test("renders min, max, and step attributes for type='number'", async () => {
-    render(<Template max={100} min={0} step={5} type="number" />);
+    await renderWithOdysseyProvider(
+      <Template max={100} min={0} step={5} type="number" />,
+    );
 
-    const input = (await screen.findByRole(
-      "spinbutton",
-    )) satisfies HTMLInputElement;
+    const input = page.getByRole("spinbutton");
 
-    expect(input).toHaveAttribute("min", "0");
-    expect(input).toHaveAttribute("max", "100");
-    expect(input).toHaveAttribute("step", "5");
+    await expect.element(input).toHaveAttribute("min", "0");
+    await expect.element(input).toHaveAttribute("max", "100");
+    await expect.element(input).toHaveAttribute("step", "5");
   });
 });

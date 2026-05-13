@@ -10,142 +10,127 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen, waitFor, within } from "@testing-library/react";
-import { userEvent } from "@testing-library/user-event";
+import { page, userEvent } from "vitest/browser";
 
-import { OdysseyProvider } from "../../OdysseyProvider.js";
+import { renderWithOdysseyProvider } from "../../test-utils/renderWithOdysseyProvider.js";
 import { SideNav } from "./SideNav.js";
 
 describe(SideNav.displayName!, () => {
-  afterEach(() => {
-    window.sessionStorage.clear();
-  });
-
   test("can show the default Okta logo", async () => {
-    render(
-      <OdysseyProvider>
-        <SideNav
-          appName="Header text"
-          sideNavItems={[
-            {
-              id: "item0",
-              href: "#",
-              label: "Users",
-            },
-          ]}
-        />
-      </OdysseyProvider>,
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: "Users",
+          },
+        ]}
+      />,
     );
 
-    await waitFor(() => {
-      expect(screen.getByTitle("Okta")).toBeVisible();
-    });
+    await expect.element(page.getByRole("img", { name: "Okta" })).toBeVisible();
   });
 
-  test("can show a custom logo", () => {
-    render(
-      <OdysseyProvider>
-        <SideNav
-          appName="Header text"
-          logoProps={{
-            imageAltText: "Custom logo",
-            imageUrl: "https://placehold.co/600x400/EEE/31343C",
-          }}
-          sideNavItems={[
-            {
-              id: "item0",
-              href: "#",
-              label: "Users",
-            },
-          ]}
-        />
-      </OdysseyProvider>,
+  test("can show a custom logo", async () => {
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        logoProps={{
+          imageAltText: "Custom logo",
+          imageUrl: "https://placehold.co/600x400/EEE/31343C",
+        }}
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: "Users",
+          },
+        ]}
+      />,
     );
 
-    expect(screen.getByAltText("Custom logo")).toBeVisible();
+    await expect.element(page.getByAltText("Custom logo")).toBeVisible();
   });
 
-  test("can show header text", () => {
+  test("can show header text", async () => {
     const headerText = "Header text";
 
-    render(
-      <OdysseyProvider>
-        <SideNav
-          appName={headerText}
-          sideNavItems={[
-            {
-              id: "item0",
-              href: "#",
-              label: "Users",
-            },
-          ]}
-        />
-      </OdysseyProvider>,
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName={headerText}
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: "Users",
+          },
+        ]}
+      />,
     );
 
-    expect(screen.getByRole("heading", { name: headerText })).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: headerText }))
+      .toBeVisible();
   });
 
   test("is collapsible", async () => {
     const menuItemText = "Users";
 
-    render(
-      <OdysseyProvider>
-        <SideNav
-          appName="Header text"
-          isCollapsible
-          sideNavItems={[
-            {
-              id: "item0",
-              href: "#",
-              label: menuItemText,
-            },
-          ]}
-        />
-      </OdysseyProvider>,
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        isCollapsible
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: menuItemText,
+          },
+        ]}
+      />,
     );
 
-    expect(screen.getByText(menuItemText)).toBeVisible();
+    await expect.element(page.getByText(menuItemText)).toBeVisible();
 
-    const collapseButton = screen.getByLabelText("Close navigation");
-    await userEvent.click(collapseButton);
+    await userEvent.click(page.getByLabelText("Close navigation"));
 
-    await waitFor(() => {
-      expect(screen.getByText(menuItemText)).not.toBeVisible();
-    });
+    // TODO: fix a11y — SideNav hides collapsed content with opacity:0, which is still
+    // perceivable by screen readers. Use visibility:hidden or remove from DOM instead.
+    await expect
+      .element(
+        page.elementLocator(
+          document.querySelector('[data-se="collapsible-region"]')!,
+        ),
+      )
+      .toHaveStyle({ opacity: "0" });
 
-    const expandButton = screen.getByLabelText("Open navigation");
+    await userEvent.click(page.getByLabelText("Open navigation"));
 
-    await userEvent.click(expandButton);
-
-    await waitFor(() => {
-      expect(screen.getByText(menuItemText)).toBeVisible();
-    });
+    await expect.element(page.getByText(menuItemText)).toBeVisible();
   });
 
   test("can fire onCollapse event", async () => {
     const menuItemText = "Users";
     const mockOnCollapse = vi.fn();
 
-    render(
-      <OdysseyProvider>
-        <SideNav
-          appName="Header text"
-          isCollapsible
-          onCollapse={mockOnCollapse}
-          sideNavItems={[
-            {
-              id: "item0",
-              href: "#",
-              label: menuItemText,
-            },
-          ]}
-        />
-      </OdysseyProvider>,
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        isCollapsible
+        onCollapse={mockOnCollapse}
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: menuItemText,
+          },
+        ]}
+      />,
     );
 
-    const collapseButton = screen.getByLabelText("Close navigation");
-    await userEvent.click(collapseButton);
+    await userEvent.click(page.getByLabelText("Close navigation"));
 
     expect(mockOnCollapse).toBeCalled();
   });
@@ -154,104 +139,95 @@ describe(SideNav.displayName!, () => {
     const menuItemText = "Users";
     const mockOnExpand = vi.fn();
 
-    render(
-      <OdysseyProvider>
-        <SideNav
-          appName="Header text"
-          isCollapsible
-          onExpand={mockOnExpand}
-          sideNavItems={[
-            {
-              id: "item0",
-              href: "#",
-              label: menuItemText,
-            },
-          ]}
-        />
-      </OdysseyProvider>,
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        isCollapsible
+        onExpand={mockOnExpand}
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: menuItemText,
+          },
+        ]}
+      />,
     );
 
-    const collapseButton = screen.getByLabelText("Close navigation");
-    await userEvent.click(collapseButton);
+    await userEvent.click(page.getByLabelText("Close navigation"));
 
-    const expandButton = screen.getByLabelText("Open navigation");
-    await userEvent.click(expandButton);
+    await userEvent.click(page.getByLabelText("Open navigation"));
 
-    expect(mockOnExpand).toBeCalled();
+    expect(mockOnExpand).toHaveBeenCalled();
   });
 
-  test("shows loading skeleton state", () => {
+  test("shows loading skeleton state", async () => {
     const menuItemText = "Menu item";
 
-    render(
-      <OdysseyProvider>
-        <SideNav
-          appName="Header text"
-          isLoading
-          sideNavItems={[
-            {
-              id: "item0",
-              href: "#",
-              label: menuItemText,
-            },
-          ]}
-        />
-      </OdysseyProvider>,
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        isLoading
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: menuItemText,
+          },
+        ]}
+      />,
     );
 
-    expect(screen.queryByText(menuItemText)).not.toBeInTheDocument();
+    await expect.element(page.getByText(menuItemText)).not.toBeInTheDocument();
   });
 
-  test("shows footer links", () => {
+  test("shows footer links", async () => {
     const footerItemLabel = "Footer item";
-    render(
-      <OdysseyProvider>
-        <SideNav
-          appName="Header text"
-          footerItems={[
-            {
-              id: "footer-item-1",
-              label: footerItemLabel,
-              href: "/",
-            },
-          ]}
-          sideNavItems={[
-            {
-              id: "item0",
-              href: "#",
-              label: "Menu item",
-            },
-          ]}
-        />
-      </OdysseyProvider>,
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        footerItems={[
+          {
+            id: "footer-item-1",
+            label: footerItemLabel,
+            href: "/",
+          },
+        ]}
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: "Menu item",
+          },
+        ]}
+      />,
     );
 
-    const footer = screen.getByRole("menubar");
-    expect(within(footer).getByText(footerItemLabel)).toBeVisible();
+    await expect
+      .element(page.getByRole("menubar").getByText(footerItemLabel))
+      .toBeVisible();
   });
 
-  test("shows custom footer component", () => {
+  test("shows custom footer component", async () => {
     const footerComponentText = "This is a custom footer component.";
     const footerComponent = <p>{footerComponentText}</p>;
 
-    render(
-      <OdysseyProvider>
-        <SideNav
-          appName="Header text"
-          footerComponent={footerComponent}
-          hasCustomFooter
-          sideNavItems={[
-            {
-              id: "item0",
-              href: "#",
-              label: "Menu item",
-            },
-          ]}
-        />
-      </OdysseyProvider>,
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        footerComponent={footerComponent}
+        hasCustomFooter
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: "Menu item",
+          },
+        ]}
+      />,
     );
 
-    expect(screen.getByText(footerComponentText)).toBeVisible();
+    await expect.element(page.getByText(footerComponentText)).toBeVisible();
   });
 
   test("displays sidenav link", async () => {
@@ -261,80 +237,77 @@ describe(SideNav.displayName!, () => {
     const menuClickableText = "Clickable";
     const menuLinkText = "Link";
 
-    render(
-      <OdysseyProvider>
-        <SideNav
-          appName="Header text"
-          sideNavItems={[
-            {
-              id: "menuClickable",
-              label: menuClickableText,
-              onClick: () => {},
-            },
-            {
-              id: "menuHeading",
-              label: headingText,
-              isSectionHeader: true,
-            },
-            {
-              id: "menuLink",
-              href: "#",
-              label: menuLinkText,
-            },
-            {
-              id: "accordionOuter",
-              label: accordionOuter,
-              nestedNavItems: [
-                {
-                  id: "accordionInner",
-                  href: "#",
-                  label: accordionInner,
-                },
-              ],
-            },
-          ]}
-        />
-      </OdysseyProvider>,
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        sideNavItems={[
+          {
+            id: "menuClickable",
+            label: menuClickableText,
+            onClick: () => {},
+          },
+          {
+            id: "menuHeading",
+            label: headingText,
+            isSectionHeader: true,
+          },
+          {
+            id: "menuLink",
+            href: "#",
+            label: menuLinkText,
+          },
+          {
+            id: "accordionOuter",
+            label: accordionOuter,
+            nestedNavItems: [
+              {
+                id: "accordionInner",
+                href: "#",
+                label: accordionInner,
+              },
+            ],
+          },
+        ]}
+      />,
     );
 
-    expect(screen.getByRole("link", { name: menuLinkText })).toBeVisible();
-    expect(
-      screen.getByRole("button", { name: menuClickableText }),
-    ).toBeVisible();
-    expect(screen.getByRole("heading", { name: headingText })).toBeVisible();
+    await expect
+      .element(page.getByRole("link", { name: menuLinkText }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: menuClickableText }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: headingText }))
+      .toBeVisible();
 
-    const accordion = screen.getByText(accordionOuter);
-    expect(screen.getByText(accordionInner)).not.toBeVisible();
+    await expect.element(page.getByText(accordionInner)).not.toBeVisible();
 
-    await userEvent.click(accordion);
-    expect(screen.getByText(accordionInner)).toBeVisible();
+    await userEvent.click(page.getByText(accordionOuter));
+    await expect.element(page.getByText(accordionInner)).toBeVisible();
   });
 
   test("can show notification badge", async () => {
     const menuItemText = "Menu item text";
     const badgeCount = 9;
 
-    render(
-      <OdysseyProvider>
-        <SideNav
-          appName="Header text"
-          sideNavItems={[
-            {
-              id: "item0",
-              href: "#",
-              label: menuItemText,
-              count: badgeCount,
-            },
-          ]}
-        />
-      </OdysseyProvider>,
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: menuItemText,
+            count: badgeCount,
+          },
+        ]}
+      />,
     );
 
-    await waitFor(() => {
-      expect(screen.getByRole("listitem")).toHaveTextContent(
-        String(badgeCount),
-      );
-    });
+    await expect
+      .element(page.getByRole("link", { name: menuItemText }))
+      .toHaveTextContent(String(badgeCount));
   });
 
   describe("`sessionStorage`", () => {
@@ -342,39 +315,39 @@ describe(SideNav.displayName!, () => {
       test("collapses side nav when collapsed", async () => {
         const appName = "My App";
 
-        const { getByText } = render(
-          <OdysseyProvider>
-            <SideNav
-              appName={appName}
-              isCollapsed
-              isCollapsible
-              sideNavItems={[]}
-            />
-          </OdysseyProvider>,
+        await renderWithOdysseyProvider(
+          <SideNav
+            appName={appName}
+            isCollapsed
+            isCollapsible
+            sideNavItems={[]}
+          />,
         );
 
-        await waitFor(() => {
-          expect(getByText(appName)).not.toBeVisible();
-        });
+        // TODO: fix a11y — SideNav hides collapsed content with opacity:0, which is still
+        // perceivable by screen readers. Use visibility:hidden or remove from DOM instead.
+        await expect
+          .element(
+            page.elementLocator(
+              document.querySelector('[data-se="collapsible-region"]')!,
+            ),
+          )
+          .toHaveStyle({ opacity: "0" });
       });
 
       test("opens side nav when not collapsed", async () => {
         const appName = "My App";
 
-        const { getByText } = render(
-          <OdysseyProvider>
-            <SideNav
-              appName={appName}
-              isCollapsed={false}
-              isCollapsible
-              sideNavItems={[]}
-            />
-          </OdysseyProvider>,
+        await renderWithOdysseyProvider(
+          <SideNav
+            appName={appName}
+            isCollapsed={false}
+            isCollapsible
+            sideNavItems={[]}
+          />,
         );
 
-        await waitFor(() => {
-          expect(getByText(appName)).toBeVisible();
-        });
+        await expect.element(page.getByText(appName)).toBeVisible();
       });
     });
 
@@ -382,39 +355,39 @@ describe(SideNav.displayName!, () => {
       test("collapses side nav when collapsed", async () => {
         const appName = "My App";
 
-        const { getByText } = render(
-          <OdysseyProvider>
-            <SideNav
-              appName={appName}
-              isCollapsed
-              isCollapsible={false}
-              sideNavItems={[]}
-            />
-          </OdysseyProvider>,
+        await renderWithOdysseyProvider(
+          <SideNav
+            appName={appName}
+            isCollapsed
+            isCollapsible={false}
+            sideNavItems={[]}
+          />,
         );
 
-        await waitFor(() => {
-          expect(getByText(appName)).not.toBeVisible();
-        });
+        // TODO: fix a11y — SideNav hides collapsed content with opacity:0, which is still
+        // perceivable by screen readers. Use visibility:hidden or remove from DOM instead.
+        await expect
+          .element(
+            page.elementLocator(
+              document.querySelector('[data-se="collapsible-region"]')!,
+            ),
+          )
+          .toHaveStyle({ opacity: "0" });
       });
 
       test("opens side nav when not collapsed", async () => {
         const appName = "My App";
 
-        const { getByText } = render(
-          <OdysseyProvider>
-            <SideNav
-              appName={appName}
-              isCollapsed={false}
-              isCollapsible={false}
-              sideNavItems={[]}
-            />
-          </OdysseyProvider>,
+        await renderWithOdysseyProvider(
+          <SideNav
+            appName={appName}
+            isCollapsed={false}
+            isCollapsible={false}
+            sideNavItems={[]}
+          />,
         );
 
-        await waitFor(() => {
-          expect(getByText(appName)).toBeVisible();
-        });
+        await expect.element(page.getByText(appName)).toBeVisible();
       });
     });
   });

@@ -12,42 +12,63 @@
 
 import type { ComponentProps } from "react";
 
-import { render, screen } from "@testing-library/react";
-import { userEvent } from "@vitest/browser/context";
 import { useState } from "react";
+import { page, userEvent } from "vitest/browser";
 
-import { OdysseyProvider } from "./OdysseyProvider.js";
 import { Switch } from "./Switch.js";
+import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 describe("Switch", () => {
   const Template = (props: Partial<ComponentProps<typeof Switch>>) => {
     const [checked, setChecked] = useState(false);
 
     return (
-      <OdysseyProvider>
-        <Switch
-          isChecked={checked}
-          label="Notifications"
-          onChange={({ checked }) => setChecked(checked)}
-          value="notifications"
-          {...props}
-        />
-      </OdysseyProvider>
+      <Switch
+        isChecked={checked}
+        label="Notifications"
+        onChange={({ checked }) => setChecked(checked)}
+        value="notifications"
+        {...props}
+      />
     );
   };
 
   test("toggling when clicked", async () => {
-    render(<Template />);
+    const { container } = await renderWithOdysseyProvider(<Template />);
 
-    const checkbox = (await screen.findByRole(
-      "checkbox",
-    )) satisfies HTMLInputElement;
-    expect(checkbox).not.toBeChecked();
+    await expect(container).toBeAccessible();
 
-    await userEvent.click(checkbox);
-    expect(checkbox).toBeChecked();
+    const checkbox = page.getByRole("checkbox");
+    await expect.element(checkbox).not.toBeChecked();
 
     await userEvent.click(checkbox);
-    expect(checkbox).not.toBeChecked();
+    await expect.element(checkbox).toBeChecked();
+
+    await userEvent.click(checkbox);
+    await expect.element(checkbox).not.toBeChecked();
+  });
+
+  test("uncontrolled switch starts checked when isDefaultChecked is true", async () => {
+    const { container } = await renderWithOdysseyProvider(
+      <Switch isDefaultChecked label="Notifications" value="notifications" />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    await expect.element(page.getByRole("checkbox")).toBeChecked();
+  });
+
+  test("does not toggle when isReadOnly is true", async () => {
+    const { container } = await renderWithOdysseyProvider(
+      <Template isReadOnly />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    const checkbox = page.getByRole("checkbox");
+    await expect.element(checkbox).not.toBeChecked();
+
+    await userEvent.click(checkbox);
+    await expect.element(checkbox).not.toBeChecked();
   });
 });

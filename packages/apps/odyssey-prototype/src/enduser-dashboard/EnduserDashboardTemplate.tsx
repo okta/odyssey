@@ -17,10 +17,10 @@
 
 import { type RouteObject } from "react-router-dom";
 
-import { StubPage } from "./pages/StubPage";
+import { MyAppsPage } from "./pages/MyAppsPage";
 
 export { EnduserDashboardShell } from "./shell/EnduserDashboardShell";
 
 export const ENDUSER_DASHBOARD_ROUTES: RouteObject[] = [
-  { index: true, element: <StubPage title="Enduser Dashboard" /> },
+  { index: true, element: <MyAppsPage /> },
 ];

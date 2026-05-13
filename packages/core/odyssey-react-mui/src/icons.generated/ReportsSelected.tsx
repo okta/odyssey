@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -31,7 +31,7 @@ const ReportsSelectedIcon = forwardRef<SVGSVGElement, ReportsSelectedIconProps>(
         <>
           <path
             clipRule="evenodd"
-            d="M12 1.333h-.667v13.334h.687c.371 0 .68 0 .933-.016a2.57 2.57 0 0 0 .754-.142 2.5 2.5 0 0 0 1.469-1.469c.09-.242.125-.49.142-.754.015-.253.015-.562.015-.932V1.333H12Zm-6 4v9.334h4v-10H6v.666ZM4.667 14V8h-4v3.353c0 .371 0 .68.015.933.017.264.052.512.142.754a2.5 2.5 0 0 0 1.469 1.469c.242.09.49.126.754.142.253.016.562.016.932.016h.689V14Z"
+            d="M12 1.333h-.667v13.334h.687c.371 0 .68 0 .933-.016a2.6 2.6 0 0 0 .754-.142 2.5 2.5 0 0 0 1.469-1.469c.09-.242.125-.49.142-.754.015-.253.015-.562.015-.932V1.333zm-6 4v9.334h4v-10H6zM4.667 14V8h-4v3.353c0 .371 0 .68.015.933.017.264.052.512.142.754a2.5 2.5 0 0 0 1.469 1.469c.242.09.49.126.754.142.253.016.562.016.932.016h.688z"
             fill="currentColor"
             fillRule="evenodd"
           />

@@ -81,16 +81,6 @@ const storybookMeta: Meta<OdysseyStackProps> = {
       control: "select",
       options: stackSpacingValues.map((value) => value),
     },
-    sx: {
-      control: "object",
-      description:
-        "The system prop that allows defining system overrides as well as additional CSS styles. See the [MUI `sx` page](https://mui.com/system/getting-started/the-sx-prop/) for more details.",
-      table: {
-        type: {
-          summary: "object",
-        },
-      },
-    },
   },
   args: {
     children: <Content />,

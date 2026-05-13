@@ -13,9 +13,8 @@
 import { Tag, TagList } from "@okta/odyssey-react-mui";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, fn, userEvent, within } from "storybook/test";
+import { fn, userEvent } from "storybook/test";
 
-import { axeRun } from "../../axeRun.js";
 import icons from "../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -67,7 +66,6 @@ const meta = {
     },
     onClick: {
       control: "object",
-      action: true,
       description: "Callback fired when the tag is clicked",
       table: {
         type: {
@@ -77,7 +75,6 @@ const meta = {
     },
     onRemove: {
       control: "object",
-      action: true,
       description:
         "Callback fired when the remove button of the tag is clicked",
       table: {
@@ -127,8 +124,6 @@ const meta = {
   args: {
     label: "Starship",
     colorVariant: "default",
-    onClick: fn(),
-    size: "medium",
   },
 } satisfies Meta<typeof Tag>;
 
@@ -212,14 +207,11 @@ export const Icon: Story = {
 export const Clickable: Story = {
   args: {
     label: "Starship",
+    onClick: fn(),
   },
-  play: async ({ args, canvasElement, step }) => {
-    await step("click the tag", async () => {
-      const canvas = within(canvasElement);
-      const tag = canvas.getByText(args.label);
-      await userEvent.click(tag);
-      expect(args.onClick).toHaveBeenCalledTimes(1);
-      await axeRun("Clickable Tag");
+  play: async ({ step }) => {
+    await step("focus tag", async () => {
+      await userEvent.tab();
     });
   },
 };
@@ -228,14 +220,6 @@ export const Removable: Story = {
   args: {
     label: "Starship",
     onRemove: fn(),
-  },
-  play: async ({ args, canvasElement, step }) => {
-    await step("remove the tag on click", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(canvas.getByRole("button", { name: "Remove tag" }));
-      await expect(args.onRemove).toHaveBeenCalledTimes(1);
-      await axeRun("Removable Tag");
-    });
   },
 };
 

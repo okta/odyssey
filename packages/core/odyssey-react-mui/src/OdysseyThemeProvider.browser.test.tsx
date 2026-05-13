@@ -10,22 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import type { MockInstance } from "vitest";
+
 import { useTheme } from "@mui/material/styles";
 import * as Tokens from "@okta/odyssey-design-tokens";
-import { act, render, waitFor } from "@testing-library/react";
 import { useContext } from "react";
-import { MockInstance } from "vitest";
+import { render } from "vitest-browser-react";
+import { page } from "vitest/browser";
 
 import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext.js";
 import { OdysseyThemeProvider } from "./OdysseyThemeProvider.js";
 import { ContrastModeContext } from "./useContrastMode.js";
 
 describe("OdysseyThemeProvider", () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-    document.documentElement.style.setProperty("backgroundColor", null);
-  });
-
   describe("contrast mode handling", () => {
     let getComputedStyleSpy: MockInstance<typeof window.getComputedStyle>;
 
@@ -42,37 +39,33 @@ describe("OdysseyThemeProvider", () => {
       getComputedStyleSpy.mockRestore();
     });
 
-    it("should update contrast mode based on background color changes", async () => {
+    test("should update contrast mode based on background color changes", async () => {
       const TestComponent = () => {
         const { contrastMode } = useContext(ContrastModeContext);
         return <div data-testid="container">{contrastMode}</div>;
       };
 
-      const { getByTestId } = render(
+      await render(
         <OdysseyThemeProvider>
           <TestComponent />
         </OdysseyThemeProvider>,
       );
 
-      const testContainer = getByTestId("container");
+      const testContainer = page.getByTestId("container").element();
 
-      act(() => {
-        testContainer.style.backgroundColor = Tokens.HueNeutral50;
-        const event = new Event("transitionend");
-        Object.defineProperty(event, "propertyName", {
-          value: "background-color",
-        });
-        testContainer.dispatchEvent(event);
+      testContainer.style.setProperty("background-color", Tokens.HueNeutral50);
+      const event = new Event("transitionend");
+      Object.defineProperty(event, "propertyName", {
+        value: "background-color",
       });
+      testContainer.dispatchEvent(event);
 
-      await waitFor(() => {
-        expect(getByTestId("container").textContent).toBe("highContrast");
-      });
+      expect(page.getByTestId("container")).toHaveTextContent("highContrast");
     });
   });
 
   describe("theme customization", () => {
-    it("should merge theme overrides with base theme", () => {
+    test("should merge theme overrides with base theme", async () => {
       const themeOverride = {
         palette: {
           primary: {
@@ -86,16 +79,18 @@ describe("OdysseyThemeProvider", () => {
         return <div data-testid="theme-test">{theme.palette.primary.main}</div>;
       };
 
-      const { getByTestId } = render(
+      await render(
         <OdysseyThemeProvider themeOverride={themeOverride}>
           <TestComponent />
         </OdysseyThemeProvider>,
       );
 
-      expect(getByTestId("theme-test").textContent).toBe("#000000");
+      await expect
+        .element(page.getByTestId("theme-test"))
+        .toHaveTextContent("#000000");
     });
 
-    it("should merge design tokens override with base tokens", () => {
+    test("should merge design tokens override with base tokens", async () => {
       const designTokensOverride = {
         HueNeutral50: "#654321",
       };
@@ -105,16 +100,18 @@ describe("OdysseyThemeProvider", () => {
         return <div data-testid="token-test">{tokens.HueNeutral50}</div>;
       };
 
-      const { getByTestId } = render(
+      await render(
         <OdysseyThemeProvider designTokensOverride={designTokensOverride}>
           <TestComponent />
         </OdysseyThemeProvider>,
       );
 
-      expect(getByTestId("token-test").textContent).toBe("#654321");
+      await expect
+        .element(page.getByTestId("token-test"))
+        .toHaveTextContent("#654321");
     });
 
-    it("should properly handle nested providers with different configurations", () => {
+    test("should properly handle nested providers with different configurations", async () => {
       const outerThemeOverride = {
         palette: {
           primary: {
@@ -138,7 +135,7 @@ describe("OdysseyThemeProvider", () => {
         );
       };
 
-      const { getByTestId } = render(
+      await render(
         <OdysseyThemeProvider themeOverride={outerThemeOverride}>
           <OdysseyThemeProvider themeOverride={innerThemeOverride}>
             <TestComponent />
@@ -146,7 +143,9 @@ describe("OdysseyThemeProvider", () => {
         </OdysseyThemeProvider>,
       );
 
-      expect(getByTestId("nested-test").textContent).toBe("#222222");
+      await expect
+        .element(page.getByTestId("nested-test"))
+        .toHaveTextContent("#222222");
     });
   });
 
@@ -159,7 +158,7 @@ describe("OdysseyThemeProvider", () => {
       shadowDom = document.createElement("div");
     });
 
-    it("should properly configure shadow root element for MUI components", () => {
+    test("should properly configure shadow root element for MUI components", async () => {
       const TestComponent = () => {
         const theme = useTheme();
         return (
@@ -172,18 +171,18 @@ describe("OdysseyThemeProvider", () => {
         );
       };
 
-      const { getByTestId } = render(
+      await render(
         <OdysseyThemeProvider shadowRootElement={shadowRoot}>
           <TestComponent />
         </OdysseyThemeProvider>,
       );
 
-      expect(getByTestId("shadow-root-test").textContent).toBe(
-        "shadow-root-configured",
-      );
+      await expect
+        .element(page.getByTestId("shadow-root-test"))
+        .toHaveTextContent("shadow-root-configured");
     });
 
-    it("should handle both shadowRootElement and deprecated shadowDomElement", () => {
+    test("should handle both shadowRootElement and deprecated shadowDomElement", async () => {
       const TestComponent = () => {
         const theme = useTheme();
         return (
@@ -196,7 +195,7 @@ describe("OdysseyThemeProvider", () => {
         );
       };
 
-      const { getByTestId } = render(
+      await render(
         <OdysseyThemeProvider
           shadowDomElement={shadowDom}
           shadowRootElement={shadowRoot}
@@ -205,7 +204,9 @@ describe("OdysseyThemeProvider", () => {
         </OdysseyThemeProvider>,
       );
 
-      expect(getByTestId("shadow-test").textContent).toBe("using-shadow-root");
+      await expect
+        .element(page.getByTestId("shadow-test"))
+        .toHaveTextContent("using-shadow-root");
     });
   });
 });

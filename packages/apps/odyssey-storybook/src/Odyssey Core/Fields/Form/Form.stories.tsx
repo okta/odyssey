@@ -11,6 +11,7 @@
  */
 
 import {
+  Autocomplete,
   Button,
   Callout,
   Checkbox,
@@ -259,6 +260,10 @@ export const KitchenSink: StoryObj<FormProps> = {
           <TextField
             errorMessage="This field is required."
             label="Vessel name"
+          />
+          <Autocomplete
+            label="Vessel class"
+            options={["Constitution", "Galaxy", "Intrepid", "Sovereign"]}
           />
           <CheckboxGroup isRequired label="Systems check">
             <Checkbox

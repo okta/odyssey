@@ -10,24 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen } from "@testing-library/react";
+import { page } from "vitest/browser";
 
-import { OdysseyProvider } from "../../OdysseyProvider.js";
+import { renderWithOdysseyProvider } from "../../test-utils/renderWithOdysseyProvider.js";
 import { ComposablePicker } from "./ComposablePicker.js";
 
 describe("ComposablePicker", () => {
-  it("displays the ComposablePicker", () => {
-    render(
-      <OdysseyProvider>
-        <ComposablePicker
-          label="picker label"
-          options={[]}
-          renderOption={() => <></>}
-        />
-      </OdysseyProvider>,
+  test("displays the ComposablePicker", async () => {
+    const { container } = await renderWithOdysseyProvider(
+      <ComposablePicker
+        label="picker label"
+        options={[]}
+        renderOption={() => <></>}
+      />,
     );
 
-    const input = screen.getByLabelText("picker label");
-    expect(input).toBeVisible();
+    await expect(container).toBeAccessible();
+
+    await expect.element(page.getByLabelText("picker label")).toBeVisible();
   });
 });

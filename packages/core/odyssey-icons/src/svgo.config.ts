@@ -12,21 +12,22 @@
 
 import type { Config } from "svgo";
 
+const convertColorsPlugin = {
+  name: "convertColors",
+  params: {
+    currentColor: true,
+  },
+} as const;
+
 const svgoConfig: Config = {
   multipass: true,
   plugins: [
-    {
-      name: "convertColors",
-      params: {
-        currentColor: true,
-      },
-    },
     "convertPathData",
     "removeDimensions",
+    // Only apply color conversion for icons, not logo icons
+    ...(process.env.ODYSSEY_ICONS_TYPE === "icon" ? [convertColorsPlugin] : []),
   ],
 };
 
 export default svgoConfig;
-
-// Don't remove this. It's critical for the CLI script to run properly.
 module.exports = svgoConfig;

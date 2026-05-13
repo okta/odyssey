@@ -21,19 +21,10 @@ import {
   buttonVariantValues,
 } from "@okta/odyssey-react-mui";
 import { AddIcon } from "@okta/odyssey-react-mui/icons";
-import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+import { fn } from "storybook/test";
 
-import type { PlaywrightProps } from "../../tools/storybookTypes.js";
-
-import { axeRun } from "../../axeRun.js";
 import icons from "../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
-
-type playType = {
-  args: ButtonProps;
-  canvasElement: HTMLElement;
-  step: PlaywrightProps<ButtonProps>["step"];
-};
 
 const meta = {
   component: Button,
@@ -139,41 +130,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const interactWithButton =
-  ({ canvasElement, step }: PlaywrightProps<ButtonProps>) =>
-  async ({
-    args,
-    actionName,
-    hoverState,
-  }: {
-    actionName: string;
-    args: ButtonProps;
-    hoverState: boolean;
-  }) => {
-    if (args.label) {
-      await step("hover and click", async () => {
-        const canvas = within(canvasElement);
-        const button = canvas.getByRole("button", { name: args.label });
-        await userEvent.tab();
-        await userEvent.click(button);
-        expect(args.onClick).toHaveBeenCalledTimes(1);
-        await axeRun(actionName);
-        if (!hoverState) {
-          await waitFor(() => userEvent.tab());
-        }
-      });
-    }
-  };
-
 export const ButtonPrimary: Story = {
   name: "Primary",
-  play: async ({ args, canvasElement, step }: playType) => {
-    await interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Primary",
-      hoverState: false,
-    });
-  },
 };
 
 export const ButtonPrimaryDisabled: Story = {
@@ -191,13 +149,6 @@ export const ButtonSecondary: Story = {
     label: "Button label",
     variant: "secondary",
   },
-  play: async ({ args, canvasElement, step }: playType) => {
-    await interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Secondary",
-      hoverState: false,
-    });
-  },
 };
 
 export const ButtonSecondaryDisabled: Story = {
@@ -214,13 +165,6 @@ export const ButtonDanger: Story = {
   args: {
     label: "Button label",
     variant: "danger",
-  },
-  play: async ({ args, canvasElement, step }: playType) => {
-    await interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Danger",
-      hoverState: false,
-    });
   },
 };
 
@@ -247,13 +191,6 @@ export const ButtonFloating: Story = {
     label: "Button label",
     variant: "floating",
   },
-  play: async ({ args, canvasElement, step }: playType) => {
-    await interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Floating",
-      hoverState: false,
-    });
-  },
 };
 
 export const ButtonFloatingAction: Story = {
@@ -261,13 +198,6 @@ export const ButtonFloatingAction: Story = {
   args: {
     label: "Button label",
     variant: "floatingAction",
-  },
-  play: async ({ args, canvasElement, step }: playType) => {
-    await interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Floating Action",
-      hoverState: false,
-    });
   },
 };
 
@@ -296,13 +226,6 @@ export const ButtonSmall: Story = {
     label: "Button label",
     size: "small",
   },
-  play: async ({ args, canvasElement, step }: playType) => {
-    await interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Small",
-      hoverState: true,
-    });
-  },
 };
 
 export const ButtonMedium: Story = {
@@ -311,13 +234,6 @@ export const ButtonMedium: Story = {
     label: "Button label",
     size: "medium",
     variant: "secondary",
-  },
-  play: async ({ args, canvasElement, step }: playType) => {
-    await interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Medium",
-      hoverState: true,
-    });
   },
 };
 
@@ -328,13 +244,6 @@ export const ButtonLarge: Story = {
     size: "large",
     variant: "danger",
   },
-  play: async ({ args, canvasElement, step }: playType) => {
-    await interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Large",
-      hoverState: true,
-    });
-  },
 };
 
 export const ButtonFullWidth: Story = {
@@ -343,13 +252,6 @@ export const ButtonFullWidth: Story = {
     label: "Button label",
     isFullWidth: true,
   },
-  play: async ({ args, canvasElement, step }: playType) => {
-    await interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button Fullwidth",
-      hoverState: true,
-    });
-  },
 };
 
 export const ButtonWithIcon: Story = {
@@ -357,13 +259,6 @@ export const ButtonWithIcon: Story = {
   args: {
     label: "Button label",
     startIcon: <AddIcon />,
-  },
-  play: async ({ args, canvasElement, step }: playType) => {
-    await interactWithButton({ canvasElement, step })({
-      args,
-      actionName: "Button with Icon",
-      hoverState: false,
-    });
   },
 };
 

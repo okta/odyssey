@@ -35,7 +35,6 @@ export type OdysseyStackProps = {
    * Defines the space between immediate children.
    */
   spacing?: (typeof stackSpacingValues)[number];
-  sx?: MuiStackProps["sx"];
 };
 
 const Stack = ({

@@ -178,17 +178,17 @@ const BaseButton = ({
           {...muiProps}
           aria-controls={ariaControls}
           aria-describedby={ariaDescribedBy}
+          aria-disabled={isDisabled}
           aria-expanded={ariaExpanded}
           aria-haspopup={ariaHasPopup}
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledBy}
           data-se={testId}
-          disabled={isDisabled}
           endIcon={endIcon}
           fullWidth={isFullWidth}
           href={href}
           id={id}
-          onClick={onClick}
+          onClick={!isDisabled ? onClick : undefined}
           ref={(element) => {
             if (element) {
               (

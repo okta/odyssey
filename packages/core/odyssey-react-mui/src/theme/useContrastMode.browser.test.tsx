@@ -10,9 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import type { MockInstance } from "vitest";
+
 import * as Tokens from "@okta/odyssey-design-tokens";
-import { act, render, renderHook, waitFor } from "@testing-library/react";
-import { MockInstance } from "vitest";
+import { render, renderHook } from "vitest-browser-react";
 
 import { hexToRgb } from "../hexToRgb.js";
 import {
@@ -31,11 +32,6 @@ import {
 import { createShadowDomElements } from "../web-component/createShadowDomElements.js";
 
 describe("useContrastMode and related functions", () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-    document.documentElement.style.setProperty("backgroundColor", null);
-  });
-
   describe("useContrastMode hook", () => {
     let getComputedStyleSpy: MockInstance<typeof window.getComputedStyle>;
 
@@ -52,8 +48,8 @@ describe("useContrastMode and related functions", () => {
       getComputedStyleSpy.mockRestore();
     });
 
-    test("defaults to highContrast mode because defaultParentBackgroundColor is HueNeutral50", () => {
-      const { result } = renderHook(() => useContrastMode({}));
+    test("defaults to highContrast mode because defaultParentBackgroundColor is HueNeutral50", async () => {
+      const { result } = await renderHook(() => useContrastMode({}));
 
       expect(result.current.parentBackgroundColor).toBe(
         defaultParentBackgroundColor,
@@ -62,8 +58,8 @@ describe("useContrastMode and related functions", () => {
       expect(result.current.contrastContainerRef.current).toBe(null);
     });
 
-    it("should respect explicitly set contrast mode", () => {
-      const { result } = renderHook(
+    test("should respect explicitly set contrast mode", async () => {
+      const { result } = await renderHook(
         () => useContrastMode({ contrastMode: "highContrast" }),
         {
           wrapper: ({ children }) => (
@@ -79,7 +75,7 @@ describe("useContrastMode and related functions", () => {
       expect(result.current.contrastMode).toBe("highContrast");
     });
 
-    it("should update contrast mode based on background color changes", async () => {
+    test("should update contrast mode based on background color changes", async () => {
       // Mock getComputedStyle to simulate background color checks
       getComputedStyleSpy.mockImplementation(
         () => ({ backgroundColor: Tokens.HueNeutral50 }) as CSSStyleDeclaration,
@@ -94,43 +90,39 @@ describe("useContrastMode and related functions", () => {
         );
       };
 
-      const { getByTestId } = render(
+      const renderResult = await render(
         <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
           <TestComponent />
         </ContrastModeContext.Provider>,
       );
 
-      const testContainer = getByTestId("container");
+      const testContainer = renderResult.getByTestId("container").element();
 
       // Create and dispatch a transitionend event to simulate CSS transition completion
       // Storybook and certain elements use transitions which could interfere with tests
-      await act(async () => {
-        testContainer.style.backgroundColor = Tokens.HueNeutral50;
+      testContainer.style.backgroundColor = Tokens.HueNeutral50;
 
-        const transitionEvent = new Event("transitionend");
+      const transitionEvent = new Event("transitionend");
 
-        testContainer.dispatchEvent(
-          Object.assign(transitionEvent, { propertyName: "background-color" }),
-        );
+      testContainer.dispatchEvent(
+        Object.assign(transitionEvent, { propertyName: "background-color" }),
+      );
 
-        return Promise.resolve();
-      });
-
-      await waitFor(() => {
-        expect(getByTestId("container").textContent).toBe("highContrast");
+      await vi.waitFor(() => {
+        expect(testContainer.textContent).toBe("highContrast");
       });
     });
 
-    it("should clean up observers and event listeners on unmount", () => {
+    test("should clean up observers and event listeners on unmount", async () => {
       const observeSpy = vi
         .spyOn(MutationObserver.prototype, "observe")
-        .mockImplementation(vi.fn());
+        .mockImplementation(() => {});
       const disconnectSpy = vi
         .spyOn(MutationObserver.prototype, "disconnect")
-        .mockImplementation(vi.fn());
+        .mockImplementation(() => {});
       const takeRecordsSpy = vi
         .spyOn(MutationObserver.prototype, "takeRecords")
-        .mockImplementation(vi.fn());
+        .mockImplementation(() => []);
 
       const addEventListenerSpy = vi.spyOn(document, "addEventListener");
       const removeEventListenerSpy = vi.spyOn(document, "removeEventListener");
@@ -140,13 +132,13 @@ describe("useContrastMode and related functions", () => {
         return <div ref={contrastContainerRef}>Test</div>;
       };
 
-      const { unmount } = render(
+      const { unmount } = await render(
         <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
           <TestComponent />
         </ContrastModeContext.Provider>,
       );
 
-      unmount();
+      await unmount();
 
       expect(disconnectSpy).toHaveBeenCalled();
       expect(removeEventListenerSpy).toHaveBeenCalledWith(
@@ -179,12 +171,12 @@ describe("useContrastMode and related functions", () => {
       getComputedStyleSpy.mockRestore();
     });
 
-    it("returns defaultParentBackgroundColor if transparent background is found", () => {
+    test("returns defaultParentBackgroundColor if transparent background is found", () => {
       const element = document.createElement("div");
       expect(getBackgroundColor(element)).toBe(defaultParentBackgroundColor);
     });
 
-    it("returns the background color of the element if it is not transparent", () => {
+    test("returns the background color of the element if it is not transparent", () => {
       const getComputedStyleSpy = vi
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
@@ -204,7 +196,7 @@ describe("useContrastMode and related functions", () => {
       getComputedStyleSpy.mockRestore();
     });
 
-    it("returns defaultParentBackgroundColor if no non-transparent background is found", () => {
+    test("returns defaultParentBackgroundColor if no non-transparent background is found", () => {
       const getComputedStyleSpy = vi
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
@@ -218,7 +210,7 @@ describe("useContrastMode and related functions", () => {
       getComputedStyleSpy.mockRestore();
     });
 
-    it("returns the background color of the parent if the element is transparent", () => {
+    test("returns the background color of the parent if the element is transparent", () => {
       const parent = document.createElement("div");
       const child = document.createElement("div");
       parent.appendChild(child);
@@ -239,7 +231,7 @@ describe("useContrastMode and related functions", () => {
       getComputedStyleSpy.mockRestore();
     });
 
-    it("returns HueNeutral50 token for its RGB equivalent", () => {
+    test("returns HueNeutral50 token for its RGB equivalent", () => {
       const getComputedStyleSpy = vi
         .spyOn(window, "getComputedStyle")
         .mockImplementation(
@@ -253,7 +245,7 @@ describe("useContrastMode and related functions", () => {
       getComputedStyleSpy.mockRestore();
     });
 
-    it("handles nested transparent elements correctly", () => {
+    test("handles nested transparent elements correctly", () => {
       const grandparent = document.createElement("div");
       const parent = document.createElement("div");
       const child = document.createElement("div");
@@ -352,7 +344,7 @@ describe("useContrastMode and related functions", () => {
     // `documentElement` is null (possible in some shadow DOM / SSR contexts).
     // This test overrides `document.documentElement` to null to verify we
     // handle that gracefully.
-    test("handles null document.documentElement gracefully", () => {
+    test("handles null document.documentElement gracefully", async () => {
       const originalDocumentElement =
         Object.getOwnPropertyDescriptor(document, "documentElement") ??
         Object.getOwnPropertyDescriptor(Document.prototype, "documentElement");
@@ -377,14 +369,14 @@ describe("useContrastMode and related functions", () => {
 
       try {
         // Should not throw
-        const { getByTestId, unmount } = render(
+        const { getByTestId, unmount } = await render(
           <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
             <TestComponent />
           </ContrastModeContext.Provider>,
         );
 
         expect(getByTestId("shadow-safe")).toBeTruthy();
-        unmount();
+        await unmount();
       } finally {
         if (originalDocumentElement) {
           Object.defineProperty(
@@ -410,10 +402,10 @@ describe("useContrastMode and related functions", () => {
     beforeEach(() => {
       addEventListenerSpy = vi
         .spyOn(document, "addEventListener")
-        .mockImplementation(vi.fn());
+        .mockImplementation(() => {});
       removeEventListenerSpy = vi
         .spyOn(document, "removeEventListener")
-        .mockImplementation(vi.fn());
+        .mockImplementation(() => {});
     });
 
     afterEach(() => {
@@ -421,29 +413,29 @@ describe("useContrastMode and related functions", () => {
       removeEventListenerSpy.mockRestore();
     });
 
-    it("should clean up observers and event listeners on unmount", () => {
+    test("should clean up observers and event listeners on unmount", async () => {
       const observeSpy = vi
         .spyOn(MutationObserver.prototype, "observe")
-        .mockImplementation(vi.fn());
+        .mockImplementation(() => {});
       const disconnectSpy = vi
         .spyOn(MutationObserver.prototype, "disconnect")
-        .mockImplementation(vi.fn());
+        .mockImplementation(() => {});
       const takeRecordsSpy = vi
         .spyOn(MutationObserver.prototype, "takeRecords")
-        .mockImplementation(vi.fn());
+        .mockImplementation(() => []);
 
       const TestComponent = () => {
         const { contrastContainerRef } = useContrastMode({});
         return <div ref={contrastContainerRef}>Test</div>;
       };
 
-      const { unmount } = render(
+      const { unmount } = await render(
         <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
           <TestComponent />
         </ContrastModeContext.Provider>,
       );
 
-      unmount();
+      await unmount();
 
       expect(disconnectSpy).toHaveBeenCalled();
       expect(removeEventListenerSpy).toHaveBeenCalledWith(
@@ -458,8 +450,8 @@ describe("useContrastMode and related functions", () => {
   });
 
   describe("useContrastModeContext", () => {
-    it("should return the current contrast mode from context", () => {
-      const { result } = renderHook(() => useContrastModeContext(), {
+    test("should return the current contrast mode from context", async () => {
+      const { result } = await renderHook(() => useContrastModeContext(), {
         wrapper: ({ children }) => (
           <ContrastModeContext.Provider
             value={{ contrastMode: "highContrast" }}
@@ -473,7 +465,7 @@ describe("useContrastMode and related functions", () => {
     });
   });
 
-  it("detects parent background color changes", () => {
+  test("detects parent background color changes", () => {
     const parent = document.createElement("div");
     const child = document.createElement("div");
     parent.appendChild(child);
@@ -496,36 +488,36 @@ describe("useContrastMode and related functions", () => {
 
   describe("Color utility functions", () => {
     describe("hexToRgb", () => {
-      it("converts black hex to rgb", () => {
+      test("converts black hex to rgb", () => {
         expect(hexToRgb("#000000").asFormattedString).toBe("rgb(0, 0, 0)");
       });
 
-      it("converts white hex to rgb", () => {
+      test("converts white hex to rgb", () => {
         expect(hexToRgb("#ffffff").asFormattedString).toBe(
           "rgb(255, 255, 255)",
         );
       });
 
-      it("converts mixed color hex to rgb", () => {
+      test("converts mixed color hex to rgb", () => {
         expect(hexToRgb("#ff0088").asFormattedString).toBe("rgb(255, 0, 136)");
       });
 
-      it("correctly converts HueNeutral50 token to rgb", () => {
+      test("correctly converts HueNeutral50 token to rgb", () => {
         const result = hexToRgb(Tokens.HueNeutral50).asFormattedString;
         expect(result).toBe(hueNeutral50Rgb);
       });
     });
 
     describe("isTransparentColor", () => {
-      it("identifies rgba(0, 0, 0, 0) as transparent", () => {
+      test("identifies rgba(0, 0, 0, 0) as transparent", () => {
         expect(isTransparentColor("rgba(0, 0, 0, 0)")).toBe(true);
       });
 
-      it('identifies "transparent" keyword as transparent', () => {
+      test('identifies "transparent" keyword as transparent', () => {
         expect(isTransparentColor("transparent")).toBe(true);
       });
 
-      it("identifies solid colors as non-transparent", () => {
+      test("identifies solid colors as non-transparent", () => {
         expect(isTransparentColor("rgb(255, 255, 255)")).toBe(false);
         expect(isTransparentColor("rgba(255, 255, 255, 1)")).toBe(false);
         expect(isTransparentColor(defaultParentBackgroundColor)).toBe(false);
@@ -533,50 +525,50 @@ describe("useContrastMode and related functions", () => {
     });
 
     describe("normalizeRgbaToRgb", () => {
-      it("converts rgba to rgb format", () => {
+      test("converts rgba to rgb format", () => {
         expect(normalizeRgbaToRgb("rgba(255, 128, 0, 0.5)")).toBe(
           "rgb(255, 128, 0)",
         );
       });
 
-      it("handles zero alpha value", () => {
+      test("handles zero alpha value", () => {
         expect(normalizeRgbaToRgb("rgba(255, 128, 0, 0)")).toBe(
           "rgb(255, 128, 0)",
         );
       });
 
-      it("handles full alpha value", () => {
+      test("handles full alpha value", () => {
         expect(normalizeRgbaToRgb("rgba(255, 128, 0, 1)")).toBe(
           "rgb(255, 128, 0)",
         );
       });
 
-      it("does not modify rgb format", () => {
+      test("does not modify rgb format", () => {
         const rgbColor = "rgb(255, 128, 0)";
         expect(normalizeRgbaToRgb(rgbColor)).toBe(rgbColor);
       });
     });
 
     describe("normalizeBackgroundColor", () => {
-      it("converts rgba to rgb and matches against HueNeutral50", () => {
+      test("converts rgba to rgb and matches against HueNeutral50", () => {
         const rgbaColor = hueNeutral50Rgb
           .replace("rgb", "rgba")
           .replace(")", ", 0.5)");
         expect(normalizeBackgroundColor(rgbaColor)).toBe(Tokens.HueNeutral50);
       });
 
-      it("returns original color if not matching HueNeutral50", () => {
+      test("returns original color if not matching HueNeutral50", () => {
         const rgbaColor = "rgba(255, 0, 0, 0.5)";
         expect(normalizeBackgroundColor(rgbaColor)).toBe("rgb(255, 0, 0)");
       });
 
-      it("returns HueNeutral50 token for matching rgb value", () => {
+      test("returns HueNeutral50 token for matching rgb value", () => {
         expect(normalizeBackgroundColor(hueNeutral50Rgb)).toBe(
           Tokens.HueNeutral50,
         );
       });
 
-      it("returns original color for non-matching rgb value", () => {
+      test("returns original color for non-matching rgb value", () => {
         const rgbColor = "rgb(255, 0, 0)";
         expect(normalizeBackgroundColor(rgbColor)).toBe(rgbColor);
       });
@@ -593,7 +585,7 @@ describe("useContrastMode and related functions", () => {
         getComputedStyleSpy.mockRestore();
       });
 
-      it("returns the computed background color of an element", () => {
+      test("returns the computed background color of an element", () => {
         const element = document.createElement("div");
         const expectedColor = "rgb(255, 0, 0)";
 
@@ -607,7 +599,7 @@ describe("useContrastMode and related functions", () => {
         expect(getElementComputedBackgroundColor(element)).toBe(expectedColor);
       });
 
-      it("handles transparent background color", () => {
+      test("handles transparent background color", () => {
         const element = document.createElement("div");
 
         getComputedStyleSpy.mockImplementation(
@@ -637,16 +629,16 @@ describe("useContrastMode and related functions", () => {
   });
 
   describe("observer skip for explicit contrastMode", () => {
-    test("skips MutationObserver when explicit contrastMode is provided", () => {
+    test("skips MutationObserver when explicit contrastMode is provided", async () => {
       const observeSpy = vi
         .spyOn(MutationObserver.prototype, "observe")
-        .mockImplementation(vi.fn());
+        .mockImplementation(() => {});
       const disconnectSpy = vi
         .spyOn(MutationObserver.prototype, "disconnect")
-        .mockImplementation(vi.fn());
+        .mockImplementation(() => {});
       const takeRecordsSpy = vi
         .spyOn(MutationObserver.prototype, "takeRecords")
-        .mockImplementation(vi.fn());
+        .mockImplementation(() => []);
       const addEventListenerSpy = vi.spyOn(document, "addEventListener");
 
       const TestComponent = () => {
@@ -660,20 +652,22 @@ describe("useContrastMode and related functions", () => {
         );
       };
 
-      const { getByTestId, unmount } = render(
+      const { getByTestId, unmount } = await render(
         <ContrastModeContext.Provider value={{ contrastMode: "lowContrast" }}>
           <TestComponent />
         </ContrastModeContext.Provider>,
       );
 
-      expect(getByTestId("explicit").textContent).toBe("highContrast");
+      await expect
+        .element(getByTestId("explicit"))
+        .toHaveTextContent("highContrast");
       expect(observeSpy).not.toHaveBeenCalled();
       expect(addEventListenerSpy).not.toHaveBeenCalledWith(
         "transitionend",
         expect.any(Function),
       );
 
-      unmount();
+      await unmount();
 
       addEventListenerSpy.mockRestore();
       disconnectSpy.mockRestore();

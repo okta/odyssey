@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.60.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.59.0...v1.60.0) (2026-05-13)
+
+### Features
+
+- move tests to vitest 4 browser mode ([#258](https://github.com/atko-eng/odyssey-design-system/issues/258)) ([baff3b8](https://github.com/atko-eng/odyssey-design-system/commit/baff3b8d07995859298f5ee9745010064149294e))
+- split icons and logos into separate folders ([#284](https://github.com/atko-eng/odyssey-design-system/issues/284)) ([2457134](https://github.com/atko-eng/odyssey-design-system/commit/2457134a3c49f77505712ad566f3a2fb5caa5799))
+
+### Bug Fixes
+
+- add webkit autofill border-radius reset ([#288](https://github.com/atko-eng/odyssey-design-system/issues/288)) ([11a2ac4](https://github.com/atko-eng/odyssey-design-system/commit/11a2ac4145b30311f541911fa60acf311870ac7a))
+- autocomplete bottom margin spacing ([#291](https://github.com/atko-eng/odyssey-design-system/issues/291)) ([70ef35a](https://github.com/atko-eng/odyssey-design-system/commit/70ef35ae0c3474e4b53b243f827d876381bcfbf4))
+- DataView Select All respects getRowId ([#294](https://github.com/atko-eng/odyssey-design-system/issues/294)) ([d42d428](https://github.com/atko-eng/odyssey-design-system/commit/d42d42854e1666dbee9c6c30b6147cf820bf067f))
+- pin vite to 7.x to drop rolldown binaries ([#281](https://github.com/atko-eng/odyssey-design-system/issues/281)) ([a51a959](https://github.com/atko-eng/odyssey-design-system/commit/a51a959e7802c7ab1e6422b662d36e74e76532a4))
+- Radio & Checkbox disable state ([#289](https://github.com/atko-eng/odyssey-design-system/issues/289)) ([9d49e26](https://github.com/atko-eng/odyssey-design-system/commit/9d49e26f8a5d9aff7b12dac23e6ec6540408867c))
+- remove sx prop in Stack component's type ([#287](https://github.com/atko-eng/odyssey-design-system/issues/287)) ([4c4206a](https://github.com/atko-eng/odyssey-design-system/commit/4c4206a182cd35ac2110e68b2deb7e24c9127ecf))
+- select not forwarding isDisabled to MUI ([#290](https://github.com/atko-eng/odyssey-design-system/issues/290)) ([26ba26b](https://github.com/atko-eng/odyssey-design-system/commit/26ba26bc5d481e805000e9b9048b3e2e430462db))
+- update disabled button so it is keyboard tabbable ([#295](https://github.com/atko-eng/odyssey-design-system/issues/295)) ([f1eb8ae](https://github.com/atko-eng/odyssey-design-system/commit/f1eb8ae6b00c50b135e934b165bfb1f11f2cbeb7))
+
 ## [1.59.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.58.0...v1.59.0) (2026-04-29)
 
 ### Features

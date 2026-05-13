@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const SearchIcon = forwardRef<SVGSVGElement, SearchIconProps>((props, ref) => {
       <>
         <path
           clipRule="evenodd"
-          d="M10.667 6.667a4 4 0 1 1-8 0 4 4 0 0 1 8 0Zm-.754 4.231a5.333 5.333 0 1 1 .948-.938l3.61 3.611-.942.943-3.616-3.616Z"
+          d="M10.667 6.667a4 4 0 1 1-8 0 4 4 0 0 1 8 0m-.754 4.231a5.333 5.333 0 1 1 .948-.938l3.61 3.611-.942.943z"
           fill="currentColor"
           fillRule="evenodd"
         />

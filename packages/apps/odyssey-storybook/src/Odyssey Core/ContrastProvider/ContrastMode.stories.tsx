@@ -39,7 +39,7 @@ export const AllComponents: StoryObj = {
         <Stack spacing={4}>
           <Stack spacing={1}>
             <span style={{ fontSize: 12, fontWeight: "bold" }}>Status</span>
-            <Stack direction="row" spacing={1} sx={{ flexWrap: "wrap" }}>
+            <Stack direction="row" spacing={1}>
               <Status label="Default" severity="default" />
               <Status label="Error" severity="error" />
               <Status label="Info" severity="info" />

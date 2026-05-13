@@ -3,13 +3,20 @@
 ## tl;dr
 
 1. Designer exports all icons as SVGs.
-2. Put icons in `packages/odyssey-icons/figma`.
+2. Put icons in `packages/core/odyssey-icons/src/figma.icon.generated` and logos in `packages/core/odyssey-icons/src/figma.logo.generated`.
 3. Run `yarn generate:icons` from the project root.
-4. Add new icons to `packages/core/odyssey-react-mui/icons/index.ts`.
+
+## Icon types
+
+Odyssey icons are split into two categories:
+
+- **icons** — general-purpose UI icons (arrows, actions, status indicators, etc.)
+- **logos** — authenticator and service brand logos (Duo, Google Authenticator, Okta Verify, Symantec VIP, YubiKey)
 
 ## Verbose
 
-When we have new icons in Figma, a designer will add those to the `packages/odyssey-icons` package in the `figma/` folder.
+When we have new icons in Figma, a designer will add those to the `packages/core/odyssey-icons` package in the appropriate `src/figma.*.generated/` subfolder.
+**Note:** SVGs must be exported at the correct size: **16×16 for icons** and **32×32 for logos**.
 
 After that's complete, run this command to generate our icons:
 
@@ -17,6 +24,13 @@ After that's complete, run this command to generate our icons:
 yarn generate:icons
 ```
 
-After icons are generated, there's one manual step required. Any new icons need to be manually added to the `odyssey-react-mui/icons/index.ts` file. Just copy paste an existing icon export and modify it.
+This runs the following steps automatically:
 
-In the past, this was automated, but an update to the SVGR library broke index templating, so we have to do this part by hand.
+1. **Build** `odyssey-icons` to produce optimized SVGs in `dist/icons` (system) and `dist/logos` (logos).
+2. **Generate system components** — SVGR converts `dist/icons/*.svg` into React components under `odyssey-react-mui/src/icons.generated/`.
+3. **Generate logo components** — SVGR converts `dist/logos/*.svg` into React components under `odyssey-react-mui/src/logos.generated/`.
+4. **Generate the index** — `scripts/generateIconsIndex.ts` scans both output directories and writes `odyssey-react-mui/src/icons.generated/index.ts` with re-exports for every generated component. No manual edits to the index file are needed.
+
+After icons are generated, add stories for any new icons in:
+
+- `packages/apps/odyssey-storybook/src/Odyssey Core/Icon/Icon.stories.tsx`

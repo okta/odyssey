@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2025-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -30,7 +30,7 @@ const ChevronRightIcon = forwardRef<SVGSVGElement, ChevronRightIconProps>(
       >
         <>
           <path
-            d="m11.138 8.471-4.333 4.334-.943-.943L9.724 8 5.862 4.138l.943-.943 4.333 4.334a.667.667 0 0 1 0 .942Z"
+            d="m11.138 8.471-4.333 4.334-.943-.943L9.724 8 5.862 4.138l.943-.943 4.333 4.334a.667.667 0 0 1 0 .942"
             fill="currentColor"
           />
         </>

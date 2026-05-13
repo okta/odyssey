@@ -10,44 +10,32 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createTheme } from "@mui/material/styles";
-import { render, screen } from "@testing-library/react";
-import { userEvent } from "@vitest/browser/context";
-import { ReactNode } from "react";
+import { page, userEvent } from "vitest/browser";
 
-import { OdysseyProvider } from "./OdysseyProvider.js";
 import { Tag } from "./Tag.js";
-
-// Needed to prevent act() warnings caused by MUI's ripple effect when
-// mocked onRemove/onClick don't cause visual changes to await.
-const noTransitionsTheme = createTheme({
-  transitions: {
-    create: () => "none",
-  },
-});
+import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 describe(Tag.displayName!, () => {
-  const Wrapper = ({ children }: { children: ReactNode }) => (
-    <OdysseyProvider themeOverride={noTransitionsTheme}>
-      {children}
-    </OdysseyProvider>
-  );
-
   test("calls onRemove when delete icon is clicked", async () => {
     const user = userEvent.setup();
 
     const onRemove = vi.fn();
-    render(<Tag label="Label" onRemove={onRemove} />, { wrapper: Wrapper });
+    const { container } = await renderWithOdysseyProvider(
+      <Tag label="Label" onRemove={onRemove} />,
+    );
+    await expect(container).toBeAccessible();
 
-    const tag = screen.getByRole("button", { name: /^Label/ });
-    expect(tag).toHaveAttribute("aria-keyshortcuts", "Backspace");
-    expect(tag).toHaveAttribute("tabindex", "0");
+    const tag = page.getByRole("button", { name: /^Label/ });
+    await expect.element(tag).toHaveAttribute("aria-keyshortcuts", "Backspace");
+    await expect.element(tag).toHaveAttribute("tabindex", "0");
 
-    const deleteButton = await screen.findByRole("button", {
+    const deleteButton = page.getByRole("button", {
       name: "Remove tag",
+      exact: true,
     });
 
     await user.click(deleteButton);
+    await expect(container).toBeAccessible();
 
     expect(onRemove).toHaveBeenCalledTimes(1);
   });
@@ -56,23 +44,25 @@ describe(Tag.displayName!, () => {
     const user = userEvent.setup();
 
     const onClick = vi.fn();
-    render(<Tag label="Label" onClick={onClick} />, { wrapper: Wrapper });
+    const { container } = await renderWithOdysseyProvider(
+      <Tag label="Label" onClick={onClick} />,
+    );
 
-    const tag = screen.getByRole("button", { name: "Label" });
+    const tag = page.getByRole("button", { name: "Label" });
     expect(tag).not.toHaveAttribute("aria-keyshortcuts");
-    expect(tag).toHaveAttribute("tabindex", "0");
+    await expect.element(tag).toHaveAttribute("tabindex", "0");
 
     await user.click(tag);
+    await expect(container).toBeAccessible();
 
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  test("tag is not reachable via Tab when onClick/onRemove are not provided", () => {
-    render(<Tag label="Label" />, { wrapper: Wrapper });
+  test("tag is not reachable via Tab when onClick/onRemove are not provided", async () => {
+    await renderWithOdysseyProvider(<Tag label="Label" />);
 
-    expect(screen.getByText("Label").closest("div")).not.toHaveAttribute(
-      "tabindex",
-      "0",
-    );
+    expect(
+      page.getByText("Label", { exact: true }).query()?.closest("div"),
+    ).not.toHaveAttribute("tabindex", "0");
   });
 });

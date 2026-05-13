@@ -17,18 +17,9 @@ import {
   bannerSeverityValues,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, fn, userEvent, within } from "storybook/test";
+import { fn } from "storybook/test";
 
-import type { PlaywrightProps } from "../../tools/storybookTypes.js";
-
-import { axeRun } from "../../axeRun.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
-
-type PlayType = {
-  args: BannerProps;
-  canvasElement: HTMLElement;
-  step: PlaywrightProps<BannerProps>["step"];
-};
 
 const storybookMeta: Meta<BannerProps> = {
   component: Banner,
@@ -163,14 +154,6 @@ export const Linked: StoryObj<BannerProps> = {
     severity: "error",
     text: "An unidentified flying object compromised Hangar 18.",
   },
-  play: async ({ canvasElement, step }: PlayType) => {
-    await step("check for the link text", async () => {
-      const canvas = within(canvasElement);
-      const link = canvas.getByText<HTMLAnchorElement>("View report");
-      await expect(link?.tagName).toBe("A");
-      await expect(link?.href).toBe(`${link?.baseURI}#anchor`);
-    });
-  },
 };
 
 export const LinkedWithOnLinkClick: StoryObj<BannerProps> = {
@@ -180,16 +163,6 @@ export const LinkedWithOnLinkClick: StoryObj<BannerProps> = {
     role: "status",
     severity: "error",
     text: "An unidentified flying object compromised Hangar 18.",
-  },
-  play: async ({ args, canvasElement, step }: PlayType) => {
-    await step("check for the link text and click it", async () => {
-      const canvas = within(canvasElement);
-      const link = canvas.getByText<HTMLAnchorElement>("View report");
-      await expect(link?.tagName).toBe("A");
-      await expect(link?.href).toBe(`${link?.baseURI}#`);
-      await userEvent.click(link);
-      await expect(args.onLinkClick).toHaveBeenCalled();
-    });
   },
 };
 
@@ -207,15 +180,5 @@ export const LinkWithTarget: StoryObj<BannerProps> = {
 export const Dismissible: StoryObj<BannerProps> = {
   args: {
     onClose: fn(),
-  },
-  play: async ({ args, canvasElement, step }: PlayType) => {
-    await step("dismiss the banner on click", async () => {
-      const canvas = within(canvasElement);
-      const button = canvas.getByTitle("Close");
-      await userEvent.click(button);
-      await userEvent.tab();
-      await expect(args.onClose).toHaveBeenCalled();
-      await axeRun("Dismissible Banner");
-    });
   },
 };

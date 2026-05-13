@@ -10,68 +10,72 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { render, screen } from "@testing-library/react";
+import { render } from "vitest-browser-react";
+import { page } from "vitest/browser";
 
+import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 import { Heading1, Typography } from "./Typography.js";
 
 describe("Typography", () => {
-  test("renders Overline", () => {
-    render(
+  test("renders Overline", async () => {
+    const { container } = await renderWithOdysseyProvider(
       <Typography ariaLabel="overline" variant="overline">
         Overline test
       </Typography>,
     );
 
-    expect(screen.getByLabelText("overline")).toBeVisible();
+    await expect(container).toBeAccessible();
+
+    await expect.element(page.getByLabelText("overline")).toBeVisible();
   });
 
-  test("renders with role", () => {
-    render(
+  test("renders with role", async () => {
+    await render(
       <Typography ariaLabel="heading" isPresentational variant="h1">
         Heading test
       </Typography>,
     );
 
-    const element = screen.getByLabelText("heading");
-    expect(element).toBeVisible();
-    expect(element).toHaveAttribute("role", "presentation");
+    const element = page.getByLabelText("heading");
+    await expect.element(element).toBeVisible();
+    await expect.element(element).toHaveAttribute("role", "presentation");
   });
 
-  test("does not render role attribute when undefined", () => {
-    render(
+  test("does not render role attribute when undefined", async () => {
+    await render(
       <Typography ariaLabel="heading" variant="h1">
         Heading test
       </Typography>,
     );
 
-    const element = screen.getByLabelText("heading");
-    expect(element).toBeVisible();
-    expect(element).not.toHaveAttribute("role");
+    const element = page.getByLabelText("heading");
+    await expect.element(element).toBeVisible();
+    await expect.element(element).not.toHaveAttribute("role");
   });
 
   describe("Heading1", () => {
-    test("renders correctly with isPresentional prop", () => {
-      render(
+    test("renders correctly with isPresentional prop", async () => {
+      await render(
         <Heading1 ariaLabel="heading" isPresentational variant="h1">
           Heading test
         </Heading1>,
       );
 
-      const element = screen.getByLabelText("heading");
-      expect(element).toBeVisible();
-      expect(element).toHaveAttribute("role", "presentation");
+      const element = page.getByLabelText("heading");
+      await expect.element(element).toBeVisible();
+      await expect.element(element).toHaveAttribute("role", "presentation");
     });
 
-    test("renders correctly with isPresentional prop", () => {
-      render(
+    test("renders correctly with isPresentional prop", async () => {
+      await render(
         <Heading1 ariaLabel="heading" variant="h1">
           Heading test
         </Heading1>,
       );
 
-      const element = screen.getByLabelText("heading");
-      expect(element).toBeVisible();
-      expect(element).not.toHaveAttribute("role");
+      const element = page.getByLabelText("heading");
+      await expect.element(element).toBeVisible();
+      await expect.element(element).not.toHaveAttribute("role");
     });
   });
 });

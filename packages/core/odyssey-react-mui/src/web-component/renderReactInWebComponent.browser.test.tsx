@@ -10,8 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { act, waitFor } from "@testing-library/react";
-
+import { appendToSandbox } from "../test-utils/appendToSandbox.js";
 import {
   renderReactInWebComponent,
   versionedWebComponentName,
@@ -19,30 +18,20 @@ import {
 } from "./renderReactInWebComponent.js";
 
 describe(renderReactInWebComponent.name, () => {
-  afterEach(async () => {
-    // This needs to be wrapped in `act` because the web component unmounts the React app, and React events have to be wrapped in `act`.
-    await act(async () => {
-      // Remove any appended elements because of this hacky process of rendering to the global DOM.
-      document.body.innerHTML = "";
-      return Promise.resolve();
-    });
-  });
-
   test("returns web component element", async () => {
     const nonce = "test-nonce";
     globalThis.cspNonce = nonce;
-    const rootElement = document.createElement("div");
-    const testElementText = "I'm a test component!";
-
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
+    // Tagged via `appendToSandbox` so the global afterEach removes it.
+    const rootElement = appendToSandbox(document.createElement("div"));
+    const testElementText = "I'm a test component!";
 
     const reactInWebComponentElement = renderReactInWebComponent({
       getReactComponent: () => <div>{testElementText}</div>,
       webComponentParentElement: rootElement,
     });
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(reactInWebComponentElement.elementName).toEqual(
         versionedWebComponentName,
       );
@@ -54,11 +43,9 @@ describe(renderReactInWebComponent.name, () => {
 
   test("renders a React app into a web component", async () => {
     const nonce = "test-nonce-2";
-    const rootElement = document.createElement("div");
-    const testElementText = "I'm a test component!";
-
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
+    const rootElement = appendToSandbox(document.createElement("div"));
+    const testElementText = "I'm a test component!";
 
     const reactInWebComponentElement = renderReactInWebComponent({
       getReactComponent: () => <div>{testElementText}</div>,
@@ -66,7 +53,7 @@ describe(renderReactInWebComponent.name, () => {
       nonce,
     });
 
-    await waitFor(() => {
+    await vi.waitFor(() => {
       expect(reactInWebComponentElement.shadowRoot).toHaveTextContent(
         testElementText,
       );
@@ -75,10 +62,8 @@ describe(renderReactInWebComponent.name, () => {
   });
 
   test("renders 2 React apps without erroring", () => {
-    const rootElement = document.createElement("div");
-
     // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
+    const rootElement = appendToSandbox(document.createElement("div"));
 
     renderReactInWebComponent({
       getReactComponent: () => <div />,
@@ -96,13 +81,11 @@ describe(renderReactInWebComponent.name, () => {
   });
 
   test("renders a single element as children of the web component", () => {
-    const rootElement = document.createElement("div");
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    const rootElement = appendToSandbox(document.createElement("div"));
     const webComponentChildren = document.createElement("div");
 
     webComponentChildren.setAttribute("slot", "app");
-
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
 
     renderReactInWebComponent({
       getReactComponent: () => <div />,
@@ -114,7 +97,8 @@ describe(renderReactInWebComponent.name, () => {
   });
 
   test("renders multiple elements as children of the web component", () => {
-    const rootElement = document.createElement("div");
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
+    const rootElement = appendToSandbox(document.createElement("div"));
     const webComponentChild1 = document.createElement("div");
     const webComponentChild2 = document.createElement("div");
 
@@ -122,9 +106,6 @@ describe(renderReactInWebComponent.name, () => {
 
     webComponentChild1.setAttribute("slot", "app");
     webComponentChild2.setAttribute("slot", "footer");
-
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    document.body.append(rootElement);
 
     renderReactInWebComponent({
       getReactComponent: () => <div />,
@@ -149,7 +130,7 @@ describe(renderReactInWebComponent.name, () => {
       reactInWebComponentElement.disconnectedCallback();
       reactInWebComponentElement.connectedCallback();
 
-      await act(() => reactInWebComponentElement.reactRootPromise);
+      await reactInWebComponentElement.reactRootPromise;
 
       await expect(
         reactInWebComponentElement.reactRootPromise,
