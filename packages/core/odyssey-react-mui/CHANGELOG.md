@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.61.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.60.0...v1.61.0) (2026-05-28)
+
+### Features
+
+- Translations for odyssey-design-system:enduser ([#333](https://github.com/atko-eng/odyssey-design-system/issues/333)) ([75fbde9](https://github.com/atko-eng/odyssey-design-system/commit/75fbde9c5bc0577088eee0d937e89e9e0c80530f))
+
 ## [1.60.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.59.0...v1.60.0) (2026-05-13)
 
 ### Features

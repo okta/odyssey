@@ -263,20 +263,62 @@ Each entry in `COMPONENT_MAPPINGS` describes a single component migration:
 ```ts
 {
   source: {
-    component: "DataTable",           // Original component name
+    component: "DataTable",             // Original component name
     packages: ["@okta/odyssey-react-mui"], // Package(s) to match imports from
-    propsType: "DataTableProps",       // Props type name
+    propsType: "DataTableProps",        // Props type name
   },
   target: {
-    component: "DataView",            // New component name
+    component: "DataView",              // New component name
     package: "@okta/odyssey-react-mui", // Target package
-    propsType: "DataViewProps",        // New props type name
-    minimumVersion: undefined,         // Optional minimum version gate
+    propsType: "DataViewProps",         // New props type name
+    minimumVersion: undefined,          // Optional minimum version gate
   },
   defaultProps: {
-    availableLayouts: ["table"],       // Props injected into every migrated element
+    availableLayouts: ["table"],        // Props injected into every migrated element
   },
-  // Map for what props will be transformed into
+  // propMap is an allowlist — any prop NOT listed here is silently dropped.
+  // List every prop the component accepts, sorted alphabetically, using identity
+  // mappings for unchanged props and renamed mappings for props that changed:
+  //   unchanged: propName: "propName"
+  //   renamed:   oldName: "newName"
+  //   nested:    columns: "tableLayoutOptions.columns"
+  //
+  // All types and the DROPPED sentinel live in ./types.js — import from there,
+  // not from ./index.js:
+  //   import { type ComponentMapping, DROPPED } from "./types.js";
+  //
+  // ComponentMapping accepts two optional generic parameters for type safety:
+  //   ComponentMapping<TSourceProps, TTargetProps>
+  //
+  // Pass the raw Props types — Required<> and PropPaths<> are derived internally:
+  //   TSourceProps — the source component Props type. Every prop (including
+  //     optional ones) must be explicitly mapped. Shallow-object props allow
+  //     the nested extraction pattern; all others accept a flat path or DROPPED.
+  //   TTargetProps — the target component Props type. propMap values are
+  //     constrained to PropPaths<Required<TTargetProps>> automatically.
+  //
+  // @okta/odyssey-react-mui is a devDependency — all imports from it in mapping
+  // files use `import type`, which TypeScript erases completely at build time.
+  // The compiled dist/ has no runtime reference to odyssey-react-mui.
+  //
+  // For non-generic Props types (most cases):
+  //   import type { SourceProps } from "@old/pkg";
+  //   import type { TargetProps } from "@okta/odyssey-react-mui";
+  //   import { type ComponentMapping, DROPPED } from "./types.js";
+  //   export const MyComponent: Record<"MyComponent", ComponentMapping<SourceProps, TargetProps>> = { ... };
+  //
+  // For generic Props types, pass a concrete instantiation:
+  //   ComponentMapping<DataViewProps<Record<string, unknown>>, DataTableProps>
+  //
+  // Omit type params (defaults to Record<string, unknown>) when the Props type
+  // is awkward to instantiate — propMap values fall back to unconstrained string.
+  //
+  // Props with no equivalent in the target API — use DROPPED (not omission).
+  // Every source prop must appear in propMap so TypeScript can enforce
+  // exhaustiveness when source props are added or renamed:
+  //   propMap: {
+  //     legacyProp: DROPPED,  // removed in target — codemod warns and drops it
+  //   }
   propMap: {
     columns: "tableLayoutOptions.columns",
     hasColumnResizing: "tableLayoutOptions.hasColumnResizing",

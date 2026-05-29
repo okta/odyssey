@@ -19,7 +19,7 @@
   "scripts": {
     "build:clean": "rimraf dist",
     "build": "yarn build:clean && tsc",
-    "build:withDeps": "yarn workspaces foreach --from '@okta/odyssey-cli' --recursive --topological run build && yarn build:clean && tsc",
+    "build:withDeps": "yarn workspaces foreach --from '@okta/odyssey-cli' --recursive --topological run build",
     "build:watch": "yarn build:clean && tsc --watch",
     "test": "NODE_ENV=test vitest run --reporter=default"
   },
@@ -40,6 +40,7 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@okta/odyssey-react-mui": "1.59.0",
     "@types/jscodeshift": "^17.3.0",
     "@types/lodash.partition": "^4.6.9",
     "@types/node": "^24.1.0",

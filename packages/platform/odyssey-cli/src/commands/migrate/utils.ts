@@ -224,5 +224,5 @@ export const getInstalledDeps = (): Record<string, string> => {
  */
 export const formatMigrationLabel = (key: string): string => {
   const { source, target } = COMPONENT_MAPPINGS[key];
-  return `${source.component} → ${target.component} (${source.package} → ${target.package})`;
+  return `${source.component} → ${target.component} (${source.packages.join(", ")} → ${target.package})`;
 };

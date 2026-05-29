@@ -57,32 +57,34 @@ export default function transformer(
         throw new TypeError(`Missing component mapping for: ${key}`);
       }
 
-      const { package: sourcePackage } = mapping.source;
+      const { packages: sourcePackages } = mapping.source;
       const { package: targetPackage } = mapping.target;
 
       const componentAliases: ComponentAlias[] = [];
       // Search for imports from every source package in the mapping.
-      fileRoot
-        .find(j.ImportDeclaration, {
-          source: { value: sourcePackage },
-        })
-        .forEach((importPath: ASTPath<namedTypes.ImportDeclaration>) => {
-          const { alias, modified } = transformNamedImport(
-            j,
-            fileRoot,
-            targetPackage,
-            mapping,
-            importPath,
-            logger,
-          );
+      for (const sourcePackage of sourcePackages) {
+        fileRoot
+          .find(j.ImportDeclaration, {
+            source: { value: sourcePackage },
+          })
+          .forEach((importPath: ASTPath<namedTypes.ImportDeclaration>) => {
+            const { alias, modified } = transformNamedImport(
+              j,
+              fileRoot,
+              targetPackage,
+              mapping,
+              importPath,
+              logger,
+            );
 
-          if (alias) {
-            componentAliases.push(alias);
-          }
-          if (modified) {
-            hasChanges = true;
-          }
-        });
+            if (alias) {
+              componentAliases.push(alias);
+            }
+            if (modified) {
+              hasChanges = true;
+            }
+          });
+      }
 
       // Replace JSX usage for each component alias.
       for (const { localName, targetLocalName } of componentAliases) {

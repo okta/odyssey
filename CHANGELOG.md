@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.61.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.60.0...v1.61.0) (2026-05-28)
+
+### Features
+
+- add promote-contribution skill and supporting migration tooling ([#302](https://github.com/atko-eng/odyssey-design-system/issues/302)) ([b06547c](https://github.com/atko-eng/odyssey-design-system/commit/b06547ce6d30bc0cf5f2e5ac13645273ce0c30a3))
+- adds support for header icon ([#299](https://github.com/atko-eng/odyssey-design-system/issues/299)) ([f5559ba](https://github.com/atko-eng/odyssey-design-system/commit/f5559ba5a502767a9ec5b26a1acfd8b544438e1b))
+- Translations for odyssey-design-system:enduser ([#333](https://github.com/atko-eng/odyssey-design-system/issues/333)) ([75fbde9](https://github.com/atko-eng/odyssey-design-system/commit/75fbde9c5bc0577088eee0d937e89e9e0c80530f))
+
+### Bug Fixes
+
+- pin shell-quote to 1.8.4, sync lockfile ([#335](https://github.com/atko-eng/odyssey-design-system/issues/335)) ([302ed72](https://github.com/atko-eng/odyssey-design-system/commit/302ed7269705c275c75d5a913ad65e9dee7a90de))
+
 ## [1.60.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.59.0...v1.60.0) (2026-05-13)
 
 ### Features

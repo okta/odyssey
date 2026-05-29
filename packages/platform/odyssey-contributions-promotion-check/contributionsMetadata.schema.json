@@ -41,16 +41,36 @@
             "type": "boolean",
             "const": true,
             "description": "When true, this component is excluded from Odyssey Core promotion recommendations. Omit for eligible components."
+          },
+          "ignoredFromPromotionReason": {
+            "type": "string",
+            "enum": ["promoted", "not feasible"],
+            "description": "Why this component is excluded from promotion recommendations. Required when isIgnoredFromPromotion is true."
           }
         },
-        "if": {
-          "required": ["similarTo"]
-        },
-        "then": {
-          "not": {
-            "required": ["forkedFrom"]
+        "allOf": [
+          {
+            "if": {
+              "required": ["similarTo"]
+            },
+            "then": {
+              "not": {
+                "required": ["forkedFrom"]
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "isIgnoredFromPromotion": { "const": true }
+              },
+              "required": ["isIgnoredFromPromotion"]
+            },
+            "then": {
+              "required": ["ignoredFromPromotionReason"]
+            }
           }
-        }
+        ]
       }
     }
   }

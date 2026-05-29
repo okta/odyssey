@@ -3,6 +3,7 @@ import type { FileInfo } from "jscodeshift";
 import jscodeshift from "jscodeshift";
 import { describe, expect, it, vi } from "vitest";
 
+import { DROPPED } from "./mappings/types.js";
 import transformer from "./transformer.js";
 
 vi.mock("./mappings/index.js", () => {
@@ -11,7 +12,7 @@ vi.mock("./mappings/index.js", () => {
       GroupedWidget: {
         source: {
           component: "GroupedWidget",
-          package: "@old/lib",
+          packages: ["@old/lib"],
           propsType: "GroupedWidgetProps",
         },
         target: {
@@ -35,7 +36,7 @@ vi.mock("./mappings/index.js", () => {
       DeepWidget: {
         source: {
           component: "DeepWidget",
-          package: "@old/lib",
+          packages: ["@old/lib"],
           propsType: "DeepWidgetProps",
         },
         target: {
@@ -51,7 +52,7 @@ vi.mock("./mappings/index.js", () => {
       NestedSource: {
         source: {
           component: "NestedSource",
-          package: "@old/lib",
+          packages: ["@old/lib"],
           propsType: "NestedSourceProps",
         },
         target: {
@@ -75,7 +76,7 @@ vi.mock("./mappings/index.js", () => {
       BatchWidget: {
         source: {
           component: "BatchWidget",
-          package: "@old/lib",
+          packages: ["@old/lib"],
           propsType: "BatchWidgetProps",
         },
         target: {
@@ -91,7 +92,7 @@ vi.mock("./mappings/index.js", () => {
       WithDefaults: {
         source: {
           component: "WithDefaults",
-          package: "@old/lib",
+          packages: ["@old/lib"],
           propsType: "WithDefaultsProps",
         },
         target: {
@@ -111,13 +112,45 @@ vi.mock("./mappings/index.js", () => {
       SamePackageWidget: {
         source: {
           component: "SamePackageWidget",
-          package: "@shared/lib",
+          packages: ["@shared/lib"],
           propsType: "SamePackageWidgetProps",
         },
         target: {
           component: "NewSamePackageWidget",
           package: "@shared/lib",
           propsType: "NewSamePackageWidgetProps",
+        },
+        propMap: {
+          label: "title",
+        },
+      },
+      DroppedWidget: {
+        source: {
+          component: "DroppedWidget",
+          packages: ["@old/lib"],
+          propsType: "DroppedWidgetProps",
+        },
+        target: {
+          component: "NewDroppedWidget",
+          package: "@new/lib",
+          propsType: "NewDroppedWidgetProps",
+        },
+        propMap: {
+          label: "label",
+          legacy: DROPPED,
+          deprecated: DROPPED,
+        },
+      },
+      MultiSourceWidget: {
+        source: {
+          component: "MultiSourceWidget",
+          packages: ["@first/lib", "@second/lib"],
+          propsType: "MultiSourceWidgetProps",
+        },
+        target: {
+          component: "NewMultiSourceWidget",
+          package: "@target/lib",
+          propsType: "NewMultiSourceWidgetProps",
         },
         propMap: {
           label: "title",
@@ -255,6 +288,20 @@ import { GroupedWidget, type GroupedWidgetProps } from "@old/lib";
     );
   });
 
+  it("should rename JSX when target already has the unaliased component imported", () => {
+    const input = `\
+import { NewGroupedWidget } from "@new/lib";
+import { GroupedWidget } from "@old/lib";
+
+const view = <GroupedWidget page={1} />;
+`;
+    const output = runTransform(input);
+    expect(output.trim()).toBe(`\
+import { NewGroupedWidget } from "@new/lib";
+
+const view = <NewGroupedWidget page={1} layouts={["list"]} />;`);
+  });
+
   it("should keep unrelated specifiers on original module", () => {
     const input =
       'import { GroupedWidget, Unrelated, type GroupedWidgetProps, type OtherType } from "@old/lib";\n';
@@ -288,7 +335,9 @@ import { GroupedWidget } from "@old/lib";
 import { GroupedWidget as GroupedWidgetImpl } from "@old/lib";
 `;
     const output = runTransform(input);
-    expect(output.trim()).toBe('import { NewGroupedWidget } from "@new/lib";');
+    expect(output.trim()).toBe(
+      'import { NewGroupedWidget, NewGroupedWidget as GroupedWidgetImpl } from "@new/lib";',
+    );
   });
 
   it("should only move mapped component when multiple are present", () => {
@@ -331,6 +380,22 @@ const view = <GroupedWidget page={1} hasSearch />;
 import { NewGroupedWidget } from "@new/lib";
 
 const view = <NewGroupedWidget page={1} hasSearch layouts={["list"]} />;`);
+  });
+
+  it("should add aliased specifier when target already has unaliased version", () => {
+    const input = `\
+import { GroupedWidget } from "@new/lib";
+import { GroupedWidget as GroupedWidgetImpl } from "@old/lib";
+
+const view = <GroupedWidget {...rest} />;
+const view2 = <GroupedWidgetImpl {...rest} />;
+`;
+    const output = runTransform(input);
+    expect(output.trim()).toBe(`\
+import { GroupedWidget, NewGroupedWidget as GroupedWidgetImpl } from "@new/lib";
+
+const view = <GroupedWidget {...rest} />;
+const view2 = <GroupedWidgetImpl {...rest} layouts={["list"]} />;`);
   });
 
   it("should avoid duplicate when target import has aliased component", () => {
@@ -440,7 +505,7 @@ const view2 = <GroupedWidget {...rest} page={1} />;
 `;
     const output = runTransform(input);
     expect(output.trim()).toBe(`\
-import { NewGroupedWidget } from "@new/lib";
+import { NewGroupedWidget, NewGroupedWidget as GroupedWidgetImpl } from "@new/lib";
 
 const view = <NewGroupedWidget {...rest} page={1} layouts={["list"]} />;
 const view2 = <NewGroupedWidget {...rest} page={1} layouts={["list"]} />;`);
@@ -738,6 +803,75 @@ const view = <GroupedWidget page={1} testId="test" />;
 import { NewGroupedWidget } from "@new/lib";
 
 const view = <NewGroupedWidget page={1} layouts={["list"]} />;`);
+  });
+
+  it("should omit a DROPPED prop and emit a warning", () => {
+    const input = `\
+import { DroppedWidget } from "@old/lib";
+
+const view = <DroppedWidget label="title" legacy={val} />;
+`;
+    const output = runTransform(input, { components: "DroppedWidget" });
+    expect(output.trim()).toBe(`\
+import { NewDroppedWidget } from "@new/lib";
+
+const view = <NewDroppedWidget label="title" />;`);
+    expect(logger).toHaveBeenCalledWith({
+      message:
+        'Dropped "legacy" — no equivalent prop in target component, update manually',
+      type: "warn",
+      options: { indentation: 2 },
+    });
+  });
+
+  it("should omit multiple DROPPED props and emit a warning for each", () => {
+    const input = `\
+import { DroppedWidget } from "@old/lib";
+
+const view = <DroppedWidget label="title" legacy={val} deprecated="x" />;
+`;
+    const output = runTransform(input, { components: "DroppedWidget" });
+    expect(output.trim()).toBe(`\
+import { NewDroppedWidget } from "@new/lib";
+
+const view = <NewDroppedWidget label="title" />;`);
+    expect(logger).toHaveBeenCalledWith({
+      message:
+        'Dropped "legacy" — no equivalent prop in target component, update manually',
+      type: "warn",
+      options: { indentation: 2 },
+    });
+    expect(logger).toHaveBeenCalledWith({
+      message:
+        'Dropped "deprecated" — no equivalent prop in target component, update manually',
+      type: "warn",
+      options: { indentation: 2 },
+    });
+  });
+
+  it("should not warn when a DROPPED prop is absent from source", () => {
+    const input = `\
+import { DroppedWidget } from "@old/lib";
+
+const view = <DroppedWidget label="title" />;
+`;
+    const output = runTransform(input, { components: "DroppedWidget" });
+    expect(output.trim()).toBe(`\
+import { NewDroppedWidget } from "@new/lib";
+
+const view = <NewDroppedWidget label="title" />;`);
+    expect(logger).not.toHaveBeenCalledWith({
+      message:
+        'Dropped "legacy" — no equivalent prop in target component, update manually',
+      type: "warn",
+      options: { indentation: 2 },
+    });
+    expect(logger).not.toHaveBeenCalledWith({
+      message:
+        'Dropped "deprecated" — no equivalent prop in target component, update manually',
+      type: "warn",
+      options: { indentation: 2 },
+    });
   });
 
   it("should wrap object default props in useMemo when inside a function body", () => {
@@ -1445,5 +1579,59 @@ class App extends React.Component {
     );
   }
 }`);
+  });
+
+  describe("multiple source packages", () => {
+    it("should migrate import from the first source package", () => {
+      const input = `\
+import { MultiSourceWidget } from "@first/lib";
+
+function App() {
+  return (<MultiSourceWidget label="a" />);
+}`;
+      const output = runTransform(input, { components: "MultiSourceWidget" });
+      expect(output.trim()).toBe(
+        `\
+import { NewMultiSourceWidget } from "@target/lib";
+
+function App() {
+  return (<NewMultiSourceWidget title="a" />);
+}`,
+      );
+    });
+
+    it("should migrate import from the second source package", () => {
+      const input = `\
+import { MultiSourceWidget } from "@second/lib";
+
+function App() {
+  return (<MultiSourceWidget label="b" />);
+}`;
+      const output = runTransform(input, { components: "MultiSourceWidget" });
+      expect(output.trim()).toBe(
+        `\
+import { NewMultiSourceWidget } from "@target/lib";
+
+function App() {
+  return (<NewMultiSourceWidget title="b" />);
+}`,
+      );
+    });
+
+    it("should consolidate imports from both source packages into a single target import", () => {
+      const input = `\
+import { MultiSourceWidget } from "@first/lib";
+import { MultiSourceWidget as MultiSourceWidgetB } from "@second/lib";
+
+const a = <MultiSourceWidget label="a" />;
+const b = <MultiSourceWidgetB label="b" />;
+`;
+      const output = runTransform(input, { components: "MultiSourceWidget" });
+      expect(output.trim()).toBe(`\
+import { NewMultiSourceWidget, NewMultiSourceWidget as MultiSourceWidgetB } from "@target/lib";
+
+const a = <NewMultiSourceWidget title="a" />;
+const b = <MultiSourceWidgetB title="b" />;`);
+    });
   });
 });

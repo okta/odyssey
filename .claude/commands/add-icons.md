@@ -1,3 +1,7 @@
+---
+description: Use when the user asks to add new SVG icons or logos to Odyssey. Handles classification, copying to the generated folder, regenerating React components, and updating Storybook stories. Use only when explicitly invoked.
+---
+
 # /add-icons — Add new icons or logos to Odyssey
 
 End-to-end workflow for adding new SVG icons or logos to the Odyssey design system: classify SVGs, copy to the right generated folder, regenerate React components, update Storybook stories, and optionally ship.

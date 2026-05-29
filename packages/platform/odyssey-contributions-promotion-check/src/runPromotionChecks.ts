@@ -81,7 +81,7 @@ const calculateComponentValidation = async ({
   );
   const skippedResult = {
     isValid: false,
-    reason: `${entry.componentName} is marked isIgnoredFromPromotion`,
+    reason: `${entry.componentName} is marked as ignored from promotion${entry.ignoredFromPromotionReason ? ` — ${entry.ignoredFromPromotionReason}` : ""}`,
   };
 
   if (entry.isIgnoredFromPromotion) {

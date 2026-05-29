@@ -13,14 +13,69 @@
 // To add a new PAM page:
 //   1. Create the component in src/pam/pages/
 //   2. Import it here and add a route entry to PAM_ROUTES
-//   3. Add a nav item to src/pam/shell/PamSideNavConfig.ts
+//   3. Add a nav item to src/pam/shell/PamSideNavConfig.tsx
 
-import { type RouteObject } from "react-router-dom";
+import { Navigate, type RouteObject } from "react-router-dom";
 
 import { StubPage } from "./pages/StubPage";
 
 export { PamShell } from "./shell/PamShell";
 
 export const PAM_ROUTES: RouteObject[] = [
-  { index: true, element: <StubPage title="PAM" /> },
+  { index: true, element: <Navigate replace to="/pam/home" /> },
+
+  // My Privileged Access
+  { path: "home", element: <StubPage title="Servers" /> },
+  { path: "secrets", element: <StubPage title="Secrets" /> },
+  { path: "saas_apps", element: <StubPage title="SaaS apps" /> },
+  {
+    path: "okta_service_accounts",
+    element: <StubPage title="Okta service accounts" />,
+  },
+  { path: "ad_domains", element: <StubPage title="Active directory" /> },
+  { path: "databases", element: <StubPage title="Databases" /> },
+  {
+    path: "checked_out_accounts",
+    element: <StubPage title="Checked out accounts" />,
+  },
+  {
+    path: "access_request_status",
+    element: <StubPage title="Access request status" />,
+  },
+
+  // Directory
+  { path: "users", element: <StubPage title="Users" /> },
+  { path: "groups", element: <StubPage title="Groups" /> },
+  { path: "clients", element: <StubPage title="Clients" /> },
+
+  // Resource Administration
+  {
+    path: "resource_groups",
+    element: <StubPage title="Resource management" />,
+  },
+  {
+    path: "resource_assignment/service_accounts",
+    element: <StubPage title="Integrations" />,
+  },
+  { path: "sudo-command-bundles", element: <StubPage title="Sudo commands" /> },
+  { path: "pam-gateways", element: <StubPage title="Gateways" /> },
+  {
+    path: "connections/directories",
+    element: <StubPage title="Connections" />,
+  },
+  {
+    path: "team/clientsession",
+    element: <StubPage title="System configuration" />,
+  },
+
+  // Security Administration
+  { path: "policy", element: <StubPage title="Policies" /> },
+  { path: "workload_roles", element: <StubPage title="Workload roles" /> },
+  { path: "resource_labels", element: <StubPage title="Labels" /> },
+
+  // DevOps Administration
+  {
+    path: "workload_connections",
+    element: <StubPage title="Workload connections" />,
+  },
 ];

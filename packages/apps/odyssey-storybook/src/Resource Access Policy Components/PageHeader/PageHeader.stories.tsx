@@ -260,6 +260,28 @@ export const WithTooManyActions: Story = {
   },
 };
 
+export const WithIcon: Story = {
+  render: () => (
+    <PageHeader>
+      <PageHeader.Icon>
+        <NotificationIcon />
+      </PageHeader.Icon>
+      <PageHeader.Title>Page title</PageHeader.Title>
+      <PageHeader.Description>
+        An icon rendered inline next to the title heading.
+      </PageHeader.Description>
+    </PageHeader>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Uses PageHeader.Icon to render a brand glyph inline with the title heading. Cannot be used together with PageHeader.Image.",
+      },
+    },
+  },
+};
+
 export const WithImage: Story = {
   render: () => (
     <PageHeader>
