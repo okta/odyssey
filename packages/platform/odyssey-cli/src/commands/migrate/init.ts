@@ -78,7 +78,7 @@ export const interactiveMigrate = async (): Promise<void> => {
     return {
       value: key,
       label: `${mapping.source.component} → ${mapping.target.component}`,
-      hint: `${mapping.source.package} → ${mapping.target.package}`,
+      hint: `${mapping.source.packages.join(", ")} → ${mapping.target.package}`,
     };
   });
 

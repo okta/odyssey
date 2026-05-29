@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
-import type { ComponentMapping } from "./mappings/index.js";
+import type { ComponentMapping } from "./mappings/types.js";
 
 import { execAsync } from "../../utils.js";
 import {
@@ -26,7 +26,7 @@ const { MOCK_COMPONENT_MAPPINGS } = vi.hoisted(() => ({
     NoMinVersion: {
       source: {
         component: "OldWidget",
-        package: "@old/lib",
+        packages: ["@old/lib"],
         propsType: "OldWidgetProps",
       },
       target: {
@@ -39,7 +39,7 @@ const { MOCK_COMPONENT_MAPPINGS } = vi.hoisted(() => ({
     WithMinVersion: {
       source: {
         component: "OldChart",
-        package: "@old/lib",
+        packages: ["@old/lib"],
         propsType: "OldChartProps",
       },
       target: {
@@ -53,7 +53,7 @@ const { MOCK_COMPONENT_MAPPINGS } = vi.hoisted(() => ({
     SubpathExport: {
       source: {
         component: "OldTable",
-        package: "@okta/odyssey-react-mui",
+        packages: ["@okta/odyssey-react-mui"],
         propsType: "OldTableProps",
       },
       target: {
@@ -66,7 +66,7 @@ const { MOCK_COMPONENT_MAPPINGS } = vi.hoisted(() => ({
     SubpathWithMinVersion: {
       source: {
         component: "OldGrid",
-        package: "@okta/odyssey-react-mui",
+        packages: ["@okta/odyssey-react-mui"],
         propsType: "OldGridProps",
       },
       target: {

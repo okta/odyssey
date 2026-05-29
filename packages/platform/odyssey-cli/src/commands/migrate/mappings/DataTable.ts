@@ -1,10 +1,16 @@
-import { ComponentMapping } from "./index.js";
+import type { DataTableProps } from "@okta/odyssey-react-mui";
+import type { DataViewProps } from "@okta/odyssey-react-mui/labs";
 
-export const DataTable = {
+import { type ComponentMapping, DROPPED } from "./types.js";
+
+export const DataTable: Record<
+  "DataTable",
+  ComponentMapping<DataTableProps, DataViewProps<Record<string, unknown>>>
+> = {
   DataTable: {
     source: {
       component: "DataTable",
-      package: "@okta/odyssey-react-mui",
+      packages: ["@okta/odyssey-react-mui"],
       propsType: "DataTableProps",
     },
     target: {
@@ -16,9 +22,14 @@ export const DataTable = {
       availableLayouts: ["table"],
     },
     propMap: {
+      additionalActionButton: "additionalActionButton",
+      additionalActionMenuItems: "additionalActionMenuItems",
+      bulkActionMenuItems: "bulkActionMenuItems",
       columns: "tableLayoutOptions.columns",
       currentPage: "currentPage",
       emptyPlaceholder: "emptyPlaceholder",
+      errorMessage: "errorMessage",
+      filters: "filters",
       getData: "getData",
       getRowId: "getRowId",
       hasChangeableDensity: "tableLayoutOptions.hasChangeableDensity",
@@ -32,6 +43,10 @@ export const DataTable = {
       hasSearchSubmitButton: "hasSearchSubmitButton",
       hasSorting: "tableLayoutOptions.hasSorting",
       initialDensity: "tableLayoutOptions.initialDensity",
+      initialSearchValue: DROPPED,
+      isPaginationMoreDisabled: "isPaginationMoreDisabled",
+      maxPages: "maxPages",
+      maxResultsPerPage: "maxResultsPerPage",
       noResultsPlaceholder: "noResultsPlaceholder",
       onChangeRowSelection: "onRowSelectionChange",
       onReorderRows: "onReorderRows",
@@ -41,7 +56,9 @@ export const DataTable = {
       rowActionButtons: "tableLayoutOptions.rowActionButtons",
       rowActionMenuItems: "tableLayoutOptions.rowActionMenuItems",
       searchDelayTime: "searchDelayTime",
+      searchFieldLabel: "searchFieldLabel",
+      selectedRows: DROPPED,
       totalRows: "totalRows",
     },
   },
-} satisfies Record<"DataTable", ComponentMapping>;
+};

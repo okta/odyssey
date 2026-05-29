@@ -227,6 +227,24 @@ const handlePrimaryAction = useCallback(...);
 const handleChange = useCallback(...);
 ```
 
+### Rule 13: Per-app extension instructions
+
+Each prototyped app may have its own `src/<app>/docs/ai/AGENTS.md` with
+extra instructions specific to that product — data models, reference
+repos, naming conventions, domain-specific rules, etc.
+
+When working in a particular app — anything under `src/<app>/`, or a
+task that mentions that product by name — **load only that app's per-app
+`docs/ai/AGENTS.md`** in addition to this file. Do not load other apps'
+instructions.
+
+| App                                | Triggered when working in / mentioning… | Per-app instructions                                     |
+| ---------------------------------- | --------------------------------------- | -------------------------------------------------------- |
+| PAM (Okta Privileged Access / OPA) | `src/pam/`; PAM, OPA, Privileged Access | [`src/pam/docs/ai/AGENTS.md`](src/pam/docs/ai/AGENTS.md) |
+
+If the per-app `docs/ai/AGENTS.md` doesn't exist for the app you're
+working in, just follow this file. Don't create one unless asked.
+
 ---
 
 ## Playwright Page Capture

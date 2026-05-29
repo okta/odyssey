@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.61.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.60.0...v1.61.0) (2026-05-28)
+
+### Features
+
+- adds support for header icon ([#299](https://github.com/atko-eng/odyssey-design-system/issues/299)) ([f5559ba](https://github.com/atko-eng/odyssey-design-system/commit/f5559ba5a502767a9ec5b26a1acfd8b544438e1b))
+
 ## [1.60.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.59.0...v1.60.0) (2026-05-13)
 
 ### Features

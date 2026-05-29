@@ -7,7 +7,8 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import partition from "lodash.partition";
 import { print as printAST } from "recast";
 
-import { ComponentMapping } from "../mappings/index.js";
+import type { ComponentMapping } from "../mappings/types.js";
+
 import {
   buildTargetAttributes,
   findEnclosingFunction,

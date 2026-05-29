@@ -18,8 +18,11 @@
   "scripts": {
     "build:clean": "rimraf dist tsconfig.tsbuildinfo",
     "build": "yarn build:clean && tsc",
+    "build:withDeps": "yarn workspaces foreach --from '@okta/odyssey-contributions-promotion-check' --recursive --topological run build",
     "build:watch": "yarn build:clean && tsc --watch",
-    "test": "NODE_ENV=test vitest run --reporter=default"
+    "test": "NODE_ENV=test vitest run --reporter=default",
+    "check": "scripts/with-ui-stats.sh node dist/cli.js",
+    "usage-detail": "scripts/with-ui-stats.sh node dist/cli-usage-detail.js"
   },
   "devDependencies": {
     "@types/eslint": "^9.6.1",

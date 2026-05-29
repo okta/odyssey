@@ -4,6 +4,11 @@ import { join } from "node:path";
 export type ContributionsMetadataEntry = {
   componentName: string;
   /**
+   * Why this component is excluded from promotion recommendations.
+   * Required when `isIgnoredFromPromotion` is `true`.
+   */
+  ignoredFromPromotionReason?: "promoted" | "not feasible";
+  /**
    * When `true`, this component is excluded from Odyssey Core promotion
    * recommendations. Omit this field entirely for components that are
    * eligible for promotion.

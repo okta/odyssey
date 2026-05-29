@@ -114,6 +114,9 @@ Key top-level files:
 - Use full, descriptive names everywhere. Never use single-letter or abbreviated names, including inside callbacks.
   - Wrong: `ref`, `r`, `e`, `err`, `fn`, `cb`, `val`, `obj`, `idx`, `dir`
   - Right: `componentReference`, `result`, `error`, `callback`, `value`, `packageEntry`, `index`, `directory`
+- In `reduce` callbacks, name the accumulator parameter after what it is building, not `accumulator`.
+  - Wrong: `(accumulator, item) => ({ ...accumulator, [item.key]: item.value })`
+  - Right: `(itemsByKey, item) => ({ ...itemsByKey, [item.key]: item.value })`
 
 ### API Stability
 
@@ -134,6 +137,10 @@ Key top-level files:
 - Follow existing accessibility patterns (ARIA, labels, keyboard support).
 - Maintain current visual design and token usage.
 - Ensure interactive buttons have accessible labels (e.g., `ariaLabel`/`aria-label`) when the visible text is not sufficient.
+
+### React component styling
+
+- Do not use the MUI `sx` prop in `odyssey-react-mui` component source files. Apply dynamic styles via `styled()` from `@mui/material/styles` with `shouldForwardProp` to filter out non-DOM custom props. The `sx` prop is acceptable in Storybook stories and consumer application code, but must not be used inside the component library itself.
 
 ---
 
@@ -322,6 +329,19 @@ All browser tests must include `toBeAccessible` assertions to catch accessibilit
 - `test`: adding missing tests or correcting existing tests
 
 > **Note:** `chore` is not allowed — Bacon's validation will reject it.
+
+#### Semantic Release packages — commit type determines whether a package publishes
+
+Packages under `packages/contributions/**` and `packages/platform/**` are managed by Semantic Release (configured in `.config/releaserc.json`). For these packages, the commit type on the merge commit directly controls whether a new version is published:
+
+| Commit type                                                | Effect                                      |
+| ---------------------------------------------------------- | ------------------------------------------- |
+| `feat:`                                                    | publishes — minor version bump              |
+| `fix:`                                                     | publishes — patch version bump              |
+| `build:`, `docs:`, `test:`, `style:`, `perf:`, `refactor:` | **does not publish** — no version increment |
+| `BREAKING CHANGE` footer                                   | publishes — major version bump              |
+
+If you need a package in these paths to be published and the change doesn't naturally fit `feat:` or `fix:`, use `fix:` — it is the minimum type that triggers a release. Never use `build:` or `docs:` when the goal is to ship a new version.
 
 ### Branch Naming
 

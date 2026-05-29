@@ -1,3 +1,7 @@
+---
+description: Use when the user wants to configure the Playwright MCP server so Claude can control a browser in this project. Adds the MCP entry to Claude settings scoped to the current project directory. Use only when explicitly invoked.
+---
+
 # /setup-playwright-mcp — Add Playwright MCP to Claude settings
 
 Adds the Playwright MCP server to `~/.claude.json` scoped to the current project directory, so Claude can control a browser.

@@ -4,7 +4,8 @@ import { namedTypes } from "ast-types";
 import { ASTPath, Collection, JSCodeshift } from "jscodeshift";
 import partition from "lodash.partition";
 
-import { ComponentMapping } from "../mappings/index.js";
+import type { ComponentMapping } from "../mappings/types.js";
+
 import {
   findOrCreateImportDeclaration,
   getImportedSpecifierName,
@@ -99,19 +100,44 @@ export const transformNamedImport = (
       ...(isType ? { importKind: "type" } : {}),
     };
 
+    // sourceName differs from importedName when the source import uses an alias,
+    // e.g. `Typography as WpTypography` — in that case we must add the aliased
+    // specifier even when the unaliased target symbol already exists.
+    const isAliased = sourceName !== importedName;
+
     const targetSpecifierExists = (targetImport.specifiers ?? []).some(
-      (specifier) => {
-        if (!j.ImportSpecifier.check(specifier)) return false;
-        const name = getImportedSpecifierName(specifier);
-        return name === targetName || specifier.local?.name === sourceName;
+      (targetSpecifier) => {
+        if (!j.ImportSpecifier.check(targetSpecifier)) return false;
+        const name = getImportedSpecifierName(targetSpecifier);
+        const localName = (targetSpecifier.local?.name ?? name) as string;
+        if (isAliased) {
+          // Adding { imported: targetName, local: sourceName }.
+          // Skip only when the same local binding already exists to prevent
+          // collisions or exact duplicates.
+          return localName === sourceName;
+        } else {
+          // Adding { imported: targetName } (unaliased, binds to targetName).
+          // Skip when the target already imports this symbol in any form.
+          return name === targetName;
+        }
       },
     );
 
     if (targetSpecifierExists) {
       logger({
         type: "warn",
-        message: `Skipped "${targetName}" import — already present (or alias "${sourceName}")`,
+        message: `Skipped "${targetName}" import — already present in target import`,
       });
+      // The specifier already exists in the target, but JSX still references the
+      // old source name. Capture the alias so the JSX rename step can rewrite it.
+      // Both conditions must be true: type imports have no JSX to rewrite, and
+      // aliased imports already bind to the correct local name.
+      if (!isType && !isAliased) {
+        componentAlias = {
+          localName: sourceName,
+          targetLocalName: targetComponent,
+        };
+      }
     } else {
       targetImport.specifiers = [
         ...(targetImport.specifiers ?? []),

@@ -5,7 +5,7 @@ import { namedTypes } from "ast-types";
 import { ASTPath, JSCodeshift } from "jscodeshift";
 import partition from "lodash.partition";
 
-import type { PropMapping } from "../mappings/index.js";
+import { DROPPED, type PropMapping } from "../mappings/types.js";
 
 type ResolvedAttr = {
   targetPath: string;
@@ -204,6 +204,7 @@ const resolveNestedSource = (
     if (
       sourceProperty &&
       typeof targetPath !== "string" &&
+      targetPath !== DROPPED &&
       namedTypes.ObjectExpression.check(sourceProperty.value)
     ) {
       return resolveNestedSource(
@@ -251,7 +252,7 @@ export const isAttrWithExpressionContainer = (
  *
  * @param {JSCodeshift} j - The jscodeshift API instance.
  * @param {namedTypes.JSXAttribute[]} attrs - The JSX attributes from the opening element.
- * @param {ComponentPropMap} propMap - Source → target prop mappings.
+ * @param {Record<string, PropMapping>} propMap - Source → target prop mappings.
  * @param {Logger} logger - The logger function to emit warnings about missing properties, type mismatches, or unmapped props.
  * @returns {ResolvedProp[]} Resolved entries with target paths and their corresponding values.
  *
@@ -287,7 +288,12 @@ export const resolveAttributes = (
     const attrName = attr.name.name;
     const mapping = propMap[attrName];
     if (mapping) {
-      if (typeof mapping === "string") {
+      if (mapping === DROPPED) {
+        logger({
+          type: "warn",
+          message: `Dropped "${attrName}" — no equivalent prop in target component, update manually`,
+        });
+      } else if (typeof mapping === "string") {
         // Flat mapping: source attr → target path
         // <DataTable label="hi" /> with propMap: { label: "title" } → resolvedAttrs.push({ targetPath: "title", value: attr.value })
         resolvedAttrs.push({ targetPath: mapping, value: attr.value });

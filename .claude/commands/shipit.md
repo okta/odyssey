@@ -1,3 +1,7 @@
+---
+description: Use when the user has uncommitted changes ready to ship and wants to create a Jira ticket, open a branch, commit, push, and open a PR in one flow. Use only when explicitly invoked — never auto-trigger.
+---
+
 # /shipit — Jira + branch + commit + push + PR workflow
 
 End-to-end workflow for shipping a small fix or task. Starting from uncommitted local changes, it creates a linked Jira ticket, opens a new branch, commits, pushes, and opens a pull request — all in one flow.
@@ -148,10 +152,10 @@ $JIRA_SKILL/scripts/write/transition_jira.sh <key> --list
 
 ### Step 5c: Transition to In Progress
 
-From Triaged, move to In Progress:
+From Triaged, move to In Progress using "Start Progress":
 
 ```bash
-$JIRA_SKILL/scripts/write/transition_jira.sh <key> --transition "In Progress"
+$JIRA_SKILL/scripts/write/transition_jira.sh <key> --transition "Start Progress"Expand commentComment on lines R149 to R154Resolved
 ```
 
 If this fails, run `--list` to discover the correct transition name from Triaged and use that instead.
