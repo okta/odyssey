@@ -29,7 +29,7 @@
     "@types/node": "^24.1.0",
     "memfs": "^4",
     "rimraf": "^6.0.1",
-    "vitest": "^3.2.4"
+    "vitest": "^4.1.8"
   },
   "engines": {
     "node": ">=20.12.0"
