@@ -1,4 +1,5 @@
 {
-  "eslint.experimental.useFlatConfig": true,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "eslint.useFlatConfig": true,
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "vitest.configSearchPatternExclude": "{**/node_modules/**,**/vendor/**,**/.*/**,**/*.d.ts,**/odyssey-contributions-stack/files/**}"
 }

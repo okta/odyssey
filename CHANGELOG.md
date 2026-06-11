@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.62.0](///compare/v1.61.0...v1.62.0) (2026-06-11)
+
+### Features
+
+- allow odyssey-react-mui consumer override ([#448](undefined/undefined/undefined/issues/448)) 3fdd312
+- forward languageCode to UI Shell (OKTA-1193069) ([#406](undefined/undefined/undefined/issues/406)) 01b1044
+- migrate iga to v3 contributions stack ([#436](undefined/undefined/undefined/issues/436)) 13680f5
+- migrate rap to v3 contributions stack ([#438](undefined/undefined/undefined/issues/438)) 6af8904
+- migrate unified-ui-shell to v3 contributions stack ([#439](undefined/undefined/undefined/issues/439)) 5700dc1
+- migrate workflows to v3 contributions stack ([#437](undefined/undefined/undefined/issues/437)) 1e76ebd
+- unified-ui-shell publish workaround ([#341](undefined/undefined/undefined/issues/341)) 4d91cd3
+
+### Bug Fixes
+
+- add screen reader text for Link external icon ([#407](undefined/undefined/undefined/issues/407)) 256b78c
+- datepicker calendar overflow in narrow containers ([#445](undefined/undefined/undefined/issues/445)) 7f91aaf
+- exclude contributions template from vitest scan ([#443](undefined/undefined/undefined/issues/443)) deb7b13
+- keep detail panel visible with column resizing [OKTA-1195804] ([#444](undefined/undefined/undefined/issues/444)) 2472b5d, closes #446
+
 ## [1.61.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.60.0...v1.61.0) (2026-05-28)
 
 ### Features

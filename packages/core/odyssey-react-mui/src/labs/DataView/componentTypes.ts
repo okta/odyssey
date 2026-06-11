@@ -67,6 +67,12 @@ export type UniversalProps<TData extends MRT_RowData> = {
   hasRowSelection?: boolean;
   hasSearch?: boolean;
   hasSearchSubmitButton?: boolean;
+  /**
+   * Seeds the selected rows on initial mount (uncontrolled). Keys must match the
+   * ids produced by `getRowId`. Ignored once the user changes the selection, and
+   * ignored entirely when the controlled `rowSelection` prop is provided.
+   */
+  initialRowSelection?: DataRowSelectionState;
   isEmpty?: boolean;
   isLoading?: boolean;
   isNoResults?: boolean;
@@ -94,6 +100,12 @@ export type UniversalProps<TData extends MRT_RowData> = {
   onRowSelectionChange?: (rowSelection: DataRowSelectionState) => void;
   paginationType?: (typeof paginationTypeValues)[number];
   resultsPerPage?: number;
+  /**
+   * Controlled selected-rows state. When provided, DataView no longer owns the
+   * selection — pair with `onRowSelectionChange` to update it. Keys must match
+   * the ids produced by `getRowId`.
+   */
+  rowSelection?: DataRowSelectionState;
   searchDelayTime?: number;
   searchFieldLabel?: string;
   totalRows?: number;

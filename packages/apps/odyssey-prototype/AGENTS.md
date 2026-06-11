@@ -227,7 +227,52 @@ const handlePrimaryAction = useCallback(...);
 const handleChange = useCallback(...);
 ```
 
-### Rule 13: Per-app extension instructions
+### Rule 13: Always Typecheck After Building
+
+Vite only transpiles — it does not typecheck. After building or modifying any
+page, run `yarn tsc` from `packages/apps/odyssey-prototype` before treating
+the task as done.
+
+Untyped errors (for example, applying a prop that an Odyssey component does
+not accept) render fine in the dev server but fail the Bacon publish-prototype
+job, which blocks the ability to generate a shareable link for internal
+concept reviews.
+
+A page is not "done" until both of the following are true:
+
+1. The page renders correctly in the dev server.
+2. `yarn tsc` exits cleanly from the package root.
+
+### Rule 14: Verify Odyssey Component Props Before Using
+
+Before applying a prop to any Odyssey component, confirm it is actually
+accepted by reading the component's source in
+`packages/core/odyssey-react-mui/src/`. Odyssey deliberately restricts MUI's
+surface area — many MUI props are intentionally not exposed.
+
+The most common trap: `sx` is restricted to consumer app code and is not
+accepted on most Odyssey components (notably `Typography`). Do not assume an
+Odyssey component accepts the same props as its underlying MUI component.
+
+When you discover a new Odyssey restriction during a prototyping session,
+add it to the **Known Odyssey gotchas** list in the Odyssey Reference
+section below so future sessions do not repeat the mistake.
+
+### Rule 15: Dev Server URLs Use Hash Format
+
+The app uses `createHashRouter` (see `src/SiteRouter.tsx`). Every dev server
+URL must include `#` between the host and the path:
+
+```text
+✅ http://localhost:5173/#/pam/secrets/move
+❌ http://localhost:5173/pam/secrets/move
+```
+
+A bare path (no `#`) silently falls through to the catch-all `*` route and
+redirects the user to the default page — there is no error message. Always
+generate hash-prefixed URLs when sharing links to prototype pages.
+
+### Rule 16: Per-app extension instructions
 
 Each prototyped app may have its own `src/<app>/docs/ai/AGENTS.md` with
 extra instructions specific to that product — data models, reference
@@ -389,6 +434,20 @@ import { SearchIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 - `Divider` → use `<Box sx={{ borderBottom: '1px solid', borderColor: 'divider' }} />`
 - `Alert` → use `<Banner>` (page-level) or `<Callout>` (inline)
 - `Modal` → use `<Dialog>`
+
+**Known Odyssey gotchas (append to this list whenever a new one is found):**
+
+- `Typography` does not accept `sx`. Use the `color` prop for semantic
+  colors, or wrap in `<Box sx={{ ... }}>` for token-based styling. The
+  underlying MUI `Typography` accepts `sx`, but Odyssey's wrapper does not
+  forward it — applying `sx` produces a TypeScript error that Vite silently
+  ignores.
+- All icons must come from `@okta/odyssey-react-mui/icons`, never
+  `@mui/icons-material` (also covered in Rule 3 — listed here for
+  discoverability when scanning gotchas).
+
+When a new Odyssey restriction surfaces during prototyping, append it here
+in the same conversation so the next session inherits the lesson.
 
 **Storybook reference:**
 [Odyssey Storybook](https://odyssey-storybook.okta.design/?path=/docs/introduction-readme--docs)

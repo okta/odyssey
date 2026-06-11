@@ -44,7 +44,7 @@ import {
   useState,
 } from "react";
 import { action } from "storybook/actions";
-import { fn } from "storybook/test";
+import { fn, userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { filterData, reorderData } from "./dataFunctions.js";
@@ -612,6 +612,51 @@ export const ExpandableRowsAndCards: Story = {
         tableLayoutOptions={tableLayoutOptions}
       />
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Expand first row's detail panel", async () => {
+      const canvas = within(canvasElement);
+      const expandButton = canvas.getAllByRole("button", { name: "Expand" })[0];
+      await userEvent.click(expandButton);
+    });
+  },
+};
+
+export const ExpandableRowsWithColumnResizing: Story = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    const renderAdditionalContent = useCallback(
+      ({ row }: { row: DataTableRowData }) => (
+        <Box>This is additional content for row {row.id}</Box>
+      ),
+      [],
+    );
+
+    const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
+      () => ({
+        columns: personColumns,
+        hasColumnResizing: true,
+        renderDetailPanel: renderAdditionalContent,
+      }),
+      [renderAdditionalContent],
+    );
+
+    return (
+      <DataView
+        availableLayouts={tableLayoutOnly}
+        getData={getData}
+        tableLayoutOptions={tableLayoutOptions}
+      />
+    );
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Expand first row's detail panel", async () => {
+      const canvas = within(canvasElement);
+      const expandButton = canvas.getAllByRole("button", { name: "Expand" })[0];
+      await userEvent.click(expandButton);
+    });
   },
 };
 
@@ -1240,6 +1285,66 @@ export const InitialColumnVisibility: Story = {
       <DataView
         availableLayouts={tableLayoutOnly}
         getData={getData}
+        tableLayoutOptions={tableLayoutOptions}
+      />
+    );
+  },
+};
+
+export const InitialRowSelection: Story = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
+      () => ({
+        columns: personColumns,
+      }),
+      [],
+    );
+
+    const initialRowSelection = useMemo<DataRowSelectionState>(
+      () => ({
+        [personData[0].id]: true,
+        [personData[2].id]: true,
+      }),
+      [],
+    );
+
+    return (
+      <DataView
+        availableLayouts={tableLayoutOnly}
+        getData={getData}
+        hasRowSelection
+        initialRowSelection={initialRowSelection}
+        tableLayoutOptions={tableLayoutOptions}
+      />
+    );
+  },
+};
+
+export const ControlledRowSelection: Story = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+    const [selectedRows, setSelectedRows] = useState<DataRowSelectionState>({
+      [personData[0].id]: true,
+    });
+
+    const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
+      () => ({
+        columns: personColumns,
+      }),
+      [],
+    );
+
+    return (
+      <DataView
+        availableLayouts={tableLayoutOnly}
+        getData={getData}
+        hasRowSelection
+        onRowSelectionChange={setSelectedRows}
+        rowSelection={selectedRows}
         tableLayoutOptions={tableLayoutOptions}
       />
     );

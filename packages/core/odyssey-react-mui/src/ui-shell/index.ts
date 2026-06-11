@@ -25,7 +25,11 @@ export * from "./WideUiShellContent.js";
 
 export * from "../web-component/renderReactInWebComponent.js"; // This is located here because some teams use React v17, and this uses React v18's `ReactDOM/client` import which isn't in older versions.
 
-export { UiShell, type UiShellProps } from "./UiShell.js";
+export {
+  UiShell,
+  type UiShellProps,
+  type UiShellTranslationSettings,
+} from "./UiShell.js";
 export {
   adminAppUiShellBreakpoints,
   useUiShellBreakpoints,

@@ -17,7 +17,15 @@ import {
   MRT_RowData,
   MRT_RowSelectionState,
 } from "material-react-table";
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import {
+  Dispatch,
+  memo,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import { Box } from "../../Box.js";
 import { MenuButton } from "../../Buttons/MenuButton.js";
@@ -118,6 +126,7 @@ const DataView = <TData extends MRT_RowData>({
   hasRowReordering,
   hasRowSelection,
   initialLayout,
+  initialRowSelection,
   isEmpty: isEmptyProp,
   isLoading: isLoadingProp,
   isNoResults: isNoResultsProp,
@@ -131,6 +140,7 @@ const DataView = <TData extends MRT_RowData>({
   onRowSelectionChange,
   paginationType = "paged",
   resultsPerPage = 20,
+  rowSelection: rowSelectionProp,
   searchDelayTime,
   searchFieldLabel,
   cardLayoutOptions,
@@ -161,15 +171,39 @@ const DataView = <TData extends MRT_RowData>({
 
   const [draggingRow, setDraggingRow] = useState<MRT_Row<TData> | null>();
 
-  const [rowSelection, setRowSelection] = useState<MRT_RowSelectionState>({});
+  const isRowSelectionControlled = rowSelectionProp !== undefined;
 
-  useEffect(() => {
-    onChangeRowSelection?.(rowSelection);
-  }, [rowSelection, onChangeRowSelection]);
+  const [uncontrolledRowSelection, setUncontrolledRowSelection] =
+    useState<MRT_RowSelectionState>(initialRowSelection ?? {});
 
-  useEffect(() => {
-    onRowSelectionChange?.(rowSelection);
-  }, [rowSelection, onRowSelectionChange]);
+  const rowSelection = isRowSelectionControlled
+    ? rowSelectionProp
+    : uncontrolledRowSelection;
+
+  const setRowSelection = useCallback<
+    Dispatch<SetStateAction<MRT_RowSelectionState>>
+  >(
+    (rowSelectionUpdater) => {
+      // MRT passes an updater fn; BulkActionsMenu passes a plain value.
+      const nextRowSelection =
+        typeof rowSelectionUpdater === "function"
+          ? rowSelectionUpdater(rowSelection)
+          : rowSelectionUpdater;
+
+      if (!isRowSelectionControlled) {
+        setUncontrolledRowSelection(nextRowSelection);
+      }
+
+      onChangeRowSelection?.(nextRowSelection);
+      onRowSelectionChange?.(nextRowSelection);
+    },
+    [
+      isRowSelectionControlled,
+      onChangeRowSelection,
+      onRowSelectionChange,
+      rowSelection,
+    ],
+  );
 
   const [pagination, setPagination] = useState({
     pageIndex: currentPage,

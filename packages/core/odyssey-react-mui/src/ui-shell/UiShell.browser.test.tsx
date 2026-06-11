@@ -14,7 +14,7 @@ import { type ReactElement } from "react";
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 
-import { translate as odysseyTranslate } from "../i18n.generated/i18n.js";
+import { i18n, translate as odysseyTranslate } from "../i18n.generated/i18n.js";
 import { AddCircleIcon } from "../icons.generated/AddCircle.js";
 import { appendToSandbox } from "../test-utils/appendToSandbox.js";
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell.js";
@@ -248,6 +248,64 @@ describe("UiShell", () => {
       );
 
       expect(container).toBeVisible();
+    });
+
+    test("renders shell-rendered chrome in the language from `subscribeToTranslationSettings`", async () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+
+      const subscribeToTranslationSettings: UiShellProps["subscribeToTranslationSettings"] =
+        (subscriber) => {
+          subscriber({ languageCode: "fr" });
+          return () => {};
+        };
+
+      const { container } = await render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="vertical"
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={() => () => {}}
+          subscribeToTranslationSettings={subscribeToTranslationSettings}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      const expectedFrenchSkipLink = i18n.getResource(
+        "fr",
+        "odyssey-react-mui",
+        "skiplinks.main",
+      ) as string;
+
+      expect(container).toHaveTextContent(expectedFrenchSkipLink);
+    });
+
+    test("unsubscribes from translation settings when unmounted", async () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+
+      const unsubscribeFromTranslationSettings = vi.fn();
+      const subscribeToTranslationSettings = vi.fn(
+        () => unsubscribeFromTranslationSettings,
+      );
+
+      const { unmount } = await render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="vertical"
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={() => () => {}}
+          subscribeToTranslationSettings={subscribeToTranslationSettings}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      unmount();
+
+      expect(subscribeToTranslationSettings).toHaveBeenCalledTimes(1);
+      expect(unsubscribeFromTranslationSettings).toHaveBeenCalledTimes(1);
     });
 
     test("notifies on subscription creation", async () => {

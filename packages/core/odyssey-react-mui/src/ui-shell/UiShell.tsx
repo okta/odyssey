@@ -13,6 +13,10 @@
 import { memo, type SetStateAction, useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
+import {
+  type TranslationOverrides,
+  type TranslationProviderProps,
+} from "../i18n.generated/i18n.js";
 import { OdysseyProvider } from "../OdysseyProvider.js";
 import { MessageBus } from "../tools/createMessageBus.js";
 import { type ReactRootElements } from "../web-component/createReactRootElements.js";
@@ -32,6 +36,21 @@ export const defaultComponentProps: UiShellNavComponentProps = {
   sideNavProps: undefined,
   topNavProps: undefined,
 } as const;
+
+/**
+ * Runtime-updatable translation settings forwarded to UI Shell's internal `OdysseyProvider`.
+ *
+ * Consumers pass these as initial props to `renderUiShell({...})` and can update them later
+ * by calling `setTranslationSettings(...)` on the returned object.
+ */
+export type UiShellTranslationSettings = Pick<
+  TranslationProviderProps,
+  "languageCode"
+> & {
+  translationOverrides?: TranslationOverrides;
+};
+
+const defaultTranslationSettings: UiShellTranslationSettings = {};
 
 const errorComponent = <div data-error />;
 
@@ -56,6 +75,18 @@ export type UiShellProps = {
    */
   subscribeToPropChanges: MessageBus<
     SetStateAction<UiShellNavComponentProps>
+  >["subscribe"];
+  /**
+   * Subscriber for runtime-updatable translation settings (`languageCode`, `translationOverrides`).
+   *
+   * These are forwarded to the shell's internal `OdysseyProvider` so consumers can drive shell
+   * localization from their own i18n source instead of the browser's `navigator.language`.
+   *
+   * Optional for backward compatibility — when omitted, the shell falls back to
+   * `window.navigator.language` (its prior behavior).
+   */
+  subscribeToTranslationSettings?: MessageBus<
+    SetStateAction<UiShellTranslationSettings>
   >["subscribe"];
   /**
    * Element inside UI Shell's React root component renders into. If using a web component, this is going to exist inside it.
@@ -100,11 +131,14 @@ const UiShell = ({
   subscribeToCloseRightSideMenu,
   subscribeToCloseSideNavMenu,
   subscribeToPropChanges,
+  subscribeToTranslationSettings,
   topNavBackgroundColor,
   uiShellAppElement,
   uiShellStylesElement,
 }: UiShellProps) => {
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
+  const [translationSettings, setTranslationSettings] =
+    useState<UiShellTranslationSettings>(defaultTranslationSettings);
 
   const activeBreakpoint = useUiShellBreakpoints(breakpointConfig);
 
@@ -115,17 +149,34 @@ const UiShell = ({
   }
 
   useEffect(() => {
-    const unsubscribe = subscribeToPropChanges((componentProps) => {
-      // If for some reason nothing is passed as `componentProps`, we fallback on `defaultComponentProps` as a safety mechanism to ensure nothing breaks.
-      setComponentProps(componentProps || defaultComponentProps);
-    });
+    const unsubscribeFromPropChanges = subscribeToPropChanges(
+      (componentProps) => {
+        // If for some reason nothing is passed as `componentProps`, we fallback on `defaultComponentProps` as a safety mechanism to ensure nothing breaks.
+        setComponentProps(componentProps || defaultComponentProps);
+      },
+    );
+
+    // Both subscribers must be wired BEFORE `onSubscriptionCreated()` fires.
+    // `renderUiShell` uses `bufferLatest` to queue the initial translation settings
+    // until the React app subscribes; if we called `onSubscriptionCreated()` first,
+    // the buffered emission would fire before this subscriber exists and be lost.
+    const unsubscribeFromTranslationSettings = subscribeToTranslationSettings?.(
+      (nextSettings) => {
+        setTranslationSettings(nextSettings || defaultTranslationSettings);
+      },
+    );
 
     onSubscriptionCreated();
 
     return () => {
-      unsubscribe();
+      unsubscribeFromPropChanges();
+      unsubscribeFromTranslationSettings?.();
     };
-  }, [onSubscriptionCreated, subscribeToPropChanges]);
+  }, [
+    onSubscriptionCreated,
+    subscribeToPropChanges,
+    subscribeToTranslationSettings,
+  ]);
 
   return activeBreakpoint === "none" ? null : (
     <ErrorBoundary fallback={errorComponent} onError={onError}>
@@ -133,7 +184,9 @@ const UiShell = ({
         emotionRootElement={uiShellStylesElement}
         fullScreenOverlayId="odyssey-react-overlay-component-render-ui-shell"
         hasCssBaseline
+        languageCode={translationSettings.languageCode}
         shadowRootElement={uiShellAppElement}
+        translationOverrides={translationSettings.translationOverrides}
       >
         <ErrorBoundary fallback={errorComponent} onError={onError}>
           <UiShellProvider

@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { ReactElement } from "react";
 import type { RenderResult } from "vitest-browser-react";
 
 import { MRT_RowSelectionState } from "material-react-table";
+import { type ReactElement, useState } from "react";
 import { page, userEvent } from "vitest/browser";
 
 import { Button } from "../../Buttons/Button.js";
@@ -579,6 +579,55 @@ describe("DataView", { timeout: 10000 }, () => {
       expect(bulkActionsMenuItem.textContent).toBe(
         `Bulk action for ${data.length}`,
       );
+    });
+
+    test("initialRowSelection seeds selected rows on mount", async () => {
+      const { container } = await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          initialRowSelection={{ [data[0].id]: true }}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await expect.element(page.getByRole("checkbox").nth(1)).toBeChecked();
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent("1 selected");
+
+      await expect(container).toBeAccessible();
+    });
+
+    test("rows stay selectable after initialRowSelection seeds the mount", async () => {
+      const mockOnRowSelectionChange = vi.fn();
+
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          initialRowSelection={{ [data[0].id]: true }}
+          onRowSelectionChange={mockOnRowSelectionChange}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await userEvent.click(page.getByRole("checkbox").nth(2));
+
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent("2 selected");
+
+      expect(mockOnRowSelectionChange).toHaveBeenLastCalledWith({
+        [data[0].id]: true,
+        [data[1].id]: true,
+      });
     });
   });
 
@@ -1233,6 +1282,74 @@ describe("DataView", { timeout: 10000 }, () => {
       await expect
         .element(page.getByText(data[0].name))
         .not.toBeInTheDocument();
+    });
+
+    test("rowSelection prop is the source of truth and is not self-updated", async () => {
+      const mockOnRowSelectionChange = vi.fn();
+
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          onRowSelectionChange={mockOnRowSelectionChange}
+          rowSelection={{}}
+          tableLayoutOptions={{ columns }}
+        />,
+      );
+
+      await userEvent.click(page.getByRole("checkbox").nth(1));
+
+      // The parent never fed the change back into the prop, so the controlled
+      // value stays empty: the row is unchecked and no bulk-actions bar appears.
+      await expect.element(page.getByRole("checkbox").nth(1)).not.toBeChecked();
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .not.toBeInTheDocument();
+
+      expect(mockOnRowSelectionChange).toHaveBeenLastCalledWith({
+        [data[0].id]: true,
+      });
+    });
+
+    test("controlled rowSelection round-trips through onRowSelectionChange", async () => {
+      function ControlledDataViewHarness() {
+        const [selectedRows, setSelectedRows] = useState<MRT_RowSelectionState>(
+          { [data[0].id]: true },
+        );
+
+        return (
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasRowSelection
+            onRowSelectionChange={setSelectedRows}
+            rowSelection={selectedRows}
+            tableLayoutOptions={{ columns }}
+          />
+        );
+      }
+
+      const { container } = await renderDataView(<ControlledDataViewHarness />);
+
+      // Controlled initial value is reflected on mount.
+      await expect.element(page.getByRole("checkbox").nth(1)).toBeChecked();
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent("1 selected");
+
+      await expect(container).toBeAccessible();
+
+      // Parent state drives updates back into the prop.
+      await userEvent.click(page.getByRole("checkbox").nth(2));
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent("2 selected");
+
+      await userEvent.click(page.getByRole("checkbox").nth(1));
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent("1 selected");
     });
   });
 });

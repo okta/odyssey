@@ -158,7 +158,7 @@ export const tableComponents = ({
             // cut off
             width: odysseyTokens.Spacing2,
           },
-        [`.ods-hide-spacer-column .${tableHeadClasses.root} &:last-of-type, .ods-hide-spacer-column .${tableBodyClasses.root} &:last-of-type`]:
+        [`.ods-hide-spacer-column .${tableHeadClasses.root} &:last-of-type, .ods-hide-spacer-column .${tableBodyClasses.root} &:last-of-type:not(.Mui-TableBodyCell-DetailPanel)`]:
           {
             display: "none",
           },
@@ -177,6 +177,10 @@ export const tableComponents = ({
           {
             flexGrow: 1,
           },
+
+        [`&.Mui-TableBodyCell-DetailPanel .MuiCollapse-root`]: {
+          flex: 1,
+        },
 
         ...(ownerState.variant === "number" && {
           textAlign: "end",
