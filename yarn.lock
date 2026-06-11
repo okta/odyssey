@@ -180,37 +180,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@applitools/core-base@npm:1.32.5":
-  version: 1.32.5
-  resolution: "@applitools/core-base@npm:1.32.5"
+"@applitools/core-base@npm:1.34.1":
+  version: 1.34.1
+  resolution: "@applitools/core-base@npm:1.34.1"
   dependencies:
-    "@applitools/image": "npm:1.2.10"
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/req": "npm:1.9.3"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/image": "npm:1.2.11"
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/req": "npm:1.10.2"
+    "@applitools/utils": "npm:1.14.5"
     abort-controller: "npm:3.0.0"
+    chalk: "npm:^3.0.0"
     throat: "npm:6.0.2"
-  checksum: 10/a677323f4b82fc534f31bfe1dd2f0e4f84831085462f1d002ad477e67aad3bef3cec56a47e9f39bfea944769e67e81bd749a6040715af5fb23d5a996fe54145e
+  checksum: 10/3ef42ffc5e90330a5b48077be471a03f8bab6c4d3829bf7686ea2040fa70e7f297a75e841edce6f207234c0b703f12c401f0dc1be29305d6911d52500e7d428c
   languageName: node
   linkType: hard
 
-"@applitools/core@npm:4.59.3":
-  version: 4.59.3
-  resolution: "@applitools/core@npm:4.59.3"
+"@applitools/core@npm:4.63.1":
+  version: 4.63.1
+  resolution: "@applitools/core@npm:4.63.1"
   dependencies:
-    "@applitools/core-base": "npm:1.32.5"
-    "@applitools/dom-capture": "npm:11.7.1"
-    "@applitools/dom-snapshot": "npm:4.16.4"
-    "@applitools/driver": "npm:1.25.5"
-    "@applitools/ec-client": "npm:1.12.25"
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/nml-client": "npm:1.11.24"
-    "@applitools/req": "npm:1.9.3"
-    "@applitools/screenshoter": "npm:3.12.18"
-    "@applitools/snippets": "npm:2.8.2"
-    "@applitools/socket": "npm:1.3.12"
-    "@applitools/ufg-client": "npm:1.20.3"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/core-base": "npm:1.34.1"
+    "@applitools/dom-capture": "npm:11.8.1"
+    "@applitools/dom-snapshot": "npm:4.17.2"
+    "@applitools/driver": "npm:1.26.2"
+    "@applitools/ec-client": "npm:1.12.30"
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/nml-client": "npm:1.11.28"
+    "@applitools/req": "npm:1.10.2"
+    "@applitools/screenshoter": "npm:3.12.21"
+    "@applitools/snippets": "npm:2.9.2"
+    "@applitools/socket": "npm:1.3.13"
+    "@applitools/ufg-client": "npm:1.22.2"
+    "@applitools/utils": "npm:1.14.5"
     abort-controller: "npm:3.0.0"
     chalk: "npm:4.1.2"
     node-fetch: "npm:2.6.7"
@@ -218,64 +219,64 @@ __metadata:
     throat: "npm:6.0.2"
   bin:
     eyes-check-network: ./dist/troubleshoot/check-network.js
-  checksum: 10/b5b1c4dc867ab7dd49ded5e4424e042e8e070e83b3a03f1c06c6a521b889315df27ef59f5bf931a91449c6fb307d76a5fb1b635ca82e57b74ccec74708766a4e
+  checksum: 10/d173953cbf6487047fdbd543359fd1d6ef76026681dab5324e6e3465bba4fa652fba96c928da0a16fb82ca4464e46e3ab7942a6b1bdae651cd2aa5c4a7f65182
   languageName: node
   linkType: hard
 
-"@applitools/dom-capture@npm:11.7.1":
-  version: 11.7.1
-  resolution: "@applitools/dom-capture@npm:11.7.1"
+"@applitools/dom-capture@npm:11.8.1":
+  version: 11.8.1
+  resolution: "@applitools/dom-capture@npm:11.8.1"
   dependencies:
-    "@applitools/dom-shared": "npm:1.1.3"
+    "@applitools/dom-shared": "npm:1.2.1"
     "@applitools/functional-commons": "npm:1.6.0"
-  checksum: 10/706bb85931fa57976ec3b67cf10134f193ce31f03ddb33a7c40bfa9870b2acaadc706e1095a81711642b6df8881662c1c97b6d7e5e52d7ea06ed7f3d5d86e7bf
+  checksum: 10/a35ca31ca6cec67e68235b195a2fdeb8225278ef5c129576e3e1818c3c81222481e34a0e91c334ed1194917f16653edda9e3ac9cc83758f13b5280067111ed01
   languageName: node
   linkType: hard
 
-"@applitools/dom-shared@npm:1.1.3":
-  version: 1.1.3
-  resolution: "@applitools/dom-shared@npm:1.1.3"
-  checksum: 10/649d4870132e8bd5375a8cf232ba34780ea579ac699a76cb8f643e17014175a2ec21e41c2cbbb09750636aa1df5fd43e64a59ba293a353fb6c7473b8ac5aba4d
+"@applitools/dom-shared@npm:1.2.1":
+  version: 1.2.1
+  resolution: "@applitools/dom-shared@npm:1.2.1"
+  checksum: 10/cde53a642f33e332baaaa779c13501c39484dcdf3896bcb4b94157f921ae8a54e6723c2eebfebc27b25eb5fa6cb0b2101d58f06ecfc2834ba378161c33cfcdac
   languageName: node
   linkType: hard
 
-"@applitools/dom-snapshot@npm:4.16.4":
-  version: 4.16.4
-  resolution: "@applitools/dom-snapshot@npm:4.16.4"
+"@applitools/dom-snapshot@npm:4.17.2":
+  version: 4.17.2
+  resolution: "@applitools/dom-snapshot@npm:4.17.2"
   dependencies:
-    "@applitools/dom-shared": "npm:1.1.3"
+    "@applitools/dom-shared": "npm:1.2.1"
     "@applitools/functional-commons": "npm:1.6.0"
     css-tree: "npm:^3.1.0"
     pako: "npm:1.0.11"
     throat: "npm:6.0.2"
-  checksum: 10/eb4e1e013004d86cebeaa663700f8797024b25459a6368bc9ee2c8c0afe62b155d4cdf3000f9c720bbef37a9c6a7026069af22556dc3f8df8bd522511b01a91e
+  checksum: 10/50c0eec0e21925e54056b7d34d56dacaa55f3cbf2d0241abd9758f2b357ba5d63651504f0424e804c5585b8d677c3ef67475c69941defbcb3c26d1ae85626eb8
   languageName: node
   linkType: hard
 
-"@applitools/driver@npm:1.25.5":
-  version: 1.25.5
-  resolution: "@applitools/driver@npm:1.25.5"
+"@applitools/driver@npm:1.26.2":
+  version: 1.26.2
+  resolution: "@applitools/driver@npm:1.26.2"
   dependencies:
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/snippets": "npm:2.8.2"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/snippets": "npm:2.9.2"
+    "@applitools/utils": "npm:1.14.5"
     semver: "npm:7.6.2"
-  checksum: 10/1d437a6dd22b3a65332df4ac1ec08a9a9300dd46b03a7521ffaae3f92d9b55d3a44329cd345a7ce18338f2c91a3ac0b465c6613dc8172b86ca9a895a8fc907cd
+  checksum: 10/19d10394356d65dcfe59b55893a25251c404a3c98ee3092272e3e5e71a8d9268f43187aecf3f593b8bc951394b6812838b4c6422d7a35ecf3c138e0bcbcb6cae
   languageName: node
   linkType: hard
 
-"@applitools/ec-client@npm:1.12.25":
-  version: 1.12.25
-  resolution: "@applitools/ec-client@npm:1.12.25"
+"@applitools/ec-client@npm:1.12.30":
+  version: 1.12.30
+  resolution: "@applitools/ec-client@npm:1.12.30"
   dependencies:
-    "@applitools/core-base": "npm:1.32.5"
-    "@applitools/driver": "npm:1.25.5"
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/req": "npm:1.9.3"
-    "@applitools/socket": "npm:1.3.12"
-    "@applitools/spec-driver-webdriver": "npm:1.5.10"
-    "@applitools/tunnel-client": "npm:>=1.11.10"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/core-base": "npm:1.34.1"
+    "@applitools/driver": "npm:1.26.2"
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/req": "npm:1.10.2"
+    "@applitools/socket": "npm:1.3.13"
+    "@applitools/spec-driver-webdriver": "npm:1.6.2"
+    "@applitools/tunnel-client": "npm:>=1.11.14"
+    "@applitools/utils": "npm:1.14.5"
     abort-controller: "npm:3.0.0"
     yargs: "npm:^17.7.2"
   dependenciesMeta:
@@ -284,7 +285,7 @@ __metadata:
   bin:
     ec-client: ./dist/cli/cli.js
     eg-client: ./dist/cli/cli.js
-  checksum: 10/8b9e59482c363ef5997a66db35cde56873fb4030236eac08c74bb5a29b680cc53113c8e6e0f2f38fd682a3dbce89f3d108e1bd0d1a98b35c05728ba039df160c
+  checksum: 10/d1a7ac514c38a80aa0b2c6b268141e81f0ebc0260c262d848a258fb98b2cc0fe2c0543f65ce649f0bf6bc533149e0f6962e04b31c2ecd379a983219b4df84714
   languageName: node
   linkType: hard
 
@@ -327,24 +328,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@applitools/eyes-storybook@npm:3.64.12":
-  version: 3.64.12
-  resolution: "@applitools/eyes-storybook@npm:3.64.12"
+"@applitools/eyes-storybook@npm:3.65.4":
+  version: 3.65.4
+  resolution: "@applitools/eyes-storybook@npm:3.65.4"
   dependencies:
-    "@applitools/core": "npm:4.59.3"
-    "@applitools/driver": "npm:1.25.5"
-    "@applitools/eyes": "npm:1.38.15"
+    "@applitools/core": "npm:4.63.1"
+    "@applitools/driver": "npm:1.26.2"
+    "@applitools/eyes": "npm:1.42.1"
     "@applitools/functional-commons": "npm:1.6.0"
-    "@applitools/logger": "npm:2.2.11"
+    "@applitools/logger": "npm:2.2.12"
     "@applitools/monitoring-commons": "npm:1.0.19"
-    "@applitools/spec-driver-puppeteer": "npm:1.7.5"
-    "@applitools/ufg-client": "npm:1.20.3"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/spec-driver-puppeteer": "npm:1.8.2"
+    "@applitools/ufg-client": "npm:1.22.2"
+    "@applitools/utils": "npm:1.14.5"
     "@inquirer/prompts": "npm:7.0.1"
     boxen: "npm:4.2.0"
     chalk: "npm:3.0.0"
     detect-port: "npm:1.3.0"
-    lodash: "npm:4.17.21"
+    lodash: "npm:^4.18.0"
     ora: "npm:3.4.0"
     puppeteer: "npm:24.11.1"
     semver: "npm:7.6.2"
@@ -354,22 +355,22 @@ __metadata:
   bin:
     eyes-setup: ./bin/eyes-setup.js
     eyes-storybook: ./bin/eyes-storybook.js
-  checksum: 10/520d0bfc49f583658a98af1bf2b3933d1869038e1d516829bfe927f221a15b7408a6e5aa7be7a71f26264e16241a8534c59f8b89ef21298db498048034b2e9af
+  checksum: 10/574266021d341ebc3d7c3d5a4fc0db070ce79c2df318a02b3a8f8e0d750963999d962c602cf299c794f2d4598bf268e82b956957592390bcd375a9596e8061c9
   languageName: node
   linkType: hard
 
-"@applitools/eyes@npm:1.38.15":
-  version: 1.38.15
-  resolution: "@applitools/eyes@npm:1.38.15"
+"@applitools/eyes@npm:1.42.1":
+  version: 1.42.1
+  resolution: "@applitools/eyes@npm:1.42.1"
   dependencies:
-    "@applitools/core": "npm:4.59.3"
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/core": "npm:4.63.1"
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/utils": "npm:1.14.5"
     chalk: "npm:4.1.2"
     yargs: "npm:17.7.2"
   bin:
     eyes: ./dist/cli/cli.js
-  checksum: 10/e76ef3250a184a2fca75d7e10fd4edeeb02b6ff55b313458c4c8f03efc872ea039ff71df1f73ec083c64df7d2ee815036f7b8f546651c55bc13db4cb6d203cb9
+  checksum: 10/ea31755fb24799e4b33b6f92246948bf9a0dd5f16851d3a53a0d5082957436f7b948d5e012a031e066b9f3318cc0bd2772a9e1c98cf239b323e0d479defaa99e
   languageName: node
   linkType: hard
 
@@ -380,29 +381,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@applitools/image@npm:1.2.10":
-  version: 1.2.10
-  resolution: "@applitools/image@npm:1.2.10"
+"@applitools/image@npm:1.2.11":
+  version: 1.2.11
+  resolution: "@applitools/image@npm:1.2.11"
   dependencies:
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/utils": "npm:1.14.5"
     bmpimagejs: "npm:1.0.4"
     jpeg-js: "npm:0.4.4"
     omggif: "npm:1.0.10"
     png-async: "npm:0.9.4"
     sharp: "npm:^0.34.5"
-  checksum: 10/528f7bb5d68f039bbd80fece9e7ce36c803887541c57da03c7173b8b5d1b935f77dec92e401cff6a2c56e040bbd1dd60d198b532c9435db3408d79e79bbc8f38
+  checksum: 10/f296aeaabb891715d8f13d368f79e55a79e8cb8a1df28e717f2600b66c256478b7980150834b1bdb64d5e485e9aa5857b836b4333475180fd92fcd3eaa5ed05f
   languageName: node
   linkType: hard
 
-"@applitools/logger@npm:2.2.11":
-  version: 2.2.11
-  resolution: "@applitools/logger@npm:2.2.11"
+"@applitools/logger@npm:2.2.12":
+  version: 2.2.12
+  resolution: "@applitools/logger@npm:2.2.12"
   dependencies:
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/utils": "npm:1.14.5"
     chalk: "npm:4.1.2"
     debug: "npm:4.3.4"
-  checksum: 10/f8b14f0c2b5cba858a6a08b30290f0f755f8e59c28c08f10d77ba5aeadcf775f40d5dff0231257224f21d99ff7126f7f6dde37aca615e503c323c6edc03e18d4
+  checksum: 10/faf148aad7e6e0b2fa7b531b8bc870893d45f50b36166b4fa453acb89e07440b720f5da0dde5a367257fecf55d37fc5611a1efc90bb84a79ca8f1d411033d490
   languageName: node
   linkType: hard
 
@@ -426,25 +427,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@applitools/nml-client@npm:1.11.24":
-  version: 1.11.24
-  resolution: "@applitools/nml-client@npm:1.11.24"
+"@applitools/nml-client@npm:1.11.28":
+  version: 1.11.28
+  resolution: "@applitools/nml-client@npm:1.11.28"
   dependencies:
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/req": "npm:1.9.3"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/req": "npm:1.10.2"
+    "@applitools/utils": "npm:1.14.5"
   peerDependencies:
-    "@applitools/core-base": 1.32.5
-  checksum: 10/4c17b4608947ee8662dafbbc6b5a0631f425083f981c4fdbace08b3c906ff96aec631587fa2989a31086d33df59f387f708a8e5ff1731c64c5d75cad45a40c2f
+    "@applitools/core-base": 1.34.1
+  checksum: 10/12e88f8eb221be65e391db9d4526c6bd977a2d64109261935cbe71b662c7a67a010e9e62b0afc781bc1bf6f202cfc1b0b66a0aff7d225c14c9d48c8e428e9fc8
   languageName: node
   linkType: hard
 
-"@applitools/req@npm:1.10.0":
-  version: 1.10.0
-  resolution: "@applitools/req@npm:1.10.0"
+"@applitools/req@npm:1.10.2":
+  version: 1.10.2
+  resolution: "@applitools/req@npm:1.10.2"
   dependencies:
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/utils": "npm:1.14.5"
     http-proxy-agent: "npm:^7.0.2"
     https-proxy-agent: "npm:^7.0.6"
     node-fetch: "npm:3.3.1"
@@ -452,112 +453,96 @@ __metadata:
   dependenciesMeta:
     undici:
       optional: true
-  checksum: 10/e39048414569fb630fc08acb5fd8410539fea2d55f26cd0964ceb754d42dad2c433acf113909f70194e07edafbf8f98071aa9e382b75cf4a051cdcb30c1e6b07
+  checksum: 10/728b64a700e8a3d95403c776e2b27dd288da3cd90f0d2929c5a8c7128b2ee03a1768bd6ab45f36be13f6f5fa8df3438e312a6e2df9632b4db64af637a9f1b896
   languageName: node
   linkType: hard
 
-"@applitools/req@npm:1.9.3":
-  version: 1.9.3
-  resolution: "@applitools/req@npm:1.9.3"
+"@applitools/screenshoter@npm:3.12.21":
+  version: 3.12.21
+  resolution: "@applitools/screenshoter@npm:3.12.21"
   dependencies:
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/utils": "npm:1.14.4"
-    http-proxy-agent: "npm:^7.0.2"
-    https-proxy-agent: "npm:^7.0.6"
-    node-fetch: "npm:3.3.1"
-    undici: "npm:>=6.23.0 <8.0.0"
-  dependenciesMeta:
-    undici:
-      optional: true
-  checksum: 10/e24cceed5663c5645b2552ad4ef0ab886566df0438bb99f26e4290586b052f3297459e6939ae83d61983b4f0ec32ad1755a83e7196d8a9312f2eff792546dd9f
+    "@applitools/image": "npm:1.2.11"
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/snippets": "npm:2.9.2"
+    "@applitools/utils": "npm:1.14.5"
+  checksum: 10/0b0c78d05eccade55f00c34c0d5d6bbeb0a104bc03e8f1783e0ab32974571e321a740576366d1c58cf6ebab424ff9e61c52a63a8a59bc4fa6da4825bf278d55e
   languageName: node
   linkType: hard
 
-"@applitools/screenshoter@npm:3.12.18":
-  version: 3.12.18
-  resolution: "@applitools/screenshoter@npm:3.12.18"
+"@applitools/snippets@npm:2.9.2":
+  version: 2.9.2
+  resolution: "@applitools/snippets@npm:2.9.2"
+  checksum: 10/3f922ff65be5dcdf7e95848fa156a5c9e07fa7810456969a0a189769ba1899d82fe70208b43f45575e187b50ec386da0dbb90453c3d6de71547cec2b819e7029
+  languageName: node
+  linkType: hard
+
+"@applitools/socket@npm:1.3.13":
+  version: 1.3.13
+  resolution: "@applitools/socket@npm:1.3.13"
   dependencies:
-    "@applitools/image": "npm:1.2.10"
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/snippets": "npm:2.8.2"
-    "@applitools/utils": "npm:1.14.4"
-  checksum: 10/ac8791505c177f4695e66b10f2edc43af3e6357ddbf602b904132534b50e262431c5b4b4692b328984a01d891e2742d9dd6dff14864abbc4bf44172153e1fc8f
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/utils": "npm:1.14.5"
+  checksum: 10/1563c5909692b254f9311f2336ee43aa1a6c4278ec69376fe02d26ec46a46d68129f051bdad01c5d6614697880178bb50fd7eb3e0b786aec58dedaffc8e04e50
   languageName: node
   linkType: hard
 
-"@applitools/snippets@npm:2.8.2":
-  version: 2.8.2
-  resolution: "@applitools/snippets@npm:2.8.2"
-  checksum: 10/30e2220fba1a4f0f4149a127a52a9f55e4f4aa23dade50b0526405d1e81917e6209de6f3892f9d4c5836150cfcb74685e5db50a885c6c89551da6066b3781c76
-  languageName: node
-  linkType: hard
-
-"@applitools/socket@npm:1.3.12":
-  version: 1.3.12
-  resolution: "@applitools/socket@npm:1.3.12"
+"@applitools/spec-driver-puppeteer@npm:1.8.2":
+  version: 1.8.2
+  resolution: "@applitools/spec-driver-puppeteer@npm:1.8.2"
   dependencies:
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/utils": "npm:1.14.4"
-  checksum: 10/6ee3d825b9f20a7f1b0b807c3bdd239831d2db66428b3fbef9d6432335ce48797fd7d265716813cc2705caf8cb21ed871fc2f5220ae3e3a920c888aad0982954
-  languageName: node
-  linkType: hard
-
-"@applitools/spec-driver-puppeteer@npm:1.7.5":
-  version: 1.7.5
-  resolution: "@applitools/spec-driver-puppeteer@npm:1.7.5"
-  dependencies:
-    "@applitools/driver": "npm:1.25.5"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/driver": "npm:1.26.2"
+    "@applitools/utils": "npm:1.14.5"
   peerDependencies:
     puppeteer: ">=5.3.0"
-  checksum: 10/4b98ac56c0cc5469bfc44ac0a478455086a0bc46c4df6119d7e7b9e8854b1bf36209f6a8bf4827d57af7d953b3ac04d3c94e1d96753066753feb65f56b5c667a
+  checksum: 10/f8bccb602280b999aa85a57104b6ebf64fff5d56d83c67e7f943b924631e8f530864a01ee324afafefbfb24deead03c7e3ddf63cc507aa64551a2c1a270ec202
   languageName: node
   linkType: hard
 
-"@applitools/spec-driver-webdriver@npm:1.5.10":
-  version: 1.5.10
-  resolution: "@applitools/spec-driver-webdriver@npm:1.5.10"
+"@applitools/spec-driver-webdriver@npm:1.6.2":
+  version: 1.6.2
+  resolution: "@applitools/spec-driver-webdriver@npm:1.6.2"
   dependencies:
-    "@applitools/driver": "npm:1.25.5"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/driver": "npm:1.26.2"
+    "@applitools/utils": "npm:1.14.5"
     http-proxy-agent: "npm:^7.0.2"
     https-proxy-agent: "npm:^7.0.6"
   peerDependencies:
     webdriver: ">=6.0.0"
-  checksum: 10/f917f457728c21c9f2d84523b8f3c1381241195083f07d6be54613b753d765e0beccd6e0c03857ee7ed441e0dafb8d209ff3d71f91bac2cbf4435873564ce7f6
+  checksum: 10/e91deb0f1a9e3990c4f06032fb5beb950b7daa5707e4d701e2594c05b520cce0325542c075033d809e20a414288422390e976b8df6fd0f523560081230b50e13
   languageName: node
   linkType: hard
 
-"@applitools/tunnel-client@npm:>=1.11.10":
-  version: 1.11.12
-  resolution: "@applitools/tunnel-client@npm:1.11.12"
+"@applitools/tunnel-client@npm:>=1.11.14":
+  version: 1.11.14
+  resolution: "@applitools/tunnel-client@npm:1.11.14"
   dependencies:
     "@applitools/execution-grid-tunnel": "npm:4.0.2"
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/req": "npm:1.10.0"
-    "@applitools/socket": "npm:1.3.12"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/req": "npm:1.10.2"
+    "@applitools/socket": "npm:1.3.13"
+    "@applitools/utils": "npm:1.14.5"
     abort-controller: "npm:3.0.0"
+    chalk: "npm:^3.0.0"
     yargs: "npm:17.7.2"
   bin:
     tunnel-client: ./dist/cli/cli.js
-  checksum: 10/54a2356f2eb8b4f41de54dd80213aff0d7eeb1da07171fc1c5f31a2098161f47c0c8b587e82015381c4707c5d4bc18c7f2765f198158f95885de9a4a98cfca10
+  checksum: 10/779a08d22c84a14c927ac22596f8569be987e954043eb9ef04972ae3e8ae3e88a6bec6f54b0b378ded987d2ff15deb1e9298c8a30f000cf61c844b567adeec35
   languageName: node
   linkType: hard
 
-"@applitools/ufg-client@npm:1.20.3":
-  version: 1.20.3
-  resolution: "@applitools/ufg-client@npm:1.20.3"
+"@applitools/ufg-client@npm:1.22.2":
+  version: 1.22.2
+  resolution: "@applitools/ufg-client@npm:1.22.2"
   dependencies:
-    "@applitools/image": "npm:1.2.10"
-    "@applitools/logger": "npm:2.2.11"
-    "@applitools/req": "npm:1.9.3"
-    "@applitools/utils": "npm:1.14.4"
+    "@applitools/image": "npm:1.2.11"
+    "@applitools/logger": "npm:2.2.12"
+    "@applitools/req": "npm:1.10.2"
+    "@applitools/utils": "npm:1.14.5"
     "@xmldom/xmldom": "npm:^0.8.12"
     abort-controller: "npm:3.0.0"
     css-tree: "npm:^3.1.0"
     throat: "npm:6.0.2"
-  checksum: 10/f7dcf8ae83d71a4eaf863c1d2373a5d30d4d16315ddcaeb14a0800e5e0e4440276a0be1ad7c2a4fb8916e1cf1ff36552cdc64d6049af404871d4aff37b761206
+  checksum: 10/b373a49d20517f55dadf38d2dbb2d6fb00d89cfb7c24e60b109080805607c1ae52508bf35dff30b32669619d9a670c0a763a45813165d7be90fcdba7c54f1a76
   languageName: node
   linkType: hard
 
@@ -568,10 +553,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@applitools/utils@npm:1.14.4":
-  version: 1.14.4
-  resolution: "@applitools/utils@npm:1.14.4"
-  checksum: 10/22e4dd4eb8b03db0ce81ba3826fbf980a15db9a8d13cdbe3025c6a2c97a7727ebc65abce13c35b3536a96e57a34b0a68bc52b44772f39911f6872bd4be8212d3
+"@applitools/utils@npm:1.14.5":
+  version: 1.14.5
+  resolution: "@applitools/utils@npm:1.14.5"
+  checksum: 10/8c77486927b262eecc89bee2dc83657b743e1bb1180eefd78d607ee5b01d92c5b670d2f25d16d42167ab426dcd5d1f5c791cfab4f50c8ac3cb60c4c31c2211f9
   languageName: node
   linkType: hard
 
@@ -5911,8 +5896,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-contribution-tooling@workspace:packages/core/odyssey-contribution-tooling"
   dependencies:
-    "@okta/ok-ui": "npm:^4.15.1"
-    "@okta/ui-stacks-component-libraries-odyssey-contributions": "npm:1.1.3"
     "@testing-library/dom": "npm:^10.4"
     "@testing-library/jest-dom": "npm:^6.8"
     "@testing-library/react": "npm:^16.3"
@@ -5933,6 +5916,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-i18next: "npm:15.4.1"
     regenerator-runtime: "npm:^0.14.1"
+    rimraf: "npm:^6.0.1"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1"
     vite-plugin-svgr: "npm:^4.5"
@@ -5984,17 +5968,19 @@ __metadata:
   resolution: "@okta/odyssey-contributions-iga-components@workspace:packages/contributions/iga-components"
   dependencies:
     "@emotion/css": "npm:11.11.0"
+    "@microsoft/api-extractor": "npm:^7.53.3"
     "@mui/material": "npm:^5.11.6"
     "@okta/odyssey-cli": "workspace:*"
     "@okta/odyssey-react-mui": "npm:1.47.1"
     "@okta/odyssey-react-mui-legacy": "npm:@okta/odyssey-react-mui@^0.21.2"
-    "@okta/ok-ui": "npm:^4.15.1"
-    "@okta/ui-stacks-component-libraries-odyssey-contributions": "npm:latest"
+    "@okta/ok-ui": "npm:^4.16.0"
+    "@okta/ui-stacks-component-libraries-odyssey-contributions": "workspace:*"
     "@testing-library/dom": "npm:^10.4"
     "@testing-library/jest-dom": "npm:^6.8"
     "@testing-library/react": "npm:^16.3"
     "@testing-library/user-event": "npm:14.x"
     "@types/react": "npm:18.x"
+    "@types/react-dom": "npm:18.x"
     "@vitejs/plugin-react": "npm:^5.0"
     "@vitest/browser": "npm:^3.2"
     "@vitest/coverage-v8": "npm:^3.2"
@@ -6003,10 +5989,12 @@ __metadata:
     jest-axe: "npm:^10.0"
     jsdom: "npm:^26.1"
     msw: "npm:^2.10.5"
+    nodemon: "npm:^3.1.14"
     playwright: "npm:^1.57.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     regenerator-runtime: "npm:^0.14.1"
+    rimraf: "npm:^6.0.1"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1"
     vite-plugin-svgr: "npm:^4.5"
@@ -6154,14 +6142,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-contributions-resource-access-policy-components@workspace:packages/contributions/resource-access-policy-components"
   dependencies:
+    "@microsoft/api-extractor": "npm:^7.53.3"
+    "@mui/material": "npm:^5.18.0"
+    "@okta/odyssey-cli": "workspace:*"
     "@okta/odyssey-react-mui": "npm:1.45.3"
-    "@okta/ok-ui": "npm:^4.15.1"
-    "@okta/ui-stacks-component-libraries-odyssey-contributions": "npm:latest"
+    "@okta/ok-ui": "npm:^4.16.0"
+    "@okta/ui-stacks-component-libraries-odyssey-contributions": "workspace:*"
     "@testing-library/dom": "npm:^10.4"
     "@testing-library/jest-dom": "npm:^6.8"
     "@testing-library/react": "npm:^16.3"
     "@testing-library/user-event": "npm:14.x"
     "@types/react": "npm:18.x"
+    "@types/react-dom": "npm:18.x"
     "@vitejs/plugin-react": "npm:^5.0"
     "@vitest/browser": "npm:^3.2"
     "@vitest/coverage-v8": "npm:^3.2"
@@ -6170,10 +6162,12 @@ __metadata:
     jest-axe: "npm:^10.0"
     jsdom: "npm:^26.1"
     msw: "npm:^2.10.5"
+    nodemon: "npm:^3.1.14"
     playwright: "npm:^1.57.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     regenerator-runtime: "npm:^0.14.1"
+    rimraf: "npm:^6.0.1"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1"
     vite-plugin-svgr: "npm:^4.5"
@@ -6260,14 +6254,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-contributions-workflows-components@workspace:packages/contributions/workflows-components"
   dependencies:
+    "@microsoft/api-extractor": "npm:^7.53.3"
+    "@okta/odyssey-cli": "workspace:*"
     "@okta/odyssey-react-mui": "npm:1.44.0"
-    "@okta/ok-ui": "npm:^4.15.1"
-    "@okta/ui-stacks-component-libraries-odyssey-contributions": "npm:latest"
+    "@okta/ok-ui": "npm:^4.16.0"
+    "@okta/ui-stacks-component-libraries-odyssey-contributions": "workspace:*"
     "@testing-library/dom": "npm:^10.4"
     "@testing-library/jest-dom": "npm:^6.8"
     "@testing-library/react": "npm:^16.3"
     "@testing-library/user-event": "npm:14.x"
     "@types/react": "npm:18.x"
+    "@types/react-dom": "npm:18.x"
     "@vitejs/plugin-react": "npm:^5.0"
     "@vitest/browser": "npm:^3.2"
     "@vitest/coverage-v8": "npm:^3.2"
@@ -6276,10 +6273,12 @@ __metadata:
     jest-axe: "npm:^10.0"
     jsdom: "npm:^26.1"
     msw: "npm:^2.10.5"
+    nodemon: "npm:^3.1.14"
     playwright: "npm:^1.57.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     regenerator-runtime: "npm:^0.14.1"
+    rimraf: "npm:^6.0.1"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1"
     vite-plugin-svgr: "npm:^4.5"
@@ -6346,7 +6345,7 @@ __metadata:
 
 "@okta/odyssey-design-tokens@npm:1.45.3":
   version: 1.45.3
-  resolution: "@okta/odyssey-design-tokens@npm:1.45.3::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-all%2F%40okta%2Fodyssey-design-tokens%2F-%2F%40okta%2Fodyssey-design-tokens-1.45.3.tgz"
+  resolution: "@okta/odyssey-design-tokens@npm:1.45.3::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fodyssey-design-tokens%2F-%2F%40okta%2Fodyssey-design-tokens-1.45.3.tgz"
   checksum: 10/da336281af41935a29fbfb120952c5b91eea7f23406b599cdfdf4b0135609c7107e117f4134ba728cb7e4fb97257cc48698d840fd851a8bc78a624ef0cf78982
   languageName: node
   linkType: hard
@@ -6536,7 +6535,7 @@ __metadata:
 
 "@okta/odyssey-react-mui@npm:1.45.3":
   version: 1.45.3
-  resolution: "@okta/odyssey-react-mui@npm:1.45.3::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-all%2F%40okta%2Fodyssey-react-mui%2F-%2F%40okta%2Fodyssey-react-mui-1.45.3.tgz"
+  resolution: "@okta/odyssey-react-mui@npm:1.45.3::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fodyssey-react-mui%2F-%2F%40okta%2Fodyssey-react-mui-1.45.3.tgz"
   dependencies:
     "@dnd-kit/core": "npm:6.0.3"
     "@dnd-kit/sortable": "npm:7.0.0"
@@ -6882,7 +6881,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/odyssey-storybook@workspace:packages/apps/odyssey-storybook"
   dependencies:
-    "@applitools/eyes-storybook": "npm:3.64.12"
+    "@applitools/eyes-storybook": "npm:3.65.4"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.0"
     "@mui/material": "npm:^5.18.0"
@@ -6933,7 +6932,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/ok-ui@npm:^4.15.1, @okta/ok-ui@npm:^4.15.2, @okta/ok-ui@npm:^4.16.0":
+"@okta/ok-ui@npm:^4.15.1, @okta/ok-ui@npm:^4.16.0":
   version: 4.17.0
   resolution: "@okta/ok-ui@npm:4.17.0::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fok-ui%2F-%2F%40okta%2Fok-ui-4.17.0.tgz"
   dependencies:
@@ -6979,6 +6978,52 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@okta/ok-ui@npm:^4.21.0":
+  version: 4.21.0
+  resolution: "@okta/ok-ui@npm:4.21.0::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fok-ui%2F-%2F%40okta%2Fok-ui-4.21.0.tgz"
+  dependencies:
+    "@yarnpkg/cli": "npm:^4.1.1"
+    "@yarnpkg/core": "npm:^4.0.3"
+    "@yarnpkg/fslib": "npm:^3.0.2"
+    "@yarnpkg/lockfile": "npm:1.1.0"
+    "@yarnpkg/parsers": "npm:^3.0.0"
+    chalk: "npm:^5.3.0"
+    enquirer: "npm:2.3.x"
+    fast-glob: "npm:^3.3.2"
+    fs-extra: "npm:^11.2.0"
+    fuse.js: "npm:^7.0.0"
+    lodash-es: "npm:^4.17.21"
+    micromatch: "npm:^4.0.7"
+    mkdirp: "npm:^1.0.4"
+    octokit: "npm:^3.1.2"
+    picocolors: "npm:^1.1.1"
+    semver: "npm:^7.6.0"
+    simple-git: "npm:^3.28.0"
+    tslog: "npm:^4.9.2"
+    yargs: "npm:^17.6.2"
+  peerDependencies:
+    "@okta/ui-libraries-stacks-applications-runtime-core-gen4": "*"
+    "@okta/ui-stacks-applications-core-gen4": "*"
+    "@okta/ui-stacks-applications-core-gen4ward": "*"
+    "@okta/ui-stacks-component-libraries-core-gen4": "*"
+    "@okta/ui-stacks-libraries-core-gen4": "*"
+  peerDependenciesMeta:
+    "@okta/ui-libraries-stacks-applications-runtime-core-gen4":
+      optional: true
+    "@okta/ui-stacks-applications-core-gen4":
+      optional: true
+    "@okta/ui-stacks-applications-core-gen4ward":
+      optional: true
+    "@okta/ui-stacks-component-libraries-core-gen4":
+      optional: true
+    "@okta/ui-stacks-libraries-core-gen4":
+      optional: true
+  bin:
+    ok-ui: ./dist/bin/ok-ui.js
+  checksum: 10/8bd2ca0d986f52b8c266cd8abafba997683bac88acce6da322d0e76550bd065a095b11497fbbf5bba9e9032fdbd8b2a1f43b8db8b767bedd19517b8b079d73b0
+  languageName: node
+  linkType: hard
+
 "@okta/tools.i18n.pseudo-loc@npm:^1.0.0-99-gc858246":
   version: 1.0.0-99-gc858246
   resolution: "@okta/tools.i18n.pseudo-loc@npm:1.0.0-99-gc858246::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Ftools.i18n.pseudo-loc%2F-%2F%40okta%2Ftools.i18n.pseudo-loc-1.0.0-99-gc858246.tgz"
@@ -7005,32 +7050,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@okta/ui-stacks-component-libraries-odyssey-contributions@npm:1.1.3, @okta/ui-stacks-component-libraries-odyssey-contributions@npm:latest":
-  version: 1.1.3
-  resolution: "@okta/ui-stacks-component-libraries-odyssey-contributions@npm:1.1.3::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-master%2F%40okta%2Fui-stacks-component-libraries-odyssey-contributions%2F-%2F%40okta%2Fui-stacks-component-libraries-odyssey-contributions-1.1.3.tgz"
-  dependencies:
-    "@okta/ui-stacks-utils": "npm:1.7.10"
-    "@okta/vite-plugin-mute-warnings": "npm:^1.0.0"
-    "@vitejs/plugin-react": "npm:^5.0"
-    vite: "npm:^7.1"
-    vite-plugin-svgr: "npm:^4.5"
-    vitest: "npm:>=3.2"
-  peerDependencies:
-    "@okta/ok-ui": ^4.13.1
-  bin:
-    odyssey-contributions-tsc: ./dist/scripts/odyssey-contributions-tsc.js
-    odyssey-contributions-vite: ./dist/scripts/odyssey-contributions-vite.js
-    odyssey-contributions-vitest: ./dist/scripts/odyssey-contributions-vitest.js
-  checksum: 10/c9de19d1da30c3448c471599e5da5c6785bd9116b045e1a0a60c4fdedf83c14e5180a511aeb6b23ab2649cb25f0bf823b8ed65d33e1c3f2a46a41df338be4fe1
-  languageName: node
-  linkType: hard
-
 "@okta/ui-stacks-component-libraries-odyssey-contributions@workspace:*, @okta/ui-stacks-component-libraries-odyssey-contributions@workspace:packages/platform/odyssey-contributions-stack":
   version: 0.0.0-use.local
   resolution: "@okta/ui-stacks-component-libraries-odyssey-contributions@workspace:packages/platform/odyssey-contributions-stack"
   dependencies:
     "@okta/odyssey-build-tooling": "workspace:*"
-    "@okta/ok-ui": "npm:^4.16.0"
+    "@okta/ok-ui": "npm:^4.21.0"
     "@okta/typescript-config-base": "npm:^2.0.0-91-g85c67f9"
     "@okta/ui-stacks-utils": "npm:^1.7.10"
     "@okta/vite-plugin-mute-warnings": "npm:^1.0.0"
@@ -7044,7 +7069,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@okta/ui-stacks-utils@npm:1.7.10, @okta/ui-stacks-utils@npm:^1.7.10":
+"@okta/ui-stacks-utils@npm:^1.7.10":
   version: 1.7.10
   resolution: "@okta/ui-stacks-utils@npm:1.7.10::__archiveUrl=https%3A%2F%2Fartifacts.aue1e.internal%2Fartifactory%2Fapi%2Fnpm%2Fnpm-okta-all%2F%40okta%2Fui-stacks-utils%2F-%2F%40okta%2Fui-stacks-utils-1.7.10.tgz"
   dependencies:
@@ -7059,15 +7084,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@okta/unified-ui-shell@workspace:packages/platform/unified-ui-shell"
   dependencies:
+    "@microsoft/api-extractor": "npm:^7.53.3"
+    "@okta/odyssey-cli": "workspace:*"
     "@okta/odyssey-contributions-ui-component-identifier": "workspace:*"
     "@okta/odyssey-react-mui": "npm:1.61.0"
-    "@okta/ok-ui": "npm:^4.15.1"
-    "@okta/ui-stacks-component-libraries-odyssey-contributions": "npm:1.1.3"
+    "@okta/ok-ui": "npm:^4.16.0"
+    "@okta/ui-stacks-component-libraries-odyssey-contributions": "workspace:*"
     "@testing-library/dom": "npm:^10.4"
     "@testing-library/jest-dom": "npm:^6.8"
     "@testing-library/react": "npm:^16.3"
     "@testing-library/user-event": "npm:14.x"
     "@types/react": "npm:18.x"
+    "@types/react-dom": "npm:18.x"
     "@vitejs/plugin-react": "npm:^5.0"
     "@vitest/browser": "npm:^3.2"
     "@vitest/coverage-v8": "npm:^3.2"
@@ -7076,10 +7104,12 @@ __metadata:
     jest-axe: "npm:^10.0"
     jsdom: "npm:^26.1"
     msw: "npm:^2.10.5"
+    nodemon: "npm:^3.1.14"
     playwright: "npm:^1.57.0"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     regenerator-runtime: "npm:^0.14.1"
+    rimraf: "npm:^6.0.1"
     typescript: "npm:^5.9.2"
     vite: "npm:^7.1"
     vite-plugin-svgr: "npm:^4.5"
@@ -17114,10 +17144,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.17.21, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:~4.17.15":
+"lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:~4.17.15":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10/c08619c038846ea6ac754abd6dd29d2568aa705feb69339e836dfa8d8b09abbb2f859371e86863eda41848221f9af43714491467b5b0299122431e202bb0c532
+  languageName: node
+  linkType: hard
+
+"lodash@npm:^4.18.0":
+  version: 4.18.1
+  resolution: "lodash@npm:4.18.1"
+  checksum: 10/306fea53dfd39dad1f03d45ba654a2405aebd35797b673077f401edb7df2543623dc44b9effbb98f69b32152295fff725a4cec99c684098947430600c6af0c3f
   languageName: node
   linkType: hard
 
@@ -18534,7 +18571,7 @@ __metadata:
     "@okta/odyssey-cli": "workspace:*"
     "@okta/odyssey-eslint-config": "workspace:*"
     "@okta/odyssey-storybook": "workspace:^"
-    "@okta/ok-ui": "npm:^4.15.2"
+    "@okta/ok-ui": "npm:^4.21.0"
     caniuse-lite: "npm:^1.0.30001677"
     concurrently: "npm:^9.1.0"
     decode-uri-component: "npm:^0.4.1"
@@ -23087,7 +23124,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:>=3.2, vitest@npm:^3.2, vitest@npm:^3.2.4":
+"vitest@npm:^3.2, vitest@npm:^3.2.4":
   version: 3.2.4
   resolution: "vitest@npm:3.2.4"
   dependencies:

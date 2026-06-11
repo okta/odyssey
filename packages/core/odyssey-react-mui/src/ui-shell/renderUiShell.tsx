@@ -16,7 +16,11 @@ import { ErrorBoundary } from "react-error-boundary";
 import { bufferLatest } from "../tools/bufferLatest.js";
 import { createMessageBus, PublishMessage } from "../tools/createMessageBus.js";
 import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
-import { UiShell, UiShellProps } from "./UiShell.js";
+import {
+  UiShell,
+  UiShellProps,
+  UiShellTranslationSettings,
+} from "./UiShell.js";
 import { UiShellNavComponentProps } from "./uiShellContentTypes.js";
 import { uiShellDataAttribute } from "./useHasUiShell.js";
 
@@ -42,6 +46,20 @@ export type RenderedUiShell = {
   setComponentProps: ReturnType<
     typeof bufferLatest<SetStateAction<UiShellNavComponentProps>>
   >;
+  /**
+   * Update the shell's translation settings (`languageCode`, `translationOverrides`) at runtime.
+   *
+   * Call this after the consumer's locale changes to re-localize shell-rendered chrome
+   * (skip-to-content link, top nav icons, side nav toggle) without re-rendering UI Shell.
+   *
+   * Accepts a React `SetStateAction`: passing a plain object **replaces** the entire
+   * settings value (so omitting `translationOverrides` clears it). Pass an updater
+   * function — `(previous) => ({ ...previous, languageCode: "es" })` — to merge with
+   * the previous value.
+   */
+  setTranslationSettings: ReturnType<
+    typeof bufferLatest<SetStateAction<UiShellTranslationSettings>>
+  >;
   slottedElements: SlottedElements;
   uiShellElement: ReturnType<typeof renderReactInWebComponent>;
 } & Partial<Pick<UiShellProps, "appElement">>;
@@ -63,12 +81,14 @@ export const renderUiShell = ({
   breakpointConfig,
   hasStandardAppContentPadding,
   initialVisibleSections,
+  languageCode,
   onError = console.error,
   onRender,
   parentElement,
   sideNavBackgroundColor,
   sideNavBackgroundContrastColor,
   topNavBackgroundColor,
+  translationOverrides,
   nonce = window.cspNonce,
 }: {
   /**
@@ -99,6 +119,7 @@ export const renderUiShell = ({
   | "sideNavBackgroundContrastColor"
   | "topNavBackgroundColor"
 > &
+  Partial<UiShellTranslationSettings> &
   Partial<Pick<UiShellProps, "appElement">>) => {
   const appElement = providedAppElement || document.createElement("div");
 
@@ -109,6 +130,11 @@ export const renderUiShell = ({
     createMessageBus<SetStateAction<UiShellNavComponentProps>>();
 
   const {
+    publish: publishTranslationSettings,
+    subscribe: subscribeToTranslationSettings,
+  } = createMessageBus<SetStateAction<UiShellTranslationSettings>>();
+
+  const {
     publish: publishSubscriptionCreated,
     subscribe: subscribeToReactAppSubscribed,
   } = createMessageBus();
@@ -116,6 +142,16 @@ export const renderUiShell = ({
   const publishAfterReactAppReadyForProps = bufferLatest({
     publish: publishPropChanges,
     subscribe: subscribeToReactAppSubscribed,
+  });
+
+  const publishAfterReactAppReadyForTranslationSettings = bufferLatest({
+    publish: publishTranslationSettings,
+    subscribe: subscribeToReactAppSubscribed,
+  });
+
+  publishAfterReactAppReadyForTranslationSettings({
+    languageCode,
+    translationOverrides,
   });
 
   const {
@@ -168,6 +204,7 @@ export const renderUiShell = ({
           subscribeToCloseRightSideMenu={subscribeToCloseRightSideMenu}
           subscribeToCloseSideNavMenu={subscribeToCloseSideNavMenu}
           subscribeToPropChanges={subscribeToPropChanges}
+          subscribeToTranslationSettings={subscribeToTranslationSettings}
           topNavBackgroundColor={topNavBackgroundColor}
           uiShellAppElement={reactRootElements.appRootElement}
           uiShellStylesElement={reactRootElements.stylesRootElement}
@@ -188,6 +225,7 @@ export const renderUiShell = ({
         closeRightSideMenu,
         closeSideNavMenu,
         setComponentProps: publishAfterReactAppReadyForProps,
+        setTranslationSettings: publishAfterReactAppReadyForTranslationSettings,
         slottedElements,
         uiShellElement,
       });
@@ -201,6 +239,7 @@ export const renderUiShell = ({
     closeRightSideMenu,
     closeSideNavMenu,
     setComponentProps: publishAfterReactAppReadyForProps,
+    setTranslationSettings: publishAfterReactAppReadyForTranslationSettings,
     slottedElements,
     uiShellElement,
   };

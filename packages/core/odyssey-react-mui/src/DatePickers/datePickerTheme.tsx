@@ -147,7 +147,7 @@ export const datePickerTheme: ThemeOptions = {
           maxWidth: theme.mixins.maxWidth,
         }),
         contentWrapper: ({ theme }) => ({
-          width: "100%",
+          width: "auto",
           paddingInline: theme.spacing(3),
 
           "@media (pointer: fine)": {

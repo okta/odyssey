@@ -6,18 +6,6 @@
   "references": [
     {
       "path": "../../core/odyssey-react-mui"
-    },
-    {
-      "path": "../../contributions/iga-components"
-    },
-    {
-      "path": "../../platform/unified-ui-shell"
-    },
-    {
-      "path": "../../contributions/workflows-components"
-    },
-    {
-      "path": "../../contributions/resource-access-policy-components"
     }
   ]
 }

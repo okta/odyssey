@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.61.0",
+  "version": "1.62.1",
   "description": "Documentation for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -15,7 +15,7 @@
     "directory": "packages/apps/odyssey-storybook"
   },
   "devDependencies": {
-    "@applitools/eyes-storybook": "3.64.12",
+    "@applitools/eyes-storybook": "3.65.4",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^5.18.0",

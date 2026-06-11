@@ -32,13 +32,14 @@
     "start": "yarn install && yarn build && yarn concurrently npm:start:dev npm:start:storybook",
     "test": "yarn workspaces foreach --all --parallel --interlaced --exclude=@okta/ui-stacks-component-libraries-odyssey-contributions run test",
     "topic": "OKTA_NPM_REGISTRY_SERVER=https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-all yarn",
-    "typecheck": "yarn workspaces foreach --all --parallel --interlaced run typecheck"
+    "typecheck": "yarn workspaces foreach --all --parallel --interlaced run typecheck",
+    "provision:contributions": "yarn workspaces foreach --all --interlaced run provision"
   },
   "devDependencies": {
     "@okta/odyssey-cli": "workspace:*",
     "@okta/odyssey-eslint-config": "workspace:*",
     "@okta/odyssey-storybook": "workspace:^",
-    "@okta/ok-ui": "^4.15.2",
+    "@okta/ok-ui": "^4.21.0",
     "caniuse-lite": "^1.0.30001677",
     "concurrently": "^9.1.0",
     "decode-uri-component": "^0.4.1",

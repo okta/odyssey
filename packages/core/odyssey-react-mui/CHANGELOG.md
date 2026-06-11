@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.62.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.61.0...v1.62.0) (2026-06-11)
+
+### Features
+
+- forward languageCode to UI Shell (OKTA-1193069) ([#406](https://github.com/atko-eng/odyssey-design-system/issues/406)) ([01b1044](https://github.com/atko-eng/odyssey-design-system/commit/01b1044d8aa9e36ef3581936db81792dfb3245ec))
+
+### Bug Fixes
+
+- add screen reader text for Link external icon ([#407](https://github.com/atko-eng/odyssey-design-system/issues/407)) ([256b78c](https://github.com/atko-eng/odyssey-design-system/commit/256b78cf595b97610142562645acc15354d8dd19))
+- datepicker calendar overflow in narrow containers ([#445](https://github.com/atko-eng/odyssey-design-system/issues/445)) ([7f91aaf](https://github.com/atko-eng/odyssey-design-system/commit/7f91aaf4bbdd8b32815761a946e9843b5f3dc3d9))
+- keep detail panel visible with column resizing [OKTA-1195804] ([#444](https://github.com/atko-eng/odyssey-design-system/issues/444)) ([2472b5d](https://github.com/atko-eng/odyssey-design-system/commit/2472b5d94fd517c619c3440363fde9f6cea430ee)), closes [#446](https://github.com/atko-eng/odyssey-design-system/issues/446)
+
 ## [1.61.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.60.0...v1.61.0) (2026-05-28)
 
 ### Features

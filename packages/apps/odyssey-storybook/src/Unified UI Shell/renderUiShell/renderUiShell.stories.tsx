@@ -32,6 +32,7 @@ import {
 } from "@okta/odyssey-react-mui";
 import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
 import { Layout, PageTemplate } from "@okta/odyssey-react-mui/labs";
+import { renderUiShell as coreRenderUiShell } from "@okta/odyssey-react-mui/ui-shell";
 import {
   renderReactInWebComponent,
   webComponentDataAttributeName,
@@ -142,6 +143,109 @@ const UiShellWrapper = ({ outerSlot, surfaceSlot }: SlotProps) => {
 export const Default: Story = {
   render: function C() {
     return <UiShellWrapper />;
+  },
+};
+
+// `languageCode` and `setTranslationSettings` ship in `@okta/odyssey-react-mui`
+// first; the `@okta/unified-ui-shell` wrapper picks them up automatically once
+// it republishes against the new `odyssey-react-mui` version. Until that release
+// cycle completes, demo these against the core `renderUiShell` directly so the
+// stories work in storybook on this branch.
+//
+// `hasTranslationProvider={false}` on the app-content `OdysseyProvider` is critical:
+// the shell and the app render in separate React trees that share the same
+// module-level `i18nInstance`. If the inner provider mounted its own
+// `TranslationProvider`, its `useEffect` would call `changeLanguage(...)` with
+// its own `languageCode` (defaulting to `window.navigator.language`) and
+// overwrite the language the shell just set.
+const createCoreOnRender: () => Parameters<
+  typeof coreRenderUiShell
+>[0]["onRender"] = () => (uiShellReturnValues) => {
+  renderReactInWebComponent({
+    getReactComponent: (reactRootElements) => (
+      <OdysseyProvider
+        emotionRootElement={reactRootElements.stylesRootElement}
+        hasTranslationProvider={false}
+        shadowRootElement={reactRootElements.appRootElement}
+      >
+        <CssBaseline />
+
+        <PageTemplate
+          description="This is my app."
+          title="Access Certification"
+        >
+          <Layout regions={[1]}>
+            <Surface>
+              <Paragraph>This is the surface content.</Paragraph>
+            </Surface>
+          </Layout>
+        </PageTemplate>
+      </OdysseyProvider>
+    ),
+    webComponentParentElement: uiShellReturnValues.appElement!,
+  });
+};
+
+const coreRenderUiShellDocsDescription = `
+**Note:** This story uses \`renderUiShell\` from \`@okta/odyssey-react-mui\` directly,
+not the \`@okta/unified-ui-shell\` wrapper used by the other stories on this page.
+The \`languageCode\` and \`setTranslationSettings\` APIs ship in \`@okta/odyssey-react-mui\`
+first and are picked up by the \`@okta/unified-ui-shell\` wrapper automatically once it
+republishes against the new \`odyssey-react-mui\` version. Tracked in
+[OKTA-1196153](https://oktainc.atlassian.net/browse/OKTA-1196153).
+`;
+
+export const InitialLanguageCodeFrench: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: coreRenderUiShellDocsDescription,
+      },
+    },
+  },
+  render: function C() {
+    const rootElementRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      if (rootElementRef.current) {
+        coreRenderUiShell({
+          appElementScrollingMode: "vertical",
+          languageCode: "fr",
+          parentElement: rootElementRef.current,
+          onRender: createCoreOnRender(),
+        });
+      }
+    }, []);
+
+    return <div ref={rootElementRef} />;
+  },
+};
+
+export const RuntimeLanguageSwitchToSpanish: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: coreRenderUiShellDocsDescription,
+      },
+    },
+  },
+  render: function C() {
+    const rootElementRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      if (rootElementRef.current) {
+        const { setTranslationSettings } = coreRenderUiShell({
+          appElementScrollingMode: "vertical",
+          languageCode: "fr",
+          parentElement: rootElementRef.current,
+          onRender: createCoreOnRender(),
+        });
+
+        setTranslationSettings({ languageCode: "es" });
+      }
+    }, []);
+
+    return <div ref={rootElementRef} />;
   },
 };
 

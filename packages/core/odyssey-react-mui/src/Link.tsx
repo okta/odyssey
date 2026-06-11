@@ -23,8 +23,10 @@ import {
 
 import type { HtmlProps } from "./HtmlProps.js";
 
+import { useTranslation } from "./i18n.generated/i18n.js";
 import { ExternalLinkIcon } from "./icons.generated/index.js";
 import { FocusHandle } from "./inputUtils.js";
+import { ScreenReaderText } from "./ScreenReaderText.js";
 
 export const linkVariantValues = ["default", "monochrome"] as const;
 
@@ -83,6 +85,7 @@ const Link = ({
   variant,
   onClick,
 }: LinkProps) => {
+  const { t } = useTranslation();
   const localLinkRef = useRef<HTMLAnchorElement>(null);
   useImperativeHandle(linkRef, () => {
     return {
@@ -120,9 +123,14 @@ const Link = ({
       {children}
 
       {target === "_blank" && (
-        <span className="Link-indicator" role="presentation">
-          <ExternalLinkIcon />
-        </span>
+        <>
+          <ScreenReaderText translate={translate}>
+            {t("link.external.newwindow")}
+          </ScreenReaderText>
+          <span className="Link-indicator" role="presentation">
+            <ExternalLinkIcon />
+          </span>
+        </>
       )}
     </MuiLink>
   );

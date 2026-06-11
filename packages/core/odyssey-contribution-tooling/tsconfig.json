@@ -32,10 +32,8 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "../vite.config.ts",
-    "../vite.config.project.ts",
-    "../vitest.config.ts",
-    "../vitest.config.project.ts"
+    "vite.config.ts",
+    "vitest.config.ts"
   ],
   "exclude": ["**/dist/**/*"]
 }

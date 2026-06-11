@@ -12,6 +12,8 @@
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
+import { css, Global } from "@emotion/react";
+import styled from "@emotion/styled";
 import { DatePicker, DatePickerProps } from "@okta/odyssey-react-mui";
 import { useMemo, useState } from "react";
 import { expect, userEvent, within } from "storybook/test";
@@ -229,5 +231,36 @@ export const Controlled: Story = {
     );
 
     return <DatePicker {...datePickerProps} />;
+  },
+};
+
+const NarrowContainer = styled.div`
+  width: 320px;
+`;
+
+const constrainedPickerPaperStyles = css`
+  .MuiPickersPopper-paper {
+    width: 320px;
+  }
+`;
+
+export const InNarrowContainer: Story = {
+  args: {
+    defaultValue: "2024-07-11T03:00:00.000Z",
+  },
+  play: async ({ canvasElement, step }) => {
+    await step("Open calendar", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(canvas.getByLabelText(/Choose date/));
+      await within(document.body).findByRole("dialog");
+    });
+  },
+  render: function C(props) {
+    return (
+      <NarrowContainer>
+        <Global styles={constrainedPickerPaperStyles} />
+        <DatePicker {...props} />
+      </NarrowContainer>
+    );
   },
 };

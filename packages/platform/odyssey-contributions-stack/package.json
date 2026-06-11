@@ -27,7 +27,7 @@
     "@okta/ok-ui": "^4.13.1"
   },
   "devDependencies": {
-    "@okta/ok-ui": "^4.16.0",
+    "@okta/ok-ui": "^4.21.0",
     "@okta/typescript-config-base": "^2.0.0-91-g85c67f9",
     "@okta/vite-plugin-mute-warnings": "^1.0.0",
     "typescript": "^5.9",
