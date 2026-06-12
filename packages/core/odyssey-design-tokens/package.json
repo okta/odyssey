@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-design-tokens",
-  "version": "1.62.1",
+  "version": "1.62.2",
   "description": "Design tokens for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -12,10 +12,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "node": "./dist/index.cjs",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.cjs"
+      "require": "./dist/index.cjs"
     }
   },
   "repository": {
