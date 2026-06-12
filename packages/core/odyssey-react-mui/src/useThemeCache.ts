@@ -33,10 +33,7 @@ export const useThemeCache = ({
 }) => {
   const existingCache = useContext(ThemeCacheContext);
 
-  const localCache = useMemo(
-    () => new Map<ContrastMode, Theme>(),
-    [odysseyTokens, shadowRootElement],
-  );
+  const localCache = useMemo(() => new Map<ContrastMode, Theme>(), []);
 
   const getOrCreateTheme = useCallback(
     (mode: ContrastMode) => {

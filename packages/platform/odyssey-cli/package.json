@@ -7,6 +7,17 @@
   "description": "CLI tools for the Odyssey design system",
   "bin": "./dist/index.js",
   "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./migrate": {
+      "types": "./dist/commands/migrate/migrate.d.ts",
+      "import": "./dist/commands/migrate/migrate.js",
+      "default": "./dist/commands/migrate/migrate.js"
+    }
+  },
   "type": "module",
   "files": [
     "dist"

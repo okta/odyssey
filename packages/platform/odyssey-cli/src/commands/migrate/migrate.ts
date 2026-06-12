@@ -3,6 +3,8 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+export { COMPONENT_MAPPINGS } from "./mappings/index.js";
+
 const require = createRequire(import.meta.url);
 type RunResult = {
   error: number;
