@@ -48,7 +48,7 @@ export type FieldsetProps = {
    */
   children: ReactElement | Array<ReactElement>;
   /**
-   * A supplementary description
+   * Secondary text displayed below the legend, providing context for the contained fields.
    */
   description?: string;
   /**
@@ -56,7 +56,8 @@ export type FieldsetProps = {
    */
   id?: string;
   /**
-   * Disables the component and any wrapped input fields.
+   * If `true`, the fieldset and all contained input fields are disabled.
+   * @default false
    */
   isDisabled?: boolean;
   /**
@@ -69,6 +70,10 @@ export type FieldsetProps = {
   name?: string;
 } & Pick<HtmlProps, "testId" | "translate">;
 
+/**
+ * A grouping of related form fields with a legend, optional description, and optional status alert.
+ * Propagates a disabled state to all child fields via context.
+ */
 const Fieldset = ({
   alert,
   children,

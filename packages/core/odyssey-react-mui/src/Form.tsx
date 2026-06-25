@@ -68,7 +68,8 @@ export type FormProps = {
    */
   alert?: ReactElement<typeof Callout>;
   /**
-   * Indicates whether input elements can by default have their values automatically completed by the browser.
+   * Indicates whether input elements can by default have their values automatically
+   * completed by the browser.
    * `autocomplete` attributes on form elements override it on <form>
    */
   autoCompleteType?: (typeof formAutoCompleteTypeValues)[number];
@@ -77,12 +78,13 @@ export type FormProps = {
    */
   children: ReactElement | Array<ReactElement>;
   /**
-   * A supplementary description
+   * Secondary text displayed below the form heading, providing context for the form's purpose.
    */
   description?: string;
   /**
    * If the value of the method attribute is post, enctype is the MIME type of the form submission.
-   * This value can be overridden by formenctype attributes on <button>, <input type="submit">, or <input type="image"> elements.
+   * This value can be overridden by formenctype attributes on <button>, <input type="submit">,
+   * or <input type="image"> elements.
    */
   encodingType?: (typeof formEncodingTypeValues)[number];
   /**
@@ -97,26 +99,29 @@ export type FormProps = {
   id?: string;
   /**
    * The HTTP method to submit the form with.
-   * This value is overridden by formmethod attributes on <button>, <input type="submit">, or <input type="image"> elements.
+   * This value is overridden by formmethod attributes on <button>, <input type="submit">,
+   * or <input type="image"> elements.
    */
   method?: (typeof formMethodValues)[number];
   /**
-   * The name of the form. The value must not be the empty string, and must be unique among the form elements in the forms collection that it is in, if any.
+   * The name of the form. The value must not be the empty string, and must be unique among
+   * the form elements in the forms collection that it is in, if any.
    */
   name: string;
   /**
-   * This Boolean attribute indicates that the form shouldn't be validated when submitted.
-   * If this attribute is not set (and therefore the form is validated),
-   * it can be overridden by a formnovalidate attribute on a <button>, <input type="submit">, or <input type="image"> element belonging to the form.
+   * If `true`, skips native browser validation when the form is submitted.
+   * @default false
    */
   noValidate?: boolean;
   /**
-   * Callback that passes the submit event to the consumer
+   * Called when the form is submitted. Receives the native form submit event.
    */
   onSubmit?: FormEventHandler<HTMLFormElement>;
   /**
-   * Indicates where to display the response after submitting the form. It is a name/keyword for a browsing context (for example, tab, window, or iframe).
-   * This value can be overridden by a formtarget attribute on a <button>, <input type="submit">, or <input type="image"> element.
+   * Indicates where to display the response after submitting the form. It is a name/keyword
+   * for a browsing context (for example, tab, window, or iframe).
+   * This value can be overridden by a formtarget attribute on a <button>, <input type="submit">,
+   * or <input type="image"> element.
    */
   target?: string;
   /**
@@ -126,6 +131,10 @@ export type FormProps = {
 } & Pick<FieldComponentProps, "isFullWidth"> &
   Pick<HtmlProps, "testId" | "translate">;
 
+/**
+ * A structured container for collecting user input. Wraps form fields and
+ * actions with an optional title, description, and alert area.
+ */
 const Form = ({
   alert,
   autoCompleteType,

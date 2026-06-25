@@ -518,3 +518,75 @@ export const WithStepContentPreviewCard: StoryObj<StepperProps> = {
     );
   },
 };
+
+export const WithAlwaysVisibleContent: StoryObj<StepperProps> = {
+  name: "With persistent preview",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When `alwaysShowContent: true` is set on a step, its `content` stays visible across all steps. Useful for a persistent preview or summary card alongside a wizard, like the OIN Catalog Quick Start Guide.",
+      },
+    },
+  },
+  render: function C() {
+    const [activeStep, setActiveStep] = useState(1);
+    const odysseyDesignTokens = useOdysseyDesignTokens();
+    const stepsWithPersistentPreview = [
+      {
+        label: "Choose integration type",
+        description: "Select the integration path that best fits your needs",
+        content: (
+          <Box sx={{ maxWidth: 250 }}>
+            <Card
+              description="A live preview of how your app will appear in the OIN Catalog."
+              title="Catalog Preview"
+              variant="tile"
+            >
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+                {["SCIM", "OIDC", "SAML"].map((category) => (
+                  <Status key={category} label={category} severity="default" />
+                ))}
+              </Box>
+            </Card>
+          </Box>
+        ),
+        alwaysShowContent: true,
+      },
+      {
+        label: "Configure your app",
+        description: "Set up your integration parameters",
+      },
+      {
+        label: "Review and submit",
+        description: "Verify your configuration before submitting",
+      },
+    ];
+
+    return (
+      <>
+        <Stepper
+          activeStep={activeStep}
+          allowBackStep
+          completedSteps={
+            new Set(Array.from({ length: activeStep }, (_, index) => index))
+          }
+          onChange={setActiveStep}
+          orientation="vertical"
+          steps={stepsWithPersistentPreview}
+        />
+        <StepperNavigation
+          currentStep={activeStep}
+          odysseyDesignTokens={odysseyDesignTokens}
+          onBack={() => setActiveStep((step) => Math.max(0, step - 1))}
+          onNext={() =>
+            setActiveStep((step) =>
+              Math.min(stepsWithPersistentPreview.length - 1, step + 1),
+            )
+          }
+          totalSteps={stepsWithPersistentPreview.length}
+        />
+      </>
+    );
+  },
+};

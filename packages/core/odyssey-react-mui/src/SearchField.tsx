@@ -45,7 +45,8 @@ export type SearchFieldProps = {
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
-   * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
+   * You can learn more about it
+   * [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
   /**
@@ -53,7 +54,7 @@ export type SearchFieldProps = {
    */
   defaultValue?: string;
   /**
-   * If `true`, the component will receive focus automatically.
+   * If `true`, the input receives focus automatically on mount.
    */
   hasInitialFocus?: boolean;
   /**
@@ -61,7 +62,8 @@ export type SearchFieldProps = {
    */
   id?: string;
   /**
-   * If `true`, the component is disabled.
+   * If `true`, the search field is disabled.
+   * @default false
    */
   isDisabled?: boolean;
   /**
@@ -69,19 +71,19 @@ export type SearchFieldProps = {
    */
   label: string;
   /**
-   * Callback fired when the `input` element loses focus.
+   * Called when the input loses focus.
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
-   * Callback fired when the value is changed.
+   * Called when the input value changes.
    */
   onChange?: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   /**
-   * Callback fired when the clear button is pressed.
+   * Called when the clear button is pressed.
    */
   onClear?: () => void;
   /**
-   * Callback fired when the `input` element get focus.
+   * Called when the input gains focus.
    */
   onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
@@ -89,13 +91,17 @@ export type SearchFieldProps = {
    */
   placeholder?: string;
 
+  /** Tab index forwarded to the underlying input element. */
   tabIndex?: HTMLAttributes<HTMLElement>["tabIndex"];
   /**
    * The value of the `input` element, to use when controlled.
    */
   value?: string;
   /**
-   * Whether the SearchField has a gray or white background
+   * Controls the background style of the search field.
+   * - If `'outline'`, white background with a visible border.
+   * - If `'filled'`, gray background, suitable for use on white surfaces.
+   * @default "outline"
    */
   variant?: (typeof searchVariantValues)[number];
 } & Pick<FieldComponentProps, "id" | "isDisabled" | "name" | "isFullWidth"> &
@@ -104,6 +110,11 @@ export type SearchFieldProps = {
 type FieldRenderProps = Partial<Pick<HtmlProps, "ariaDescribedBy">> &
   Pick<FieldComponentRenderProps, "id">;
 
+/**
+ * A search input field with a built-in search icon and a clear button. Supports
+ * both controlled and uncontrolled usage, and renders an accessible label
+ * visually hidden by default.
+ */
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {

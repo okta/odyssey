@@ -46,23 +46,30 @@ export type OdysseyProviderProps<
   FullScreenOverlayProviderProps &
   OdysseyThemeProviderProps &
   OdysseyTranslationProviderProps<SupportedLanguages> & {
+    /** The content to render within the Odyssey context providers. */
     children: ReactNode;
     /**
-     * Whether to emit the ScopedCssBaseline. Defaults to true.
+     * If `true`, emits global CssBaseline reset styles.
+     * @default true
      */
     hasCssBaseline?: boolean;
     /**
-     * Adds the `ScopedCssBaseline` wrapper. This also adds a `div`, so it might not be what you want.
+     * If `true`, wraps children in a ScopedCssBaseline element. Note that this adds an extra `div` to the DOM.
+     * @default true
      */
     hasScopedCssBaseline?: boolean;
     /**
-     * If `true`, the `OdysseyTranslationProvider` wrapper will be added. Defaults to `true`.
-     * This should only be set to `false` if there exists an OdysseyTranslationProvider higher up in the tree.
+     * If `true`, wraps children with OdysseyTranslationProvider. Set to `false` only when a translation provider already exists higher in the tree.
      * @default true
      */
     hasTranslationProvider?: boolean;
   };
 
+/**
+ * Root provider for Odyssey. Composes theme, cache, translation, and full-screen overlay
+ * contexts in a single wrapper. Every application using Odyssey must render this provider
+ * at or near the tree root.
+ */
 const OdysseyProvider = <SupportedLanguages extends string>({
   children,
   contrastMode,

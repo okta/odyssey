@@ -22,8 +22,11 @@ The dev server transpiles only. Type errors are invisible in the browser. Always
 <Typography sx={{ color: "red" }}>text</Typography>;
 
 // ✅ correct — use styled() with odysseyDesignTokens for token-based styles
-import { styled } from "@mui/material/styles";
-import { useOdysseyDesignTokens } from "@okta/odyssey-react-mui";
+import styled from "@emotion/styled";
+import {
+  type DesignTokens,
+  useOdysseyDesignTokens,
+} from "@okta/odyssey-react-mui";
 
 const StyledWrapper = styled("div", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",

@@ -36,15 +36,32 @@ import { Subordinate } from "./Typography.js";
 export type BreadcrumbType = "listItem" | "menuItem" | "currentPage";
 
 export type BreadcrumbProps = {
+  /** The visible label text for the breadcrumb item. */
   children?: string;
+  /**
+   * The URL the breadcrumb navigates to. When omitted, the item renders as plain text
+   * (e.g., the current page).
+   */
   href?: string;
+  /** An optional icon displayed before the label text. */
   iconName?: "user" | "group";
+  /**
+   * Click handler invoked when the breadcrumb is activated. Prevents default navigation when
+   * provided.
+   */
   onClick?: MouseEventHandler;
 };
 
 export type BreadcrumbsProps = {
+  /** The ordered list of `Breadcrumb` elements representing the navigation path. */
   children: ReactElement<typeof Breadcrumb>[];
+  /** When provided, prepends a home icon link pointing to this URL as the first breadcrumb. */
   homeHref?: string;
+  /**
+   * Maximum number of breadcrumb items to show before collapsing the middle items into an
+   * overflow menu.
+   * @default 5
+   */
   maxVisibleItems?: number;
 } & Pick<HtmlProps, "testId" | "translate">;
 
@@ -63,6 +80,10 @@ const BreadcrumbContent = styled.span`
   text-overflow: ellipsis;
 `;
 
+/**
+ * A single item in a Breadcrumbs trail. Renders as a link, a menu item, or plain text depending
+ * on its position and context.
+ */
 export const Breadcrumb = ({
   children,
   href,
@@ -140,6 +161,11 @@ const breadcrumbProviderValue: Record<
 
 const defaultTruncationValue = 5;
 
+/**
+ * A navigational breadcrumb trail that displays the user's location within a hierarchy.
+ * Automatically collapses middle items into an overflow menu when the number of items exceeds
+ * `maxVisibleItems`.
+ */
 const BreadcrumbList = ({
   children,
   homeHref,

@@ -24,6 +24,10 @@ export type TagListProps = {
   children: ReactElement<typeof Tag> | Array<ReactElement<typeof Tag>>;
 } & Pick<HtmlProps, "ariaLabel" | "testId">;
 
+/**
+ * A horizontal, wrapping list of Tag elements rendered as a semantic `<ul>`. Use to
+ * display a collection of tags associated with an item or entity.
+ */
 const TagList = ({ ariaLabel, children, testId }: TagListProps) => {
   const providerValue = useMemo<{
     chipElementType: ChipElementType;

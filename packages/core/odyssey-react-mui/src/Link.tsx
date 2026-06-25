@@ -44,11 +44,11 @@ export type LinkProps = {
    */
   icon?: ReactElement;
   /**
-   * The ref forwarded to the TextField
+   * Ref attached to the underlying <a> element.
    */
   linkRef?: RefObject<FocusHandle>;
   /**
-   * The click event handler for the Link
+   * Called when the link is clicked.
    */
   onClick?: MuiLinkProps["onClick"];
   /**
@@ -67,15 +67,23 @@ export type LinkProps = {
     | "_top"
     | (string & NonNullable<unknown>);
   /**
-   * The visual presentation of the Link (default or monochrome)
+   * Controls the visual presentation of the link.
+   * - If `'default'`, renders in the brand link color.
+   * - If `'monochrome'`, renders in the current text color; use on colored backgrounds where the default color would clash.
    */
   variant?: (typeof linkVariantValues)[number];
-} & Pick<HtmlProps, "ariaLabel" | "testId" | "translate">;
+} & Pick<HtmlProps, "ariaLabel" | "id" | "testId" | "translate">;
 
+/**
+ * A navigational element that renders an anchor tag. Supports internal and external links,
+ * an optional leading icon, and automatically appends an external link indicator when
+ * opening in a new tab.
+ */
 const Link = ({
   ariaLabel,
   children,
   href,
+  id,
   icon,
   linkRef,
   rel,
@@ -111,6 +119,7 @@ const Link = ({
       aria-label={ariaLabel}
       data-se={testId}
       href={href}
+      id={id}
       onClick={onClick ? handleClick : undefined}
       ref={localLinkRef}
       rel={rel}

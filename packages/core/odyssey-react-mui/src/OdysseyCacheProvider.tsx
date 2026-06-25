@@ -23,7 +23,9 @@ import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId.js";
 export type OdysseyCacheProviderProps = {
   children: ReactNode;
   /**
-   * @deprecated Use `EmotionRootElement` instead. This was incorrectly configured as an `HTMLStyleElement`, but then we're rendering `<style>` inside `<style>`. We need this to be a `<div>` instead.
+   * @deprecated Use `EmotionRootElement` instead. This was incorrectly configured as an
+   * `HTMLStyleElement`, but then we're rendering `<style>` inside `<style>`. We need this
+   * to be a `<div>` instead.
    *
    * Emotion caches styles into the style element.
    * When enabling this prop, Emotion caches the styles at this element, rather than in <head>.
@@ -37,20 +39,32 @@ export type OdysseyCacheProviderProps = {
   /**
    * @deprecated No longer necessary.
    *
-   * Required to know if a Shadow DOM is in use. This tells Emotion to change its cache configuration.
+   * Required to know if a Shadow DOM is in use. This tells Emotion to change its cache
+   * configuration.
    */
   hasShadowDom?: boolean;
+  /**
+   * A cryptographic nonce ("number used once") that allows `<style>` tags injected by Emotion
+   * to pass a Content Security Policy that restricts inline styles.
+   */
   nonce?: string;
   /**
    * @deprecated No longer necessary.
    *
    * Emotion renders into this HTML element.
-   * When enabling this prop, Emotion renders at the top of this component rather than the bottom like it does in the HTML `<head>`.
+   * When enabling this prop, Emotion renders at the top of this component rather than
+   * the bottom like it does in the HTML `<head>`.
    */
   shadowDomElement?: HTMLDivElement | HTMLElement;
+  /** Custom Stylis plugins applied to Emotion's CSS processing pipeline. */
   stylisPlugins?: StylisPlugin[];
 };
 
+/**
+ * Configures Emotion's style cache for Odyssey components. Wrap your application in this
+ * provider when you need to render into a Shadow DOM, iframe, or non-`<head>` target element,
+ * or when your CSP requires a nonce on injected `<style>` tags.
+ */
 const OdysseyCacheProvider = ({
   children,
   emotionRoot,

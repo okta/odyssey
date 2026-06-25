@@ -28,7 +28,8 @@ export type CheckboxGroupProps = {
    */
   children: ReactNode;
   /**
-   * If `true`, the CheckboxGroup is required
+   * If `true`, at least one checkbox in the group must be selected.
+   * @default false
    */
   isRequired?: boolean;
   /**
@@ -55,6 +56,10 @@ type CheckboxGroupRenderProps = Pick<
     Pick<FieldComponentRenderProps, "ariaDescribedBy" | "errorMessageElementId">
   >;
 
+/**
+ * A labeled group of Checkbox controls. Wraps one or more Checkbox elements
+ * with a shared label, optional hint, and unified error messaging.
+ */
 const CheckboxGroup = ({
   ariaDescribedBy,
   children,

@@ -12,8 +12,6 @@
 
 import type { ThemeOptions } from "@mui/material";
 
-import { buttonClasses } from "@mui/material/Button";
-
 import type { GetComponentsProps } from "./types.js";
 
 export const dialogComponents = ({
@@ -90,20 +88,10 @@ export const dialogComponents = ({
     },
     styleOverrides: {
       root: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
         marginBlockEnd: 0,
         padding: 0,
-        paddingBlockStart: odysseyTokens.Spacing5,
-        paddingBlockEnd: odysseyTokens.Spacing4,
-        paddingInline: odysseyTokens.Spacing6,
-        fontFamily: odysseyTokens.TypographyFamilyHeading,
-
-        [`.${buttonClasses.root}`]: {
-          // Pull close button by inline padding amount
-          marginInlineEnd: `-${odysseyTokens.Spacing3}`,
-        },
+        minWidth: 0,
+        flex: "1 1 auto",
       },
     },
   },

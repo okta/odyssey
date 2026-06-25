@@ -33,11 +33,11 @@ import { useOdysseyDesignTokens } from "./OdysseyDesignTokensContext.js";
 
 export type TabItemProps = {
   /**
-   * The content of the Tab itself
+   * Content rendered inside the tab panel when this tab is active.
    */
   children: ReactNode;
   /**
-   * If `true`, the TabItem is disabled
+   * If `true`, the tab is disabled and cannot be selected.
    */
   isDisabled?: boolean;
   /**
@@ -53,7 +53,14 @@ export type TabItemProps = {
    */
   value?: string;
 } & {
+  /**
+   * The count to display in the notification badge on the tab. Badge is hidden when the
+   * value is 0 or undefined.
+   */
   notificationCount?: BadgeProps["badgeContent"];
+  /**
+   * The maximum value to display in the notification badge before truncating with "+".
+   */
   notificationCountMax?: BadgeProps["badgeContentMax"];
 } & Pick<HtmlProps, "testId" | "translate">;
 
@@ -64,7 +71,7 @@ export type TabsProps = {
    */
   initialValue?: string;
   /**
-   * Callback fired when the active tab is changed.
+   * Called when the active tab changes. Receives the new tab value.
    */
   onChange?: MuiTabListProps["onChange"];
   /**
@@ -113,6 +120,11 @@ const TabLabel = ({
   );
 };
 
+/**
+ * A tabbed navigation component that renders a list of tabs and their associated content
+ * panels. Supports controlled and uncontrolled selection, notification badges, icons,
+ * and scrollable overflow.
+ */
 const Tabs = ({
   ariaLabel,
   initialValue,

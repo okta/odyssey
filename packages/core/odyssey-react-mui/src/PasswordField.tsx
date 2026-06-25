@@ -35,9 +35,9 @@ import { FocusHandle, getControlState, useInputValues } from "./inputUtils.js";
 
 export type PasswordFieldProps = {
   /**
-   * This prop helps users to fill forms faster, especially on mobile devices.
-   * The name can be confusing, as it's more like an autofill.
-   * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
+   * Controls the browser autocomplete hint for the password field.
+   * - If `'current-password'`, hints that the field is for signing in with an existing password.
+   * - If `'new-password'`, hints that the field is for creating or updating a password; browsers may suggest a strong password.
    */
   autoCompleteType?: "current-password" | "new-password";
   /**
@@ -45,15 +45,16 @@ export type PasswordFieldProps = {
    */
   defaultValue?: string;
   /**
-   * If `true`, the component will receive focus automatically.
+   * If `true`, the input receives focus automatically on mount.
    */
   hasInitialFocus?: boolean;
   /**
-   * If `true`, the show/hide icon is not shown to the user
+   * If `true`, renders a toggle button that lets the user reveal or hide the password value.
+   * @default true
    */
   hasShowPassword?: boolean;
   /**
-   * The ref forwarded to the TextField
+   * Ref attached to the underlying <input> element.
    */
   inputRef?: React.RefObject<FocusHandle>;
   /**
@@ -61,15 +62,15 @@ export type PasswordFieldProps = {
    */
   label: string;
   /**
-   * Callback fired when the `input` element loses focus.
+   * Called when the input loses focus.
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
-   * Callback fired when the value is changed.
+   * Called when the input value changes.
    */
   onChange?: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   /**
-   * Callback fired when the `input` element get focus.
+   * Called when the input gains focus.
    */
   onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
@@ -88,6 +89,10 @@ type FieldRenderProps = Partial<
 > &
   Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
+/**
+ * A text field for collecting sensitive input such as passwords. Renders a masked
+ * input with an optional toggle button that lets users reveal or hide the entered value.
+ */
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (
     {

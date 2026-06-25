@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2021-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,20 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import styled from "@emotion/styled";
 import {
-  DesignTokens,
+  createOdysseyStyledComponent,
   OdysseyStackProps,
   Stack,
   stackDirectionValues,
   stackSpacingValues,
-  useOdysseyDesignTokens,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
-const ContentBox = styled.div<{ odysseyDesignTokens: DesignTokens }>(
+const ContentBox = createOdysseyStyledComponent({ tag: "div" })(
   ({ odysseyDesignTokens }) => ({
     display: "flex",
     alignItems: "center",
@@ -37,14 +35,12 @@ const ContentBox = styled.div<{ odysseyDesignTokens: DesignTokens }>(
 );
 
 const Content = () => {
-  const odysseyDesignTokens = useOdysseyDesignTokens();
-
   return (
     <>
-      <ContentBox odysseyDesignTokens={odysseyDesignTokens}>1</ContentBox>
-      <ContentBox odysseyDesignTokens={odysseyDesignTokens}>2</ContentBox>
-      <ContentBox odysseyDesignTokens={odysseyDesignTokens}>3</ContentBox>
-      <ContentBox odysseyDesignTokens={odysseyDesignTokens}>4</ContentBox>
+      <ContentBox>1</ContentBox>
+      <ContentBox>2</ContentBox>
+      <ContentBox>3</ContentBox>
+      <ContentBox>4</ContentBox>
     </>
   );
 };

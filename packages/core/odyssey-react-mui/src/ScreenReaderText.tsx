@@ -21,16 +21,25 @@ export type ScreenReaderTextProps = {
    * The visually-hidden text.
    */
   children: ReactNode;
+  /**
+   * HTML `id` attribute for referencing this element from other elements
+   * (e.g., `aria-labelledby`).
+   */
   id?: string;
 } & Pick<HtmlProps, "ariaHidden" | "translate">;
 
 /**
  * MUI sx expects you pass in a CSS object, not an object with CSS.
- * They seem identical, but only if you create a new object like this will MUI be happy with the type of visuallyHidden.
- * It's otherwise a regular object with CSS properties.
+ * They seem identical, but only if you create a new object like this will MUI be
+ * happy with the type of visuallyHidden. It's otherwise a regular object with CSS
+ * properties.
  */
 const style = { ...visuallyHidden };
 
+/**
+ * Renders text that is visually hidden but announced by screen readers. Use to provide
+ * accessible labels or context without affecting the visible layout.
+ */
 const ScreenReaderText = ({
   ariaHidden,
   children,

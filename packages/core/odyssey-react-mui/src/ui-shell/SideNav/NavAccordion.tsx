@@ -55,20 +55,19 @@ export type NavAccordionProps = {
    */
   id?: string;
   /**
-   *  Determines if the Accordion component use compact layout
+   * If `true`, the accordion uses a compact layout with reduced padding.
    */
   isCompact?: boolean;
   /**
-   * Whether the item is expanded by default
+   * If `true`, the accordion item is expanded on initial render.
    */
   isDefaultExpanded?: boolean;
   /**
-   * Whether the item is disabled
+   * If `true`, the accordion item is disabled and cannot be expanded or collapsed.
    */
   isDisabled?: boolean;
   /**
-   * If true, expands the accordion, otherwise collapse it.
-   * Setting this prop enables control over the accordion.
+   * If `true`, the accordion item is expanded (controlled).
    */
   isExpanded?: boolean;
   /**

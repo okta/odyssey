@@ -97,7 +97,7 @@ export type SideNavHeaderProps = {
    */
   appName?: string;
   /**
-   * If the side nav currently has no items, it will be loading.
+   * If `true`, the side nav header renders skeleton placeholders while nav items are loading.
    */
   isLoading?: boolean;
   /**

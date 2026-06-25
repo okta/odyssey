@@ -35,25 +35,25 @@ export const calloutSeverityValues = [
 
 export type CalloutProps = {
   /**
-   * Used to optionally pass a text list to the component
+   * Supplementary content rendered inside the callout body, typically a list or structured markup.
    */
   children?: ReactNode;
   /**
-   * Sets the ARIA role of the Callout
-   * ("status" for something that dynamically updates, "alert" for errors, null for something
-   * unchanging)
+   * Sets the ARIA live-region role.
+   * - If `'status'`, announces updates politely; use for non-critical dynamic messages.
+   * - If `'alert'`, announces updates assertively; use for errors or urgent information.
    */
   role?: (typeof calloutRoleValues)[number];
   /**
-   * Determine the color and icon of the Callout
+   * Visual severity level that controls the callout's color and icon.
    */
   severity: (typeof calloutSeverityValues)[number];
   /**
-   * The text content of the Callout
+   * Primary message text displayed inside the callout body.
    */
   text?: string;
   /**
-   * The title of the Callout
+   * Heading text displayed at the top of the callout, above the body content.
    */
   title?: string;
 } & (
@@ -68,17 +68,23 @@ export type CalloutProps = {
 ) &
   // if linkText is provided, either linkUrl or onLinkClick must be provided
   (| {
+        /** The `rel` attribute forwarded to the action link. */
         linkRel?: LinkProps["rel"];
+        /** The `target` attribute forwarded to the action link. */
         linkTarget?: LinkProps["target"];
+        /** Visible label for the action link rendered below the Callout content. */
         linkText: string;
+        /** URL the action link navigates to. Required when `onLinkClick` is not provided. */
         linkUrl: LinkProps["href"];
         onLinkClick?: never;
       }
     | {
         linkRel?: never;
         linkTarget?: never;
+        /** Visible label for the action link rendered below the Callout content. */
         linkText: string;
         linkUrl?: never;
+        /** Click handler for the action link. Required when `linkUrl` is not provided. */
         onLinkClick: LinkProps["onClick"];
       }
     | {
@@ -99,6 +105,10 @@ const ContentContainer = styled("div", {
   },
 }));
 
+/**
+ * A non-dismissible inline message that draws attention to important contextual information. Use
+ * Callout to surface status, warnings, errors, or supplementary guidance within a page or form.
+ */
 const Callout = ({
   children,
   linkRel,

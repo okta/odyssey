@@ -62,35 +62,37 @@ export type NativeSelectProps<
    */
   defaultValue?: Value;
   /**
-   * If `true`, the Select allows multiple selections
+   * If `true`, the select allows multiple options to be selected simultaneously.
    */
   hasMultipleChoices?: HasMultipleChoices;
   /**
-   * The ref forwarded to the NativeSelect
+   * Ref attached to the underlying <select> element.
    */
   inputRef?: React.RefObject<FocusHandle>;
   /**
-   * @deprecated Use `hasMultipleChoices` instead
+   * @deprecated Use `hasMultipleChoices` instead.
    */
-  /** **Deprecated:** use `hasMultipleChoices` */
   isMultiSelect?: HasMultipleChoices;
   /**
    * The label text for the NativeSelect
    */
   label: string;
   /**
-   * Callback fired when the NativeSelect loses focus
+   * Called when the NativeSelect loses focus.
    */
   onBlur?: MuiSelectProps<Value>["onBlur"];
   /**
-   * Callback fired when the value of the NativeSelect changes
+   * Called when the selected value of the NativeSelect changes.
    */
   onChange?: MuiSelectProps<Value>["onChange"];
   /**
-   * Callback fired when the NativeSelect gains focus
+   * Called when the NativeSelect gains focus.
    */
   onFocus?: MuiSelectProps<Value>["onFocus"];
-  options: Value;
+  /**
+   * @deprecated Pass `<option>` elements as `children` instead. This prop has no effect.
+   */
+  options?: Value;
   /**
    * The value or values selected in the NativeSelect. Use when component is controlled
    */
@@ -113,6 +115,10 @@ type NativeSelectRenderProps = Partial<
 > &
   Pick<FieldComponentRenderProps, "labelElementId">;
 
+/**
+ * A native HTML `<select>` element wrapped in an Odyssey field. Use when a
+ * lightweight, OS-rendered dropdown is preferred over the custom Select component.
+ */
 const NativeSelect = forwardRef(
   <
     Value extends NativeSelectValueType<HasMultipleChoices>,

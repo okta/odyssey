@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,14 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import styled from "@emotion/styled";
-import { Subordinate } from "@okta/odyssey-react-mui";
+import {
+  createOdysseyStyledComponent,
+  Subordinate,
+} from "@okta/odyssey-react-mui";
 import { Layout, LayoutProps } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 
-const VisibleRegion = styled.div({
+const VisibleRegion = createOdysseyStyledComponent({ tag: "div" })({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -25,11 +27,11 @@ const VisibleRegion = styled.div({
   border: "1px dashed #cbcbcb",
 });
 
-const RegionLabel = styled.h3({
+const RegionLabel = createOdysseyStyledComponent({ tag: "h3" })({
   margin: 0,
 });
 
-const DisclaimerContainer = styled.div({
+const DisclaimerContainer = createOdysseyStyledComponent({ tag: "div" })({
   maxWidth: "55ch",
   marginBlockEnd: "8px",
 });
@@ -46,7 +48,7 @@ const RegionDisclaimer = () => {
   );
 };
 
-const MarginContainer = styled.div({
+const MarginContainer = createOdysseyStyledComponent({ tag: "div" })({
   "& + &": {
     marginBlockStart: "16px",
   },

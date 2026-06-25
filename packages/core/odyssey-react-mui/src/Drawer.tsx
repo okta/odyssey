@@ -50,56 +50,66 @@ export type DrawerProps = {
    */
   children?: ReactNode;
   /**
-   * When set to `true`, the Drawer will be visible.
+   * If `true`, the drawer is visible.
    */
   isOpen?: boolean;
   /**
-   * Callback that controls what happens when the Drawer is dismissed
+   * Called when the drawer is dismissed. Receives the event and the reason for closing.
    */
   onClose: (event: MuiOnCloseEvent, reason: DrawerOnCloseReason) => void;
   /**
-   * An optional Button object to be situated in the Drawerfooter. Should almost always be of variant `primary`.
+   * An optional Button object to be situated in the Drawer footer. Should
+   * almost always be of variant `primary`.
    */
   primaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
-   * An optional Button object to be situated in the Drawer footer, alongside the `callToActionPrimaryComponent`.
+   * An optional Button object to be situated in the Drawer footer, alongside
+   * the `callToActionPrimaryComponent`.
    */
   secondaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
-   * An optional Button object to be situated in the Drawer footer, alongside the other two `callToAction` components.
+   * An optional Button object to be situated in the Drawer footer, alongside
+   * the other two `callToAction` components.
    */
   tertiaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
-   * The title of the Drawer
+   * Heading text displayed at the top of the drawer.
    */
   title?: string;
   /**
-   * Type of Drawer
+   * Controls how the Drawer positions relative to page content.
+   * - If `'temporary'`, overlays content and dismisses when the user clicks the backdrop.
+   * - If `'persistent'`, pushes the page layout to the side and stays open until explicitly closed.
+   * @default "temporary"
    */
   variant?: (typeof variantValues)[number];
 } & Pick<HtmlProps, "ariaLabel" | "testId" | "translate"> &
   (
     | {
         /**
-         * Shows divider lines separating header, content, and footer (if using action buttons).
+         * If `true`, renders divider lines separating the header, content, and footer sections.
+         * @default false
          */
         hasDividers?: never;
         /**
          * @deprecated use `hasDividers` instead.
          *
-         * Shows divider lines separating header, content, and footer (if using action buttons).
+         * If `true`, shows divider lines separating header, content, and footer. Use `hasDividers` instead.
+         * @default false
          */
         showDividers: boolean;
       }
     | {
         /**
-         * Shows divider lines separating header, content, and footer (if using action buttons).
+         * If `true`, renders divider lines separating the header, content, and footer sections.
+         * @default false
          */
         hasDividers: boolean;
         /**
          * @deprecated use `hasDividers` instead.
          *
-         * Shows divider lines separating header, content, and footer (if using action buttons).
+         * If `true`, shows divider lines separating header, content, and footer. Use `hasDividers` instead.
+         * @default false
          */
         showDividers?: never;
       }
@@ -175,6 +185,10 @@ const DrawerFooter = styled("div", {
     odysseyDesignTokens.HueNeutralWhite};
 `;
 
+/**
+ * A panel that slides in from the edge of the screen to display supplementary
+ * content or actions without navigating away from the current page.
+ */
 const Drawer = ({
   ariaLabel,
   children,

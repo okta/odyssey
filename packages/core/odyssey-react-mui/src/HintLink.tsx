@@ -14,6 +14,9 @@ import { memo } from "react";
 
 import { Link, LinkProps } from "./Link.js";
 
+/**
+ * A monochrome link intended for use inside hint/helper text beneath form fields.
+ */
 const HintLink = (
   props: Pick<
     LinkProps,

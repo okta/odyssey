@@ -30,8 +30,14 @@ export type DataCardProps = {
   children?: CardProps["children"];
   description?: CardProps["description"];
   detailPanel?: CardProps["detailPanel"];
+  /**
+   * If `true`, the card renders a selection checkbox.
+   */
   hasSelection?: boolean;
   image?: CardProps["image"];
+  /**
+   * If `true`, the card is in a selected state.
+   */
   isSelected?: boolean;
   menuButtonChildren?: CardProps["menuButtonChildren"];
   onSelectionChange?: () => void;

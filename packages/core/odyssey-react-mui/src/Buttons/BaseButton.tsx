@@ -49,11 +49,12 @@ export const buttonVariantValues = [
 
 export type BaseButtonProps = {
   /**
-   * The ref forwarded to the Button
+   * Ref attached to the underlying button element, exposing a `focus()` handle.
    */
   buttonRef?: RefObject<FocusHandle>;
   /**
-   * The contents of the button. Only available internal to Odyssey here in BaseButton. If set, label is ignored.
+   * The contents of the button. Only available internal to Odyssey here in BaseButton. If set,
+   * label is ignored.
    */
   children?: ReactNode;
   /**
@@ -69,40 +70,54 @@ export type BaseButtonProps = {
    */
   id?: string;
   /**
-   * Determines whether the Button is disabled
+   * If `true`, the button is disabled and cannot be activated.
    */
   isDisabled?: boolean;
   /**
-   * Determines whether the Button should take up the full available width
+   * If `true`, the button expands to fill its container's full width.
    */
   isFullWidth?: boolean;
   /**
-   * The text content of the Button
+   * The text content of the Button.
+   * @default ""
    */
   label?: string;
   /**
-   * The click event handler for the Button
+   * Called when the button is clicked.
    */
   onClick?: MuiButtonProps["onClick"];
   /**
-   * The size of the button
+   * The size of the button.
+   * @default "medium"
    */
   size?: (typeof buttonSizeValues)[number];
   /**
    * The icon element to display at the start of the Button
    */
   startIcon?: ReactElement;
+  /** The tab order of the Button relative to other focusable elements. */
   tabIndex?: HTMLAttributes<HTMLElement>["tabIndex"];
   /**
    * The tooltip text for the Button if it's icon-only
    */
   tooltipText?: string;
   /**
-   * The type of the HTML button element
+   * The HTML button type attribute.
+   * - If `'button'`, no default form behavior.
+   * - If `'submit'`, submits the nearest form.
+   * - If `'reset'`, resets the nearest form to its initial values.
+   * @default "button"
    */
   type?: (typeof buttonTypeValues)[number];
   /**
-   * The variant of the Button
+   * Controls the visual hierarchy and intent of the button.
+   * - If `'primary'`, high-emphasis action; use for the single most important action on a page.
+   * - If `'secondary'`, medium-emphasis action; use for secondary actions alongside a primary.
+   * - If `'danger'`, high-emphasis destructive action.
+   * - If `'dangerSecondary'`, medium-emphasis destructive action.
+   * - If `'floating'`, low-emphasis action without a border or background.
+   * - If `'floatingAction'`, icon-only floating action, typically fixed-positioned.
+   * - If `'tertiary'`, deprecated low-emphasis style; use `'floating'` instead.
    */
   variant: (typeof buttonVariantValues)[number] | "tertiary";
 };
@@ -123,6 +138,10 @@ export type AdditionalBaseButtonProps = Pick<
   | "translate"
 >;
 
+/**
+ * The internal base button primitive used by all Odyssey button variants. Handles icon placement,
+ * full-width layout, tooltip wrapping, focus handle forwarding, and MUI prop context integration.
+ */
 const BaseButton = ({
   ariaControls,
   ariaDescribedBy,

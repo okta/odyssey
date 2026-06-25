@@ -124,32 +124,31 @@ export type SelectProps<
    */
   defaultValue?: MuiSelectProps<Value>["defaultValue"];
   /**
-   * If `true`, the Select allows multiple selections
+   * If `true`, the Select allows multiple options to be selected simultaneously.
    */
   hasMultipleChoices?: HasMultipleChoices;
   /**
-   * The ref forwarded to the Select
+   * Ref attached to the underlying <select> element.
    */
   inputRef?: React.RefObject<FocusHandle>;
   /**
    * @deprecated Use `hasMultipleChoices` instead.
    */
-  /** **Deprecated:** use `hasMultipleChoices` */
   isMultiSelect?: HasMultipleChoices;
   /**
    * The label text for the Select
    */
   label: string;
   /**
-   * Callback fired when the Select loses focus
+   * Called when the Select loses focus.
    */
   onBlur?: MuiSelectProps<Value>["onBlur"];
   /**
-   * Callback fired when the value of the Select changes
+   * Called when the selected value changes.
    */
   onChange?: MuiSelectProps<Value>["onChange"];
   /**
-   * Callback fired when the Select gains focus
+   * Called when the Select gains focus.
    */
   onFocus?: MuiSelectProps<Value>["onFocus"];
   /**
@@ -183,19 +182,26 @@ type SelectRenderProps = Partial<
 /**
  * Options in Odyssey <Select> are passed as an array, which can contain any combination
  * of the following:
- *   - string —                            A simple string. The string will be both the text and the value of the resulting option.
- *                                         <option value="string">string</option>
+ *   - string —
+ *     A simple string. The string will be both the text and the value of the resulting
+ *     option. <option value="string">string</option>
  *
- *   - { text: string } —                  Same as above, but the string is contained within an object.
- *                                         <option value="text">text</option>
+ *   - { text: string } —
+ *     Same as above, but the string is contained within an object.
+ *     <option value="text">text</option>
  *
- *   - { text: string, value: string } —   The option text will be text, and the option value will be value.
- *                                         <option value="value">text</option>
+ *   - { text: string, value: string } —
+ *     The option text will be text, and the option value will be value.
+ *     <option value="value">text</option>
  *
  *   - { text: string, type: "heading" } — Used to display a group heading with the text
  */
 
 const { CONTROLLED } = ComponentControlledState;
+/**
+ * A form field that lets users choose one or more options from a dropdown list. Supports
+ * single and multi-select modes, grouped options, and controlled or uncontrolled usage.
+ */
 const Select = <
   Value extends SelectValueType<HasMultipleChoices>,
   HasMultipleChoices extends boolean,

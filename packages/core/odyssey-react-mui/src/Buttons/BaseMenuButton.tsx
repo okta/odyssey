@@ -99,7 +99,8 @@ const StyledMenuButtonContainer = styled("div", {
 
 export type BaseMenuButtonProps = {
   /**
-   * The button children for the triggering Button. Only available internal to Odyssey here in BaseMenuButton. If set, buttonLabel is ignored.
+   * The button children for the triggering Button. Only available internal to Odyssey here in
+   * BaseMenuButton. If set, buttonLabel is ignored.
    */
   buttonChildren?: ReactNode;
   /**
@@ -115,7 +116,7 @@ export type BaseMenuButtonProps = {
    */
   endIcon?: ReactElement;
   /**
-   * Add a vertical rule to divide the button from surrounding content
+   * If `true`, renders a vertical divider adjacent to the button to separate it from surrounding content.
    */
   hasVerticalDivider?: boolean;
   /**
@@ -123,7 +124,7 @@ export type BaseMenuButtonProps = {
    */
   id?: string;
   /**
-   * If the MenuButton is an overflow menu or standard menu.
+   * If `true`, renders as an overflow (more-actions) trigger instead of a labeled menu button.
    */
   isOverflow?: boolean;
   /**
@@ -131,12 +132,12 @@ export type BaseMenuButtonProps = {
    */
   menuAlignment?: (typeof menuAlignmentValues)[number];
   /**
-   * Whether to omit the endIcon if not set (rather than use a default value for it based on overflow)
+   * If `true`, suppresses the default end icon rather than falling back to the overflow or chevron default.
    */
   omitEndIcon?: boolean;
   /**
-   * If true (the default), the menu will close when a child MenuItem is clicked.
-   * Otherwise, it will remain open.
+   * If `true`, the menu closes automatically when a child MenuItem is clicked.
+   * @default true
    */
   shouldCloseOnSelect?: boolean;
   /**
@@ -196,6 +197,11 @@ export type AdditionalBaseMenuButtonProps = Pick<
       }
   );
 
+/**
+ * Base component for button-triggered menus and popovers. Renders a trigger button that opens a
+ * dropdown menu or popover content on click. Used internally by MenuButton and overflow menu
+ * patterns.
+ */
 const BaseMenuButton = ({
   ariaLabel,
   ariaLabelledBy,

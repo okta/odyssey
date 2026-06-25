@@ -30,23 +30,23 @@ export const toastSeverityValues = [
 
 export type ToastProps = {
   /**
-   * If set, this determines how long the Toast should appear before automatically disappearing in milliseconds.
-   * It will only take effect if the Toast is not dismissible.
-   * If left blank, it defaults to 6000.
+   * How long the Toast should appear before automatically disappearing, in milliseconds.
+   * Only takes effect when the Toast is not dismissible.
+   * @default 6000
    */
   autoHideDuration?: number;
   /**
-   * If `true`, the Toast will include a close button.
+   * If `true`, the toast includes a close button allowing the user to dismiss it manually.
    */
   isDismissable?: boolean;
   /**
-   * If true, the Toast is visible
+   * If `true`, the toast is visible.
    */
   isVisible?: boolean;
   /**
-   * If linkUrl is not undefined, this is the text of the link.
-   * If left blank, it defaults to "Learn more".
-   * Note that linkText does nothing if linkUrl is not defined
+   * The visible label for the link rendered when `linkUrl` is provided. Has no effect
+   * without `linkUrl`.
+   * @default "Learn more"
    */
   linkText?: string;
   /**
@@ -54,17 +54,17 @@ export type ToastProps = {
    */
   linkUrl?: string;
   /**
-   * An optional function to run when the Toast is closed.
+   * Called when the Toast is closed, either automatically or by user dismissal.
    */
   onHide?: () => void;
   /**
-   * Sets the ARIA role of the Toast
-   * ("status" for something that dynamically updates, "alert" for errors, null for something
-   * unchanging)
+   * Sets the ARIA live-region role.
+   * - If `'status'`, announces updates politely; use for non-critical dynamic messages.
+   * - If `'alert'`, announces updates assertively; use for errors or urgent information.
    */
   role?: (typeof toastRoleValues)[number];
   /**
-   * Determine the color and icon of the Toast
+   * Controls the color and icon of the toast.
    */
   severity: (typeof toastSeverityValues)[number];
   /**
@@ -75,6 +75,11 @@ export type ToastProps = {
 
 const ClickAwayListenerProps = { onClickAway: () => false };
 
+/**
+ * A brief, auto-dismissing notification used to communicate non-critical feedback such
+ * as confirmations, warnings, or errors. Renders as a Snackbar overlay with optional
+ * dismiss and link actions.
+ */
 const Toast = ({
   autoHideDuration = 6000,
   isDismissable,

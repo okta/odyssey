@@ -31,6 +31,13 @@ import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookT
 import { pickerComponentPropsMetaData } from "../pickerComponentPropsMetaData.js";
 import PlaceholderLogo from "./PlaceholderLogo.js";
 
+// A self-contained data-URI image stands in for the string ("image src")
+// adornment variant. A remote URL (e.g. placehold.co) loads on a network whose
+// timing the Applitools visual regression capture can't control, which made
+// these stories flaky; an inline SVG renders identically on every run.
+const placeholderImageDataUri =
+  "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='400'%20height='600'%3E%3Crect%20width='400'%20height='600'%20fill='%23E2E8F0'/%3E%3C/svg%3E";
+
 const optionsSmall = [
   {
     value: "an",
@@ -66,7 +73,7 @@ const optionsSmall = [
     value: "image",
     label: "This adornment is an image",
     description: "Some optional descriptive text.",
-    adornment: "https://placehold.co/400x600",
+    adornment: placeholderImageDataUri,
   },
 ];
 
@@ -106,7 +113,7 @@ const optionsLarge = [
     value: "image",
     label: "This adornment is an image",
     description: "Some optional descriptive text.",
-    adornment: "https://placehold.co/400x600",
+    adornment: placeholderImageDataUri,
   },
 ];
 
@@ -248,7 +255,7 @@ export const WithGroups: Story = {
         value: "image",
         label: "This adornment is an image",
         description: "Some optional descriptive text.",
-        adornment: "https://placehold.co/400x600",
+        adornment: placeholderImageDataUri,
         group: "Image Strings",
       },
     ],

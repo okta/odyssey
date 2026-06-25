@@ -55,20 +55,21 @@ export type TextFieldProps = {
    */
   endAdornment?: string | ReactElement;
   /**
-   * If `true`, the component will receive focus automatically.
+   * If `true`, the input receives focus automatically on mount.
    */
   hasInitialFocus?: boolean;
   /**
-   * Hints at the type of data that might be entered by the user while editing the element or its contents
+   * Hints at the type of data that might be entered by the user while editing the
+   * element or its contents.
    * @see https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute
    */
   inputMode?: InputHTMLAttributes<HTMLInputElement>["inputMode"];
   /**
-   * The ref forwarded to the TextField
+   * Ref attached to the underlying <input> element.
    */
   inputRef?: React.RefObject<FocusHandle>;
   /**
-   * If `true`, a [TextareaAutosize](/material-ui/react-textarea-autosize/) element is rendered.
+   * If `true`, the input renders as a multiline textarea.
    */
   isMultiline?: boolean;
   /**
@@ -84,15 +85,15 @@ export type TextFieldProps = {
    */
   min?: number;
   /**
-   * Callback fired when the `input` element loses focus.
+   * Called when the input loses focus.
    */
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
-   * Callback fired when the value is changed.
+   * Called when the input value changes.
    */
   onChange?: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   /**
-   * Callback fired when the `input` element get focus.
+   * Called when the input gains focus.
    */
   onFocus?: FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /**
@@ -108,7 +109,9 @@ export type TextFieldProps = {
    */
   step?: number;
   /**
-   * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
+   * Type of the `input` element. It should be
+   * [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
+   * @default "text"
    */
   type?: (typeof textFieldTypeValues)[number];
   /**
@@ -123,6 +126,10 @@ type FieldRenderProps = Partial<
 > &
   Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
+/**
+ * A single-line or multiline text input field with label, hint, and error support.
+ * Use for collecting free-form text input such as names, emails, URLs, or numbers.
+ */
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {

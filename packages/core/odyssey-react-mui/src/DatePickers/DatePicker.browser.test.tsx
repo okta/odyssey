@@ -122,6 +122,41 @@ describe(DatePicker.displayName!, () => {
     await expect.element(page.getByRole("dialog")).not.toBeInTheDocument();
   });
 
+  // The calendar popup used to render at a hardcoded viewport-wide width and
+  // overflow narrow parents, clipping the last (Saturday) column.
+  test("calendar popup in a narrow container shows every column", async () => {
+    const { container } = await renderWithOdysseyProvider(
+      <div style={{ width: "320px" }}>
+        <DatePicker
+          label="Date picker label"
+          value="2024-07-11T03:00:00.000Z"
+        />
+      </div>,
+    );
+
+    const calendarButton = page.getByLabelText(
+      odysseyTranslate("picker.labels.date.choose"),
+    );
+    await userEvent.click(calendarButton);
+
+    const dialog = page.getByRole("dialog");
+    await expect.element(dialog).toBeVisible();
+
+    // No accessible query distinguishes the day-grid row container, so reach for
+    // the MUI class to assert the seven columns are not horizontally clipped.
+    const weekRow = dialog
+      .element()
+      .querySelector(".MuiDayCalendar-weekContainer")!;
+    expect(weekRow.scrollWidth).toBeLessThanOrEqual(weekRow.clientWidth);
+
+    // color-contrast disabled due to axe checking cells individually causing timeout in CI
+    await expect
+      .element(dialog)
+      .toBeAccessible({ disabledRules: ["color-contrast"] });
+
+    await expect(container).toBeAccessible();
+  });
+
   test("controlled date picker with calendar date selected", async () => {
     const ControlledDatePicker = () => {
       const [value, setValue] = useState("2024-07-11T03:00:00.000Z");

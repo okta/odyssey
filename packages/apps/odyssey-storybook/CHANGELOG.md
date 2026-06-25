@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.63.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.62.2...v1.63.0) (2026-06-25)
+
+### Features
+
+- add createOdysseyStyledComponent with codemod ([#486](https://github.com/atko-eng/odyssey-design-system/issues/486)) ([3a4fa82](https://github.com/atko-eng/odyssey-design-system/commit/3a4fa82ebcee790be3bc339538a2ea88933232e3))
+- add value/defaultValue to FileUploader ([#489](https://github.com/atko-eng/odyssey-design-system/issues/489)) ([be7fd60](https://github.com/atko-eng/odyssey-design-system/commit/be7fd60d89d7b1e66f4095e8f39837c7ba357768))
+
+### Bug Fixes
+
+- bump odyssey-react-mui in unified-ui-shell ([#463](https://github.com/atko-eng/odyssey-design-system/issues/463)) ([cd0c388](https://github.com/atko-eng/odyssey-design-system/commit/cd0c388ff23f5a1a9de77e7dd80b5006d070a359))
+- dialog a11y close button bug ([#517](https://github.com/atko-eng/odyssey-design-system/issues/517)) ([7b03ca5](https://github.com/atko-eng/odyssey-design-system/commit/7b03ca50cbc33c4fd7b67f15cd5a4724e3b6b801))
+- size DatePicker calendar to its content ([#459](https://github.com/atko-eng/odyssey-design-system/issues/459)) ([d8eb6b8](https://github.com/atko-eng/odyssey-design-system/commit/d8eb6b8bf11e367c5afa22ad545addc2748d3f48))
+- stabilize flaky Picker VRT popover edge ([#479](https://github.com/atko-eng/odyssey-design-system/issues/479)) ([17443e2](https://github.com/atko-eng/odyssey-design-system/commit/17443e241fc430c3af7da85272c54fb582db06e8))
+
 ## [1.62.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.61.0...v1.62.0) (2026-06-11)
 
 ### Features

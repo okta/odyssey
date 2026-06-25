@@ -11,14 +11,7 @@
  */
 
 import styled from "@emotion/styled";
-import {
-  ChangeEvent,
-  memo,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, memo, useCallback, useRef, useState } from "react";
 
 import { Button } from "../Buttons/Button.js";
 import { Field, RenderFieldComponentProps } from "../Field.js";
@@ -110,23 +103,42 @@ const CenterAlignedSupportText = styled.div({
 
 export type FileUploaderProps = {
   /**
-   * an array of file types the user is able to upload. @see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers for examples
+   * an array of file types the user is able to upload.
+   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#unique_file_type_specifiers for examples
    */
   acceptedFileTypes?: string[];
+  /**
+   * The initial file list for uncontrolled usage. Applied only on mount.
+   */
+  defaultValue?: File[];
+  /**
+   * If `true`, the file uploader is disabled and cannot accept new files.
+   * @default false
+   */
+  isDisabled?: boolean;
   /**
    * The label for the `input` element.
    */
   label: string;
   /**
-   * Function that is called when the list of ifles to upload is changed
+   * Called when the list of files to upload changes. Receives the updated file array.
    */
   onChange: (files: File[]) => void;
   /**
-   * Either `single` or `multiple`. If `multiple`, multiple files can be uploaded
+   * Controls how many files the uploader accepts.
+   * - If `'single'`, only one file can be selected at a time.
+   * - If `'multiple'`, the user can select more than one file at once.
    */
   type?: (typeof fileUploadTypes)[number];
   /**
-   * Either `button`, `dragAndDrop` or `dragAndDropWithIcon`. Will determine how component appears visually
+   * The file list for controlled usage. When provided, the consumer is
+   * responsible for updating it via `onChange`.
+   */
+  value?: File[];
+  /**
+   * The visual interaction style. `"button"` renders a compact upload button;
+   * `"dragAndDrop"` renders a drop zone; `"dragAndDropWithIcon"` adds an illustration
+   * to the drop zone.
    */
   variant: (typeof fileUploadVariants)[number];
 } & Pick<
@@ -135,13 +147,17 @@ export type FileUploaderProps = {
   | "hint"
   | "HintLinkComponent"
   | "id"
-  | "isDisabled"
   | "isFullWidth"
   | "isOptional"
 >;
 
+/**
+ * A form field that allows users to select and upload one or more files,
+ * supporting button, drag-and-drop, and drag-and-drop-with-icon interaction variants.
+ */
 const FileUploader = ({
   acceptedFileTypes,
+  defaultValue,
   errorMessage,
   id,
   isDisabled = false,
@@ -152,16 +168,17 @@ const FileUploader = ({
   label,
   onChange,
   type,
+  value,
   variant,
 }: FileUploaderProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [filesToUpload, setFilesToUpload] = useState<File[]>([]);
+  const [filesToUpload, setFilesToUpload] = useState<File[]>(
+    defaultValue ?? [],
+  );
 
-  useEffect(() => {
-    onChange(filesToUpload);
-  }, [filesToUpload, onChange]);
+  const resolvedFiles = value !== undefined ? value : filesToUpload;
 
   const updateFilesToUpload = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -170,16 +187,17 @@ const FileUploader = ({
       if (files && files.length > 0) {
         const mergedFiles =
           type === "multiple"
-            ? filesToUpload.concat(Array.from(files))
+            ? resolvedFiles.concat(Array.from(files))
             : Array.from(files).slice();
 
         setFilesToUpload(mergedFiles);
+        onChange(mergedFiles);
       }
 
       // reset input value to allow re-upload of a file with the same name
       event.target.value = "";
     },
-    [type, filesToUpload],
+    [type, resolvedFiles, onChange],
   );
 
   const triggerFileInputClick = useCallback(() => {
@@ -188,12 +206,13 @@ const FileUploader = ({
 
   const removeFileFromFilesToUploadList = useCallback<(name: string) => void>(
     (name) => {
-      const deletedFileFilteredOut = filesToUpload.filter(
+      const deletedFileFilteredOut = resolvedFiles.filter(
         (file) => file.name !== name,
       );
       setFilesToUpload(deletedFileFilteredOut);
+      onChange(deletedFileFilteredOut);
     },
-    [filesToUpload],
+    [resolvedFiles, onChange],
   );
 
   const renderFileInput = useCallback(
@@ -293,9 +312,9 @@ const FileUploader = ({
         label={label}
         renderFieldComponent={renderFileInput}
       />
-      {filesToUpload.length > 0 && (
+      {resolvedFiles.length > 0 && (
         <FileUploadPreview
-          fileNames={filesToUpload.map((file) => file.name)}
+          fileNames={resolvedFiles.map((file) => file.name)}
           isDisabled={isDisabled}
           onFileRemove={removeFileFromFilesToUploadList}
         />

@@ -57,6 +57,11 @@ export type EmptyStateProps = {
   SecondaryCallToActionComponent?: ReactNode;
 };
 
+/**
+ * A full-width placeholder displayed when a list, table, or page section has
+ * no data to show. Communicates the empty state with a heading, description,
+ * and optional call-to-action buttons.
+ */
 const EmptyState = ({
   heading,
   description,

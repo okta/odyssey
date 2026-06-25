@@ -64,7 +64,7 @@ const StyledTopNavContainer = styled("div", {
 
 export type TopNavProps = {
   /**
-   * Whether or not the underlying content has been scrolled
+   * If `true`, indicates that the underlying page content has been scrolled; used to apply a shadow to the top nav.
    */
   isScrolled?: boolean;
   /**

@@ -28,19 +28,26 @@ export const statusVariantValues = ["lamp", "pill"] as const;
 
 export type StatusProps = {
   /**
-   * The text content of the Status
+   * The visible text label displayed inside the Status indicator.
    */
   label: string;
   /**
-   * Determine the color and icon of the Status
+   * The severity level, which controls the color and icon of the Status indicator.
    */
   severity: (typeof statusSeverityValues)[number];
   /**
-   * The style of the Status indicator
+   * Controls the visual shape of the Status indicator.
+   * - If `'lamp'`, circular dot, used for compact inline status display.
+   * - If `'pill'`, rounded badge with a colored background.
+   * @default "pill"
    */
   variant?: (typeof statusVariantValues)[number];
 } & Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
+/**
+ * A compact visual indicator that communicates the state or condition of an entity
+ * using color and a label.
+ */
 const Status = ({
   ariaDescribedBy,
   label,

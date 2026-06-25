@@ -37,5 +37,5 @@
     "svgo": "^4.0.1",
     "typescript": "^5.8.3"
   },
-  "version": "1.62.2"
+  "version": "1.63.0"
 }

@@ -38,8 +38,9 @@ export type AutocompleteProps<
     undefined,
     IsCustomValueAllowed
   >["defaultValue"];
-  /** Used to determine if the option represents the given value. Uses strict equality by default if none provided.
-   * Both arguments need to be handled, an option can only match with one value.
+  /**
+   * Used to determine if the option represents the given value. Uses strict equality by default if
+   * none provided. Both arguments need to be handled, an option can only match with one value.
    * option: the option to test
    * value: the value to test against
    *
@@ -48,7 +49,9 @@ export type AutocompleteProps<
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 
   /**
-   * Used to determine the string value for a given option. It's used to fill the input (and the list box options if renderOption is not provided). If used in free solo mode, it must accept both the type of the options and a string.
+   * Used to determine the string value for a given option. It's used to fill the input (and the
+   * list box options if renderOption is not provided). If used in free solo mode, it must accept
+   * both the type of the options and a string.
    *
    * `function(option: Value) => string`
    */
@@ -59,7 +62,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["getOptionLabel"];
   /**
-   * Enables multiple choice selection
+   * Whether multiple options can be selected simultaneously.
    */
   hasMultipleChoices?: MuiAutocompleteProps<
     OptionType,
@@ -77,7 +80,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["inputValue"];
   /**
-   * Allows the input of custom values
+   * If `true`, the user can type a custom value not present in the options list.
    */
   isCustomValueAllowed?: MuiAutocompleteProps<
     OptionType,
@@ -86,7 +89,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["freeSolo"];
   /**
-   * Disables the Autocomplete input
+   * If `true`, the Autocomplete input is disabled.
    */
   isDisabled?: MuiAutocompleteProps<
     OptionType,
@@ -95,7 +98,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["disabled"];
   /**
-   * Displays a loading indicator
+   * If `true`, a loading indicator is shown in place of the options list.
    */
   isLoading?: MuiAutocompleteProps<
     OptionType,
@@ -104,7 +107,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["loading"];
   /**
-   * Makes the Autocomplete input read-only
+   * If `true`, the Autocomplete input is read-only.
    */
   isReadOnly?: MuiAutocompleteProps<
     OptionType,
@@ -113,9 +116,8 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["readOnly"];
   /**
-   * If this component is required to display a virtualized list of options,
-   * then this value needs to be set to true.
-   * It is recommended if you're options are on the order of 10's of hundreds or more.
+   * If `true`, renders the options list using virtualization.
+   * Recommended when the list contains hundreds of items or more.
    */
   isVirtualized?: boolean;
   /**
@@ -123,13 +125,12 @@ export type AutocompleteProps<
    */
   label: string;
   /**
-   * The text to display when no options are available
-   *
-   * default: "No options"
+   * The text to display when no options are available.
+   * @default "No options"
    */
   noOptionsText?: string;
   /**
-   * Callback fired when the autocomplete loses focus.
+   * Called when the Autocomplete loses focus.
    */
   onBlur?: MuiAutocompleteProps<
     OptionType,
@@ -138,7 +139,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["onBlur"];
   /**
-   * Callback fired when a selection is made.
+   * Called when the selected value changes.
    */
   onChange?: MuiUseAutocompleteProps<
     OptionType,
@@ -147,7 +148,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["onChange"];
   /**
-   * Callback fired when the autocomplete gains focus.
+   * Called when the Autocomplete gains focus.
    */
   onFocus?: MuiAutocompleteProps<
     OptionType,
@@ -156,7 +157,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["onFocus"];
   /**
-   * Callback fired when the textbox receives typed characters.
+   * Called when the text input value changes. Receives the new input string.
    */
   onInputChange?: MuiAutocompleteProps<
     OptionType,
@@ -190,6 +191,11 @@ export type AutocompleteProps<
 > &
   Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
+/**
+ * An input field with a dropdown list of selectable options that supports filtering, multi-select,
+ * and free-text entry. Use when users need to search or choose from a potentially large set of
+ * values.
+ */
 const Autocomplete = <
   OptionType,
   HasMultipleChoices extends boolean | undefined,

@@ -20,12 +20,24 @@ export type TimeZoneOption = {
 };
 
 export type TimeZonePickerProps = {
+  /** Accessible label for the time zone autocomplete input. */
   label: string;
+  /**
+   * Called when the selected time zone changes. Receives the `value` string of
+   * the selected option, or `undefined` when the selection is cleared.
+   */
   onTimeZoneChange?: (timeZone: string | undefined) => void;
+  /** Array of time zone options available for selection.
+   * Each entry requires a human-readable `label` and a machine-readable `value`.
+   */
   timeZoneOptions: TimeZoneOption[];
+  /** The currently selected time zone, matched against `TimeZoneOption.value`. */
   value?: string;
 } & Pick<AutocompleteProps<TimeZoneOption, false, false>, "isReadOnly">;
 
+/**
+ * An autocomplete input for selecting a time zone from a provided list of options.
+ */
 const TimeZonePicker = ({
   label,
   isReadOnly,

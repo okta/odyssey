@@ -18,6 +18,14 @@ import { ResetArgsDecorator } from "../src/tools/ResetArgsDecorator.js";
 
 setupOdysseyDebugListener();
 
+// Popover widths are measured from the anchor field the moment they open.
+// If the web font swaps in mid-open, the field reflows by a sub-pixel and a
+// popover's right edge shifts ~1px between Applitools captures. Waiting for
+// fonts to settle before every play function keeps captured widths deterministic.
+export const beforeEach = async () => {
+  await document.fonts.ready;
+};
+
 export const globalTypes = {
   locale: {
     name: "Locale",

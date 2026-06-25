@@ -22,7 +22,13 @@ export const paginationTypeValues = ["paged", "loadMore"] as const;
 export type DataTablePaginationProps = {
   currentNumberOfResults?: number;
   currentPage?: number;
+  /**
+   * If `true`, the next-page button is disabled.
+   */
   isNextButtonDisabled?: boolean;
+  /**
+   * If `true`, the previous-page button is disabled.
+   */
   isPreviousButtonDisabled?: boolean;
   onClickNext: () => void;
   onClickPrevious?: () => void;

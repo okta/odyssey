@@ -1,7 +1,12 @@
+import type { FileInfo, API as JSCodeshiftAPI } from "jscodeshift";
+
 import { type Logger } from "@okta/odyssey-prompts";
+import jscodeshift from "jscodeshift";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+
+import transformer from "./transformer.js";
 
 export { COMPONENT_MAPPINGS } from "./mappings/index.js";
 
@@ -66,23 +71,9 @@ const JSCODESHIFT_DEFAULTS = {
 } as const;
 
 /**
- * Entry point that runs jscodeshift.
- *
- * @param {MigrationOptions} options - The migration configuration.
- * @param {string} options.components - Comma-separated component mapping keys to apply.
- * @param {boolean} options.dryRun - When true, preview changes without writing files.
- * @param {string[]} options.paths - File paths or directories to transform.
- * @returns {Promise<MigrationResult>} The result of the migration, including
- *   file counts (`ok`, `nochange`, `error`, `skip`), a `success` flag, and
- *   the elapsed time.
- *
- * @example
- * Dry run — preview DataTable migration without writing files
- * const result = await migrate({
- *   components: "DataTable",
- *   dryRun: true,
- *   paths: ["src/"],
- * });
+ * Runs jscodeshift against local file paths. Use when the caller has direct
+ * filesystem access (CLI, local tooling). For hosted or remote contexts where
+ * the filesystem is unavailable, use {@link migrateContent} instead.
  */
 export const migrate = async ({
   dryRun,
@@ -113,5 +104,52 @@ export const migrate = async ({
     skip,
     success: error === 0,
     timeElapsed,
+  };
+};
+
+export type MigrateSourceArgs = {
+  components: string;
+  filename?: string;
+  logger: Logger;
+  sourceCode: string;
+};
+
+export type MigrateSourceResult = {
+  hasChanges: boolean;
+  transformedCode: string;
+};
+
+/**
+ * Transforms source code in memory without reading or writing files.
+ * Intended for hosted/HTTP environments where the server has no access to
+ * the caller's filesystem. The caller reads the file, passes its content here,
+ * and writes the result back.
+ *
+ * @example
+ * const { transformedCode } = migrateSource({
+ *   components: "DataTable",
+ *   sourceCode: fs.readFileSync("src/Table.tsx", "utf-8"),
+ *   logger: myLogger,
+ * });
+ * fs.writeFileSync("src/Table.tsx", transformedCode);
+ */
+export const migrateSource = ({
+  components,
+  filename = "component.tsx",
+  logger,
+  sourceCode,
+}: MigrateSourceArgs): MigrateSourceResult => {
+  const j = jscodeshift.withParser("tsx");
+  const fileInfo: FileInfo = { source: sourceCode, path: filename };
+  const syntheticApi: JSCodeshiftAPI = {
+    j,
+    jscodeshift: j,
+    stats: () => {},
+    report: () => {},
+  };
+  const result = transformer(fileInfo, syntheticApi, { components, logger });
+  return {
+    transformedCode: result,
+    hasChanges: result !== sourceCode,
   };
 };

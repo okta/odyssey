@@ -43,19 +43,21 @@ export type FieldProps = {
    */
   errorMessageList?: string[];
   /**
-   * The field type determines how ARIA components are setup. It's important to use this to denote if you expect only one component (like a text field) or multiple (like a radio group).
+   * Controls how ARIA attributes are applied to the field container.
+   * - If `'single'`, use when the field wraps a single control such as a text input.
+   * - If `'group'`, use when the field wraps multiple controls such as a radio or checkbox group.
    */
   fieldType: (typeof fieldTypeValues)[number];
   /**
-   * If `true`, the Field label will be shown
+   * If `true`, the field label is visible. If `false`, the label is visually hidden but remains accessible to screen readers.
    */
   hasVisibleLabel: boolean;
   /**
-   * Important for determining if children inherit error state
+   * If `true`, child inputs inherit the group error state. Required for CheckboxGroup to propagate validity.
    */
   isCheckboxGroup?: boolean;
   /**
-   * Important for narrowing down the `fieldset` role to "radiogroup".
+   * If `true`, narrows the fieldset ARIA role to `"radiogroup"`.
    */
   isRadioGroup?: boolean;
   /**

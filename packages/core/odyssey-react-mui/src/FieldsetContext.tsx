@@ -13,6 +13,9 @@
 import { createContext, useContext } from "react";
 
 export type FieldsetContextValue = {
+  /**
+   * If `true`, all inputs within the fieldset are disabled.
+   */
   isDisabled: boolean;
 };
 

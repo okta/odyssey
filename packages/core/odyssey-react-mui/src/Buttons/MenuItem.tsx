@@ -23,23 +23,23 @@ import { MenuContext } from "./MenuContext.js";
 
 export type MenuItemProps = {
   /**
-   * The content of the menu item.
+   * Label or content rendered inside the clickable menu item row.
    */
   children: ReactNode;
   /**
-   * If `true`, the menu item will receive focus automatically.
+   * If `true`, the menu item receives focus automatically when the menu opens.
    */
   hasInitialFocus?: boolean;
   /**
-   * If `true`, the menu item will be visually marked as disabled.
+   * If `true`, the menu item is visually and functionally disabled.
    */
   isDisabled?: boolean;
   /**
-   * If `true`, the menu item will be visually marked as selected.
+   * If `true`, the menu item is visually marked as the current selection.
    */
   isSelected?: boolean;
   /**
-   * Callback fired when the menu item is clicked.
+   * Called when the menu item is clicked.
    */
   onClick?: MuiMenuItemProps["onClick"];
   /**
@@ -47,16 +47,22 @@ export type MenuItemProps = {
    */
   value?: string;
   /**
-   * The variant of the menu item.
-   * - "default": The default variant.
-   * - "destructive": A variant indicating a destructive action.
+   * Controls the visual style of the menu item.
+   * - If `'default'`, standard menu item appearance.
+   * - If `'destructive'`, red text and icon, indicating a destructive or irreversible action.
+   * @default "default"
    */
   variant?: "default" | "destructive";
-} & Pick<HtmlProps, "testId">;
+} & Pick<HtmlProps, "id" | "testId">;
 
+/**
+ * An individual action item rendered inside a Menu. Supports default and destructive visual
+ * variants, disabled and selected states, and auto-closes the parent Menu on click by default.
+ */
 const MenuItem = ({
   children,
   hasInitialFocus,
+  id,
   isSelected,
   isDisabled,
   onClick: onClickProp,
@@ -88,6 +94,7 @@ const MenuItem = ({
       }
       data-se={testId}
       disabled={isDisabled}
+      id={id}
       onClick={onClick}
       selected={isSelected}
       tabIndex={0}

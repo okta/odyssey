@@ -64,4 +64,74 @@ describe(Dialog.displayName!, () => {
     expect(onClose).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalledWith(expect.anything(), "closeButtonClick");
   });
+
+  test("dialog has role='dialog' with accessible name from the title prop", async () => {
+    const onClose = vi.fn();
+    await renderWithOdysseyProvider(
+      <Dialog isOpen onClose={onClose} title="Reset password">
+        Are you sure?
+      </Dialog>,
+    );
+    // Resolves through aria-labelledby → referenced element's text.
+    await expect
+      .element(page.getByRole("dialog", { name: "Reset password" }))
+      .toBeVisible();
+  });
+
+  test("dialog's aria-labelledby points to an element containing the title text", async () => {
+    const onClose = vi.fn();
+    await renderWithOdysseyProvider(
+      <Dialog isOpen onClose={onClose} title="Confirm action">
+        Body.
+      </Dialog>,
+    );
+    const dialog = page.getByRole("dialog");
+    await expect.element(dialog).toBeVisible();
+    const labelledBy = dialog.element().getAttribute("aria-labelledby");
+    expect(labelledBy).toBeTruthy();
+    const labelEl = document.getElementById(labelledBy!);
+    expect(labelEl?.textContent).toBe("Confirm action");
+  });
+
+  test("close button has no heading ancestor", async () => {
+    // Bug regression: the close button must not be a descendant of any
+    // heading element, otherwise screen readers announce it as
+    // "heading level N, Close, button".
+    const onClose = vi.fn();
+    await renderWithOdysseyProvider(
+      <Dialog isOpen onClose={onClose} title="Dialog title">
+        Dialog content.
+      </Dialog>,
+    );
+    const closeButton = page.getByRole("button", {
+      name: odysseyTranslate("close.text"),
+    });
+    await expect.element(closeButton).toBeVisible();
+    const hasHeadingAncestor = Boolean(
+      closeButton.element().closest("h1, h2, h3, h4, h5, h6"),
+    );
+    expect(hasHeadingAncestor).toBe(false);
+  });
+
+  test("dialog's aria-labelledby id remains stable across re-renders with the same title", async () => {
+    // Locks in id stability so future refactors don't accidentally
+    // regenerate ids on each render, that would force ATs to
+    // re-announce the dialog as the labelledby target changes.
+    const onClose = vi.fn();
+    const { rerender } = await renderWithOdysseyProvider(
+      <Dialog isOpen onClose={onClose} title="Reset">
+        Body.
+      </Dialog>,
+    );
+    const dialog = page.getByRole("dialog");
+    await expect.element(dialog).toBeVisible();
+    const labelledByBefore = dialog.element().getAttribute("aria-labelledby");
+    rerender(
+      <Dialog isOpen onClose={onClose} title="Reset">
+        Body changed.
+      </Dialog>,
+    );
+    const labelledByAfter = dialog.element().getAttribute("aria-labelledby");
+    expect(labelledByAfter).toBe(labelledByBefore);
+  });
 });
