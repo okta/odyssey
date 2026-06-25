@@ -40,4 +40,12 @@ debug-storybook.log
 .claude/settings.local.json
 .claude/worktrees/
 
+# Figma Make guidelines working backlog (the rest of guidelines/ is tracked)
+guidelines/PLAN.md
+
 .playwright-mcp/
+
+# Local env files (e.g. APPLITOOLS_API_KEY for running VRTs locally)
+.env
+.env.*
+!.env.example

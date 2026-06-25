@@ -70,7 +70,12 @@ export type TypographyProps = {
    */
   children: ReactNode;
   /**
-   * The color of the text.
+   * Controls the text color.
+   * - If `'primary'`, default text color.
+   * - If `'textPrimary'`, alias for `'primary'`.
+   * - If `'secondary'`, subdued text color.
+   * - If `'textSecondary'`, alias for `'secondary'`.
+   * - If `'error'`, danger red, for error states.
    */
   color?: (typeof typographyColorValues)[number];
   /**
@@ -82,15 +87,16 @@ export type TypographyProps = {
    */
   id?: string;
   /**
-   * If true, the component is presentational and should be ignored by screen readers.
+   * If `true`, the element is treated as presentational and ignored by screen readers.
    */
   isPresentational?: boolean;
   /**
-   * The ref forwarded to the Typography
+   * Ref attached to the underlying typography element.
    */
   typographyRef?: React.RefObject<FocusHandle>;
   /**
    * The variant of Typography to render.
+   * @default "body"
    */
   variant?: keyof typeof typographyVariantMapping;
 } & Pick<
@@ -103,6 +109,11 @@ export type TypographyProps = {
   | "translate"
 >;
 
+/**
+ * Low-level typography primitive that renders styled text using the Odyssey design
+ * system. Prefer the semantic variants (Heading1–Heading6, Paragraph, etc.) over this
+ * component for most use cases.
+ */
 const Typography = ({
   ariaCurrent,
   ariaDescribedBy,
@@ -166,6 +177,10 @@ const Typography = ({
 const MemoizedTypography = memo(Typography);
 MemoizedTypography.displayName = "Typography";
 
+/**
+ * Top-level page heading rendered as an `<h1>` element. Use once per page to mark the
+ * primary title.
+ */
 const Heading1 = ({
   ariaCurrent,
   ariaDescribedBy,
@@ -198,6 +213,9 @@ const Heading1 = ({
 const MemoizedHeading1 = memo(Heading1);
 MemoizedHeading1.displayName = "Heading1";
 
+/**
+ * Second-level section heading rendered as an `<h2>` element.
+ */
 const Heading2 = ({
   ariaCurrent,
   ariaDescribedBy,
@@ -228,6 +246,9 @@ const Heading2 = ({
 const MemoizedHeading2 = memo(Heading2);
 MemoizedHeading2.displayName = "Heading2";
 
+/**
+ * Third-level section heading rendered as an `<h3>` element.
+ */
 const Heading3 = ({
   ariaCurrent,
   ariaDescribedBy,
@@ -258,6 +279,9 @@ const Heading3 = ({
 const MemoizedHeading3 = memo(Heading3);
 MemoizedHeading3.displayName = "Heading3";
 
+/**
+ * Fourth-level section heading rendered as an `<h4>` element.
+ */
 const Heading4 = ({
   ariaCurrent,
   ariaDescribedBy,
@@ -288,6 +312,9 @@ const Heading4 = ({
 const MemoizedHeading4 = memo(Heading4);
 MemoizedHeading4.displayName = "Heading4";
 
+/**
+ * Fifth-level section heading rendered as an `<h5>` element.
+ */
 const Heading5 = ({
   ariaCurrent,
   ariaDescribedBy,
@@ -318,6 +345,9 @@ const Heading5 = ({
 const MemoizedHeading5 = memo(Heading5);
 MemoizedHeading5.displayName = "Heading5";
 
+/**
+ * Sixth-level section heading rendered as an `<h6>` element.
+ */
 const Heading6 = ({
   ariaCurrent,
   ariaDescribedBy,
@@ -348,6 +378,9 @@ const Heading6 = ({
 const MemoizedHeading6 = memo(Heading6);
 MemoizedHeading6.displayName = "Heading6";
 
+/**
+ * Body text rendered as a `<p>` element. Use for standard prose content.
+ */
 const Paragraph = ({
   ariaCurrent,
   ariaDescribedBy,
@@ -378,6 +411,10 @@ const Paragraph = ({
 const MemoizedParagraph = memo(Paragraph);
 MemoizedParagraph.displayName = "Paragraph";
 
+/**
+ * Subordinate text rendered as a `<p>` element with a reduced visual weight. Use for
+ * secondary or supporting information that follows primary body copy.
+ */
 const Subordinate = ({
   ariaCurrent,
   ariaDescribedBy,
@@ -408,6 +445,10 @@ const Subordinate = ({
 const MemoizedSubordinate = memo(Subordinate);
 MemoizedSubordinate.displayName = "Subordinate";
 
+/**
+ * Support text rendered as a `<p>` element at the smallest body scale. Use for helper
+ * text, captions, or fine print.
+ */
 const Support = ({
   ariaCurrent,
   ariaDescribedBy,
@@ -438,6 +479,9 @@ const Support = ({
 const MemoizedSupport = memo(Support);
 MemoizedSupport.displayName = "Support";
 
+/**
+ * Legend text styled for use as a `<fieldset>` legend or form group label.
+ */
 const Legend = ({
   ariaDescribedBy,
   ariaLabel,
@@ -466,6 +510,10 @@ const Legend = ({
 const MemoizedLegend = memo(Legend);
 MemoizedLegend.displayName = "Legend";
 
+/**
+ * Overline text rendered as a `<p>` element in an uppercase, small-caps style. Use to
+ * label a section or group before a heading.
+ */
 const Overline = ({
   ariaDescribedBy,
   ariaLabel,

@@ -1,0 +1,112 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta />
+
+# Configuring Vite
+
+Odyssey depends on React and ReactDOM as true singletons — multiple instances break hooks and context. MUI and Emotion should also be shared across your app to avoid style conflicts. Vite's default bundling can create duplicates depending on how your project is structured. The right fix depends on your situation:
+
+| Situation                                                | Fix                                             |
+| -------------------------------------------------------- | ----------------------------------------------- |
+| App that renders Odyssey via `renderReactInWebComponent` | `output.manualChunks` — keep React in one chunk |
+| App with duplicate copies pulled in from libraries       | `resolve.dedupe`                                |
+| Library or contributions package you publish             | `rollupOptions.external` + `output.globals`     |
+
+These are not mutually exclusive. A contributions package externalizes its dependencies, and the consuming app dedupes or chunks React on top of that.
+
+---
+
+## Web-component app: `output.manualChunks`
+
+Apps that render Odyssey through `renderReactInWebComponent` need this fix. The web-component entry uses a dynamic `import("react-dom/client")` that Vite splits into its own chunk, which can pull in a second copy of React. Forcing all React entry points into a single chunk prevents this:
+
+```ts
+// vite.config.ts
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-dom/client"],
+        },
+      },
+    },
+  },
+});
+```
+
+This is a workaround for the dynamic import behavior in the web-component entry. It is expected to be removed once Odyssey switches to a static import internally.
+
+---
+
+## Plain app: `resolve.dedupe`
+
+Apps that mount with a plain `ReactDOM.createRoot` (no web-component) can hit duplication when multiple libraries each resolve their own copy of a shared package. Deduplication forces a single physical resolution per package:
+
+```ts
+// vite.config.ts
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  resolve: {
+    dedupe: [
+      "react",
+      "react-dom",
+      "@mui/material",
+      "@emotion/react",
+      "@emotion/styled",
+      "@okta/odyssey-react-mui",
+    ],
+  },
+});
+```
+
+`dedupe` works at module-resolution time; `manualChunks` works at chunk-splitting time. They solve different layers of the same class of problem.
+
+---
+
+## Library or contributions package: `external` + `globals`
+
+When building a library, never bundle the shared singletons — mark them `external` and let the consuming app provide the single runtime copy:
+
+```ts
+// vite.config.project.ts
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      external: [
+        "react",
+        "react-dom",
+        "@okta/odyssey-react-mui",
+        "@okta/odyssey-design-tokens",
+        "@mui/material",
+        "@emotion/react",
+        "@emotion/styled",
+      ],
+      output: {
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+          "@okta/odyssey-react-mui": "OdysseyReactMui",
+          "@okta/odyssey-design-tokens": "OdysseyDesignTokens",
+          "@mui/material": "MaterialUI",
+          "@emotion/react": "EmotionReact",
+          "@emotion/styled": "EmotionStyled",
+        },
+      },
+    },
+  },
+});
+```
+
+Contributions packages in this repo use this pattern via the stack-provided `vite.config.ts` template. Only edit `vite.config.project.ts` — the template file is managed by the contributions stack and will be overwritten on updates.
+
+---
+
+## Verifying a single React instance
+
+After building, duplicate React instances often surface at runtime as **"Invalid hook call"** errors in the console. With the `manualChunks` config applied, inspect the build output to confirm `react`, `react-dom`, and `react-dom/client` all resolve into the single `react-vendor` chunk. No such errors should appear.

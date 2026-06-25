@@ -203,4 +203,14 @@ export const htmlPropsMetaData: ArgTypes<Required<HtmlProps>> = {
       },
     },
   },
+  id: {
+    control: "text",
+    description: "The `id` attribute of the HTML element.",
+    table: {
+      category: "Functional",
+      type: {
+        summary: "string",
+      },
+    },
+  },
 };

@@ -94,7 +94,7 @@ export type DataFilter = {
    */
   id: Exclude<MRT_ColumnDef<MRT_RowData>["accessorKey"], undefined>;
   /**
-   * `Autocomplete` normally only allows values that exist in the list box. This feature allows you to enter in any value in the text field and have that be the stored value in `Autocomplete`
+   * If `true`, the autocomplete filter accepts free-text values that are not in the option list.
    *
    * NOTE: This only applies when `variant` is `autocomplete`
    */
@@ -142,13 +142,11 @@ export type DataFiltersProps = {
    */
   filters?: Array<DataFilter>;
   /**
-   * If true, a Search button will be provided alongside the search input
-   * and `onChangeSearch` will fire when the button is clicked, rather than
-   * whenever the input value changes.
+   * If `true`, a Search button is shown alongside the search input; `onChangeSearch` fires on button click rather than on each input change.
    */
   hasSearchSubmitButton?: boolean;
   /**
-   * If true, the filter and search will be disabled
+   * If `true`, the filter controls and search input are disabled.
    */
   isDisabled?: boolean;
   /**
@@ -194,7 +192,6 @@ const FilterTags = ({
     (activeFilter: DataFilter) => activeFilter.value,
   );
   const filtersToRender: FiltersToRender[] = [];
-
   filtersWithValues.forEach((filter) => {
     if (Array.isArray(filter.value)) {
       filter.value.forEach((filterValue) => {
@@ -211,10 +208,13 @@ const FilterTags = ({
       });
     }
     if (typeof filter.value === "string") {
+      const matchingOption = filter.options?.find(
+        (option) => option.value === filter.value,
+      );
       filtersToRender.push({
         filterId: filter.id,
         filterLabel: filter.label,
-        optionLabel: filter.value,
+        optionLabel: matchingOption?.label ?? filter.value,
         optionValue: filter.value,
       });
     }

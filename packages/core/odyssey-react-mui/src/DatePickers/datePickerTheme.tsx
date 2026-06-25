@@ -28,6 +28,17 @@ type ThemeStyles = ({
 
 type StateStyles = Record<string, ThemeStyles>;
 
+// Minimal shape of the Popper.js modifier argument we read/write to size the
+// calendar popup to its anchor field. Typed locally to avoid importing the full
+// @popperjs/core types into the theme.
+type PopperWidthModifierArguments = {
+  state: {
+    elements: { popper: HTMLElement; reference: Element };
+    rects: { reference: { width: number } };
+    styles: { popper: Record<string, string> };
+  };
+};
+
 export const dateStyles: StateStyles = {
   default: ({ theme }) => ({
     color: theme.palette.text.primary,
@@ -142,9 +153,17 @@ export const datePickerTheme: ThemeOptions = {
       styleOverrides: {
         root: ({ theme }) => ({
           display: "block",
-          // Matches Popper width
+          // Touch renders a near-full-width modal (no Popper), so it keeps the
+          // viewport-based width. On pointer:fine the Popper is sized to the
+          // field's width (see the MuiDatePicker popper modifier, clamped on
+          // MuiPickersPopper), so the layout just fills it instead of forcing a
+          // fixed viewport-wide width that overflows narrow parent containers.
           width: "calc(100vw - 64px)",
           maxWidth: theme.mixins.maxWidth,
+
+          "@media (pointer: fine)": {
+            width: "100%",
+          },
         }),
         contentWrapper: ({ theme }) => ({
           width: "auto",
@@ -179,6 +198,13 @@ export const datePickerTheme: ThemeOptions = {
           justifyContent: "space-between",
           marginBlockStart: theme.spacing(5),
           paddingInline: theme.spacing(1),
+          // Match weekContainer's gap so the in-flow header reaches the same
+          // natural width as the day grid. The grid itself is position:absolute
+          // (for slide animations), so it doesn't contribute to the calendar's
+          // min-content width; the header is what carries that intrinsic width up
+          // to the popup's `min-width: min-content`, keeping all seven columns
+          // visible when the popup shrinks to a narrow field.
+          gap: theme.spacing(1),
         }),
         monthContainer: ({ theme }) => ({
           // padding needed to be able to show focus state for calendar days
@@ -219,6 +245,28 @@ export const datePickerTheme: ThemeOptions = {
           popper: {
             popperOptions: {
               placement: "bottom-start",
+              // Size the calendar popup to its anchor field's width so it never
+              // overflows a narrow parent container. MuiPickersPopper clamps this
+              // between the calendar's min-content and the previous default cap.
+              modifiers: [
+                {
+                  name: "matchFieldWidth",
+                  enabled: true,
+                  phase: "beforeWrite",
+                  requires: ["computeStyles"],
+                  fn: ({ state }: PopperWidthModifierArguments) => {
+                    state.styles.popper.width = `${state.rects.reference.width}px`;
+                  },
+                  effect: ({ state }: PopperWidthModifierArguments) => {
+                    const fieldElement = state.elements
+                      .reference as HTMLElement;
+                    state.elements.popper.style.setProperty(
+                      "width",
+                      `${fieldElement.offsetWidth}px`,
+                    );
+                  },
+                },
+              ],
             },
           },
         },
@@ -298,6 +346,14 @@ export const datePickerTheme: ThemeOptions = {
     },
     MuiPickersPopper: {
       styleOverrides: {
+        root: ({ theme }) => ({
+          // The MuiDatePicker popper modifier sets this element's width to the
+          // field width; clamp it so the popup never collapses below the
+          // calendar's natural width (min-content, carried by the weekday-header
+          // gap) or grows past the previous default cap.
+          minWidth: "min-content",
+          maxWidth: theme.mixins.maxWidth,
+        }),
         paper: ({ theme }) => ({
           boxShadow: `0 ${1 / 14}rem ${
             4 / 14

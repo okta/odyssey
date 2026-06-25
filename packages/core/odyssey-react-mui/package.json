@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.62.2",
+  "version": "1.63.0",
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
@@ -20,6 +20,12 @@
       ],
       "icons": [
         "./dist/types/icons.generated/index.d.ts"
+      ],
+      "lazy-loaded-icons": [
+        "./dist/types/icons.generated/lazyIconDictionary.d.ts"
+      ],
+      "icon-names": [
+        "./dist/types/icons.generated/names.d.ts"
       ],
       "logos": [
         "./dist/types/logos.generated/index.d.ts"
@@ -48,6 +54,16 @@
       "types": "./dist/types/icons.generated/index.d.ts",
       "import": "./dist/esm/icons.generated/index.js",
       "require": "./dist/cjs/icons.generated/index.cjs"
+    },
+    "./lazy-loaded-icons": {
+      "types": "./dist/types/icons.generated/lazyIconDictionary.d.ts",
+      "import": "./dist/esm/icons.generated/lazyIconDictionary.js",
+      "require": "./dist/cjs/icons.generated/lazyIconDictionary.cjs"
+    },
+    "./icon-names": {
+      "types": "./dist/types/icons.generated/names.d.ts",
+      "import": "./dist/esm/icons.generated/names.js",
+      "require": "./dist/cjs/icons.generated/names.cjs"
     },
     "./logos": {
       "types": "./dist/types/logos.generated/index.d.ts",

@@ -29,38 +29,43 @@ export const bannerSeverityValues: AlertColor[] = [
 
 export type BannerProps = {
   /**
-   * The function that's fired when the user clicks the close button. If undefined,
-   * the close button will not be shown.
+   * Called when the user clicks the close button. When undefined, the close button is not shown.
    */
   onClose?: AlertProps["onClose"];
   /**
-   * Sets the ARIA role of the alert
-   * ("status" for something that dynamically updates, "alert" for errors, null for something
-   * unchanging)
+   * Sets the ARIA live-region role.
+   * - If `'status'`, announces updates politely; use for non-critical dynamic messages.
+   * - If `'alert'`, announces updates assertively; use for errors or urgent information.
    */
   role?: (typeof bannerRoleValues)[number];
   /**
-   * Determine the color and icon of the alert
+   * Visual severity level that controls the banner's color and icon.
    */
   severity: (typeof bannerSeverityValues)[number];
   /**
-   * The text content of the alert
+   * Primary message text displayed inside the banner.
    */
   text: string;
 } & Pick<HtmlProps, "testId" | "translate"> &
   // if linkText is provided, either linkUrl or onLinkClick must be provided
   (| {
+        /** The `rel` attribute of the action link. */
         linkRel?: LinkProps["rel"];
+        /** The `target` attribute of the action link (e.g., `"_blank"`). */
         linkTarget?: LinkProps["target"];
+        /** Visible label for the action link rendered after the banner text. */
         linkText: string;
+        /** The URL the action link navigates to. Required when `onLinkClick` is not provided. */
         linkUrl: LinkProps["href"];
         onLinkClick?: never;
       }
     | {
         linkRel?: never;
         linkTarget?: never;
+        /** Visible label for the action link rendered after the banner text. */
         linkText: string;
         linkUrl?: never;
+        /** Click handler for the action link. Required when `linkUrl` is not provided. */
         onLinkClick: LinkProps["onClick"];
       }
     | {
@@ -72,6 +77,10 @@ export type BannerProps = {
       }
   );
 
+/**
+ * A full-width alert strip displayed at the top of a page or section to communicate
+ * high-priority information such as errors, warnings, or status updates.
+ */
 const Banner = ({
   linkRel,
   linkTarget,

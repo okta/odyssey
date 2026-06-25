@@ -40,10 +40,17 @@ const StyledContrastContainerStyles = styled("div")({
 });
 
 export type OdysseyThemeProviderProps = OdysseyThemeProviderContextProps & {
+  /** The content to render inside the Odyssey theme context. */
   children: ReactNode;
+  /**
+   * Overrides the contrast mode for child components, enabling high-contrast or low-contrast
+   * rendering within this subtree.
+   */
   contrastMode?: ContrastMode;
   /**
-   * Odyssey adds a wrapper `div` for contrast changes and height calculations. This is not necessary if you're not changing the background color or rendering into full-height element.
+   * If `true`, wraps children in a div used for contrast changes and height calculations.
+   * Set to `false` when no background color change is needed and full-height rendering is not required.
+   * @default true
    */
   hasWrapperElement?: boolean;
   /** @deprecated Use shadowRootElement instead */
@@ -51,9 +58,11 @@ export type OdysseyThemeProviderProps = OdysseyThemeProviderContextProps & {
 };
 
 /**
- * This function doesn't include the Emotion Cache or Translations. You should probably be using `OdysseyProvider`.
+ * This function doesn't include the Emotion Cache or Translations. You should probably
+ * be using `OdysseyProvider`.
  *
- * Some teams have a need to wrap separately (SIW), but most teams will never need to use this explicitly.
+ * Some teams have a need to wrap separately (SIW), but most teams will never need to use
+ * this explicitly.
  */
 const OdysseyThemeProvider = ({
   children,

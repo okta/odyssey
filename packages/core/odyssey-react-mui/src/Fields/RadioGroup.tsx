@@ -40,7 +40,7 @@ export type RadioGroupProps = {
    */
   label: string;
   /**
-   * Listen for changes in the browser that change `value`
+   * Called when the selected radio option changes. Receives the event and the new value.
    */
   onChange?: MuiRadioGroupProps["onChange"];
   /**
@@ -65,6 +65,10 @@ type FieldRenderProps = Partial<
 > &
   Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
+/**
+ * A group of mutually exclusive Radio inputs, allowing the user to select
+ * exactly one option from a set.
+ */
 const RadioGroup = ({
   ariaDescribedBy,
   children,

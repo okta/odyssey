@@ -46,11 +46,13 @@ const IconContainer = styled.span<{
 
 export type IconWithTooltipProps = {
   /**
-   * The icon to render. Defaults to `InformationCircleIcon`
+   * The icon to render. Defaults to `InformationCircleIcon`.
+   * @default `<InformationCircleIcon />`
    */
   IconComponent?: ReactNode;
   /**
-   * The placement of the Tooltip
+   * The placement of the Tooltip.
+   * @default "right"
    */
   placement?: MuiTooltipProps["placement"];
   /**
@@ -59,6 +61,10 @@ export type IconWithTooltipProps = {
   tooltipText: string;
 } & Pick<HtmlProps, "testId" | "translate">;
 
+/**
+ * Displays an icon (defaulting to an information circle) that reveals a tooltip on focus or hover.
+ * Use it to surface supplementary help text inline next to a label or form field.
+ */
 const IconWithTooltip = ({
   IconComponent = <InformationCircleIcon />,
   placement = "right",

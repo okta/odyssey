@@ -82,23 +82,23 @@ export type DataTableColumn<TData extends MRT_RowData> = {
    */
   Cell?: MRT_ColumnDef<TData>["Cell"];
   /**
-   * If set to false, the column won't be filterable
+   * If `false`, the column is excluded from column-level filtering.
    */
   enableColumnFilter?: boolean;
   /**
-   * If set to false, the column won't be searchable
+   * If `false`, the column is excluded from the global search.
    */
   enableGlobalFilter?: boolean;
   /**
-   * If set to false, the column won't be hidable
+   * If `false`, the column cannot be hidden by the user.
    */
   enableHiding?: boolean;
   /**
-   * If set to false, the column won't be resizable
+   * If `false`, the column cannot be resized by the user.
    */
   enableResizing?: boolean;
   /**
-   * If set to false, the column won't be sortable
+   * If `false`, the column cannot be sorted.
    */
   enableSorting?: boolean;
   /**
@@ -163,45 +163,43 @@ export type DataTableProps<TData extends MRT_RowData> = {
    */
   getRowId?: MRT_TableOptions<TData>["getRowId"];
   /**
-   * If true, the end user will be able to change the table density.
+   * If `true`, the end user can change the table row density.
    */
   hasChangeableDensity?: boolean;
   /**
-   * If true, the end user can resize individual columns.
+   * If `true`, the end user can resize individual columns.
    */
   hasColumnResizing?: boolean;
   /**
-   * If true, the end user will be able to show/hide columns.
+   * If `true`, the end user can show or hide columns.
    */
   hasColumnVisibility?: boolean;
   /**
-   * If true, the end user will be able to filter columns.
+   * If `true`, a filter menu is shown above the table.
    */
   hasFilters?: boolean;
   /**
-   * If true, the table will include pagination controls.
+   * If `true`, pagination controls are shown below the table.
    */
   hasPagination?: boolean;
   /**
-   * If true, the end user can reorder rows via a drag-and-drop interface
+   * If `true`, the end user can reorder rows via drag-and-drop.
    */
   hasRowReordering?: boolean;
   /**
-   * If true, the table will include checkboxes on each row, enabling
-   * the user to select some or all rows.
+   * If `true`, each row includes a checkbox for row selection.
    */
   hasRowSelection?: boolean;
   /**
-   * If true, the global table search controls will be shown.
+   * If `true`, a global search field is shown above the table.
    */
   hasSearch?: boolean;
   /**
-   * If true, the search field will include a Search button, rather than
-   * firing on input change.
+   * If `true`, the search field includes a submit button; otherwise it fires on each input change.
    */
   hasSearchSubmitButton?: boolean;
   /**
-   * If true, the end user can sort columns (ascending, descending, or neither)
+   * If `true`, the end user can sort columns ascending, descending, or unsorted.
    */
   hasSorting?: boolean;
   /**

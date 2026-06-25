@@ -29,8 +29,13 @@ const storybookMeta: Meta = {
 
 export default storybookMeta;
 
+// `keyof typeof iconDictionary` may include non-component values when resolved
+// against a stale dist; exclude them so computed indexing always yields a
+// React component with a valid `displayName`.
+type IconComponentName = Exclude<keyof typeof iconDictionary, "iconNames">;
+
 type IconData = {
-  name: keyof typeof iconDictionary;
+  name: IconComponentName;
   use: string;
 };
 
@@ -177,9 +182,7 @@ export const Default: StoryObj = {
         columns={columns as DataTableColumn<DataTableRowData>[]}
         getData={() => icons}
         // The `as` here shouldn't be required because `DataTable` should know the return type of `getData` and infer the rest. It needs to ta generic to fix that. --Kevin Ghadyani
-        getRowId={(originalRow) =>
-          originalRow.name as keyof typeof iconDictionary
-        }
+        getRowId={(originalRow) => originalRow.name as IconComponentName}
         hasSorting={false}
       />
     );

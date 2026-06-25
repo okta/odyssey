@@ -36,27 +36,30 @@ export type AccordionProps = {
    */
   id?: string;
   /**
-   * Whether the item is expanded by default
+   * If `true`, the accordion item is expanded on initial render.
    */
   isDefaultExpanded?: boolean;
   /**
-   * Whether the item is disabled
+   * If `true`, the accordion item is disabled and cannot be expanded or collapsed.
    */
   isDisabled?: boolean;
   /**
-   * Whether the item is expanded
+   * If `true`, the accordion item is expanded (controlled).
    */
   isExpanded?: boolean;
   /**
    * The label text for the AccordionSummary
    */
   label: string;
+  /**
+   * Called when the expansion state of the accordion changes.
+   */
   onChange?: MuiAccordionProps["onChange"];
   /**
-   * Event fired when the expansion state of the accordion is changed
-   */
-  /**
-   * Visual style for the accordion (default or borderless)
+   * Controls the visual border style of the accordion.
+   * - If `'default'`, renders with a visible outline border.
+   * - If `'borderless'`, renders without a border, suitable for use on patterned or colored backgrounds.
+   * @default "default"
    */
   variant?: (typeof accordionVariantValues)[number];
 } & (
@@ -71,6 +74,10 @@ export type AccordionProps = {
 ) &
   Pick<HtmlProps, "testId" | "translate">;
 
+/**
+ * A collapsible content section with a clickable header. Use to progressively
+ * disclose information and reduce visual complexity on content-heavy pages.
+ */
 const Accordion = ({
   children,
   label,

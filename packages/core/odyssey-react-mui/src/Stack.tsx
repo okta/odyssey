@@ -22,6 +22,7 @@ export const stackDirectionValues = [
 ] as const;
 
 export type OdysseyStackProps = {
+  /** The content to render inside the stack. */
   children?: MuiStackProps["children"];
   /**
    * The component used for the root node. Either a string to use a HTML element or a component.
@@ -29,14 +30,20 @@ export type OdysseyStackProps = {
   component?: MuiStackProps["component"];
   /**
    * Defines the flex-direction style property. It is applied for all screen sizes.
+   * @default "column"
    */
   direction?: (typeof stackDirectionValues)[number];
   /**
    * Defines the space between immediate children.
+   * @default 2
    */
   spacing?: (typeof stackSpacingValues)[number];
 };
 
+/**
+ * A layout component that arranges its children in a one-dimensional row or column
+ * with consistent spacing between them.
+ */
 const Stack = ({
   children,
   direction = "column",

@@ -24,6 +24,10 @@ export type MenuButtonProps = Omit<
 > &
   AdditionalBaseMenuButtonProps;
 
+/**
+ * A button that opens a dropdown menu of actions when clicked. Renders a labeled trigger button
+ * with a chevron icon and manages the open/close state of the associated menu.
+ */
 const MenuButton = (props: MenuButtonProps) => {
   return <BaseMenuButton {...props} />;
 };

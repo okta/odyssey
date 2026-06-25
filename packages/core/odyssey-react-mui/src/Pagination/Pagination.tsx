@@ -75,25 +75,26 @@ export type PaginationProps = {
    */
   currentRowsCount?: number;
   /**
-   * If true, the page input will be visible and the user can directly manipulate which page
-   * is visible.
+   * If `true`, shows a page-number input allowing users to navigate directly to a page.
+   * @default true
    */
   hasPageInput?: boolean;
   /**
-   * If true, the row count input will be visible and the user can directly manipulate how many rows
-   * are visible.
+   * If `true`, shows a rows-per-page input allowing users to change how many rows are visible.
+   * @default true
    */
   hasRowCountInput?: boolean;
   /**
-   * If true, the "X - X of total X" label will be visible
+   * If `true`, shows the "X – X of total X" row count label.
+   * @default true
    */
   hasRowCountLabel?: boolean;
   /**
-   * If true, the pagination controls will be disabled
+   * If `true`, all pagination controls are disabled.
    */
   isDisabled?: boolean;
   /**
-   * If true, the next or Show More button will be disabled
+   * If `true`, the next-page or Show More button is disabled.
    */
   isMoreDisabled?: boolean;
   /**
@@ -117,7 +118,7 @@ export type PaginationProps = {
    */
   nextLabel?: string;
   /**
-   * Page index and page size setter
+   * Called when the page index or page size changes. Receives the new page index and page size.
    */
   onPaginationChange: ({
     pageIndex,
@@ -153,6 +154,10 @@ export type PaginationProps = {
   variant?: (typeof paginationTypeValues)[number];
 };
 
+/**
+ * A pagination control that allows users to navigate between pages of data or load more items.
+ * Supports paged navigation with previous/next buttons and a "load more" variant.
+ */
 const Pagination = ({
   currentPageLabel: currentPageLabelProp,
   currentRowsCount,

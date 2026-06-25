@@ -37,26 +37,28 @@ import { HintContainerWithInlineStartSpacing } from "./Hint.js";
 
 export type RadioProps = {
   /**
-   * The ref forwarded to the Radio
+   * Ref attached to the underlying `<input>` element.
    */
   inputRef?: React.RefObject<FocusHandle>;
   /**
-   * Determines whether the Radio button is checked
+   * If `true`, the radio button is checked.
    */
   isChecked?: boolean;
   /**
-   * If `true`, the radio button has an invalid value
+   * If `true`, the radio button has an invalid value.
    */
   isInvalid?: boolean;
   /**
    * The label text for the Radio
    */
   label: string;
+  /** Called when the radio button loses focus. */
   onBlur?: MuiFormControlLabelProps["onBlur"];
   /**
-   * Callback fired when the blur event happens. Provides event value.
+   * Called when the radio selection changes.
    */
   onChange?: MuiRadioProps["onChange"];
+  /** Called when the radio button is clicked. */
   onClick?: React.MouseEventHandler<HTMLSpanElement>;
   /**
    * The value attribute of the Radio
@@ -68,6 +70,10 @@ export type RadioProps = {
 > &
   Pick<HtmlProps, "testId" | "translate">;
 
+/**
+ * A single radio button used within a RadioGroup.
+ * Renders a labeled, optionally hinted radio input that supports read-only and disabled states.
+ */
 const Radio = ({
   hint,
   id: idOverride,

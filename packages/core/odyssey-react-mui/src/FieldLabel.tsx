@@ -20,9 +20,15 @@ import { ScreenReaderText } from "./ScreenReaderText.js";
 import { Subordinate } from "./Typography.js";
 
 export type FieldLabelProps = {
+  /**
+   * If `true`, the label text is rendered visibly. If `false`, the label is visually hidden but remains accessible to screen readers.
+   */
   hasVisibleLabel: boolean;
   id: string;
   inputId: string;
+  /**
+   * If `true`, an "(Optional)" indicator is appended to the label text.
+   */
   isOptional: boolean;
   text: string;
 } & Pick<HtmlProps, "testId" | "translate">;

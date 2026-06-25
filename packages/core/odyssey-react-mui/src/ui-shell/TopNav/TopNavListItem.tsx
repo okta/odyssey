@@ -110,7 +110,7 @@ export type TopNavListItemProps = {
    */
   id: string;
   /**
-   * Determines whether the link item is disabled.
+   * If `true`, the navigation link item is disabled and cannot be activated.
    */
   isDisabled?: boolean;
   /**

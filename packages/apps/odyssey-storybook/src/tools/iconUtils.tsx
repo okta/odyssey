@@ -13,11 +13,21 @@
 import * as odysseyIcons from "@okta/odyssey-react-mui/icons";
 import { createElement } from "react";
 
+type OdysseyIconExport = (typeof odysseyIcons)[keyof typeof odysseyIcons];
+// The `/icons` barrel may resolve non-component values (e.g. `readonly string[]`)
+// when checked against a stale dist; narrow to members with a `displayName`.
+type OdysseyIconComponent = Exclude<OdysseyIconExport, readonly string[]>;
+
+const isIconComponent = (
+  iconExport: OdysseyIconExport,
+): iconExport is OdysseyIconComponent & { displayName: string } =>
+  "displayName" in iconExport && iconExport.displayName != null;
+
 const icons = Object.values(odysseyIcons)
-  .filter((iconComponent) => iconComponent.displayName)
+  .filter(isIconComponent)
   .map((iconComponent) => ({
-    [iconComponent.displayName || ""]: createElement(iconComponent),
+    [iconComponent.displayName]: createElement(iconComponent),
   }))
-  .reduce((accumulator, iconObject) => ({ ...accumulator, ...iconObject }), {});
+  .reduce((iconsByName, iconObject) => ({ ...iconsByName, ...iconObject }), {});
 
 export default icons;

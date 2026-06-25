@@ -12,7 +12,6 @@
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { css, Global } from "@emotion/react";
 import styled from "@emotion/styled";
 import { DatePicker, DatePickerProps } from "@okta/odyssey-react-mui";
 import { useMemo, useState } from "react";
@@ -238,12 +237,6 @@ const NarrowContainer = styled.div`
   width: 320px;
 `;
 
-const constrainedPickerPaperStyles = css`
-  .MuiPickersPopper-paper {
-    width: 320px;
-  }
-`;
-
 export const InNarrowContainer: Story = {
   args: {
     defaultValue: "2024-07-11T03:00:00.000Z",
@@ -258,7 +251,6 @@ export const InNarrowContainer: Story = {
   render: function C(props) {
     return (
       <NarrowContainer>
-        <Global styles={constrainedPickerPaperStyles} />
         <DatePicker {...props} />
       </NarrowContainer>
     );

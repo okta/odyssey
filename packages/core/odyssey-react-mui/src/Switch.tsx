@@ -108,7 +108,7 @@ const SwitchTrack = styled("div", {
   width: odysseyDesignTokens.Spacing7,
   height: `calc(${odysseyDesignTokens.Spacing4} + ${odysseyDesignTokens.Spacing1})`,
   borderRadius: odysseyDesignTokens.BorderRadiusOuter,
-  backgroundColor: odysseyDesignTokens.HueNeutral300,
+  backgroundColor: odysseyDesignTokens.PaletteNeutralMain,
   transition: `background-color ${odysseyDesignTokens.TransitionDurationMain}`,
 
   ...(isDisabled && {
@@ -122,7 +122,7 @@ const SwitchTrack = styled("div", {
   ...(isChecked &&
     !isDisabled &&
     !isReadOnly && {
-      backgroundColor: odysseyDesignTokens.PaletteSuccessLight,
+      backgroundColor: odysseyDesignTokens.PaletteSuccessMain,
     }),
 }));
 
@@ -220,19 +220,20 @@ type OnChangeCallbackArguments = {
 
 export type SwitchProps = {
   /**
-   * Determines whether the Switch is read-only
+   * If `true`, the switch is read-only and cannot be toggled by the user.
+   * @default false
    */
   isReadOnly?: boolean;
   /**
-   * The label text for the Switch
+   * The label text for the Switch.
    */
   label: string;
   /**
-   * The change event handler for the Switch
+   * Called when the checked state changes. Receives the new checked state and the input value.
    */
   onChange?: ({ checked, value }: OnChangeCallbackArguments) => void;
   /**
-   * The value attribute of the Switch
+   * The value submitted with the form when the Switch is checked.
    */
   value: string;
 } & Pick<
@@ -288,6 +289,11 @@ const SwitchLabel = ({
 const MemoizedSwitchLabel = memo(SwitchLabel);
 SwitchLabel.displayName = "SwitchLabel";
 
+/**
+ * A toggle control that lets users switch a setting on or off. Use in place of
+ * a checkbox when the change takes effect immediately without requiring a form
+ * submission.
+ */
 const Switch = ({
   hint,
   HintLinkComponent,

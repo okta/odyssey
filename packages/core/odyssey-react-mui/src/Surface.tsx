@@ -38,9 +38,14 @@ const StyledContainer = styled(MuiPaper, {
 }));
 
 export type SurfaceProps = {
+  /** Content to render inside the surface container. */
   children: ReactNode;
 };
 
+/**
+ * A styled container that provides a visually distinct background for grouping related
+ * content. Automatically adapts its border and theme to the current contrast mode.
+ */
 const Surface = ({ children }: SurfaceProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { contrastMode } = useContrastModeContext();

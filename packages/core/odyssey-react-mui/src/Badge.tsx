@@ -26,8 +26,22 @@ export const badgeContentMaxValues = [
 export const badgeTypeValues = ["default", "attention", "danger"] as const;
 
 export type BadgeProps = {
+  /**
+   * The numeric count to display inside the badge. Renders nothing when the value is 0 or falsy.
+   */
   badgeContent: number;
+  /**
+   * The maximum count value to display before appending a "+" suffix.
+   * @default 100
+   */
   badgeContentMax?: (typeof badgeContentMaxValues)[number];
+  /**
+   * Controls the visual style of the badge.
+   * - If `'default'`, neutral background.
+   * - If `'attention'`, yellow attention-state background.
+   * - If `'danger'`, red danger-state background.
+   * @default "default"
+   */
   type?: (typeof badgeTypeValues)[number];
 } & Pick<HtmlProps, "testId" | "translate">;
 
@@ -46,6 +60,10 @@ const badgeTypeColors = (odysseyTokens: DesignTokens) => ({
   },
 });
 
+/**
+ * A small numeric indicator that overlays or accompanies another element to convey a count or
+ * status. Renders nothing when the count is zero.
+ */
 const Badge = ({
   badgeContent,
   badgeContentMax = 100,

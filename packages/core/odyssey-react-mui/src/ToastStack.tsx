@@ -22,6 +22,10 @@ export type ToastListProps = {
   children: ReactElement<typeof Toast> | Array<ReactElement<typeof Toast>>;
 };
 
+/**
+ * A container that stacks Toast notifications in a fixed position on the screen. Renders
+ * its Toast children in a vertically stacked column for simultaneous display.
+ */
 const ToastStack = ({ children }: ToastListProps) => {
   return (
     <Snackbar open={true}>

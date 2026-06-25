@@ -14,6 +14,10 @@ import { memo, ReactNode } from "react";
 
 export type ConditionalWrapperProps = {
   children: ReactNode;
+  /**
+   * If `true`, wraps children with the provided wrapper element.
+   * If `false`, renders children directly.
+   */
   isWrapped: boolean;
   Wrapper: (children: ReactNode) => ReactNode;
 };

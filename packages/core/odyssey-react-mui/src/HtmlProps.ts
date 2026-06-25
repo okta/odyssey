@@ -94,6 +94,10 @@ export type HtmlProps = {
    */
   ariaPressed?: HTMLAttributes<HTMLElement>["aria-pressed"];
   /**
+   * The `id` attribute of the HTML element.
+   */
+  id?: HTMLAttributes<HTMLElement>["id"];
+  /**
    * The `tabindex` global attribute allows developers to make HTML elements focusable, allow or prevent them from being sequentially focusable
    *
    * Note: Manipulating the natural tab order is generally advised against

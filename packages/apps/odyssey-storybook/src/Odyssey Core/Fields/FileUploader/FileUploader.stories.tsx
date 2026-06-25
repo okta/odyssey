@@ -11,11 +11,14 @@
  */
 
 import {
+  Button,
   FileUploader,
   fileUploadTypes,
   fileUploadVariants,
+  Stack,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
+import { useState } from "react";
 import { fn } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
@@ -138,5 +141,41 @@ export const SpecificFileTypes: Story = {
   args: {
     acceptedFileTypes: [".jpg", ".png"],
     variant: "dragAndDropWithIcon",
+  },
+};
+
+export const WithDefaultValue: Story = {
+  args: {
+    defaultValue: [
+      new File(["seed"], "seeded-document.pdf", { type: "application/pdf" }),
+    ],
+    type: "multiple",
+    variant: "dragAndDropWithIcon",
+  },
+};
+
+export const ControlledWithReset: Story = {
+  args: {
+    variant: "dragAndDropWithIcon",
+  },
+  render: function C() {
+    const [files, setFiles] = useState<File[]>([]);
+    return (
+      <Stack>
+        <Button
+          label="Reset"
+          onClick={() => setFiles([])}
+          variant="secondary"
+        />
+        <FileUploader
+          hint="Upload a file, then hit Reset"
+          label="Upload your files here"
+          onChange={setFiles}
+          type="multiple"
+          value={files}
+          variant="dragAndDropWithIcon"
+        />
+      </Stack>
+    );
   },
 };

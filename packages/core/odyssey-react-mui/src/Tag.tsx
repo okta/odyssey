@@ -47,28 +47,32 @@ type TagSize = (typeof tagSizeValues)[number];
 
 export type TagProps = {
   /**
-   * Color variant of the Tag, affecting its appearance
+   * Color variant of the Tag, affecting its background and text colors.
+   * @default "default"
    */
   colorVariant?: TagColorVariant;
+  /** Optional icon element rendered before the label. */
   icon?: ReactElement;
+  /** If `true`, the tag is disabled and cannot be interacted with. */
   isDisabled?: boolean;
   /**
    * The label text for the Tag
    */
   label: string;
   /**
-   * Callback fired when the Tag is clicked
+   * Called when the Tag is clicked.
    */
   onClick?: MuiChipProps["onClick"];
   /**
-   * Callback fired when the remove button of the Tag is clicked
+   * Called when the remove button of the Tag is clicked.
    */
   onRemove?: MuiChipProps["onDelete"];
-  /*
-   *  Size variant of the Tag
+  /**
+   * Size variant of the Tag.
+   * @default "medium"
    */
   size?: TagSize;
-} & Pick<HtmlProps, "testId" | "translate">;
+} & Pick<HtmlProps, "id" | "testId" | "translate">;
 
 const getChipColors = ({
   colorVariant,
@@ -263,9 +267,14 @@ const StyledTag = styled(MuiChip, {
   };
 });
 
+/**
+ * A compact label used to categorize or annotate content. Supports optional click and
+ * remove interactions, color variants, and icons.
+ */
 const Tag = ({
   colorVariant = "default",
   icon,
+  id,
   isDisabled,
   label,
   onClick,
@@ -295,6 +304,7 @@ const Tag = ({
         }
         disabled={isDisabled}
         icon={icon}
+        id={id}
         label={label}
         odysseyDesignTokens={odysseyDesignTokens}
         onClick={onClick}
@@ -309,6 +319,7 @@ const Tag = ({
       colorVariant,
       contrastMode,
       icon,
+      id,
       isDisabled,
       label,
       odysseyDesignTokens,

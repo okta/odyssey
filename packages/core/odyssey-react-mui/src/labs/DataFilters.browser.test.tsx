@@ -89,6 +89,42 @@ describe("DataFilters", () => {
       .not.toBeInTheDocument();
   });
 
+  test("renders filter tags using option labels for string values", async () => {
+    const { container } = await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[
+          {
+            id: "app-filter",
+            label: "Application",
+            options: [{ label: "App 1", value: "app1" }],
+            value: "app1",
+            variant: "select",
+          },
+        ]}
+        onChangeFilters={() => {}}
+      />,
+    );
+
+    // TODO: fix — active filters <ul> has direct role=button children violating list structure (list)
+    await expect(container).toBeAccessible({ disabledRules: ["list"] });
+
+    const activeFiltersList = page.getByRole("list", {
+      name: "Active filters",
+    });
+    await expect.element(activeFiltersList).toBeVisible();
+    await expect
+      .element(
+        activeFiltersList.getByRole("button", {
+          name: "Application: App 1 Remove tag",
+        }),
+      )
+      .toBeVisible();
+
+    await expect
+      .element(page.getByText("Application: app1", { exact: true }))
+      .not.toBeInTheDocument();
+  });
+
   test("renders all options", async () => {
     await renderWithOdysseyProvider(
       <DataFilters

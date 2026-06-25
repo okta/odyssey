@@ -29,6 +29,7 @@ export type TooltipProps = {
   children: ReactElement;
   /**
    * The placement of the Tooltip
+   * @default "top"
    */
   placement?: MuiTooltipProps["placement"];
   /**
@@ -37,6 +38,11 @@ export type TooltipProps = {
   text: string;
 } & Pick<HtmlProps, "testId" | "translate">;
 
+/**
+ * A contextual popup that displays a short text label when the user hovers over or
+ * focuses its trigger element. Use to surface supplementary information for UI elements
+ * where visible label space is limited.
+ */
 const Tooltip = ({
   ariaType,
   children,

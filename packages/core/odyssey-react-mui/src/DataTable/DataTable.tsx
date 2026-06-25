@@ -70,7 +70,7 @@ import { useScrollIndication } from "./useScrollIndication.js";
 
 export type DataTableColumn<T extends DataTableRowData> = MRT_ColumnDef<T> & {
   /**
-   * @deprecated use hasTextWrapping instead of enableWrapping
+   * @deprecated Use `hasTextWrapping` instead.
    */
   enableWrapping?: boolean;
   hasTextWrapping?: boolean;
@@ -133,7 +133,8 @@ export type DataTableProps = {
    */
   additionalActionMenuItems?: ReactNode;
   /**
-   * Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected
+   * Menu items to include in the bulk actions menu, which appears above the
+   * table if a row or rows are selected
    */
   bulkActionMenuItems?: (
     selectedRows: MRT_RowSelectionState,
@@ -144,6 +145,7 @@ export type DataTableProps = {
   columns: DataTableColumn<DataTableRowData>[];
   /**
    * The current page number.
+   * @default 1
    */
   currentPage?: number;
   /**
@@ -159,7 +161,7 @@ export type DataTableProps = {
    */
   filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
   /**
-   * Callback that fires whenever the table needs to fetch new data, due to changes in
+   * Called whenever the table needs to fetch new data, due to changes in
    * page, results per page, search input, filters, or sorting
    */
   getData: ({
@@ -172,62 +174,63 @@ export type DataTableProps = {
     | MRT_TableOptions<DataTableRowData>["data"]
     | Promise<MRT_TableOptions<DataTableRowData>["data"]>;
   /**
-   * The function to get the ID of a row
+   * The function to get the ID of a row.
+   * @default (row) => row.id
    */
   getRowId?: MRT_TableOptions<DataTableRowData>["getRowId"];
   /**
-   * If true, the end user will be able to change the table density.
+   * If `true`, the end user can change the table row density.
    */
   hasChangeableDensity?: boolean;
   /**
-   * If true, the end user can resize individual columns.
+   * If `true`, the end user can resize individual columns.
    */
   hasColumnResizing?: boolean;
   /**
-   * If true, the end user will be able to show/hide columns.
+   * If `true`, the end user can show or hide columns.
    */
   hasColumnVisibility?: boolean;
   /**
-   * If true, the end user will be able to filter columns.
+   * If `true`, a filter menu is shown above the table.
    */
   hasFilters?: boolean;
   /**
-   * If true, the table will include pagination controls.
+   * If `true`, pagination controls are shown below the table.
    */
   hasPagination?: boolean;
   /**
-   * If true, the end user can reorder rows via a drag-and-drop interface
+   * If `true`, the end user can reorder rows via drag-and-drop.
    */
   hasRowReordering?: boolean;
   /**
-   * If true, the table will include checkboxes on each row, enabling
-   * the user to select some or all rows.
+   * If `true`, each row includes a checkbox for row selection.
    */
   hasRowSelection?: boolean;
   /**
-   * If true, the global table search controls will be shown.
+   * If `true`, a search field is shown above the table.
    */
   hasSearch?: boolean;
   /**
-   * If true, the search field will include a Search button, rather than
-   * firing on input change.
+   * If `true`, the search field includes a submit button; otherwise it fires on each input change.
    */
   hasSearchSubmitButton?: boolean;
   /**
-   * If true, the end user can sort columns (ascending, descending, or neither)
+   * If `true`, the end user can sort columns ascending, descending, or unsorted.
    */
   hasSorting?: boolean;
   /**
    * The initial density (height & padding) of the table rows. This is available even if the
    * table density isn't changeable by the end user via hasChangeableDensity.
+   * @default "comfortable"
    */
   initialDensity?: (typeof densityValues)[number];
   /**
-   * The initial search value
+   * The initial search value.
+   * @default ""
    */
   initialSearchValue?: string;
   /**
-   * Is the next or show-more button disabled
+   * If `true`, the next-page or show-more pagination button is disabled.
    */
   isPaginationMoreDisabled?: boolean;
   /**
@@ -244,17 +247,18 @@ export type DataTableProps = {
    */
   noResultsPlaceholder?: ReactNode;
   /**
-   * Callback that fires when a row (or rows) is selected or unselected.
+   * Called when a row (or rows) is selected or unselected.
    */
   onChangeRowSelection?: (rowSelection: DataTableRowSelectionState) => void;
   /**
-   * Callback that fires when the user reorders rows within the table. Can be used
+   * Called when the user reorders rows within the table. Can be used
    * to propagate order change to the backend.
    */
   onReorderRows?: ({ rowId, newRowIndex }: DataTableOnReorderRowsType) => void;
   /**
    * The type of pagination controls shown. Defaults to next/prev buttons, but can be
    * set to a simple "Load more" button by setting to "loadMore".
+   * @default "paged"
    */
   paginationType?: (typeof paginationTypeValues)[number];
   /**
@@ -263,6 +267,7 @@ export type DataTableProps = {
   renderDetailPanel?: MRT_TableOptions<DataTableRowData>["renderDetailPanel"];
   /**
    * The number of results per page.
+   * @default 20
    */
   resultsPerPage?: number;
   /**
@@ -348,6 +353,13 @@ const ScrollableTableContainer = styled("div", {
 
 const defaultGetRowId: DataTableProps["getRowId"] = (row) => row.id as string;
 
+/**
+ * A full-featured data table with support for sorting, filtering, pagination,
+ * row selection, row reordering, and column visibility controls. Delegates
+ * data fetching to the caller via `getData`, which is invoked whenever page,
+ * search, filters, or sort state changes.
+ * @deprecated use DataView instead for new cases
+ */
 const DataTable = ({
   additionalActionButton,
   additionalActionMenuItems,

@@ -128,6 +128,18 @@ If you are an Okta employee, the easiest way to generate these files is to repla
 
 If you are not an Okta employee, please file an issue request for assistance.
 
+## Vite Configuration
+
+If your app or library uses Vite, you may need to configure it to prevent duplicate React instances. The right fix depends on your situation:
+
+| Situation                                                | Fix                                             |
+| -------------------------------------------------------- | ----------------------------------------------- |
+| App that renders Odyssey via `renderReactInWebComponent` | `output.manualChunks` — keep React in one chunk |
+| App with duplicate copies pulled in from libraries       | `resolve.dedupe`                                |
+| Library or contributions package you publish             | `rollupOptions.external` + `output.globals`     |
+
+For the full guide with code examples and rationale, see the **Configuring Vite** page in Storybook.
+
 ## Components
 
 Components are published in an ESM format transpiled for the modern browsers

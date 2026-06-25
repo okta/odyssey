@@ -33,7 +33,13 @@ export const useThemeCache = ({
 }) => {
   const existingCache = useContext(ThemeCacheContext);
 
-  const localCache = useMemo(() => new Map<ContrastMode, Theme>(), []);
+  const localCache = useMemo(
+    () => new Map<ContrastMode, Theme>(),
+    // Reset the cache when tokens or shadow root change so stale Themes
+    // can't be returned for a different DesignTokens/shadowRootElement pair.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [odysseyTokens, shadowRootElement],
+  );
 
   const getOrCreateTheme = useCallback(
     (mode: ContrastMode) => {

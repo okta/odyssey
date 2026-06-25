@@ -48,13 +48,19 @@ export type AppTileProps = {
   description?: string;
   // An image or icon at the top of the tile
   image?: ReactElement;
-  // If true, the AppTile is loading
+  /**
+   * If `true`, renders skeleton placeholders in place of app tile content.
+   */
   isLoading?: boolean;
   // Event handler for when the user clicks the tile
   onClick: MouseEventHandler;
   // A string for the tile title
   title?: string;
-  // Whether the tile is comfortable or compact
+  /**
+   * Controls the layout density of the tile.
+   * - If `'comfortable'`, renders with standard padding.
+   * - If `'compact'`, renders with reduced padding for denser layouts.
+   */
   variant?: (typeof appTileVariantValues)[number];
 } & (
   | {

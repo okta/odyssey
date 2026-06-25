@@ -18,6 +18,7 @@ import {
   DialogProps as MuiDialogProps,
   DialogTitle as MuiDialogTitle,
 } from "@mui/material";
+import { buttonClasses } from "@mui/material/Button";
 import {
   cloneElement,
   memo,
@@ -33,6 +34,7 @@ import {
 import type { HtmlProps } from "./HtmlProps.js";
 
 import { Button, ButtonProps } from "./Buttons/Button.js";
+import { createOdysseyStyledComponent } from "./createOdysseyStyledComponent.js";
 import { FullScreenOverlay } from "./FullScreenOverlay.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
 import { CloseIcon } from "./icons.generated/index.js";
@@ -49,15 +51,18 @@ export type DialogProps = {
   ariaLabel?: string;
 
   /**
-   * @deprecated Will be removed in a future Odyssey version. Use `primaryCallToActionComponent` instead.
+   * @deprecated Will be removed in a future Odyssey version. Use
+   * `primaryCallToActionComponent` instead.
    */
   callToActionFirstComponent?: ReactElement<typeof Button>;
   /**
-   * @deprecated Will be removed in a future Odyssey version. Use `tertiaryCallToActionComponent` instead.
+   * @deprecated Will be removed in a future Odyssey version. Use
+   * `tertiaryCallToActionComponent` instead.
    */
   callToActionLastComponent?: ReactElement<typeof Button>;
   /**
-   * @deprecated Will be removed in a future Odyssey version. Use `secondaryCallToActionComponent` instead.
+   * @deprecated Will be removed in a future Odyssey version. Use
+   * `secondaryCallToActionComponent` instead.
    */
   callToActionSecondComponent?: ReactElement<typeof Button>;
   /**
@@ -65,11 +70,11 @@ export type DialogProps = {
    */
   children: ReactNode;
   /**
-   * When set to `true`, the Dialog will be visible.
+   * If `true`, the dialog is visible.
    */
   isOpen: boolean;
   /**
-   * Callback that controls what happens when the Dialog is dismissed.
+   * Called when the dialog is dismissed. Receives the event and the reason for closing.
    */
   onClose: (event: MuiOnCloseEvent, reason: DialogOnCloseReason) => void;
   /**
@@ -77,12 +82,14 @@ export type DialogProps = {
    */
   primaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
-   * An optional Button object to be situated in the Dialog footer as the secondary call to action, alongside the `primaryCallToActionComponent`.
+   * An optional Button object to be situated in the Dialog footer as the
+   * secondary call to action, alongside the `primaryCallToActionComponent`.
    */
   secondaryCallToActionComponent?: ReactElement<typeof Button>;
 
   /**
-   * An optional Button object to be situated in the Dialog footer as the tertiary call to action, alongside the other `callToAction` components.
+   * An optional Button object to be situated in the Dialog footer as the
+   * tertiary call to action, alongside the other `callToAction` components.
    */
   tertiaryCallToActionComponent?: ReactElement<typeof Button>;
 
@@ -92,11 +99,38 @@ export type DialogProps = {
   title: string;
 
   /**
-   * When set to `security`, the Dialog backdrop will be opaque.
+   * Controls the opacity of the Dialog backdrop.
+   * - If `'default'`, semi-transparent backdrop.
+   * - If `'security'`, fully opaque backdrop, used for security-sensitive dialogs.
+   * @default "default"
    */
   variant?: "default" | "security";
 } & Pick<HtmlProps, "testId" | "translate">;
 
+const DialogTitleContainer = createOdysseyStyledComponent({ tag: "div" })(
+  ({ odysseyDesignTokens }) => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBlockEnd: 0,
+    padding: 0,
+    paddingBlockStart: odysseyDesignTokens.Spacing5,
+    paddingBlockEnd: odysseyDesignTokens.Spacing4,
+    paddingInline: odysseyDesignTokens.Spacing6,
+    fontFamily: odysseyDesignTokens.TypographyFamilyHeading,
+
+    [`& > .${buttonClasses.root}`]: {
+      // Pull close button by inline padding amount
+      marginInlineEnd: `-${odysseyDesignTokens.Spacing3}`,
+      flexShrink: 0,
+    },
+  }),
+);
+
+/**
+ * A modal overlay that interrupts the user to present critical information,
+ * collect input, or require confirmation before proceeding.
+ */
 const Dialog = ({
   primaryCallToActionComponent,
   secondaryCallToActionComponent,
@@ -113,9 +147,9 @@ const Dialog = ({
   variant = "default",
 }: DialogProps) => {
   const { t } = useTranslation();
+
   const [isContentScrollable, setIsContentScrollable] = useState(false);
   const dialogContentRef = useRef<HTMLDivElement>(null);
-  const dialogTitleId = useUniqueId();
   const dialogLabelId = useUniqueId();
 
   useEffect(() => {
@@ -175,11 +209,10 @@ const Dialog = ({
         open={isOpen}
         slotProps={slotProps}
       >
-        <MuiDialogTitle
-          id={dialogTitleId} // We need to explicitly unset `id` for MUI to automatically set it based on the `aria-labelledby` prop passed to `MuiDialog`
-          translate={translate}
-        >
-          <span id={dialogLabelId}>{title}</span>
+        <DialogTitleContainer>
+          <MuiDialogTitle id={dialogLabelId} translate={translate}>
+            {title}
+          </MuiDialogTitle>
           <Button
             ariaLabel={t("close.text")}
             onClick={handleCloseButtonClick}
@@ -187,7 +220,7 @@ const Dialog = ({
             startIcon={<CloseIcon />}
             variant="floating"
           />
-        </MuiDialogTitle>
+        </DialogTitleContainer>
 
         <MuiDialogContent
           {...(isContentScrollable && {

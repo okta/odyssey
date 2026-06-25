@@ -45,15 +45,15 @@ export const checkboxValidityValues = ["valid", "invalid", "inherit"] as const;
 
 export type CheckboxProps = {
   /**
-   * The ref forwarded to the Checkbox
+   * Ref attached to the underlying `<input>` element.
    */
   inputRef?: React.RefObject<FocusHandle>;
   /**
-   * Determines whether the Checkbox is in an indeterminate state
+   * If `true`, the checkbox is in an indeterminate state, displayed as a dash rather than checked or unchecked.
    */
   isIndeterminate?: boolean;
   /**
-   * Determines whether the Checkbox is required
+   * If `true`, the checkbox is required.
    */
   isRequired?: boolean;
   /**
@@ -61,11 +61,12 @@ export type CheckboxProps = {
    */
   label?: string;
   /**
-   * Callback fired when the blur event happens. Provides event value.
+   * Called when the checkbox loses focus.
    */
   onBlur?: MuiFormControlLabelProps["onBlur"];
   /**
-   * The checkbox validity, if different from its enclosing group. Defaults to "inherit".
+   * The checkbox validity, if different from its enclosing group.
+   * @default "inherit"
    */
   validity?: (typeof checkboxValidityValues)[number];
   /**
@@ -79,6 +80,11 @@ export type CheckboxProps = {
   CheckedFieldProps<MuiCheckboxProps> &
   Pick<HtmlProps, "ariaLabel" | "ariaLabelledBy" | "testId" | "translate">;
 
+/**
+ * A single checkbox input that allows a user to select or deselect a binary
+ * option. Use within a CheckboxGroup for grouped selections, or standalone
+ * for independent boolean choices.
+ */
 const Checkbox = ({
   ariaLabel,
   ariaLabelledBy,

@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2023-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import styled from "@emotion/styled";
 import { IconButton as MuiIconButton } from "@mui/material";
 import {
   Button,
@@ -18,6 +17,7 @@ import {
   CardProps,
   cardVariantValues,
   Checkbox,
+  createOdysseyStyledComponent,
   MenuItem,
   CheckboxProps as MuiCheckboxProps,
 } from "@okta/odyssey-react-mui";
@@ -62,7 +62,7 @@ const menuButtonChildren = (
   </>
 );
 
-const CheckboxContainer = styled("div")(() => ({
+const CheckboxContainer = createOdysseyStyledComponent({ tag: "div" })(() => ({
   "& label": {
     // TODO: This is a fix for existing styles that were here. We need to remove these as we can't expect app dev teams to override Odyssey styles.
     gap: 0,

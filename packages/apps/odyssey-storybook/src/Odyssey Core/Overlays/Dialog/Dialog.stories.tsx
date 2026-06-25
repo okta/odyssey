@@ -354,6 +354,30 @@ export const Long: StoryObj<DialogProps> = {
   },
 };
 
+export const LongTitle: StoryObj<DialogProps> = {
+  ...DefaultTemplate,
+  play: async ({ canvasElement, step }) => {
+    await step("Open dialog", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(
+        canvas.getByRole("button", { name: "Open dialog" }),
+      );
+    });
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "If the `title` is longer than the available space, the heading wraps to multiple lines while the close button stays anchored to the top-right of the dialog header.",
+      },
+    },
+  },
+  args: {
+    title:
+      "Confirm permanent deactivation of this scheduled organization shutdown workflow",
+  },
+};
+
 export const NoButtons: StoryObj<DialogProps> = {
   play: async ({ canvasElement, step }) => {
     await step("Open dialog", async () => {

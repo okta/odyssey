@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.63.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.62.2...v1.63.0) (2026-06-25)
+
+### Features
+
+- add createOdysseyStyledComponent with codemod ([#486](https://github.com/atko-eng/odyssey-design-system/issues/486)) ([3a4fa82](https://github.com/atko-eng/odyssey-design-system/commit/3a4fa82ebcee790be3bc339538a2ea88933232e3))
+- add value/defaultValue to FileUploader ([#489](https://github.com/atko-eng/odyssey-design-system/issues/489)) ([be7fd60](https://github.com/atko-eng/odyssey-design-system/commit/be7fd60d89d7b1e66f4095e8f39837c7ba357768))
+- Translations for odyssey-design-system:enduser ([#483](https://github.com/atko-eng/odyssey-design-system/issues/483)) ([5ffffe6](https://github.com/atko-eng/odyssey-design-system/commit/5ffffe6f2cc35092b136f0afbad012a38be18fc1))
+
+### Bug Fixes
+
+- change optionLabel for DataFilters to return label from option when variant is select ([#482](https://github.com/atko-eng/odyssey-design-system/issues/482)) ([3768c6b](https://github.com/atko-eng/odyssey-design-system/commit/3768c6bcd0fcc412c20594d405eb3b4ca2952f68))
+- dialog a11y close button bug ([#517](https://github.com/atko-eng/odyssey-design-system/issues/517)) ([7b03ca5](https://github.com/atko-eng/odyssey-design-system/commit/7b03ca50cbc33c4fd7b67f15cd5a4724e3b6b801))
+- size DatePicker calendar to its content ([#459](https://github.com/atko-eng/odyssey-design-system/issues/459)) ([d8eb6b8](https://github.com/atko-eng/odyssey-design-system/commit/d8eb6b8bf11e367c5afa22ad545addc2748d3f48))
+- switch update contrast values to pass WCAG 1.4.11 ([#507](https://github.com/atko-eng/odyssey-design-system/issues/507)) ([1348ec6](https://github.com/atko-eng/odyssey-design-system/commit/1348ec679e66469581e8d3fc71a56c33015940ba))
+
 ## [1.62.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.61.0...v1.62.0) (2026-06-11)
 
 ### Features

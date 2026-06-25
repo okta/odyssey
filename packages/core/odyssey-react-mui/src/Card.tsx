@@ -49,25 +49,49 @@ export const CARD_IMAGE_SIZE_COMPACT = "48px";
 export type CardProps = {
   /** @experimental: Temporary internal property, do not use. */
   __role?: AriaRole;
+  /** Additional content rendered inside the card body, below the description. */
   children?: ReactNode;
+  /** Secondary text displayed below the title. */
   description?: string;
+  /** Expandable or supplementary panel rendered below the main card content. */
   detailPanel?: ReactNode;
+  /** Image element displayed in the card, sized according to the variant. */
   image?: ReactElement;
+  /** If `true`, renders skeleton placeholders in place of card content. */
   isLoading?: boolean;
+  /** Small label rendered above the title, typically used for categorization. */
   overline?: string;
+  /** Primary heading text of the card. */
   title?: string;
+  /** HTML id applied to the title element, useful for aria-labelledby references. */
   titleId?: string;
+  /**
+   * Controls the visual layout of the card.
+   * - If `'tile'`, standard card with consistent padding and a visible border.
+   * - If `'stack'`, full-bleed layout, stacking an image above the content area.
+   * - If `'compact'`, reduced padding for denser layouts.
+   * @default "tile"
+   */
   variant?: (typeof cardVariantValues)[number];
 } & (
   | {
+      /**
+       * Slot for an accessory element (e.g., an icon or badge) shown alongside the card content.
+       */
       accessory?: ReactNode;
       button?: never;
       menuButtonChildren?: never;
+      /** Click handler that makes the entire card surface interactive. */
       onClick: MouseEventHandler;
     }
   | {
+      /**
+       * Slot for an accessory element (e.g., an icon or badge) shown alongside the card content.
+       */
       accessory?: ReactNode;
+      /** Primary action button rendered in the card footer. */
       button?: ReactElement<typeof Button>;
+      /** Items rendered inside the overflow menu button in the card corner. */
       menuButtonChildren?: MenuButtonProps["children"];
       onClick?: never;
     }
@@ -289,6 +313,10 @@ const MenuButtonContainer = styled("div", {
 const getNumberOfDefinedReactNodes = (props: Array<ReactNode>) =>
   Children.toArray(props).length;
 
+/**
+ * A surface component for displaying structured content with an optional image, title,
+ * description, and actions. Supports tile, stack, and compact layout variants.
+ */
 const Card = ({
   children,
   description,

@@ -31,51 +31,89 @@ export const headerCopyrightLicense = `/*!
 
 `;
 
-const getExportStatements = async ({
-  directoryPath,
-  exportDirectory,
-}: {
-  directoryPath: string;
-  exportDirectory: string;
-}) => {
+const getIconNamesFromDirectory = async (directoryPath: string) => {
   const filenames = await readdir(directoryPath);
-
   return filenames
     .filter((filename) => extname(filename) === ".tsx")
     .map((filename) => basename(filename, extname(filename)))
-    .map((filename) =>
-      exportDirectory
-        ? `export * from "./${exportDirectory}/${filename}.js";`
-        : `export * from "./${filename}.js";`,
-    )
-    .join("\n");
+    .toSorted();
 };
 
-Promise.all([
-  getExportStatements({
-    directoryPath: "./src/icons.generated",
-    exportDirectory: "",
-  }),
-  getExportStatements({
-    directoryPath: "./src/logos.generated",
-    exportDirectory: "",
-  }),
-])
-  .then(([iconsExportStatements, logosExportStatements]) =>
-    Promise.all([
-      writeFile(
-        "./src/icons.generated/index.ts",
-        `${headerCopyrightLicense}${iconsExportStatements}\n`,
-      ),
-      writeFile(
-        "./src/logos.generated/index.ts",
-        `${headerCopyrightLicense}${logosExportStatements}\n`,
-      ),
-    ]),
-  )
-  .then(() => {
-    console.info("Completed writing icon and logo index files.");
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+const formatExportStatements = ({
+  exportDirectory,
+  iconNames,
+}: {
+  exportDirectory: string;
+  iconNames: readonly string[];
+}) =>
+  iconNames
+    .map((iconName) =>
+      exportDirectory
+        ? `export * from "./${exportDirectory}/${iconName}.js";`
+        : `export * from "./${iconName}.js";`,
+    )
+    .join("\n");
+
+const formatNamesModule = (iconNames: readonly string[]) => {
+  const arrayLiteral = iconNames
+    .map((iconName) => `  "${iconName}",`)
+    .join("\n");
+  return `${headerCopyrightLicense}export const iconNames = [
+${arrayLiteral}
+] as const satisfies readonly string[];
+
+export type IconName = (typeof iconNames)[number];
+`;
+};
+
+// Each entry's `import("./<Name>.js")` is a static path so Vite/Rollup/Webpack
+// emit one chunk per icon file. Consumers look the lazy component up by
+// `IconName`, and only the rendered icon's chunk is fetched at runtime.
+const formatLazyIconDictionaryModule = (iconNames: readonly string[]) => {
+  const recordEntries = iconNames
+    .map(
+      (iconName) =>
+        `  ${iconName}: lazy(() =>\n    import("./${iconName}.js").then((module) => ({ default: module.${iconName}Icon })),\n  ),`,
+    )
+    .join("\n");
+  return `${headerCopyrightLicense}import { type ComponentType, lazy, type LazyExoticComponent } from "react";
+
+import type { SvgIconNoChildrenProps } from "../SvgIcon.js";
+import type { IconName } from "./names.js";
+
+export type LazyIconComponent = LazyExoticComponent<
+  ComponentType<SvgIconNoChildrenProps>
+>;
+
+export const lazyIconDictionary: Record<IconName, LazyIconComponent> = {
+${recordEntries}
+};
+`;
+};
+
+const iconNames = await getIconNamesFromDirectory("./src/icons.generated");
+const logoNames = await getIconNamesFromDirectory("./src/logos.generated");
+
+await Promise.all([
+  writeFile("./src/icons.generated/names.ts", formatNamesModule(iconNames)),
+  writeFile(
+    "./src/icons.generated/lazyIconDictionary.ts",
+    formatLazyIconDictionaryModule(iconNames),
+  ),
+  writeFile(
+    "./src/icons.generated/index.ts",
+    `${headerCopyrightLicense}${formatExportStatements({
+      exportDirectory: "",
+      iconNames,
+    })}\n`,
+  ),
+  writeFile(
+    "./src/logos.generated/index.ts",
+    `${headerCopyrightLicense}${formatExportStatements({
+      exportDirectory: "",
+      iconNames: logoNames,
+    })}\n`,
+  ),
+]);
+
+console.info("Completed writing icon and logo index files.");
