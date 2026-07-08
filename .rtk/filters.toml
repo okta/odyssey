@@ -1,0 +1,116 @@
+schema_version = 1
+
+# ------------------------------------------------------------------
+# Global noise: absolute repo path -> ./, reset notice, timing lines
+# These appear in every command's output when run from another dir.
+# ------------------------------------------------------------------
+
+[filters.yarn-typecheck]
+description = "Compress yarn typecheck output across workspaces"
+match_command = "^yarn\\s+(workspaces\\s+foreach.+\\s+)?typecheck"
+strip_ansi = true
+filter_stderr = true
+strip_lines_matching = [
+  "^\\s*$",
+  "^Shell cwd was reset to ",
+  "^Failed with errors in [\\d.]",
+  "^Completed in [\\d.]",
+]
+replace = [
+  { pattern = "/Users/[^/]+/okta/odyssey-design-system/", replacement = "./" },
+  { pattern = "The command failed in workspace (@okta/[^@]+)@workspace:\\S+ with exit code (\\d+)", replacement = "$1: typecheck failed (exit $2)" },
+]
+truncate_lines_at = 220
+on_empty = "typecheck: ok"
+
+[filters.yarn-lint]
+description = "Compress yarn lint output (eslint + prettier-check)"
+match_command = "^yarn\\s+lint\\b"
+strip_ansi = true
+filter_stderr = true
+strip_lines_matching = [
+  "^\\s*$",
+  "^Shell cwd was reset to ",
+  "^Done in [\\d.]+s\\.$",
+]
+replace = [
+  { pattern = "/Users/[^/]+/okta/odyssey-design-system/", replacement = "./" },
+]
+on_empty = "lint: ok"
+
+[filters.yarn-eslint]
+description = "Compress yarn eslint output"
+match_command = "^(NODE_OPTIONS=\\S+\\s+)?yarn\\s+eslint\\b"
+strip_ansi = true
+filter_stderr = true
+strip_lines_matching = [
+  "^\\s*$",
+  "^Shell cwd was reset to ",
+  "^Done in [\\d.]+s\\.$",
+]
+replace = [
+  { pattern = "/Users/[^/]+/okta/odyssey-design-system/", replacement = "./" },
+]
+on_empty = "eslint: ok"
+
+[filters.yarn-prettier]
+description = "Compress prettier-check output"
+match_command = "^yarn\\s+prettier(-check|--check|-write|--write)?\\b"
+strip_ansi = true
+filter_stderr = true
+strip_lines_matching = [
+  "^\\s*$",
+  "^Shell cwd was reset to ",
+  "^Done in [\\d.]+s\\.$",
+  "^Checking formatting\\.\\.\\.$",
+]
+replace = [
+  { pattern = "/Users/[^/]+/okta/odyssey-design-system/", replacement = "./" },
+]
+match_output = [
+  { pattern = "All matched files use Prettier formatting", message = "prettier: ok" }
+]
+on_empty = "prettier: ok"
+
+[filters.yarn-test]
+description = "Compress yarn test output (vitest browser + unit)"
+match_command = "^yarn\\s+(workspaces\\s+foreach.+\\s+)?test\\b"
+strip_ansi = true
+filter_stderr = true
+strip_lines_matching = [
+  "^\\s*$",
+  # Strip passing test lines — keep only failures
+  "^\\s*✓ ",
+  "^\\s*↓ ",
+  # Strip a11y noise from browser tests
+  "^\\[a11y",
+  "^stderr \\| ",
+  # Strip timing/session lines from vitest summary
+  "^\\s*Start at\\s+",
+  "^\\s*Duration\\s+",
+  "^Shell cwd was reset to ",
+]
+replace = [
+  { pattern = "/Users/[^/]+/okta/odyssey-design-system/", replacement = "./" },
+  { pattern = "The command failed in workspace (@okta/[^@]+)@workspace:\\S+ with exit code (\\d+)", replacement = "$1: test failed (exit $2)" },
+]
+on_empty = "test: all pass"
+
+[filters.yarn-build]
+description = "Compress yarn build output across workspaces"
+match_command = "^yarn\\s+(workspaces\\s+foreach.+\\s+)?build\\b"
+strip_ansi = true
+filter_stderr = true
+strip_lines_matching = [
+  "^\\s*$",
+  "^Shell cwd was reset to ",
+  "^Done in [\\d.]+s\\.$",
+  "^Completed in [\\d.]",
+  # Strip individual dist file listings
+  "^\\s*dist/",
+]
+replace = [
+  { pattern = "/Users/[^/]+/okta/odyssey-design-system/", replacement = "./" },
+  { pattern = "The command failed in workspace (@okta/[^@]+)@workspace:\\S+ with exit code (\\d+)", replacement = "$1: build failed (exit $2)" },
+]
+on_empty = "build: ok"

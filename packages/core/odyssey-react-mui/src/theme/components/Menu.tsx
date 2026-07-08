@@ -51,7 +51,6 @@ export const menuComponents = ({
       root: ({ ownerState, theme }) => ({
         gap: odysseyTokens.Spacing2,
         minHeight: "unset",
-        maxWidth: `calc(55ch - ${odysseyTokens.Spacing4})`,
         paddingBlock: odysseyTokens.Spacing3,
         paddingInline: odysseyTokens.Spacing4,
         borderRadius: odysseyTokens.BorderRadiusMain,

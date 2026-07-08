@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.64.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.63.0...v1.64.0) (2026-07-08)
+
+### Features
+
+- add a new optional buttonComponent to Callout ([#528](https://github.com/atko-eng/odyssey-design-system/issues/528)) ([afccbab](https://github.com/atko-eng/odyssey-design-system/commit/afccbab23059f23289d557b4131c24dad073e538))
+- add odyssey-blueprint core package ([#527](https://github.com/atko-eng/odyssey-design-system/issues/527)) ([e1ec32a](https://github.com/atko-eng/odyssey-design-system/commit/e1ec32a7a0bdc2ba251c832c039f9d7b73ab7ead))
+
+### Bug Fixes
+
+- add sticky header and max height to data view ([#530](https://github.com/atko-eng/odyssey-design-system/issues/530)) ([384dbc7](https://github.com/atko-eng/odyssey-design-system/commit/384dbc7608630aaf1c43664282b1cf22568d31a9))
+- added column pinning support for OIN data view ([#532](https://github.com/atko-eng/odyssey-design-system/issues/532)) ([2c0cab1](https://github.com/atko-eng/odyssey-design-system/commit/2c0cab110886a609d84e310e72f1d00281d13f1f))
+- controlled switch corrected ([#529](https://github.com/atko-eng/odyssey-design-system/issues/529)) ([bd49333](https://github.com/atko-eng/odyssey-design-system/commit/bd493334f585bf0872c5b1fcfeb73aeb0691d701))
+- remove MenuItem maxWidth cap for Select dropdown width ([#531](https://github.com/atko-eng/odyssey-design-system/issues/531)) ([23c4102](https://github.com/atko-eng/odyssey-design-system/commit/23c41021603373ba408978ce5fc00d9333a05c65))
+
 ## [1.63.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.62.2...v1.63.0) (2026-06-25)
 
 ### Features

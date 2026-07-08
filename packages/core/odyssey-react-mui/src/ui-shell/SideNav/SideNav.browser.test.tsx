@@ -310,6 +310,97 @@ describe(SideNav.displayName!, () => {
       .toHaveTextContent(String(badgeCount));
   });
 
+  describe("button nav item `aria-expanded`", () => {
+    test("button item with isExpanded true", async () => {
+      const { container } = await renderWithOdysseyProvider(
+        <SideNav
+          appName="App"
+          sideNavItems={[
+            {
+              id: "notifications",
+              label: "Notifications",
+              onClick: () => {},
+              isExpanded: true,
+            },
+          ]}
+        />,
+      );
+
+      const button = page.getByRole("button", { name: "Notifications" });
+      await expect.element(button).toHaveAttribute("aria-expanded", "true");
+      await expect(container).toBeAccessible();
+    });
+
+    test("button item with isExpanded false", async () => {
+      const { container } = await renderWithOdysseyProvider(
+        <SideNav
+          appName="App"
+          sideNavItems={[
+            {
+              id: "notifications",
+              label: "Notifications",
+              onClick: () => {},
+              isExpanded: false,
+            },
+          ]}
+        />,
+      );
+
+      const button = page.getByRole("button", { name: "Notifications" });
+      await expect.element(button).toHaveAttribute("aria-expanded", "false");
+      await expect(container).toBeAccessible();
+    });
+
+    test("button item without isExpanded prop", async () => {
+      const { container } = await renderWithOdysseyProvider(
+        <SideNav
+          appName="App"
+          sideNavItems={[
+            {
+              id: "notifications",
+              label: "Notifications",
+              onClick: () => {},
+            },
+          ]}
+        />,
+      );
+
+      const button = page.getByRole("button", { name: "Notifications" });
+      await expect.element(button).not.toHaveAttribute("aria-expanded");
+      await expect(container).toBeAccessible();
+    });
+
+    test("button item with ariaControls", async () => {
+      const { container } = await renderWithOdysseyProvider(
+        <>
+          <SideNav
+            appName="App"
+            sideNavItems={[
+              {
+                id: "notifications",
+                label: "Notifications",
+                onClick: () => {},
+                ariaControls: "notifications-panel",
+                isExpanded: true,
+              },
+            ]}
+          />
+          {/* aria-controls must reference a real element id, or axe flags
+              aria-valid-attr-value. This stands in for the panel a consumer
+              would toggle open. */}
+          <div id="notifications-panel" />
+        </>,
+      );
+
+      const button = page.getByRole("button", { name: "Notifications" });
+      await expect
+        .element(button)
+        .toHaveAttribute("aria-controls", "notifications-panel");
+      await expect.element(button).toHaveAttribute("aria-expanded", "true");
+      await expect(container).toBeAccessible();
+    });
+  });
+
   describe("`sessionStorage`", () => {
     describe("Collapsible", () => {
       test("collapses side nav when collapsed", async () => {

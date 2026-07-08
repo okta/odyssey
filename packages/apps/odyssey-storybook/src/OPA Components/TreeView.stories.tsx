@@ -1007,6 +1007,53 @@ export const WithFetchError: Story = {
   },
 };
 
+export const WithNodeSeverity: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A node that requires step-up authentication is a `needs-action` state, not a failure. Expanding Databases returns a gated status; `nodeSeverity` marks that node `info` so its chevron, icon, label, and message render in the primary (blue) color instead of red, and `retryLabel` reads "Verify" instead of "Reload". Nodes without an explicit severity stay red.',
+      },
+    },
+  },
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement);
+    const expandButtons = await canvas.findAllByRole("button", {
+      name: "Expand",
+    });
+    // Root order is Infrastructure, Databases, API Keys — expand Databases to
+    // surface its gated (info-severity) status row for the snapshot.
+    await userEvent.click(expandButtons[1]);
+  },
+  render: function C() {
+    const tokens = useOdysseyDesignTokens();
+    const treeProps = useTreeViewController({
+      initialNodes: LAZY_ROOT_NODES,
+      fetchChildren: (nodeId) => {
+        if (nodeId === "databases") {
+          throw new Error("Verification required to view this folder.");
+        }
+        return LAZY_CHILDREN_BY_ID[nodeId] ?? [];
+      },
+    });
+
+    return (
+      <Surface>
+        <div style={{ width: "640px", padding: tokens.Spacing2 }}>
+          <TreeView
+            {...treeProps}
+            nodeSeverity={(nodeId) =>
+              nodeId === "databases" ? "info" : undefined
+            }
+            ref={treeProps.treeViewRef}
+            retryLabel="Verify"
+          />
+        </div>
+      </Surface>
+    );
+  },
+};
+
 export const WithMultiLevelPagination: Story = {
   parameters: {
     docs: {

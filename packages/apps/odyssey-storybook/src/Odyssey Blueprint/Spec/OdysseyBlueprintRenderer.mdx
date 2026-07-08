@@ -1,0 +1,369 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Odyssey Blueprint/Spec/OdysseyBlueprintRenderer" />
+
+# OdysseyBlueprintRenderer
+
+`OdysseyBlueprintRenderer` turns a Blueprint schema into a React component
+tree. A blueprint is a plain JS object (or the result of `parseYamlWithSchema`)
+whose shape is described in [`SPEC.md`](https://github.com/atko-eng/odyssey-design-system/blob/master/docs/blueprint/SPEC.md).
+This page documents the v3 shape that authors and host applications work with.
+
+## Glossary
+
+The v3 shape factors a blueprint entry into a small, fixed set of fields. Each
+serves a different role; the longer treatment is in the
+[`SPEC.md` Recommended blueprint shape section](https://github.com/atko-eng/odyssey-design-system/blob/master/docs/blueprint/SPEC.md#recommended-blueprint-shape).
+
+- **`from`** — `library/name@version` compound string. The single discriminator
+  that routes an entry to a building block or a template (e.g.
+  `odyssey-blueprint/button@1`).
+- **`instanceId`** — stable identity for state and refs. Optional in
+  author-written YAML; the loader auto-fills any missing ids before the entry
+  reaches the renderer.
+- **`inputs:`** — schema-validated values **consumed** by the block (continuous
+  data in). Children of layout blocks live at `inputs.children`.
+- **`outputs:`** — schema-typed values **produced** by the block (continuous
+  data out). The React component writes these at runtime; other entries read
+  them with an `{ instance: { id, port: outputs, name } }` ref.
+- **`events`** — schema-declared one-shot signals (a click, a submit). Declared
+  on the schema, fired at runtime via `fireEvent`, referenced from other
+  entries with `port: events`.
+- **`actions:`** — declarative side effects. Each action names a receiver and
+  a handler the receiver registered via `setActions`.
+- **`subscriptions:`** — when an event fires elsewhere, run a named action on
+  this entry. Pairs with `events` and `actions:`.
+- **`__extraInputs`** — last-resort passthrough for values that don't belong
+  in any schema yet. Not validated, not type-safe; prefer extending the schema
+  via [`defineBlueprintExtension`](#extending-with-your-own-building-blocks).
+
+## Quick start
+
+The simplest form: pass a v3 blueprint directly to the renderer. `from`
+identifies the building block, `instanceId` names this instance, and `inputs`
+carries the configuration.
+
+```tsx
+import { OdysseyBlueprintRenderer } from "@okta/odyssey-blueprint";
+
+<OdysseyBlueprintRenderer
+  blueprint={{
+    from: "odyssey-blueprint/button@1",
+    instanceId: "save-button",
+    inputs: {
+      label: "Save",
+      variant: "primary",
+    },
+  }}
+/>;
+```
+
+For YAML-authored page definitions, parse with `parseYamlWithSchema` first:
+
+```tsx
+import {
+  OdysseyBlueprintRenderer,
+  parseYamlWithSchema,
+  anyNodeSchema,
+} from "@okta/odyssey-blueprint";
+
+const parsed = parseYamlWithSchema({
+  schema: anyNodeSchema,
+  yamlSource: `
+    from: odyssey-blueprint/banner@1
+    instanceId: my-yaml-banner
+    inputs:
+      severity: success
+      text: "Parsed from YAML!"
+  `,
+});
+
+<OdysseyBlueprintRenderer blueprint={parsed} />;
+```
+
+## Extending with your own building blocks
+
+Consumer libraries register their own building blocks via
+`defineBlueprintExtension({ schemas, components })` and combine them with the
+bundled set through `createBlueprintRenderer`. The resulting renderer is
+strongly typed: every key in `schemas` must have a matching key in
+`components`, and the React component receives the typed entry from its
+schema.
+
+```ts
+import { z } from "zod";
+import {
+  createBlueprintRenderer,
+  defineBlueprintExtension,
+} from "@okta/odyssey-blueprint";
+import { defaultComponents } from "@okta/odyssey-blueprint/registry";
+
+import { acmeSchemas } from "./schemas.js";
+import { acmeComponents } from "./components.js";
+
+export const acmeExtension = defineBlueprintExtension({
+  schemas: acmeSchemas,
+  components: acmeComponents,
+});
+
+export const AcmeBlueprintRenderer = createBlueprintRenderer({
+  components: {
+    ...defaultComponents,
+    ...acmeExtension.components,
+  },
+});
+```
+
+## Templates
+
+Templates compose multiple building blocks behind a single `from`. They come
+in two forms.
+
+### Declarative templates with operators
+
+A declarative template is a structured object whose nodes can carry refs and
+operators. Operators are the closed bundled set —
+`join`, `count`, `filter`, `length`, `map`, `sum`, `format`, `ifElse`, plus
+the standard comparison and logical predicates — and they evaluate
+deterministically against the entry's inputs.
+
+```ts
+import { defineBlueprintTemplate } from "@okta/odyssey-blueprint/registry";
+
+export const userManagementPage = defineBlueprintTemplate({
+  from: "acme/user-management-page@1",
+  inputs: { rolesEndpoint: { type: "string" } },
+  body: {
+    from: "odyssey-blueprint/page@1",
+    inputs: {
+      title: "Users",
+      children: [
+        {
+          from: "acme/user-table@1",
+          inputs: { source: { input: "rolesEndpoint" } },
+        },
+      ],
+    },
+  },
+});
+```
+
+### Function-form templates
+
+When a template needs branching, recursion, or computation that operators
+can't express, it can be authored as a function returning a blueprint subtree.
+The function receives typed `inputs` and must return a deterministic tree.
+
+```ts
+import { defineBlueprintTemplate } from "@okta/odyssey-blueprint/registry";
+
+export const stepperWithDefaults = defineBlueprintTemplate({
+  from: "acme/stepper-with-defaults@1",
+  inputs: { steps: { type: "array" } },
+  body: ({ inputs }) => ({
+    from: "odyssey-blueprint/stepper@1",
+    inputs: {
+      steps: inputs.steps.length === 0 ? [{ label: "Start" }] : inputs.steps,
+    },
+  }),
+});
+```
+
+### Headless data sources
+
+Data sources are first-class headless blueprints: they have no UI but expose
+`outputs:` (`data`, `isPending`, `error`) and, for mutations, `events:`
+(`success`, `failure`). Consuming entries bind to those outputs and events
+just like they would to any visible block.
+
+```yaml
+from: odyssey-blueprint/page@1
+instanceId: users-page
+inputs:
+  children:
+    - from: odyssey-blueprint/rest-source@1
+      instanceId: users-source
+      inputs:
+        url: /api/v1/users
+    - from: acme/user-table@1
+      instanceId: users-table
+      inputs:
+        source:
+          instance: { id: users-source, port: outputs, name: data }
+        isPending:
+          instance: { id: users-source, port: outputs, name: isPending }
+```
+
+## State and bindings
+
+Every blueprint entry that participates in state registers itself with the
+renderer's store. Building-block authors use three hooks; the contracts are
+spelled out in the [`SPEC.md` State section](https://github.com/atko-eng/odyssey-design-system/blob/master/docs/blueprint/SPEC.md#recommended-blueprint-shape).
+
+### `useRegisterBlueprintInstance`
+
+Called once by the React component. Registers the instance with the store and
+returns `setOutputs`, `setActions`, and `fireEvent`.
+
+```tsx
+import { useRegisterBlueprintInstance } from "@okta/odyssey-blueprint";
+
+function ButtonV1({ entry }: { entry: ButtonSchema }) {
+  const { setOutputs, fireEvent } = useRegisterBlueprintInstance({
+    instanceId: entry.instanceId,
+    initialOutputs: { isClicked: false },
+  });
+
+  return (
+    <Button
+      label={entry.inputs.label}
+      onClick={() => {
+        setOutputs({ isClicked: true });
+        fireEvent("click");
+      }}
+    />
+  );
+}
+```
+
+### `useBlueprintOutput`
+
+Reads the current value of another instance's output. Re-renders the consumer
+whenever the value changes.
+
+```tsx
+import { useBlueprintOutput } from "@okta/odyssey-blueprint";
+
+const isPending = useBlueprintOutput({
+  instanceRef: { id: "user-form", port: "outputs", name: "isPending" },
+});
+```
+
+### `useBlueprintBinding`
+
+Resolves any `BlueprintValue` — literal, ref, or operator — to its current
+value. Use this when an input may be authored as any of the three.
+
+```tsx
+import { useBlueprintBinding } from "@okta/odyssey-blueprint";
+
+const resolvedLabel = useBlueprintBinding({ value: entry.inputs.label });
+```
+
+## External state on the renderer
+
+Host React code can mirror the renderer's state map without writing a custom
+building block. The renderer accepts the same controlled / uncontrolled prop
+API as a native form input:
+
+- **`defaultState`** — initial state for the uncontrolled form. Mutually
+  exclusive with `state`.
+- **`state`** — controlled state map. The renderer mirrors writes back via
+  `onStateChange` and diffs incoming changes into the store.
+- **`onStateChange`** — fires whenever the renderer's store updates. Identical
+  writes are deduped, so the host can store the value back into `state`
+  without creating a loop.
+
+```tsx
+import { useState } from "react";
+import { OdysseyBlueprintRenderer } from "@okta/odyssey-blueprint";
+
+function HostedPage({ blueprint }) {
+  const [blueprintState, setBlueprintState] = useState({});
+  return (
+    <OdysseyBlueprintRenderer
+      blueprint={blueprint}
+      state={blueprintState}
+      onStateChange={setBlueprintState}
+    />
+  );
+}
+```
+
+## React escape hatch — slots
+
+When a host React tree needs to inject custom JSX into a specific position of
+an otherwise data-driven blueprint, the `react-slot@1` block reserves a named
+slot. The host fills it from React via the `slots` prop. The slot still
+participates in state registration: a host component rendered into the slot
+can call `useRegisterBlueprintInstance({ instanceId })` and bind to other
+entries through the same store.
+
+```yaml
+from: odyssey-blueprint/page@1
+inputs:
+  children:
+    - from: odyssey-blueprint/heading@1
+      instanceId: page-title
+      inputs: { text: "Custom dashboard" }
+    - from: odyssey-blueprint/react-slot@1
+      instanceId: dashboard-content
+```
+
+```tsx
+<OdysseyBlueprintRenderer
+  blueprint={blueprint}
+  slots={{
+    "dashboard-content": <MyHostJsx />,
+  }}
+/>
+```
+
+### Embedding arbitrary React
+
+The simplest use of `react-slot@1` — drop a React node into a position the
+schema reserves by name. The slot can render anything; there is no schema
+for the contents because the host owns the React tree.
+
+### Slot emits outputs into the registry
+
+A slot's hosted component registers under its `instanceId` and writes to
+its declared outputs via `setOutputs`. Sibling entries — including other
+slots, or any native building block whose schema reads the same port —
+read those outputs through the same registry.
+
+### Slot consumes another entry's output
+
+Hooks work in both directions: a slot can read another instance's outputs
+via `useBlueprintOutput`. The hook suspends until the target instance
+registers, so the renderer paints a single coherent state once both sides
+mount.
+
+#### When to reach for slots
+
+- Embedding a legacy React widget that does not fit any current building
+  block (a third-party graph, a feature-flagged custom panel).
+- Prototyping a new visual before promoting it to a real schema with
+  `defineBlueprintExtension`.
+
+For anything reusable across pages, prefer authoring a real schema —
+slots are deliberately scoped per blueprint and do not survive
+copy-paste between blueprint files.
+
+## Migration from the legacy shape
+
+The pre-v3 shape used `kind` and `id` and inlined configuration at the top
+level. The v3 shape replaces them with `from`, `instanceId`, and `inputs:`.
+For example:
+
+```yaml
+# Legacy
+kind: banner
+id: my-banner
+severity: info
+text: "Hello"
+
+# v3
+from: odyssey-blueprint/banner@1
+instanceId: my-banner
+inputs:
+  severity: info
+  text: "Hello"
+```
+
+A codemod ships with `@okta/odyssey-blueprint` to rewrite source files in
+place. During the transition window the loader continues to accept the
+legacy shape with a one-time deprecation warning per file; the alias is
+removed in the next major release. Authors should run the codemod and
+type-check before the alias is removed. The full migration plan is recorded
+in the [SPEC's Migration section](https://github.com/atko-eng/odyssey-design-system/blob/master/docs/blueprint/SPEC.md#migration-silent-alias-for-shape-hard-error-for-string-dsls-mandatory-codemod).

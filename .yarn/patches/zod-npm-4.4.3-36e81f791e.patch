@@ -1,0 +1,124 @@
+diff --git a/package.json b/package.json
+index 8a0c194e0958637d8e6c9d8a6c2ee66701582c35..2b674d6c69402c3c4118d121996d6638e39b0da0 100644
+--- a/package.json
++++ b/package.json
+@@ -59,7 +59,7 @@
+     },
+     "./mini": {
+       "@zod/source": "./src/mini/index.ts",
+-      "types": "./mini/index.d.cts",
++      "types": "./mini/index.d.ts",
+       "import": "./mini/index.js",
+       "require": "./mini/index.cjs"
+     },
+diff --git a/v4/locales/index.d.ts b/v4/locales/index.d.ts
+index 2e0c03994bc12a75f58f2c15b91bf4f6e0b4ed6b..655eddb80b3dd3437f820c77d516995c3cbe03af 100644
+--- a/v4/locales/index.d.ts
++++ b/v4/locales/index.d.ts
+@@ -1,52 +1,54 @@
+-export { default as ar } from "./ar.js";
+-export { default as az } from "./az.js";
+-export { default as be } from "./be.js";
+-export { default as bg } from "./bg.js";
+-export { default as ca } from "./ca.js";
+-export { default as cs } from "./cs.js";
+-export { default as da } from "./da.js";
+-export { default as de } from "./de.js";
+-export { default as el } from "./el.js";
+-export { default as en } from "./en.js";
+-export { default as eo } from "./eo.js";
+-export { default as es } from "./es.js";
+-export { default as fa } from "./fa.js";
+-export { default as fi } from "./fi.js";
+-export { default as fr } from "./fr.js";
+-export { default as frCA } from "./fr-CA.js";
+-export { default as he } from "./he.js";
+-export { default as hr } from "./hr.js";
+-export { default as hu } from "./hu.js";
+-export { default as hy } from "./hy.js";
+-export { default as id } from "./id.js";
+-export { default as is } from "./is.js";
+-export { default as it } from "./it.js";
+-export { default as ja } from "./ja.js";
+-export { default as ka } from "./ka.js";
+-export { default as kh } from "./kh.js";
+-export { default as km } from "./km.js";
+-export { default as ko } from "./ko.js";
+-export { default as lt } from "./lt.js";
+-export { default as mk } from "./mk.js";
+-export { default as ms } from "./ms.js";
+-export { default as nl } from "./nl.js";
+-export { default as no } from "./no.js";
+-export { default as ota } from "./ota.js";
+-export { default as ps } from "./ps.js";
+-export { default as pl } from "./pl.js";
+-export { default as pt } from "./pt.js";
+-export { default as ro } from "./ro.js";
+-export { default as ru } from "./ru.js";
+-export { default as sl } from "./sl.js";
+-export { default as sv } from "./sv.js";
+-export { default as ta } from "./ta.js";
+-export { default as th } from "./th.js";
+-export { default as tr } from "./tr.js";
+-export { default as ua } from "./ua.js";
+-export { default as uk } from "./uk.js";
+-export { default as ur } from "./ur.js";
+-export { default as uz } from "./uz.js";
+-export { default as vi } from "./vi.js";
+-export { default as zhCN } from "./zh-CN.js";
+-export { default as zhTW } from "./zh-TW.js";
+-export { default as yo } from "./yo.js";
++import type * as errors from "../core/errors.js";
++type LocaleFactory = () => { localeError: errors.$ZodErrorMap };
++export declare const ar: LocaleFactory;
++export declare const az: LocaleFactory;
++export declare const be: LocaleFactory;
++export declare const bg: LocaleFactory;
++export declare const ca: LocaleFactory;
++export declare const cs: LocaleFactory;
++export declare const da: LocaleFactory;
++export declare const de: LocaleFactory;
++export declare const el: LocaleFactory;
++export declare const en: LocaleFactory;
++export declare const eo: LocaleFactory;
++export declare const es: LocaleFactory;
++export declare const fa: LocaleFactory;
++export declare const fi: LocaleFactory;
++export declare const fr: LocaleFactory;
++export declare const frCA: LocaleFactory;
++export declare const he: LocaleFactory;
++export declare const hr: LocaleFactory;
++export declare const hu: LocaleFactory;
++export declare const hy: LocaleFactory;
++export declare const id: LocaleFactory;
++export declare const is: LocaleFactory;
++export declare const it: LocaleFactory;
++export declare const ja: LocaleFactory;
++export declare const ka: LocaleFactory;
++export declare const kh: LocaleFactory;
++export declare const km: LocaleFactory;
++export declare const ko: LocaleFactory;
++export declare const lt: LocaleFactory;
++export declare const mk: LocaleFactory;
++export declare const ms: LocaleFactory;
++export declare const nl: LocaleFactory;
++export declare const no: LocaleFactory;
++export declare const ota: LocaleFactory;
++export declare const ps: LocaleFactory;
++export declare const pl: LocaleFactory;
++export declare const pt: LocaleFactory;
++export declare const ro: LocaleFactory;
++export declare const ru: LocaleFactory;
++export declare const sl: LocaleFactory;
++export declare const sv: LocaleFactory;
++export declare const ta: LocaleFactory;
++export declare const th: LocaleFactory;
++export declare const tr: LocaleFactory;
++export declare const ua: LocaleFactory;
++export declare const uk: LocaleFactory;
++export declare const ur: LocaleFactory;
++export declare const uz: LocaleFactory;
++export declare const vi: LocaleFactory;
++export declare const zhCN: LocaleFactory;
++export declare const zhTW: LocaleFactory;
++export declare const yo: LocaleFactory;

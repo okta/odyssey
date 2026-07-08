@@ -12,11 +12,13 @@
     "node": "<=22"
   },
   "scripts": {
+    "blueprint-validate": "yarn workspace @okta/odyssey-blueprint validate **/*.{yaml,yml,json}",
     "build": "yarn workspaces foreach --all --topological-dev --parallel --interlaced --exclude=@okta/odyssey-icons --exclude=@okta/odyssey-storybook --exclude=@okta/odyssey-prototype run build",
     "create-contribution": "ok-ui create-package --from ./packages/contributions/example-components --output-dir ./packages/contributions",
     "eslint": "NODE_OPTIONS=--max-old-space-size=6144 eslint .",
     "generate:i18n:pseudoLocaleProperties": "yarn workspace @okta/odyssey-cli build:withDeps && yarn workspaces foreach --all --parallel run generate:i18n:pseudoLocaleProperties",
     "generate:i18n": "yarn workspace @okta/odyssey-cli build:withDeps && yarn workspaces foreach --all --parallel run generate:i18n",
+    "generate:blueprint-schema": "yarn workspace @okta/odyssey-blueprint generate-json-schema",
     "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-react-mui generate:icons",
     "lerna-publish": "lerna publish from-package --no-verify-registry --no-push --force-publish --ignore-changes 'packages/contributions/**' --ignore-changes 'packages/platform/**'",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish --ignore-changes 'packages/contributions/**' --ignore-changes 'packages/platform/**'",
@@ -55,6 +57,10 @@
     "workspace": "^0.0.1-preview.1"
   },
   "resolutions": {
+    "zod": "patch:zod@npm%3A4.4.3#~/.yarn/patches/zod-npm-4.4.3-36e81f791e.patch",
+    "@okta/auth-foundation": "patch:@okta/auth-foundation@npm:0.5.3-g57e7859#./.yarn/patches/@okta-auth-foundation-npm-0.5.3-g57e7859.patch",
+    "@okta/ui-libraries-fetch": "patch:@okta/ui-libraries-fetch@npm:1.14.0#./.yarn/patches/@okta-ui-libraries-fetch-npm-1.14.0.patch",
+    "@okta/ui-libraries-monolith": "patch:@okta/ui-libraries-monolith@npm:2.2.0#./.yarn/patches/@okta-ui-libraries-monolith-npm-2.2.0.patch",
     "@joshwooding/vite-plugin-react-docgen-typescript/glob@^7.2.0": "^9.0.0",
     "flatted@npm:^3.2.9": "^3.4.2",
     "flatted@npm:^3.3.3": "^3.4.2",
