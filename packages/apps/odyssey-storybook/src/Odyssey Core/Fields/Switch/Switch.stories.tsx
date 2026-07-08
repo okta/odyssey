@@ -235,3 +235,23 @@ export const Uncontrolled: Story = {
   },
   render: (props) => <Switch {...props} />,
 };
+
+export const ControlledNoUpdate: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When `isChecked` is controlled and the parent does not update it in response to `onChange`, the Switch must stay in its current state. Clicking this Switch fires `onChange` but the value never changes.",
+      },
+    },
+  },
+  args: {
+    isChecked: false,
+  },
+  argTypes: {
+    isDefaultChecked: { control: false },
+  },
+  render: function C(args) {
+    return <Switch {...args} />;
+  },
+};

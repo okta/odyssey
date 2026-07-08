@@ -349,10 +349,12 @@ const Switch = ({
       }
       const target = event.target;
       const { checked, value } = target;
-      setInternalSwitchChecked(checked);
+      if (controlledStateRef.current !== CONTROLLED) {
+        setInternalSwitchChecked(checked);
+      }
       onChange?.({ checked, value });
     },
-    [onChange, setInternalSwitchChecked, isReadOnly],
+    [onChange, isReadOnly],
   );
 
   return (

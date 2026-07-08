@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.64.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.63.0...v1.64.0) (2026-07-08)
+
+### Bug Fixes
+
+- controlled switch corrected ([#529](https://github.com/atko-eng/odyssey-design-system/issues/529)) ([bd49333](https://github.com/atko-eng/odyssey-design-system/commit/bd493334f585bf0872c5b1fcfeb73aeb0691d701))
+- **odyssey-react-mui:** add aria-expanded to button nav items ([#524](https://github.com/atko-eng/odyssey-design-system/issues/524)) ([7e38134](https://github.com/atko-eng/odyssey-design-system/commit/7e38134229cf03ef4d61f7ef0a4af3177616f354))
+- remove MenuItem maxWidth cap for Select dropdown width ([#531](https://github.com/atko-eng/odyssey-design-system/issues/531)) ([23c4102](https://github.com/atko-eng/odyssey-design-system/commit/23c41021603373ba408978ce5fc00d9333a05c65))
+
 ## [1.63.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.62.2...v1.63.0) (2026-06-25)
 
 ### Features

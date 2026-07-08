@@ -10,3 +10,4 @@ yarn-error.log
 .yarn/*
 packages/odyssey-react-mui/src/properties/ts/*.ts
 *.generated.ts
+*.generated.json

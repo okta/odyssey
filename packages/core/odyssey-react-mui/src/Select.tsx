@@ -253,6 +253,20 @@ const Select = <
   const localInputRef = useRef<HTMLSelectElement>(null);
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
+  const [menuPaperMinWidth, setMenuPaperMinWidth] = useState<
+    number | undefined
+  >(undefined);
+
+  // MUI measures anchorElement.clientWidth (excludes border) for the paper's
+  // minWidth, making the paper ~2px narrower than the field. Capturing
+  // offsetWidth (includes border) on open keeps both edges flush with the field.
+  const handleMenuOpen = useCallback(() => {
+    const anchor = selectRef.current?.parentNode as HTMLElement | null;
+    if (anchor) {
+      setMenuPaperMinWidth(anchor.offsetWidth);
+    }
+  }, []);
+
   useImperativeHandle(inputRef, () => {
     return {
       focus: () => {
@@ -484,6 +498,10 @@ const Select = <
           }}
           labelId={labelElementId}
           MenuProps={{
+            PaperProps:
+              menuPaperMinWidth !== undefined
+                ? { style: { minWidth: menuPaperMinWidth } }
+                : undefined,
             sx: {
               ".MuiPaper-root": {
                 maxHeight: "50vh",
@@ -495,6 +513,7 @@ const Select = <
           onBlur={onBlur}
           onChange={onChange}
           onFocus={onFocus}
+          onOpen={handleMenuOpen}
           renderValue={hasMultipleChoices ? renderValue : undefined}
           translate={translate}
         >

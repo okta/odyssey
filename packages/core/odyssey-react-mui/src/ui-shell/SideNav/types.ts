@@ -171,6 +171,7 @@ export type SideNavItem = {
   target?: string;
 } & (
   | {
+      ariaControls?: never;
       href?: never;
       isDefaultExpanded?: never;
       isExpanded?: never;
@@ -182,16 +183,35 @@ export type SideNavItem = {
     }
   | {
       /**
-       * link added to the nav item. if it is undefined, static text will be displayed.
-       * fires onClick event when it is passed
+       * The `id` of the element this button controls. Use alongside
+       * `isExpanded` to wire up `aria-controls` for assistive technology.
        */
-      href?: string;
+      ariaControls?: string;
+      href?: never;
+      isDefaultExpanded?: never;
+      /**
+       * If `true`, communicates to assistive technology that this button
+       * controls an expanded panel. Use when this item opens a panel or
+       * drawer rather than navigating.
+       */
+      isExpanded?: boolean;
+      isSectionHeader?: never;
+      nestedNavItems?: never;
+    }
+  | {
+      ariaControls?: never;
+      /**
+       * link added to the nav item. if it is undefined, static text will be
+       * displayed. fires onClick event when it is passed
+       */
+      href: string;
       isDefaultExpanded?: never;
       isExpanded?: never;
       isSectionHeader?: never;
       nestedNavItems?: never;
     }
   | {
+      ariaControls?: never;
       href?: never;
       /**
        * Whether the accordion (nav item with nestedNavItems) is expanded by default
@@ -212,6 +232,7 @@ export type SideNavItem = {
       nestedNavItems: Array<SideNavItem>;
     }
   | {
+      ariaControls?: never;
       href: string;
       isDefaultExpanded?: never;
       isExpanded?: never;

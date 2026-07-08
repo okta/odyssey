@@ -208,10 +208,26 @@ const eslintConfig = createTsEslintConfig(
       "**/coverage/**/*",
       "**/dist/**/*",
       "**/node_modules/**/*",
+      "**/public/mockServiceWorker.js",
+      "**/public/mockServiceWorker.generated.js",
       "**/src/properties/ts/*.ts",
+      // Generated Blueprint authoring schema (~3.5 MB); linting it OOMs the
+      // type-aware parser and it is a build artifact, not authored source.
+      "packages/contributions/odyssey-blueprint/blueprint.schema.generated.json",
       "packages/platform/odyssey-contributions-stack/**/files/**/*",
       "packages/platform/odyssey-contributions-promotion-check/src/utils/componentExports.ts",
     ],
+  },
+
+  {
+    name: getPrefixedEslintConfigName("bin-scripts"),
+    // bin/*.mjs scripts import from dist/ which doesn't exist at lint time —
+    // the import is valid at runtime after `yarn build`. Disabling resolution
+    // at the config level is cleaner than per-file inline disables.
+    files: ["packages/contributions/odyssey-blueprint/bin/*.mjs"],
+    rules: {
+      "import/no-unresolved": "off",
+    },
   },
 
   process.env.IS_CI === "true" ||

@@ -270,6 +270,8 @@ const SideNavItemContent = ({
   endIcon,
   onClick,
   isDisabled,
+  ariaControls,
+  isExpanded,
   isSelected,
   scrollRef,
   onItemSelected,
@@ -287,6 +289,8 @@ const SideNavItemContent = ({
   | "endIcon"
   | "onClick"
   | "isDisabled"
+  | "ariaControls"
+  | "isExpanded"
   | "isSelected"
   | "translate"
 > & {
@@ -383,6 +387,8 @@ const SideNavItemContent = ({
           </NavItemContentContainer>
         ) : !href ? (
           <NavItemContentContainer
+            aria-controls={ariaControls}
+            aria-expanded={isExpanded}
             contextValue={contextValue}
             data-se="tb--sidenav-text-container"
             isActiveDropTarget={isActiveDropTarget}
