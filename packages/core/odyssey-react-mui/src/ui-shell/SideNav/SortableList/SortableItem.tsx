@@ -38,12 +38,14 @@ import {
   UiShellColors,
   useUiShellContext,
 } from "../../../ui-shell/UiShellProvider.js";
+import { useDragOverlayContext } from "./SortableOverlay.js";
 
 type ItemProps = {
   id: UniqueIdentifier;
   isDisabled?: boolean;
   isSelected?: boolean;
   isSortable?: boolean;
+  label: string;
 };
 
 export type SortableItemContextType = {
@@ -107,63 +109,96 @@ const StyledSortableListItem = styled("li", {
   }),
 }));
 
-const StyledUl = styled("ul")({
-  padding: 0,
-  listStyle: "none",
-  listStyleType: "none",
+const getFocusRingStyles = ({
+  focusRingColor,
+  odysseyDesignTokens,
+}: {
+  focusRingColor: ContrastColors["focusRingColor"];
+  odysseyDesignTokens: DesignTokens;
+}) => ({
+  outline: "2px solid transparent",
+  boxShadow: `0 0 0 2px ${odysseyDesignTokens.HueNeutralWhite}, 0 0 0 4px ${focusRingColor || odysseyDesignTokens.PalettePrimaryMain}`,
 });
 
 const StyledDragHandleButton = styled("button", {
   shouldForwardProp: (prop) =>
     prop !== "odysseyDesignTokens" &&
-    prop !== "isDragging" &&
+    prop !== "isGrabbed" &&
+    prop !== "isSelected" &&
     prop !== "focusRingColor",
 })<{
   focusRingColor: ContrastColors["focusRingColor"];
-  isDragging?: boolean;
+  isGrabbed?: boolean;
+  isSelected?: boolean;
   odysseyDesignTokens: DesignTokens;
-}>(({ odysseyDesignTokens, isDragging, focusRingColor }) => ({
+}>(({ odysseyDesignTokens, isGrabbed, isSelected, focusRingColor }) => ({
   position: "absolute",
   opacity: 0,
   padding: odysseyDesignTokens.Spacing2,
-  border: "none",
-  backgroundColor: "transparent",
-  cursor: `${isDragging ? "grabbing" : "grab"}`,
-  transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}`,
+  // Transparent 1px border by default so toggling to the HueBlue600 grabbed
+  // border does not shift the icon.
+  border: "1px solid transparent",
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
+  backgroundColor: "transparent",
+  cursor: `${isGrabbed ? "grabbing" : "grab"}`,
+  outline: "none",
 
   svg: {
     display: "flex",
   },
 
-  "&:focus, &:focus-visible": {
-    outline: "none",
-    boxShadow: `inset 0 0 0 2px ${odysseyDesignTokens.PalettePrimaryMain}`,
+  // hover state, only applied when not actively grabbing/dragging the handle
+  ...(!isGrabbed && {
+    "&:hover": {
+      backgroundColor: isSelected
+        ? odysseyDesignTokens.HueBlue100
+        : odysseyDesignTokens.HueNeutral200,
+    },
+  }),
 
-    ...(focusRingColor && {
-      boxShadow: `inset 0 0 0 2px ${focusRingColor}`,
-    }),
-  },
+  // Focus ring for a resting handle (keyboard focus). Excludes the actively
+  // grabbed handle via aria-pressed so the isGrabbed block styles that state.
+  "&:focus-visible:not([aria-pressed='true'])": getFocusRingStyles({
+    focusRingColor,
+    odysseyDesignTokens,
+  }),
+
+  // grabbed (overlay)
+  ...(isGrabbed && {
+    opacity: 1,
+    borderColor: odysseyDesignTokens.HueBlue600,
+    // icon fills with currentColor, so `color` recolors it to match the border
+    color: odysseyDesignTokens.HueBlue600,
+    ...getFocusRingStyles({ focusRingColor, odysseyDesignTokens }),
+  }),
 }));
 
 type DragHandleProps = {
   isDisabled?: boolean;
-  isDragging?: boolean;
+  isSelected?: boolean;
+  label: string;
 };
 
-export const DragHandle = ({ isDragging }: DragHandleProps) => {
+export const DragHandle = ({ isSelected, label }: DragHandleProps) => {
   const { attributes, listeners, ref } = useContext(SortableItemContext);
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
   const uiShellContext = useUiShellContext();
+  // True only for the overlay copy that follows the pointer.
+  const { isGrabbed } = useDragOverlayContext();
 
   return (
     <StyledDragHandleButton
       {...attributes}
       {...listeners}
-      aria-label={t("navigation.drag.handle")}
+      aria-label={
+        label
+          ? t("navigation.drag.handle.label", { label })
+          : t("navigation.drag.handle")
+      }
       focusRingColor={uiShellContext?.sideNavContrastColors?.focusRingColor}
-      isDragging={isDragging}
+      isGrabbed={isGrabbed}
+      isSelected={isSelected}
       odysseyDesignTokens={odysseyDesignTokens}
       ref={ref}
     >
@@ -190,6 +225,7 @@ export const SortableItem = ({
   isDisabled,
   isSelected,
   isSortable = true,
+  label,
   children,
 }: PropsWithChildren<ItemProps>) => {
   const {
@@ -230,8 +266,10 @@ export const SortableItem = ({
         sideNavContrastColors={uiShellContext?.sideNavContrastColors}
         style={style}
       >
-        {!isDisabled && isSortable && <DragHandle isDragging={isDragging} />}
-        <StyledUl>{children}</StyledUl>
+        {!isDisabled && isSortable && (
+          <DragHandle isSelected={isSelected} label={label} />
+        )}
+        {children}
       </StyledSortableListItem>
     </SortableItemContext.Provider>
   );

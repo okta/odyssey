@@ -16,6 +16,7 @@ import {
   Menu as MuiMenu,
   MenuItem as MuiMenuItem,
   Popover as MuiPopover,
+  PopoverProps as MuiPopoverProps,
   Typography as MuiTypography,
 } from "@mui/material";
 import { MRT_ColumnDef, MRT_RowData } from "material-react-table";
@@ -446,6 +447,42 @@ const DataFilters = ({
     setFilters(updatedFilters);
   }, [inputValues, filtersProp]);
 
+  const handleFilterPopoverClose = useCallback<
+    NonNullable<MuiPopoverProps["onClose"]>
+  >(
+    (ev, reason) => {
+      // Escape only backs out of the second-level popover, keeping
+      // the first-level filters menu open and returning focus to
+      // the filter option that opened it, so keyboard users don't
+      // lose their place (WCAG 2.4.3). A second Escape then lets
+      // MuiMenu's own focus restoration return focus to the
+      // "Filters" trigger button.
+      if (reason === "escapeKeyDown") {
+        handleFilterSubmit();
+        setIsFilterPopoverOpen(false);
+        filterPopoverAnchorElement?.focus();
+        return;
+      }
+
+      if (menuRef.current) {
+        const mouseEvent = ev as MouseEvent;
+        const menuRect = menuRef.current.getBoundingClientRect();
+        const clickInsideMenu =
+          mouseEvent.clientX >= menuRect.left &&
+          mouseEvent.clientX <= menuRect.right &&
+          mouseEvent.clientY >= menuRect.top &&
+          mouseEvent.clientY <= menuRect.bottom;
+
+        if (!clickInsideMenu) {
+          setIsFiltersMenuOpen(false);
+        }
+      }
+      handleFilterSubmit();
+      setIsFilterPopoverOpen(false);
+    },
+    [filterPopoverAnchorElement, handleFilterSubmit],
+  );
+
   const filterMenu = useMemo(
     () => (
       <>
@@ -596,22 +633,7 @@ const DataFilters = ({
                 // to match the default popover offset.
                 elevation={2}
                 id="filter-form"
-                onClose={(ev: MouseEvent) => {
-                  if (menuRef.current) {
-                    const menuRect = menuRef.current.getBoundingClientRect();
-                    const clickInsideMenu =
-                      ev.clientX >= menuRect.left &&
-                      ev.clientX <= menuRect.right &&
-                      ev.clientY >= menuRect.top &&
-                      ev.clientY <= menuRect.bottom;
-
-                    if (!clickInsideMenu) {
-                      setIsFiltersMenuOpen(false);
-                    }
-                  }
-                  handleFilterSubmit();
-                  setIsFilterPopoverOpen(false);
-                }}
+                onClose={handleFilterPopoverClose}
                 open={isFilterPopoverOpen}
                 sx={{ marginLeft: 2, marginTop: -1 }}
               >

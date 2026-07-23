@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.65.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.64.0...v1.65.0) (2026-07-22)
+
+### Features
+
+- add PasswordField toggle aria-label prop ([#565](https://github.com/atko-eng/odyssey-design-system/issues/565)) ([fd45530](https://github.com/atko-eng/odyssey-design-system/commit/fd45530b1fad28e6a9e179099425276d9aa4d536))
+- Translations for odyssey-design-system:enduser ([#592](https://github.com/atko-eng/odyssey-design-system/issues/592)) ([82a6ac1](https://github.com/atko-eng/odyssey-design-system/commit/82a6ac127efbc2380584e1228da55a8e52f3936d))
+
+### Bug Fixes
+
+- add initialSorting prop to DataView ([#579](https://github.com/atko-eng/odyssey-design-system/issues/579)) ([3bac40c](https://github.com/atko-eng/odyssey-design-system/commit/3bac40c3e299ab86fd47bd5c199f58fc6e568a8e))
+- add new-tab hint to SideNav external links ([#580](https://github.com/atko-eng/odyssey-design-system/issues/580)) ([882c852](https://github.com/atko-eng/odyssey-design-system/commit/882c852021007e545376bb88c9eb6b486a582577))
+- align form label optional indicator to baseline ([#510](https://github.com/atko-eng/odyssey-design-system/issues/510)) ([67174a3](https://github.com/atko-eng/odyssey-design-system/commit/67174a352b0d49c1c97fb73c1e8027fd15fc9f15))
+- expose SideNav nav as accessible list ([#572](https://github.com/atko-eng/odyssey-design-system/issues/572)) ([78ed29e](https://github.com/atko-eng/odyssey-design-system/commit/78ed29e9c60f097c69dccb93489997e2f8db72ce))
+- hide collapsed SideNav content from a11y tree ([#561](https://github.com/atko-eng/odyssey-design-system/issues/561)) ([d63f17e](https://github.com/atko-eng/odyssey-design-system/commit/d63f17ef28612a4bb47542e630a318455fd2f2a5))
+- move SideNav aria-current to interactive item ([#571](https://github.com/atko-eng/odyssey-design-system/issues/571)) ([d845590](https://github.com/atko-eng/odyssey-design-system/commit/d845590520117b06d6d49a6b0adf70e9117b8c73))
+- narrow shell hamburger a11y state and focus ([#557](https://github.com/atko-eng/odyssey-design-system/issues/557)) ([45111ca](https://github.com/atko-eng/odyssey-design-system/commit/45111ca3fa6c0c05c87a9f9199c507049b767a44))
+- portal ToastStack above Dialog backdrop ([#564](https://github.com/atko-eng/odyssey-design-system/issues/564)) ([64f4f07](https://github.com/atko-eng/odyssey-design-system/commit/64f4f07bfa92ff4d395259c5101def1280748015))
+- remove h5 margin-bottom in DrawerHeader ([#582](https://github.com/atko-eng/odyssey-design-system/issues/582)) ([4eee547](https://github.com/atko-eng/odyssey-design-system/commit/4eee54731514d7eeff9839bf5f00c9d175ad6f1a))
+- restore keyboard focus on DataFilters escape and submit ([#588](https://github.com/atko-eng/odyssey-design-system/issues/588)) ([5c3b3b3](https://github.com/atko-eng/odyssey-design-system/commit/5c3b3b3084921a1494d06272e7b3ffa18e222714))
+- side nav drag handle contrast in grabbed state ([#591](https://github.com/atko-eng/odyssey-design-system/issues/591)) ([a860992](https://github.com/atko-eng/odyssey-design-system/commit/a8609929bffd8e5189c9e5595844f9149548e8aa))
+- static import in renderReactInWebComponent ([#563](https://github.com/atko-eng/odyssey-design-system/issues/563)) ([84e42db](https://github.com/atko-eng/odyssey-design-system/commit/84e42db0a35ac3239db25b3af61be4e6b6d484fe))
+- unique drag handle names in SideNav ([#566](https://github.com/atko-eng/odyssey-design-system/issues/566)) ([f425943](https://github.com/atko-eng/odyssey-design-system/commit/f425943f13695e877c111b43ce2564b819f92a56))
+
 ## [1.64.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.63.0...v1.64.0) (2026-07-08)
 
 ### Bug Fixes

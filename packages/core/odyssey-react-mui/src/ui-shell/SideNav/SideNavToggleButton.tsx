@@ -63,7 +63,13 @@ const StyledToggleButton = styled(MuiButton, {
     outline: "none",
   },
 
-  "&:hover, &:focus-visible": {
+  // `&&` raises specificity to counteract the "floating" Button variant's
+  // `&[aria-expanded='true']:not([aria-disabled='true'])` rule. Since this
+  // button is always `aria-expanded` while open, that theme rule would
+  // otherwise set the chevron to `HueBlue600` on hover, matching the hover
+  // background and making the arrow invisible.
+  "&&:hover, &&:focus-visible": {
+    backgroundColor: "transparent",
     color: odysseyDesignTokens.HueNeutralWhite,
   },
 

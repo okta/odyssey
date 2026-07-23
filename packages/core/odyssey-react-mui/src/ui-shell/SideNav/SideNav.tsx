@@ -403,7 +403,7 @@ const StyledSideNavFooterItemsContainer = styled("div", {
   },
 }));
 
-const StyledLoadingItemContainer = styled("div", {
+const StyledLoadingItemContainer = styled("li", {
   shouldForwardProp: (prop) => prop !== "odysseyDesignTokens",
 })<{ odysseyDesignTokens: DesignTokens }>(({ odysseyDesignTokens }) => ({
   alignItems: "center",
@@ -679,16 +679,21 @@ const SideNav = ({
   );
 
   const createLeafItemContextValue = useCallback(
-    (depth: number, isSortable?: boolean) => ({
+    (depth: number, isSortable?: boolean, isWithinSortableList?: boolean) => ({
       isCompact,
       depth,
       isSortable,
+      isWithinSortableList,
       absolutePaddingStart: leavesPaddingStart,
     }),
     [isCompact, leavesPaddingStart],
   );
 
-  const renderSideNavItem = (item: SideNavItem, depth: number = 1) => {
+  const renderSideNavItem = (
+    item: SideNavItem,
+    depth: number = 1,
+    isWithinSortableList: boolean = false,
+  ) => {
     const {
       href,
       id,
@@ -719,7 +724,9 @@ const SideNav = ({
     } else if (nestedNavItems && nestedNavItems.length > 0) {
       // Recursive case: item has nested children - ALWAYS render as accordion
       const nestedChildren = (
-        <StyledSideNavListContainer role="presentation">
+        // Name the nested list after its parent item so screen readers announce
+        // e.g. "Settings, list, 5 items" instead of an unnamed nested list.
+        <StyledSideNavListContainer aria-label={label}>
           {isSortable ? (
             <SideNavSortableList
               depth={depth + 1}
@@ -748,7 +755,6 @@ const SideNav = ({
 
           <StyledSideNavListItem
             aria-disabled={isDisabled}
-            disabled={isDisabled}
             id={`${id}-items`}
             odysseyDesignTokens={odysseyDesignTokens}
           >
@@ -759,7 +765,6 @@ const SideNav = ({
         <ErrorBoundary fallback={blankElement} key={id}>
           <StyledSideNavListItem
             aria-disabled={isDisabled}
-            disabled={isDisabled}
             id={id}
             odysseyDesignTokens={odysseyDesignTokens}
           >
@@ -788,7 +793,11 @@ const SideNav = ({
         <ErrorBoundary fallback={blankElement} key={id}>
           <SideNavItemContentContext.Provider
             key={id}
-            value={createLeafItemContextValue(depth, isSortable)}
+            value={createLeafItemContextValue(
+              depth,
+              isSortable,
+              isWithinSortableList,
+            )}
           >
             <SideNavItemContent
               {...item}
@@ -806,6 +815,7 @@ const SideNav = ({
   const processSideNavItems = (
     items: SideNavItem[],
     depth: number = 1,
+    isWithinSortableList: boolean = false,
   ): (SideNavItem & { sortableItem: BaseItem })[] => {
     return items?.map((item) => ({
       ...item,
@@ -814,7 +824,8 @@ const SideNav = ({
         isSelected: item.isSelected,
         isDisabled: item.isDisabled,
         isSortable: item.isSortable,
-        navItem: renderSideNavItem(item, depth),
+        label: item.label,
+        navItem: renderSideNavItem(item, depth, isWithinSortableList),
       },
     }));
   };
@@ -929,6 +940,14 @@ const SideNav = ({
           data-se="collapsible-region"
           isSideNavCollapsed={isSideNavCollapsed}
           odysseyDesignTokens={odysseyDesignTokens}
+          // When collapsed, the region is only hidden visually (opacity/width), so
+          // its links stayed in the accessibility tree and keyboard tab order.
+          // `inert` removes the whole subtree from both, immediately, without
+          // disturbing the fade animation. Spreading conditionally omits the
+          // attribute entirely when expanded — a present `inert`, even `inert=""`
+          // or `inert="false"`, keeps the region inert — while the empty string
+          // renders as a bare, active `inert` attribute when collapsed.
+          {...(isSideNavCollapsed ? { inert: "" } : {})}
         >
           <StyledOpacityTransitionContainer
             isSideNavCollapsed={isSideNavCollapsed}
@@ -959,10 +978,7 @@ const SideNav = ({
               hasBlockStartPadding={!appName}
               odysseyDesignTokens={odysseyDesignTokens}
             >
-              <StyledSideNavListContainer
-                ref={scrollableContentRef}
-                role="none"
-              >
+              <StyledSideNavListContainer ref={scrollableContentRef}>
                 {isLoading
                   ? Array(6)
                       .fill(null)

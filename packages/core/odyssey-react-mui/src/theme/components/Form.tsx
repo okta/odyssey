@@ -159,8 +159,11 @@ export const formComponents = ({
   },
   MuiFormLabel: {
     styleOverrides: {
+      // Align on the first text line so the optional indicator stays with the
+      // start of a multi-line wrapped group label rather than its vertical
+      // center.
       root: {
-        alignItems: "center",
+        alignItems: "baseline",
         color: odysseyTokens.TypographyColorBody,
         display: "inline-flex",
         lineHeight: odysseyTokens.TypographyLineHeightUi,

@@ -28,6 +28,8 @@ import {
   Surface,
   Tag,
   TagList,
+  Toast,
+  ToastStack,
   Tooltip,
 } from "@okta/odyssey-react-mui";
 import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
@@ -313,6 +315,36 @@ export const OpenedDialog: Story = {
   },
 };
 
+export const OpenedDialogWithToast: Story = {
+  render: function C() {
+    return (
+      <UiShellWrapper
+        outerSlot={
+          <>
+            <Button label="My Button" variant="primary" />
+
+            <ToastStack>
+              <Toast
+                isDismissable
+                isVisible
+                onHide={action("onHide")}
+                role="status"
+                severity="info"
+                text="This toast should float ABOVE the dialog backdrop."
+              />
+            </ToastStack>
+
+            <Dialog isOpen onClose={action("onClose")} title="Test Dialog">
+              If the fix works, the info toast is visible above this dialog's
+              dark backdrop. If broken, the toast is hidden behind it.
+            </Dialog>
+          </>
+        }
+      />
+    );
+  },
+};
+
 export const OpenedDrawer: Story = {
   render: function C() {
     return (
@@ -328,6 +360,43 @@ export const OpenedDrawer: Story = {
               title="Test Drawer"
             >
               <Paragraph>This is the text in my Drawer.</Paragraph>
+            </Drawer>
+          </>
+        }
+      />
+    );
+  },
+};
+
+export const OpenedDrawerWithToast: Story = {
+  render: function C() {
+    return (
+      <UiShellWrapper
+        outerSlot={
+          <>
+            <Button label="My Button" variant="primary" />
+
+            <ToastStack>
+              <Toast
+                isDismissable
+                isVisible
+                onHide={action("onHide")}
+                role="status"
+                severity="info"
+                text="This toast should float ABOVE the drawer backdrop."
+              />
+            </ToastStack>
+
+            <Drawer
+              hasDividers
+              isOpen
+              onClose={action("onClose")}
+              title="Test Drawer"
+            >
+              <Paragraph>
+                If the fix works, the info toast is visible above this drawer's
+                dark backdrop. If broken, the toast is hidden behind it.
+              </Paragraph>
             </Drawer>
           </>
         }
@@ -460,4 +529,66 @@ export const OpenedTooltipInSurface: Story = {
 
       await userEvent.hover(buttonElement);
     }),
+};
+
+// `renderUiShell` accepts side-nav icons as string names (`startIconName` /
+// `endIconName`) in addition to React elements. Names are resolved lazily
+// through Odyssey's icon dictionary, so consuming apps don't bundle the full
+// icon set. The icon transformation runs inside `setComponentProps`, so items
+// are set there rather than in the initial render args.
+export const SideNavWithStringIcons: Story = {
+  render: function C() {
+    const rootElementRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      if (rootElementRef.current) {
+        const { setComponentProps } = renderUiShell({
+          appElementScrollingMode: "vertical",
+          parentElement: rootElementRef.current,
+          onRender: createOnRender({
+            surfaceSlot: (
+              <Paragraph>
+                The side nav icons are resolved from string names via Odyssey's
+                lazy icon dictionary.
+              </Paragraph>
+            ),
+          }),
+        });
+
+        setComponentProps({
+          sideNavProps: {
+            sideNavItems: [
+              {
+                id: "dashboard",
+                label: "Dashboard",
+                href: "#dashboard",
+                startIconName: "HomeIcon",
+              },
+              {
+                id: "applications",
+                label: "Applications",
+                href: "#applications",
+                startIconName: "AppsIcon",
+              },
+              {
+                id: "settings",
+                label: "Settings",
+                isDefaultExpanded: true,
+                nestedNavItems: [
+                  {
+                    id: "settings-profile",
+                    label: "Profile",
+                    href: "#profile",
+                    endIconName: "SettingsIcon",
+                  },
+                ],
+              },
+            ],
+          },
+        });
+      }
+    }, []);
+
+    return <div ref={rootElementRef} />;
+  },
 };

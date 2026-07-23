@@ -32,15 +32,15 @@
     "typecheck": "tsc --project src/tsconfig.json"
   },
   "peerDependencies": {
-    "@okta/odyssey-react-mui": "^1.62.1",
+    "@okta/odyssey-react-mui": "^1.64.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@microsoft/api-extractor": "^7.53.3",
+    "@microsoft/api-extractor": "^7.58.9",
     "@okta/odyssey-cli": "workspace:*",
     "@okta/odyssey-contributions-ui-component-identifier": "workspace:*",
-    "@okta/odyssey-react-mui": "1.62.1",
+    "@okta/odyssey-react-mui": "1.64.0",
     "@okta/ok-ui": "^4.16.0",
     "@okta/ui-stacks-component-libraries-odyssey-contributions": "workspace:*",
     "@testing-library/dom": "^10.4",

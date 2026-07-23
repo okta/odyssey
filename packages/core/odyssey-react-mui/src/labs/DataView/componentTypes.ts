@@ -78,6 +78,13 @@ export type UniversalProps<TData extends MRT_RowData> = {
   isNoResults?: boolean;
   isPaginationMoreDisabled?: boolean;
   isRowReorderingDisabled?: boolean;
+  /**
+   * Returns `true` for any row whose selection should be disabled. The row
+   * still renders, but its selection checkbox is non-interactive and the bulk
+   * "Select all" action skips it. Only applies when `hasRowSelection` is
+   * `true`.
+   */
+  isRowSelectionDisabled?: (row: TData) => boolean;
   maxPages?: number;
   maxResultsPerPage?: number;
   metaText?: string;
@@ -122,6 +129,13 @@ export type TableLayoutProps<TData extends MRT_RowData> = {
   hasSorting?: boolean;
   initialColumnVisibility?: DataColumnVisibilityState;
   initialDensity?: MRT_DensityState;
+  /**
+   * Seeds the sort order on initial mount (uncontrolled). Each entry is a
+   * column id and a direction. Ignored once the user changes the sort, and
+   * only meaningful when `hasSorting` is `true`.
+   * @default []
+   */
+  initialSorting?: MRT_SortingState;
   renderDetailPanel?: MRT_TableOptions<TData>["renderDetailPanel"];
   rowActionButtons?: RowActionsProps<TData>["rowActionButtons"];
   rowActionMenuItems?: RowActionsProps<TData>["rowActionMenuItems"];

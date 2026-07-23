@@ -82,6 +82,7 @@ export type TableLayoutContentProps<TData extends MRT_RowData> = {
   isLoading: boolean;
   isNoResults?: boolean;
   isRowReorderingDisabled?: boolean;
+  isRowSelectionDisabled?: UniversalProps<TData>["isRowSelectionDisabled"];
   onReorderRows: UniversalProps<TData>["onReorderRows"];
   pagination: {
     pageIndex: number;
@@ -149,6 +150,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
   isLoading,
   isNoResults,
   isRowReorderingDisabled,
+  isRowSelectionDisabled,
   onReorderRows,
   pagination,
   rowReorderingUtilities,
@@ -477,7 +479,14 @@ const TableLayoutContent = <TData extends MRT_RowData>({
         columnSorting: newSortVal,
       }));
     },
-    enableRowSelection: hasRowSelection,
+    // Our public API is "disabled"-framed (isRowSelectionDisabled), whereas
+    // MRT's enableRowSelection predicate is "enabled"-framed, so the value is
+    // inverted before handing it off.
+    enableRowSelection: hasRowSelection
+      ? isRowSelectionDisabled
+        ? (row) => !isRowSelectionDisabled(row.original)
+        : true
+      : false,
     onRowSelectionChange: setRowSelection,
     renderEmptyRowsFallback: emptyStateContainer,
     localization: {

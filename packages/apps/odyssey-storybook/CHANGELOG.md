@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.65.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.64.0...v1.65.0) (2026-07-22)
+
+### Features
+
+- add index.ts export files, storybook stories, and simplify policy-rules compound public API ([#585](https://github.com/atko-eng/odyssey-design-system/issues/585)) ([0729d3e](https://github.com/atko-eng/odyssey-design-system/commit/0729d3e845baf527ac7e59d1e3337b004fd85959))
+- add PasswordField toggle aria-label prop ([#565](https://github.com/atko-eng/odyssey-design-system/issues/565)) ([fd45530](https://github.com/atko-eng/odyssey-design-system/commit/fd45530b1fad28e6a9e179099425276d9aa4d536))
+
+### Bug Fixes
+
+- add initialSorting prop to DataView ([#579](https://github.com/atko-eng/odyssey-design-system/issues/579)) ([3bac40c](https://github.com/atko-eng/odyssey-design-system/commit/3bac40c3e299ab86fd47bd5c199f58fc6e568a8e))
+- align form label optional indicator to baseline ([#510](https://github.com/atko-eng/odyssey-design-system/issues/510)) ([67174a3](https://github.com/atko-eng/odyssey-design-system/commit/67174a352b0d49c1c97fb73c1e8027fd15fc9f15))
+- lazy-load icons in unified-ui-shell ([#559](https://github.com/atko-eng/odyssey-design-system/issues/559)) ([6afc6d5](https://github.com/atko-eng/odyssey-design-system/commit/6afc6d5cfa00c6389a561e0ed90fcf704dd01935))
+- portal ToastStack above Dialog backdrop ([#564](https://github.com/atko-eng/odyssey-design-system/issues/564)) ([64f4f07](https://github.com/atko-eng/odyssey-design-system/commit/64f4f07bfa92ff4d395259c5101def1280748015))
+- static import in renderReactInWebComponent ([#563](https://github.com/atko-eng/odyssey-design-system/issues/563)) ([84e42db](https://github.com/atko-eng/odyssey-design-system/commit/84e42db0a35ac3239db25b3af61be4e6b6d484fe))
+
 ## [1.64.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.63.0...v1.64.0) (2026-07-08)
 
 ### Features

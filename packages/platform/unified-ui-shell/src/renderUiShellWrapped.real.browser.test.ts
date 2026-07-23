@@ -179,9 +179,9 @@ describe("renderUiShell (unified-ui-shell wrapper)", () => {
             id: "mystery",
             label: "Mystery",
             href: "#mystery",
-            // The `startIconName` type is constrained to known icon keys at the
-            // public API; a `DoesNotExistIcon` string is a runtime-only edge
-            // case (e.g. a stale config) so we cast through `unknown` to
+            // The `startIconName` type is constrained to known icon names at
+            // the public API; a `DoesNotExistIcon` string is a runtime-only
+            // edge case (e.g. a stale config) so we cast through `unknown` to
             // exercise the dictionary-miss branch without weakening the type.
             startIconName: "DoesNotExistIcon" as unknown as "HomeIcon",
           },

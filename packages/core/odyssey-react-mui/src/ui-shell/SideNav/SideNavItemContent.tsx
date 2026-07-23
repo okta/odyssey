@@ -13,9 +13,12 @@
 import styled from "@emotion/styled";
 import { Link as NavItemLink } from "@mui/material";
 import {
+  forwardRef,
+  type HTMLAttributes,
   KeyboardEventHandler,
   memo,
   MouseEventHandler,
+  type Ref,
   useCallback,
   useImperativeHandle,
   useMemo,
@@ -25,11 +28,13 @@ import {
 
 import type { SideNavItem } from "./types.js";
 
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import { ExternalLinkIcon } from "../../icons.generated/index.js";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
+import { ScreenReaderText } from "../../ScreenReaderText.js";
 import {
   UiShellColors,
   useUiShellContext,
@@ -39,19 +44,24 @@ import {
   useSideNavItemContent,
 } from "./SideNavItemContentContext.js";
 import { SideNavItemLinkContent } from "./SideNavItemLinkContent.js";
+import { useDragOverlayContext } from "./SortableList/SortableOverlay.js";
 
-export const StyledSideNavListItem = styled("li", {
-  shouldForwardProp: (prop) =>
-    prop !== "isSelected" &&
-    prop !== "odysseyDesignTokens" &&
-    prop !== "sideNavContrastColors",
-})<{
-  disabled?: boolean;
+type SideNavListItemStyleProps = {
   isSelected?: boolean;
-  itemSelectedBackgroundColor?: string;
   odysseyDesignTokens: DesignTokens;
   sideNavContrastColors?: UiShellColors["sideNavContrastColors"];
-}>(({ isSelected, odysseyDesignTokens, sideNavContrastColors }) => ({
+};
+
+const sideNavListItemShouldForwardProp = (prop: string) =>
+  prop !== "isSelected" &&
+  prop !== "odysseyDesignTokens" &&
+  prop !== "sideNavContrastColors";
+
+const sideNavListItemStyles = ({
+  isSelected,
+  odysseyDesignTokens,
+  sideNavContrastColors,
+}: SideNavListItemStyleProps) => ({
   display: "flex",
   alignItems: "center",
   backgroundColor: "unset",
@@ -66,7 +76,46 @@ export const StyledSideNavListItem = styled("li", {
       sideNavContrastColors?.itemSelectedBackgroundColor ||
       odysseyDesignTokens.HueBlue50,
   }),
-}));
+});
+
+export const StyledSideNavListItem = styled("li", {
+  shouldForwardProp: sideNavListItemShouldForwardProp,
+})<SideNavListItemStyleProps>(sideNavListItemStyles);
+
+// Inside a sortable list, `SortableItem` supplies the `<li>`, so the item
+// content renders this `<div>` variant instead — nesting a `<li>` (or its own
+// one-item `<ul>`) inside each row would break the list's screen-reader
+// semantics.
+const StyledSideNavListItemAsDiv = styled("div", {
+  shouldForwardProp: sideNavListItemShouldForwardProp,
+})<SideNavListItemStyleProps>(sideNavListItemStyles);
+
+type SideNavListItemProps = HTMLAttributes<HTMLElement> &
+  SideNavListItemStyleProps & {
+    // When rendered inside a sortable list, the root element is a `<div>`
+    // rather than the default `<li>` (see `StyledSideNavListItemAsDiv`).
+    isWithinSortableList?: boolean;
+  };
+
+// Selecting the `<li>` or `<div>` root inside JSX and asserting a single styled
+// type would mistype the forwarded ref as `HTMLLIElement` even when the DOM
+// node is a `<div>`. Wrapping the choice in a `forwardRef<HTMLElement>` keeps
+// the ref honestly typed for both variants.
+const SideNavListItem = forwardRef<HTMLElement, SideNavListItemProps>(
+  ({ isWithinSortableList, ...sideNavListItemProps }, sideNavListItemRef) =>
+    isWithinSortableList ? (
+      <StyledSideNavListItemAsDiv
+        {...sideNavListItemProps}
+        ref={sideNavListItemRef as Ref<HTMLDivElement>}
+      />
+    ) : (
+      <StyledSideNavListItem
+        {...sideNavListItemProps}
+        ref={sideNavListItemRef as Ref<HTMLLIElement>}
+      />
+    ),
+);
+SideNavListItem.displayName = "SideNavListItem";
 
 const scrollToNode = (node: HTMLElement | null) => {
   if (node) {
@@ -82,8 +131,35 @@ type ScrollIntoViewHandle = {
   scrollIntoView: () => void;
 };
 
+// The row's active background: neutral by default, or the selected-item blue +
+// action color when selected. Shared by the drag-active and hover/focus states
+// so they stay identical.
+const getActiveRowBackgroundStyles = ({
+  isSelected,
+  odysseyDesignTokens,
+  sideNavContrastColors,
+}: {
+  isSelected?: boolean;
+  odysseyDesignTokens: DesignTokens;
+  sideNavContrastColors: UiShellColors["sideNavContrastColors"];
+}) => ({
+  backgroundColor:
+    sideNavContrastColors?.itemHoverBackgroundColor ||
+    odysseyDesignTokens.HueNeutral50,
+
+  ...(isSelected && {
+    backgroundColor:
+      sideNavContrastColors?.itemSelectedBackgroundColor ||
+      odysseyDesignTokens.HueBlue50,
+    color:
+      sideNavContrastColors?.fontColor ||
+      odysseyDesignTokens.TypographyColorAction,
+  }),
+});
+
 export const getBaseNavItemContentStyles = ({
   isDisabled,
+  isDragActive,
   isSelected,
   odysseyDesignTokens,
   sideNavContrastColors,
@@ -91,6 +167,10 @@ export const getBaseNavItemContentStyles = ({
 }: {
   isActiveDropTarget: boolean;
   isDisabled?: boolean;
+  // True for the copy shown during a drag (the overlay). Applies the row's
+  // active background independent of hover/focus, so mouse and keyboard drags
+  // look identical. See getBaseNavItemContentStyles usage of isActiveDropTarget.
+  isDragActive?: boolean;
   isSelected?: boolean;
   odysseyDesignTokens: DesignTokens;
   sideNavContrastColors: UiShellColors["sideNavContrastColors"];
@@ -115,20 +195,24 @@ export const getBaseNavItemContentStyles = ({
       odysseyDesignTokens.HueNeutral50,
   }),
 
+  // The dragged copy (overlay) carries the active row background regardless of
+  // hover/focus, so keyboard and mouse drags render identically. The hover
+  // selector below only fires for pointer hover / handle focus, which the
+  // overlay copy never has.
+  ...(isDragActive &&
+    getActiveRowBackgroundStyles({
+      isSelected,
+      odysseyDesignTokens,
+      sideNavContrastColors,
+    })),
+
   // When hover or focus of the drag handle, apply general hover styles
   "&:hover, li:has(> button:hover, > button:focus, > button:focus-visible) &": {
     textDecoration: "none",
-    backgroundColor:
-      sideNavContrastColors?.itemHoverBackgroundColor ||
-      odysseyDesignTokens.HueNeutral50,
-
-    ...(isSelected && {
-      backgroundColor:
-        sideNavContrastColors?.itemSelectedBackgroundColor ||
-        odysseyDesignTokens.HueBlue50,
-      color:
-        sideNavContrastColors?.fontColor ||
-        odysseyDesignTokens.TypographyColorAction,
+    ...getActiveRowBackgroundStyles({
+      isSelected,
+      odysseyDesignTokens,
+      sideNavContrastColors,
     }),
 
     ...(isDisabled && {
@@ -183,6 +267,7 @@ const NavItemContentContainer = styled("div", {
     prop !== "odysseyDesignTokens" &&
     prop != "contextValue" &&
     prop !== "isDisabled" &&
+    prop !== "isDragActive" &&
     prop !== "sideNavContrastColors" &&
     prop !== "isSelected" &&
     prop !== "isActiveDropTarget",
@@ -190,12 +275,14 @@ const NavItemContentContainer = styled("div", {
   contextValue: SideNavItemContentContextValue;
   isActiveDropTarget: boolean;
   isDisabled?: boolean;
+  isDragActive?: boolean;
   isSelected?: boolean;
   odysseyDesignTokens: DesignTokens;
   sideNavContrastColors: UiShellColors["sideNavContrastColors"];
 }>(
   ({
     isDisabled,
+    isDragActive,
     isSelected,
     contextValue,
     odysseyDesignTokens,
@@ -204,6 +291,7 @@ const NavItemContentContainer = styled("div", {
   }) => ({
     ...getBaseNavItemContentStyles({
       isDisabled,
+      isDragActive,
       isSelected,
       odysseyDesignTokens,
       sideNavContrastColors,
@@ -222,6 +310,7 @@ const StyledNavItemLink = styled(NavItemLink, {
   shouldForwardProp: (prop) =>
     prop != "contextValue" &&
     prop !== "isDisabled" &&
+    prop !== "isDragActive" &&
     prop !== "isSelected" &&
     prop !== "odysseyDesignTokens" &&
     prop !== "sideNavContrastColors" &&
@@ -230,12 +319,14 @@ const StyledNavItemLink = styled(NavItemLink, {
   contextValue: SideNavItemContentContextValue;
   isActiveDropTarget: boolean;
   isDisabled?: boolean;
+  isDragActive?: boolean;
   isSelected?: boolean;
   odysseyDesignTokens: DesignTokens;
   sideNavContrastColors: UiShellColors["sideNavContrastColors"];
 }>(
   ({
     isDisabled,
+    isDragActive,
     isSelected,
     contextValue,
     odysseyDesignTokens,
@@ -244,6 +335,7 @@ const StyledNavItemLink = styled(NavItemLink, {
   }) => ({
     ...getBaseNavItemContentStyles({
       isDisabled,
+      isDragActive,
       isSelected,
       odysseyDesignTokens,
       sideNavContrastColors,
@@ -308,9 +400,14 @@ const SideNavItemContent = ({
   );
 
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
   const [isActiveDropTarget, setIsActiveDropTarget] = useState(false);
+  // True only for the copy rendered inside the DragOverlay (the visible copy
+  // during a drag), so the active row background shows for both mouse and
+  // keyboard drags rather than relying on pointer hover / handle focus.
+  const { isGrabbed } = useDragOverlayContext();
 
-  const localScrollRef = useRef<HTMLLIElement>(null);
+  const localScrollRef = useRef<HTMLElement>(null);
   useImperativeHandle(scrollRef, () => {
     return {
       scrollIntoView: () => {
@@ -343,12 +440,11 @@ const SideNavItemContent = ({
   );
 
   return (
-    <StyledSideNavListItem
-      aria-current={isSelected ? "page" : undefined}
+    <SideNavListItem
       aria-disabled={isDisabled}
-      disabled={isDisabled}
       id={id}
       isSelected={isSelected}
+      isWithinSortableList={contextValue.isWithinSortableList}
       key={id}
       odysseyDesignTokens={odysseyDesignTokens}
       onDragLeave={() => {
@@ -367,6 +463,7 @@ const SideNavItemContent = ({
         // Use Link for nav items with links and div for disabled or non-link items
         isDisabled ? (
           <NavItemContentContainer
+            aria-current={isSelected ? "page" : undefined}
             contextValue={contextValue}
             data-se="tb--sidenav-text-container"
             isActiveDropTarget={false}
@@ -388,11 +485,13 @@ const SideNavItemContent = ({
         ) : !href ? (
           <NavItemContentContainer
             aria-controls={ariaControls}
+            aria-current={isSelected ? "page" : undefined}
             aria-expanded={isExpanded}
             contextValue={contextValue}
             data-se="tb--sidenav-text-container"
             isActiveDropTarget={isActiveDropTarget}
             isDisabled={isDisabled}
+            isDragActive={isGrabbed}
             isSelected={isSelected}
             odysseyDesignTokens={odysseyDesignTokens}
             onClick={itemClickHandler}
@@ -413,11 +512,13 @@ const SideNavItemContent = ({
           </NavItemContentContainer>
         ) : (
           <StyledNavItemLink
+            aria-current={isSelected ? "page" : undefined}
             contextValue={contextValue}
             data-se="tb--sidenav-text-container"
             href={href}
             isActiveDropTarget={isActiveDropTarget}
             isDisabled={isDisabled}
+            isDragActive={isGrabbed}
             isSelected={isSelected}
             odysseyDesignTokens={odysseyDesignTokens}
             onClick={itemClickHandler}
@@ -434,14 +535,19 @@ const SideNavItemContent = ({
               translate={translate}
             />
             {target === "_blank" && (
-              <span className="Link-indicator" role="presentation">
-                <ExternalLinkIcon />
-              </span>
+              <>
+                <ScreenReaderText translate={translate}>
+                  {t("link.external.newwindow")}
+                </ScreenReaderText>
+                <span className="Link-indicator" role="presentation">
+                  <ExternalLinkIcon />
+                </span>
+              </>
             )}
           </StyledNavItemLink>
         )
       }
-    </StyledSideNavListItem>
+    </SideNavListItem>
   );
 };
 

@@ -595,4 +595,100 @@ describe("UiShell", () => {
       await expect.element(page.getByText(itemLabel)).not.toBeVisible();
     });
   });
+
+  describe("Narrow shell left navigation accessibility", () => {
+    const appName = "My Test App";
+    const itemLabel = "Add new folder";
+    const PAGE_HEIGHT = 1000;
+
+    const renderNarrowShell = async () => {
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+
+      return render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="none"
+          hasStandardAppContentPadding={false}
+          onSubscriptionCreated={() => {}}
+          subscribeToPropChanges={(subscriber) => {
+            subscriber({
+              ...defaultComponentProps,
+              sideNavProps: {
+                appName,
+                sideNavItems: [
+                  {
+                    id: "item1",
+                    label: itemLabel,
+                    onClick: () => {},
+                  },
+                ],
+              },
+            });
+
+            return () => {};
+          }}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+    };
+
+    // WCAG 4.1.2: the hamburger toggle must expose its expand/collapse state.
+    test("hamburger conveys expand state and controls the left navigation", async () => {
+      await page.viewport(
+        defaultUiShellBreakpointConfig.medium - 1,
+        PAGE_HEIGHT,
+      );
+
+      await renderNarrowShell();
+
+      const hamburger = page.getByRole("button", {
+        name: odysseyTranslate("topnav.sidenavmenu.toggle"),
+      });
+
+      expect(hamburger.element().getAttribute("aria-expanded")).toBe("false");
+
+      await userEvent.click(hamburger);
+
+      expect(hamburger.element().getAttribute("aria-expanded")).toBe("true");
+
+      const controlledId = hamburger.element().getAttribute("aria-controls");
+      expect(controlledId).toBeTruthy();
+
+      const leftNavContainer = document.getElementById(controlledId!);
+      expect(leftNavContainer).not.toBeNull();
+      expect(leftNavContainer).toContainElement(
+        page.getByText(itemLabel).element(),
+      );
+    });
+
+    // WCAG 1.3.2: focus must move into the revealed navigation on open, and
+    // return to the toggle on close, so it is announced in reading order.
+    test("focus moves into the left navigation on open and back on close", async () => {
+      await page.viewport(
+        defaultUiShellBreakpointConfig.medium - 1,
+        PAGE_HEIGHT,
+      );
+
+      await renderNarrowShell();
+
+      const hamburger = page.getByRole("button", {
+        name: odysseyTranslate("topnav.sidenavmenu.toggle"),
+      });
+
+      await userEvent.click(hamburger);
+
+      const controlledId = hamburger.element().getAttribute("aria-controls");
+      const leftNavContainer = document.getElementById(controlledId!);
+      expect(document.activeElement).toBe(leftNavContainer);
+
+      await expect.element(page.getByText(itemLabel)).toBeVisible();
+      await expect(leftNavContainer).toBeAccessible();
+
+      await userEvent.keyboard("{Escape}");
+
+      expect(document.activeElement).toBe(hamburger.element());
+    });
+  });
 });

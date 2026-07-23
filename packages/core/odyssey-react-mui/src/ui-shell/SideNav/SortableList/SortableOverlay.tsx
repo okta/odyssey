@@ -17,6 +17,7 @@ import {
   DragOverlay,
   DropAnimation,
 } from "@dnd-kit/core";
+import { createContext, useContext } from "react";
 
 const dropAnimationConfig: DropAnimation = {
   sideEffects: defaultDropAnimationSideEffects({
@@ -28,8 +29,30 @@ const dropAnimationConfig: DropAnimation = {
   }),
 };
 
+type DragOverlayContextValue = {
+  isGrabbed: boolean;
+};
+
+// @dnd-kit renders two copies of the dragged row: the source item that stays in
+// the list (flagged by `useSortable().isDragging`) and this floating overlay
+// copy that follows the pointer. The overlay renders outside SortableContext,
+// so it has no `isDragging` flag of its own. This context lets nested components
+// tell they are inside the overlay (the "grabbed" copy) vs. the source ghost.
+const DragOverlayContext = createContext<DragOverlayContextValue>({
+  isGrabbed: false,
+});
+
+export const useDragOverlayContext = () => useContext(DragOverlayContext);
+
+// Stable reference so the provider doesn't re-render every consumer each render.
+const dragOverlayContextValue: DragOverlayContextValue = { isGrabbed: true };
+
 export function SortableOverlay({ children }: PropsWithChildren<object>) {
   return (
-    <DragOverlay dropAnimation={dropAnimationConfig}>{children}</DragOverlay>
+    <DragOverlay dropAnimation={dropAnimationConfig}>
+      <DragOverlayContext.Provider value={dragOverlayContextValue}>
+        {children}
+      </DragOverlayContext.Provider>
+    </DragOverlay>
   );
 }

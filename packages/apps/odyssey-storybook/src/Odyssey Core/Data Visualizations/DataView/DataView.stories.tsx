@@ -192,6 +192,9 @@ const meta = {
       control: "boolean",
       name: "tableLayoutOptions.hasSorting",
     },
+    initialSorting: {
+      name: "tableLayoutOptions.initialSorting",
+    },
     itemProps: {
       name: "cardLayoutOptions.itemProps",
     },
@@ -322,6 +325,7 @@ const meta = {
         tableLayoutOptions={{
           columns: personColumns,
           hasSorting: args.hasSorting,
+          initialSorting: args.initialSorting,
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
             : undefined,
@@ -1351,6 +1355,39 @@ export const ControlledRowSelection: Story = {
   },
 };
 
+export const DisabledRowSelection: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '`isRowSelectionDisabled` blocks selection for individual rows across all layouts. Here, high-risk people cannot be selected: their checkbox is disabled (in both the table and cards) and the bulk "Select all" action leaves them unchecked. Use the layout switcher to compare table, list, and grid.',
+      },
+    },
+  },
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
+      () => ({
+        columns: personColumns,
+      }),
+      [],
+    );
+
+    return (
+      <DataView
+        availableLayouts={["table", "list", "grid"]}
+        cardLayoutOptions={{ itemProps }}
+        getData={getData}
+        hasRowSelection
+        isRowSelectionDisabled={(row) => row.risk === "high"}
+        tableLayoutOptions={tableLayoutOptions}
+      />
+    );
+  },
+};
+
 export const GrowColumnWithActions: Story = {
   render: function C() {
     const [data, setData] = useState<Person[]>(personData);
@@ -1390,6 +1427,30 @@ export const GrowColumnWithActions: Story = {
         rowActionButtons: rowActions,
       }),
       [rowActions],
+    );
+
+    return (
+      <DataView
+        availableLayouts={tableLayoutOnly}
+        getData={getData}
+        tableLayoutOptions={tableLayoutOptions}
+      />
+    );
+  },
+};
+
+export const InitialSorting: Story = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
+      () => ({
+        columns: personColumns,
+        hasSorting: true,
+        initialSorting: [{ id: "name", desc: false }],
+      }),
+      [],
     );
 
     return (

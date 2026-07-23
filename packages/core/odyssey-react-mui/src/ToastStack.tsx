@@ -10,9 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Box, Snackbar } from "@mui/material";
+import { Box, Portal, Snackbar } from "@mui/material";
 import { memo, ReactElement } from "react";
 
+import { FullScreenOverlay } from "./FullScreenOverlay.js";
+import { useOdysseyThemeProviderPropsContext } from "./OdysseyThemeProviderPropsContext.js";
 import { Toast } from "./Toast.js";
 
 export type ToastListProps = {
@@ -22,23 +24,39 @@ export type ToastListProps = {
   children: ReactElement<typeof Toast> | Array<ReactElement<typeof Toast>>;
 };
 
+// Inside `FullScreenOverlay`, `shadowRootElement` is the shared overlay root
+// Dialog's Modal also uses. MUI's Snackbar renders inline, so we Portal it
+// there ourselves — placing its DOM (and thus its z-index) in the same
+// stacking context as the Dialog backdrop.
+const ToastStackContent = ({ children }: ToastListProps) => {
+  const { shadowRootElement } = useOdysseyThemeProviderPropsContext();
+
+  return (
+    <Portal container={shadowRootElement}>
+      <Snackbar open={true}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column-reverse",
+            gap: 2,
+          }}
+        >
+          {children}
+        </Box>
+      </Snackbar>
+    </Portal>
+  );
+};
+
 /**
  * A container that stacks Toast notifications in a fixed position on the screen. Renders
  * its Toast children in a vertically stacked column for simultaneous display.
  */
 const ToastStack = ({ children }: ToastListProps) => {
   return (
-    <Snackbar open={true}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column-reverse",
-          gap: 2,
-        }}
-      >
-        {children}
-      </Box>
-    </Snackbar>
+    <FullScreenOverlay overlayType="toastStack">
+      <ToastStackContent>{children}</ToastStackContent>
+    </FullScreenOverlay>
   );
 };
 

@@ -138,6 +138,9 @@ const DrawerHeader = styled("div", {
     odysseyDesignTokens.HueNeutralWhite};
   border-bottom: ${({ hasDividers, odysseyDesignTokens }) =>
     hasDividers ? `1px solid ${odysseyDesignTokens.HueNeutral200}` : "none"};
+  & h5 {
+    margin-bottom: 0;
+  }
 `;
 
 const DrawerContentWrapper = styled("div", {
