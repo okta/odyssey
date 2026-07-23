@@ -254,4 +254,90 @@ describe("DataFilters", () => {
       .toBeInTheDocument();
     await expect.element(filterMenu.getByText("app1")).toBeInTheDocument();
   });
+
+  const renderFilterWithTextVariant = async () =>
+    renderWithOdysseyProvider(
+      <DataFilters
+        filters={[
+          {
+            id: "text-filter",
+            label: "Text filter",
+            variant: "text",
+          },
+        ]}
+        onChangeFilters={vi.fn()}
+      />,
+    );
+
+  test("escape on second-level filter popover closes only the popover and returns focus to its filter option", async () => {
+    const { container } = await renderFilterWithTextVariant();
+    await expect(container).toBeAccessible();
+
+    await userEvent.click(page.getByLabelText("Filters", { exact: true }));
+    const filterOption = page.getByRole("menuitem", { name: /Text filter/ });
+    await userEvent.click(filterOption);
+
+    const textbox = page.getByRole("textbox", { name: "Text filter" });
+    await expect.element(textbox).toBeVisible();
+    await expect.element(textbox).toBeAccessible();
+
+    await userEvent.keyboard("{Escape}");
+
+    await expect.element(textbox).not.toBeInTheDocument();
+    const filterMenu = page.getByRole("menu");
+    await expect.element(filterMenu).toBeVisible();
+    // TODO: fix — pre-existing color-contrast issue on the filter's
+    // "Any <label>" Subordinate subtitle once the menu item regains focus
+    // (4.35:1, needs 4.5:1). Unrelated to focus management; needs a token fix.
+    await expect
+      .element(filterMenu)
+      .toBeAccessible({ disabledRules: ["color-contrast"] });
+    await expect.element(filterOption).toHaveFocus();
+  });
+
+  test("escape on first-level filters menu (no popover open) closes the menu and returns focus to the Filters button", async () => {
+    const { container } = await renderFilterWithTextVariant();
+    await expect(container).toBeAccessible();
+
+    const filtersButton = page.getByLabelText("Filters", { exact: true });
+    await userEvent.click(filtersButton);
+    const filterMenu = page.getByRole("menu");
+    await expect.element(filterMenu).toBeVisible();
+    await expect.element(filterMenu).toBeAccessible();
+
+    await userEvent.keyboard("{Escape}");
+
+    await expect.element(filterMenu).not.toBeInTheDocument();
+    await expect.element(filtersButton).toHaveFocus();
+    await expect(container).toBeAccessible();
+  });
+
+  test("pressing escape twice backs out of the popover then closes the filters menu, returning focus to the Filters button", async () => {
+    const { container } = await renderFilterWithTextVariant();
+    await expect(container).toBeAccessible();
+
+    const filtersButton = page.getByLabelText("Filters", { exact: true });
+    await userEvent.click(filtersButton);
+    const filterMenu = page.getByRole("menu");
+    await expect.element(filterMenu).toBeAccessible();
+
+    await userEvent.click(page.getByRole("menuitem", { name: /Text filter/ }));
+    const textbox = page.getByRole("textbox", { name: "Text filter" });
+    await expect.element(textbox).toBeVisible();
+    await expect.element(textbox).toBeAccessible();
+
+    await userEvent.keyboard("{Escape}");
+    await expect.element(filterMenu).toBeVisible();
+    // TODO: fix — pre-existing color-contrast issue on the filter's
+    // "Any <label>" Subordinate subtitle once the menu item regains focus
+    // (4.35:1, needs 4.5:1). Unrelated to focus management; needs a token fix.
+    await expect
+      .element(filterMenu)
+      .toBeAccessible({ disabledRules: ["color-contrast"] });
+
+    await userEvent.keyboard("{Escape}");
+    await expect.element(filterMenu).not.toBeInTheDocument();
+    await expect.element(filtersButton).toHaveFocus();
+    await expect(container).toBeAccessible();
+  });
 });

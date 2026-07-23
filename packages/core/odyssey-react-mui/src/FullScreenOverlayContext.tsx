@@ -35,6 +35,7 @@ export const useFullScreenOverlayContext = () =>
 export const OVERLAY_DATA_ATTRIBUTES = {
   dialog: "data-odyssey-react-dialog-overlay-component",
   drawer: "data-odyssey-react-drawer-overlay-component",
+  toastStack: "data-odyssey-react-toast-stack-overlay-component",
   default: "data-odyssey-react-overlay-component",
 } as const;
 

@@ -115,6 +115,10 @@ const meta = {
     },
   },
   args: {
+    // Provide a defined value so the underlying input mounts controlled.
+    // Otherwise MUI freezes it as uncontrolled and toggling the `isChecked`
+    // control in the Docs demo never updates the rendered state.
+    isChecked: false,
     label: "Label",
     onBlur: fn(),
     onChange: fn(),

@@ -10,9 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Root } from "react-dom/client";
-
 import { type ReactNode } from "react";
+import { createRoot, type Root } from "react-dom/client";
 
 import {
   createReactRootElements,
@@ -43,8 +42,7 @@ export class WebComponentClass extends SsrFriendlyHtmlElementClass {
   #getReactComponent: GetReactComponentInWebComponent | null = null;
   readonly #reactRootElements: ReactRootElements;
   public readonly elementName: string = this.localName;
-  // public for testing
-  public reactRootPromise: Promise<Root | null> = Promise.resolve(null);
+  #reactRoot: Root | null = null;
 
   constructor() {
     super();
@@ -64,17 +62,10 @@ export class WebComponentClass extends SsrFriendlyHtmlElementClass {
    * Always set immediately after creation via document.createElement
    */
   setGetReactComponent(getReactComponent: GetReactComponentInWebComponent) {
-    this.reactRootPromise = this.reactRootPromise.then((reactRoot) => {
-      this.#getReactComponent = getReactComponent;
-      if (reactRoot) {
-        // connectedCallback has already been fired. Need to mount this content to the existing root
-        reactRoot.render(this.#getReactComponent(this.#reactRootElements));
-      } else {
-        // Nothing to do. Content will be mounted when connectedCallback is called
-      }
-
-      return reactRoot;
-    });
+    this.#getReactComponent = getReactComponent;
+    if (this.#reactRoot) {
+      this.#reactRoot.render(this.#getReactComponent(this.#reactRootElements));
+    }
   }
 
   connectedCallback() {
@@ -83,44 +74,29 @@ export class WebComponentClass extends SsrFriendlyHtmlElementClass {
       stylesRootElement: this.#reactRootElements.stylesRootElement,
     });
 
-    this.reactRootPromise = this.reactRootPromise
-      .then((reactRoot) => {
-        if (reactRoot) {
-          // Shouldn't ever happen. connected and disconnected should never be called out of order
-          throw new Error(
-            `connectedCallback fired when reactRoot is already mounted.`,
-          );
-        }
+    if (this.#reactRoot) {
+      throw new Error(
+        `connectedCallback fired when reactRoot is already mounted.`,
+      );
+    }
 
-        // Ensure react root is available before mounting
-        // If we want to support React v17 in the future, we can use a try-catch on the import to grab the old `ReactDOM.render` function if `react-dom/client` errors. --Kevin Ghadyani
-        return import("react-dom/client").then(({ createRoot }) =>
-          createRoot(this.#reactRootElements.appRootElement),
-        );
-      })
-      .then((reactRoot) => {
-        if (!this.#getReactComponent) {
-          // getReactComponent hasn't been set yet. Content will be mounted once it's set.
-        } else {
-          reactRoot.render(this.#getReactComponent(this.#reactRootElements));
-        }
-        return reactRoot;
-      });
+    this.#reactRoot = createRoot(this.#reactRootElements.appRootElement);
+
+    if (this.#getReactComponent) {
+      this.#reactRoot.render(this.#getReactComponent(this.#reactRootElements));
+    }
   }
 
   disconnectedCallback() {
-    this.reactRootPromise = this.reactRootPromise.then((reactRoot) => {
-      if (!reactRoot) {
-        // Shouldn't ever happen
-        throw new Error(
-          `disconnectedCallback fired when reactRoot is already unmounted.`,
-        );
-      }
+    if (!this.#reactRoot) {
+      throw new Error(
+        `disconnectedCallback fired when reactRoot is already unmounted.`,
+      );
+    }
 
-      reactRoot.unmount();
-      // Set root to null. We don't want to attempt to render to a root that's already been unmounted.
-      return null;
-    });
+    this.#reactRoot.unmount();
+    this.#reactRoot = null;
+    // #getReactComponent is preserved — if reconnected it will render on connectedCallback
   }
 }
 

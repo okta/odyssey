@@ -120,51 +120,39 @@ describe(renderReactInWebComponent.name, () => {
   describe("Throws errors if connected/disconnected are called out of order", () => {
     const rootElement = document.createElement("div");
 
-    test("init -> connect -> disconnect -> connect passes", async () => {
+    test("init -> connect -> disconnect -> connect passes", () => {
       const reactInWebComponentElement = renderReactInWebComponent({
         getReactComponent: () => <div></div>,
         webComponentRootElement: rootElement,
       });
 
-      reactInWebComponentElement.connectedCallback();
-      reactInWebComponentElement.disconnectedCallback();
-      reactInWebComponentElement.connectedCallback();
-
-      await reactInWebComponentElement.reactRootPromise;
-
-      await expect(
-        reactInWebComponentElement.reactRootPromise,
-      ).resolves.not.toThrow();
+      expect(() => {
+        reactInWebComponentElement.connectedCallback();
+        reactInWebComponentElement.disconnectedCallback();
+        reactInWebComponentElement.connectedCallback();
+      }).not.toThrow();
     });
 
-    test("init -> disconnect fails", async () => {
+    test("init -> disconnect fails", () => {
       const reactInWebComponentElement = renderReactInWebComponent({
         getReactComponent: () => <div></div>,
         webComponentRootElement: rootElement,
       });
 
-      reactInWebComponentElement.disconnectedCallback();
-
-      await expect(
-        reactInWebComponentElement.reactRootPromise,
-      ).rejects.toThrow();
+      expect(() => reactInWebComponentElement.disconnectedCallback()).toThrow();
     });
 
-    test("init -> connect -> connect fails", async () => {
+    test("init -> connect -> connect fails", () => {
       const reactInWebComponentElement = renderReactInWebComponent({
         getReactComponent: () => <div></div>,
         webComponentRootElement: rootElement,
       });
 
       reactInWebComponentElement.connectedCallback();
-      reactInWebComponentElement.connectedCallback();
-
-      await expect(
-        reactInWebComponentElement.reactRootPromise,
-      ).rejects.toThrow();
+      expect(() => reactInWebComponentElement.connectedCallback()).toThrow();
     });
 
-    test("init -> connect -> disconnect -> disconnect fails", async () => {
+    test("init -> connect -> disconnect -> disconnect fails", () => {
       const reactInWebComponentElement = renderReactInWebComponent({
         getReactComponent: () => <div></div>,
         webComponentRootElement: rootElement,
@@ -172,11 +160,7 @@ describe(renderReactInWebComponent.name, () => {
 
       reactInWebComponentElement.connectedCallback();
       reactInWebComponentElement.disconnectedCallback();
-      reactInWebComponentElement.disconnectedCallback();
-
-      await expect(
-        reactInWebComponentElement.reactRootPromise,
-      ).rejects.toThrow();
+      expect(() => reactInWebComponentElement.disconnectedCallback()).toThrow();
     });
   });
 });

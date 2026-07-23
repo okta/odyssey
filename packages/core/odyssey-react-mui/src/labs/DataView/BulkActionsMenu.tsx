@@ -12,7 +12,7 @@
 
 import styled from "@emotion/styled";
 import { MRT_RowData, MRT_RowSelectionState } from "material-react-table";
-import { Dispatch, memo, SetStateAction, useCallback } from "react";
+import { Dispatch, memo, SetStateAction, useCallback, useMemo } from "react";
 
 import { Box } from "../../Box.js";
 import { Button } from "../../Buttons/Button.js";
@@ -29,6 +29,7 @@ import { GetRowId } from "./dataTypes.js";
 export type BulkActionsMenuProps<TData extends MRT_RowData> = {
   data: TData[];
   getRowId: GetRowId<TData>;
+  isRowSelectionDisabled?: UniversalProps<TData>["isRowSelectionDisabled"];
   menuItems: UniversalProps<TData>["bulkActionMenuItems"];
   rowSelection: MRT_RowSelectionState;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
@@ -50,6 +51,7 @@ const BulkActionsContainer = styled("div", {
 const BulkActionsMenu = <TData extends MRT_RowData>({
   data,
   getRowId,
+  isRowSelectionDisabled,
   menuItems,
   rowSelection,
   setRowSelection,
@@ -59,12 +61,23 @@ const BulkActionsMenu = <TData extends MRT_RowData>({
 
   const selectedRowCount = Object.values(rowSelection).filter(Boolean).length;
 
+  const selectableRowCount = useMemo(
+    () =>
+      isRowSelectionDisabled
+        ? data.filter((row) => !isRowSelectionDisabled(row)).length
+        : data.length,
+    [data, isRowSelectionDisabled],
+  );
+
   const handleSelectAll = useCallback(() => {
     const rows = Object.fromEntries(
-      data.map((row, index) => [getRowId(row, index), true]),
+      data
+        .map((row, index) => [getRowId(row, index), row] as const)
+        .filter(([, row]) => !isRowSelectionDisabled?.(row))
+        .map(([rowId]) => [rowId, true]),
     );
     setRowSelection(rows);
-  }, [data, getRowId, setRowSelection]);
+  }, [data, getRowId, isRowSelectionDisabled, setRowSelection]);
 
   const handleSelectNone = useCallback(() => {
     setRowSelection({});
@@ -84,7 +97,9 @@ const BulkActionsMenu = <TData extends MRT_RowData>({
       )}
       <Box>
         <Button
-          isDisabled={selectedRowCount === data.length} // Disabled if all are selected
+          // >= rather than ===: a controlled rowSelection can carry disabled or
+          // off-page rows, so selectedRowCount may exceed the selectable count.
+          isDisabled={selectedRowCount >= selectableRowCount}
           label={t("table.actions.selectall")}
           onClick={handleSelectAll}
           variant="secondary"

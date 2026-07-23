@@ -132,6 +132,7 @@ const DataView = <TData extends MRT_RowData>({
   isNoResults: isNoResultsProp,
   isPaginationMoreDisabled,
   isRowReorderingDisabled,
+  isRowSelectionDisabled,
   metaText,
   noResultsPlaceholder,
   onChangeRowSelection,
@@ -211,8 +212,10 @@ const DataView = <TData extends MRT_RowData>({
   });
 
   const [tableState, setTableState] = useState<TableState>({
-    columnSorting: [],
-    columnVisibility: tableLayoutOptions?.initialColumnVisibility ?? {},
+    columnSorting: [...(tableLayoutOptions?.initialSorting ?? [])],
+    columnVisibility: {
+      ...(tableLayoutOptions?.initialColumnVisibility ?? {}),
+    },
     rowDensity: tableLayoutOptions?.initialDensity ?? densityValues[0],
   });
 
@@ -477,6 +480,7 @@ const DataView = <TData extends MRT_RowData>({
           <BulkActionsMenu
             data={data}
             getRowId={getRowId}
+            isRowSelectionDisabled={isRowSelectionDisabled}
             menuItems={bulkActionMenuItems}
             rowSelection={rowSelection}
             setRowSelection={setRowSelection}
@@ -510,6 +514,7 @@ const DataView = <TData extends MRT_RowData>({
           isLoading={isLoading}
           isNoResults={isNoResults}
           isRowReorderingDisabled={isRowReorderingDisabled}
+          isRowSelectionDisabled={isRowSelectionDisabled}
           onReorderRows={onReorderRows}
           pagination={pagination}
           rowReorderingUtilities={rowReorderingUtilities}
@@ -536,6 +541,7 @@ const DataView = <TData extends MRT_RowData>({
             isLoading={isLoading}
             isNoResults={isNoResults}
             isRowReorderingDisabled={isRowReorderingDisabled}
+            isRowSelectionDisabled={isRowSelectionDisabled}
             onReorderRows={onReorderRows}
             pagination={pagination}
             rowReorderingUtilities={rowReorderingUtilities}

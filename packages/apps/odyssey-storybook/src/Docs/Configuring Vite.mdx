@@ -6,19 +6,21 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 Odyssey depends on React and ReactDOM as true singletons — multiple instances break hooks and context. MUI and Emotion should also be shared across your app to avoid style conflicts. Vite's default bundling can create duplicates depending on how your project is structured. The right fix depends on your situation:
 
-| Situation                                                | Fix                                             |
-| -------------------------------------------------------- | ----------------------------------------------- |
-| App that renders Odyssey via `renderReactInWebComponent` | `output.manualChunks` — keep React in one chunk |
-| App with duplicate copies pulled in from libraries       | `resolve.dedupe`                                |
-| Library or contributions package you publish             | `rollupOptions.external` + `output.globals`     |
+| Situation                                                         | Fix                                                                  |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------- |
+| App on an older Odyssey rendering via `renderReactInWebComponent` | `output.manualChunks` — keep React in one chunk (older Odyssey only) |
+| App with duplicate copies pulled in from libraries                | `resolve.dedupe`                                                     |
+| Library or contributions package you publish                      | `rollupOptions.external` + `output.globals`                          |
 
 These are not mutually exclusive. A contributions package externalizes its dependencies, and the consuming app dedupes or chunks React on top of that.
 
 ---
 
-## Web-component app: `output.manualChunks`
+## Web-component app: `output.manualChunks` (older Odyssey only)
 
-Apps that render Odyssey through `renderReactInWebComponent` need this fix. The web-component entry uses a dynamic `import("react-dom/client")` that Vite splits into its own chunk, which can pull in a second copy of React. Forcing all React entry points into a single chunk prevents this:
+As of the Odyssey release that makes `renderReactInWebComponent` import `react-dom/client` statically, this workaround is **no longer required** — the web-component entry no longer produces a self-referencing dynamic-import chunk.
+
+If you are pinned to an older Odyssey version whose web-component entry still uses a dynamic `import("react-dom/client")`, Vite splits that dynamic import into its own chunk, which can pull in a second copy of React. Forcing all React entry points into a single chunk prevents this:
 
 ```ts
 // vite.config.ts
@@ -37,7 +39,7 @@ export default defineConfig({
 });
 ```
 
-This is a workaround for the dynamic import behavior in the web-component entry. It is expected to be removed once Odyssey switches to a static import internally.
+Newer Odyssey versions perform this import statically, so this section applies only to apps that cannot upgrade yet.
 
 ---
 
@@ -109,4 +111,4 @@ Contributions packages in this repo use this pattern via the stack-provided `vit
 
 ## Verifying a single React instance
 
-After building, duplicate React instances often surface at runtime as **"Invalid hook call"** errors in the console. With the `manualChunks` config applied, inspect the build output to confirm `react`, `react-dom`, and `react-dom/client` all resolve into the single `react-vendor` chunk. No such errors should appear.
+After building, duplicate React instances often surface at runtime as **"Invalid hook call"** errors in the console. Inspect the build output to confirm `react`, `react-dom`, and `react-dom/client` resolve to a single copy — for example, all landing in one `react-vendor` chunk when you apply `manualChunks`. No such errors should appear.

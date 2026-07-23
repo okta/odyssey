@@ -79,6 +79,17 @@ const meta = {
         },
       },
     },
+    showPasswordToggleAriaLabel: {
+      control: "text",
+      description:
+        "Stable accessible name for the password visibility toggle. Override per instance when a page has more than one `PasswordField` so screen-reader users can tell the toggles apart. The name does not change on toggle — `aria-pressed` conveys the show/hide state.",
+      table: {
+        category: "Functional",
+        type: {
+          summary: "string",
+        },
+      },
+    },
     hint: fieldComponentPropsMetaData.hint,
     id: fieldComponentPropsMetaData.id,
     isDisabled: fieldComponentPropsMetaData.isDisabled,
@@ -317,6 +328,33 @@ export const Focused: Story = {
       <Stack spacing={2}>
         <PasswordField label="Not Focused" />
         <PasswordField {...args} onChange={handleChange} value={value} />
+      </Stack>
+    );
+  },
+};
+
+export const CustomToggleAriaLabels: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "When a page has more than one `PasswordField`, give each visibility toggle a distinct, stable accessible name via `showPasswordToggleAriaLabel` so screen-reader users can tell them apart. The name does not change on toggle — `aria-pressed` conveys the show/hide state.",
+      },
+    },
+  },
+  render: function C() {
+    return (
+      <Stack spacing={2}>
+        <PasswordField
+          autoCompleteType="new-password"
+          label="Password"
+          showPasswordToggleAriaLabel="Show entered password"
+        />
+        <PasswordField
+          autoCompleteType="new-password"
+          label="Re-enter password"
+          showPasswordToggleAriaLabel="Show re-entered password"
+        />
       </Stack>
     );
   },

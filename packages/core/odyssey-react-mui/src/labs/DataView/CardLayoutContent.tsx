@@ -53,6 +53,7 @@ export type CardLayoutContentProps<TData extends MRT_RowData> = {
   isLoading: boolean;
   isNoResults?: boolean;
   isRowReorderingDisabled?: boolean;
+  isRowSelectionDisabled?: UniversalProps<TData>["isRowSelectionDisabled"];
   onReorderRows: UniversalProps<TData>["onReorderRows"];
   pagination: { pageIndex: number; pageSize: number };
   rowReorderingUtilities: {
@@ -109,6 +110,7 @@ type RowDataCardProps<TData extends MRT_RowData> = {
   | "hasRowReordering"
   | "hasRowSelection"
   | "isRowReorderingDisabled"
+  | "isRowSelectionDisabled"
   | "onReorderRows"
   | "rowReorderingUtilities"
   | "rowSelection"
@@ -166,6 +168,7 @@ const RowDataCard = <TData extends MRT_RowData>({
   hasRowReordering,
   hasRowSelection,
   isRowReorderingDisabled,
+  isRowSelectionDisabled,
   onReorderRows,
   row,
   rowReorderingUtilities,
@@ -174,6 +177,11 @@ const RowDataCard = <TData extends MRT_RowData>({
 }: RowDataCardProps<TData>) => {
   const { overline, title, description, image, children, variant } =
     cardLayoutOptions.itemProps(row);
+
+  const isSelectionDisabled = useMemo(
+    () => isRowSelectionDisabled?.(row) ?? false,
+    [isRowSelectionDisabled, row],
+  );
 
   const onSelectionChange = useCallback(
     () => handleRowSelectionChange(row),
@@ -223,6 +231,7 @@ const RowDataCard = <TData extends MRT_RowData>({
       hasSelection={hasRowSelection}
       image={image}
       isSelected={rowSelection[row.id as number] ?? false}
+      isSelectionDisabled={isSelectionDisabled}
       key={row.id as string}
       menuButtonChildren={menuButtonChildren}
       onSelectionChange={onSelectionChange}
@@ -246,6 +255,7 @@ const CardLayoutContent = <TData extends MRT_RowData>({
   isLoading,
   isNoResults,
   isRowReorderingDisabled,
+  isRowSelectionDisabled,
   onReorderRows,
   pagination,
   rowReorderingUtilities,
@@ -258,6 +268,10 @@ const CardLayoutContent = <TData extends MRT_RowData>({
 
   const handleRowSelectionChange = useCallback(
     (row: TData) => {
+      if (isRowSelectionDisabled?.(row)) {
+        return;
+      }
+
       setRowSelection((rowSelection) =>
         Object.fromEntries(
           row.id in rowSelection
@@ -266,7 +280,7 @@ const CardLayoutContent = <TData extends MRT_RowData>({
         ),
       );
     },
-    [setRowSelection],
+    [isRowSelectionDisabled, setRowSelection],
   );
 
   return (
@@ -298,6 +312,7 @@ const CardLayoutContent = <TData extends MRT_RowData>({
                     hasRowReordering={hasRowReordering}
                     hasRowSelection={hasRowSelection}
                     isRowReorderingDisabled={isRowReorderingDisabled}
+                    isRowSelectionDisabled={isRowSelectionDisabled}
                     key={row.id as string}
                     onReorderRows={onReorderRows}
                     row={row}

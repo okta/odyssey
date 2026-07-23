@@ -31,9 +31,12 @@ describe(PasswordField.displayName!, () => {
     const fieldElement = page.getByRole("textbox", { name: "Password" });
     await expect.element(fieldElement).toHaveAttribute("type", "password");
 
+    // The toggle keeps a stable accessible name; its pressed state is what
+    // conveys show/hide, following the ARIA toggle-button pattern.
     const toggleButton = page.getByRole("button", {
       name: odysseyTranslate("passwordfield.icon.label.show"),
     });
+    await expect.element(toggleButton).toHaveAttribute("aria-pressed", "false");
 
     await userEvent.click(toggleButton);
     await userEvent.tab();
@@ -46,5 +49,54 @@ describe(PasswordField.displayName!, () => {
 
     await expect.element(fieldElement).toHaveAttribute("type", "password");
     await expect.element(toggleButton).toHaveAttribute("aria-pressed", "false");
+  });
+
+  test("toggle accessible name stays stable across show and hide", async () => {
+    await renderWithOdysseyProvider(
+      <PasswordField label="Password" value="password" />,
+    );
+
+    const toggleButton = page.getByRole("button", {
+      name: odysseyTranslate("passwordfield.icon.label.show"),
+    });
+    await expect.element(toggleButton).toBeVisible();
+
+    await userEvent.click(toggleButton);
+
+    // Name must not change on toggle — only aria-pressed reflects the state.
+    await expect.element(toggleButton).toBeVisible();
+    await expect.element(toggleButton).toHaveAttribute("aria-pressed", "true");
+  });
+
+  test("custom aria label distinguishes two password fields", async () => {
+    const { container } = await renderWithOdysseyProvider(
+      <>
+        <PasswordField
+          label="Password"
+          showPasswordToggleAriaLabel="Show entered password"
+        />
+        <PasswordField
+          label="Re-enter password"
+          showPasswordToggleAriaLabel="Show re-entered password"
+        />
+      </>,
+    );
+    await expect(container).toBeAccessible();
+
+    const firstToggle = page.getByRole("button", {
+      name: "Show entered password",
+    });
+    const secondToggle = page.getByRole("button", {
+      name: "Show re-entered password",
+    });
+    await expect.element(firstToggle).toBeVisible();
+    await expect.element(secondToggle).toBeVisible();
+
+    await userEvent.click(firstToggle);
+
+    // The revealed toggle keeps its distinct name; only aria-pressed changes.
+    await expect.element(firstToggle).toHaveAttribute("aria-pressed", "true");
+    await expect.element(secondToggle).toHaveAttribute("aria-pressed", "false");
+    await expect(container).toBeAccessible();
   });
 });

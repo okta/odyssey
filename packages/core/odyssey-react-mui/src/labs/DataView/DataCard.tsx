@@ -39,6 +39,11 @@ export type DataCardProps = {
    * If `true`, the card is in a selected state.
    */
   isSelected?: boolean;
+  /**
+   * If `true`, the selection checkbox is disabled and the card cannot be
+   * selected or deselected.
+   */
+  isSelectionDisabled?: boolean;
   menuButtonChildren?: CardProps["menuButtonChildren"];
   onSelectionChange?: () => void;
   overline?: CardProps["overline"];
@@ -65,6 +70,7 @@ const DataCard = ({
   hasSelection,
   image,
   isSelected,
+  isSelectionDisabled,
   onSelectionChange,
   overline,
   title,
@@ -82,6 +88,7 @@ const DataCard = ({
       <CheckboxContainer odysseyDesignTokens={odysseyDesignTokens}>
         <MuiCheckbox
           checked={isSelected}
+          disabled={isSelectionDisabled}
           inputProps={{
             "aria-labelledby": titleId,
           }}
@@ -89,7 +96,13 @@ const DataCard = ({
         />
       </CheckboxContainer>
     ),
-    [isSelected, odysseyDesignTokens, onSelectionChange, titleId],
+    [
+      isSelected,
+      isSelectionDisabled,
+      odysseyDesignTokens,
+      onSelectionChange,
+      titleId,
+    ],
   );
 
   const ExpansionToggle = useMemo(() => {

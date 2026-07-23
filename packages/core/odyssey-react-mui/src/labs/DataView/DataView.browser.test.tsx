@@ -335,6 +335,63 @@ describe("DataView", { timeout: 10000 }, () => {
   });
 
   describe("Row selection", () => {
+    test("disabled row renders a non-interactive selection checkbox", async () => {
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          isRowSelectionDisabled={(row) => row.id === data[0].id}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      // nth(0) is the header "select all" checkbox; nth(1) is the first data row.
+      await expect.element(page.getByRole("checkbox").nth(1)).toBeDisabled();
+    });
+
+    test("a selectable row is unaffected when another row is disabled", async () => {
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          isRowSelectionDisabled={(row) => row.id === data[0].id}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await userEvent.click(page.getByRole("checkbox").nth(2));
+
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent("1 selected");
+    });
+
+    test("Select all skips disabled rows", async () => {
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          isRowSelectionDisabled={(row) => row.id === data[0].id}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+
+      await userEvent.click(page.getByRole("button", { name: "Select all" }));
+
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent(`${data.length - 1} selected`);
+    });
+
     test("can select table rows", async () => {
       await renderDataView(
         <DataView
@@ -371,6 +428,24 @@ describe("DataView", { timeout: 10000 }, () => {
       await expect
         .element(page.getByRole("button", { name: "More actions" }))
         .toHaveTextContent(`${data.length} selected`);
+    });
+
+    test("disabled row's card checkbox is non-interactive", async () => {
+      await renderDataView(
+        <DataView
+          availableLayouts={["grid"]}
+          cardLayoutOptions={{
+            itemProps: gridItemProps,
+          }}
+          getData={getData}
+          hasRowSelection
+          isRowSelectionDisabled={(row) => row.id === data[0].id}
+        />,
+      );
+
+      // Card layouts have no header select-all checkbox; nth(0) is the first card.
+      await expect.element(page.getByRole("checkbox").nth(0)).toBeDisabled();
+      await expect.element(page.getByRole("checkbox").nth(1)).toBeEnabled();
     });
 
     test("can select card rows", async () => {
@@ -902,6 +977,26 @@ describe("DataView", { timeout: 10000 }, () => {
     await expect
       .element(page.getByRole("row").nth(6))
       .toHaveTextContent(data[0].name);
+  });
+
+  test("initialSorting seeds column sort on first render", async () => {
+    await renderDataView(
+      <DataView
+        availableLayouts={["table"]}
+        getData={getData}
+        tableLayoutOptions={{
+          columns,
+          hasSorting: true,
+          initialSorting: [{ id: "name", desc: false }],
+        }}
+      />,
+    );
+
+    await expect
+      .element(page.getByRole("button", { name: "Sorted by Name ascending" }))
+      .toBeVisible();
+
+    await expect(document.body).toBeAccessible();
   });
 
   test("can change row density", async () => {

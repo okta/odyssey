@@ -1,15 +1,20 @@
-import * as odysseyIconsExport from "@okta/odyssey-react-mui/icons";
+import { iconNames } from "@okta/odyssey-react-mui/icon-names";
 import { SideNavItem } from "@okta/odyssey-react-mui/labs";
+import { lazyIconDictionary } from "@okta/odyssey-react-mui/lazy-loaded-icons";
 import {
   renderUiShell as odysseyRenderUiShell,
   type RenderedUiShell,
   type UiShellNavComponentProps,
 } from "@okta/odyssey-react-mui/ui-shell";
-import { createElement, type ReactElement } from "react";
+import { createElement, type ReactElement, Suspense } from "react";
 
-type IconDictionary = Omit<typeof odysseyIconsExport, "default">;
-
-const iconDictionary: IconDictionary = odysseyIconsExport;
+/**
+ * Public icon name accepted by `startIconName` / `endIconName`. Retains the
+ * historical `Icon`-suffixed names (e.g. `"HomeIcon"`) so consumers do not have
+ * to rename anything, while internally we resolve against the suffix-less keys
+ * of `lazyIconDictionary` (e.g. `"Home"`). Derived from Odyssey's `iconNames`.
+ */
+export type UiShellIconName = `${(typeof iconNames)[number]}Icon`;
 
 export {
   adminAppUiShellBreakpoints,
@@ -42,7 +47,7 @@ export type ModifiedSideNavItem = Omit<
         /**
          * Name of the icon to display after the nav item text.
          */
-        endIconName?: keyof typeof iconDictionary;
+        endIconName?: UiShellIconName;
       }
     | {
         /**
@@ -58,7 +63,7 @@ export type ModifiedSideNavItem = Omit<
         /**
          * Name of the icon to display before the text.
          */
-        startIconName?: keyof typeof iconDictionary;
+        startIconName?: UiShellIconName;
       }
     | {
         /**
@@ -175,11 +180,22 @@ const getIcon = ({
   iconName,
 }: {
   icon?: ReactElement;
-  iconName?: Exclude<keyof IconDictionary, "default">;
-}) =>
-  iconName && iconName in iconDictionary
-    ? createElement(iconDictionary[iconName])
+  iconName?: UiShellIconName;
+}) => {
+  // `lazyIconDictionary` is keyed by the suffix-less icon name (e.g. `"Home"`),
+  // whereas the public `iconName` retains the historical `Icon` suffix.
+  const lazyIconName = iconName?.replace(/Icon$/, "");
+
+  return lazyIconName && Object.hasOwn(lazyIconDictionary, lazyIconName)
+    ? createElement(
+        Suspense,
+        { fallback: null },
+        createElement(
+          lazyIconDictionary[lazyIconName as keyof typeof lazyIconDictionary],
+        ),
+      )
     : icon;
+};
 
 export const renderUiShell: ModifiedRenderUiShell = (
   odysseyRenderUiShellArgs,
@@ -202,45 +218,51 @@ export const renderUiShell: ModifiedRenderUiShell = (
 
   const computeModifiedComponentProps: ComputeComponentProps = (
     componentProps,
-  ) => ({
-    ...componentProps,
-    ...("sideNavProps" in componentProps
-      ? {
-          sideNavProps: {
-            ...componentProps.sideNavProps,
-            ...{
-              sideNavItems: componentProps.sideNavProps?.sideNavItems?.map(
-                (sideNavItem) => ({
-                  ...sideNavItem,
-                  nestedNavItems:
-                    "nestedNavItems" in sideNavItem &&
-                    sideNavItem.nestedNavItems
-                      ? sideNavItem.nestedNavItems.map((nestedNavItem) => ({
-                          ...nestedNavItem,
-                          endIcon: getIcon({
-                            icon: nestedNavItem.endIcon,
-                            iconName: nestedNavItem.endIconName,
-                          }),
-                        }))
-                      : undefined,
-                  endIcon: getIcon({
-                    icon: sideNavItem.endIcon,
-                    iconName: sideNavItem.endIconName,
+  ) =>
+    ({
+      ...componentProps,
+      ...("sideNavProps" in componentProps
+        ? {
+            sideNavProps: {
+              ...componentProps.sideNavProps,
+              ...{
+                sideNavItems: componentProps.sideNavProps?.sideNavItems?.map(
+                  (sideNavItem) => ({
+                    ...sideNavItem,
+                    nestedNavItems:
+                      "nestedNavItems" in sideNavItem &&
+                      sideNavItem.nestedNavItems
+                        ? sideNavItem.nestedNavItems.map((nestedNavItem) => ({
+                            ...nestedNavItem,
+                            endIcon: getIcon({
+                              icon: nestedNavItem.endIcon,
+                              iconName: nestedNavItem.endIconName,
+                            }),
+                          }))
+                        : undefined,
+                    endIcon: getIcon({
+                      icon: sideNavItem.endIcon,
+                      iconName: sideNavItem.endIconName,
+                    }),
+                    startIcon: getIcon({
+                      icon: sideNavItem.startIcon,
+                      iconName: sideNavItem.startIconName,
+                    }),
                   }),
-                  startIcon: getIcon({
-                    icon: sideNavItem.startIcon,
-                    iconName: sideNavItem.startIconName,
-                  }),
-                }),
-                // We can do this `as` with `satisfies`, but the complex discriminated unions in `SideNavItem` make this nearly impossible. It's simplest to write the JavaScript and let the user-facing types and React code handle the rest as they're already managing this situation.
-              ) as SideNavItem[],
+                  // We can do this `as` with `satisfies`, but the complex discriminated unions in `SideNavItem` make this nearly impossible. It's simplest to write the JavaScript and let the user-facing types and React code handle the rest as they're already managing this situation.
+                ) as SideNavItem[],
+              },
             },
-          },
-        }
-      : {
-          sideNavItems: [] satisfies SideNavItem[],
-        }),
-  });
+          }
+        : {
+            sideNavItems: [] satisfies SideNavItem[],
+          }),
+      // `SideNavItem`'s section-header variant constrains `ariaControls` to
+      // `undefined`, whereas `ModifiedSideNavItem` carries `ariaControls?:
+      // string` from its base `Omit`, so the container can't be expressed as
+      // `UiShellNavComponentProps` without a cast. The element-level `as
+      // SideNavItem[]` above already asserts each item is well-formed.
+    }) as UiShellNavComponentProps;
 
   const onRender = (onRenderUiShellReturnValues: RenderedUiShell) => {
     if (odysseyRenderUiShellArgs.onRender) {

@@ -16,12 +16,14 @@ import {
   memo,
   useCallback,
   useEffect,
+  useId,
   useRef,
   useState,
 } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import type { HtmlProps } from "../HtmlProps.js";
+import type { FocusHandle } from "../inputUtils.js";
 
 import { Button } from "../Buttons/Button.js";
 import { hexToRgb } from "../hexToRgb.js";
@@ -257,6 +259,10 @@ const NarrowUiShellContent = ({
   const topNavContainerRef = useRef<HTMLDivElement>(null);
   const uiShellAppAreaRef = useRef<HTMLDivElement>(null);
 
+  const leftSideContainerRef = useRef<HTMLDivElement>(null);
+  const leftSideMenuToggleRef = useRef<FocusHandle>(null);
+  const leftSideContainerId = useId();
+
   const [isLeftSideMenuOpen, setIsLeftSideMenuOpen] = useState(false);
   const [isRightSideMenuOpen, setIsRightSideMenuOpen] = useState(false);
 
@@ -291,6 +297,24 @@ const NarrowUiShellContent = ({
     setIsLeftSideMenuOpen(false);
     setIsRightSideMenuOpen((isRightSideMenuOpen) => !isRightSideMenuOpen);
   }, []);
+
+  // WCAG 1.3.2: when the left nav opens, focus must move into it so screen
+  // reader and keyboard users land on the newly revealed content instead of
+  // being stranded on the header. On close we return focus to the toggle
+  // (disclosure pattern) — the container is `display: none` by the time this
+  // effect runs, so its children can no longer hold focus and we cannot rely
+  // on an activeElement containment check.
+  const isLeftSideMenuOpenRef = useRef(false);
+
+  useEffect(() => {
+    if (isLeftSideMenuOpen) {
+      leftSideContainerRef.current?.focus();
+    } else if (isLeftSideMenuOpenRef.current) {
+      leftSideMenuToggleRef.current?.focus();
+    }
+
+    isLeftSideMenuOpenRef.current = isLeftSideMenuOpen;
+  }, [isLeftSideMenuOpen]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -353,7 +377,10 @@ const NarrowUiShellContent = ({
                     (sideNavProps?.isCollapsible ||
                       !sideNavProps?.isCollapsed) && (
                       <Button
+                        ariaControls={leftSideContainerId}
+                        ariaExpanded={isLeftSideMenuOpen}
                         ariaLabel={t("topnav.sidenavmenu.toggle")}
+                        buttonRef={leftSideMenuToggleRef}
                         onClick={toggleLeftSideMenu}
                         startIcon={<HamburgerMenuIcon />}
                         testId="sidenav-menu--icon"
@@ -391,7 +418,12 @@ const NarrowUiShellContent = ({
         )}
 
         <StyledAppContentArea>
-          <StyledLeftSideContainer isOpen={isLeftSideMenuOpen}>
+          <StyledLeftSideContainer
+            id={leftSideContainerId}
+            isOpen={isLeftSideMenuOpen}
+            ref={leftSideContainerRef}
+            tabIndex={-1}
+          >
             {
               /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
               initialVisibleSections?.includes("SideNav") &&

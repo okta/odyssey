@@ -6,9 +6,15 @@ const { setComponentPropsMock, setupOdysseyDebugListenerMock } = vi.hoisted(
   }),
 );
 
-vi.mock("@okta/odyssey-react-mui/icons", () => ({
-  HomeOutlinedIcon: () => "HomeOutlinedIcon",
-  SettingsOutlinedIcon: () => "SettingsOutlinedIcon",
+vi.mock("@okta/odyssey-react-mui/icon-names", () => ({
+  iconNames: ["Home", "Settings"],
+}));
+
+vi.mock("@okta/odyssey-react-mui/lazy-loaded-icons", () => ({
+  lazyIconDictionary: {
+    Home: () => "Home",
+    Settings: () => "Settings",
+  },
 }));
 
 vi.mock("@okta/odyssey-react-mui/ui-shell", () => {
@@ -26,7 +32,6 @@ vi.mock("@okta/odyssey-contributions-ui-component-identifier", () => ({
   setupOdysseyDebugListener: setupOdysseyDebugListenerMock,
 }));
 
-import * as odysseyIconsExport from "@okta/odyssey-react-mui/icons";
 import { renderUiShell as odysseyRenderUiShell } from "@okta/odyssey-react-mui/ui-shell";
 import { createElement } from "react";
 import { afterEach, describe, expect, it, Mock, vi } from "vitest";
@@ -99,20 +104,17 @@ describe("unified-ui-shell", () => {
             {
               id: "1",
               text: "Home",
-              startIconName:
-                "HomeOutlinedIcon" as keyof typeof odysseyIconsExport,
+              startIconName: "HomeIcon",
             },
             {
               id: "2",
               text: "Settings",
-              startIconName:
-                "SettingsOutlinedIcon" as keyof typeof odysseyIconsExport,
+              startIconName: "SettingsIcon",
               nestedNavItems: [
                 {
                   id: "2-1",
                   text: "Profile",
-                  endIconName:
-                    "HomeOutlinedIcon" as keyof typeof odysseyIconsExport,
+                  endIconName: "HomeIcon",
                 },
               ],
             },
@@ -261,7 +263,7 @@ describe("unified-ui-shell", () => {
         {
           id: "nav1",
           label: "Navigation 1",
-          startIconName: "HomeOutlinedIcon" as keyof typeof odysseyIconsExport,
+          startIconName: "HomeIcon",
           href: "/path",
         },
         // With React Element icons
@@ -280,8 +282,7 @@ describe("unified-ui-shell", () => {
             {
               id: "nested-child",
               label: "Nested Child",
-              endIconName:
-                "SettingsOutlinedIcon" as keyof typeof odysseyIconsExport,
+              endIconName: "SettingsIcon",
             },
           ],
         },

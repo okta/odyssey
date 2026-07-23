@@ -78,6 +78,16 @@ export type PasswordFieldProps = {
    */
   placeholder?: string;
   /**
+   * Accessible name for the password visibility toggle. This is a stable name
+   * that does not change when the password is shown or hidden — the toggle's
+   * pressed state is conveyed through `aria-pressed`, so the name must stay
+   * constant to follow the ARIA toggle-button pattern. Override per instance
+   * when a page has more than one PasswordField (or when collecting other
+   * sensitive input such as a security answer) so screen-reader users can tell
+   * the toggles apart (e.g. "Show re-entered password").
+   */
+  showPasswordToggleAriaLabel?: string;
+  /**
    * The value of the `input` element. Use when component is controlled.
    */
   value?: string;
@@ -116,6 +126,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       onFocus,
       onBlur,
       placeholder,
+      showPasswordToggleAriaLabel,
       testId,
       translate,
       value,
@@ -179,7 +190,10 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
               <InputAdornment position="end">
                 <IconButton
                   aria-controls={id}
-                  aria-label={t("passwordfield.icon.label.show")}
+                  aria-label={
+                    showPasswordToggleAriaLabel ??
+                    t("passwordfield.icon.label.show")
+                  }
                   aria-pressed={inputType === "text"}
                   onClick={togglePasswordVisibility}
                 >
@@ -226,6 +240,7 @@ const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
         isReadOnly,
         hasShowPassword,
         ref,
+        showPasswordToggleAriaLabel,
         testId,
         translate,
       ],

@@ -45,6 +45,7 @@ export type SideNavSortableListProps = {
   processSideNavItems: (
     items: SideNavItem[],
     depth?: number,
+    isWithinSortableList?: boolean,
   ) => (SideNavItem & { sortableItem: BaseItem })[];
 };
 
@@ -56,7 +57,7 @@ const SideNavSortableList = ({
   depth = 1,
 }: SideNavSortableListProps) => {
   const processedItems = useMemo(
-    () => processSideNavItems(items, depth),
+    () => processSideNavItems(items, depth, true),
     [processSideNavItems, items, depth],
   );
 
@@ -72,6 +73,7 @@ const SideNavSortableList = ({
         isDisabled={sortableItem.isDisabled}
         isSelected={sortableItem.isSelected}
         isSortable={sortableItem.isSortable}
+        label={sortableItem.label}
       >
         {sortableItem.navItem}
       </SortableList.Item>
