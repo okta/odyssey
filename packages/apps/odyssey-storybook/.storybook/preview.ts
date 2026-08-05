@@ -13,7 +13,16 @@
 import type { Preview } from "@storybook/react-vite";
 
 import { setupOdysseyDebugListener } from "@okta/odyssey-contributions-ui-component-identifier";
+import {
+  ABSOLUTE_MINIMUM_HEIGHT,
+  ABSOLUTE_MINIMUM_WIDTH,
+} from "@okta/odyssey-react-mui";
+import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 
+import {
+  STANDARD_APPLITOOLS_HEIGHT,
+  STANDARD_APPLITOOLS_WIDTH,
+} from "../src/tools/applitoolsBrowserSize.js";
 import { ResetArgsDecorator } from "../src/tools/ResetArgsDecorator.js";
 
 setupOdysseyDebugListener();
@@ -150,6 +159,43 @@ const preview = {
       "storybook/docs/panel": { index: -1 },
     },
     viewMode: "docs",
+    // Storybook defaults the viewport toolbar to MINIMAL_VIEWPORTS (small
+    // mobile, large mobile, tablet, desktop). Spread those and add viewports
+    // for the regimes useCompactViewportMatches reports, so each is selectable
+    // for every story: the WCAG 1.4.10 reflow floor (both axes compact) plus
+    // one viewport per axis that isolates it. The compact axis of each derives
+    // from the exported ABSOLUTE_MINIMUM_* constants so it cannot drift; the
+    // non-compact axis uses the standard Applitools capture size, which is well
+    // clear of the compact thresholds so only one axis matches.
+    viewport: {
+      options: {
+        ...MINIMAL_VIEWPORTS,
+        absoluteMinimum: {
+          name: `Absolute minimum (${ABSOLUTE_MINIMUM_WIDTH}×${ABSOLUTE_MINIMUM_HEIGHT})`,
+          styles: {
+            height: `${ABSOLUTE_MINIMUM_HEIGHT}px`,
+            width: `${ABSOLUTE_MINIMUM_WIDTH}px`,
+          },
+          type: "mobile",
+        },
+        compactHeight: {
+          name: `Compact height (${STANDARD_APPLITOOLS_WIDTH}×${ABSOLUTE_MINIMUM_HEIGHT})`,
+          styles: {
+            height: `${ABSOLUTE_MINIMUM_HEIGHT}px`,
+            width: `${STANDARD_APPLITOOLS_WIDTH}px`,
+          },
+          type: "other",
+        },
+        compactWidth: {
+          name: `Compact width (${ABSOLUTE_MINIMUM_WIDTH}×${STANDARD_APPLITOOLS_HEIGHT})`,
+          styles: {
+            height: `${STANDARD_APPLITOOLS_HEIGHT}px`,
+            width: `${ABSOLUTE_MINIMUM_WIDTH}px`,
+          },
+          type: "mobile",
+        },
+      },
+    },
   },
 
   tags: ["autodocs"],

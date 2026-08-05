@@ -40,9 +40,11 @@ import {
 } from "@okta/odyssey-react-mui/labs";
 import {
   Dispatch,
+  type Ref,
   SetStateAction,
   useCallback,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { action } from "storybook/actions";
@@ -181,6 +183,9 @@ const meta = {
     filters: {},
     searchDelayTime: {
       control: "number",
+    },
+    searchFieldLabel: {
+      control: "text",
     },
     enableVirtualization: {
       control: "boolean",
@@ -373,6 +378,7 @@ const meta = {
         paginationType={args.paginationType}
         resultsPerPage={args.resultsPerPage}
         searchDelayTime={args.searchDelayTime}
+        searchFieldLabel={args.searchFieldLabel}
         tableLayoutOptions={{
           columns: personColumns,
           getCustomRowStyles: args.getCustomRowStyles,
@@ -1311,5 +1317,69 @@ export const ColumnPinning: Story = {
         story: "This story shows the DataView with column pinning enabled.",
       },
     },
+  },
+};
+
+// Unwraps the material-react-table instance type carried by DataView's apiRef
+// prop, so the story stays self-contained without importing material-react-table.
+type DataViewTableInstance =
+  NonNullable<DataViewProps<Person>["apiRef"]> extends Ref<infer TInstance>
+    ? TInstance
+    : never;
+
+export const ApiRefRowFocus: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Passes an `apiRef` to reach the underlying material-react-table instance. Every data row renders a stable `data-row-id`, so the consuming app can resolve a row element via `apiRef.current.refs.tableContainerRef` and move focus to it.",
+      },
+    },
+  },
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+    const apiRef = useRef<DataViewTableInstance>(null);
+
+    const focusFirstRow = useCallback(() => {
+      const container = apiRef.current?.refs.tableContainerRef.current;
+      const firstRowId = apiRef.current?.getRowModel().rows[0]?.id;
+      const rowElement = container?.querySelector<HTMLTableRowElement>(
+        `tbody tr[data-row-id="${firstRowId}"]`,
+      );
+
+      if (!rowElement) {
+        return;
+      }
+
+      // Prefer an interactive element in the row (better for assistive tech).
+      const focusTarget =
+        rowElement.querySelector<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? rowElement;
+
+      // A plain <tr> isn't focusable — make it programmatically focusable first.
+      if (focusTarget === rowElement && !rowElement.hasAttribute("tabindex")) {
+        rowElement.setAttribute("tabindex", "-1");
+      }
+
+      focusTarget.focus();
+    }, []);
+
+    return (
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+        <Button
+          label="Focus first row"
+          onClick={focusFirstRow}
+          variant="secondary"
+        />
+        <DataView
+          apiRef={apiRef}
+          availableLayouts={tableLayoutOnly}
+          getData={getData}
+          tableLayoutOptions={{ columns: personColumns }}
+        />
+      </Box>
+    );
   },
 };

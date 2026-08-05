@@ -13,9 +13,10 @@
 import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback, useState } from "react";
-import { userEvent, within } from "storybook/test";
+import { useArgs } from "storybook/preview-api";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+import { useStoryArgOrLocalState } from "../../tools/useStoryArgOrLocalState.js";
 
 const storybookMeta = {
   component: Accordion,
@@ -103,20 +104,32 @@ export const Single: Story = {
 export const Borderless: Story = {
   args: {
     children: "This is the content of the box.",
+    // Expanded by default so Applitools captures the open Accordion without a
+    // play function. useStoryArgOrLocalState keeps the isExpanded control live in
+    // Canvas and falls back to local state on the Docs page, where useArgs cannot
+    // drive a non-default story.
+    isExpanded: true,
     variant: "borderless",
   },
-  play: async ({ canvasElement, step }) => {
-    await step("Expand accordion", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(canvas.getByRole("button", { name: "Label" }));
-    });
-  },
-  render: function C(props: AccordionProps) {
+  render: function C(props, context) {
+    const { value: isExpanded, setValue: setIsExpanded } =
+      useStoryArgOrLocalState<AccordionProps, "isExpanded">({
+        args: props,
+        context,
+        argKey: "isExpanded",
+        defaultValue: props.isExpanded,
+        defaultStoryName: "Single",
+      });
+    const onChange = useCallback<NonNullable<AccordionProps["onChange"]>>(
+      (_event, expanded) => setIsExpanded(expanded),
+      [setIsExpanded],
+    );
     return (
       <Accordion
         isDisabled={props.isDisabled}
-        isExpanded={props.isExpanded}
+        isExpanded={isExpanded}
         label={props.label}
+        onChange={onChange}
         variant={props.variant}
       >
         {props.children}
@@ -127,35 +140,44 @@ export const Borderless: Story = {
 export const Multi: Story = {
   args: {
     children: "This is the content of the box.",
+    isExpanded: true,
   },
-  play: async ({ canvasElement, step }) => {
-    await step("Expand middle accordion", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(
-        canvas.getByRole("button", { name: "Accordion 3" }),
-      );
-    });
+  argTypes: {
+    // Split the panel by scope: these controls drive only the first item...
+    children: { table: { category: "Child (first item)" } },
+    label: { table: { category: "Child (first item)" } },
+    isDisabled: { table: { category: "Child (first item)" } },
+    isExpanded: { table: { category: "Child (first item)" } },
+    // ...while variant is a group-level style applied to every item.
+    variant: { table: { category: "Group" } },
   },
   render: function C(props: AccordionProps) {
+    const [, updateArgs] = useArgs();
+    const onChange = useCallback<NonNullable<AccordionProps["onChange"]>>(
+      (_event, isExpanded) => updateArgs({ isExpanded }),
+      [updateArgs],
+    );
     return (
       <>
         <Accordion
           isDisabled={props.isDisabled}
           isExpanded={props.isExpanded}
           label={props.label}
+          onChange={onChange}
+          variant={props.variant}
         >
           {props.children}
         </Accordion>
-        <Accordion label="Accordion 2">
+        <Accordion label="Accordion 2" variant={props.variant}>
           This is the second accordion item.
         </Accordion>
-        <Accordion label="Accordion 3">
+        <Accordion label="Accordion 3" variant={props.variant}>
           This is the third accordion item.
         </Accordion>
-        <Accordion label="Accordion 4">
+        <Accordion label="Accordion 4" variant={props.variant}>
           This is the fourth accordion item.
         </Accordion>
-        <Accordion label="Accordion 5">
+        <Accordion label="Accordion 5" variant={props.variant}>
           This is the fifth accordion item.
         </Accordion>
       </>

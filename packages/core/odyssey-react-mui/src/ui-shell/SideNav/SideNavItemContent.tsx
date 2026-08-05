@@ -441,7 +441,6 @@ const SideNavItemContent = ({
 
   return (
     <SideNavListItem
-      aria-disabled={isDisabled}
       id={id}
       isSelected={isSelected}
       isWithinSortableList={contextValue.isWithinSortableList}
@@ -462,14 +461,21 @@ const SideNavItemContent = ({
       {
         // Use Link for nav items with links and div for disabled or non-link items
         isDisabled ? (
+          // `aria-disabled` is only announced on a widget role, so the
+          // disabled state lives on this `role="button"` element (mirroring
+          // the interactive branch below and the disabled accordion summary)
+          // rather than the wrapper, whose `listitem` role (or plain `<div>`
+          // in sortable mode) can't carry a disabled state for AT.
           <NavItemContentContainer
             aria-current={isSelected ? "page" : undefined}
+            aria-disabled={isDisabled}
             contextValue={contextValue}
             data-se="tb--sidenav-text-container"
             isActiveDropTarget={false}
             isDisabled={isDisabled}
             isSelected={isSelected}
             odysseyDesignTokens={odysseyDesignTokens}
+            role="button"
             sideNavContrastColors={uiShellContext?.sideNavContrastColors}
           >
             <SideNavItemLinkContent

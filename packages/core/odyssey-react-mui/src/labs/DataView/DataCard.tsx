@@ -16,7 +16,7 @@ import {
   IconButton as MuiIconButton,
   Tooltip as MuiTooltip,
 } from "@mui/material";
-import { memo, useId, useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 
 import { Card, CardProps } from "../../Card.js";
 import { useTranslation } from "../../i18n.generated/i18n.js";
@@ -25,6 +25,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
+import { useUniqueId } from "../../useUniqueId.js";
 
 export type DataCardProps = {
   children?: CardProps["children"];
@@ -79,7 +80,7 @@ const DataCard = ({
 }: DataCardProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
-  const titleId = useId();
+  const titleId = useUniqueId();
 
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 

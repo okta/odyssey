@@ -12,6 +12,7 @@
 
 import js from "@eslint/js";
 import json from "@eslint/json";
+import nxEslintPlugin from "@nx/eslint-plugin";
 import { contributionsPlugin } from "@okta/odyssey-contributions-promotion-check";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import headerPlugin from "eslint-plugin-header";
@@ -227,6 +228,61 @@ const eslintConfig = createTsEslintConfig(
     files: ["packages/contributions/odyssey-blueprint/bin/*.mjs"],
     rules: {
       "import/no-unresolved": "off",
+    },
+  },
+
+  {
+    // Allows us to enforce boundaries in the monorepo.
+    // e.g. `scope:core` can't depend on `scope:contributions`.
+    name: getPrefixedEslintConfigName("nx-module-boundaries"),
+    files: [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.cts",
+      "**/*.mts",
+      "**/*.js",
+      "**/*.jsx",
+    ],
+    plugins: { "@nx": nxEslintPlugin },
+    rules: {
+      "@nx/enforce-module-boundaries": [
+        "error",
+        {
+          enforceBuildableLibDependency: false,
+          allow: [],
+          depConstraints: [
+            {
+              sourceTag: "scope:core",
+              onlyDependOnLibsWithTags: ["scope:core", "scope:tools"],
+            },
+            {
+              sourceTag: "scope:contributions",
+              onlyDependOnLibsWithTags: [
+                "scope:core",
+                "scope:platform",
+                "scope:contributions",
+                "scope:tools",
+              ],
+            },
+            {
+              sourceTag: "scope:platform",
+              onlyDependOnLibsWithTags: [
+                "scope:core",
+                "scope:platform",
+                "scope:tools",
+              ],
+            },
+            {
+              sourceTag: "scope:app",
+              onlyDependOnLibsWithTags: ["*"],
+            },
+            {
+              sourceTag: "scope:tools",
+              onlyDependOnLibsWithTags: ["scope:tools", "scope:platform"],
+            },
+          ],
+        },
+      ],
     },
   },
 

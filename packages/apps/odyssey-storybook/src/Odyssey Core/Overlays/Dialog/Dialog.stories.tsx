@@ -11,6 +11,8 @@
  */
 
 import {
+  ABSOLUTE_MINIMUM_HEIGHT,
+  ABSOLUTE_MINIMUM_WIDTH,
   Button,
   Dialog,
   DialogContentText,
@@ -18,16 +20,15 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback } from "storybook/preview-api";
-import { userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+import { getReflowEyesParameters } from "../../../tools/reflowEyesParameters.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 
 // Explicitly type the Meta object
 const storybookMeta: Meta<typeof Dialog> = {
   component: Dialog,
   decorators: [OdysseyStorybookThemeDecorator],
-  tags: ["autodocs"],
   argTypes: {
     primaryCallToActionComponent: {
       control: false,
@@ -115,7 +116,9 @@ const storybookMeta: Meta<typeof Dialog> = {
   args: {
     children:
       "Description text explaining the consequences and any alternatives. Limit to two lines if possible",
-    isOpen: false,
+    // Rendered open by default so Applitools captures the open Dialog without a
+    // play function. The "Open dialog" button still opens/closes it in Canvas.
+    isOpen: true,
     title: "Dialog title",
     variant: "default",
   },
@@ -176,27 +179,10 @@ const DefaultTemplate: StoryObj<DialogProps> = {
 
 export const Default: StoryObj<DialogProps> = {
   ...DefaultTemplate,
-  tags: ["!autodocs"],
-  play: async ({ canvasElement, step }) => {
-    await step("Open dialog", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(
-        canvas.getByRole("button", { name: "Open dialog" }),
-      );
-    });
-  },
 };
 
 export const Long: StoryObj<DialogProps> = {
   ...DefaultTemplate,
-  play: async ({ canvasElement, step }) => {
-    await step("Open dialog", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(
-        canvas.getByRole("button", { name: "Open dialog" }),
-      );
-    });
-  },
   parameters: {
     docs: {
       description: {
@@ -356,14 +342,6 @@ export const Long: StoryObj<DialogProps> = {
 
 export const LongTitle: StoryObj<DialogProps> = {
   ...DefaultTemplate,
-  play: async ({ canvasElement, step }) => {
-    await step("Open dialog", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(
-        canvas.getByRole("button", { name: "Open dialog" }),
-      );
-    });
-  },
   parameters: {
     docs: {
       description: {
@@ -378,15 +356,34 @@ export const LongTitle: StoryObj<DialogProps> = {
   },
 };
 
-export const NoButtons: StoryObj<DialogProps> = {
-  play: async ({ canvasElement, step }) => {
-    await step("Open dialog", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(
-        canvas.getByRole("button", { name: "Open dialog" }),
-      );
-    });
+export const SmallScreen: StoryObj<DialogProps> = {
+  ...DefaultTemplate,
+  globals: {
+    viewport: { value: "absoluteMinimum", isRotated: false },
   },
+  args: {
+    title:
+      "Confirm permanent deactivation of this scheduled organization shutdown workflow",
+  },
+  parameters: {
+    // The absolute-minimum viewport is the WCAG 1.4.10 reflow floor, where the
+    // Dialog goes full-screen and scrolls its body. See getReflowEyesParameters
+    // for why layoutBreakpoints is needed to capture the compact layout in
+    // Applitools.
+    eyes: getReflowEyesParameters({
+      height: ABSOLUTE_MINIMUM_HEIGHT,
+      width: ABSOLUTE_MINIMUM_WIDTH,
+    }),
+    docs: {
+      description: {
+        story:
+          "At the absolute minimum supported viewport (320×256, the WCAG 1.4.10 Reflow floor), the `Dialog` renders full-screen and scrolls its body, so content reflows without loss of information or functionality.",
+      },
+    },
+  },
+};
+
+export const NoButtons: StoryObj<DialogProps> = {
   render: function C(args, context) {
     const { value, setValue } = useStoryArgOrLocalState<DialogProps, "isOpen">({
       args,

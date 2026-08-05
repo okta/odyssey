@@ -23,7 +23,6 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext.js";
 import { Paragraph } from "./Typography.js";
-import { useUniqueId } from "./useUniqueId.js";
 
 export const calloutRoleValues = ["status", "alert"] as const;
 export const calloutSeverityValues = [
@@ -125,22 +124,16 @@ const Callout = ({
 }: CalloutProps) => {
   const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const titleId = useUniqueId();
 
   return (
     <Alert
       aria-label={t(`severity.${severity}`)}
-      aria-labelledby={titleId}
       data-se={testId}
       role={role}
       severity={severity}
       variant="callout"
     >
-      {title && (
-        <AlertTitle aria-hidden id={titleId} translate={translate}>
-          {title}
-        </AlertTitle>
-      )}
+      {title && <AlertTitle translate={translate}>{title}</AlertTitle>}
 
       <ContentContainer odysseyDesignTokens={odysseyDesignTokens}>
         {children && <Box component="div">{children}</Box>}

@@ -1,0 +1,49 @@
+import {
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs/blocks";
+
+import * as ToastStories from "./Toast.stories";
+
+<Meta of={ToastStories} />
+
+<Title of={ToastStories} />
+<Subtitle of={ToastStories} />
+<Description of={ToastStories} />
+
+A `Toast` surfaces a brief, non-blocking message. Control its visibility with
+the `isVisible` prop and respond to dismissal with `onHide`. A `Toast` must be
+wrapped in a `ToastStack`, which handles positioning. Use one `ToastStack` per
+screen, regardless of how many `Toast`s it holds.
+
+```tsx
+const [isVisible, setIsVisible] = useState(false);
+
+<>
+  <Button
+    label="Open toast"
+    onClick={() => setIsVisible(true)}
+    variant="primary"
+  />
+  <ToastStack>
+    <Toast
+      isVisible={isVisible}
+      onHide={() => setIsVisible(false)}
+      severity="info"
+      text="The mission to Sagittarius A is set for January 7."
+    />
+  </ToastStack>
+</>;
+```
+
+The stories in the sidebar render visible by default so their visual state is
+captured without interaction. Open a story from the sidebar to see each variant:
+
+- **Info**, **Error**, **Warning**, and **Success** show each severity.
+- **Dismissible** adds a close button and an action link.
+- **Multiple toasts** shows several stacked in a single `ToastStack`.
+
+<Controls />

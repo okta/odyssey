@@ -27,6 +27,7 @@ import {
   RuleAccess,
   RuleEditor,
   RulesTable,
+  TranslationProvider,
   validateNetworkZone,
 } from "@okta/odyssey-contributions-policy-rules-components";
 import { Box, useOdysseyDesignTokens } from "@okta/odyssey-react-mui";
@@ -383,7 +384,7 @@ export const RulesTableCustomI18n: Story = {
     docs: {
       description: {
         story:
-          "Overrides the compound's built-in strings via `<PolicyRulesProvider i18nOverrides={...}>`. The prop is a locale-agnostic partial map — the compound applies each override under whichever language its i18next instance is currently rendering, and stays in sync with the parent app's react-i18next language. Anything you omit falls through to the compound's default. Here the Add button, empty-state title/description, and rule-name label are re-worded for the SSR context; every other string still comes from the compound.",
+          "Overrides the compound's built-in strings via `<TranslationProvider translationOverrides={...}>`. `translationOverrides` is a per-locale record mapping language code → key → override string. The base provider registers each entry under its language key. Anything you omit falls through to the compound's default. Here the Add button, empty-state title/description, and rule-name label are re-worded for the SSR context under `en`; every other string still comes from the compound.",
       },
     },
   },
@@ -396,29 +397,35 @@ export const RulesTableCustomI18n: Story = {
     );
     return (
       <QueryClientProvider client={queryClient}>
-        <PolicyRulesProvider
-          descriptor={SSR_DESCRIPTOR}
-          i18nOverrides={{
-            "rulesTable.addRule": "Add SSR rule",
-            "rulesTable.empty": "No SSR rules yet",
-            "rulesTable.emptyDescription":
-              "Add a rule to control who can self-register for this org.",
-            "ruleEditor.name.label": "SSR rule name",
+        <TranslationProvider
+          languageCode="en"
+          translationOverrides={{
+            en: {
+              "rulesTable.addRule": "Add SSR rule",
+              "rulesTable.empty": "No SSR rules yet",
+              "rulesTable.emptyDescription":
+                "Add a rule to control who can self-register for this org.",
+              "ruleEditor.name.label": "SSR rule name",
+            },
           }}
-          networkZoneService={networkZoneService}
-          policyId={MOCK_POLICY_ID}
-          service={service}
         >
-          <RulesTable.Root maxTotalRules={SSR_MAX_TOTAL_RULES}>
-            <RulesTable.AddButton onClick={action("add-rule")} />
-            <RulesTable.Table
-              actions={[ActionRead.Registration]}
-              conditions={[ConditionRead.Email, ConditionRead.NetworkZone]}
-              onEditRule={action("edit-rule")}
-            />
-            <RulesTable.DeleteDialog />
-          </RulesTable.Root>
-        </PolicyRulesProvider>
+          <PolicyRulesProvider
+            descriptor={SSR_DESCRIPTOR}
+            networkZoneService={networkZoneService}
+            policyId={MOCK_POLICY_ID}
+            service={service}
+          >
+            <RulesTable.Root maxTotalRules={SSR_MAX_TOTAL_RULES}>
+              <RulesTable.AddButton onClick={action("add-rule")} />
+              <RulesTable.Table
+                actions={[ActionRead.Registration]}
+                conditions={[ConditionRead.Email, ConditionRead.NetworkZone]}
+                onEditRule={action("edit-rule")}
+              />
+              <RulesTable.DeleteDialog />
+            </RulesTable.Root>
+          </PolicyRulesProvider>
+        </TranslationProvider>
       </QueryClientProvider>
     );
   },

@@ -13,6 +13,7 @@
 import { page, userEvent } from "vitest/browser";
 
 import { Callout } from "./Callout.js";
+import { translate as odysseyTranslate } from "./i18n.generated/i18n.js";
 import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 describe(Callout.displayName!, () => {
@@ -31,6 +32,36 @@ describe(Callout.displayName!, () => {
 
     const link = page.getByText("Learn more");
     await expect.element(link).toHaveAttribute("href", "#anchor");
+  });
+
+  test("title is exposed to assistive tech and not aria-hidden", async () => {
+    const { container } = await renderWithOdysseyProvider(
+      <Callout
+        role="status"
+        severity="info"
+        text="Callout text."
+        title="Callout title"
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    const title = page.getByText("Callout title");
+    await expect.element(title).toBeVisible();
+    // The title must stay in the reading order so browse-mode screen readers
+    // (NVDA/JAWS) announce it. A prior version set aria-hidden on the title and
+    // exposed it only via aria-labelledby, which VoiceOver read on entry but
+    // Windows screen readers skipped entirely while reading through content.
+    await expect.element(title).not.toHaveAttribute("aria-hidden");
+
+    // The Alert names itself via aria-label (the severity) and must not use
+    // aria-labelledby, which would override aria-label and drop the severity
+    // from the live-region announcement.
+    const alert = page.getByRole("status");
+    await expect
+      .element(alert)
+      .toHaveAttribute("aria-label", odysseyTranslate("severity.info"));
+    await expect.element(alert).not.toHaveAttribute("aria-labelledby");
   });
 
   test("callout with link click callback", async () => {

@@ -17,6 +17,16 @@ const parentBranchName =
     : process.env.BASE_BRANCH_NAME;
 const commitHash = process.env.SHA || "";
 
+// puppeteer's own Chromium download is disabled (skipDownload in
+// .puppeteerrc.cjs), so eyes-storybook has no bundled browser to launch. On CI it
+// drives the google-chrome-stable that visual-regression-test.sh installs from
+// Artifactory. PUPPETEER_EXECUTABLE_PATH overrides it for local runs; when neither
+// applies (for example a local machine without that path), executablePath is
+// omitted so puppeteer falls back to its own resolution.
+const chromeExecutablePath =
+  process.env.PUPPETEER_EXECUTABLE_PATH ||
+  (process.platform === "linux" ? "/usr/bin/google-chrome-stable" : undefined);
+
 const applitoolsConfig = {
   accessibilityValidation: {
     level: "AA",
@@ -36,6 +46,7 @@ const applitoolsConfig = {
   puppeteerOptions: {
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
     headless: true,
+    ...(chromeExecutablePath ? { executablePath: chromeExecutablePath } : {}),
   },
   runInDocker: true,
   saveNewTests: true,

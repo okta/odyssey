@@ -24,6 +24,10 @@ __vitest-screenshots/
 # Lerna
 lerna-debug.log
 
+# Nx
+.nx/cache
+.nx/workspace-data
+
 # Storybook
 debug-storybook.log
 

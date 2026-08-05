@@ -1,0 +1,55 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*",
+      "!{projectRoot}/**/*.md",
+      "!{projectRoot}/**/*.mdx",
+      "!{projectRoot}/**/LICENSE*",
+      "sharedGlobals"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/**/*.test.@(js|jsx|ts|tsx)",
+      "!{projectRoot}/**/__tests__/**/*",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+      "!{projectRoot}/.storybook/**/*"
+    ],
+    "full-source": [
+      "{projectRoot}/**/*",
+      "!{projectRoot}/**/LICENSE*",
+      "sharedGlobals"
+    ],
+    "sharedGlobals": [
+      "{workspaceRoot}/yarn.lock",
+      "{workspaceRoot}/.yarnrc.yml",
+      "{workspaceRoot}/.nvmrc",
+      "{workspaceRoot}/tsconfig.json",
+      "{workspaceRoot}/babel.config.*",
+      "{workspaceRoot}/.browserslistrc",
+      "{workspaceRoot}/package.json",
+      { "env": "NODE_ENV" },
+      { "env": "BROWSERSLIST_ENV" },
+      { "env": "ODYSSEY_BUILD_MODE" },
+      { "env": "ODYSSEY_ICONS_TYPE" }
+    ]
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"],
+      "outputs": ["{projectRoot}/dist"],
+      "cache": true
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "inputs": ["default", "^production"],
+      "cache": true
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": ["default", "^production"],
+      "cache": true
+    }
+  }
+}

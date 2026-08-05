@@ -74,6 +74,16 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     },
     errorMessage: fieldComponentPropsMetaData.errorMessage,
     errorMessageList: fieldComponentPropsMetaData.errorMessageList,
+    filterOptions: {
+      control: false,
+      description:
+        "Determines the filtered options to display when typing in the input. Defaults to matching the typed input against the option label. Override this (e.g. `(options) => options`) when `options` is already filtered server-side.",
+      table: {
+        type: {
+          summary: "(options: OptionType[], state) => OptionType[]",
+        },
+      },
+    },
     getIsOptionEqualToValue: {
       control: false,
       description:

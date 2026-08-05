@@ -292,6 +292,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
   emptyOptionsText,
   errorMessage,
   errorMessageList,
+  filterOptions,
   getIsOptionEqualToValue,
   groupOptionsBy,
   hasMultipleChoices,
@@ -399,6 +400,7 @@ const PickerWithOptionAdornment: PickerWithOptionAdornmentComponentType = <
       emptyOptionsText={emptyOptionsText}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
+      filterOptions={filterOptions}
       getIsOptionEqualToValue={getIsOptionEqualToValue}
       groupOptionsBy={groupOptionsBy}
       hasMultipleChoices={hasMultipleChoices}

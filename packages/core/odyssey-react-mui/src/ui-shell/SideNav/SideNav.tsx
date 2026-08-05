@@ -36,6 +36,7 @@ import {
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
 import { OdysseyThemeProvider } from "../../OdysseyThemeProvider.js";
+import { useCompactViewportMatches } from "../../theme/useMediaQuery.js";
 import { Overline } from "../../Typography.js";
 import {
   UiShellColors,
@@ -474,6 +475,11 @@ const SideNav = ({
   const uiShellContext = useUiShellContext();
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
+
+  // At compact viewport heights the persistent (pinned) custom footer eats into
+  // the already-limited vertical space, so move it into the scrollable region
+  // instead of pinning it to the bottom.
+  const { isWithinCompactHeight } = useCompactViewportMatches();
 
   const scrollableContentRef = useRef<HTMLUListElement>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
@@ -1004,16 +1010,31 @@ const SideNav = ({
                   </StyledSideNavFooterItemsContainer>
                 </StyledSideNavFooter>
               )}
+              {!isLoading && hasCustomFooter && isWithinCompactHeight && (
+                <StyledSideNavFooter
+                  odysseyDesignTokens={odysseyDesignTokens}
+                  sideNavBackgroundColor={
+                    uiShellContext?.sideNavBackgroundColor
+                  }
+                >
+                  {footerComponent}
+                </StyledSideNavFooter>
+              )}
             </StyledSideNavScrollableContainer>
-            {!isLoading && !footerItems && hasCustomFooter && (
-              <StyledPersistentSideNavFooter
-                isContentScrollable={isContentScrollable}
-                odysseyDesignTokens={odysseyDesignTokens}
-                sideNavBackgroundColor={uiShellContext?.sideNavBackgroundColor}
-              >
-                {footerComponent}
-              </StyledPersistentSideNavFooter>
-            )}
+            {!isLoading &&
+              !footerItems &&
+              hasCustomFooter &&
+              !isWithinCompactHeight && (
+                <StyledPersistentSideNavFooter
+                  isContentScrollable={isContentScrollable}
+                  odysseyDesignTokens={odysseyDesignTokens}
+                  sideNavBackgroundColor={
+                    uiShellContext?.sideNavBackgroundColor
+                  }
+                >
+                  {footerComponent}
+                </StyledPersistentSideNavFooter>
+              )}
           </StyledOpacityTransitionContainer>
         </StyledCollapsibleContent>
       </OdysseyThemeProvider>

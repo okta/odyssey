@@ -10,12 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { dialogClasses } from "@mui/material/Dialog";
 import { page, userEvent } from "vitest/browser";
 
 import { Button } from "./Buttons/Button.js";
 import { Dialog } from "./Dialog.js";
 import { translate as odysseyTranslate } from "./i18n.generated/i18n.js";
 import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
+import { ROOMY_HEIGHT, ROOMY_WIDTH } from "./test-utils/viewportTestSizes.js";
+import {
+  COMPACT_MAX_HEIGHT,
+  COMPACT_MAX_WIDTH,
+} from "./theme/useMediaQuery.js";
 
 describe(Dialog.displayName!, () => {
   test("open dialog with heading and content", async () => {
@@ -133,5 +139,71 @@ describe(Dialog.displayName!, () => {
     );
     const labelledByAfter = dialog.element().getAttribute("aria-labelledby");
     expect(labelledByAfter).toBe(labelledByBefore);
+  });
+
+  test("viewport narrowed to the compact width threshold", async () => {
+    await page.viewport(COMPACT_MAX_WIDTH, ROOMY_HEIGHT);
+    const onClose = vi.fn();
+
+    await renderWithOdysseyProvider(
+      <Dialog isOpen onClose={onClose} title="Dialog title">
+        Dialog content.
+      </Dialog>,
+    );
+
+    const dialog = page.getByRole("dialog");
+    await expect.element(dialog).toBeVisible();
+
+    const paper = dialog.element();
+    expect(paper.classList.contains(dialogClasses.paperFullScreen)).toBe(true);
+
+    const container = paper.closest(`.${dialogClasses.container}`);
+    expect(container?.classList.contains(dialogClasses.scrollBody)).toBe(true);
+
+    await expect.element(dialog).toBeAccessible();
+  });
+
+  test("viewport shortened to the compact height threshold", async () => {
+    await page.viewport(ROOMY_WIDTH, COMPACT_MAX_HEIGHT);
+    const onClose = vi.fn();
+
+    await renderWithOdysseyProvider(
+      <Dialog isOpen onClose={onClose} title="Dialog title">
+        Dialog content.
+      </Dialog>,
+    );
+
+    const dialog = page.getByRole("dialog");
+    await expect.element(dialog).toBeVisible();
+
+    const paper = dialog.element();
+    expect(paper.classList.contains(dialogClasses.paperFullScreen)).toBe(true);
+
+    const container = paper.closest(`.${dialogClasses.container}`);
+    expect(container?.classList.contains(dialogClasses.scrollBody)).toBe(true);
+
+    await expect.element(dialog).toBeAccessible();
+  });
+
+  test("viewport larger than the compact threshold in both dimensions", async () => {
+    await page.viewport(ROOMY_WIDTH, ROOMY_HEIGHT);
+    const onClose = vi.fn();
+
+    await renderWithOdysseyProvider(
+      <Dialog isOpen onClose={onClose} title="Dialog title">
+        Dialog content.
+      </Dialog>,
+    );
+
+    const dialog = page.getByRole("dialog");
+    await expect.element(dialog).toBeVisible();
+
+    const paper = dialog.element();
+    expect(paper.classList.contains(dialogClasses.paperFullScreen)).toBe(false);
+
+    const container = paper.closest(`.${dialogClasses.container}`);
+    expect(container?.classList.contains(dialogClasses.scrollPaper)).toBe(true);
+
+    await expect.element(dialog).toBeAccessible();
   });
 });

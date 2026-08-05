@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://dkt4axinaj2u1.cloudfront.net/v2/schema.json
+schema_version: "2.0"
+
+rules:
+  # IF a PR is labeled "Okto Agent" AND does NOT yet have 2 approvals,
+  # block it until the second approval is received.
+  - id: "OKTO_AGENT_REQUIRES_TWO_APPROVALS"
+    name: "Okto Agent PRs require 2 approvals"
+    description: |
+      PRs labeled "Okto Agent" are authored by an automated coding agent and
+      must be reviewed by at least two people before merge. The PR is blocked
+      until it has 2 approvals.
+    predicates:
+      and:
+        - labels:
+            matches:
+              - "Okto Agent"
+        - not:
+            approved:
+              min: 2
+    actions:
+      on_true:
+        - block_pr: true
+        - post_comment: "This PR is labeled 'Okto Agent' and requires at least 2 approvals before it can merge."
