@@ -4,6 +4,6 @@
   "exact": true,
   "npmClient": "yarn",
   "packages": ["packages/core/*", "packages/apps/*", "packages/configs/*"],
-  "useNx": false,
-  "version": "1.65.0"
+  "useNx": true,
+  "version": "1.66.0"
 }

@@ -10,10 +10,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { page } from "vitest/browser";
+import { page, userEvent } from "vitest/browser";
 
 import { renderWithOdysseyProvider } from "../../test-utils/renderWithOdysseyProvider.js";
-import { ComposablePicker } from "./ComposablePicker.js";
+import {
+  type BaseRenderOptionProps,
+  ComposablePicker,
+} from "./ComposablePicker.js";
+
+type Option = { label: string; value: string };
+const options: Option[] = [
+  { label: "Alpha", value: "alpha" },
+  { label: "Beta", value: "beta" },
+];
 
 describe("ComposablePicker", () => {
   test("displays the ComposablePicker", async () => {
@@ -28,5 +37,34 @@ describe("ComposablePicker", () => {
     await expect(container).toBeAccessible();
 
     await expect.element(page.getByLabelText("picker label")).toBeVisible();
+  });
+
+  test("filterOptions overrides the default label-based filtering", async () => {
+    await renderWithOdysseyProvider(
+      <ComposablePicker
+        filterOptions={(unfilteredOptions) => unfilteredOptions}
+        label="picker label"
+        options={options}
+        renderOption={(
+          { key, ...muiProps }: BaseRenderOptionProps,
+          option: Option,
+        ) => (
+          <li {...muiProps} key={key}>
+            {option.label}
+          </li>
+        )}
+      />,
+    );
+
+    const combobox = page.getByRole("combobox");
+    await userEvent.click(combobox);
+    await userEvent.fill(combobox, "does not match either label");
+
+    await expect
+      .element(page.getByRole("option", { name: "Alpha" }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("option", { name: "Beta" }))
+      .toBeVisible();
   });
 });

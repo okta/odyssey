@@ -1,6 +1,11 @@
 {
   "name": "@okta/odyssey-design-tokens",
-  "version": "1.65.0",
+  "version": "1.66.0",
+  "nx": {
+    "tags": [
+      "scope:core"
+    ]
+  },
   "description": "Design tokens for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
   "license": "Apache-2.0",

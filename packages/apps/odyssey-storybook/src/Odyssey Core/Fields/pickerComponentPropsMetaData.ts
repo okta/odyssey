@@ -193,6 +193,15 @@ export const pickerComponentPropsMetaData = (
       type: { summary: "(option, value) => boolean" },
     },
   },
+  filterOptions: {
+    control: false,
+    description:
+      "Determines the filtered options to display when typing in the input. Defaults to matching the typed input against the option label. Override this (e.g. `(options) => options`) when `options` is already filtered server-side.",
+    table: {
+      category: "Functional",
+      type: { summary: "(options, state) => Option[]" },
+    },
+  },
   onChange: {
     action: "changed",
     description: "Callback fired when the value changes.",

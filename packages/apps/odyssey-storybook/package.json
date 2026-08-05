@@ -1,7 +1,26 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.65.0",
+  "version": "1.66.0",
   "description": "Documentation for Odyssey, Okta's design system",
+  "nx": {
+    "tags": [
+      "scope:app"
+    ],
+    "targets": {
+      "build": {
+        "outputs": [
+          "{projectRoot}/dist"
+        ],
+        "inputs": [
+          "full-source",
+          "^production",
+          {
+            "env": "BUILD_BASE"
+          }
+        ]
+      }
+    }
+  },
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "sideEffects": false,
@@ -15,7 +34,7 @@
     "directory": "packages/apps/odyssey-storybook"
   },
   "devDependencies": {
-    "@applitools/eyes-storybook": "3.65.4",
+    "@applitools/eyes-storybook": "3.67.3",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^5.18.0",
@@ -55,7 +74,7 @@
     "storybook-addon-rtl": "^3.0.1",
     "storybook-addon-tag-badges": "^3.0.4",
     "typescript": "^5.9.2",
-    "vite": "^6.3.5",
+    "vite": "^7.3.6",
     "wait-on": "^7.2.0",
     "zod": "^4.4.3"
   },

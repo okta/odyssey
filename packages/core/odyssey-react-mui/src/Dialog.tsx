@@ -38,6 +38,7 @@ import { createOdysseyStyledComponent } from "./createOdysseyStyledComponent.js"
 import { FullScreenOverlay } from "./FullScreenOverlay.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
 import { CloseIcon } from "./icons.generated/index.js";
+import { useCompactViewportMatches } from "./theme/useMediaQuery.js";
 import { useUniqueId } from "./useUniqueId.js";
 
 type MuiOnCloseEvent = Parameters<Required<MuiDialogProps>["onClose"]>[0];
@@ -120,6 +121,7 @@ const DialogTitleContainer = createOdysseyStyledComponent({ tag: "div" })(
     fontFamily: odysseyDesignTokens.TypographyFamilyHeading,
 
     [`& > .${buttonClasses.root}`]: {
+      alignSelf: "baseline",
       // Pull close button by inline padding amount
       marginInlineEnd: `-${odysseyDesignTokens.Spacing3}`,
       flexShrink: 0,
@@ -200,13 +202,17 @@ const Dialog = ({
     [variant],
   );
 
+  const { isWithinCompactWidthOrHeight } = useCompactViewportMatches();
+
   return (
     <FullScreenOverlay overlayType="dialog">
       <MuiDialog
         aria-labelledby={dialogLabelId}
         data-se={testId}
+        fullScreen={isWithinCompactWidthOrHeight}
         onClose={onClose}
         open={isOpen}
+        scroll={isWithinCompactWidthOrHeight ? "body" : "paper"}
         slotProps={slotProps}
       >
         <DialogTitleContainer>

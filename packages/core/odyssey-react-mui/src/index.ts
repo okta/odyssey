@@ -254,10 +254,18 @@ export {
   textFieldTypeValues,
 } from "./TextField.js";
 export {
+  ABSOLUTE_MINIMUM_HEIGHT,
+  ABSOLUTE_MINIMUM_WIDTH,
+  COMPACT_MAX_HEIGHT,
+  COMPACT_MAX_HEIGHT_CONDITION,
+  COMPACT_MAX_WIDTH,
+  COMPACT_MAX_WIDTH_CONDITION,
+  COMPACT_MEDIA_QUERY,
   createOdysseyMuiTheme,
   type DesignTokens,
   type DesignTokensOverride,
   pxToRem,
+  useCompactViewportMatches,
   useMediaQuery,
 } from "./theme/theme.js";
 export {

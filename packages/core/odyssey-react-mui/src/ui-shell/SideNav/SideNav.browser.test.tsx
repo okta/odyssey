@@ -14,6 +14,11 @@ import { page, userEvent } from "vitest/browser";
 
 import { translate as odysseyTranslate } from "../../i18n.generated/i18n.js";
 import { renderWithOdysseyProvider } from "../../test-utils/renderWithOdysseyProvider.js";
+import {
+  ROOMY_HEIGHT,
+  ROOMY_WIDTH,
+} from "../../test-utils/viewportTestSizes.js";
+import { COMPACT_MAX_HEIGHT } from "../../theme/useMediaQuery.js";
 import { SideNav } from "./SideNav.js";
 
 describe(SideNav.displayName!, () => {
@@ -287,6 +292,66 @@ describe(SideNav.displayName!, () => {
     );
 
     await expect.element(page.getByText(footerComponentText)).toBeVisible();
+  });
+
+  test("custom footer inside the scrollable region at compact viewport heights", async () => {
+    await page.viewport(ROOMY_WIDTH, COMPACT_MAX_HEIGHT);
+
+    const footerComponentText = "This is a custom footer component.";
+
+    const { container } = await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        footerComponent={<p>{footerComponentText}</p>}
+        hasCustomFooter
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: "Menu item",
+          },
+        ]}
+      />,
+    );
+
+    const footer = page.getByText(footerComponentText);
+    await expect.element(footer).toBeVisible();
+
+    expect(
+      footer.element().closest('[data-se="scrollable-region"]'),
+    ).not.toBeNull();
+
+    await expect(container).toBeAccessible();
+  });
+
+  test("custom footer pinned outside the scrollable region at roomy viewport heights", async () => {
+    await page.viewport(ROOMY_WIDTH, ROOMY_HEIGHT);
+
+    const footerComponentText = "This is a custom footer component.";
+
+    const { container } = await renderWithOdysseyProvider(
+      <SideNav
+        appName="Header text"
+        footerComponent={<p>{footerComponentText}</p>}
+        hasCustomFooter
+        sideNavItems={[
+          {
+            id: "item0",
+            href: "#",
+            label: "Menu item",
+          },
+        ]}
+      />,
+    );
+
+    const footer = page.getByText(footerComponentText);
+    await expect.element(footer).toBeVisible();
+
+    expect(
+      footer.element().closest('[data-se="scrollable-region"]'),
+    ).toBeNull();
+
+    await expect(container).toBeAccessible();
   });
 
   test("displays sidenav link", async () => {
@@ -799,6 +864,40 @@ describe(SideNav.displayName!, () => {
           page.getByRole("link", { name: `${linkLabel} ${newWindowText}` }),
         )
         .toBeVisible();
+
+      await expect(container).toBeAccessible();
+    });
+  });
+
+  describe("disabled leaf nav item", () => {
+    test("exposes its disabled state to screen readers", async () => {
+      const menuItemText = "Authentication Policies";
+
+      const { container } = await renderWithOdysseyProvider(
+        <SideNav
+          appName="App"
+          sideNavItems={[
+            {
+              id: "auth-policies",
+              label: menuItemText,
+              isDisabled: true,
+            },
+          ]}
+        />,
+      );
+
+      // `aria-disabled` is only announced on a widget role, so the disabled
+      // leaf carries `role="button"` and the state must live there rather
+      // than on the wrapper, whose `listitem` role (or plain `<div>` in
+      // sortable mode) can't carry it for AT (WCAG 4.1.2). This mirrors how
+      // a disabled accordion item announces "dimmed".
+      const disabledItem = page.getByRole("button", { name: menuItemText });
+      await expect
+        .element(disabledItem)
+        .toHaveAttribute("aria-disabled", "true");
+
+      const listItem = disabledItem.element().closest("li");
+      expect(listItem?.hasAttribute("aria-disabled")).toBe(false);
 
       await expect(container).toBeAccessible();
     });

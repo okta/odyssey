@@ -13,11 +13,11 @@
   },
   "scripts": {
     "blueprint-validate": "yarn workspace @okta/odyssey-blueprint validate **/*.{yaml,yml,json}",
-    "build": "yarn workspaces foreach --all --topological-dev --parallel --interlaced --exclude=@okta/odyssey-icons --exclude=@okta/odyssey-storybook --exclude=@okta/odyssey-prototype run build",
+    "build": "nx run-many -t build --exclude=@okta/odyssey-icons,@okta/odyssey-storybook,@okta/odyssey-prototype",
     "create-contribution": "ok-ui create-package --from ./packages/contributions/example-components --output-dir ./packages/contributions",
     "eslint": "NODE_OPTIONS=--max-old-space-size=6144 eslint .",
-    "generate:i18n:pseudoLocaleProperties": "yarn workspace @okta/odyssey-cli build:withDeps && yarn workspaces foreach --all --parallel run generate:i18n:pseudoLocaleProperties",
-    "generate:i18n": "yarn workspace @okta/odyssey-cli build:withDeps && yarn workspaces foreach --all --parallel run generate:i18n",
+    "generate:i18n:pseudoLocaleProperties": "yarn nx build @okta/odyssey-cli && yarn workspaces foreach --all --parallel run generate:i18n:pseudoLocaleProperties",
+    "generate:i18n": "yarn nx build @okta/odyssey-cli && yarn workspaces foreach --all --parallel run generate:i18n",
     "generate:blueprint-schema": "yarn workspace @okta/odyssey-blueprint generate-json-schema",
     "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-react-mui generate:icons",
     "lerna-publish": "lerna publish from-package --no-verify-registry --no-push --force-publish --ignore-changes 'packages/contributions/**' --ignore-changes 'packages/platform/**'",
@@ -32,12 +32,13 @@
     "start:prototype": "yarn install && yarn build && yarn workspace @okta/odyssey-prototype dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "start": "yarn install && yarn build && yarn concurrently npm:start:dev npm:start:storybook",
-    "test": "yarn workspaces foreach --all --parallel --interlaced --exclude=@okta/ui-stacks-component-libraries-odyssey-contributions run test",
+    "test": "nx run-many -t test --exclude=@okta/ui-stacks-component-libraries-odyssey-contributions",
     "topic": "OKTA_NPM_REGISTRY_SERVER=https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-all yarn",
-    "typecheck": "yarn workspaces foreach --all --parallel --interlaced run typecheck",
+    "typecheck": "nx run-many -t typecheck",
     "provision:contributions": "yarn workspaces foreach --all --interlaced run provision"
   },
   "devDependencies": {
+    "@nx/eslint-plugin": "20.0.8",
     "@okta/odyssey-cli": "workspace:*",
     "@okta/odyssey-eslint-config": "workspace:*",
     "@okta/odyssey-storybook": "workspace:^",
@@ -51,10 +52,16 @@
     "lint-staged": "^15.2.10",
     "loader-utils": "^3.2.1",
     "nwsapi": "^2.2.7",
+    "nx": "20.0.8",
     "prettier": "^3.3.3",
     "prompts": "^2.4.2",
     "wait-on": "^7.2.0",
     "workspace": "^0.0.1-preview.1"
+  },
+  "dependenciesMeta": {
+    "lightningcss-cli": {
+      "built": true
+    }
   },
   "resolutions": {
     "zod": "patch:zod@npm%3A4.4.3#~/.yarn/patches/zod-npm-4.4.3-36e81f791e.patch",
@@ -64,16 +71,6 @@
     "@joshwooding/vite-plugin-react-docgen-typescript/glob@^7.2.0": "^9.0.0",
     "flatted@npm:^3.2.9": "^3.4.2",
     "flatted@npm:^3.3.3": "^3.4.2",
-    "vitest@npm:^3.2": "^3.2.6",
-    "vitest@npm:^3.2.4": "^3.2.6",
-    "@vitest/browser@npm:^3.2": "^3.2.6",
-    "@vitest/coverage-v8@npm:^3.2": "^3.2.6",
-    "@vitest/ui@npm:^3.2": "^3.2.6",
-    "vitest@npm:^4.0.0": "^4.1.8",
-    "@vitest/browser@npm:^4.0.0": "^4.1.8",
-    "@vitest/browser-playwright@npm:^4.0.0": "^4.1.8",
-    "@vitest/coverage-v8@npm:^4.0.0": "^4.1.8",
-    "@vitest/ui@npm:^4.0.0": "^4.1.8",
     "@lerna/create@npm:7.2.0/npm-packlist": "^6.0.0",
     "@svgr/cli/glob@^8.0.3": "^9.0.0",
     "@wdio/config@npm:7.31.1": "^8.29.3",
@@ -126,7 +123,7 @@
     "ws@npm:^8.11.0": "^8.18.2",
     "ws@npm:8.13.0": "^8.18.2",
     "ws@npm:8.16.0": "^8.18.2",
-    "vitest/vite": "^7.1",
+    "storybook/esbuild": "0.28.1",
     "shell-quote": "^1.8.4"
   }
 }

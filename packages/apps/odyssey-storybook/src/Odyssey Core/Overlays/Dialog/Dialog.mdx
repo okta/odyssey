@@ -1,0 +1,58 @@
+import {
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs/blocks";
+
+import * as DialogStories from "./Dialog.stories";
+
+<Meta of={DialogStories} />
+
+<Title of={DialogStories} />
+<Subtitle of={DialogStories} />
+<Description of={DialogStories} />
+
+A `Dialog` interrupts the user with a modal overlay to confirm an action or
+present a focused task. Control its visibility with the `isOpen` prop and
+respond to dismissal with `onClose`.
+
+```tsx
+const [isOpen, setIsOpen] = useState(false);
+
+<>
+  <Button
+    label="Open dialog"
+    onClick={() => setIsOpen(true)}
+    variant="primary"
+  />
+  <Dialog
+    isOpen={isOpen}
+    onClose={() => setIsOpen(false)}
+    title="Dialog title"
+    primaryCallToActionComponent={
+      <Button
+        label="Primary action"
+        onClick={() => setIsOpen(false)}
+        variant="primary"
+      />
+    }
+  >
+    Description text explaining the consequences and any alternatives.
+  </Dialog>
+</>;
+```
+
+The stories in the sidebar render open by default so their visual state is
+captured without interaction. Open a story from the sidebar to see each variant:
+
+- **Long** shows how a body longer than the available space gains top and bottom
+  borders to indicate scrollability.
+- **Long title** shows the heading wrapping to multiple lines while the close
+  button stays anchored to the top-right.
+- **Small screen** shows the absolute-minimum viewport (320x256, the WCAG 1.4.10
+  reflow floor), where the `Dialog` goes full-screen and scrolls its body.
+- **No buttons** shows a `Dialog` without footer actions.
+
+<Controls />

@@ -32,6 +32,7 @@ import {
   ToastStack,
   Tooltip,
 } from "@okta/odyssey-react-mui";
+import { appRootElementId } from "@okta/odyssey-react-mui/__internal";
 import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
 import { Layout, PageTemplate } from "@okta/odyssey-react-mui/labs";
 import {
@@ -43,8 +44,6 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import { type ReactNode, useEffect, useRef } from "react";
 import { action } from "storybook/actions";
 import { expect, userEvent, waitFor, within } from "storybook/test";
-
-import { appRootElementId } from "../../../../../core/odyssey-react-mui/src/web-component/createReactRootElements.js";
 
 const meta = {
   component: () => null,

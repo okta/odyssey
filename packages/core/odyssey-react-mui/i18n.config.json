@@ -1,0 +1,11 @@
+{
+  "commitPrefix": "build: ",
+  "guardian": "guardian-odyssey-eng",
+  "jiraComponent": "Team: UICore Odyssey",
+  "namespace": "enduser",
+  "resourceFile": "odyssey-react-mui.properties",
+  "resourceFilePath": "packages/core/odyssey-react-mui/src/properties",
+  "reviewers": ["okta/eng-globalizationcore", "okta/design-system"],
+  "slackChannel": "odyssey",
+  "translationsFilePath": "packages/core/odyssey-react-mui/src/properties/translations"
+}

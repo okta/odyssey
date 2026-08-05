@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.66.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.0...v1.66.0) (2026-08-05)
+
+### Features
+
+- add DataView row-selection disabling ([#595](https://github.com/atko-eng/odyssey-design-system/issues/595)) ([9658290](https://github.com/atko-eng/odyssey-design-system/commit/9658290bb43320f16c0c23f932b3f6b2e29f4231))
+- add orpheus-components contribution package ([#614](https://github.com/atko-eng/odyssey-design-system/issues/614)) ([ede8189](https://github.com/atko-eng/odyssey-design-system/commit/ede8189f392ade4d7cfddc316d0c627980f386fd))
+- expose filterOptions on Autocomplete and pickers ([#648](https://github.com/atko-eng/odyssey-design-system/issues/648)) ([8f7f9ad](https://github.com/atko-eng/odyssey-design-system/commit/8f7f9adccec0b11ff45e1fa2459e485b362d29e4))
+- refactor lerna to use NX caching ([#603](https://github.com/atko-eng/odyssey-design-system/issues/603)) ([c8bcd10](https://github.com/atko-eng/odyssey-design-system/commit/c8bcd1045a62ebf3a8200fcf6d8886bd09a7d555))
+- simplify policy-rules compound API and i18n ([#596](https://github.com/atko-eng/odyssey-design-system/issues/596)) ([f062745](https://github.com/atko-eng/odyssey-design-system/commit/f062745eea4cdac08dfc66b526a94c83282da198))
+
+### Bug Fixes
+
+- backport 1.65.1 release to master ([#620](https://github.com/atko-eng/odyssey-design-system/issues/620)) ([8e699f6](https://github.com/atko-eng/odyssey-design-system/commit/8e699f6b013e6c98f0456a8a8f3a2c0c37154fe9))
+- backport 1.65.2 release to master ([#627](https://github.com/atko-eng/odyssey-design-system/issues/627)) ([af2b4a5](https://github.com/atko-eng/odyssey-design-system/commit/af2b4a52b48bcdd143eccbc8e9d51b943b6bae88))
+- correct Accordion Multi story controls ([#600](https://github.com/atko-eng/odyssey-design-system/issues/600)) ([7e145e5](https://github.com/atko-eng/odyssey-design-system/commit/7e145e5d00e2c40540139a961d9162846275bae4))
+- DataView in iga contributions ([#624](https://github.com/atko-eng/odyssey-design-system/issues/624)) ([7ca2609](https://github.com/atko-eng/odyssey-design-system/commit/7ca2609f35a4ee7f43a5f74e4bad0318b1825f08))
+- reflow content at compact viewport in dialog and sidenav ([#611](https://github.com/atko-eng/odyssey-design-system/issues/611)) ([6bea16a](https://github.com/atko-eng/odyssey-design-system/commit/6bea16a6a2a6ef1f6036f9e4c791030444d3bac1))
+- update vulnerable packages ([#618](https://github.com/atko-eng/odyssey-design-system/issues/618)) ([2933ec1](https://github.com/atko-eng/odyssey-design-system/commit/2933ec1c2d8d683276c5c70e410e32c2056f1f5b))
+
+## [1.65.2](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.1...v1.65.2) (2026-07-29)
+
+**Note:** Version bump only for package @okta/odyssey-storybook
+
+## [1.65.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.0...v1.65.1) (2026-07-28)
+
+### Bug Fixes
+
+- reflow content at compact viewport in dialog and sidenav ([#611](https://github.com/atko-eng/odyssey-design-system/issues/611)) ([361c97a](https://github.com/atko-eng/odyssey-design-system/commit/361c97ac3fdaaa19aaf0e84889ad65271068e61d))
+
 ## [1.65.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.64.0...v1.65.0) (2026-07-22)
 
 ### Features

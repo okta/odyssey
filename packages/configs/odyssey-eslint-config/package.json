@@ -1,6 +1,11 @@
 {
   "name": "@okta/odyssey-eslint-config",
-  "version": "1.65.0",
+  "version": "1.66.0",
+  "nx": {
+    "tags": [
+      "scope:tools"
+    ]
+  },
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
@@ -15,6 +20,7 @@
   "dependencies": {
     "@eslint/js": "^9.31.0",
     "@eslint/json": "^1.2.0",
+    "@nx/eslint-plugin": "20.0.8",
     "@okta/odyssey-contributions-promotion-check": "workspace:*",
     "@okta/odyssey-typescript": "workspace:^",
     "@typescript-eslint/eslint-plugin": "^8.46.0",

@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.66.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.0...v1.66.0) (2026-08-05)
+
+### Features
+
+- add DataView row-selection disabling ([#595](https://github.com/atko-eng/odyssey-design-system/issues/595)) ([9658290](https://github.com/atko-eng/odyssey-design-system/commit/9658290bb43320f16c0c23f932b3f6b2e29f4231))
+- expose filterOptions on Autocomplete and pickers ([#648](https://github.com/atko-eng/odyssey-design-system/issues/648)) ([8f7f9ad](https://github.com/atko-eng/odyssey-design-system/commit/8f7f9adccec0b11ff45e1fa2459e485b362d29e4))
+- refactor lerna to use NX caching ([#603](https://github.com/atko-eng/odyssey-design-system/issues/603)) ([c8bcd10](https://github.com/atko-eng/odyssey-design-system/commit/c8bcd1045a62ebf3a8200fcf6d8886bd09a7d555))
+
+### Bug Fixes
+
+- backport 1.65.1 release to master ([#620](https://github.com/atko-eng/odyssey-design-system/issues/620)) ([8e699f6](https://github.com/atko-eng/odyssey-design-system/commit/8e699f6b013e6c98f0456a8a8f3a2c0c37154fe9))
+- backport 1.65.2 release to master ([#627](https://github.com/atko-eng/odyssey-design-system/issues/627)) ([af2b4a5](https://github.com/atko-eng/odyssey-design-system/commit/af2b4a52b48bcdd143eccbc8e9d51b943b6bae88))
+- chevron colour on sidenav toggle button ([#598](https://github.com/atko-eng/odyssey-design-system/issues/598)) ([ab5640a](https://github.com/atko-eng/odyssey-design-system/commit/ab5640ab83e97e297d7b639461b1dc339948bb1e))
+- expose Callout title to screen readers ([#609](https://github.com/atko-eng/odyssey-design-system/issues/609)) ([74681d3](https://github.com/atko-eng/odyssey-design-system/commit/74681d3762245451334a2d77f800d57a74a22ca3))
+- expose SideNav disabled leaf state to AT ([#616](https://github.com/atko-eng/odyssey-design-system/issues/616)) ([1d2c506](https://github.com/atko-eng/odyssey-design-system/commit/1d2c506d15a9e66ed9a580c0af7a86e0898786b1))
+- reflow content at compact viewport in dialog and sidenav ([#611](https://github.com/atko-eng/odyssey-design-system/issues/611)) ([6bea16a](https://github.com/atko-eng/odyssey-design-system/commit/6bea16a6a2a6ef1f6036f9e4c791030444d3bac1))
+- shim react 18-only hooks for react 17 ([#625](https://github.com/atko-eng/odyssey-design-system/issues/625)) ([90cd607](https://github.com/atko-eng/odyssey-design-system/commit/90cd6078e415e233db01c5961b9cb160f74d9d77))
+- update vulnerable packages ([#618](https://github.com/atko-eng/odyssey-design-system/issues/618)) ([2933ec1](https://github.com/atko-eng/odyssey-design-system/commit/2933ec1c2d8d683276c5c70e410e32c2056f1f5b))
+
+## [1.65.2](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.1...v1.65.2) (2026-07-29)
+
+### Bug Fixes
+
+- shim react 18-only hooks for react 17 ([#625](https://github.com/atko-eng/odyssey-design-system/issues/625)) ([043fb2e](https://github.com/atko-eng/odyssey-design-system/commit/043fb2e513480c12bf9ea64fb9268c5b4dcf39e6))
+
+## [1.65.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.0...v1.65.1) (2026-07-28)
+
+### Bug Fixes
+
+- expose Callout title to screen readers ([#609](https://github.com/atko-eng/odyssey-design-system/issues/609)) ([e73e3e2](https://github.com/atko-eng/odyssey-design-system/commit/e73e3e216d81d9f82e97f7e49daa42b7e32e8d51))
+- expose SideNav disabled leaf state to AT ([#616](https://github.com/atko-eng/odyssey-design-system/issues/616)) ([5838afe](https://github.com/atko-eng/odyssey-design-system/commit/5838afed271aadaeb4df5a60f0ea70507d044d15))
+- reflow content at compact viewport in dialog and sidenav ([#611](https://github.com/atko-eng/odyssey-design-system/issues/611)) ([361c97a](https://github.com/atko-eng/odyssey-design-system/commit/361c97ac3fdaaa19aaf0e84889ad65271068e61d))
+
 ## [1.65.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.64.0...v1.65.0) (2026-07-22)
 
 ### Features

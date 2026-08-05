@@ -100,6 +100,7 @@ const ComposablePicker = <
   emptyOptionsText,
   errorMessage,
   errorMessageList,
+  filterOptions,
   getIsOptionEqualToValue,
   getOptionLabel,
   groupOptionsBy,
@@ -167,6 +168,7 @@ const ComposablePicker = <
       closeText={t("close.text")}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
+      filterOptions={filterOptions}
       filterSelectedOptions={true}
       freeSolo={isCustomValueAllowed}
       fullWidth={isFullWidth}

@@ -39,6 +39,19 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["defaultValue"];
   /**
+   * Determines the filtered options to display when typing in the input.
+   * Defaults to MUI's client-side substring match against `getOptionLabel`.
+   * Override this (e.g. `(options) => options`) when `options` is already
+   * filtered server-side, to avoid MUI re-filtering already-matching results
+   * away.
+   */
+  filterOptions?: MuiAutocompleteProps<
+    OptionType,
+    HasMultipleChoices,
+    undefined,
+    IsCustomValueAllowed
+  >["filterOptions"];
+  /**
    * Used to determine if the option represents the given value. Uses strict equality by default if
    * none provided. Both arguments need to be handled, an option can only match with one value.
    * option: the option to test
@@ -205,6 +218,7 @@ const Autocomplete = <
   defaultValue,
   errorMessage,
   errorMessageList,
+  filterOptions,
   getIsOptionEqualToValue,
   getOptionLabel,
   hasMultipleChoices,
@@ -270,6 +284,7 @@ const Autocomplete = <
       closeText={t("close.text")}
       disableCloseOnSelect={hasMultipleChoices}
       disabled={isDisabled}
+      filterOptions={filterOptions}
       filterSelectedOptions={true}
       freeSolo={isCustomValueAllowed}
       fullWidth={isFullWidth}

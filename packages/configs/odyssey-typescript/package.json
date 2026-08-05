@@ -7,5 +7,10 @@
   "peerDependencies": {
     "typescript": "^5.8.3"
   },
-  "version": "1.65.0"
+  "version": "1.66.0",
+  "nx": {
+    "tags": [
+      "scope:tools"
+    ]
+  }
 }

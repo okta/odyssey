@@ -1,0 +1,25 @@
+import {
+  Controls,
+  Description,
+  Meta,
+  Primary,
+  Stories,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs/blocks";
+
+import * as AccordionStories from "./Accordion.stories";
+
+<Meta of={AccordionStories} />
+
+<Title of={AccordionStories} />
+<Subtitle of={AccordionStories} />
+<Description of={AccordionStories} />
+<Primary of={AccordionStories} />
+
+An `Accordion` reveals or hides a section of content behind a header. Use
+`isDefaultExpanded` for an uncontrolled accordion that starts open, or
+`isExpanded` with `onChange` to control expansion yourself.
+
+<Controls />
+<Stories />

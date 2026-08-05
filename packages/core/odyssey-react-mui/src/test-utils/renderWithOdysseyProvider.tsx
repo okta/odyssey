@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createTheme } from "@mui/material/styles";
+import { type ThemeOptions } from "@mui/material/styles";
 import { type ReactElement, type ReactNode } from "react";
 import {
   render,
@@ -24,7 +24,12 @@ import { OdysseyProvider } from "../OdysseyProvider.js";
 // `create` covers CSS transition strings; `duration` zeroes JS timeouts that
 // MUI transition components (Fade, Slide, Collapse) use to decide when to
 // unmount.
-export const noTransitionsTheme = createTheme({
+//
+// Passed as `themeOverride` (plain `ThemeOptions`), not a resolved `createTheme`
+// result: the provider deep-merges this into the Odyssey theme and re-runs
+// `createTheme` so the override composes correctly. A resolved theme here would
+// instead be merged as an already-built theme and clobber Odyssey's own values.
+export const noTransitionsTheme = {
   transitions: {
     create: () => "none",
     duration: {
@@ -37,7 +42,7 @@ export const noTransitionsTheme = createTheme({
       leavingScreen: 0,
     },
   },
-});
+} satisfies ThemeOptions;
 
 const OdysseyWrapper = ({ children }: { children: ReactNode }) => (
   <OdysseyProvider themeOverride={noTransitionsTheme}>

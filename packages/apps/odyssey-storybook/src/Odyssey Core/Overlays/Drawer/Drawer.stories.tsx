@@ -20,7 +20,6 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback, useState } from "react";
-import { userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -103,7 +102,6 @@ const drawerLongText = (
 const meta = {
   component: Drawer,
   decorators: [OdysseyStorybookThemeDecorator],
-  tags: ["autodocs"],
   argTypes: {
     primaryCallToActionComponent: {
       description:
@@ -255,7 +253,9 @@ type Story = StoryObj<typeof meta>;
 const DefaultTemplate: Story = {
   args: {} as DrawerProps, // This is a hack
   render: function C(props) {
-    const [isVisible, setIsVisible] = useState(false);
+    // Open by default so Applitools captures the open Drawer without a play
+    // function. The button still toggles it in Canvas.
+    const [isVisible, setIsVisible] = useState(true);
     const onOpen = useCallback(() => {
       setIsVisible(true);
     }, []);
@@ -378,14 +378,6 @@ export const Overlay: Story = {
     children: drawerLongText,
     title: "Okta Privileged Access",
   } as DrawerProps, // This is a hack,
-  play: async ({ canvasElement, step }) => {
-    await step("Open drawer", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(
-        canvas.getByRole("button", { name: "Open drawer" }),
-      );
-    });
-  },
 };
 
 export const Persistent: Story = {
@@ -415,14 +407,6 @@ export const Persistent: Story = {
     ),
     title: "Profile details",
   } as DrawerProps, // This is a hack,
-  play: async ({ canvasElement, step }) => {
-    await step("Open drawer", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(
-        canvas.getByRole("button", { name: "Open drawer" }),
-      );
-    });
-  },
 };
 
 export const ShowDividers: Story = {
@@ -452,27 +436,13 @@ export const ShowDividers: Story = {
     ),
     title: "Profile details",
   } as DrawerProps, // This is a hack
-  play: async ({ canvasElement, step }) => {
-    await step("Open drawer", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(
-        canvas.getByRole("button", { name: "Open drawer" }),
-      );
-    });
-  },
 };
 
 export const NoFooter: Story = {
-  play: async ({ canvasElement, step }) => {
-    await step("Open drawer", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(
-        canvas.getByRole("button", { name: "Open drawer" }),
-      );
-    });
-  },
   render: function C(props) {
-    const [isVisible, setIsVisible] = useState(false);
+    // Open by default so Applitools captures the open Drawer without a play
+    // function. The button still toggles it in Canvas.
+    const [isVisible, setIsVisible] = useState(true);
 
     const onOpen = useCallback(() => {
       setIsVisible(true);

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.66.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.0...v1.66.0) (2026-08-05)
+
+### Features
+
+- refactor lerna to use NX caching ([#603](https://github.com/atko-eng/odyssey-design-system/issues/603)) ([c8bcd10](https://github.com/atko-eng/odyssey-design-system/commit/c8bcd1045a62ebf3a8200fcf6d8886bd09a7d555))
+
+### Bug Fixes
+
+- backport 1.65.1 release to master ([#620](https://github.com/atko-eng/odyssey-design-system/issues/620)) ([8e699f6](https://github.com/atko-eng/odyssey-design-system/commit/8e699f6b013e6c98f0456a8a8f3a2c0c37154fe9))
+- backport 1.65.2 release to master ([#627](https://github.com/atko-eng/odyssey-design-system/issues/627)) ([af2b4a5](https://github.com/atko-eng/odyssey-design-system/commit/af2b4a52b48bcdd143eccbc8e9d51b943b6bae88))
+
+## [1.65.2](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.1...v1.65.2) (2026-07-29)
+
+**Note:** Version bump only for package @okta/odyssey-typescript
+
+## [1.65.1](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.0...v1.65.1) (2026-07-28)
+
+**Note:** Version bump only for package @okta/odyssey-typescript
+
 ## [1.65.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.64.0...v1.65.0) (2026-07-22)
 
 **Note:** Version bump only for package @okta/odyssey-typescript

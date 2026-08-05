@@ -22,7 +22,6 @@ import {
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useMemo } from "react";
 import { useCallback, useState } from "storybook/preview-api";
-import { userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
@@ -30,7 +29,6 @@ import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.
 const meta = {
   component: Toast,
   decorators: [OdysseyStorybookThemeDecorator],
-  tags: ["autodocs"],
   argTypes: {
     autoHideDuration: {
       control: "number",
@@ -144,7 +142,9 @@ const meta = {
     },
   },
   args: {
-    isVisible: false,
+    // Rendered visible by default so Applitools captures the Toast without a play
+    // function. The "Open toast" button still shows/hides it in Canvas.
+    isVisible: true,
     severity: "info",
     role: "status",
     linkText: "Info",
@@ -159,7 +159,7 @@ type Story = StoryObj<typeof meta>;
 
 const Single: Story = {
   args: {
-    isVisible: false,
+    isVisible: true,
     role: "status",
   },
   render: function C(args, context) {
@@ -203,13 +203,6 @@ export const Info: Story = {
     text: "The mission to Sagittarius A is set for January 7.",
     severity: "info",
   },
-  tags: ["!autodocs"],
-  play: async ({ canvasElement, step }) => {
-    await step("Show toast", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(canvas.getByRole("button"));
-    });
-  },
 };
 
 export const ErrorToast: Story = {
@@ -220,12 +213,6 @@ export const ErrorToast: Story = {
     role: "alert",
     severity: "error",
   },
-  play: async ({ canvasElement, step }) => {
-    await step("Show toast", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(canvas.getByRole("button"));
-    });
-  },
 };
 
 export const Warning: Story = {
@@ -234,12 +221,6 @@ export const Warning: Story = {
     text: "Severe solar winds may delay local system flights",
     role: "status",
     severity: "warning",
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("Show toast", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(canvas.getByRole("button"));
-    });
   },
 };
 
@@ -250,12 +231,6 @@ export const Success: Story = {
     role: "status",
     severity: "success",
   },
-  play: async ({ canvasElement, step }) => {
-    await step("Show toast", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(canvas.getByRole("button"));
-    });
-  },
 };
 
 export const Dismissible: Story = {
@@ -264,12 +239,6 @@ export const Dismissible: Story = {
     isDismissable: true,
     linkText: "View report",
     linkUrl: "#",
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("Show toast", async () => {
-      const canvas = within(canvasElement);
-      await userEvent.click(canvas.getByRole("button"));
-    });
   },
 };
 
@@ -326,7 +295,13 @@ export const MultipleToasts: Story = {
       [],
     );
 
-    const [toasts, setToasts] = useState<ToastWithId[]>([]);
+    // Seeded with three toasts so Applitools captures the stacked state without a
+    // play function. The "Open another Toast" button still appends more in Canvas.
+    const [toasts, setToasts] = useState<ToastWithId[]>(() =>
+      toastData
+        .slice(0, 3)
+        .map((toast) => ({ ...toast, id: createUniqueId() })),
+    );
 
     const addToast = useCallback(() => {
       setToasts((prevToasts) => [
@@ -365,14 +340,5 @@ export const MultipleToasts: Story = {
         </ToastStack>
       </>
     );
-  },
-  play: async ({ canvasElement, step }) => {
-    await step("Show toasts", async () => {
-      const canvas = within(canvasElement);
-      const button = canvas.getByRole("button", { name: "Open another Toast" });
-      await userEvent.click(button);
-      await userEvent.click(button);
-      await userEvent.click(button);
-    });
   },
 };

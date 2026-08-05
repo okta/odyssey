@@ -275,6 +275,7 @@ const Picker: PickerComponentType = <
   emptyOptionsText,
   errorMessage,
   errorMessageList,
+  filterOptions,
   getIsOptionEqualToValue,
   groupOptionsBy,
   hasMultipleChoices,
@@ -351,6 +352,7 @@ const Picker: PickerComponentType = <
       emptyOptionsText={emptyOptionsText}
       errorMessage={errorMessage}
       errorMessageList={errorMessageList}
+      filterOptions={filterOptions}
       getIsOptionEqualToValue={getIsOptionEqualToValue}
       groupOptionsBy={groupOptionsBy}
       hasMultipleChoices={hasMultipleChoices}

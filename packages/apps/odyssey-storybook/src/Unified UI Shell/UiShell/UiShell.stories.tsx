@@ -11,6 +11,7 @@
  */
 
 import {
+  ABSOLUTE_MINIMUM_HEIGHT,
   Banner,
   Box,
   Button,
@@ -19,6 +20,10 @@ import {
   SearchField,
   Surface,
 } from "@okta/odyssey-react-mui";
+import {
+  BaseButton,
+  createMessageBus,
+} from "@okta/odyssey-react-mui/__internal";
 import {
   AddCircleIcon,
   AppsIcon,
@@ -51,10 +56,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { action } from "storybook/actions";
 import { fn } from "storybook/test";
 
-import { BaseButton } from "../../../../../core/odyssey-react-mui/src/Buttons/BaseButton.js";
-import { createMessageBus } from "../../../../../core/odyssey-react-mui/src/tools/createMessageBus.js";
 import PlaceholderLogo from "../../Odyssey Core/Fields/PickerWithOptionAdornment/PlaceholderLogo.js";
+import { STANDARD_APPLITOOLS_WIDTH } from "../../tools/applitoolsBrowserSize.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+import { getReflowEyesParameters } from "../../tools/reflowEyesParameters.js";
 
 const meta = {
   component: UiShell,
@@ -607,6 +612,53 @@ export const WithoutAppContent: Story = {
       subscriber({
         appSwitcherProps: sharedAppSwitcherProps,
         sideNavProps: sharedSideNavProps,
+        topNavProps: sharedTopNavProps,
+      });
+
+      return () => {};
+    },
+  },
+};
+
+export const WithCustomSideNavFooter: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
+  globals: {
+    viewport: { value: "compactHeight", isRotated: false },
+  },
+  parameters: {
+    // This story proves the custom SideNav footer scrolls when the viewport is
+    // short. That behavior keys off compact *height* (max-height 500px), a
+    // separate axis from the narrow shell (which triggers below 600px width and
+    // tucks the SideNav into a closed off-canvas drawer). It selects the global
+    // compactHeight viewport (1024×256): width stays wide (1024px) so the
+    // SideNav stays persistent and its footer is visible, and short height
+    // (256px) triggers the scroll.
+    //
+    // See getReflowEyesParameters for why layoutBreakpoints is needed to
+    // capture the compact-height layout in Applitools.
+    eyes: getReflowEyesParameters({
+      height: ABSOLUTE_MINIMUM_HEIGHT,
+      width: STANDARD_APPLITOOLS_WIDTH,
+    }),
+  },
+  args: {
+    optionalComponents: {
+      ...sharedOptionalComponents,
+      sideNavFooter: (
+        <Box sx={{ padding: 4 }}>
+          <Paragraph>Custom footer content</Paragraph>
+          <Button label="Contact support" variant="secondary" />
+        </Box>
+      ),
+    },
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        appSwitcherProps: sharedAppSwitcherProps,
+        sideNavProps: {
+          ...sharedSideNavProps,
+          footerItems: undefined,
+          hasCustomFooter: true,
+        },
         topNavProps: sharedTopNavProps,
       });
 

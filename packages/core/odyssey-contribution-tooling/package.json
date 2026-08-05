@@ -1,6 +1,11 @@
 {
   "name": "@okta/odyssey-contribution-tooling",
-  "version": "1.65.0",
+  "version": "1.66.0",
+  "nx": {
+    "tags": [
+      "scope:core"
+    ]
+  },
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.umd.cjs",
@@ -42,9 +47,9 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^5.0",
-    "@vitest/browser": "^3.2",
-    "@vitest/coverage-v8": "^3.2",
-    "@vitest/ui": "^3.2",
+    "@vitest/browser": "^3.2.7",
+    "@vitest/coverage-v8": "^3.2.7",
+    "@vitest/ui": "^3.2.7",
     "concurrently": "^9.2.1",
     "jest-axe": "^10.0",
     "jsdom": "^26.1",
@@ -55,8 +60,8 @@
     "regenerator-runtime": "^0.14.1",
     "rimraf": "^6.0.1",
     "typescript": "^5.9.2",
-    "vite": "^7.1",
+    "vite": "^7.3.6",
     "vite-plugin-svgr": "^4.5",
-    "vitest": "^3.2"
+    "vitest": "^3.2.7"
   }
 }

@@ -1,0 +1,49 @@
+import {
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs/blocks";
+
+import * as DrawerStories from "./Drawer.stories";
+
+<Meta of={DrawerStories} />
+
+<Title of={DrawerStories} />
+<Subtitle of={DrawerStories} />
+<Description of={DrawerStories} />
+
+A `Drawer` slides in from the edge of the screen to present secondary content or
+actions. Control its visibility with the `isOpen` prop and respond to dismissal
+with `onClose`.
+
+```tsx
+const [isOpen, setIsOpen] = useState(false);
+
+<>
+  <Button
+    label="Open drawer"
+    onClick={() => setIsOpen(true)}
+    variant="primary"
+  />
+  <Drawer
+    ariaLabel="close"
+    isOpen={isOpen}
+    onClose={() => setIsOpen(false)}
+    title="Okta Privileged Access"
+  >
+    Drawer content goes here.
+  </Drawer>
+</>;
+```
+
+The stories in the sidebar render open by default so their visual state is
+captured without interaction. Open a story from the sidebar to see each variant:
+
+- **Overlay** blocks all other page actions and sits on top of page content.
+- **Persistent** is embedded in the content like a dismissable sidebar.
+- **Show dividers** shows a persistent `Drawer` with divider lines enabled.
+- **No footer** shows a `Drawer` without footer actions.
+
+<Controls />

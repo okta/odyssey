@@ -16,7 +16,6 @@ import {
   memo,
   useCallback,
   useEffect,
-  useId,
   useRef,
   useState,
 } from "react";
@@ -34,6 +33,7 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../OdysseyDesignTokensContext.js";
+import { useUniqueId } from "../useUniqueId.js";
 import { InnerAppContainer } from "./InnerAppContainer.js";
 import { SideNav } from "./SideNav/SideNav.js";
 import { SkipToContent } from "./SkipToContent.js";
@@ -261,7 +261,7 @@ const NarrowUiShellContent = ({
 
   const leftSideContainerRef = useRef<HTMLDivElement>(null);
   const leftSideMenuToggleRef = useRef<FocusHandle>(null);
-  const leftSideContainerId = useId();
+  const leftSideContainerId = useUniqueId();
 
   const [isLeftSideMenuOpen, setIsLeftSideMenuOpen] = useState(false);
   const [isRightSideMenuOpen, setIsRightSideMenuOpen] = useState(false);

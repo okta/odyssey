@@ -8,5 +8,10 @@
   "dependencies": {
     "conventional-changelog-conventionalcommits": "^7.0.2"
   },
-  "version": "1.65.0"
+  "version": "1.66.0",
+  "nx": {
+    "tags": [
+      "scope:tools"
+    ]
+  }
 }
