@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.66.0",
+  "version": "1.66.1",
   "description": "Documentation for Odyssey, Okta's design system",
   "nx": {
     "tags": [

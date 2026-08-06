@@ -1,6 +1,6 @@
 {
   "name": "@okta/browserslist-config-odyssey",
-  "version": "1.66.0",
+  "version": "1.66.1",
   "nx": {
     "tags": [
       "scope:tools"

@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-design-tokens",
-  "version": "1.66.0",
+  "version": "1.66.1",
   "nx": {
     "tags": [
       "scope:core"

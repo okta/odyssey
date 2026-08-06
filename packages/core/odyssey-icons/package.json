@@ -37,7 +37,7 @@
     "svgo": "^4.0.2",
     "typescript": "^5.8.3"
   },
-  "version": "1.66.0",
+  "version": "1.66.1",
   "nx": {
     "tags": [
       "scope:core"
