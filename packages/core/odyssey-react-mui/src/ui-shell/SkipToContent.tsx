@@ -148,6 +148,7 @@ const SkipToContent = ({ appElement }: SkipToContentProps) => {
     >
       <BaseButton
         buttonRef={buttonRef}
+        id="skip-to-main-content"
         label={t("skiplinks.main")}
         onClick={focusMainContent}
         variant="primary"
