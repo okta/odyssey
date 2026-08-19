@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.67.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.66.1...v1.67.0) (2026-08-19)
+
+### Bug Fixes
+
+- archive vitest failure screenshots per pkg ([#665](https://github.com/atko-eng/odyssey-design-system/issues/665)) ([7b43623](https://github.com/atko-eng/odyssey-design-system/commit/7b4362347929584c77ace256e3614715d6e9d2be))
+- derive ModifiedSideNavItem from SideNavItem ([#660](https://github.com/atko-eng/odyssey-design-system/issues/660)) ([435e640](https://github.com/atko-eng/odyssey-design-system/commit/435e640bd7fe657b016870536aa488230e699436))
+- give Drawer close button accessible name ([#634](https://github.com/atko-eng/odyssey-design-system/issues/634)) ([c0896f2](https://github.com/atko-eng/odyssey-design-system/commit/c0896f293ecdc5f6d5a2e4a42c43547ca9de2d70))
+- install husky hooks via postinstall ([#726](https://github.com/atko-eng/odyssey-design-system/issues/726)) ([771e9df](https://github.com/atko-eng/odyssey-design-system/commit/771e9df4c1b72818201e9fd5673d67daf144e7c9))
+- **odyssey-ai-tooling:** untrack generated artifacts ([#677](https://github.com/atko-eng/odyssey-design-system/issues/677)) ([7ff0973](https://github.com/atko-eng/odyssey-design-system/commit/7ff0973c117bebe8e3067aab78610987fafa4c9a))
+- pin orpheus date range picker story dates ([#721](https://github.com/atko-eng/odyssey-design-system/issues/721)) ([155c9c6](https://github.com/atko-eng/odyssey-design-system/commit/155c9c63d651d8871139a9acd1732b1a71bd97d2))
+- release script sync and stage failure bugs ([#685](https://github.com/atko-eng/odyssey-design-system/issues/685)) ([37d88c8](https://github.com/atko-eng/odyssey-design-system/commit/37d88c809a6990a65456c0678ee581aa1af98ac7))
+- skip contributions dirs lacking package.json ([#676](https://github.com/atko-eng/odyssey-design-system/issues/676)) ([fbbc369](https://github.com/atko-eng/odyssey-design-system/commit/fbbc369cc7af2949437ee1f3c01cd5503aec720c))
+- stabilize lazy-icon shell tests and harden getIcon against icon load failures ([#663](https://github.com/atko-eng/odyssey-design-system/issues/663)) ([4d608c7](https://github.com/atko-eng/odyssey-design-system/commit/4d608c7ff856e0086b6638176b05f5a00e2ecb11))
+- thin CircularProgress stroke to a 1:12 ratio ([#707](https://github.com/atko-eng/odyssey-design-system/issues/707)) ([ea5395c](https://github.com/atko-eng/odyssey-design-system/commit/ea5395cad54bd09ec1dac68232eb5cdce63449ba))
+- unsilence VRT server, add dev-shm flag ([#690](https://github.com/atko-eng/odyssey-design-system/issues/690)) ([01cea9e](https://github.com/atko-eng/odyssey-design-system/commit/01cea9e2484c8a98d91c0f456a7bf822e020d22e))
+- update oin-components ImageUploader's button text from Confirm -> Upload ([#698](https://github.com/atko-eng/odyssey-design-system/issues/698)) ([d0a72a9](https://github.com/atko-eng/odyssey-design-system/commit/d0a72a971d56f94562fb5a4baee982f772ea97e8))
+- use lerna built-in changelog preset ([#729](https://github.com/atko-eng/odyssey-design-system/issues/729)) ([bfdc51f](https://github.com/atko-eng/odyssey-design-system/commit/bfdc51f8668cacf8a939920bbabf3a9091a9bdfa))
+- yarn.lock conflict ([#669](https://github.com/atko-eng/odyssey-design-system/issues/669)) ([2cb048b](https://github.com/atko-eng/odyssey-design-system/commit/2cb048b6d576331e9c1be190d3b66ce3a05993ff))
+
+### Features
+
+- add @okta/extractor pipeline package ([#678](https://github.com/atko-eng/odyssey-design-system/issues/678)) ([bfc3777](https://github.com/atko-eng/odyssey-design-system/commit/bfc3777ad43ee81a66bdf673e3fda4da7c64b980)), closes [post-#674](https://github.com/post-/issues/674) [post-#674](https://github.com/post-/issues/674) [#674](https://github.com/atko-eng/odyssey-design-system/issues/674)
+- add blueprint text fields and parity guard (OKTA-1249838) ([#681](https://github.com/atko-eng/odyssey-design-system/issues/681)) ([c87140f](https://github.com/atko-eng/odyssey-design-system/commit/c87140f149c1dc7ca3f8fea2592f783fe10930ff))
+- add DataView to ud-components with maxSelectedRows and i18n ([#659](https://github.com/atko-eng/odyssey-design-system/issues/659)) ([dd82212](https://github.com/atko-eng/odyssey-design-system/commit/dd82212658a859d4841ae2affb427ba7df485806))
+- add extractor-fixture synthetic test app ([#674](https://github.com/atko-eng/odyssey-design-system/issues/674)) ([d2daa7a](https://github.com/atko-eng/odyssey-design-system/commit/d2daa7ac53a706e80d5aac4ce9a3bc88dd743bcf))
+- add odyssey-upgrade-tools package ([#518](https://github.com/atko-eng/odyssey-design-system/issues/518)) ([8166f18](https://github.com/atko-eng/odyssey-design-system/commit/8166f18be901fcd338d86a4357e3dddc50b98e5d)), closes [#odyssey-notifications](https://github.com/atko-eng/odyssey-design-system/issues/odyssey-notifications)
+- add unique IDs to image uploader buttons for testing ([#718](https://github.com/atko-eng/odyssey-design-system/issues/718)) ([ab0a4c1](https://github.com/atko-eng/odyssey-design-system/commit/ab0a4c1df9d095f4201d02d340e7e908eae09eb7))
+- Adds self-hosted Nx remote cache ([#671](https://github.com/atko-eng/odyssey-design-system/issues/671)) ([e908e5f](https://github.com/atko-eng/odyssey-design-system/commit/e908e5f189d898f996cc3a1f9c320a65d827e3b7))
+- bump odyssey-react-mui to 1.66.1 in shell ([#662](https://github.com/atko-eng/odyssey-design-system/issues/662)) ([cf9095b](https://github.com/atko-eng/odyssey-design-system/commit/cf9095b9106804377297d1edadccb4bf393731d3))
+- expose search query to DataView cells ([#613](https://github.com/atko-eng/odyssey-design-system/issues/613)) ([00c2b57](https://github.com/atko-eng/odyssey-design-system/commit/00c2b578cd65cc5bfe04e2c1fdbe2743057893c7))
+- figma make setup, rename prototype skills ([#717](https://github.com/atko-eng/odyssey-design-system/issues/717)) ([eec046d](https://github.com/atko-eng/odyssey-design-system/commit/eec046d42aa04c170344023092c4b8d6415ed18c))
+- IGA dataview fixes and features ([#631](https://github.com/atko-eng/odyssey-design-system/issues/631)) ([7523549](https://github.com/atko-eng/odyssey-design-system/commit/75235497246271028d6b29c781a2662ba2fbeee1))
+- migrate MCP package to skills ([#653](https://github.com/atko-eng/odyssey-design-system/issues/653)) ([f773fb3](https://github.com/atko-eng/odyssey-design-system/commit/f773fb3eb2df7f1f0095d84063585df8b3a2de78))
+- Node 24 upgrade + dockerized claude sandbox (throwaway + persistent) ([#569](https://github.com/atko-eng/odyssey-design-system/issues/569)) ([26d88e3](https://github.com/atko-eng/odyssey-design-system/commit/26d88e3d9da9fd54adbc6a2db870ffe27d58dac3)), closes [#593](https://github.com/atko-eng/odyssey-design-system/issues/593) [#641](https://github.com/atko-eng/odyssey-design-system/issues/641) [#647](https://github.com/atko-eng/odyssey-design-system/issues/647) [#649](https://github.com/atko-eng/odyssey-design-system/issues/649) [#645](https://github.com/atko-eng/odyssey-design-system/issues/645) [#661](https://github.com/atko-eng/odyssey-design-system/issues/661)
+- Translations for odyssey-design-system:enduser ([#652](https://github.com/atko-eng/odyssey-design-system/issues/652)) ([54d837d](https://github.com/atko-eng/odyssey-design-system/commit/54d837d3c20ab74bdb5280bdf10688e3cafb77ee))
+- translations for odyssey-design-system:enduser ([#723](https://github.com/atko-eng/odyssey-design-system/issues/723)) ([2dfe63b](https://github.com/atko-eng/odyssey-design-system/commit/2dfe63b19bd1014c41d577ea3cb86ffdcb5927ce))
+
 ## [1.66.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.0...v1.66.0) (2026-08-05)
 
 ### Features

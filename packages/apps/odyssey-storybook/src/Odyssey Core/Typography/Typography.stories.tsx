@@ -31,6 +31,10 @@ import {
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { createElement } from "react";
 
+import {
+  staticBoardParameters,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const variantMapping = {
@@ -202,8 +206,7 @@ const storybookMeta: Meta<typeof Typography> = {
 
 export default storybookMeta;
 
-export const TypographyStory: StoryObj<typeof Typography> = {
-  name: "Generic Typography",
+export const Playground: StoryObj<typeof Typography> = {
   args: {
     children: "This is standard text.",
     variant: "body",
@@ -217,103 +220,26 @@ export const TypographyStory: StoryObj<typeof Typography> = {
   },
 };
 
-export const Heading1Story: StoryObj<typeof Typography> = {
-  name: "Heading 1",
-  args: {
-    children: "Heading 1",
-    variant: "h1",
+export const AllVariants: StoryObj<typeof Typography> = {
+  name: "All variants",
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every typography variant.">
+        <Heading1>Heading 1</Heading1>
+        <Heading2>Heading 2</Heading2>
+        <Heading3>Heading 3</Heading3>
+        <Heading4>Heading 4</Heading4>
+        <Heading5>Heading 5</Heading5>
+        <Heading6>Heading 6</Heading6>
+        <Paragraph>Paragraph</Paragraph>
+        <Legend>This is a legend.</Legend>
+        <Overline>This is an overline.</Overline>
+        <Subordinate>This is subordinate text.</Subordinate>
+        <Support>This is support text.</Support>
+      </StorySection>
+    );
   },
-  render: (args) => <Heading1 {...args} />,
-};
-
-export const Heading2Story: StoryObj<typeof Typography> = {
-  name: "Heading 2",
-  args: {
-    children: "Heading 2",
-    variant: "h2",
-  },
-  render: (args) => <Heading2 {...args} />,
-};
-
-export const Heading3Story: StoryObj<typeof Typography> = {
-  name: "Heading 3",
-  args: {
-    children: "Heading 3",
-    variant: "h3",
-  },
-  render: (args) => <Heading3 {...args} />,
-};
-
-export const Heading4Story: StoryObj<typeof Typography> = {
-  name: "Heading 4",
-  args: {
-    children: "Heading 4",
-    variant: "h4",
-  },
-  render: (args) => <Heading4 {...args} />,
-};
-
-export const Heading5Story: StoryObj<typeof Typography> = {
-  name: "Heading 5",
-  args: {
-    children: "Heading 5",
-    variant: "h5",
-  },
-  render: (args) => <Heading5 {...args} />,
-};
-
-export const Heading6Story: StoryObj<typeof Typography> = {
-  name: "Heading 6",
-  args: {
-    children: "Heading 6",
-    variant: "h6",
-  },
-  render: (args) => <Heading6 {...args} />,
-};
-
-export const BodyStory: StoryObj<typeof Typography> = {
-  name: "Paragraph",
-  args: {
-    children: "This is body copy.",
-    variant: "body",
-  },
-  render: (args) => <Paragraph {...args} />,
-};
-
-export const LegendStory: StoryObj<typeof Typography> = {
-  name: "Legend",
-  args: {
-    children: "This is a legend",
-    variant: "legend",
-  },
-  render: (args) => <Legend {...args} />,
-};
-
-export const OverlineStory: StoryObj<typeof Typography> = {
-  name: "Overline",
-  args: {
-    children: "This is an Overline",
-    variant: "overline",
-  },
-  render: (args) => <Overline {...args} />,
-};
-
-export const SubordinateStory: StoryObj<typeof Typography> = {
-  name: "Subordinate",
-  args: {
-    children: "This is subordinate text.",
-    variant: "subordinate",
-  },
-  render: (args) => <Subordinate {...args} />,
-};
-
-export const SupportStory: StoryObj<typeof Typography> = {
-  name: "Support",
-  args: {
-    children: "This is support text.",
-    variant: "support",
-  },
-  render: (args) => <Support {...args} />,
 };
 
 export const ColorStory: StoryObj<typeof Typography> = {

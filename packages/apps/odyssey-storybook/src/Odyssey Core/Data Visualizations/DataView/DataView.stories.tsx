@@ -26,6 +26,7 @@ import {
   availableLayouts,
   CardLayoutProps,
   DataCardProps,
+  DataColumns,
   DataGetDataType,
   DataOnReorderRowsType,
   DataRowSelectionState,
@@ -1161,6 +1162,44 @@ export const PaginationHook: Story = {
         getData={getData}
         hasPagination
         onPaginationChange={onPaginationChange}
+        tableLayoutOptions={tableLayoutOptions}
+      />
+    );
+  },
+};
+
+export const ShowSearchQueryInCell: Story = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
+      () => ({
+        columns: personColumns.map<DataColumns<Person>[number]>((column) =>
+          column.accessorKey === "name"
+            ? {
+                ...column,
+                Cell: ({ cell, table }) => {
+                  const name = cell.getValue<string>();
+                  const searchQuery = String(
+                    table.getState().globalFilter ?? "",
+                  );
+
+                  return searchQuery ? `${name} (Query: ${searchQuery})` : name;
+                },
+              }
+            : column,
+        ),
+      }),
+      [],
+    );
+
+    return (
+      <DataView
+        availableLayouts={tableLayoutOnly}
+        getData={getData}
+        hasSearch
+        searchFieldLabel="Search names to see the query appended"
         tableLayoutOptions={tableLayoutOptions}
       />
     );

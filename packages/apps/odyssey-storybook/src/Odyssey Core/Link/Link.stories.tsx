@@ -15,6 +15,12 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Link, linkVariantValues } from "@okta/odyssey-react-mui";
 import { InformationCircleFilledIcon } from "@okta/odyssey-react-mui/icons";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryRow,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import icons from "../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -173,32 +179,49 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Playground: Story = {};
 
-export const Monochrome: Story = {
-  args: {
-    variant: "monochrome",
-  },
-};
-
-export const WithIcon: Story = {
-  args: {
-    icon: <InformationCircleFilledIcon />,
-  },
-};
-
-export const External: Story = {
+export const AllVariants: Story = {
   parameters: {
+    ...staticBoardParameters,
     docs: {
       description: {
         story:
-          'When navigating to an external domain, combine `target="_blank"`, `rel="noopener"`, and an accessible label to clarify the behavior.',
+          'Static showcase. The Playground story is the interactive one where controls apply. When navigating to an external domain, combine `target="_blank"`, `rel="noopener"`, and an accessible label to clarify the behavior.',
       },
     },
   },
-  args: {
-    rel: "noopener",
-    target: "_blank",
-    ariaLabel: "External Link",
+  render: function C() {
+    return (
+      <StorySection title="Every link variant, plus the leading-icon and external-link content variations.">
+        <StoryRow>
+          {linkVariantValues.map((variant) => (
+            <StoryCell key={variant} label={variant}>
+              <Link href="#anchor" variant={variant}>
+                Link text
+              </Link>
+            </StoryCell>
+          ))}
+
+          <StoryCell label="with icon">
+            <Link href="#anchor" icon={<InformationCircleFilledIcon />}>
+              Link text
+            </Link>
+          </StoryCell>
+
+          {/* target="_blank" appends the external-link icon. */}
+          <StoryCell label='target="_blank"'>
+            <Link
+              ariaLabel="External Link"
+              href="#anchor"
+              rel="noopener"
+              target="_blank"
+            >
+              Link text
+            </Link>
+          </StoryCell>
+        </StoryRow>
+      </StorySection>
+    );
   },
 };

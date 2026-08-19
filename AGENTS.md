@@ -182,6 +182,9 @@ Each links to the decision record that explains why and what was rejected.
 - Project-shared config belongs in the repo's checked-in settings, not the user's local-global settings. See [decision record](docs/decisions/2026-06-23-shared-config-in-repo-not-local-global.md).
 - Keep a PR's diff scoped to the files the task requires; do not sweep in unrelated packages, components, or stories.
 - Do not reference internal product details (internal system codenames, architecture) in committed content — this repo syncs to a public mirror. See [decision record](docs/decisions/2026-06-12-no-internal-product-details-public-mirror.md).
+- Never make a build a side effect of `yarn install`. The root `postinstall` only installs husky's git hooks and bootstraps `@okta/odyssey-contributions-promotion-check`; the blanket `yarn build` lives in `scripts/setup.sh`, and anything else that needs a built tree runs `yarn build` itself. See [decision record](docs/decisions/2026-08-10-build-in-setup-not-postinstall.md).
+- Install husky from `postinstall`, not `prepare`. Yarn 4 never runs a root `prepare` script, so the recipe in husky's own docs silently installs nothing and leaves every clone with no pre-commit hook. See [decision record](docs/decisions/2026-08-18-husky-hooks-via-postinstall-not-prepare.md).
+- Do not set `changelogPreset` in `lerna.json`. Lerna uses the changelog preset that ships in its own dependency tree, so upgrading Lerna upgrades the preset with it. A separately versioned preset, custom or third-party, has to move in lockstep with Lerna majors, and nothing in CI catches the drift because no test generates a changelog. See [decision record](docs/decisions/2026-08-19-lerna-builtin-changelog-preset.md).
 
 ---
 
@@ -191,6 +194,31 @@ Each links to the decision record that explains why and what was rejected.
 
 - Most feature code lives in `packages/*`.
 - Storybook app: `packages/apps/odyssey-storybook`.
+
+### Reference fixtures are not style exemplars
+
+`packages/apps/extractor-fixture/**` is a deliberately non-Odyssey, plain-MUI
+React app. It exists only as a migration _source_: a realistic "legacy" target
+the `@okta/extractor` pipeline is calibrated against, and the "before" that
+Blueprint reproduces with Odyssey components. Its patterns (plain MUI, the `sx`
+prop, a home-rolled auth context and fetch client, no react-query) are
+intentional and are not how Odyssey UI should be written.
+
+Two rules follow, and they point in opposite directions:
+
+- **Do not copy its patterns out.** When writing or generating any
+  Odyssey-owned code, never reuse a pattern because you found it in
+  `extractor-fixture/`. Follow the handbook and the styling and component rules
+  above (Odyssey components, `createOdysseyStyledComponent`, design tokens)
+  regardless of what grep surfaces there.
+- **Do not "align" it in.** Do not convert this package to Odyssey conventions
+  as drive-by cleanup or to satisfy a lint rule. Its non-Odyssey shape is the
+  point, and changing it also churns the extractor's golden snapshot.
+
+This does not fence off the package: when a task explicitly targets
+`extractor-fixture` (for example, fixing its own behavior), edit it normally.
+The Odyssey and Backbone re-implementations of this app are tracked as separate
+work and live as their own packages, not as edits that "upgrade" this one.
 
 ### MUI Theme Component Overrides
 
@@ -284,41 +312,15 @@ These apply only when working in `packages/contributions/odyssey-blueprint`. Blu
 
 This gate applies **only** when the branch you are pushing will open (or has open) a PR with `master` as its base. For worker branches and other intermediate feature branches, the project's separate worker/branch instructions apply — do not run this gate there.
 
-**Do not run `yarn lint`, `yarn typecheck`, or `yarn test` repo-wide.** In a worktree with symlinked `node_modules`, these commands resolve packages against the main checkout's compiled artifacts from a different HEAD and generate thousands of false errors. The `lint-staged` pre-commit hook already ran prettier and eslint on every staged `*.{ts,tsx,js,jsx}` file at commit time.
+**Do not run `yarn lint`, `yarn typecheck`, or `yarn test` repo-wide.** The worktree has a real per-package install, so cross-package resolution is correct, but typechecking and testing every package on every push wastes minutes for no benefit. The `lint-staged` pre-commit hook already ran prettier on every staged file (its glob is `*`, so markdown and JSON are covered too) and eslint on every staged `*.{ts,tsx,js,jsx}` file at commit time. That hook only runs if husky is installed, which the root `postinstall` handles; if `git config --get core.hooksPath` prints nothing, the hook is silently doing nothing and you need `yarn install` (or `yarn husky`) before trusting it.
 
-Instead, run typecheck and test only for the packages that contain changed TypeScript files:
+Instead, run typecheck and test only for the packages affected by your changes:
 
 ```sh
-# Refresh origin/master when online; no-op offline so the gate still runs air-gapped.
-# The three-dot diff is immune to a stale ref (it diffs from the merge base, not
-# master's tip), so this only matters for a fresh clone that lacks the ref entirely.
-git fetch -q origin master 2>/dev/null || true
-
-# Find packages with changed .ts/.tsx files since master
-CHANGED_TS_PKGS=$(git diff origin/master...HEAD --name-only \
-  | grep -E '\.(ts|tsx)$' \
-  | grep '^packages/' \
-  | sed 's|^\(packages/[^/]*/[^/]*\)/.*|\1|' \
-  | sort -u)
-
-if [ -z "$CHANGED_TS_PKGS" ]; then
-  echo "No TypeScript files changed — typecheck and test skipped."
-else
-  for PKG_DIR in $CHANGED_TS_PKGS; do
-    PKG_NAME=$(node -p "require('./$PKG_DIR/package.json').name" 2>/dev/null) || continue
-    HAS_TYPECHECK=$(node -p "require('./$PKG_DIR/package.json').scripts?.typecheck ? 'yes' : 'no'" 2>/dev/null)
-    if [ "$HAS_TYPECHECK" = "yes" ]; then
-      yarn workspace "$PKG_NAME" typecheck || exit 1
-    fi
-    HAS_TEST=$(node -p "require('./$PKG_DIR/package.json').scripts?.test ? 'yes' : 'no'" 2>/dev/null)
-    if [ "$HAS_TEST" = "yes" ]; then
-      yarn workspace "$PKG_NAME" test || exit 1
-    fi
-  done
-fi
+bash scripts/pre-push-gate.sh
 ```
 
-If typecheck or test fails for a changed package, stop and surface the failure — do not push.
+The script uses `nx affected` to detect which packages your changes touch and runs their `typecheck` and `test` targets. If typecheck or test fails for an affected package, stop and surface the failure — do not push.
 
 ### Monorepo
 
@@ -352,101 +354,7 @@ rationale, runbooks, or package documentation here; link to the owning document.
 
 ### JSDoc for Components (`odyssey-react-mui`)
 
-Component source files are the single source of truth for documentation. The MCP generation script (`packages/platform/odyssey-mcp/scripts/generateMetadata.ts`) and any future Storybook integration both read JSDoc from these files. **When a component or prop changes, its JSDoc must be updated in the same commit.**
-
-#### Component-level description
-
-Place a JSDoc block immediately above the `const ComponentName = ...` function declaration — **not** above the Props type, not above the memoized re-export, not above the `export { }` statement.
-
-```tsx
-/**
- * Displays a small numeric count alongside an element. Typically used in
- * navigation to indicate unread messages, pending tasks, or notifications.
- */
-const Badge = ({ badgeContent, type = "default" }: BadgeProps) => {
-  // ...
-};
-
-const MemoizedBadge = memo(Badge);
-MemoizedBadge.displayName = "Badge";
-
-export { MemoizedBadge as Badge };
-```
-
-The generation script resolves the component by calling `getVariableDeclaration(componentName)` on the source file. For the export `{ MemoizedBadge as Badge }`, it looks for `const Badge = ...`. JSDoc on any other declaration is not picked up.
-
-#### Prop-level descriptions
-
-Add a JSDoc block above each property in the `type ComponentNameProps` or `interface ComponentNameProps` declaration:
-
-```tsx
-export type BadgeProps = {
-  /** The numeric count to display. A value of 0 or less renders nothing. */
-  badgeContent: number;
-  /**
-   * The maximum count before showing an overflow indicator (e.g. `100+`).
-   * @default 100
-   */
-  badgeContentMax?: (typeof badgeContentMaxValues)[number];
-  /**
-   * The visual style of the badge, controlling background color.
-   * @default "default"
-   */
-  type?: (typeof badgeTypeValues)[number];
-};
-```
-
-#### `@default` tag
-
-Add `@default <value>` to any prop that has a default in the destructuring signature (e.g. `type = "default"`, `badgeContentMax = 100`). The value should match exactly what is written in the destructuring.
-
-#### `@deprecated` tag
-
-Add `@deprecated <reason>` to props or components that are deprecated. This propagates to the generated metadata and is exposed via MCP.
-
-#### `@see` tag
-
-Use `@see <url>` to link to external specifications or standards when the prop behavior is non-obvious (e.g., HTML `autocomplete` attribute values).
-
-#### Boolean prop descriptions
-
-Lead with **`If \`true\``**, state the consequence, end with a period. Never use "Whether X" — it is passive and less useful for agentic consumers.
-
-```tsx
-/** If `true`, the item is disabled and cannot be interacted with. */
-isDisabled?: boolean;
-
-/** If `true`, the input receives focus automatically on mount. */
-hasInitialFocus?: boolean;
-```
-
-#### Enum prop descriptions
-
-**Behavioral variants** (each value produces meaningfully different behavior): write a lead sentence naming what the prop controls, then a per-value bullet list using the `If 'value', consequence.` form.
-
-```tsx
-/**
- * Controls how the Drawer positions relative to page content.
- * - If `'temporary'`, overlays content and dismisses on backdrop click.
- * - If `'persistent'`, pushes the page layout and stays open.
- * @default "temporary"
- */
-variant?: "temporary" | "persistent";
-```
-
-**Scale / self-describing values** (size, spacing, severity, numeric ranges — values whose meaning is obvious from the name): a single descriptive sentence is sufficient; per-value bullets add no information.
-
-```tsx
-/**
- * The size of the button.
- * @default "medium"
- */
-size?: "small" | "medium" | "large";
-```
-
-#### Line length in JSDoc
-
-Wrap JSDoc prose at 80 characters. The `*` prefix counts toward the limit.
+Component source files are the single source of truth for documentation, and JSDoc must be updated in the same commit as any component or prop change. See [odyssey-react-mui AGENTS.md](packages/core/odyssey-react-mui/AGENTS.md) for the full conventions (component/prop placement, `@default`/`@deprecated`/`@see` tags, boolean/enum prop phrasing, line-wrap rule). Only load that file when editing component source in that package.
 
 ### Architectural Decision Records (`docs/decisions/`)
 
@@ -457,40 +365,11 @@ Wrap JSDoc prose at 80 characters. The `*` prefix counts toward the limit.
 - **Never delete or rewrite** a past record. To reverse a decision, supersede it: set the old record's Status to `Superseded by [...]`, add a `> [!WARNING]` callout at its top linking forward, and add a `Supersedes:` line to the new record. This preserves the backflow trail.
 - **A rule in AGENTS.md and its decision record are complementary**: AGENTS.md states the rule tersely; the decision record explains why and what was rejected. When you add a load-bearing rule here, add its decision record too.
 
-### Storybook Stories
+### Storybook Stories & VRT
 
-- **No top-level one-time-use variables.** Storybook's Code tab only shows what is inside the story's `render` function and `args`. Any value extracted to a top-level variable (outside the story object) disappears from the Code tab and is invisible to readers. If a value is used by only one story, define it inline: either as a story `arg` (for data) or inline inside the `render` function body (for functions/loaders that can't be expressed as args). A shared helper is only appropriate when it is genuinely reused by multiple stories.
-- Always prefer Odyssey components from `@okta/odyssey-react-mui` over raw HTML elements in stories. Use `Button` not `<button>`, `Link` not `<a>`, `Heading1`–`Heading6` or `Paragraph` not `<h1>`–`<h6>`/`<p>`, `SearchField`/`TextField` not `<input>`, `Surface` or `Box` not unstyled `<div>` wrappers.
-- Stories live in `packages/apps/odyssey-storybook/src/`. Use the `OdysseyStorybookThemeDecorator` decorator for all UI Shell and component stories to get the correct Odyssey theme and provider context.
-- When a story needs a custom `render` function, always name it `function C()` — this is the established pattern across all Odyssey stories:
+See [docs/agents/storybook-and-vrt.md](docs/agents/storybook-and-vrt.md) for story-writing conventions (no top-level one-time-use variables, prefer Odyssey components, `render: function C()`). Only load that file when writing or editing Storybook stories.
 
-  ```tsx
-  export const MyStory: Story = {
-    render: function C() {
-      // hooks and JSX here
-    },
-  };
-  ```
-
-### Storybook Visual Regression Testing (VRT)
-
-- Stories must render directly in the visual state Applitools should capture. Use
-  args or dedicated stories for open menus, dialogs, drawers, toasts, tooltips,
-  calendars, and other transient states.
-- Interaction behavior belongs in browser tests. Do not add a Storybook `play`
-  function solely to expose a state that can be represented through args or direct
-  rendering.
-- Use a `play` function only when the interaction itself is the visual behavior
-  under review and the state cannot reasonably be rendered directly. Keep that
-  exceptional interaction minimal and deterministic.
-- For an overlay whose open state is a boolean prop or arg (Dialog, Drawer, Toast,
-  Accordion), render it open by default and drop the trigger-only `play`. Pair each
-  converted backdrop overlay with a manual `Component.mdx` docs page so the open
-  backdrop does not render inline on the Docs page. See
-  [decision record](docs/decisions/2026-07-28-open-by-default-overlays-in-stories.md).
-
-Full authoring guidance (when a `play` is still required, MDX pairing, examples)
-lives in [docs/handbook/testing/visual-regression-testing.md](docs/handbook/testing/visual-regression-testing.md).
+For VRT, render the visual state Applitools should capture directly; interaction behavior belongs in browser tests. Overlays with a boolean open prop (Dialog, Drawer, Toast, Accordion) render open by default, paired with a manual `Component.mdx` docs page (see [decision record](docs/decisions/2026-07-28-open-by-default-overlays-in-stories.md)). Seed date and time args with a fixed past date and no UTC offset (`"2024-07-15T14:30:00"`, not `"2024-07-15T14:30:00.000Z"`) so neither the runner's clock nor its time zone shifts the capture (see [decision record](docs/decisions/2026-08-18-fixed-past-offsetless-dates-in-stories.md)). Full VRT authoring guidance lives in [docs/handbook/testing/visual-regression-testing.md](docs/handbook/testing/visual-regression-testing.md).
 
 ---
 
@@ -519,34 +398,6 @@ lives in [docs/handbook/testing/visual-regression-testing.md](docs/handbook/test
 - No module mocks (`vi.mock`). Design functions with dependency injection (see Coding Standards above) and pass lightweight inline fakes in tests instead.
 - Tests must be pure and side-effect-free. Never collect call args via `.push()` or other mutation — express the same assertion through the function's return value instead (e.g. resolve only when the expected args are received, reject otherwise).
 - Always assert the **exact** result. Never use partial matchers (`expect.stringContaining`, `expect.objectContaining`, `expect.arrayContaining`) — they hide fields and let regressions through silently. Assert the full object, the full string, the full array.
-
-### Browser tests in odyssey-react-mui
-
-Use `renderWithOdysseyProvider` from `./test-utils/renderWithOdysseyProvider.js` as the default render wrapper — it provides an `OdysseyProvider` context and disables MUI transitions for deterministic tests. Using `render` directly with `OdysseyProvider` is acceptable when `renderWithOdysseyProvider` is not a good fit, but this should be the exception.
-
-All browser tests must include `toBeAccessible` assertions to catch accessibility regressions. The matcher is registered in `vitest-browser-setup.ts` and runs axe-core under the hood.
-
-- **When to assert**: on initial render AND after each meaningful state change (open menu, selected option, focused input, expanded accordion, visible tooltip).
-- **`disabledRules`**: pass rule IDs for known false positives or known issues that need to be fixed later (e.g., `"color-contrast"` for overlay components like Toast, Dialog, DatePicker calendar). Always add a comment above explaining what the issue is and whether it's a false positive or a known issue to fix.
-- **Scoping**: pass a specific DOM element to scope the check to a region (e.g., an open dialog). Use `expect.element(locator)` for vitest locators.
-- **Portal-rendered components**: MUI components that portal to `document.body` (Dialog, Drawer, Toast, Menu, Autocomplete listbox, DatePicker calendar) render **outside** the `container` returned by `renderWithOdysseyProvider`. Using `expect(container).toBeAccessible()` on these will silently scan an empty wrapper and never find violations. Always scope to the actual rendered element: `expect.element(page.getByRole("dialog"))`, `expect.element(page.getByRole("menu"))`, etc.
-
-  ```tsx
-  test("menu opened via keyboard", async () => {
-    const { container } = await renderWithOdysseyProvider(<MyComponent />);
-    // Axe on initial render
-    await expect(container).toBeAccessible();
-    // Open the menu
-    const trigger = page.getByRole("button", { name: "Options" });
-    await userEvent.keyboard("{Enter}");
-    // Axe scoped to the open menu — color-contrast disabled for overlay backdrop
-    const menu = page.getByRole("menu");
-    // TODO: fix — overlay has insufficient color contrast
-    await expect
-      .element(menu)
-      .toBeAccessible({ disabledRules: ["button-name"] });
-  });
-  ```
 
 ---
 
@@ -604,7 +455,11 @@ If you need a package in these paths to be published and the change doesn't natu
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full PR process (Jira ticket requirement, Bacon CI, Slack notification, and merge steps).
 
-**Base branch:** always target the branch you forked from, not `master`. Worker branches are created off the current feature branch (e.g. `kg_json-schema-claude_OKTA-1173898`), so the PR must target that same branch. Pass `--base <parent-branch>` explicitly when creating PRs with `gh pr create` — do not rely on the default.
+**Base branch:** every PR targets `master`. Pass `--base master` explicitly when creating PRs with `gh pr create` rather than relying on the default.
+
+**Stacked PRs are not supported.** Bacon cannot merge a PR whose base is another open PR's branch, because the sync endpoint Bacon calls to request the merge has no GitHub API support for it. A stacked PR will run CI and then be unmergeable, so do not open one. Split the work into changes that each stand on their own against `master`, and land them in sequence. If a later change genuinely depends on an earlier one, wait for the earlier PR to merge to `master`, rebase, then open the next PR. See [decision record](docs/decisions/2026-08-14-no-stacked-prs-bacon-cannot-merge.md).
+
+**Before and after screenshots.** Every PR that changes rendered output carries before and after screenshots in its description, and the "before" has to be captured before any source is edited. GitHub has no API for uploading PR attachments, so commit the images to the `odyssey-pr-assets` side branch via the contents API and embed them with a commit-SHA-pinned `https://github.com/<owner>/<repo>/blob/<sha>/...?raw=true` URL. GitHub serves same-origin `github.com` URLs directly instead of through its unauthenticated image proxy, which is what makes them render in a private repo. Follow [docs/runbooks/pr-review-screenshots.md](docs/runbooks/pr-review-screenshots.md); the [decision record](docs/decisions/2026-08-17-pr-screenshots-via-assets-branch.md) lists the alternatives that do not work, including `raw.githubusercontent.com`, release assets, and public gists.
 
 ### AI-authored PR and issue comments
 
@@ -619,41 +474,9 @@ This applies to all outward-facing comment bodies the agent authors; it does not
 
 ### Worktree setup for workers
 
-See [Worker Task Workflow](#12-worker-task-workflow) for end-to-end worker process rules (commit/push/PR cadence, working directory hygiene, naming patterns).
+See [Worker Task Workflow](#11-worker-task-workflow) for end-to-end worker process rules (commit/push/PR cadence, working directory hygiene, naming patterns).
 
-Workers run in git worktrees under `.claude/worktrees/<branch>/`. Yarn's `node_modules` is installed only in the repo root, not in the worktree, so the pre-commit hook (`yarn lint-staged`) and any `yarn workspace` commands fail out of the box.
-
-**`node_modules` is symlinked automatically** by the `WorktreeCreate` hook in `.claude/settings.json` — no manual step needed.
-
-**If the task requires updating package versions**, remove the symlink and run a real install instead so the lockfile stays consistent:
-
-```sh
-rm .claude/worktrees/<branch>/node_modules
-yarn install --mode=update-lockfile  # updates yarn.lock only, leaves main node_modules untouched
-# or for a full install inside the worktree:
-yarn install
-```
-
-Commit the updated `yarn.lock` alongside the `package.json` change.
-
-If the storybook stories import from `@okta/odyssey-blueprint` (newly added exports that haven't shipped in the dist yet), add local overrides so ESLint resolves the worktree's built package instead of the stale dist:
-
-```sh
-# Storybook blueprint override
-mkdir -p .claude/worktrees/<branch>/packages/apps/odyssey-storybook/node_modules/@okta
-ln -sfn /path/to/repo/.claude/worktrees/<branch>/packages/contributions/odyssey-blueprint \
-  .claude/worktrees/<branch>/packages/apps/odyssey-storybook/node_modules/@okta/odyssey-blueprint
-mkdir -p .claude/worktrees/<branch>/packages/apps/odyssey-storybook/node_modules/@storybook
-ln -sfn /path/to/repo/packages/apps/odyssey-storybook/node_modules/@storybook \
-  .claude/worktrees/<branch>/packages/apps/odyssey-storybook/node_modules/@storybook
-
-# Build the package's JS and type declarations so ESLint resolves the new types
-cd .claude/worktrees/<branch>/packages/contributions/odyssey-blueprint
-NODE_ENV=production /path/to/repo/node_modules/.bin/vite build
-/path/to/repo/node_modules/.bin/tsc --project tsconfig.production.project.json --noEmit false
-```
-
-These symlinks are NOT committed (they live only in the working tree). Worktree tests must be run from inside the package directory (`cd` into it first) so vitest picks up the package's own `vitest.config.ts` rather than the root config.
+Workers run in git worktrees under `.claude/worktrees/<branch>/`. The `WorktreeCreate` hook runs a real `yarn install` in the worktree automatically (reusing the main checkout's cache and running the build), so `@okta/*` resolve to the worktree's own packages and no manual linking is needed. See [docs/agents/worker-worktree-setup.md](docs/agents/worker-worktree-setup.md) for the lockfile-update step when a task bumps package versions. Only load that file when a worker task needs to install dependencies inside a worktree.
 
 ---
 
@@ -670,62 +493,21 @@ If your AI system supports includes, place a small file that points here, e.g.
 
 ---
 
-## 10. `odyssey-react-mui` Package — Browser Test Specifics
-
-This package is the only one currently running **vitest 4 browser mode** with the Playwright provider. It has a custom matcher registered in `vitest-browser-setup.ts` that covers a gap in the built-in assertion set.
-
-### `toBeAccessible`
-
-Use `await expect(element).toBeAccessible()` to assert that a DOM element passes axe-core accessibility checks. This is the required accessibility assertion for all browser tests.
-
-```ts
-// basic — assert initial render is accessible
-const { container } = await renderWithOdysseyProvider(<MyComponent />);
-await expect(container).toBeAccessible();
-
-// scoped to a specific region via a Locator — expect.element() resolves it first
-const dialog = page.getByRole("dialog");
-await expect.element(dialog).toBeAccessible();
-
-// disable known-broken rules (always add a comment explaining why)
-// TODO: fix — DatePicker calendar has insufficient color contrast
-await expect.element(dialog).toBeAccessible({ disabledRules: ["button-name"] });
-```
-
-`toBeAccessible` takes a DOM `Element`. Use `expect.element(locator)` when you have a vitest `Locator` — it pre-resolves the locator to an element before calling the matcher. Use `expect(container)` when you already have a DOM element (e.g. the `container` from `renderWithOdysseyProvider`). `expect.element()` is safe here because the element is always expected to exist.
-
-### Asserting hidden or absent state
-
-- Element removed from DOM (popover unmount, conditional render):
-  - `await expect.element(locator).not.toBeInTheDocument()` — async, with retry. Use to assert an element has been removed from the DOM. Pass the `Locator` directly.
-  - `await expect.poll(() => locator.query()).toBeNull()` — async with retry. Use when removal may be delayed (e.g. exit animations that keep the element in the DOM briefly before unmounting).
-- Element in DOM but not visible (MUI Collapse, CSS height:0, display:none): `await expect.element(locator).not.toBeVisible()`
-  - Playwright's `not.toBeVisible()` detects an empty bounding box (height:0, display:none) and `visibility:hidden`. It does **not** detect `opacity:0` — see the note below.
-  - `getByText` finds elements regardless of `aria-hidden`, so `expect.element(page.getByText("x")).not.toBeVisible()` works for MUI Collapse (height:0), even though the element has `aria-hidden="true"` set on a parent.
-  - For `getByRole` locators: `aria-hidden` prevents them from matching by default. Add `{ includeHidden: true }` so the locator can resolve: `page.getByRole("region", { includeHidden: true })`
-
-**Important — `opacity` does not count as "not visible":** An element is considered visible when it has a non-empty bounding box and does not have `visibility:hidden` computed style. Elements of zero size or with `display:none` are not considered visible. `opacity:0` has no impact on Playwright visibility — elements at `opacity:0` are still announced by screen readers and other assistive technologies, so they are correctly treated as visible. If a component hides content using only `opacity:0`, assert the CSS directly (`toHaveStyle("opacity: 0")`) and add a `// TODO` comment noting that the component should use `visibility:hidden` or remove content from the DOM instead, so assistive technologies do not announce hidden content.
-
-### Import note
-
-Use `"vitest/browser"` for all vitest browser imports — `Locator`, `utils`, `page`, `userEvent`, etc. The older `"@vitest/browser/context"` package is deprecated and will stop working in the next major version.
-
----
-
-## 11. Package-Specific Instructions
+## 10. Package-Specific Instructions
 
 Some packages have their own agent instruction files that extend or override these
 repo-wide rules. Only load a package-specific file when you are working in that package.
 
-| Package                                    | Instructions                                                    | When to use                                                                  |
-| ------------------------------------------ | --------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `packages/apps/odyssey-prototype`          | [AGENTS.md](packages/apps/odyssey-prototype/AGENTS.md)          | Only when modifying files inside `packages/apps/odyssey-prototype/`          |
-| `packages/apps/odyssey-ui-builder`         | [AGENTS.md](packages/apps/odyssey-ui-builder/AGENTS.md)         | Only when modifying files inside `packages/apps/odyssey-ui-builder/`         |
-| `packages/contributions/odyssey-blueprint` | [AGENTS.md](packages/contributions/odyssey-blueprint/AGENTS.md) | Only when modifying files inside `packages/contributions/odyssey-blueprint/` |
+| Package                                    | Instructions                                                    | When to use                                                                          |
+| ------------------------------------------ | --------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `packages/apps/odyssey-prototype`          | [AGENTS.md](packages/apps/odyssey-prototype/AGENTS.md)          | Only when modifying files inside `packages/apps/odyssey-prototype/`                  |
+| `packages/apps/odyssey-ui-builder`         | [AGENTS.md](packages/apps/odyssey-ui-builder/AGENTS.md)         | Only when modifying files inside `packages/apps/odyssey-ui-builder/`                 |
+| `packages/contributions/odyssey-blueprint` | [AGENTS.md](packages/contributions/odyssey-blueprint/AGENTS.md) | Only when modifying files inside `packages/contributions/odyssey-blueprint/`         |
+| `packages/core/odyssey-react-mui`          | [AGENTS.md](packages/core/odyssey-react-mui/AGENTS.md)          | Only when modifying JSDoc or browser tests inside `packages/core/odyssey-react-mui/` |
 
 ---
 
-## 12. Worker Task Workflow
+## 11. Worker Task Workflow
 
 Rules for worker tasks (work delegated to a Claude worker running in a worktree). See also [Worktree setup for workers](#worktree-setup-for-workers) for environment setup.
 
@@ -733,10 +515,11 @@ Rules for worker tasks (work delegated to a Claude worker running in a worktree)
 - Always run git commands from the correct worktree path; verify `pwd` before committing or editing `MANIFEST.md`. Do not edit the main checkout from a worker — the user runs Storybook from it.
 - Use the established post-rename clean-name pattern (not legacy `*Node` sections) when adding new components.
 - Reference Worker Task Workflow from any worker-doc-related instruction or skill that delegates work to a worktree.
+- Worker PRs target `master` like every other PR. Do not base a worker PR on another open PR's branch; see [Pull Requests](#pull-requests) for why Bacon cannot merge a stacked PR.
 
 ---
 
-## 13. Debugging
+## 12. Debugging
 
 ### Before Investigating UI Bugs
 
@@ -748,7 +531,7 @@ When a UI bug is reported, launch the browser/Storybook FIRST on a port that you
 
 ---
 
-## 14. When in Doubt
+## 13. When in Doubt
 
 - Prefer small, safe changes.
 - Ask for clarification only when blocking.

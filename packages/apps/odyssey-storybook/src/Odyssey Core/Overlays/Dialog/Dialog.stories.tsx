@@ -132,6 +132,7 @@ const DefaultTemplate: StoryObj<DialogProps> = {
       args,
       context,
       argKey: "isOpen",
+      defaultStoryName: "Default",
       defaultValue: args.isOpen ?? false,
     });
 

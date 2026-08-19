@@ -519,6 +519,7 @@ const DataView = <TData extends MRT_RowData>({
           pagination={pagination}
           rowReorderingUtilities={rowReorderingUtilities}
           rowSelection={rowSelection}
+          search={search}
           setRowSelection={setRowSelection}
           setTableState={setTableState}
           tableLayoutOptions={tableLayoutOptions}

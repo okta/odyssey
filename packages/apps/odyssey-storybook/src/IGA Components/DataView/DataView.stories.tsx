@@ -21,6 +21,7 @@ import {
   Box,
   Button,
   DataTableRowData,
+  Dialog,
   EmptyState,
   MenuItem,
   paginationTypeValues,
@@ -31,6 +32,7 @@ import {
   availableLayouts,
   CardLayoutProps,
   DataCardProps,
+  type DataFilter,
   DataGetDataType,
   DataOnReorderRowsType,
   DataRowSelectionState,
@@ -126,6 +128,9 @@ const meta = {
       },
     },
     hasRowSelection: {
+      control: "boolean",
+    },
+    hasBulkActionsMenu: {
       control: "boolean",
     },
     onChangeRowSelection: {},
@@ -355,6 +360,7 @@ const meta = {
         enableVirtualization={args.enableVirtualization}
         errorMessage={args.errorMessage}
         getData={getData}
+        hasBulkActionsMenu={args.hasBulkActionsMenu}
         hasFilters={args.hasFilters}
         hasPagination={args.hasPagination}
         hasRowReordering={args.hasRowReordering}
@@ -380,8 +386,9 @@ const meta = {
         searchDelayTime={args.searchDelayTime}
         searchFieldLabel={args.searchFieldLabel}
         tableLayoutOptions={{
-          columns: personColumns,
+          columns: args.columns ?? personColumns,
           getCustomRowStyles: args.getCustomRowStyles,
+          getRowHeight: args.getRowHeight,
           hasSorting: args.hasSorting,
           rowActionMenuItems: args.hasActionMenuItems
             ? actionMenuItems
@@ -554,6 +561,23 @@ export const GridOnly: Story = {
 
 export const Everything: Story = {
   args: {
+    // The "Access justification" column keeps `hasTextWrapping: false`, so its
+    // long text stays on a single line and truncates with an ellipsis even
+    // though `getRowHeight` returns "auto" — auto row height and single-line
+    // truncation are independent.
+    getRowHeight: () => "auto" as const,
+    columns: [
+      ...personColumns,
+      {
+        accessorFn: (row: Person) =>
+          row.name === personData[0].name
+            ? `${row.name} in ${row.city}, ${row.state} requested elevated access for the quarterly audit review and is currently flagged as ${row.risk} risk pending manager approval.`
+            : "Standard access",
+        id: "justification",
+        header: "Access justification",
+        hasTextWrapping: false,
+      },
+    ],
     hasRowReordering: true,
     hasPagination: true,
     hasFilters: true,
@@ -845,6 +869,74 @@ export const CustomFilters: Story = {
         onReorderRows={onReorderRows}
         tableLayoutOptions={tableLayoutOptions}
       />
+    );
+  },
+};
+
+export const ExternalFilterDialog: Story = {
+  args: {
+    hasFilters: true,
+    hasPagination: false,
+    hasSearch: true,
+  },
+  render: function C(props) {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData, onReorderRows } = useDataCallbacks(data, setData);
+
+    const [isFilterDialogOpen, setIsFilterDialogOpen] = useState(false);
+    const [selectedFilters, setSelectedFilters] = useState<DataFilter[]>([]);
+
+    const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
+      () => ({ columns: personColumns }),
+      [],
+    );
+
+    return (
+      <>
+        <DataView
+          {...props}
+          getData={getData}
+          onClickFilterButton={() => setIsFilterDialogOpen(true)}
+          onRemoveFilter={({ filterId }) =>
+            setSelectedFilters((previousFilters) =>
+              previousFilters.filter((filter) => filter.id !== filterId),
+            )
+          }
+          onReorderRows={onReorderRows}
+          selectedFilters={selectedFilters}
+          tableLayoutOptions={tableLayoutOptions}
+        />
+        <Dialog
+          isOpen={isFilterDialogOpen}
+          onClose={() => setIsFilterDialogOpen(false)}
+          title="Filter people"
+        >
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <Button
+              isFullWidth
+              label="Names starting with A"
+              onClick={() => {
+                setSelectedFilters([
+                  { id: "name", label: "Name starts with", value: "A" },
+                ]);
+                setIsFilterDialogOpen(false);
+              }}
+              variant="secondary"
+            />
+            <Button
+              isFullWidth
+              label="Names starting with B"
+              onClick={() => {
+                setSelectedFilters([
+                  { id: "name", label: "Name starts with", value: "B" },
+                ]);
+                setIsFilterDialogOpen(false);
+              }}
+              variant="secondary"
+            />
+          </Box>
+        </Dialog>
+      </>
     );
   },
 };
@@ -1303,20 +1395,59 @@ export const GetCustomRowStyles: Story = {
 };
 
 export const ColumnPinning: Story = {
-  args: {
-    availableLayouts: tableLayoutOnly,
-    hasColumnPinning: true,
-    pinnedLeftColumns: [personColumns[0].accessorKey as string],
-    pinnedRightColumns: [
-      personColumns[personColumns.length - 1].accessorKey as string,
-    ],
-  },
   parameters: {
     docs: {
       description: {
         story: "This story shows the DataView with column pinning enabled.",
       },
     },
+  },
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    const rowActionButtons = useCallback(
+      () => (
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <Button
+            label="Open"
+            onClick={onClick}
+            size="small"
+            variant="secondary"
+          />
+          <Button
+            label="Reassign"
+            onClick={onClick}
+            size="small"
+            variant="secondary"
+          />
+        </Box>
+      ),
+      [],
+    );
+
+    const tableLayoutOptions = useMemo<TableLayoutProps<Person>>(
+      () => ({
+        columns: personColumns,
+        hasColumnPinning: true,
+        hasColumnResizing: true,
+        rowActionButtons,
+        selectPinnedColumns: () => ({
+          left: ["mrt-row-select"],
+          right: ["mrt-row-actions"],
+        }),
+      }),
+      [rowActionButtons],
+    );
+
+    return (
+      <DataView
+        availableLayouts={tableLayoutOnly}
+        getData={getData}
+        hasRowSelection
+        tableLayoutOptions={tableLayoutOptions}
+      />
+    );
   },
 };
 

@@ -17,8 +17,14 @@ import {
   bannerSeverityValues,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
+import { action } from "storybook/actions";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const storybookMeta: Meta<BannerProps> = {
@@ -123,62 +129,59 @@ const storybookMeta: Meta<BannerProps> = {
 
 export default storybookMeta;
 
-export const Info: StoryObj<BannerProps> = {
+export const Playground: StoryObj<BannerProps> = {
   args: {
     severity: "info",
     text: "The mission to Sagittarius A is set for January 7.",
   },
 };
 
-export const Error: StoryObj<BannerProps> = {
-  args: {
-    role: "status",
-    severity: "error",
-    text: "An unidentified flying object compromised Hangar 18.",
-  },
-};
+export const AllVariants: StoryObj<BannerProps> = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every severity, plus the link, external-link, and dismissable content variations.">
+        <StoryGrid columns={1}>
+          {bannerSeverityValues.map((severity) => (
+            <StoryCell key={severity} label={severity}>
+              <Banner
+                severity={severity}
+                text={`This is a ${severity} banner.`}
+              />
+            </StoryCell>
+          ))}
 
-export const Warning: StoryObj<BannerProps> = {
-  args: {
-    role: "status",
-    severity: "warning",
-    text: "Severe solar winds detected. Local system flights may be delayed.",
-  },
-};
+          <StoryCell label="with link">
+            <Banner
+              linkText="View report"
+              linkUrl="#anchor"
+              role="status"
+              severity="error"
+              text="An unidentified flying object compromised Hangar 18."
+            />
+          </StoryCell>
 
-export const Linked: StoryObj<BannerProps> = {
-  args: {
-    linkText: "View report",
-    linkUrl: "#anchor",
-    role: "status",
-    severity: "error",
-    text: "An unidentified flying object compromised Hangar 18.",
-  },
-};
+          {/* linkTarget="_blank" adds the external-link icon after the link. */}
+          <StoryCell label='with link · linkTarget="_blank"'>
+            <Banner
+              linkTarget="_blank"
+              linkText="View report"
+              linkUrl="#anchor"
+              role="status"
+              severity="error"
+              text="An unidentified flying object compromised Hangar 18."
+            />
+          </StoryCell>
 
-export const LinkedWithOnLinkClick: StoryObj<BannerProps> = {
-  args: {
-    linkText: "View report",
-    onLinkClick: fn(),
-    role: "status",
-    severity: "error",
-    text: "An unidentified flying object compromised Hangar 18.",
-  },
-};
-
-export const LinkWithTarget: StoryObj<BannerProps> = {
-  args: {
-    linkTarget: "_blank",
-    linkText: "View report",
-    linkUrl: "#anchor",
-    role: "status",
-    severity: "error",
-    text: "An unidentified flying object compromised Hangar 18.",
-  },
-};
-
-export const Dismissible: StoryObj<BannerProps> = {
-  args: {
-    onClose: fn(),
+          <StoryCell label="dismissable">
+            <Banner
+              onClose={action("onClose")}
+              severity="info"
+              text="The mission to Sagittarius A is set for January 7."
+            />
+          </StoryCell>
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };

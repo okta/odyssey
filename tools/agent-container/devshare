@@ -1,0 +1,44 @@
+#!/bin/sh
+# devshare — hand a running dev server a browsable URL via the in-container dev-proxy.
+#
+#   devshare <port> [label]   register :<port>, print the URL to give the human
+#   devshare list             show every currently-shared app (JSON)
+#   devshare rm <id|port>     unregister by id or by port
+#
+# It only talks to the loopback-only control API (dev-proxy.mjs). Agents: run
+# `devshare <port> <label>`, then paste the printed URL for the human to open.
+set -eu
+
+CONTROL="http://127.0.0.1:${DEVPROXY_CONTROL_PORT:-3775}"
+
+usage() {
+  sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'
+  exit "${1:-0}"
+}
+
+command_name="${1:-}"
+case "$command_name" in
+"" | -h | --help | help) usage 0 ;;
+list | ls | --list)
+  curl -fsS "$CONTROL/list" | jq .
+  ;;
+rm | unregister | remove)
+  key="${2:?usage: devshare rm <id|port>}"
+  case "$key" in
+  *[!0-9]*) body="{\"id\":\"$key\"}" ;; # non-numeric => id
+  *) body="{\"port\":$key}" ;;          # numeric     => port
+  esac
+  curl -fsS -X POST "$CONTROL/unregister" -H 'content-type: application/json' -d "$body" | jq .
+  ;;
+*[!0-9]*)
+  echo "devshare: unknown command '$command_name' (expected a port, 'list', or 'rm')" >&2
+  usage 1
+  ;;
+*)
+  # bare number => register that port; optional 2nd arg is a human label
+  port="$command_name"
+  label="${2:-}"
+  curl -fsS -X POST "$CONTROL/register" -H 'content-type: application/json' \
+    -d "{\"port\":$port,\"label\":\"$label\"}" | jq -r '.url'
+  ;;
+esac

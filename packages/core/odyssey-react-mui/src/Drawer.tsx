@@ -214,7 +214,7 @@ const Drawer = ({
   const hasDividers = hasDividersProp || showDividers;
 
   //If RTL is set in the theme, align the drawer on the left side of the screen, uses right by default.
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const anchorDirection = i18n.dir() === "rtl" ? "left" : "right";
 
   useEffect(() => {
@@ -285,7 +285,7 @@ const Drawer = ({
           >
             <Heading5>{title}</Heading5>
             <Button
-              ariaLabel={ariaLabel}
+              ariaLabel={ariaLabel || t("close.text")}
               onClick={handleCloseButtonClick}
               size="small"
               startIcon={<CloseIcon />}
@@ -329,6 +329,7 @@ const Drawer = ({
       onClose,
       primaryCallToActionComponent,
       secondaryCallToActionComponent,
+      t,
       tertiaryCallToActionComponent,
       testId,
       title,

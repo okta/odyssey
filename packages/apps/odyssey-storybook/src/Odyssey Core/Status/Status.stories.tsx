@@ -18,6 +18,13 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryConstrainedWidth,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const storybookMeta: Meta<StatusProps> = {
@@ -74,90 +81,49 @@ const storybookMeta: Meta<StatusProps> = {
 
 export default storybookMeta;
 
-export const DefaultPill: StoryObj<StatusProps> = {
+export const Playground: StoryObj<StatusProps> = {
   args: {
     label: "Warp drive in standby",
   },
 };
 
-export const ErrorPill: StoryObj<StatusProps> = {
-  args: {
-    label: "Warp drive unstable",
-    severity: "error",
-  },
-};
-
-export const InfoPill: StoryObj<StatusProps> = {
-  args: {
-    label: "Warp drive unstable",
-    severity: "info",
-  },
-};
-
-export const SuccessPill: StoryObj<StatusProps> = {
-  args: {
-    label: "Warp drive online",
-    severity: "success",
-  },
-};
-
-export const WarningPill: StoryObj<StatusProps> = {
-  args: {
-    label: "Warp fuel low",
-    severity: "warning",
-  },
-};
-
-export const DefaultLamp: StoryObj<StatusProps> = {
-  args: {
-    label: "Warp drive in standby",
-    variant: "lamp",
-  },
-};
-
-export const ErrorLamp: StoryObj<StatusProps> = {
-  args: {
-    label: "Warp drive unstable",
-    severity: "error",
-    variant: "lamp",
-  },
-};
-
-export const InfoLamp: StoryObj<StatusProps> = {
-  args: {
-    label: "Warp drive unstable",
-    severity: "info",
-    variant: "lamp",
-  },
-};
-
-export const SuccessLamp: StoryObj<StatusProps> = {
-  args: {
-    label: "Warp drive online",
-    severity: "success",
-    variant: "lamp",
-  },
-};
-
-export const WarningLamp: StoryObj<StatusProps> = {
-  args: {
-    label: "Warp fuel low",
-    severity: "warning",
-    variant: "lamp",
-  },
-};
-
-export const OverflowLamp: StoryObj<StatusProps> = {
-  args: {
-    label:
-      "A really long label that will overflow the container and should be truncated",
-    variant: "lamp",
-  },
-  render: function C(props) {
+export const AllVariants: StoryObj<StatusProps> = {
+  parameters: staticBoardParameters,
+  render: function C() {
     return (
-      <div style={{ width: "200px" }}>
-        <Status {...props} />
-      </div>
+      <StorySection title="Every severity across both variants (pill and lamp), plus label overflow.">
+        <StoryGrid columns={statusVariantValues.length}>
+          {statusSeverityValues.flatMap((severity) =>
+            statusVariantValues.map((variant) => (
+              <StoryCell
+                key={`${severity}-${variant}`}
+                label={`${severity} · ${variant}`}
+              >
+                <Status
+                  label={severity}
+                  severity={severity}
+                  variant={variant}
+                />
+              </StoryCell>
+            )),
+          )}
+
+          {statusVariantValues.map((variant) => (
+            <StoryCell
+              key={`overflow-${variant}`}
+              label={`overflow · ${variant}`}
+            >
+              <StoryConstrainedWidth>
+                <Status
+                  label="A really long label that will overflow the container and should be truncated"
+                  severity="default"
+                  variant={variant}
+                />
+              </StoryConstrainedWidth>
+            </StoryCell>
+          ))}
+        </StoryGrid>
+      </StorySection>
     );
   },
 };

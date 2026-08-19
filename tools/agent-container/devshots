@@ -1,0 +1,38 @@
+#!/bin/sh
+# devshots — publish the container's screenshot gallery and print its URL.
+#
+#   devshots        ensure the gallery server is up, share it, print the URL
+#   devshots rm     stop sharing (the server keeps running)
+#
+# The container's Playwright MCP writes screenshots into DEVPROXY_SHOTS_DIR, so an
+# agent that just captured something can run this and hand the human one URL
+# instead of describing what it saw.
+set -eu
+
+PORT="${DEVPROXY_SHOTS_PORT:-3776}"
+DIR="${DEVPROXY_SHOTS_DIR:-/home/agent/.screenshots}"
+LOG="${DEVPROXY_SHOTS_LOG:-/home/agent/.shot-server.log}"
+
+if [ "${1:-}" = "rm" ]; then
+  exec devshare rm "$PORT"
+fi
+
+# Start on demand rather than at container boot: most sessions never take a
+# screenshot, and an unused listener is one more thing to explain.
+if ! curl -fsS -o /dev/null "http://127.0.0.1:${PORT}/" 2>/dev/null; then
+  mkdir -p "$DIR"
+  nohup node /usr/local/bin/shot-server.mjs >>"$LOG" 2>&1 &
+  # Wait for the listener rather than sleeping a fixed amount, so this stays fast
+  # when it is already warm and still correct on a cold start.
+  attempt=0
+  while ! curl -fsS -o /dev/null "http://127.0.0.1:${PORT}/" 2>/dev/null; do
+    attempt=$((attempt + 1))
+    if [ "$attempt" -ge 50 ]; then
+      echo "devshots: gallery server did not come up on :${PORT} — see $LOG" >&2
+      exit 1
+    fi
+    sleep 0.1
+  done
+fi
+
+devshare "$PORT" screenshots

@@ -10,7 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { UDComponentsProvider } from "@okta/odyssey-contributions-ud-components";
+import {
+  TranslationProvider,
+  UDComponentsProvider,
+} from "@okta/odyssey-contributions-ud-components";
 import { Decorator } from "@storybook/react-vite";
 
 export const UDComponentsStorybookThemeDecorator: Decorator = (
@@ -18,6 +21,11 @@ export const UDComponentsStorybookThemeDecorator: Decorator = (
   context,
 ) => (
   <UDComponentsProvider languageCode={context.globals.locale as string}>
-    <Story />
+    {/* This package's strings live on their own i18next instance, so
+        `UDComponentsProvider` alone does not switch them. Nesting the
+        package's own provider is what makes the locale toolbar reach them. */}
+    <TranslationProvider languageCode={context.globals.locale as string}>
+      <Story />
+    </TranslationProvider>
   </UDComponentsProvider>
 );

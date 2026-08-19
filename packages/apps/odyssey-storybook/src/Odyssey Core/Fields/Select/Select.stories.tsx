@@ -14,8 +14,16 @@ import type { Meta, StoryContext, StoryObj } from "@storybook/react-vite";
 
 import { SelectChangeEvent } from "@mui/material";
 import { Link, Select, type SelectProps } from "@okta/odyssey-react-mui";
-import { fn, screen, userEvent, within } from "storybook/test";
+import { action } from "storybook/actions";
+import { screen, userEvent, within } from "storybook/test";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryContrastBoard,
+  StoryGrid,
+  StorySection,
+} from "../../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
@@ -211,9 +219,9 @@ const storybookMeta: Meta<typeof Select> = {
     errorMessageList: [],
     hint: "Hint text",
     label: "Label",
-    onBlur: fn(),
-    onChange: fn(),
-    onFocus: fn(),
+    onBlur: action("onBlur"),
+    onChange: action("onChange"),
+    onFocus: action("onFocus"),
     options: baseOptionLabels,
     isDisabled: false,
     isFullWidth: false,
@@ -291,7 +299,7 @@ const multiSelectTemplate: Pick<Story, "render" | "args" | "argTypes"> = {
   },
 };
 
-export const Default: Story = {
+export const Playground: Story = {
   ...singleSelectTemplate,
   play: async ({ canvasElement, step }) => {
     await step("Open dropdown", async () => {
@@ -300,42 +308,6 @@ export const Default: Story = {
     });
   },
   tags: ["!autodocs"],
-};
-
-export const Disabled: Story = {
-  ...singleSelectTemplate,
-  args: {
-    isDisabled: true,
-  },
-};
-
-export const Error: Story = {
-  ...singleSelectTemplate,
-  args: {
-    errorMessage: "Select an option.",
-  },
-};
-
-export const ErrorsList: Story = {
-  ...singleSelectTemplate,
-  args: {
-    errorMessage: "Select an option.",
-    errorMessageList: ["Error A", "Error B"],
-  },
-};
-
-export const FullWidth: Story = {
-  ...singleSelectTemplate,
-  args: {
-    isFullWidth: true,
-  },
-};
-
-export const HintLink: Story = {
-  ...singleSelectTemplate,
-  args: {
-    HintLinkComponent: <Link href="#">Link</Link>,
-  },
 };
 
 export const EmptyOption: Story = {
@@ -441,58 +413,6 @@ export const MultiSelect: Story = {
   },
 };
 
-export const ReadOnly: Story = {
-  ...singleSelectTemplate,
-  args: {
-    isReadOnly: true,
-    value: "Option C",
-  },
-};
-
-export const ReadOnlyMultiSelect: Story = {
-  ...multiSelectTemplate,
-  args: {
-    hasMultipleChoices: true,
-    isReadOnly: true,
-    value: ["Option A", "Option C", "Option D"],
-  },
-  argTypes: {
-    value: { control: { type: "check" }, options: baseOptionLabels },
-  },
-};
-
-export const ReadOnlyMultiSelectValue: Story = {
-  ...multiSelectTemplate,
-  args: {
-    hasMultipleChoices: true,
-    isReadOnly: true,
-    value: ["Option B", "Option E"],
-  },
-  argTypes: {
-    value: { control: { type: "check" }, options: baseOptionLabels },
-  },
-};
-
-export const MultipleLanguages: Story = {
-  ...singleSelectTemplate,
-  args: {
-    label: "Label",
-    options: languageOptions,
-    value: "",
-  },
-  argTypes: {
-    options: { control: false },
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Showcase the Select component with options for multiple different languages",
-      },
-    },
-  },
-};
-
 export const Uncontrolled: Story = {
   args: {
     defaultValue: "Option B",
@@ -528,4 +448,125 @@ export const UncontrolledMultiSelect: Story = {
     defaultValue: { control: { type: "check" }, options: baseOptionLabels },
   },
   render: (args) => <Select {...(args as SelectStoryArgs)} />,
+};
+
+export const AllStates: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every prop-driven state a Select can render.">
+        <StoryGrid columns={3}>
+          <StoryCell label="default">
+            <Select
+              label="Label"
+              options={["Option A", "Option B", "Option C"]}
+            />
+          </StoryCell>
+
+          <StoryCell label="disabled">
+            <Select
+              isDisabled
+              label="Label"
+              options={["Option A", "Option B", "Option C"]}
+            />
+          </StoryCell>
+
+          <StoryCell label="read-only">
+            <Select
+              defaultValue="Option C"
+              isReadOnly
+              label="Label"
+              options={["Option A", "Option B", "Option C"]}
+            />
+          </StoryCell>
+
+          <StoryCell label="optional">
+            <Select
+              isOptional
+              label="Label"
+              options={["Option A", "Option B", "Option C"]}
+            />
+          </StoryCell>
+
+          <StoryCell label="error">
+            <Select
+              errorMessage="Select an option."
+              label="Label"
+              options={["Option A", "Option B", "Option C"]}
+            />
+          </StoryCell>
+
+          <StoryCell label="errors list">
+            <Select
+              errorMessage="Select an option."
+              errorMessageList={["Error A", "Error B"]}
+              label="Label"
+              options={["Option A", "Option B", "Option C"]}
+            />
+          </StoryCell>
+
+          <StoryCell label="hint">
+            <Select
+              hint="Hint text"
+              label="Label"
+              options={["Option A", "Option B", "Option C"]}
+            />
+          </StoryCell>
+
+          <StoryCell label="hint with link">
+            <Select
+              hint="Hint text"
+              HintLinkComponent={<Link href="#">Link</Link>}
+              label="Label"
+              options={["Option A", "Option B", "Option C"]}
+            />
+          </StoryCell>
+
+          <StoryCell label="read-only multi-select">
+            <Select
+              defaultValue={["Option A", "Option C"]}
+              hasMultipleChoices
+              isReadOnly
+              label="Label"
+              options={["Option A", "Option B", "Option C", "Option D"]}
+            />
+          </StoryCell>
+
+          {/* Non-Latin option text exercises the fonts and line metrics the
+              Latin-only options never reach. */}
+          <StoryCell label="non-Latin options">
+            <Select defaultValue="ja" label="Label" options={languageOptions} />
+          </StoryCell>
+        </StoryGrid>
+
+        <StoryGrid columns={1}>
+          <StoryCell label="full width">
+            <Select
+              isFullWidth
+              label="Label"
+              options={["Option A", "Option B", "Option C"]}
+            />
+          </StoryCell>
+        </StoryGrid>
+      </StorySection>
+    );
+  },
+};
+
+export const Contrast: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Selected chips in a multi-select shift shade with the surface contrast (white vs gray).">
+        <StoryContrastBoard>
+          <Select
+            defaultValue={["Option A", "Option B", "Option C"]}
+            hasMultipleChoices
+            label="Label"
+            options={["Option A", "Option B", "Option C", "Option D"]}
+          />
+        </StoryContrastBoard>
+      </StorySection>
+    );
+  },
 };

@@ -124,6 +124,7 @@ export type TableLayoutContentProps<TData extends MRT_RowData> = {
     }) => void;
   };
   rowSelection: MRT_RowSelectionState;
+  search?: string;
   setRowSelection: Dispatch<SetStateAction<MRT_RowSelectionState>>;
   setTableState: Dispatch<SetStateAction<TableState>>;
   tableLayoutOptions: TableLayoutProps<TData>;
@@ -155,6 +156,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
   pagination,
   rowReorderingUtilities,
   rowSelection,
+  search,
   setRowSelection,
   setTableState,
   tableLayoutOptions,
@@ -332,6 +334,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
       isLoading,
       rowSelection,
       columnOrder,
+      globalFilter: search,
     },
     icons: {
       ArrowDownwardIcon: ArrowDownIcon,

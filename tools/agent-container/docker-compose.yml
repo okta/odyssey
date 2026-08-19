@@ -1,0 +1,254 @@
+# Persistent, interactive Odyssey Docker workspace.
+#
+# Unlike launch-implementer.sh's one-shot `docker run` (a throwaway
+# container per automated plan execution), this is a long-lived container
+# you attach to from a local VSCode window via "Dev Containers: Attach to
+# Running Container" and drive interactively — one or more `claude` (and,
+# once wired up, `codex`) sessions in separate integrated terminals.
+#
+# Start/stop with launch-workspace.sh, not `docker compose` directly — the
+# script derives the ANTHROPIC_AUTH_TOKEN/NPM_TOKEN/GH_TOKEN env file this
+# compose file mounts in, and seeds persistent home-directory state.
+
+# Pin the project name so it is NOT derived from the directory basename. Renaming
+# this package's directory must not spin up a new project that orphans the
+# existing container and volumes — exactly what broke on the claude-sandbox ->
+# agent-container rename. launch-workspace.sh reconciles a container left behind
+# by the old project name; it must match this value.
+name: agent-container
+
+services:
+  workspace:
+    image: odyssey-implementer-agent
+    container_name: odyssey-workspace
+    restart: unless-stopped
+    mem_limit: ${WORKSPACE_MEMORY_LIMIT:-24g}
+    cpus: ${WORKSPACE_CPU_LIMIT:-12}
+    working_dir: /home/agent/okta
+    environment:
+      - HOME=/home/agent
+      - NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+      # Clone URL for the first-boot odyssey seed (workspace-init.sh). Read from
+      # the host repo's origin by launch-workspace.sh, so it is not hardcoded.
+      - ODYSSEY_ORIGIN_URL=${ODYSSEY_ORIGIN_URL:?set ODYSSEY_ORIGIN_URL - launch-workspace.sh writes .env for you}
+      # Flag-gated in-container upgrade of the baked agent CLIs to the versions in
+      # tools/agent-container/pinned-versions.json (workspace-refresh.sh). Off by
+      # default — set WORKSPACE_SELF_UPDATE=1 (e.g. in .env) once container ->
+      # Artifactory npm auth is confirmed. INTERVAL is the background re-check
+      # cadence in seconds; REGISTRY is the internal mirror to install from. See
+      # agent-container.md.
+      - WORKSPACE_SELF_UPDATE=${WORKSPACE_SELF_UPDATE:-0}
+      - WORKSPACE_SELF_UPDATE_INTERVAL=${WORKSPACE_SELF_UPDATE_INTERVAL:-86400}
+      - WORKSPACE_SELF_UPDATE_REGISTRY=${WORKSPACE_SELF_UPDATE_REGISTRY:-https://artifactory.es.atko.services/artifactory/api/npm/npm-okta-master/}
+      # Dev-app share proxy (dev-proxy.mjs). PUBLIC_BASE + PUBLIC_PORT build the
+      # URL `devshare` prints; they are separate because folding the port into the
+      # base would make the proxy's Host matcher miss on every request and fall
+      # back to leftmost-label guessing. `localhost` needs no DNS or /etc/hosts
+      # setup: macOS and Chromium both resolve any *.localhost label to 127.0.0.1.
+      - DEVPROXY_PUBLIC_BASE=${DEVPROXY_PUBLIC_BASE:-localhost}
+      - DEVPROXY_PUBLIC_PORT=${DEVPROXY_PUBLIC_PORT:-3774}
+      - DEVPROXY_URL_SCHEME=${DEVPROXY_URL_SCHEME:-http}
+      - DEVPROXY_DATA_PORT=3774
+      - DEVPROXY_CONTROL_PORT=3775
+      # Where the container's Playwright MCP writes screenshots (launch-workspace.sh
+      # passes this same path as its --output-dir) and where `devshots` serves them.
+      - DEVPROXY_SHOTS_DIR=/home/agent/.screenshots
+      - DEVPROXY_SHOTS_PORT=3776
+    # t3code's web GUI, published to the host loopback only (127.0.0.1) so it
+    # is reachable at http://localhost:3773 from your browser but never exposed
+    # to the LAN. Started headless in `command:` below (--no-browser).
+    ports:
+      - "127.0.0.1:3773:3773"
+      # MCP OAuth callback. Every MCP server is configured (launch-workspace.sh)
+      # with this fixed callback port; publishing it to host loopback lets an
+      # OAuth consent completed in your host browser redirect to
+      # http://localhost:41414/callback and reach Claude Code's listener inside
+      # the container — so browser-OAuth MCP servers (slack, google_*, …) can be
+      # authenticated once without a paste step. See agent-container.md.
+      - "127.0.0.1:41414:41414"
+      # dev-proxy's data plane. One published port serves every dev server an
+      # agent shares, routed by the Host header's leftmost label, so adding an app
+      # needs no compose edit and dev servers can keep binding loopback only. The
+      # control API (3775) and the screenshot gallery (3776) stay unpublished and
+      # are reached through this port.
+      - "127.0.0.1:3774:3774"
+    volumes:
+      # A persistent, Linux-native volume for the repo checkout(s) — NOT a bind
+      # mount of the host okta/ tree. The container runs its own `yarn install`,
+      # which writes Linux-native binaries (esbuild, swc, rollup, …); sharing the
+      # host tree would overwrite the macOS binaries the host's Storybook depends
+      # on. workspace-init.sh seeds odyssey on first boot; other repos are cloned
+      # in on demand. See "Option D" / the Linux-native-repos decision record in
+      # agent-container.md.
+      - okta-workspace:/home/agent/okta
+      # t3code's runtime state, incl. its pairing/signing secret and state.sqlite.
+      # A named volume (not a host bind mount) so SQLite gets VM-native locking,
+      # and so a container recreate keeps the same pairing token instead of
+      # rotating it and invalidating already-paired browsers.
+      - t3code-state:/home/agent/.t3
+      # Host url.insteadOf rewrites (generated by launch-workspace.sh), included
+      # into the container's global gitconfig by workspace-init.sh so
+      # org-<id>@github.com: remotes resolve to https + GH_TOKEN.
+      - ./.workspace-env/git-insteadof:/home/agent/.gitconfig-insteadof:ro
+      # MCP server definitions (generated by launch-workspace.sh from the host
+      # ~/.claude.json, headersHelper paths repointed to the container copies).
+      # Merged into ~/.claude.json by workspace-init.sh.
+      - ./.workspace-env/mcp-servers.json:/home/agent/.mcp-servers.json:ro
+      # Your REAL host ~/.claude, not a separate copy: session/chat
+      # history stays unified between host and container instead of
+      # forking into two invisible-to-each-other histories. Safe because
+      # the thing that actually blocks bypass mode on the host,
+      # managed-settings.json, lives at a fixed OS path outside ~/.claude
+      # and doesn't exist inside this Linux container — so sharing
+      # ~/.claude doesn't smuggle that block in, and nothing here needs
+      # to write to your real settings.json to get bypass mode (just run
+      # `claude --dangerously-skip-permissions` in the container).
+      - ${HOST_CLAUDE_DIR:?set HOST_CLAUDE_DIR - launch-workspace.sh writes .env for you}:/home/agent/.claude
+      # The SAME host ~/.claude, also mounted at its host-absolute path, so
+      # host-absolute paths recorded inside its configs resolve in the container.
+      # installed_plugins.json stores each plugin's installPath as an absolute
+      # host path (e.g. /Users/you/.claude/plugins/cache/...); without this, that
+      # path is missing in the container and Claude Code silently fails to load
+      # the plugin — so the ord-skills jira/confluence skills never appear. This
+      # aliases the host path to the same data. Read-only: config reads only.
+      - ${HOST_CLAUDE_DIR:?set HOST_CLAUDE_DIR - launch-workspace.sh writes .env for you}:${HOST_CLAUDE_DIR:?set HOST_CLAUDE_DIR - launch-workspace.sh writes .env for you}:ro
+      # Short-lived credentials, refreshed in place by
+      # `launch-workspace.sh --refresh-auth` without restarting the
+      # container. See "Auth token refresh" in agent-container.md.
+      - ./.workspace-env/tokens.env:/home/agent/.okta-tokens.env:ro
+      # Your GPG public/secret key, ownertrust, and signing passphrase,
+      # exported by launch-workspace.sh from your host keyring. Read-only —
+      # imported into the container's own ~/.gnupg by `command:` below,
+      # never written back. See "Auth token refresh" in agent-container.md
+      # for the same rotation story (`--refresh-auth` re-exports it).
+      - ./.workspace-env/gpg:/home/agent/.gpg-import:ro
+      # The org's managed Claude Code policy, trimmed of the two settings
+      # that don't apply inside a container (apiKeyHelper, statusLine) and
+      # the one this workspace exists to lift (disableBypassPermissionsMode).
+      # Regenerated by launch-workspace.sh on every start — see its comment
+      # for what's excluded and why. Linux's fixed path for this file per
+      # Claude Code's enterprise policy docs, not a choice made here.
+      - ./.workspace-env/managed-settings.json:/etc/claude-code/managed-settings.json:ro
+      # File-spool for the host token-broker (ocm-broker.mjs). The container's
+      # ocm shim writes a token request here; the broker (running on the host,
+      # where a browser exists) runs the real `ocm auth …`, opening the host
+      # browser when a fresh/step-up login is needed, and writes the token
+      # back. Read-write — the only rw mount here — because the container
+      # creates the request files. See "Host token-broker" in agent-container.md.
+      - ./.workspace-env/broker:/home/agent/.okta-broker:rw
+    # Idempotently wire ~/.bashrc to source the mounted token file on every
+    # new interactive shell — this is how VSCode's integrated terminal and
+    # `docker exec` sessions pick up a refreshed token. Already-running
+    # `claude`/`codex` processes do not; see agent-container.md. Also wire
+    # git to authenticate with the same mounted GH_TOKEN via a credential
+    # helper that re-sources the token file on every git operation (not
+    # just at shell startup), so it works from the VS Code extension host
+    # too. This must win over VS Code's own git-credential-forwarding
+    # (which defaults to copying the host's ~/.gitconfig into the
+    # container on attach) — see "Persistent interactive workspace" in
+    # agent-container.md for why that forwarding is disabled instead of
+    # relied on. Set the container's git identity to the real host user
+    # (never a bot identity) and import their GPG key so commits made in
+    # here land Verified — GitHub requires that to merge. The passphrase
+    # is fed to gpg-agent once via loopback pinentry (never interactively)
+    # to warm its cache for default/max-cache-ttl, so `git commit` from an
+    # unattended `claude` session doesn't hit a pinentry prompt it can't
+    # answer. Then sleep forever so the container has something to stay
+    # alive for.
+    #
+    # Every `${VAR}` below is escaped as `$${VAR}` on purpose: Compose
+    # interpolates `${...}` in this file from the HOST shell environment
+    # at `docker compose up` time, before the string ever reaches bash —
+    # unescaped, GH_TOKEN/GIT_USER_NAME/GIT_USER_EMAIL/GPG_KEY_ID would
+    # silently resolve to blank (they only exist inside the container,
+    # sourced from tokens.env) instead of the runtime values. `$$` tells
+    # Compose to emit a literal `$`, deferring expansion to the
+    # container's own bash.
+    command:
+      - -c
+      - |
+        source /home/agent/.okta-tokens.env 2>/dev/null || true
+        touch /home/agent/.bashrc
+        grep -qxF 'source /home/agent/.okta-tokens.env 2>/dev/null || true' /home/agent/.bashrc ||
+          echo 'source /home/agent/.okta-tokens.env 2>/dev/null || true' >> /home/agent/.bashrc
+        cat > /home/agent/.git-credential-helper.sh <<'HELPER'
+        #!/usr/bin/env bash
+        source /home/agent/.okta-tokens.env 2>/dev/null || true
+        echo "username=x-access-token"
+        echo "password=$${GH_TOKEN:-}"
+        HELPER
+        chmod +x /home/agent/.git-credential-helper.sh
+        git config --global credential.helper '!/home/agent/.git-credential-helper.sh'
+        git config --global user.name "$${GIT_USER_NAME:?GIT_USER_NAME not set — rerun launch-workspace.sh}"
+        git config --global user.email "$${GIT_USER_EMAIL:?GIT_USER_EMAIL not set — rerun launch-workspace.sh}"
+        if [ -f /home/agent/.gpg-import/secret.asc ]; then
+          mkdir -p /home/agent/.gnupg
+          chmod 700 /home/agent/.gnupg
+          gpg --batch --import /home/agent/.gpg-import/public.asc 2>/dev/null || true
+          gpg --batch --import /home/agent/.gpg-import/secret.asc 2>/dev/null
+          gpg --import-ownertrust /home/agent/.gpg-import/ownertrust.txt 2>/dev/null || true
+          grep -qxF 'allow-loopback-pinentry' /home/agent/.gnupg/gpg-agent.conf 2>/dev/null || echo 'allow-loopback-pinentry' >> /home/agent/.gnupg/gpg-agent.conf
+          grep -qxF 'default-cache-ttl 86400' /home/agent/.gnupg/gpg-agent.conf 2>/dev/null || echo 'default-cache-ttl 86400' >> /home/agent/.gnupg/gpg-agent.conf
+          grep -qxF 'max-cache-ttl 86400' /home/agent/.gnupg/gpg-agent.conf 2>/dev/null || echo 'max-cache-ttl 86400' >> /home/agent/.gnupg/gpg-agent.conf
+          grep -qxF 'pinentry-mode loopback' /home/agent/.gnupg/gpg.conf 2>/dev/null || echo 'pinentry-mode loopback' >> /home/agent/.gnupg/gpg.conf
+          gpgconf --kill gpg-agent 2>/dev/null || true
+          echo warm | gpg --batch --pinentry-mode loopback --passphrase-file /home/agent/.gpg-import/passphrase -o /dev/null -bsau "$${GPG_KEY_ID:?GPG_KEY_ID not set — rerun launch-workspace.sh}" 2>/dev/null || true
+          git config --global user.signingkey "$${GPG_KEY_ID}"
+          git config --global commit.gpgsign true
+        fi
+        # Container-side bring-up: git insteadOf rewrites, first-boot odyssey
+        # clone into the Linux volume, and MCP server registration. Kept in a
+        # baked script (see Dockerfile) so its logic is free of Compose's `$$`
+        # escaping. Runs after the git identity/credential wiring above so the
+        # seed clone authenticates.
+        bash /usr/local/bin/workspace-init.sh || true
+        # Flag-gated: upgrade the baked agent CLIs to pinned-versions.json before
+        # t3code starts (so it launches on the upgraded binary), then keep them
+        # current on an interval. Both are no-ops unless WORKSPACE_SELF_UPDATE=1.
+        # See agent-container.md and the 2026-08-04 decision record.
+        bash /usr/local/bin/workspace-refresh.sh || true
+        if [ "$${WORKSPACE_SELF_UPDATE:-0}" = "1" ]; then
+          ( while sleep "$${WORKSPACE_SELF_UPDATE_INTERVAL:-86400}"; do
+              bash /usr/local/bin/workspace-refresh.sh || true
+            done ) &
+        fi
+        # Bridge the published MCP OAuth callback port to Claude Code's
+        # loopback-only listener. Claude binds 127.0.0.1:41414 for the OAuth
+        # redirect, but the published port (docker-compose ports) arrives on the
+        # container's external interface — so an OAuth consent approved in the
+        # host browser (redirect to http://localhost:41414/callback) would never
+        # reach it. socat forwards eth0:41414 -> 127.0.0.1:41414. Bound to the
+        # eth0 IP (not 0.0.0.0) so it does not collide with Claude's loopback
+        # bind. Backgrounded; harmless when no login is active. See agent-container.md.
+        socat TCP-LISTEN:41414,fork,reuseaddr,bind=$$(hostname -i) TCP:127.0.0.1:41414 >/dev/null 2>&1 &
+        # Dev-app share proxy: agents run `devshare <port>` to get a host-openable
+        # URL for a dev server, and `devshots` to publish the screenshot gallery.
+        # Started here rather than from an entrypoint so it restarts with the
+        # container and logs beside the other startup work. See agent-container.md.
+        node /usr/local/bin/dev-proxy.mjs >/home/agent/.dev-proxy.log 2>&1 &
+        # Start t3code's backend + web app, bound to all interfaces inside the
+        # container so the published 127.0.0.1:3773 host port reaches it. It
+        # inherits ANTHROPIC_AUTH_TOKEN etc. from the token file sourced above,
+        # so the claude sessions it spawns are authenticated. --no-browser: do
+        # not try to open a browser in the headless container. Backgrounded so
+        # the container stays attachable; logs to ~/.t3code.log.
+        t3 --no-browser --host 0.0.0.0 --port 3773 >/home/agent/.t3code.log 2>&1 &
+        exec sleep infinity
+
+# Persistent Linux-native checkout volume. Survives container restarts so a
+# reattach lands back in the same repos and node_modules; removed only by an
+# explicit `docker volume rm odyssey-workspace-okta`.
+#
+# Declared `external` so Compose neither labels them with (nor checks them
+# against) the project name: that project label is what emits the "created for
+# project X" warning and what a directory rename would otherwise strand. External
+# volumes are also never removed by `docker compose down`. launch-workspace.sh
+# creates them idempotently before `up`, so a fresh machine still works.
+volumes:
+  okta-workspace:
+    external: true
+    name: odyssey-workspace-okta
+  # t3code state, persisted so the pairing token survives container recreates.
+  t3code-state:
+    external: true
+    name: odyssey-workspace-t3

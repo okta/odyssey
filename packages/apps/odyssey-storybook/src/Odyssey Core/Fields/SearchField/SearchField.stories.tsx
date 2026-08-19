@@ -14,6 +14,13 @@ import { SearchField, searchVariantValues } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { ChangeEvent, useCallback, useState } from "react";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryContrastBoard,
+  StoryRow,
+  StorySection,
+} from "../../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
@@ -159,22 +166,65 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Playground: Story = {
   args: {
     defaultValue: "",
   },
 };
 
-export const FilledVariant: Story = {
-  args: {
-    defaultValue: "",
-    variant: "filled",
+export const AllStates: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every variant, plus disabled and filled states.">
+        <StoryRow>
+          {searchVariantValues.map((variant) => (
+            <StoryCell key={variant} label={variant}>
+              <SearchField
+                label="Search"
+                placeholder="Search planets"
+                variant={variant}
+              />
+            </StoryCell>
+          ))}
+
+          {searchVariantValues.map((variant) => (
+            <StoryCell
+              key={`${variant}-disabled`}
+              label={`${variant} disabled`}
+            >
+              <SearchField
+                isDisabled
+                label="Search"
+                placeholder="Search planets"
+                variant={variant}
+              />
+            </StoryCell>
+          ))}
+
+          <StoryCell label="with value">
+            <SearchField
+              defaultValue="Jupiter"
+              label="Search"
+              variant="outline"
+            />
+          </StoryCell>
+        </StoryRow>
+      </StorySection>
+    );
   },
 };
 
-export const Disabled: Story = {
-  args: {
-    isDisabled: true,
+export const Contrast: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="SearchField drops its border on a gray (highContrast) surface.">
+        <StoryContrastBoard>
+          <SearchField label="Search" placeholder="Search planets" />
+        </StoryContrastBoard>
+      </StorySection>
+    );
   },
 };
 

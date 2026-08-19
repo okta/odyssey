@@ -10,11 +10,16 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { deepmerge, Link, Switch, SwitchProps } from "@okta/odyssey-react-mui";
+import { Link, Switch, SwitchProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
+import { action } from "storybook/actions";
 import { useCallback } from "storybook/preview-api";
-import { fn } from "storybook/test";
 
+import {
+  staticBoardParameters,
+  StoryGrid,
+  StorySection,
+} from "../../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
@@ -115,7 +120,7 @@ const meta = {
   args: {
     isChecked: false,
     label: "label",
-    onChange: fn(),
+    onChange: action("onChange"),
     value: "value",
   },
 } satisfies Meta<typeof Switch>;
@@ -160,61 +165,42 @@ const SwitchTemplate: Story = {
   },
 };
 
-export const Default: Story = {
-  ...deepmerge(SwitchTemplate, {
-    tags: ["!autodocs"],
-  }),
+export const Playground: Story = {
+  ...SwitchTemplate,
 };
 
-export const Checked: Story = {
-  ...deepmerge(SwitchTemplate, {
-    args: {
-      isChecked: true,
-    },
-  }),
-};
-
-export const Hint: Story = {
-  ...deepmerge(SwitchTemplate, {
-    args: {
-      hint: "Hint text",
-    },
-  }),
-};
-
-export const HintLink: Story = {
-  ...deepmerge(SwitchTemplate, {
-    args: {
-      hint: "Hint text",
-      HintLinkComponent: <Link href="#link">Link</Link>,
-    },
-  }),
-};
-
-export const Disabled: Story = {
-  ...deepmerge(SwitchTemplate, {
-    args: {
-      isDisabled: true,
-    },
-  }),
-};
-
-export const CheckedDisabled: Story = {
-  ...deepmerge(SwitchTemplate, {
-    args: {
-      isDisabled: true,
-      isChecked: true,
-    },
-  }),
-};
-
-export const CheckedReadOnly: Story = {
-  ...deepmerge(SwitchTemplate, {
-    args: {
-      isReadOnly: true,
-      isChecked: true,
-    },
-  }),
+export const AllStates: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every switch state.">
+        <StoryGrid columns={3}>
+          <Switch label="Off" value="off" />
+          <Switch isDefaultChecked label="On" value="on" />
+          <Switch isDisabled label="Disabled" value="disabled" />
+          <Switch
+            isDefaultChecked
+            isDisabled
+            label="Disabled on"
+            value="disabledOn"
+          />
+          <Switch
+            isDefaultChecked
+            isReadOnly
+            label="Read-only"
+            value="readOnly"
+          />
+          <Switch hint="Hint text" label="With hint" value="hint" />
+          <Switch
+            hint="Hint text"
+            HintLinkComponent={<Link href="#link">Link</Link>}
+            label="With hint link"
+            value="hintLink"
+          />
+        </StoryGrid>
+      </StorySection>
+    );
+  },
 };
 
 export const Uncontrolled: Story = {

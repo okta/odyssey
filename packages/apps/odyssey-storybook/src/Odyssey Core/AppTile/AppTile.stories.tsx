@@ -22,8 +22,14 @@ import { MoreIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 import { AppTile, appTileVariantValues } from "@okta/odyssey-react-mui/labs";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback, useState } from "react";
-import { fn } from "storybook/test";
+import { action } from "storybook/actions";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {
@@ -162,7 +168,7 @@ const meta = {
   args: {
     description: "This is a description of the app.",
     image: <img alt="Example logo" src="https://placehold.co/128" />,
-    onClick: fn(),
+    onClick: action("onClick"),
     variant: "comfortable",
   },
   tags: ["labs-export"],
@@ -172,7 +178,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Playground: Story = {
   args: {
     children: (
       <TagList>
@@ -180,6 +186,90 @@ export const Default: Story = {
         <Tag label="Tag 2" />
       </TagList>
     ),
+  },
+};
+
+export const AllVariants: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    const headerFeatures = [
+      { label: "base", props: {} },
+      { label: "auxiliary text", props: { auxiliaryText: "Single sign-on" } },
+      {
+        label: "action button",
+        props: {
+          actionIcon: <SettingsIcon />,
+          actionLabel: "Open app settings",
+          onActionClick: action("onActionClick"),
+        },
+      },
+    ];
+
+    return (
+      <StorySection title="Every variant across the header feature combinations.">
+        {appTileVariantValues.map((variant) => (
+          <StorySection key={variant} title={variant}>
+            <StoryGrid columns={3}>
+              {headerFeatures.map((headerFeature) => (
+                <StoryCell
+                  key={headerFeature.label}
+                  label={headerFeature.label}
+                >
+                  <AppTile
+                    description="This is a description of the app."
+                    image={
+                      <img alt="Example logo" src="https://placehold.co/128" />
+                    }
+                    onClick={action("onClick")}
+                    title="App name"
+                    variant={variant}
+                    {...headerFeature.props}
+                  />
+                </StoryCell>
+              ))}
+            </StoryGrid>
+          </StorySection>
+        ))}
+      </StorySection>
+    );
+  },
+};
+
+export const ImageAspectRatios: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="How the tile adapts to different image aspect ratios.">
+        <StoryGrid columns={3}>
+          <StoryCell label="square">
+            <AppTile
+              description="This is a description of the app."
+              image={<img alt="Square logo" src="https://placehold.co/600" />}
+              onClick={action("onClick")}
+              title="App name"
+            />
+          </StoryCell>
+
+          <StoryCell label="tall">
+            <AppTile
+              description="This is a description of the app."
+              image={<img alt="Tall logo" src="https://placehold.co/400x800" />}
+              onClick={action("onClick")}
+              title="App name"
+            />
+          </StoryCell>
+
+          <StoryCell label="wide">
+            <AppTile
+              description="This is a description of the app."
+              image={<img alt="Wide logo" src="https://placehold.co/800x400" />}
+              onClick={action("onClick")}
+              title="App name"
+            />
+          </StoryCell>
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };
 
@@ -199,19 +289,19 @@ export const Multiple: Story = {
       >
         <AppTile
           image={<img alt="Example logo" src="https://placehold.co/128" />}
-          onClick={fn()}
+          onClick={action("onClick")}
           title="App name"
         />
         <AppTile
           description="Lorem ipsum dolor sit amet."
           image={<img alt="Example logo" src="https://placehold.co/128" />}
           isLoading
-          onClick={fn()}
+          onClick={action("onClick")}
           title="App name"
         />
         <AppTile
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac lectus vel dui ullamcorper commodo at vitae lectus. Proin porta urna vitae quam hendrerit pellentesque. Nam nec neque a sapien pharetra commodo. Curabitur ut lacinia dolor. Sed pulvinar nibh nec rutrum interdum. Duis velit nunc, fringilla ut eleifend lacinia, porta at neque. Nulla quis magna sollicitudin, feugiat tellus vitae, tristique magna. Pellentesque pretium leo vitae odio aliquet, eu placerat orci luctus. Nunc sagittis leo nec nulla rhoncus, ut tempus libero maximus."
-          onClick={fn()}
+          onClick={action("onClick")}
           title="App name"
         />
       </Box>
@@ -237,8 +327,8 @@ export const Compact: Story = {
           actionIcon={<MoreIcon />}
           actionLabel="Open app settings"
           image={<img alt="Example logo" src="https://placehold.co/128" />}
-          onActionClick={fn()}
-          onClick={fn()}
+          onActionClick={action("onActionClick")}
+          onClick={action("onClick")}
           title="App name"
           variant="compact"
         />
@@ -246,8 +336,8 @@ export const Compact: Story = {
           actionIcon={<MoreIcon />}
           actionLabel="Open app settings"
           image={<img alt="Example logo" src="https://placehold.co/256x48" />}
-          onActionClick={fn()}
-          onClick={fn()}
+          onActionClick={action("onActionClick")}
+          onClick={action("onClick")}
           title="App name"
           variant="compact"
         />
@@ -255,8 +345,8 @@ export const Compact: Story = {
           actionIcon={<MoreIcon />}
           actionLabel="Open app settings"
           image={<img alt="Example logo" src="https://placehold.co/256x96" />}
-          onActionClick={fn()}
-          onClick={fn()}
+          onActionClick={action("onActionClick")}
+          onClick={action("onClick")}
           title="App name"
           variant="compact"
         />
@@ -265,8 +355,8 @@ export const Compact: Story = {
           actionLabel="Open app settings"
           image={<img alt="Example logo" src="https://placehold.co/128" />}
           isLoading
-          onActionClick={fn()}
-          onClick={fn()}
+          onActionClick={action("onActionClick")}
+          onClick={action("onClick")}
           title="App name"
           variant="compact"
         />
@@ -298,85 +388,7 @@ export const ActionButton: Story = {
             actionIcon={<SettingsIcon />}
             actionLabel={"Open app settings"}
             onActionClick={toggleDrawer}
-            onClick={fn()}
-          >
-            <TagList>
-              <Tag label="Tag 1" />
-              <Tag label="Tag 2" />
-            </TagList>
-          </AppTile>
-        </Box>
-      </>
-    );
-  },
-};
-
-export const SquareImage: Story = {
-  args: {
-    image: <img alt="Square logo" src="https://placehold.co/600" />,
-  },
-};
-
-export const TallImage: Story = {
-  args: {
-    image: <img alt="Tall logo" src="https://placehold.co/400x800" />,
-  },
-};
-
-export const WideImage: Story = {
-  args: {
-    image: <img alt="Wide logo" src="https://placehold.co/800x400" />,
-  },
-};
-
-export const WideImageWithActionButton: Story = {
-  args: {
-    actionIcon: <SettingsIcon />,
-    actionLabel: "Open app settings",
-    auxiliaryText: "Single sign-on",
-    image: <img alt="Wide logo" src="https://placehold.co/800x400" />,
-    onActionClick: fn(),
-  },
-};
-
-export const AuxiliaryText: Story = {
-  args: {
-    auxiliaryText: "Single sign-on",
-    children: (
-      <TagList>
-        <Tag label="Tag 1" />
-        <Tag label="Tag 2" />
-      </TagList>
-    ),
-  },
-};
-
-export const ActionButtonAndAuxiliaryText: Story = {
-  render: function C() {
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-    const toggleDrawer = useCallback(
-      () => setIsDrawerOpen(!isDrawerOpen),
-      [isDrawerOpen],
-    );
-
-    return (
-      <>
-        <Drawer
-          isOpen={isDrawerOpen}
-          onClose={toggleDrawer}
-          showDividers={false}
-        />
-        <Box sx={{ maxWidth: 262 }}>
-          <AppTile
-            actionAriaControls={""}
-            actionAriaExpanded={isDrawerOpen}
-            actionAriaHasPopup={"menu"}
-            actionIcon={<SettingsIcon />}
-            actionLabel={"Open app settings"}
-            auxiliaryText={"Single sign-on"}
-            onActionClick={toggleDrawer}
-            onClick={fn()}
+            onClick={action("onClick")}
           >
             <TagList>
               <Tag label="Tag 1" />
@@ -424,6 +436,6 @@ export const Loading: Story = {
       </TagList>
     ),
     isLoading: true,
-    onActionClick: fn(),
+    onActionClick: action("onActionClick"),
   },
 };

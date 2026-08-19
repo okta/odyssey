@@ -17,10 +17,18 @@ import {
   Dialog,
   type DialogProps,
 } from "@okta/odyssey-contributions-ud-components";
-import { Button, Select, type SelectProps } from "@okta/odyssey-react-mui";
+import {
+  ABSOLUTE_MINIMUM_HEIGHT,
+  ABSOLUTE_MINIMUM_WIDTH,
+  Button,
+  Select,
+  type SelectProps,
+} from "@okta/odyssey-react-mui";
 import { useCallback, useState } from "react";
+import { userEvent, within } from "storybook/test";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
+import { getReflowEyesParameters } from "../../tools/reflowEyesParameters.js";
 import { UDComponentsStorybookThemeDecorator } from "../../tools/UDComponentsStorybookThemeDecorator.js";
 
 const meta = {
@@ -364,6 +372,109 @@ export const NoButtons: StoryObj<DialogProps> = {
     children:
       "By closing this Dialog you agree to adhere to the Ceres Station terms of use.",
     title: "Ceres Station docking terms",
+  },
+};
+
+export const LongTitle: StoryObj<DialogProps> = {
+  render: function C(props: DialogProps) {
+    const [isVisible, setIsVisible] = useState(false);
+
+    const onOpen = useCallback(() => {
+      setIsVisible(true);
+    }, []);
+
+    const onClose = useCallback(() => {
+      setIsVisible(false);
+    }, []);
+
+    return (
+      <>
+        <Button label="Open dialog" onClick={onOpen} variant="primary" />
+        <Dialog
+          {...props}
+          isOpen={isVisible}
+          onClose={onClose}
+          primaryCallToActionComponent={
+            <Button label="Acknowledge" onClick={onClose} variant="primary" />
+          }
+        />
+      </>
+    );
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "A long title wraps onto multiple lines while the close button stays anchored to the top-right of the header and the Dialog respects its `maxWidth`.",
+      },
+    },
+  },
+  args: {
+    children:
+      "Decompression will begin once all crew have acknowledged this notice.",
+    title:
+      "Emergency decompression of the starboard cargo hold requires acknowledgement from all crew",
+  },
+};
+
+export const SmallScreen: StoryObj<DialogProps> = {
+  render: function C(props: DialogProps) {
+    const [isVisible, setIsVisible] = useState(false);
+
+    const onOpen = useCallback(() => {
+      setIsVisible(true);
+    }, []);
+
+    const onClose = useCallback(() => {
+      setIsVisible(false);
+    }, []);
+
+    return (
+      <>
+        <Button label="Open dialog" onClick={onOpen} variant="primary" />
+        <Dialog
+          {...props}
+          isOpen={isVisible}
+          onClose={onClose}
+          primaryCallToActionComponent={
+            <Button label="Acknowledge" onClick={onClose} variant="primary" />
+          }
+        />
+      </>
+    );
+  },
+  // Matches the interaction the Odyssey Core Dialog SmallScreen story uses to
+  // reach the same full-screen compact layout.
+  play: async ({ canvasElement, step }) => {
+    await step("Open dialog", async () => {
+      const canvas = within(canvasElement);
+      await userEvent.click(
+        canvas.getByRole("button", { name: "Open dialog" }),
+      );
+    });
+  },
+  globals: {
+    viewport: { value: "absoluteMinimum", isRotated: false },
+  },
+  parameters: {
+    // The Storybook viewport addon only resizes the preview iframe, so
+    // Applitools needs layoutBreakpoints to re-capture at the compact size.
+    eyes: getReflowEyesParameters({
+      height: ABSOLUTE_MINIMUM_HEIGHT,
+      width: ABSOLUTE_MINIMUM_WIDTH,
+    }),
+    docs: {
+      description: {
+        story:
+          "At the absolute minimum supported viewport (320×256, the WCAG 1.4.10 Reflow floor), the `Dialog` renders full-screen and scrolls its body so content reflows without loss of information or functionality. The `maxWidth` setting does not apply while full-screen.",
+      },
+    },
+  },
+  args: {
+    children:
+      "Decompression will begin once all crew have acknowledged this notice.",
+    maxWidth: "lg",
+    title: "Emergency decompression of the starboard cargo hold",
   },
 };
 

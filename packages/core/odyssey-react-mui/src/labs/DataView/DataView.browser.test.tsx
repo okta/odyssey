@@ -25,7 +25,10 @@ import {
   type CardLayoutProps,
   type TableLayoutProps,
 } from "./componentTypes.js";
-import { type DataOnReorderRowsType } from "./dataTypes.js";
+import {
+  type DataOnReorderRowsType,
+  type DataTableColumn,
+} from "./dataTypes.js";
 import { DataView } from "./DataView.js";
 import {
   columns,
@@ -232,6 +235,43 @@ describe("DataView", { timeout: 10000 }, () => {
       await expect
         .element(page.getByRole("table").getByText(data[1].name))
         .toBeVisible();
+    });
+
+    test("provides the submitted search query to table cell renderers", async () => {
+      const columnsWithSearchAwareCell = columns.map<DataTableColumn<Person>>(
+        (column) =>
+          column.accessorKey === "name"
+            ? {
+                ...column,
+                Cell: ({ table }) => `Query: ${table.getState().globalFilter}`,
+              }
+            : column,
+      );
+
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasSearch
+          hasSearchSubmitButton
+          tableLayoutOptions={{
+            columns: columnsWithSearchAwareCell,
+          }}
+        />,
+      );
+
+      await expect(document.body).toBeAccessible();
+
+      const searchInput = page.getByPlaceholder(/Search/i);
+      const submitButton = page.getByRole("button", { name: "Search" });
+      await userEvent.fill(searchInput, data[1].name);
+      await userEvent.click(submitButton);
+
+      await expect
+        .element(page.getByRole("table").getByText(`Query: ${data[1].name}`))
+        .toBeVisible();
+
+      await expect(document.body).toBeAccessible();
     });
 
     test("can clear the search input", async () => {

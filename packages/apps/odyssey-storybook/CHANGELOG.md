@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.67.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.66.1...v1.67.0) (2026-08-19)
+
+### Bug Fixes
+
+- pin orpheus date range picker story dates ([#721](https://github.com/atko-eng/odyssey-design-system/issues/721)) ([155c9c6](https://github.com/atko-eng/odyssey-design-system/commit/155c9c63d651d8871139a9acd1732b1a71bd97d2))
+- unsilence VRT server, add dev-shm flag ([#690](https://github.com/atko-eng/odyssey-design-system/issues/690)) ([01cea9e](https://github.com/atko-eng/odyssey-design-system/commit/01cea9e2484c8a98d91c0f456a7bf822e020d22e))
+
+### Features
+
+- add blueprint text fields and parity guard (OKTA-1249838) ([#681](https://github.com/atko-eng/odyssey-design-system/issues/681)) ([c87140f](https://github.com/atko-eng/odyssey-design-system/commit/c87140f149c1dc7ca3f8fea2592f783fe10930ff))
+- add DataView to ud-components with maxSelectedRows and i18n ([#659](https://github.com/atko-eng/odyssey-design-system/issues/659)) ([dd82212](https://github.com/atko-eng/odyssey-design-system/commit/dd82212658a859d4841ae2affb427ba7df485806))
+- Adds self-hosted Nx remote cache ([#671](https://github.com/atko-eng/odyssey-design-system/issues/671)) ([e908e5f](https://github.com/atko-eng/odyssey-design-system/commit/e908e5f189d898f996cc3a1f9c320a65d827e3b7))
+- expose search query to DataView cells ([#613](https://github.com/atko-eng/odyssey-design-system/issues/613)) ([00c2b57](https://github.com/atko-eng/odyssey-design-system/commit/00c2b578cd65cc5bfe04e2c1fdbe2743057893c7))
+- IGA dataview fixes and features ([#631](https://github.com/atko-eng/odyssey-design-system/issues/631)) ([7523549](https://github.com/atko-eng/odyssey-design-system/commit/75235497246271028d6b29c781a2662ba2fbeee1))
+- Node 24 upgrade + dockerized claude sandbox (throwaway + persistent) ([#569](https://github.com/atko-eng/odyssey-design-system/issues/569)) ([26d88e3](https://github.com/atko-eng/odyssey-design-system/commit/26d88e3d9da9fd54adbc6a2db870ffe27d58dac3)), closes [#593](https://github.com/atko-eng/odyssey-design-system/issues/593) [#641](https://github.com/atko-eng/odyssey-design-system/issues/641) [#647](https://github.com/atko-eng/odyssey-design-system/issues/647) [#649](https://github.com/atko-eng/odyssey-design-system/issues/649) [#645](https://github.com/atko-eng/odyssey-design-system/issues/645) [#661](https://github.com/atko-eng/odyssey-design-system/issues/661)
+
 ## [1.66.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.0...v1.66.0) (2026-08-05)
 
 ### Features

@@ -1,0 +1,6 @@
+{
+  "$comment": "Pinned versions of the agent CLIs that workspace-refresh.sh upgrades in place at container runtime (flag-gated behind WORKSPACE_SELF_UPDATE). This file is the source of truth: bump a version here to roll the container forward without rebuilding the image (a git pull inside the workspace picks it up; the baked copy is the first-boot fallback). Only exact versions are honored deterministically — a dist-tag like 'latest' reinstalls on every run. @openai/codex is intentionally omitted: npm reinstall would clobber its /usr/local/bin/codex launcher shim, and it is under active integration. t3 is omitted because the running GUI only picks up a new binary on the next container start.",
+  "packages": {
+    "@anthropic-ai/claude-code": "2.1.212"
+  }
+}

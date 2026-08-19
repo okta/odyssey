@@ -11,8 +11,10 @@
  */
 
 import { MenuItem, MenuItemProps, MenuList } from "@okta/odyssey-react-mui";
+import { DeleteIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
+import { staticBoardParameters } from "../../../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../../../Fields/fieldComponentPropsMetaData.js";
 
@@ -98,50 +100,28 @@ const BaseStory = (props: MenuItemProps) => {
   );
 };
 
-export const Simple: StoryObj<MenuItemProps> = {
+export const Playground: StoryObj<MenuItemProps> = {
   render: BaseStory,
 };
 
-export const Destructive: StoryObj<MenuItemProps> = {
-  args: {
-    variant: "destructive",
-  },
-  render: BaseStory,
-};
-
-export const Disabled: StoryObj<MenuItemProps> = {
-  args: {
-    isDisabled: true,
-  },
-  render: BaseStory,
-};
-
-export const Selected: StoryObj<MenuItemProps> = {
-  args: {
-    isSelected: true,
-  },
-  render: function C(props: MenuItemProps) {
-    return <BaseStory {...props} />;
-  },
-};
-
-export const Focused: StoryObj<MenuItemProps> = {
-  parameters: {
-    docs: {
-      description: {
-        story: "This `MenuItem` will receive focus when the page loads",
-      },
-    },
-  },
-  args: {
-    hasInitialFocus: true,
-    value: "",
-  },
-  render: (args) => {
+export const AllStates: StoryObj<MenuItemProps> = {
+  parameters: staticBoardParameters,
+  render: function C() {
     return (
       <MenuList>
-        <MenuItem>Not Focused</MenuItem>
-        <MenuItem {...args} />
+        <MenuItem>Default</MenuItem>
+        <MenuItem>
+          <SettingsIcon /> Default with icon
+        </MenuItem>
+        <MenuItem variant="destructive">Destructive</MenuItem>
+        {/* MenuItem never renders an icon of its own. The destructive variant
+            only recolors, so a consumer-supplied icon has to inherit the danger
+            color for the variant to read as destructive. */}
+        <MenuItem variant="destructive">
+          <DeleteIcon /> Destructive with icon
+        </MenuItem>
+        <MenuItem isDisabled>Disabled</MenuItem>
+        <MenuItem isSelected>Selected</MenuItem>
       </MenuList>
     );
   },
