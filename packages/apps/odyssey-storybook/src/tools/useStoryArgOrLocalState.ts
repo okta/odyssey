@@ -16,6 +16,9 @@ import { useArgs, useState } from "storybook/preview-api";
 /**
  * Provides a stateful value that uses Storybook args in Canvas,
  * falls back to local state for non-default stories when rendered in Docs.
+ *
+ * `defaultStoryName` names the args-driven story, which by convention is
+ * `Playground`. Components not yet on that convention pass their own name.
  */
 export function useStoryArgOrLocalState<
   TArgs extends Record<string, unknown>,
@@ -32,7 +35,7 @@ export function useStoryArgOrLocalState<
     context,
     argKey,
     defaultValue,
-    defaultStoryName = "Default",
+    defaultStoryName = "Playground",
   } = params;
   const isDocs = context.viewMode === "docs";
   const isDefaultStory = context.name === defaultStoryName;

@@ -1,5 +1,13 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "eslint"
+      }
+    }
+  ],
   "namedInputs": {
     "default": [
       "{projectRoot}/**/*",
@@ -15,12 +23,20 @@
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
       "!{projectRoot}/.storybook/**/*"
     ],
+    "formatting": [
+      "{workspaceRoot}/**/*",
+      "!{workspaceRoot}/**/dist/**/*",
+      "!{workspaceRoot}/**/*.generated.*"
+    ],
     "full-source": [
       "{projectRoot}/**/*",
       "!{projectRoot}/**/LICENSE*",
       "sharedGlobals"
     ],
     "sharedGlobals": [
+      "{workspaceRoot}/.bacon.yml",
+      "{workspaceRoot}/scripts/setup.sh",
+      "{workspaceRoot}/scripts/util.sh",
       "{workspaceRoot}/yarn.lock",
       "{workspaceRoot}/.yarnrc.yml",
       "{workspaceRoot}/.nvmrc",
@@ -28,28 +44,57 @@
       "{workspaceRoot}/babel.config.*",
       "{workspaceRoot}/.browserslistrc",
       "{workspaceRoot}/package.json",
-      { "env": "NODE_ENV" },
-      { "env": "BROWSERSLIST_ENV" },
-      { "env": "ODYSSEY_BUILD_MODE" },
-      { "env": "ODYSSEY_ICONS_TYPE" }
+      {
+        "env": "NODE_ENV"
+      },
+      {
+        "env": "BROWSERSLIST_ENV"
+      },
+      {
+        "env": "ODYSSEY_BUILD_MODE"
+      },
+      {
+        "env": "ODYSSEY_ICONS_TYPE"
+      }
     ]
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"],
-      "outputs": ["{projectRoot}/dist"],
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "outputs": [
+        "{projectRoot}/dist",
+        "{projectRoot}/src/properties/ts"
+      ],
       "cache": true
     },
     "typecheck": {
-      "dependsOn": ["^build"],
-      "inputs": ["default", "^production"],
+      "dependsOn": [
+        "^build",
+        "build"
+      ],
+      "inputs": [
+        "default",
+        "^production"
+      ],
       "cache": true
     },
     "test": {
-      "dependsOn": ["^build"],
-      "inputs": ["default", "^production"],
+      "dependsOn": [
+        "^build",
+        "build"
+      ],
+      "inputs": [
+        "default",
+        "^production"
+      ],
       "cache": true
     }
-  }
+  },
+  "analytics": false
 }

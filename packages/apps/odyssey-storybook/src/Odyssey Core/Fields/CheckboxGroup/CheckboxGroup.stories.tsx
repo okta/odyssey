@@ -18,6 +18,12 @@ import {
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StorySection,
+} from "../../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
@@ -170,59 +176,96 @@ const GroupTemplate: Story = {
   },
 };
 
-export const Default: Story = {
+export const Playground: Story = {
   ...GroupTemplate,
 };
 
-export const Disabled: Story = {
-  ...GroupTemplate,
-  parameters: {
-    controls: {
-      exclude: ["isDefaultChecked", "isIndeterminate"],
-    },
+export const AllStates: Story = {
+  parameters: staticBoardParameters,
+  args: {} as CheckboxGroupProps, // This is a hack
+  render: function C() {
+    const groupCheckboxes = () => [
+      <Checkbox
+        key="item-1"
+        label="Item label 1"
+        name="item-1"
+        value="item-1"
+      />,
+      <Checkbox
+        key="item-2"
+        label="Item label 2"
+        name="item-2"
+        value="item-2"
+      />,
+      <Checkbox
+        key="item-3"
+        label="Item label 3"
+        name="item-3"
+        value="item-3"
+      />,
+    ];
+
+    return (
+      <StorySection title="Every group-level state. Per-checkbox composition lives in the dedicated stories below.">
+        <StoryGrid columns={2}>
+          <StoryCell label="default">
+            <CheckboxGroup label="Label">{groupCheckboxes()}</CheckboxGroup>
+          </StoryCell>
+
+          <StoryCell label="disabled">
+            <CheckboxGroup isDisabled label="Label">
+              {groupCheckboxes()}
+            </CheckboxGroup>
+          </StoryCell>
+
+          <StoryCell label="read-only">
+            <CheckboxGroup isReadOnly label="Label">
+              {groupCheckboxes()}
+            </CheckboxGroup>
+          </StoryCell>
+
+          <StoryCell label="required">
+            <CheckboxGroup isRequired label="Label">
+              {groupCheckboxes()}
+            </CheckboxGroup>
+          </StoryCell>
+
+          <StoryCell label="hint">
+            <CheckboxGroup hint="Hint text" label="Label">
+              {groupCheckboxes()}
+            </CheckboxGroup>
+          </StoryCell>
+
+          <StoryCell label="hint with link">
+            <CheckboxGroup
+              hint="Hint text"
+              HintLinkComponent={<Link href="#link">Link</Link>}
+              label="Label"
+            >
+              {groupCheckboxes()}
+            </CheckboxGroup>
+          </StoryCell>
+
+          <StoryCell label="error">
+            <CheckboxGroup errorMessage="Error Message" label="Label">
+              {groupCheckboxes()}
+            </CheckboxGroup>
+          </StoryCell>
+
+          <StoryCell label="error with list">
+            <CheckboxGroup
+              errorMessage="Error Message"
+              errorMessageList={["Error A"]}
+              isRequired
+              label="Label"
+            >
+              {groupCheckboxes()}
+            </CheckboxGroup>
+          </StoryCell>
+        </StoryGrid>
+      </StorySection>
+    );
   },
-  args: {
-    isDisabled: true,
-  } as CheckboxGroupProps, // This is a hack
-};
-
-export const ReadOnly: Story = {
-  ...GroupTemplate,
-  parameters: {
-    controls: {
-      exclude: ["isDefaultChecked", "isIndeterminate"],
-    },
-  },
-  args: {
-    isReadOnly: true,
-  } as CheckboxGroupProps, // This is a hack
-};
-
-export const Error: Story = {
-  ...GroupTemplate,
-  parameters: {
-    controls: {
-      exclude: ["isDefaultChecked", "isIndeterminate"],
-    },
-    docs: {
-      description: {
-        story:
-          "Unlike Radio Buttons, Checkboxes validate individually, not as a group. Validity must be set individually on each checkbox using the `isInvalid` prop, even if the group has an `errorMessage` set.",
-      },
-    },
-  },
-  args: {
-    errorMessage: "Error Message",
-  } as CheckboxGroupProps, // This is a hack
-};
-
-export const ErrorsList: Story = {
-  ...GroupTemplate,
-  args: {
-    isRequired: true,
-    errorMessage: "Error Message",
-    errorMessageList: ["Error A"],
-  } as CheckboxGroupProps, // This is a hack
 };
 
 export const ErrorWithIndividualHint: Story = {
@@ -251,28 +294,6 @@ export const ErrorWithIndividualHint: Story = {
       </CheckboxGroup>
     );
   },
-};
-
-export const Hint: Story = {
-  ...GroupTemplate,
-  args: {
-    hint: "Hint text",
-  } as CheckboxGroupProps, // This is a hack
-};
-
-export const HintLink: Story = {
-  ...GroupTemplate,
-  args: {
-    hint: "Hint text",
-    HintLinkComponent: <Link href="#link">Link</Link>,
-  } as CheckboxGroupProps, // This is a hack
-};
-
-export const Required: Story = {
-  ...GroupTemplate,
-  args: {
-    isRequired: true,
-  } as CheckboxGroupProps, // This is a hack
 };
 
 export const MixedError: Story = {

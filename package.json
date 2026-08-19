@@ -7,25 +7,38 @@
   "workspaces": [
     "packages/**/*"
   ],
+  "nx": {
+    "includedScripts": [],
+    "targets": {
+      "prettier-check": {
+        "command": "yarn prettier-check",
+        "inputs": [
+          "formatting"
+        ],
+        "outputs": [],
+        "cache": true
+      }
+    }
+  },
   "engines": {
     "yarn": "^4.6.0",
-    "node": "<=22"
+    "node": ">=24"
   },
   "scripts": {
     "blueprint-validate": "yarn workspace @okta/odyssey-blueprint validate **/*.{yaml,yml,json}",
     "build": "nx run-many -t build --exclude=@okta/odyssey-icons,@okta/odyssey-storybook,@okta/odyssey-prototype",
     "create-contribution": "ok-ui create-package --from ./packages/contributions/example-components --output-dir ./packages/contributions",
-    "eslint": "NODE_OPTIONS=--max-old-space-size=6144 eslint .",
+    "eslint": "nx run-many -t eslint",
     "generate:i18n:pseudoLocaleProperties": "yarn nx build @okta/odyssey-cli && yarn workspaces foreach --all --parallel run generate:i18n:pseudoLocaleProperties",
     "generate:i18n": "yarn nx build @okta/odyssey-cli && yarn workspaces foreach --all --parallel run generate:i18n",
     "generate:blueprint-schema": "yarn workspace @okta/odyssey-blueprint generate-json-schema",
     "generate:icons": "yarn workspace @okta/odyssey-icons build && yarn workspace @okta/odyssey-react-mui generate:icons",
     "lerna-publish": "lerna publish from-package --no-verify-registry --no-push --force-publish --ignore-changes 'packages/contributions/**' --ignore-changes 'packages/platform/**'",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish --ignore-changes 'packages/contributions/**' --ignore-changes 'packages/platform/**'",
-    "lint:fix": "HAS_SORTING=true yarn run eslint --fix",
-    "lint": "yarn eslint && yarn prettier-check",
+    "lint:fix": "HAS_SORTING=true nx run-many -t eslint --fix",
+    "lint": "yarn eslint && nx run odyssey:prettier-check",
     "playwright-install": "yarn workspaces foreach --all run playwright-install",
-    "postinstall": "yarn build",
+    "postinstall": "husky && yarn workspace @okta/odyssey-contributions-promotion-check build",
     "prettier-check": "prettier --ignore-unknown --log-level warn --check .",
     "prettier-write": "prettier --ignore-unknown --log-level warn --write .",
     "start:dev": "yarn workspaces foreach --all --parallel --interlaced --jobs unlimited --exclude=@okta/odyssey-icons --exclude=@okta/odyssey-storybook --exclude=@okta/odyssey-prototype run dev",
@@ -38,7 +51,8 @@
     "provision:contributions": "yarn workspaces foreach --all --interlaced run provision"
   },
   "devDependencies": {
-    "@nx/eslint-plugin": "20.0.8",
+    "@nx/eslint": "23.1.1",
+    "@nx/eslint-plugin": "23.1.1",
     "@okta/odyssey-cli": "workspace:*",
     "@okta/odyssey-eslint-config": "workspace:*",
     "@okta/odyssey-storybook": "workspace:^",
@@ -48,11 +62,12 @@
     "decode-uri-component": "^0.4.1",
     "eslint": "^9.31.0",
     "husky": "^9.1.6",
-    "lerna": "^8.1.9",
+    "jiti": "^2.4.2",
+    "lerna": "^10.0.0",
     "lint-staged": "^15.2.10",
     "loader-utils": "^3.2.1",
     "nwsapi": "^2.2.7",
-    "nx": "20.0.8",
+    "nx": "23.1.1",
     "prettier": "^3.3.3",
     "prompts": "^2.4.2",
     "wait-on": "^7.2.0",

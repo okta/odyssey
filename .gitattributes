@@ -1,0 +1,6 @@
+# The decision-records index is an append-only log that many PRs add rows to at
+# the same place (the newest date, at the bottom) and share a tags list. Use
+# git's built-in union merge driver so concurrent additions from different
+# branches are both kept on merge/rebase instead of colliding. See
+# docs/decisions/2026-08-14-decisions-index-conflict-resistant-format.md
+docs/decisions/README.md merge=union

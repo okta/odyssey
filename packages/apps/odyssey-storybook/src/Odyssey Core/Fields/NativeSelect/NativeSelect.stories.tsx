@@ -13,8 +13,14 @@
 import { SelectChangeEvent } from "@mui/material";
 import { Link, NativeSelect, NativeSelectProps } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
+import { action } from "storybook/actions";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StorySection,
+} from "../../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
@@ -155,8 +161,8 @@ const storybookMeta: Meta<typeof NativeSelect> = {
     isFullWidth: false,
     isOptional: false,
     label: "Label",
-    onBlur: fn(),
-    onFocus: fn(),
+    onBlur: action("onBlur"),
+    onFocus: action("onFocus"),
     value: "Option A",
   },
 };
@@ -235,30 +241,82 @@ const multiTemplate: StoryObj<typeof NativeSelect> = {
   },
 };
 
-export const Default: StoryObj<typeof NativeSelect> = {
+export const Playground: StoryObj<typeof NativeSelect> = {
   ...singleTemplate,
-  tags: ["!autodocs"],
 };
 
-export const Disabled: StoryObj<typeof NativeSelect> = {
-  ...singleTemplate,
-  args: {
-    isDisabled: true,
-  },
-};
+export const AllStates: StoryObj<typeof NativeSelect> = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every field-level state. Grouped options, multiple selection, and uncontrolled behavior live in the dedicated stories below.">
+        <StoryGrid columns={2}>
+          <StoryCell label="default">
+            <NativeSelect
+              children={baseOptions}
+              defaultValue="Option A"
+              hint="Hint text"
+              id="native-select-default"
+              label="Label"
+            />
+          </StoryCell>
 
-export const Error: StoryObj<typeof NativeSelect> = {
-  ...singleTemplate,
-  args: {
-    errorMessage: "Select an option.",
-  },
-};
+          <StoryCell label="disabled">
+            <NativeSelect
+              children={baseOptions}
+              defaultValue="Option A"
+              hint="Hint text"
+              id="native-select-disabled"
+              isDisabled
+              label="Label"
+            />
+          </StoryCell>
 
-export const ErrorsList: StoryObj<typeof NativeSelect> = {
-  ...singleTemplate,
-  args: {
-    errorMessage: "Select an option.",
-    errorMessageList: ["Error A", "Error B"],
+          <StoryCell label="optional">
+            <NativeSelect
+              children={baseOptions}
+              defaultValue="Option A"
+              hint="Hint text"
+              id="native-select-optional"
+              isOptional
+              label="Label"
+            />
+          </StoryCell>
+
+          <StoryCell label="hint with link">
+            <NativeSelect
+              children={baseOptions}
+              defaultValue="Option A"
+              hint="Hint text"
+              HintLinkComponent={<Link href="#link">Learn more</Link>}
+              id="native-select-hint-link"
+              label="Label"
+            />
+          </StoryCell>
+
+          <StoryCell label="error">
+            <NativeSelect
+              children={baseOptions}
+              defaultValue="Option A"
+              errorMessage="Select an option."
+              id="native-select-error"
+              label="Label"
+            />
+          </StoryCell>
+
+          <StoryCell label="error with list">
+            <NativeSelect
+              children={baseOptions}
+              defaultValue="Option A"
+              errorMessage="Select an option."
+              errorMessageList={["Error A", "Error B"]}
+              id="native-select-error-list"
+              label="Label"
+            />
+          </StoryCell>
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };
 
@@ -289,20 +347,6 @@ export const Multi: StoryObj<typeof NativeSelect> = {
   ...multiTemplate,
   argTypes: {
     value: { control: { type: "check" }, options: valueControlOptions },
-  },
-};
-
-export const Optional: StoryObj<typeof NativeSelect> = {
-  ...singleTemplate,
-  args: {
-    isOptional: true,
-  },
-};
-
-export const HintLink: StoryObj<typeof NativeSelect> = {
-  ...singleTemplate,
-  args: {
-    HintLinkComponent: <Link href="#link">Learn more</Link>,
   },
 };
 

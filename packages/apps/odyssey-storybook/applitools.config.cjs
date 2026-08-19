@@ -44,7 +44,11 @@ const applitoolsConfig = {
   matchLevel: "Strict",
   parentBranchName,
   puppeteerOptions: {
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+    ],
     headless: true,
     ...(chromeExecutablePath ? { executablePath: chromeExecutablePath } : {}),
   },

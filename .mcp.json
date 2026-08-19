@@ -1,0 +1,114 @@
+{
+  "mcpServers": {
+    "playwright-1": {
+      "type": "stdio",
+      "command": "yarn",
+      "args": [
+        "workspace",
+        "@okta/odyssey-prototype",
+        "playwright-mcp",
+        "--user-data-dir",
+        "${HOME}/.claude/playwright-profiles/1"
+      ]
+    },
+    "playwright-2": {
+      "type": "stdio",
+      "command": "yarn",
+      "args": [
+        "workspace",
+        "@okta/odyssey-prototype",
+        "playwright-mcp",
+        "--user-data-dir",
+        "${HOME}/.claude/playwright-profiles/2"
+      ]
+    },
+    "playwright-3": {
+      "type": "stdio",
+      "command": "yarn",
+      "args": [
+        "workspace",
+        "@okta/odyssey-prototype",
+        "playwright-mcp",
+        "--user-data-dir",
+        "${HOME}/.claude/playwright-profiles/3"
+      ]
+    },
+    "playwright-4": {
+      "type": "stdio",
+      "command": "yarn",
+      "args": [
+        "workspace",
+        "@okta/odyssey-prototype",
+        "playwright-mcp",
+        "--user-data-dir",
+        "${HOME}/.claude/playwright-profiles/4"
+      ]
+    },
+    "playwright-5": {
+      "type": "stdio",
+      "command": "yarn",
+      "args": [
+        "workspace",
+        "@okta/odyssey-prototype",
+        "playwright-mcp",
+        "--user-data-dir",
+        "${HOME}/.claude/playwright-profiles/5"
+      ]
+    },
+    "playwright-6": {
+      "type": "stdio",
+      "command": "yarn",
+      "args": [
+        "workspace",
+        "@okta/odyssey-prototype",
+        "playwright-mcp",
+        "--user-data-dir",
+        "${HOME}/.claude/playwright-profiles/6"
+      ]
+    },
+    "playwright-7": {
+      "type": "stdio",
+      "command": "yarn",
+      "args": [
+        "workspace",
+        "@okta/odyssey-prototype",
+        "playwright-mcp",
+        "--user-data-dir",
+        "${HOME}/.claude/playwright-profiles/7"
+      ]
+    },
+    "playwright-8": {
+      "type": "stdio",
+      "command": "yarn",
+      "args": [
+        "workspace",
+        "@okta/odyssey-prototype",
+        "playwright-mcp",
+        "--user-data-dir",
+        "${HOME}/.claude/playwright-profiles/8"
+      ]
+    },
+    "playwright-9": {
+      "type": "stdio",
+      "command": "yarn",
+      "args": [
+        "workspace",
+        "@okta/odyssey-prototype",
+        "playwright-mcp",
+        "--user-data-dir",
+        "${HOME}/.claude/playwright-profiles/9"
+      ]
+    },
+    "playwright-10": {
+      "type": "stdio",
+      "command": "yarn",
+      "args": [
+        "workspace",
+        "@okta/odyssey-prototype",
+        "playwright-mcp",
+        "--user-data-dir",
+        "${HOME}/.claude/playwright-profiles/10"
+      ]
+    }
+  }
+}

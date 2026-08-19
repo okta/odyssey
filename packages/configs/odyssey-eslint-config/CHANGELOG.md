@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.67.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.66.1...v1.67.0) (2026-08-19)
+
+### Features
+
+- add @okta/extractor pipeline package ([#678](https://github.com/atko-eng/odyssey-design-system/issues/678)) ([bfc3777](https://github.com/atko-eng/odyssey-design-system/commit/bfc3777ad43ee81a66bdf673e3fda4da7c64b980)), closes [post-#674](https://github.com/post-/issues/674) [post-#674](https://github.com/post-/issues/674) [#674](https://github.com/atko-eng/odyssey-design-system/issues/674)
+- Adds self-hosted Nx remote cache ([#671](https://github.com/atko-eng/odyssey-design-system/issues/671)) ([e908e5f](https://github.com/atko-eng/odyssey-design-system/commit/e908e5f189d898f996cc3a1f9c320a65d827e3b7))
+- migrate MCP package to skills ([#653](https://github.com/atko-eng/odyssey-design-system/issues/653)) ([f773fb3](https://github.com/atko-eng/odyssey-design-system/commit/f773fb3eb2df7f1f0095d84063585df8b3a2de78))
+
 ## [1.66.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.0...v1.66.0) (2026-08-05)
 
 ### Features

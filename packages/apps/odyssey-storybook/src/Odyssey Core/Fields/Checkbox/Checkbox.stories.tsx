@@ -17,8 +17,14 @@ import {
   deepmerge,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
+import { action } from "storybook/actions";
 
+import {
+  staticBoardParameters,
+  StoryFieldCell,
+  StoryGrid,
+  StorySection,
+} from "../../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
@@ -171,8 +177,8 @@ const meta = {
   args: {
     isReadOnly: false,
     validity: "inherit",
-    onBlur: fn(),
-    onChange: fn(),
+    onBlur: action("onBlur"),
+    onChange: action("onChange"),
   },
 } satisfies Meta<typeof Checkbox>;
 
@@ -216,7 +222,7 @@ const CheckboxTemplate: Story = {
   },
 };
 
-export const Default: Story = {
+export const Playground: Story = {
   ...deepmerge(CheckboxTemplate, {
     parameters: {
       docs: {
@@ -226,100 +232,54 @@ export const Default: Story = {
         },
       },
     },
-    tags: ["!autodocs"],
   }),
 };
 
-export const Required: Story = {
-  ...deepmerge(CheckboxTemplate, {
-    parameters: {
-      docs: {
-        description: {
-          story:
-            "Checkboxes are optional by default, and there are few circumstances in which a checkbox is required. Odyssey provides an `isRequired` boolean that, when set to `true`, makes the checkbox required. Note that when a checkbox is required, it must be checked for the form to submit, so this is only appropriate for checkboxes that must be checked to continue, such as a confirmation.",
-        },
-      },
-    },
-    args: {
-      isRequired: true,
-      isChecked: false,
-    },
-  }),
-};
+export const AllStates: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every checkbox state.">
+        <StoryGrid columns={3}>
+          <StoryFieldCell>
+            <Checkbox label="Unchecked" />
+          </StoryFieldCell>
 
-export const Checked: Story = {
-  ...deepmerge(CheckboxTemplate, {
-    args: {
-      isChecked: true,
-    },
-  }),
-};
+          <StoryFieldCell>
+            <Checkbox isDefaultChecked label="Checked" />
+          </StoryFieldCell>
 
-export const Disabled: Story = {
-  ...deepmerge(CheckboxTemplate, {
-    parameters: {
-      docs: {
-        description: {
-          story:
-            "Checkboxes may be disabled individually or as a group. The values of disabled inputs will not be submitted.",
-        },
-      },
-    },
-    args: {
-      isDisabled: true,
-      isChecked: false,
-    },
-  }),
-};
+          <StoryFieldCell>
+            <Checkbox isIndeterminate label="Indeterminate" />
+          </StoryFieldCell>
 
-export const Indeterminate: Story = {
-  ...deepmerge(CheckboxTemplate, {
-    parameters: {
-      docs: {
-        description: {
-          story:
-            "In the case of nested checkboxes, an indeterminate state may be required. Note that this state is visual- only and will be submitted as either checked or unchecked depending on the internal state.",
-        },
-      },
-    },
-    args: {
-      isIndeterminate: true,
-      isChecked: true,
-    },
-  }),
-};
+          <StoryFieldCell>
+            <Checkbox isDisabled label="Disabled" />
+          </StoryFieldCell>
 
-export const Invalid: Story = {
-  ...deepmerge(CheckboxTemplate, {
-    args: {
-      validity: "invalid",
-      isChecked: false,
-    },
-  }),
-};
+          <StoryFieldCell>
+            <Checkbox isDefaultChecked isDisabled label="Disabled checked" />
+          </StoryFieldCell>
 
-export const ReadOnly: Story = {
-  ...deepmerge(CheckboxTemplate, {
-    args: {
-      isReadOnly: true,
-      isChecked: true,
-    },
-  }),
-};
+          <StoryFieldCell>
+            <Checkbox label="Invalid" validity="invalid" />
+          </StoryFieldCell>
 
-export const Hint: Story = {
-  ...deepmerge(CheckboxTemplate, {
-    parameters: {
-      docs: {
-        description: {
-          story: "hint provides helper text to the Checkbox",
-        },
-      },
-    },
-    args: {
-      hint: "Hint text",
-    },
-  }),
+          <StoryFieldCell>
+            <Checkbox isDefaultChecked isReadOnly label="Read-only" />
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <Checkbox isRequired label="Required" />
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <Checkbox hint="Hint text" label="With hint" />
+          </StoryFieldCell>
+        </StoryGrid>
+      </StorySection>
+    );
+  },
 };
 
 export const Uncontrolled: Story = {

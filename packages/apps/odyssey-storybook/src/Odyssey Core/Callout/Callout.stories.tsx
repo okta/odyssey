@@ -17,8 +17,13 @@ import {
   calloutSeverityValues,
 } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { fn } from "storybook/test";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const storybookMeta: Meta<CalloutProps> = {
@@ -141,7 +146,7 @@ const storybookMeta: Meta<CalloutProps> = {
 
 export default storybookMeta;
 
-export const Info: StoryObj<CalloutProps> = {
+export const Playground: StoryObj<CalloutProps> = {
   args: {
     role: "status",
     severity: "info",
@@ -150,30 +155,25 @@ export const Info: StoryObj<CalloutProps> = {
   },
 };
 
-export const Error: StoryObj<CalloutProps> = {
-  args: {
-    role: "alert",
-    severity: "error",
-    title: "Safety checks failed",
-    text: "Reconfigure the fuel mixture ratios and perform safety checks again.",
-  },
-};
-
-export const Warning: StoryObj<CalloutProps> = {
-  args: {
-    role: "status",
-    severity: "warning",
-    title: "Safety checks incomplete",
-    text: "Complete all safety checks before requesting approval to launch your mission.",
-  },
-};
-
-export const Success: StoryObj<CalloutProps> = {
-  args: {
-    role: "status",
-    severity: "success",
-    title: "Approved for launch",
-    text: "Safety checks are complete. Your mission is ready for liftoff.",
+export const AllVariants: StoryObj<CalloutProps> = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every severity.">
+        <StoryGrid columns={2}>
+          {calloutSeverityValues.map((severity) => (
+            <StoryCell key={severity} label={severity}>
+              <Callout
+                role={severity === "error" ? "alert" : "status"}
+                severity={severity}
+                text={`This is a ${severity} callout.`}
+                title={`${severity} title`}
+              />
+            </StoryCell>
+          ))}
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };
 
@@ -207,48 +207,11 @@ export const ChildrenWithList: StoryObj<CalloutProps> = {
     title: "Delivery details needed to complete your user profile",
     text: undefined,
     children: (
-      <>
-        <ul>
-          <li>Secondary email</li>
-          <li>Street address</li>
-          <li>City</li>
-        </ul>
-      </>
+      <ul>
+        <li>Secondary email</li>
+        <li>Street address</li>
+        <li>City</li>
+      </ul>
     ),
-  },
-};
-
-export const ChildrenWithLink: StoryObj<CalloutProps> = {
-  args: {
-    role: "alert",
-    severity: "error",
-    title: "Safety checks failed",
-    text: undefined,
-    children:
-      "There is an issue with the fuel mixture ratios. Reconfigure the fuel mixture and perform the safety checks again.",
-    linkText: "Visit fueling console",
-    linkUrl: "#",
-  },
-};
-
-export const TitleWithLink: StoryObj<CalloutProps> = {
-  args: {
-    role: "alert",
-    severity: "error",
-    title: "Safety checks failed",
-    text: undefined,
-    linkText: "Visit fueling console",
-    linkUrl: "#",
-  },
-};
-
-export const TitleWithLinkWithOnLinkClick: StoryObj<CalloutProps> = {
-  args: {
-    linkText: "Visit fueling console",
-    onLinkClick: fn(),
-    role: "alert",
-    severity: "error",
-    text: undefined,
-    title: "Safety checks failed",
   },
 };

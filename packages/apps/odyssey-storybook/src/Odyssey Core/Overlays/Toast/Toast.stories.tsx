@@ -23,6 +23,7 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import { useMemo } from "react";
 import { useCallback, useState } from "storybook/preview-api";
 
+import { staticBoardParameters } from "../../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 
@@ -171,7 +172,7 @@ const Single: Story = {
       context,
       argKey: "isVisible",
       defaultValue: args.isVisible,
-      defaultStoryName: "Info",
+      defaultStoryName: "Playground",
     });
 
     const showToast = useCallback(() => {
@@ -197,7 +198,7 @@ const Single: Story = {
   },
 };
 
-export const Info: Story = {
+export const Playground: Story = {
   ...Single,
   args: {
     text: "The mission to Sagittarius A is set for January 7.",
@@ -205,40 +206,34 @@ export const Info: Story = {
   },
 };
 
-export const ErrorToast: Story = {
-  ...Single,
-  name: "Error",
-  args: {
-    text: "Security breach in Hangar 18",
-    role: "alert",
-    severity: "error",
-  },
-};
-
-export const Warning: Story = {
-  ...Single,
-  args: {
-    text: "Severe solar winds may delay local system flights",
-    role: "status",
-    severity: "warning",
-  },
-};
-
-export const Success: Story = {
-  ...Single,
-  args: {
-    text: "Docking completed",
-    role: "status",
-    severity: "success",
-  },
-};
-
-export const Dismissible: Story = {
-  ...Single,
-  args: {
-    isDismissable: true,
-    linkText: "View report",
-    linkUrl: "#",
+export const AllVariants: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <ToastStack>
+        {toastSeverityValues.flatMap((severity) =>
+          [false, true].map((isDismissable) => (
+            // autoHideDuration={0} disables auto-hide so every severity stays on
+            // screen for the Applitools capture instead of dismissing after 6s.
+            <Toast
+              autoHideDuration={0}
+              isDismissable={isDismissable}
+              isVisible
+              key={`${severity}-${isDismissable ? "dismissable" : "plain"}`}
+              linkText={isDismissable ? "View report" : undefined}
+              linkUrl={isDismissable ? "#" : undefined}
+              role={severity === "error" ? "alert" : "status"}
+              severity={severity}
+              text={
+                isDismissable
+                  ? `This is a dismissable ${severity} toast.`
+                  : `This is a ${severity} toast.`
+              }
+            />
+          )),
+        )}
+      </ToastStack>
+    );
   },
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.66.1",
+  "version": "1.67.0",
   "description": "Documentation for Odyssey, Okta's design system",
   "nx": {
     "tags": [
@@ -26,7 +26,7 @@
   "sideEffects": false,
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "repository": {
     "type": "git",
@@ -44,7 +44,9 @@
     "@okta/odyssey-contributions-iga-components": "workspace:*",
     "@okta/odyssey-contributions-oin-components": "workspace:*",
     "@okta/odyssey-contributions-opa-components": "workspace:*",
+    "@okta/odyssey-contributions-policy-rules-components": "workspace:*",
     "@okta/odyssey-contributions-resource-access-policy-components": "workspace:*",
+    "@okta/odyssey-contributions-ud-components": "workspace:*",
     "@okta/odyssey-contributions-ui-component-identifier": "workspace:*",
     "@okta/odyssey-contributions-workflows-components": "workspace:*",
     "@okta/odyssey-contributions-wp-components": "workspace:*",
@@ -80,8 +82,8 @@
   },
   "scripts": {
     "build": "storybook build --output-dir dist",
-    "ci:server": "http-server dist --port 6006 --silent",
-    "ci:visualRegressionTest": "yarn build && yarn concurrently --kill-others --success first --names \"STORYBOOK-SERVER,VISUAL-REGRESSION-TEST\" --prefix-colors \"magenta,green\" npm:ci:server \"wait-on tcp:127.0.0.1:6006 && yarn eyes-storybook --conf ./applitools.config.cjs -u http://127.0.0.1:6006\"",
+    "ci:server": "http-server dist --port 6006",
+    "ci:visualRegressionTest": "yarn concurrently --kill-others --success first --names \"STORYBOOK-SERVER,VISUAL-REGRESSION-TEST\" --prefix-colors \"magenta,green\" npm:ci:server \"wait-on tcp:127.0.0.1:6006 && yarn eyes-storybook --conf ./applitools.config.cjs -u http://127.0.0.1:6006\"",
     "dev:server": "http-server dist --port 6006",
     "dev:storybook": "storybook dev -p 6006",
     "dev:types": "tsc --build --noEmit --watch",

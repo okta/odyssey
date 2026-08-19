@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.67.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.66.1...v1.67.0) (2026-08-19)
+
+### Bug Fixes
+
+- give Drawer close button accessible name ([#634](https://github.com/atko-eng/odyssey-design-system/issues/634)) ([c0896f2](https://github.com/atko-eng/odyssey-design-system/commit/c0896f293ecdc5f6d5a2e4a42c43547ca9de2d70))
+- thin CircularProgress stroke to a 1:12 ratio ([#707](https://github.com/atko-eng/odyssey-design-system/issues/707)) ([ea5395c](https://github.com/atko-eng/odyssey-design-system/commit/ea5395cad54bd09ec1dac68232eb5cdce63449ba))
+
+### Features
+
+- expose search query to DataView cells ([#613](https://github.com/atko-eng/odyssey-design-system/issues/613)) ([00c2b57](https://github.com/atko-eng/odyssey-design-system/commit/00c2b578cd65cc5bfe04e2c1fdbe2743057893c7))
+- translations for odyssey-design-system:enduser ([#723](https://github.com/atko-eng/odyssey-design-system/issues/723)) ([2dfe63b](https://github.com/atko-eng/odyssey-design-system/commit/2dfe63b19bd1014c41d577ea3cb86ffdcb5927ce))
+
 ## [1.66.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.65.0...v1.66.0) (2026-08-05)
 
 ### Features

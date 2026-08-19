@@ -13,8 +13,17 @@
 import { Autocomplete, Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { SyntheticEvent, useCallback, useState } from "react";
-import { fn, screen, userEvent, within } from "storybook/test";
+import { action } from "storybook/actions";
+import { screen, userEvent, within } from "storybook/test";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryContrastBoard,
+  StoryFilledWidth,
+  StoryGrid,
+  StorySection,
+} from "../../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 import { LargeDataSet, largeDataSet } from "./large-data-collection.js";
@@ -268,10 +277,10 @@ const storybookMeta: Meta<typeof Autocomplete> = {
     hint: "Select your destination in the Sol system.",
     id: "testId",
     label: "Destination",
-    onBlur: fn(),
-    onChange: fn(),
-    onFocus: fn(),
-    onInputChange: fn(),
+    onBlur: action("onBlur"),
+    onChange: action("onChange"),
+    onFocus: action("onFocus"),
+    onInputChange: action("onInputChange"),
     options: stations,
   },
 };
@@ -281,49 +290,12 @@ export default storybookMeta;
 type StationType = { label: string };
 type AutocompleteType = typeof Autocomplete<StationType, boolean, boolean>;
 
-export const Default: StoryObj<AutocompleteType> = {
+export const Playground: StoryObj<AutocompleteType> = {
   play: async ({ canvasElement, step }) => {
     await step("Open dropdown", async () => {
       const canvas = within(canvasElement);
       await userEvent.click(canvas.getByRole("combobox"));
     });
-  },
-};
-
-export const Disabled: StoryObj<AutocompleteType> = {
-  args: {
-    isDisabled: true,
-    value: { label: "Tycho Station" },
-    getIsOptionEqualToValue: (option, value) => option.label === value.label,
-  },
-};
-
-export const Error: StoryObj<AutocompleteType> = {
-  args: {
-    errorMessage: "Select your destination.",
-  },
-};
-
-export const ErrorsList: StoryObj<AutocompleteType> = {
-  args: {
-    hasMultipleChoices: true,
-    errorMessage: "Select your destination.",
-    errorMessageList: [
-      "Select at least 1 destination",
-      "Select no more than 3 destinations",
-    ],
-  },
-};
-
-export const FullWidth: StoryObj<AutocompleteType> = {
-  args: {
-    isFullWidth: true,
-  },
-};
-
-export const HintLink: StoryObj<AutocompleteType> = {
-  args: {
-    HintLinkComponent: <Link href="#link">Learn more</Link>,
   },
 };
 
@@ -336,7 +308,7 @@ export const IsCustomValueAllowed: StoryObj<AutocompleteType> = {
       },
     },
   },
-  ...Default,
+  ...Playground,
   args: {
     isCustomValueAllowed: true,
   },
@@ -378,38 +350,6 @@ export const Multiple: StoryObj<AutocompleteType> = {
       await userEvent.click(canvas.getByRole("combobox"));
       await userEvent.click(screen.getByRole("option", { name: "Ceres" }));
     });
-  },
-};
-
-export const MultipleDisabled: StoryObj<AutocompleteType> = {
-  args: {
-    hasMultipleChoices: true,
-    isDisabled: true,
-    defaultValue: [{ label: "Tycho Station" }],
-    getIsOptionEqualToValue: (option, value) => option.label === value.label,
-  },
-};
-
-export const MultipleReadOnly: StoryObj<AutocompleteType> = {
-  args: {
-    hasMultipleChoices: true,
-    isReadOnly: true,
-    defaultValue: [{ label: "Tycho Station" }],
-    getIsOptionEqualToValue: (option, value) => option.label === value.label,
-  },
-};
-
-export const Optional: StoryObj<AutocompleteType> = {
-  args: {
-    isOptional: true,
-  },
-};
-
-export const ReadOnly: StoryObj<AutocompleteType> = {
-  args: {
-    isReadOnly: true,
-    defaultValue: { label: "Tycho Station" },
-    getIsOptionEqualToValue: (option, value) => option.label === value.label,
   },
 };
 
@@ -609,5 +549,187 @@ export const ControlledMultipleVirtualizedAutocomplete: StoryObj<
       [],
     );
     return <Autocomplete {...props} onChange={onChange} value={localValue} />;
+  },
+};
+
+export const AllStates: StoryObj<AutocompleteType> = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    const stateOptions = [
+      { label: "Anderson Station" },
+      { label: "Ceres" },
+      { label: "Eros" },
+    ];
+
+    return (
+      <StorySection title="Every prop-driven state an Autocomplete can render.">
+        <StoryGrid columns={3}>
+          <StoryCell label="default">
+            <StoryFilledWidth>
+              <Autocomplete label="Destination" options={stateOptions} />
+            </StoryFilledWidth>
+          </StoryCell>
+
+          <StoryCell label="disabled">
+            <StoryFilledWidth>
+              <Autocomplete
+                isDisabled
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+
+          <StoryCell label="read-only">
+            <StoryFilledWidth>
+              <Autocomplete
+                defaultValue={stateOptions[1]}
+                isReadOnly
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+
+          <StoryCell label="optional">
+            <StoryFilledWidth>
+              <Autocomplete
+                isOptional
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+
+          <StoryCell label="error">
+            <StoryFilledWidth>
+              <Autocomplete
+                errorMessage="Select your destination."
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+
+          <StoryCell label="errors list">
+            <StoryFilledWidth>
+              <Autocomplete
+                errorMessage="Select your destination."
+                errorMessageList={["Error A", "Error B"]}
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+
+          <StoryCell label="hint">
+            <StoryFilledWidth>
+              <Autocomplete
+                hint="Select your destination in the Sol system."
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+
+          <StoryCell label="hint with link">
+            <StoryFilledWidth>
+              <Autocomplete
+                hint="Select your destination in the Sol system."
+                HintLinkComponent={<Link href="#link">Learn more</Link>}
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+
+          <StoryCell label="multi-select">
+            <StoryFilledWidth>
+              <Autocomplete
+                defaultValue={stateOptions.slice(0, 2)}
+                hasMultipleChoices
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+
+          <StoryCell label="multi-select · disabled">
+            <StoryFilledWidth>
+              <Autocomplete
+                defaultValue={stateOptions.slice(0, 2)}
+                hasMultipleChoices
+                isDisabled
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+
+          <StoryCell label="multi-select · read-only">
+            <StoryFilledWidth>
+              <Autocomplete
+                defaultValue={stateOptions.slice(0, 2)}
+                hasMultipleChoices
+                isReadOnly
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+
+          <StoryCell label="multi-select · errors list">
+            <StoryFilledWidth>
+              <Autocomplete
+                errorMessage="Select your destination."
+                errorMessageList={[
+                  "Select at least 1 destination",
+                  "Select no more than 3 destinations",
+                ]}
+                hasMultipleChoices
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+        </StoryGrid>
+
+        <StoryGrid columns={1}>
+          <StoryCell label="full width">
+            <StoryFilledWidth>
+              <Autocomplete
+                isFullWidth
+                label="Destination"
+                options={stateOptions}
+              />
+            </StoryFilledWidth>
+          </StoryCell>
+        </StoryGrid>
+      </StorySection>
+    );
+  },
+};
+
+export const Contrast: StoryObj<AutocompleteType> = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    const contrastOptions = [
+      { label: "Anderson Station" },
+      { label: "Ceres" },
+      { label: "Eros" },
+    ];
+
+    return (
+      <StorySection title="Selected chips in a multi-select shift shade with the surface contrast (white vs gray).">
+        <StoryContrastBoard>
+          <Autocomplete
+            defaultValue={contrastOptions.slice(0, 2)}
+            hasMultipleChoices
+            label="Destination"
+            options={contrastOptions}
+          />
+        </StoryContrastBoard>
+      </StorySection>
+    );
   },
 };

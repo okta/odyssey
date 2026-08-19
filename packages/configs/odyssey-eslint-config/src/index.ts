@@ -22,6 +22,8 @@ import perfectionistPlugin from "eslint-plugin-perfectionist";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import { configs as storybookPluginConfigs } from "eslint-plugin-storybook";
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
 import {
   config as createTsEslintConfig,
   configs as tsEslintConfigs,
@@ -61,6 +63,35 @@ const modifiedReactHooksPlugin = {
 const getPrefixedEslintConfigName = (name: string) =>
   `odyssey-eslint-config/${name}`;
 
+// The @nx/eslint inferred lint target runs `eslint .` with cwd set to each
+// project directory, so process.cwd() would scope the TypeScript project
+// service to a single project and miss workspace-level config files it does not
+// include (e.g. a package's vitest.config.ts). Anchor tsconfigRootDir to the
+// monorepo root so resolution matches a root-level `eslint .`. Only the linted
+// project's own files are loaded per invocation, so memory stays bounded.
+const findWorkspaceRoot = (startDirectory: string): string => {
+  const packageJsonPath = resolve(startDirectory, "package.json");
+
+  if (
+    existsSync(packageJsonPath) &&
+    "workspaces" in
+      (JSON.parse(readFileSync(packageJsonPath, "utf8")) as Record<
+        string,
+        unknown
+      >)
+  ) {
+    return startDirectory;
+  }
+
+  const parentDirectory = dirname(startDirectory);
+
+  return parentDirectory === startDirectory
+    ? process.cwd()
+    : findWorkspaceRoot(parentDirectory);
+};
+
+const workspaceRoot = findWorkspaceRoot(import.meta.dirname);
+
 const eslintConfig = createTsEslintConfig(
   {
     name: getPrefixedEslintConfigName("global"),
@@ -69,7 +100,7 @@ const eslintConfig = createTsEslintConfig(
       parserOptions: {
         parser: "@typescript-eslint/parser",
         projectService: true,
-        tsconfigRootDir: process.cwd(),
+        tsconfigRootDir: workspaceRoot,
       },
       sourceType: "module",
     },
@@ -111,6 +142,13 @@ const eslintConfig = createTsEslintConfig(
       importPlugin.flatConfigs.recommended,
       tsEslintConfigs.eslintRecommended,
     ],
+    // importPlugin.flatConfigs.recommended pins ecmaVersion to 2018, which
+    // rejects ES2020+ syntax (import.meta, ??, ?.) in plain JS/.mjs files.
+    // Restore the intended modern baseline for the JavaScript file group.
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+    },
     name: getPrefixedEslintConfigName("javascript"),
     // rules: {
     //   "import/no-extraneous-dependencies": [
@@ -215,6 +253,7 @@ const eslintConfig = createTsEslintConfig(
       // Generated Blueprint authoring schema (~3.5 MB); linting it OOMs the
       // type-aware parser and it is a build artifact, not authored source.
       "packages/contributions/odyssey-blueprint/blueprint.schema.generated.json",
+      "packages/platform/extractor/test/golden/**/*",
       "packages/platform/odyssey-contributions-stack/**/files/**/*",
       "packages/platform/odyssey-contributions-promotion-check/src/utils/componentExports.ts",
     ],

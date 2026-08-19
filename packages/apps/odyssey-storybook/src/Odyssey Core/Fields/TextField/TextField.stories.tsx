@@ -14,7 +14,6 @@ import {
   deepmerge,
   InputAdornment,
   Link,
-  Stack,
   TextField,
   TextFieldProps,
   textFieldTypeValues,
@@ -22,9 +21,16 @@ import {
 import { AddCircleIcon, CallIcon } from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { ChangeEvent } from "react";
+import { action } from "storybook/actions";
 import { useCallback } from "storybook/preview-api";
-import { fn, userEvent, within } from "storybook/test";
+import { userEvent, within } from "storybook/test";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StorySection,
+} from "../../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
@@ -241,9 +247,9 @@ const meta = {
   args: {
     endAdornment: "None",
     label: "Label",
-    onBlur: fn(),
-    onChange: fn(),
-    onFocus: fn(),
+    onBlur: action("onBlur"),
+    onChange: action("onChange"),
+    onFocus: action("onFocus"),
     startAdornment: "None",
     value: "",
   },
@@ -298,206 +304,10 @@ const textFieldPlay: NonNullable<Story["play"]> = async ({
   });
 };
 
-export const Default: Story = {
+export const Playground: Story = {
   ...deepmerge(TextFieldTemplate, {
     play: textFieldPlay,
     tags: ["!autodocs"],
-  }),
-};
-
-export const Disabled: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    parameters: {
-      docs: {
-        description: {
-          story: "The values of disabled inputs will not be submitted.",
-        },
-      },
-    },
-    args: {
-      isDisabled: true,
-      value: "Value",
-    },
-  }),
-};
-
-export const Optional: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    args: {
-      isOptional: true,
-      value: "",
-    },
-  }),
-};
-
-export const ReadOnly: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    parameters: {
-      docs: {
-        description: {
-          story: "The values of readonly inputs will be submitted.",
-        },
-      },
-    },
-    args: {
-      isReadOnly: true,
-      value: "Value",
-    },
-  }),
-};
-
-export const Error: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    args: {
-      errorMessage: "Error Message",
-      value: "",
-    },
-  }),
-};
-
-export const ErrorsList: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    args: {
-      errorMessage: "Error Message",
-      errorMessageList: ["Error A"],
-      value: "",
-    },
-  }),
-};
-
-export const FullWidth: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    args: {
-      isFullWidth: true,
-    },
-  }),
-};
-
-export const Hint: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    args: {
-      hint: "Hint text",
-      value: "",
-    },
-  }),
-};
-
-export const HintLink: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    args: {
-      hint: "Hint text",
-      HintLinkComponent: <Link href="#link">Link</Link>,
-      value: "",
-    },
-  }),
-};
-
-export const Adornments: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    parameters: {
-      docs: {
-        description: {
-          story: "TextField supports both `string` and `<Icon />` adornments.",
-        },
-      },
-    },
-    args: {
-      label: "Label",
-      endAdornment: "String",
-      startAdornment: "Icon",
-      value: "",
-    },
-  }),
-};
-
-export const Multiline: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    parameters: {
-      docs: {
-        description: {
-          story:
-            "As the user types, the field will grow vertically to accommodate the new lines.",
-        },
-      },
-    },
-    args: {
-      autoCompleteType: "shipping street-address",
-      label: "Label",
-      isMultiline: true,
-      value: "",
-    },
-  }),
-  name: "Multiline (Textarea)",
-};
-
-export const Focused: Story = {
-  parameters: {
-    docs: {
-      description: {
-        story: "This `TextField` will receive focus when the page loads",
-      },
-    },
-  },
-  args: {
-    hasInitialFocus: true,
-    label: "Label",
-    value: "",
-  },
-  render: (args) => {
-    return (
-      <Stack spacing={2}>
-        <TextField label="Not Focused" />
-        <TextField {...args} />
-      </Stack>
-    );
-  },
-};
-
-export const Placeholder: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    args: {
-      placeholder: "Placeholder text",
-    },
-  }),
-};
-
-export const Tel: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    parameters: {
-      docs: {
-        description: {
-          story:
-            "TextFields of type `tel` are not automatically validated because global formats are so varied.",
-        },
-      },
-    },
-    args: {
-      autoCompleteType: "mobile tel",
-      label: "Phone number",
-      startAdornment: <InputAdornment position="start">+1</InputAdornment>,
-      type: "tel",
-      value: "",
-    },
-  }),
-};
-export const Number: Story = {
-  ...deepmerge(TextFieldTemplate, {
-    parameters: {
-      docs: {
-        description: {
-          story:
-            "TextFields of type `number` accept `min`, `max`, and `step` props to constrain valid values.",
-        },
-      },
-    },
-    args: {
-      label: "Quantity",
-      type: "number",
-      min: 0,
-      max: 100,
-      step: 5,
-      value: "",
-    },
   }),
 };
 
@@ -521,5 +331,105 @@ export const Uncontrolled: Story = {
     const { value, ...rest } = props;
     void value;
     return <TextField {...rest} />;
+  },
+};
+
+export const AllStates: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every prop-driven state a TextField can render.">
+        <StoryGrid columns={3}>
+          <StoryCell label="default">
+            <TextField label="Label" />
+          </StoryCell>
+
+          <StoryCell label="disabled">
+            <TextField defaultValue="Value" isDisabled label="Label" />
+          </StoryCell>
+
+          <StoryCell label="read-only">
+            <TextField defaultValue="Value" isReadOnly label="Label" />
+          </StoryCell>
+
+          <StoryCell label="optional">
+            <TextField isOptional label="Label" />
+          </StoryCell>
+
+          <StoryCell label="error">
+            <TextField errorMessage="Error Message" label="Label" />
+          </StoryCell>
+
+          <StoryCell label="errors list">
+            <TextField
+              errorMessage="Error Message"
+              errorMessageList={["Error A"]}
+              label="Label"
+            />
+          </StoryCell>
+
+          <StoryCell label="hint">
+            <TextField hint="Hint text" label="Label" />
+          </StoryCell>
+
+          <StoryCell label="hint with link">
+            <TextField
+              hint="Hint text"
+              HintLinkComponent={<Link href="#link">Link</Link>}
+              label="Label"
+            />
+          </StoryCell>
+
+          <StoryCell label="placeholder">
+            <TextField label="Label" placeholder="Placeholder text" />
+          </StoryCell>
+
+          <StoryCell label="adornments">
+            <TextField
+              endAdornment="%"
+              label="Label"
+              startAdornment={<AddCircleIcon />}
+            />
+          </StoryCell>
+
+          <StoryCell label="multiline">
+            <TextField isMultiline label="Label" />
+          </StoryCell>
+
+          {/* Global phone formats are too varied to validate, so type="tel"
+              relies on an adornment for the country code instead. */}
+          <StoryCell label='type="tel"'>
+            <TextField
+              autoCompleteType="mobile tel"
+              label="Phone number"
+              startAdornment={
+                <InputAdornment position="start">+1</InputAdornment>
+              }
+              type="tel"
+            />
+          </StoryCell>
+
+          <StoryCell label='type="number"'>
+            <TextField
+              label="Quantity"
+              max={100}
+              min={0}
+              step={5}
+              type="number"
+            />
+          </StoryCell>
+
+          <StoryCell label="focused">
+            <TextField hasInitialFocus label="Label" />
+          </StoryCell>
+        </StoryGrid>
+
+        <StoryGrid columns={1}>
+          <StoryCell label="full width">
+            <TextField isFullWidth label="Label" />
+          </StoryCell>
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };

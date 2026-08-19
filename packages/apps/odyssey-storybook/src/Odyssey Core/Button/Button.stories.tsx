@@ -13,7 +13,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import {
-  Box,
   Button,
   type ButtonProps,
   buttonSizeValues,
@@ -21,8 +20,15 @@ import {
   buttonVariantValues,
 } from "@okta/odyssey-react-mui";
 import { AddIcon } from "@okta/odyssey-react-mui/icons";
-import { fn } from "storybook/test";
+import { action } from "storybook/actions";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StoryRow,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import icons from "../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -121,7 +127,7 @@ const meta = {
   },
   args: {
     label: "Button label",
-    onClick: fn(),
+    onClick: action("onClick"),
     variant: "primary",
   },
 } satisfies Meta<ButtonProps>;
@@ -130,167 +136,97 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const ButtonPrimary: Story = {
-  name: "Primary",
-};
+export const Playground: Story = {};
 
-export const ButtonPrimaryDisabled: Story = {
-  name: "Primary, Disabled",
-  args: {
-    isDisabled: true,
-    label: "Button label",
-    variant: "primary",
+export const AllVariants: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every button variant, enabled and disabled.">
+        <StoryGrid columns={3}>
+          {buttonVariantValues.map((variant) => (
+            <StoryCell key={variant} label={variant}>
+              <Button
+                label={variant}
+                onClick={action("onClick")}
+                variant={variant}
+              />
+
+              <Button
+                isDisabled
+                label={`${variant} disabled`}
+                variant={variant}
+              />
+            </StoryCell>
+          ))}
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };
 
-export const ButtonSecondary: Story = {
-  name: "Secondary",
-  args: {
-    label: "Button label",
-    variant: "secondary",
+export const AllSizes: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every button size.">
+        <StoryRow>
+          {buttonSizeValues.map((size) => (
+            <Button
+              key={size}
+              label={size}
+              onClick={action("onClick")}
+              size={size}
+              variant="primary"
+            />
+          ))}
+        </StoryRow>
+      </StorySection>
+    );
   },
 };
 
-export const ButtonSecondaryDisabled: Story = {
-  name: "Secondary, Disabled",
-  args: {
-    isDisabled: true,
-    label: "Button label",
-    variant: "secondary",
-  },
-};
+export const AllStates: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Icon, icon-only, link, and full-width states.">
+        <StoryRow>
+          <StoryCell label="with icon">
+            <Button
+              label="Button label"
+              startIcon={<AddIcon />}
+              variant="primary"
+            />
+          </StoryCell>
 
-export const ButtonDanger: Story = {
-  name: "Danger",
-  args: {
-    label: "Button label",
-    variant: "danger",
-  },
-};
+          <StoryCell label="icon-only (needs tooltip)">
+            <Button
+              ariaLabel="Add"
+              startIcon={<AddIcon />}
+              tooltipText="Add"
+              variant="primary"
+            />
+          </StoryCell>
 
-export const ButtonDangerSecondary: Story = {
-  name: "Danger Secondary",
-  args: {
-    label: "Button label",
-    variant: "dangerSecondary",
-  },
-};
+          <StoryCell label="as link">
+            <Button
+              href="https://okta.com"
+              label="Visit okta.com"
+              variant="secondary"
+            />
+          </StoryCell>
+        </StoryRow>
 
-export const ButtonDangerDisabled: Story = {
-  name: "Danger, Disabled",
-  args: {
-    label: "Button label",
-    isDisabled: true,
-    variant: "danger",
+        <StoryCell label="full-width">
+          <Button
+            isFullWidth
+            label="Button label"
+            onClick={action("onClick")}
+            variant="primary"
+          />
+        </StoryCell>
+      </StorySection>
+    );
   },
-};
-
-export const ButtonFloating: Story = {
-  name: "Floating",
-  args: {
-    label: "Button label",
-    variant: "floating",
-  },
-};
-
-export const ButtonFloatingAction: Story = {
-  name: "Floating Action",
-  args: {
-    label: "Button label",
-    variant: "floatingAction",
-  },
-};
-
-export const ButtonFloatingDisabled: Story = {
-  name: "Floating, Disabled",
-  args: {
-    label: "Button label",
-    isDisabled: true,
-    variant: "floating",
-  },
-};
-
-export const ButtonSecondaryAsLink: Story = {
-  name: "Button as a link",
-  args: {
-    label: "Visit okta.com",
-    variant: "floatingAction",
-    href: "https://okta.com",
-    onClick: undefined,
-  },
-};
-
-export const ButtonSmall: Story = {
-  name: "Small",
-  args: {
-    label: "Button label",
-    size: "small",
-  },
-};
-
-export const ButtonMedium: Story = {
-  name: "Medium",
-  args: {
-    label: "Button label",
-    size: "medium",
-    variant: "secondary",
-  },
-};
-
-export const ButtonLarge: Story = {
-  name: "Large",
-  args: {
-    label: "Button label",
-    size: "large",
-    variant: "danger",
-  },
-};
-
-export const ButtonFullWidth: Story = {
-  name: "Full-width",
-  args: {
-    label: "Button label",
-    isFullWidth: true,
-  },
-};
-
-export const ButtonWithIcon: Story = {
-  name: "Icon",
-  args: {
-    label: "Button label",
-    startIcon: <AddIcon />,
-  },
-};
-
-export const IconOnly: Story = {
-  name: "Icon-only",
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Icon-only buttons should be paired with a Tooltip to provide additional context. A tooltip can be added by setting the `tooltipText` prop on the button to a string.",
-      },
-    },
-  },
-  args: {
-    startIcon: <AddIcon />,
-    ariaLabel: "Button label",
-    label: undefined,
-    tooltipText: "Button label",
-  },
-};
-
-export const KitchenSink: Story = {
-  name: "Kitchen sink",
-  render: () => (
-    <Box sx={{ display: "flex", flexWrap: "wrap", rowGap: 2 }}>
-      <Button label="Primary" variant="primary" />
-      <Button label="Secondary" variant="secondary" />
-      <Button label="Danger Secondary" variant="dangerSecondary" />
-      <Button label="Danger" variant="danger" />
-      <Button label="Floating" variant="floating" />
-      <Button label="Floating Action" variant="floatingAction" />
-      <Button ariaLabel="Add" startIcon={<AddIcon />} variant="primary" />
-    </Box>
-  ),
 };

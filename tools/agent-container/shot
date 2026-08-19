@@ -1,0 +1,79 @@
+#!/usr/bin/env node
+// shot — capture a page from inside the container into the screenshot gallery.
+//
+//   shot <url> [filename]     screenshot <url>, print the saved path
+//   shot <url> --full-page    capture the whole scrollable page
+//
+// Why this exists rather than using the Playwright MCP's own screenshot tool:
+// @playwright/mcp returns screenshots inline in its tool response and does not
+// write them to `--output-dir`, so an image the agent can see is still an image
+// you cannot. Writing a file is what makes `devshots` able to show it to you.
+//
+// It borrows Playwright from the container's repo clone (so there is one Chromium
+// and one Playwright in play) and launches the image's baked browser by explicit
+// path, because the baked browser build and the clone's pinned Playwright disagree
+// on build numbers.
+
+import { createRequire } from "node:module";
+import fs from "node:fs/promises";
+import path from "node:path";
+
+const REPO_DIR =
+  process.env.WORKSPACE_REPO_DIR || "/home/agent/okta/odyssey-design-system";
+const SHOTS_DIR = process.env.DEVPROXY_SHOTS_DIR || "/home/agent/.screenshots";
+const EXECUTABLE_PATH =
+  process.env.SHOT_EXECUTABLE_PATH || "/usr/local/bin/chromium";
+
+const [url, ...rest] = process.argv.slice(2);
+
+if (!url || url === "-h" || url === "--help") {
+  console.log(
+    "usage: shot <url> [filename] [--full-page]\n" +
+      "       screenshots land in " +
+      SHOTS_DIR +
+      "; run 'devshots' to get a URL for them",
+  );
+  process.exit(url ? 0 : 1);
+}
+
+const isFullPage = rest.includes("--full-page");
+const explicitName = rest.find((argument) => !argument.startsWith("--"));
+// A sortable, collision-free default so repeated captures of the same page do not
+// overwrite each other and the gallery's newest-first order stays meaningful.
+const fileName =
+  explicitName || `shot-${new Date().toISOString().replace(/[:.]/g, "-")}.png`;
+const target = path.join(SHOTS_DIR, path.basename(fileName));
+
+const require = createRequire(path.join(REPO_DIR, "package.json"));
+let chromium;
+try {
+  ({ chromium } = require("playwright"));
+} catch (error) {
+  console.error(
+    `shot: could not load playwright from ${REPO_DIR} (${error.code || error.message}).\n` +
+      "Has the clone finished 'yarn install'?",
+  );
+  process.exit(1);
+}
+
+await fs.mkdir(SHOTS_DIR, { recursive: true });
+
+const browser = await chromium.launch({
+  executablePath: EXECUTABLE_PATH,
+  headless: true,
+  args: ["--no-sandbox"],
+});
+
+try {
+  const page = await browser.newPage({
+    viewport: { width: 1440, height: 900 },
+  });
+  await page.goto(url, { waitUntil: "networkidle", timeout: 60_000 });
+  await page.screenshot({ path: target, fullPage: isFullPage });
+  console.log(target);
+} catch (error) {
+  console.error(`shot: ${error.message}`);
+  process.exitCode = 1;
+} finally {
+  await browser.close();
+}

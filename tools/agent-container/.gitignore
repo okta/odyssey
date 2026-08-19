@@ -1,0 +1,7 @@
+# Host-side generated state for the persistent workspace: derived
+# credentials and compose's env-file. Never committed — see
+# agent-container.md. (~/.claude itself is the real host directory, not
+# generated state under this folder — see docker-compose.yml's mount.)
+.workspace-env/
+.env
+corporate-ca.pem

@@ -38,4 +38,35 @@ describe(CircularProgress.displayName!, () => {
     await expect.element(progress).toHaveAttribute("role", "progressbar");
     await expect.element(progress).toHaveAttribute("aria-valuenow", "70");
   });
+
+  test("stroke width relative to diameter", async () => {
+    await renderWithOdysseyProvider(<CircularProgress ariaLabel="Loading" />);
+
+    const progress = page.getByLabelText("Loading").element();
+    const circle = progress.querySelector("circle");
+
+    if (!circle) {
+      throw new Error("CircularProgress rendered without an SVG circle");
+    }
+
+    // MUI draws the ring in a fixed 44-unit viewBox and passes `thickness`
+    // through as the circle's stroke-width attribute, so that attribute divided
+    // by the viewBox is the stroke-to-diameter ratio at every rendered size.
+    // Design specifies 1:12, which is 2px at the default 24px diameter and
+    // 1.33px at the 16px Button renders. The ratio is asserted rather than a
+    // pixel width because rem-based sizing resolves against whatever root font
+    // size the host page sets. The attribute is read instead of the computed
+    // style because computed style resolves to a CSS length, which is a
+    // different unit space than the viewBox the ratio is expressed in.
+    const viewBoxWidth = 44;
+    const strokeWidthInViewBoxUnits = circle.getAttribute("stroke-width");
+
+    if (!strokeWidthInViewBoxUnits) {
+      throw new Error("CircularProgress rendered without a stroke-width");
+    }
+
+    expect(
+      Number.parseFloat(strokeWidthInViewBoxUnits) / viewBoxWidth,
+    ).toBeCloseTo(1 / 12, 5);
+  });
 });

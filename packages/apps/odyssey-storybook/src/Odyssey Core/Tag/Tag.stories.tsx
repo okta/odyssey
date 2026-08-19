@@ -10,11 +10,24 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Tag, TagList } from "@okta/odyssey-react-mui";
+import {
+  Tag,
+  tagColorVariants,
+  TagList,
+  tagSizeValues,
+} from "@okta/odyssey-react-mui";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react-vite";
-import { fn, userEvent } from "storybook/test";
+import { action } from "storybook/actions";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryContrastBoard,
+  StoryGrid,
+  StoryRow,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import icons from "../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
@@ -87,18 +100,11 @@ const meta = {
       control: {
         type: "select",
       },
-      options: [
-        "default",
-        "info",
-        "accentOne",
-        "accentTwo",
-        "accentThree",
-        "accentFour",
-      ],
+      options: tagColorVariants,
       description: "The color of the tag",
       table: {
         type: {
-          summary: "string",
+          summary: tagColorVariants.join(" | "),
         },
         defaultValue: {
           summary: "default",
@@ -109,14 +115,14 @@ const meta = {
       control: {
         type: "select",
       },
-      options: ["default", "small"],
+      options: tagSizeValues,
       description: "The size of the tag",
       table: {
         type: {
-          summary: "string",
+          summary: tagSizeValues.join(" | "),
         },
         defaultValue: {
-          summary: "default",
+          summary: "medium",
         },
       },
     },
@@ -131,44 +137,79 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Playground: Story = {
   args: {
     label: "Starship",
   },
 };
 
-export const Info: Story = {
-  args: {
-    label: "Starship",
-    colorVariant: "info",
+export const AllVariants: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every color variant at both sizes.">
+        <StoryGrid columns={tagSizeValues.length}>
+          {tagColorVariants.flatMap((colorVariant) =>
+            tagSizeValues.map((size) => (
+              <StoryCell
+                key={`${colorVariant}-${size}`}
+                label={`${colorVariant} · ${size}`}
+              >
+                <Tag
+                  colorVariant={colorVariant}
+                  label={colorVariant}
+                  size={size}
+                />
+              </StoryCell>
+            )),
+          )}
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };
 
-export const AccentOne: Story = {
-  args: {
-    label: "Starship",
-    colorVariant: "accentOne",
+export const AllStates: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Interactive and non-default states.">
+        <StoryRow>
+          <StoryCell label="with icon">
+            <Tag icon={<GroupIcon />} label="Crew" />
+          </StoryCell>
+
+          <StoryCell label="clickable">
+            <Tag label="Starship" onClick={action("onClick")} />
+          </StoryCell>
+
+          <StoryCell label="removable">
+            <Tag label="Starship" onRemove={action("onRemove")} />
+          </StoryCell>
+
+          <StoryCell label="disabled">
+            <Tag isDisabled label="Starship" />
+          </StoryCell>
+        </StoryRow>
+      </StorySection>
+    );
   },
 };
 
-export const AccentTwo: Story = {
-  args: {
-    label: "Starship",
-    colorVariant: "accentTwo",
-  },
-};
-
-export const AccentThree: Story = {
-  args: {
-    label: "Starship",
-    colorVariant: "accentThree",
-  },
-};
-
-export const AccentFour: Story = {
-  args: {
-    label: "Starship",
-    colorVariant: "accentFour",
+export const Contrast: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Tag shifts its background shade with the surface contrast (white vs gray).">
+        <StoryContrastBoard>
+          <TagList>
+            <Tag label="Default" />
+            <Tag colorVariant="info" label="Info" />
+            <Tag colorVariant="accentOne" label="Accent" />
+          </TagList>
+        </StoryContrastBoard>
+      </StorySection>
+    );
   },
 };
 
@@ -187,45 +228,5 @@ export const List: Story = {
   },
   args: {
     label: "Default tag",
-  },
-};
-
-export const Small: Story = {
-  args: {
-    label: "Starship",
-    size: "small",
-  },
-};
-
-export const Icon: Story = {
-  args: {
-    label: "Crew",
-    icon: <GroupIcon />,
-  },
-};
-
-export const Clickable: Story = {
-  args: {
-    label: "Starship",
-    onClick: fn(),
-  },
-  play: async ({ step }) => {
-    await step("focus tag", async () => {
-      await userEvent.tab();
-    });
-  },
-};
-
-export const Removable: Story = {
-  args: {
-    label: "Starship",
-    onRemove: fn(),
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    label: "Starship",
-    isDisabled: true,
   },
 };

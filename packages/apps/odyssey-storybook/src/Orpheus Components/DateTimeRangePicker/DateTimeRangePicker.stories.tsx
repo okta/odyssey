@@ -143,8 +143,8 @@ export const WithInitialRange: StoryObj<DateTimeRangePickerProps> = {
   },
   args: {
     value: {
-      end: "2026-08-15T14:30:00.000Z",
-      start: "2026-08-01T09:00:00.000Z",
+      end: "2024-07-15T14:30:00",
+      start: "2024-07-01T09:00:00",
     },
   },
 };
@@ -160,8 +160,8 @@ export const WithError: StoryObj<DateTimeRangePickerProps> = {
   args: {
     errorMessage: "End date must be within 30 days of start.",
     value: {
-      end: "2026-09-15T00:00:00.000Z",
-      start: "2026-08-01T00:00:00.000Z",
+      end: "2024-08-15T00:00:00",
+      start: "2024-07-01T00:00:00",
     },
   },
 };
@@ -170,8 +170,8 @@ export const Disabled: StoryObj<DateTimeRangePickerProps> = {
   args: {
     isDisabled: true,
     value: {
-      end: "2026-08-15T14:30:00.000Z",
-      start: "2026-08-01T09:00:00.000Z",
+      end: "2024-07-15T14:30:00",
+      start: "2024-07-01T09:00:00",
     },
   },
 };
@@ -180,14 +180,13 @@ export const WithMinMax: StoryObj<DateTimeRangePickerProps> = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Restricts selection to August 2026. Dates outside are disabled.",
+        story: "Restricts selection to July 2024. Dates outside are disabled.",
       },
     },
   },
   args: {
-    maxDate: "2026-08-31T23:59:59.000Z",
-    minDate: "2026-08-01T00:00:00.000Z",
+    maxDate: "2024-07-31T23:59:59",
+    minDate: "2024-07-01T00:00:00",
   },
 };
 
@@ -202,8 +201,8 @@ export const StartStep: StoryObj<DateTimeRangePickerProps> = {
   },
   args: {
     value: {
-      end: "2026-08-15T14:30:00.000Z",
-      start: "2026-08-01T09:00:00.000Z",
+      end: "2024-07-15T14:30:00",
+      start: "2024-07-01T09:00:00",
     },
   },
   play: async ({ canvasElement, step }) => {
@@ -227,8 +226,8 @@ export const EndStep: StoryObj<DateTimeRangePickerProps> = {
   },
   args: {
     value: {
-      end: "2026-08-15T14:30:00.000Z",
-      start: "2026-08-01T09:00:00.000Z",
+      end: "2024-07-15T14:30:00",
+      start: "2024-07-01T09:00:00",
     },
   },
   play: async ({ canvasElement, step }) => {
