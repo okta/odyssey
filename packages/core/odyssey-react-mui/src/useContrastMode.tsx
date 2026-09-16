@@ -13,6 +13,7 @@
 import * as Tokens from "@okta/odyssey-design-tokens";
 import {
   createContext,
+  type RefObject,
   useCallback,
   useContext,
   useLayoutEffect,
@@ -24,6 +25,14 @@ import { hexToRgb } from "./hexToRgb.js";
 
 export type ContrastMode = "lowContrast" | "highContrast";
 export type ContrastModeContextType = {
+  /**
+   * Odyssey's app wrapper element: the contrast and height container
+   * `OdysseyThemeProvider` renders. `useAppElementContainerQuery` observes it so
+   * container queries track the space Odyssey actually occupies. Absent outside
+   * a provider, and `current` stays `null` when the provider renders with
+   * `hasWrapperElement={false}`.
+   */
+  contrastContainerRef?: RefObject<HTMLDivElement>;
   contrastMode: ContrastMode;
 };
 

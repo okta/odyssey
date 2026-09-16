@@ -12,7 +12,10 @@
 
 import type { ButtonProps as MuiButtonProps } from "@mui/material";
 
-import { Button as MuiButton } from "@mui/material";
+import {
+  Button as MuiButton,
+  CircularProgress as MuiCircularProgress,
+} from "@mui/material";
 import {
   HTMLAttributes,
   memo,
@@ -33,6 +36,7 @@ import {
   MuiPropsContextType,
   useMuiProps,
 } from "../MuiPropsContext.js";
+import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
 import { Tooltip } from "../Tooltip.js";
 import { useButton } from "./ButtonContext.js";
 
@@ -77,6 +81,13 @@ export type BaseButtonProps = {
    * If `true`, the button expands to fill its container's full width.
    */
   isFullWidth?: boolean;
+  /**
+   * If `true`, the button shows a progress spinner in place of its start icon
+   * and stops responding to clicks, while keeping the background and border of
+   * its default state. To reword the button while it works (for example
+   * `"Saving…"`), swap `label` alongside this.
+   */
+  isLoading?: boolean;
   /**
    * The text content of the Button.
    * @default ""
@@ -156,6 +167,7 @@ const BaseButton = ({
   id,
   isDisabled,
   isFullWidth: isFullWidthProp,
+  isLoading,
   label = "",
   onClick,
   size = "medium",
@@ -174,10 +186,49 @@ const BaseButton = ({
   const variant = variantProp === "tertiary" ? "secondary" : variantProp;
   const localButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const buttonContext = useButton();
+  const odysseyDesignTokens = useOdysseyDesignTokens();
   const isFullWidth = useMemo(
     () =>
       buttonContext.isFullWidth ? buttonContext.isFullWidth : isFullWidthProp,
     [buttonContext, isFullWidthProp],
+  );
+
+  const buttonContent = children ?? label;
+
+  const loadingIndicator = useMemo(
+    () => (
+      // Design specifies each variant's spinner color as that variant's own
+      // label color, so `color="inherit"` keeps the two in step instead of
+      // restating the palette per variant. MUI's CircularProgress is used
+      // directly because Odyssey's wrapper deliberately exposes neither a size
+      // nor a color prop, and design asked for the 16px sizing to stay internal
+      // to Button. Stroke weight comes from the shared theme default, which
+      // holds a 1:12 stroke-to-diameter ratio at any size.
+      <MuiCircularProgress
+        aria-hidden
+        color="inherit"
+        size={odysseyDesignTokens.Spacing4}
+      />
+    ),
+    [odysseyDesignTokens],
+  );
+
+  // An inert button keeps its `href` so it stays focusable and keeps its link
+  // role, which leaves the browser's own activation as the thing to stop:
+  // `pointer-events: none` from the theme only blocks the mouse, and because
+  // `aria-disabled` is advisory, Enter still dispatches a click that would
+  // follow the link or submit the form. Preventing the default on that click
+  // covers every input method without swapping the element out.
+  const handleClick = useCallback<NonNullable<MuiButtonProps["onClick"]>>(
+    (event) => {
+      if (isLoading || isDisabled) {
+        event.preventDefault();
+        return;
+      }
+
+      onClick?.(event);
+    },
+    [isDisabled, isLoading, onClick],
   );
 
   useImperativeHandle(
@@ -195,9 +246,10 @@ const BaseButton = ({
       return (
         <MuiButton
           {...muiProps}
+          aria-busy={isLoading}
           aria-controls={ariaControls}
           aria-describedby={ariaDescribedBy}
-          aria-disabled={isDisabled}
+          aria-disabled={isLoading || isDisabled}
           aria-expanded={ariaExpanded}
           aria-haspopup={ariaHasPopup}
           aria-label={ariaLabel}
@@ -207,7 +259,7 @@ const BaseButton = ({
           fullWidth={isFullWidth}
           href={href}
           id={id}
-          onClick={!isDisabled ? onClick : undefined}
+          onClick={handleClick}
           ref={(element) => {
             if (element) {
               (
@@ -220,13 +272,13 @@ const BaseButton = ({
             }
           }}
           size={size}
-          startIcon={startIcon}
+          startIcon={isLoading ? loadingIndicator : startIcon}
           tabIndex={tabIndex}
           translate={translate}
           type={type}
           variant={variant}
         >
-          {children ?? label}
+          {buttonContent}
         </MuiButton>
       );
     },
@@ -237,14 +289,15 @@ const BaseButton = ({
       ariaHasPopup,
       ariaLabel,
       ariaLabelledBy,
+      buttonContent,
       endIcon,
+      handleClick,
       href,
       id,
       isDisabled,
       isFullWidth,
-      label,
-      children,
-      onClick,
+      isLoading,
+      loadingIndicator,
       size,
       startIcon,
       tabIndex,

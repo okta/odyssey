@@ -22,6 +22,12 @@ import {
 } from "@okta/odyssey-react-mui/icons";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 import { WpComponentsStorybookThemeDecorator } from "../../tools/WpComponentsStorybookThemeDecorator.js";
 
@@ -38,16 +44,17 @@ export default meta;
 
 type Story = StoryObj<typeof EmptyState>;
 
-export const AllFeatures: Story = {
+export const Playground: Story = {
   args: {
-    icons: [
-      <SettingsIcon key="1" />,
-      <ArrowRightIcon key="2" />,
-      <GlobeIcon key="3" />,
-    ],
-    heading: "Setup integrations to begin importing AI Agents",
     description:
-      "Begin by adding the AI agent client credentials to your application. Once connected, you can import and manage your AI agents.",
+      "Begin by adding the AI agent client credentials to your application.",
+    heading: "Set up integrations to begin importing AI Agents",
+  },
+};
+
+export const AllFeatures: Story = {
+  name: "All features",
+  args: {
     actions: (
       <>
         <Button label="Add new application" variant="primary" />
@@ -57,8 +64,17 @@ export const AllFeatures: Story = {
         />
       </>
     ),
+    description:
+      "Begin by adding the AI agent client credentials to your application. Once connected, you can import and manage your AI agents.",
+    heading: "Set up integrations to begin importing AI Agents",
+    icons: [
+      <SettingsIcon key="1" />,
+      <ArrowRightIcon key="2" />,
+      <GlobeIcon key="3" />,
+    ],
   },
   parameters: {
+    ...staticBoardParameters,
     docs: {
       description: {
         story:
@@ -68,142 +84,89 @@ export const AllFeatures: Story = {
   },
 };
 
-export const Minimal: Story = {
-  args: {
-    heading: "No items found",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Minimal example with just a required title.",
-      },
-    },
-  },
-};
+export const AllVariants: Story = {
+  name: "All variants",
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every combination of icons, description, and actions.">
+        <StoryGrid columns={2}>
+          <StoryCell label="heading only">
+            <EmptyState heading="No items found" />
+          </StoryCell>
 
-export const WithDescription: Story = {
-  args: {
-    heading: "No results",
-    description:
-      "Try adjusting your search criteria or filters to find what you are looking for.",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Empty state with title and description text.",
-      },
-    },
-  },
-};
+          <StoryCell label="heading + description">
+            <EmptyState
+              description="Try adjusting your search criteria or filters to find what you are looking for."
+              heading="No results"
+            />
+          </StoryCell>
 
-export const WithSingleIcon: Story = {
-  args: {
-    icons: [<SearchIcon key="1" />],
-    heading: "No search results",
-    description:
-      "We could not find any results matching your search. Try different keywords.",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Empty state with a single icon above the title.",
-      },
-    },
-  },
-};
+          <StoryCell label="single icon">
+            <EmptyState
+              description="We could not find any results matching your search. Try different keywords."
+              heading="No search results"
+              icons={[<SearchIcon key="1" />]}
+            />
+          </StoryCell>
 
-export const WithMultipleIcons: Story = {
-  args: {
-    icons: [
-      <FolderIcon key="1" />,
-      <ArrowRightIcon key="2" />,
-      <GlobeIcon key="3" />,
-    ],
-    heading: "Connect your folders to the cloud",
-    description:
-      "Sync your local folders with cloud storage to access files from anywhere.",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Multiple icons are automatically laid out in a centered row with consistent spacing.",
-      },
-    },
-  },
-};
+          <StoryCell label="multiple icons">
+            <EmptyState
+              description="Sync your local folders with cloud storage to access files from anywhere."
+              heading="Connect your folders to the cloud"
+              icons={[
+                <FolderIcon key="1" />,
+                <ArrowRightIcon key="2" />,
+                <GlobeIcon key="3" />,
+              ]}
+            />
+          </StoryCell>
 
-export const WithActions: Story = {
-  args: {
-    heading: "No applications configured",
-    description:
-      "Add your first application to get started with identity management.",
-    actions: <Button label="Add application" variant="primary" />,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Empty state with a single action button.",
-      },
-    },
-  },
-};
+          <StoryCell label="single action">
+            <EmptyState
+              actions={<Button label="Add application" variant="primary" />}
+              description="Add your first application to get started with identity management."
+              heading="No applications configured"
+            />
+          </StoryCell>
 
-export const WithMultipleActions: Story = {
-  args: {
-    icons: [<AddCircleIcon key="1" />],
-    heading: "Get started with your project",
-    description: "Create a new project from scratch or import an existing one.",
-    actions: (
-      <>
-        <Button label="Create new project" variant="primary" />
-        <Button label="Import existing" variant="secondary" />
-        <Button label="Learn more" variant="floating" />
-      </>
-    ),
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Empty state with multiple action buttons arranged in a row.",
-      },
-    },
-  },
-};
+          <StoryCell label="three actions">
+            <EmptyState
+              actions={
+                <>
+                  <Button label="Create new project" variant="primary" />
+                  <Button label="Import existing" variant="secondary" />
+                  <Button label="Learn more" variant="floating" />
+                </>
+              }
+              description="Create a new project from scratch or import an existing one."
+              heading="Get started with your project"
+              icons={[<AddCircleIcon key="1" />]}
+            />
+          </StoryCell>
 
-export const NoDataState: Story = {
-  args: {
-    icons: [<FolderIcon key="1" />],
-    heading: "No data available",
-    description:
-      "There is no data to display at this time. Data will appear here once it becomes available.",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Common use case for tables or lists with no data.",
-      },
-    },
-  },
-};
+          <StoryCell label="no-data use case">
+            <EmptyState
+              description="There is no data to display at this time. Data will appear here once it becomes available."
+              heading="No data available"
+              icons={[<FolderIcon key="1" />]}
+            />
+          </StoryCell>
 
-export const ErrorState: Story = {
-  args: {
-    heading: "Something went wrong",
-    description:
-      "We encountered an error while loading the data. Please try again later.",
-    actions: (
-      <>
-        <Button label="Retry" variant="primary" />
-        <Button label="Go back" variant="secondary" />
-      </>
-    ),
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Empty state used for error scenarios with retry option.",
-      },
-    },
+          <StoryCell label="error use case">
+            <EmptyState
+              actions={
+                <>
+                  <Button label="Retry" variant="primary" />
+                  <Button label="Go back" variant="secondary" />
+                </>
+              }
+              description="We encountered an error while loading the data. Please try again later."
+              heading="Something went wrong"
+            />
+          </StoryCell>
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.69.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.68.0...v1.69.0) (2026-09-16)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
+
+
+
+
+# [1.68.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.67.0...v1.68.0) (2026-09-02)
+
+**Note:** Version bump only for package @okta/browserslist-config-odyssey
+
 # [1.67.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.66.1...v1.67.0) (2026-08-19)
 
 **Note:** Version bump only for package @okta/browserslist-config-odyssey

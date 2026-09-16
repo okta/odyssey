@@ -14,7 +14,7 @@ import type { ThemeOptions } from "@mui/material";
 
 import type { GetComponentsProps } from "./types.js";
 
-import { COMPACT_MEDIA_QUERY } from "../useMediaQuery.js";
+import { toCompactMediaQuery } from "../useMediaQuery.js";
 
 export const dialogComponents = ({
   odysseyTokens,
@@ -41,7 +41,7 @@ export const dialogComponents = ({
           "drop-shadow(0px 1px 4px rgba(29, 29, 33, 0.08)) drop-shadow(0px 4px 10px rgba(29, 29, 33, 0.08)) drop-shadow(0px 8px 30px rgba(29, 29, 33, 0.1))",
         borderRadius: odysseyTokens.BorderRadiusOuter,
         // Full-screen at compact viewports has no rounded corners.
-        [COMPACT_MEDIA_QUERY]: {
+        [toCompactMediaQuery("width", "height")]: {
           borderRadius: 0,
         },
       },

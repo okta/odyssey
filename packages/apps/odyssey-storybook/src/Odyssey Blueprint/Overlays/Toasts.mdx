@@ -1,0 +1,103 @@
+import {
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs/blocks";
+
+import * as ToastsStories from "./Toasts.stories";
+
+<Meta of={ToastsStories} />
+
+<Title of={ToastsStories} />
+<Subtitle of={ToastsStories} />
+<Description of={ToastsStories} />
+
+`toast@1` wraps the Odyssey `Toast`, and `toast-stack@1` wraps `ToastStack`, the
+container that positions toasts and lets them stack above a dialog backdrop. A
+manual docs page replaces the generated one because the stories render visible, and
+a visible toast portals itself over this page.
+
+## Showing and hiding
+
+A toast owns its own visibility. `inputs.isDefaultVisible` seeds it; after that it
+is driven by `actions.show` and `actions.hide`. `outputs.isVisible` mirrors the live
+state, and `events.dismiss` fires whether the user closed the toast or the auto-hide
+timer expired.
+
+Several sources can fan into one toast by pointing their events at `show`:
+
+```json
+{
+  "from": "odyssey-blueprint/toast@1",
+  "instanceId": "save.toast",
+  "inputs": {
+    "message": "Could not save the app",
+    "severity": "error",
+    "role": "alert"
+  },
+  "subscriptions": {
+    "show": [
+      {
+        "instance": { "id": "save.mutation", "port": "events", "name": "error" }
+      },
+      {
+        "instance": {
+          "id": "assign.mutation",
+          "port": "events",
+          "name": "error"
+        }
+      }
+    ]
+  }
+}
+```
+
+Set `role` explicitly on anything a screen reader should announce. The pinned
+Odyssey `Toast` applies no default, so an omitted role announces nothing. Use
+`status` for routine updates and `alert` for errors.
+
+## Stacking
+
+One `toast-stack@1` per screen holds every toast. Its `content` takes an array of
+`toast@1` entries, or an `each:` form when the list comes from runtime data, so a
+stack never hardcodes its items:
+
+```json
+{
+  "from": "odyssey-blueprint/toast-stack@1",
+  "instanceId": "app.toasts",
+  "inputs": {
+    "content": {
+      "as": "notification",
+      "each": {
+        "instance": { "id": "errors.source", "port": "outputs", "name": "rows" }
+      },
+      "entry": {
+        "from": "odyssey-blueprint/toast@1",
+        "instanceId": {
+          "join": {
+            "values": [
+              "app.toasts.",
+              { "iterator": { "name": "notification", "path": ["key"] } }
+            ]
+          }
+        },
+        "inputs": {
+          "message": {
+            "iterator": { "name": "notification", "path": ["message"] }
+          },
+          "severity": "error",
+          "role": "alert"
+        }
+      }
+    }
+  }
+}
+```
+
+Each nested toast keeps its own visibility, actions and events, so one row can be
+dismissed without touching the rest. The stack itself holds no state.
+
+<Controls />

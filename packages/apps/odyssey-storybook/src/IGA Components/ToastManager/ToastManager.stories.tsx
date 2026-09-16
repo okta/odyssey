@@ -52,7 +52,7 @@ const ChildComponent = () => {
   return <Button label="Add Toast" onClick={handleClick} variant={"primary"} />;
 };
 
-export const Example: Story = {
+export const Playground: Story = {
   args: {
     children: <ChildComponent />,
   },

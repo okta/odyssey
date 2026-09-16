@@ -24,6 +24,12 @@ import { fn } from "storybook/test";
 
 import type { A11yParameters } from "../../../.storybook/a11yTypes.js";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import icons from "../../tools/iconUtils.js";
 import { IgaComponentsOdysseyStorybookThemeDecorator } from "../../tools/IgaComponentsOdysseyStorybookThemeDecorator.js";
 
@@ -121,9 +127,12 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const DisabledWithTooltip: Story = {
-  name: "Disabled with Tooltip",
+export const Playground: Story = {};
+
+export const AllDisabledVariants: Story = {
+  name: "All disabled variants",
   parameters: {
+    ...staticBoardParameters,
     docs: {
       description: {
         story:
@@ -139,124 +148,23 @@ export const DisabledWithTooltip: Story = {
       },
     } satisfies A11yParameters,
   },
-  args: {
-    ariaDisabled: true,
-    label: "Button label",
-    variant: "primary",
-    tooltipText: "This action is currently unavailable",
-  },
-};
-
-const ariaDisabledA11yParameters = {
-  config: {
-    rules: [{ id: "color-contrast", enabled: false }],
-  },
-} satisfies A11yParameters;
-
-export const DisabledPrimaryWithTooltip: Story = {
-  name: "Disabled Primary with Tooltip",
-  parameters: {
-    docs: {
-      description: {
-        story: "Primary button with `ariaDisabled` and tooltip.",
-      },
-    },
-    a11y: ariaDisabledA11yParameters,
-  },
-  args: {
-    ariaDisabled: true,
-    label: "Primary",
-    variant: "primary",
-    tooltipText: "This action is currently unavailable",
-  },
-};
-
-export const DisabledSecondaryWithTooltip: Story = {
-  name: "Disabled Secondary with Tooltip",
-  parameters: {
-    docs: {
-      description: {
-        story: "Secondary button with `ariaDisabled` and tooltip.",
-      },
-    },
-    a11y: ariaDisabledA11yParameters,
-  },
-  args: {
-    ariaDisabled: true,
-    label: "Secondary",
-    variant: "secondary",
-    tooltipText: "This action is currently unavailable",
-  },
-};
-
-export const DisabledDangerWithTooltip: Story = {
-  name: "Disabled Danger with Tooltip",
-  parameters: {
-    docs: {
-      description: {
-        story: "Danger button with `ariaDisabled` and tooltip.",
-      },
-    },
-    a11y: ariaDisabledA11yParameters,
-  },
-  args: {
-    ariaDisabled: true,
-    label: "Danger",
-    variant: "danger",
-    tooltipText: "This action is currently unavailable",
-  },
-};
-
-export const DisabledDangerSecondaryWithTooltip: Story = {
-  name: "Disabled Danger Secondary with Tooltip",
-  parameters: {
-    docs: {
-      description: {
-        story: "Danger Secondary button with `ariaDisabled` and tooltip.",
-      },
-    },
-    a11y: ariaDisabledA11yParameters,
-  },
-  args: {
-    ariaDisabled: true,
-    label: "Danger Secondary",
-    variant: "dangerSecondary",
-    tooltipText: "This action is currently unavailable",
-  },
-};
-
-export const DisabledFloatingWithTooltip: Story = {
-  name: "Disabled Floating with Tooltip",
-  parameters: {
-    docs: {
-      description: {
-        story: "Floating button with `ariaDisabled` and tooltip.",
-      },
-    },
-    a11y: ariaDisabledA11yParameters,
-  },
-  args: {
-    ariaDisabled: true,
-    label: "Floating",
-    variant: "floating",
-    tooltipText: "This action is currently unavailable",
-  },
-};
-
-export const DisabledFloatingActionWithTooltip: Story = {
-  name: "Disabled Floating Action with Tooltip",
-  parameters: {
-    docs: {
-      description: {
-        story: "Floating Action button with `ariaDisabled` and tooltip.",
-      },
-    },
-    a11y: ariaDisabledA11yParameters,
-  },
-  args: {
-    ariaDisabled: true,
-    label: "Floating Action",
-    variant: "floatingAction",
-    tooltipText: "This action is currently unavailable",
+  render: function C() {
+    return (
+      <StorySection title="Every variant with `ariaDisabled` and a tooltip.">
+        <StoryGrid columns={3}>
+          {buttonVariantValues.map((variant) => (
+            <StoryCell key={variant} label={variant}>
+              <Button
+                ariaDisabled
+                label={variant}
+                onClick={fn()}
+                tooltipText="This action is currently unavailable"
+                variant={variant}
+              />
+            </StoryCell>
+          ))}
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };

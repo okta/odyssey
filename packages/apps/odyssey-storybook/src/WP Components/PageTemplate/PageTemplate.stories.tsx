@@ -21,6 +21,7 @@ import {
   Form,
   MenuButton,
   MenuItem,
+  Paragraph,
   Surface,
   TextField,
 } from "@okta/odyssey-react-mui";
@@ -48,7 +49,7 @@ export default meta;
 
 type Story = StoryObj<{ isFullWidth?: boolean; testId?: string }>;
 
-export const Default: Story = {
+export const Playground: Story = {
   render: (args) => (
     <PageTemplate
       headerComponent={
@@ -153,7 +154,7 @@ export const OverlayDrawer: Story = {
             title="Drawer title"
             variant="temporary"
           >
-            <div>
+            <Paragraph>
               Okta Privileged Access is a Privileged Access Management (PAM)
               solution designed to help customers mitigate the risk of
               unauthorized access to resources, a critical area of security and
@@ -163,7 +164,7 @@ export const OverlayDrawer: Story = {
               managing access to all your privileged accounts. It securely
               connects people, machines, and applications to privileged
               resources such as servers, containers, and enterprise apps.
-            </div>
+            </Paragraph>
           </Drawer>
         }
         headerComponent={
@@ -250,7 +251,7 @@ export const EmbeddedDrawer: Story = {
             title="Drawer title"
             variant="persistent"
           >
-            <div>
+            <Paragraph>
               Okta Privileged Access is a Privileged Access Management (PAM)
               solution designed to help customers mitigate the risk of
               unauthorized access to resources, a critical area of security and
@@ -260,7 +261,7 @@ export const EmbeddedDrawer: Story = {
               managing access to all your privileged accounts. It securely
               connects people, machines, and applications to privileged
               resources such as servers, containers, and enterprise apps.
-            </div>
+            </Paragraph>
           </Drawer>
         }
         headerComponent={

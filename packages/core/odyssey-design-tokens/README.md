@@ -32,7 +32,20 @@ import * as Tokens from "@okta/odyssey-design-tokens";
 
 ## Tokens
 
-Tokens are published in two formats: ESM and SCSS.
+Tokens are published in JavaScript (ESM and CommonJS) and SCSS formats.
+
+Import the SCSS variables:
+
+```scss
+@use "@okta/odyssey-design-tokens/scss" as odsTokens;
+
+.example {
+  padding: odsTokens.$spacing-4;
+}
+```
+
+A nested `$ods-tokens` map covering all tokens is also available from the same
+import.
 
 ## License
 

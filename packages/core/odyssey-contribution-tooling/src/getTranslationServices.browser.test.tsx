@@ -15,6 +15,7 @@ describe(getTranslationServices.name, () => {
     fr,
   } as const;
 
+  let i18nInstance: ReturnType<typeof getTranslationServices>["i18n"];
   let OdysseyTranslationProvider: ReturnType<
     typeof getTranslationServices
   >["TranslationProvider"];
@@ -27,6 +28,7 @@ describe(getTranslationServices.name, () => {
       defaultLanguageCode: "en",
       resources: testResources,
     });
+    i18nInstance = services.i18n;
     OdysseyTranslationProvider = services.TranslationProvider;
     useTranslation = services.useTranslation;
   });
@@ -36,6 +38,7 @@ describe(getTranslationServices.name, () => {
     return (
       <div>
         <h1>{t("greeting", { friends: "FRIENDS" })}</h1>
+        <h2>{t("farewell")}</h2>
         <p>Current language: {i18n.language}</p>
       </div>
     );
@@ -93,6 +96,145 @@ describe(getTranslationServices.name, () => {
     expect(
       screen.getByRole("heading", { name: "Hello Overridden!" }),
     ).toBeInTheDocument();
+  });
+
+  test("a provider without overrides mounted after one with overrides unmounts", async () => {
+    const { unmount } = render(
+      <OdysseyTranslationProvider
+        translationOverrides={{ en: { greeting: "Hello Overridden!" } }}
+      >
+        <TestComponent />
+      </OdysseyTranslationProvider>,
+    );
+
+    // the override lands in an effect, so the first paint can still be the default
+    expect(
+      await screen.findByRole("heading", { name: "Hello Overridden!" }),
+    ).toBeVisible();
+
+    unmount();
+
+    render(
+      <OdysseyTranslationProvider>
+        <TestComponent />
+      </OdysseyTranslationProvider>,
+    );
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("heading", { name: "Hello World FRIENDS" }),
+      ).toBeVisible();
+    });
+  });
+
+  test("an inner provider with overrides unmounts under an outer provider with its own", async () => {
+    const outerOverrides = { en: { greeting: "Outer greeting {{friends}}" } };
+    const innerOverrides = { en: { farewell: "Inner farewell" } };
+
+    const { rerender } = render(
+      <OdysseyTranslationProvider translationOverrides={outerOverrides}>
+        <TestComponent />
+      </OdysseyTranslationProvider>,
+    );
+
+    expect(
+      await screen.findByRole("heading", { name: "Outer greeting FRIENDS" }),
+    ).toBeVisible();
+
+    rerender(
+      <OdysseyTranslationProvider translationOverrides={outerOverrides}>
+        <OdysseyTranslationProvider translationOverrides={innerOverrides}>
+          <TestComponent />
+        </OdysseyTranslationProvider>
+      </OdysseyTranslationProvider>,
+    );
+
+    expect(
+      await screen.findByRole("heading", { name: "Inner farewell" }),
+    ).toBeVisible();
+
+    rerender(
+      <OdysseyTranslationProvider translationOverrides={outerOverrides}>
+        <TestComponent />
+      </OdysseyTranslationProvider>,
+    );
+
+    expect(i18nInstance.getResourceBundle("en", "test-app")).toStrictEqual({
+      greeting: "Outer greeting {{friends}}",
+      farewell: "Goodbye",
+    });
+    expect(
+      screen.getByRole("heading", { name: "Outer greeting FRIENDS" }),
+    ).toBeVisible();
+  });
+
+  test("a bundle the consumer added directly outlives an unrelated provider's unmount", async () => {
+    i18nInstance.addResourceBundle(
+      "en",
+      "test-app",
+      { farewell: "Consumer farewell" },
+      true,
+      true,
+    );
+
+    const { unmount } = render(
+      <OdysseyTranslationProvider
+        translationOverrides={{ en: { greeting: "Provider greeting" } }}
+      >
+        <TestComponent />
+      </OdysseyTranslationProvider>,
+    );
+
+    expect(
+      await screen.findByRole("heading", { name: "Provider greeting" }),
+    ).toBeVisible();
+
+    unmount();
+
+    render(
+      <OdysseyTranslationProvider>
+        <TestComponent />
+      </OdysseyTranslationProvider>,
+    );
+
+    expect(
+      await screen.findByRole("heading", { name: "Hello World FRIENDS" }),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("heading", { name: "Consumer farewell" }),
+    ).toBeVisible();
+  });
+
+  test("an override for a language the resources do not cover unmounts", async () => {
+    const { unmount } = render(
+      <OdysseyTranslationProvider<"custom">
+        translationOverrides={{ custom: { greeting: "Custom greeting" } }}
+      >
+        <TestComponent />
+      </OdysseyTranslationProvider>,
+    );
+
+    expect(
+      await screen.findByRole("heading", { name: "Hello World FRIENDS" }),
+    ).toBeVisible();
+
+    unmount();
+
+    expect(i18nInstance.options.ns).toStrictEqual(["test-app"]);
+    expect(
+      i18nInstance.getResource("custom", "test-app", "greeting"),
+    ).toBeUndefined();
+
+    render(
+      <OdysseyTranslationProvider>
+        <TestComponent />
+      </OdysseyTranslationProvider>,
+    );
+
+    expect(
+      await screen.findByRole("heading", { name: "Hello World FRIENDS" }),
+    ).toBeVisible();
+    expect(screen.getByRole("heading", { name: "Goodbye" })).toBeVisible();
   });
 
   describe("when components are nested", () => {

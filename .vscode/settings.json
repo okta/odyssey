@@ -1,5 +1,7 @@
 {
   "eslint.useFlatConfig": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
   "js/ts.tsdk.path": "node_modules/typescript/lib",
   "vitest.configSearchPatternExclude": "{**/node_modules/**,**/vendor/**,**/.*/**,**/*.d.ts,**/odyssey-contributions-stack/files/**}"
 }

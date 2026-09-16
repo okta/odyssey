@@ -1,0 +1,86 @@
+import {
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs/blocks";
+
+import * as OverlaysStories from "./Overlays.stories";
+
+<Meta of={OverlaysStories} />
+
+<Title of={OverlaysStories} />
+<Subtitle of={OverlaysStories} />
+<Description of={OverlaysStories} />
+
+`dialog@1`, `drawer@1` and `full-screen-overlay@1` wrap the Odyssey `Dialog`,
+`Drawer` and `FullScreenOverlay`. A manual docs page replaces the generated one
+here because every story renders open, and an open backdrop would render inline on
+this page and stack behind the prose.
+
+## Open state
+
+An overlay owns its open state. `inputs.isDefaultOpen` seeds it, and everything
+after that goes through the action channel, so a dismissed overlay stays dismissed
+instead of being reopened by an input that still reads `true`.
+
+- `actions.open`, `actions.close`, `actions.toggle` control it from outside.
+- `outputs.isOpen` mirrors the live state for `when:` gates and `subscriptions:`.
+- `open` and `close` events fire on transitions. `close` covers the close button,
+  the backdrop and the escape key.
+
+Wire it to a sibling by subscribing an action to that sibling's event:
+
+```json
+{
+  "from": "odyssey-blueprint/dialog@1",
+  "instanceId": "confirm.delete",
+  "inputs": {
+    "title": "Delete app",
+    "content": "This removes the app for everyone."
+  },
+  "subscriptions": {
+    "open": {
+      "instance": { "id": "row.delete", "port": "events", "name": "click" }
+    }
+  }
+}
+```
+
+## Content
+
+`inputs.content` is the overlay body. It takes plain text, one nested entry, an
+array of either, or an `each:` form for a body driven from runtime data.
+
+```json
+{
+  "from": "odyssey-blueprint/dialog@1",
+  "instanceId": "confirm.delete",
+  "inputs": {
+    "title": "Delete app",
+    "isDefaultOpen": true,
+    "content": [
+      "Type the app name to confirm.",
+      {
+        "from": "odyssey-blueprint/text-field@1",
+        "instanceId": "confirm.delete.name",
+        "inputs": { "label": "App name" }
+      }
+    ]
+  }
+}
+```
+
+The footer slots `primaryCallToAction`, `secondaryCallToAction` and
+`tertiaryCallToAction` take nested entries the same way. They are usable today but
+have nothing button-shaped to hold: no button block has landed yet, so footers in
+these stories are left empty.
+
+## Accessibility
+
+Set `ariaLabel` on every drawer. The pinned Odyssey `Drawer` passes it straight to
+the close button with no fallback, so a drawer without one renders a button that
+has no accessible name.
+
+<Controls />

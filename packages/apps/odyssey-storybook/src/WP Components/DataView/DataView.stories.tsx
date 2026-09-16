@@ -53,7 +53,7 @@ export default meta;
 
 type Story = StoryObj<typeof DataView>;
 
-export const Default: Story = {
+export const Playground: Story = {
   render: function C() {
     const getData = useCallback(
       (props: DataGetDataType) => filterData({ data: personData, ...props }),

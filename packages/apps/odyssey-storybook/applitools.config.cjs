@@ -56,7 +56,6 @@ const applitoolsConfig = {
   saveNewTests: true,
   sendDom: true,
   serverUrl: "https://oktaeyes.applitools.com",
-  testConcurrency: 20,
   waitBeforeCapture: 2000,
   include: new RegExp(process.env.SCOPED_COMPONENTS || ".*", "i"),
 };

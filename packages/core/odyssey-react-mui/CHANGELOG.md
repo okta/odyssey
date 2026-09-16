@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.69.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.68.0...v1.69.0) (2026-09-16)
+
+### Bug Fixes
+
+* drawer reflows at compact viewport width ([#725](https://github.com/atko-eng/odyssey-design-system/issues/725)) ([5dedf14](https://github.com/atko-eng/odyssey-design-system/commit/5dedf14bea5f5852a5d914aacee1d7627cfe8c3c))
+* make DatePicker follow its value prop (OKTA-1252948) ([#734](https://github.com/atko-eng/odyssey-design-system/issues/734)) ([9f9d1e8](https://github.com/atko-eng/odyssey-design-system/commit/9f9d1e8448a1c1a715f8b2efa10fbecfb75a6f5b))
+
+### Features
+
+* add charts entrypoint and LineChart ([#692](https://github.com/atko-eng/odyssey-design-system/issues/692)) ([9c467d5](https://github.com/atko-eng/odyssey-design-system/commit/9c467d5387cfec61060713df005f4141b387a6c1))
+* add overflowWrap prop to Typography ([#817](https://github.com/atko-eng/odyssey-design-system/issues/817)) ([948893d](https://github.com/atko-eng/odyssey-design-system/commit/948893db9104121d7e5a0fd6f4bd1d2bebb66d99))
+* Translations for odyssey-design-system:enduser ([#679](https://github.com/atko-eng/odyssey-design-system/issues/679)) ([34db929](https://github.com/atko-eng/odyssey-design-system/commit/34db929e34ca81d50a08d3aa1b2dc732c6217e2f))
+
+
+# [1.68.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.67.0...v1.68.0) (2026-09-02)
+
+### Bug Fixes
+
+- restore node export condition in odyssey-react-mui (OKTA-1249837) ([#680](https://github.com/atko-eng/odyssey-design-system/issues/680)) ([f44c778](https://github.com/atko-eng/odyssey-design-system/commit/f44c778544874407823573ef0fa75abd9d627181))
+
+### Features
+
+- add app-element container-query hooks ([#644](https://github.com/atko-eng/odyssey-design-system/issues/644)) ([d31daa4](https://github.com/atko-eng/odyssey-design-system/commit/d31daa4ba970f1b1400a35923b186ab33200ffba))
+- add loading state to Button ([#708](https://github.com/atko-eng/odyssey-design-system/issues/708)) ([b3ab584](https://github.com/atko-eng/odyssey-design-system/commit/b3ab584fa38bfe5ff6e8167b6ead92bddb7e5101))
+
 # [1.67.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.66.1...v1.67.0) (2026-08-19)
 
 ### Bug Fixes

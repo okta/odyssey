@@ -13,11 +13,18 @@
 import {
   Radio,
   RadioGroup,
+  type SecureSettingsIndicatorLevel,
 } from "@okta/odyssey-contributions-passwordless-components";
 import { Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { fieldComponentPropsMetaData } from "../../Odyssey Core/Fields/fieldComponentPropsMetaData.js";
+import {
+  staticBoardParameters,
+  StoryFieldCell,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { PasswordlessComponentsOdysseyStorybookThemeDecorator } from "../../tools/PasswordlessComponentsOdysseyStorybookThemeDecorator.js";
 
 const meta = {
@@ -87,8 +94,10 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const Template: Story = {
-  args: {} as Story["args"],
+export const Playground: Story = {
+  args: {
+    defaultValue: "",
+  } as Story["args"],
   render: function C(props) {
     return (
       <RadioGroup {...props}>
@@ -100,123 +109,158 @@ const Template: Story = {
   },
 };
 
-export const Default: Story = {
-  ...Template,
-  args: {
-    defaultValue: "",
-  } as Story["args"],
-};
+export const AllSecureLevels: Story = {
+  args: {} as Story["args"],
+  name: "All secure levels",
+  parameters: staticBoardParameters,
+  render: function C() {
+    const groupLevels: Array<SecureSettingsIndicatorLevel | undefined> = [
+      undefined,
+      "more",
+      "most",
+    ];
 
-export const WithHint: Story = {
-  ...Template,
-  args: {
-    hint: "Select your preferred authentication method",
-    defaultValue: "",
-  } as Story["args"],
-};
-
-export const WithHintLink: Story = {
-  ...Template,
-  args: {
-    hint: "Select your preferred authentication method",
-    HintLinkComponent: (
-      <Link href="#link">Learn more about authentication options</Link>
-    ),
-    defaultValue: "",
-  } as Story["args"],
-};
-
-export const GroupSecureLevelMore: Story = {
-  ...Template,
-  args: {
-    secureLevel: "more",
-    defaultValue: "",
-  } as Story["args"],
-};
-
-export const GroupSecureLevelMost: Story = {
-  ...Template,
-  args: {
-    secureLevel: "most",
-    defaultValue: "",
-  } as Story["args"],
-};
-
-export const IndividualSecureLevels: Story = {
-  args: {
-    label: "Authentication Method",
-    defaultValue: "",
-  } as Story["args"],
-  render: function C(props) {
     return (
-      <RadioGroup {...props}>
-        <Radio
-          hint="Hardware-backed authentication"
-          label="Passkeys"
-          secureLevel="most"
-          value="passkeys"
-        />
-        <Radio
-          hint="Passwordless email verification"
-          label="Email magic link"
-          secureLevel="more"
-          value="email"
-        />
-        <Radio hint="Text message verification" label="SMS OTP" value="sms" />
-      </RadioGroup>
+      <StorySection title="Group-level secure levels, per-radio levels, and the two combined.">
+        <StoryGrid columns={2}>
+          {groupLevels.map((secureLevel) => (
+            <StoryFieldCell key={secureLevel ?? "none"}>
+              <RadioGroup
+                defaultValue=""
+                label={`Group secureLevel: ${secureLevel ?? "none"}`}
+                secureLevel={secureLevel}
+              >
+                <Radio label="Passkeys" value="passkeys" />
+                <Radio label="Email magic link" value="email" />
+                <Radio label="SMS OTP" value="sms" />
+              </RadioGroup>
+            </StoryFieldCell>
+          ))}
+
+          <StoryFieldCell>
+            <RadioGroup defaultValue="" label="Individual levels only">
+              <Radio
+                hint="Hardware-backed authentication"
+                label="Passkeys"
+                secureLevel="most"
+                value="passkeys"
+              />
+              <Radio
+                hint="Passwordless email verification"
+                label="Email magic link"
+                secureLevel="more"
+                value="email"
+              />
+              <Radio
+                hint="Text message verification"
+                label="SMS OTP"
+                value="sms"
+              />
+            </RadioGroup>
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <RadioGroup
+              defaultValue=""
+              label="Group and individual combined"
+              secureLevel="most"
+            >
+              <Radio
+                hint="Hardware-backed authentication"
+                label="Passkeys"
+                secureLevel="most"
+                value="passkeys"
+              />
+              <Radio
+                hint="Passwordless email verification"
+                label="Email magic link"
+                secureLevel="more"
+                value="email"
+              />
+              <Radio
+                hint="Text message verification"
+                label="SMS OTP"
+                value="sms"
+              />
+            </RadioGroup>
+          </StoryFieldCell>
+        </StoryGrid>
+      </StorySection>
     );
   },
 };
 
-export const CombinedSecureLevels: Story = {
-  args: {
-    label: "Authentication Method",
-    secureLevel: "most",
-    defaultValue: "",
-  } as Story["args"],
-  render: function C(props) {
+export const AllStates: Story = {
+  args: {} as Story["args"],
+  name: "All states",
+  parameters: staticBoardParameters,
+  render: function C() {
     return (
-      <RadioGroup {...props}>
-        <Radio
-          hint="Hardware-backed authentication"
-          label="Passkeys"
-          secureLevel="most"
-          value="passkeys"
-        />
-        <Radio
-          hint="Passwordless email verification"
-          label="Email magic link"
-          secureLevel="more"
-          value="email"
-        />
-        <Radio hint="Text message verification" label="SMS OTP" value="sms" />
-      </RadioGroup>
+      <StorySection title="Every group state, shown at the highest secure level.">
+        <StoryGrid columns={2}>
+          <StoryFieldCell>
+            <RadioGroup
+              defaultValue=""
+              hint="Select your preferred authentication method"
+              label="With hint"
+            >
+              <Radio label="Passkeys" value="passkeys" />
+              <Radio label="Email magic link" value="email" />
+            </RadioGroup>
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <RadioGroup
+              defaultValue=""
+              hint="Select your preferred authentication method"
+              HintLinkComponent={
+                <Link href="#link">
+                  Learn more about authentication options
+                </Link>
+              }
+              label="With hint link"
+            >
+              <Radio label="Passkeys" value="passkeys" />
+              <Radio label="Email magic link" value="email" />
+            </RadioGroup>
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <RadioGroup
+              defaultValue=""
+              isDisabled
+              label="Disabled"
+              secureLevel="most"
+            >
+              <Radio label="Passkeys" value="passkeys" />
+              <Radio label="Email magic link" value="email" />
+            </RadioGroup>
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <RadioGroup
+              defaultValue=""
+              isReadOnly
+              label="Read-only"
+              secureLevel="most"
+            >
+              <Radio label="Passkeys" value="passkeys" />
+              <Radio label="Email magic link" value="email" />
+            </RadioGroup>
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <RadioGroup
+              defaultValue=""
+              errorMessage="Please select an authentication method"
+              label="With error"
+            >
+              <Radio label="Passkeys" value="passkeys" />
+              <Radio label="Email magic link" value="email" />
+            </RadioGroup>
+          </StoryFieldCell>
+        </StoryGrid>
+      </StorySection>
     );
   },
-};
-
-export const Disabled: Story = {
-  ...Template,
-  args: {
-    isDisabled: true,
-    secureLevel: "most",
-    defaultValue: "",
-  } as Story["args"],
-};
-
-export const ReadOnly: Story = {
-  ...Template,
-  args: {
-    isReadOnly: true,
-    secureLevel: "most",
-    defaultValue: "passkeys",
-  } as Story["args"],
-};
-
-export const WithError: Story = {
-  ...Template,
-  args: {
-    errorMessage: "Please select an authentication method",
-    defaultValue: "",
-  } as Story["args"],
 };

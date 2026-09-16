@@ -11,6 +11,7 @@
  */
 
 import {
+  createOdysseyStyledComponent,
   Heading1,
   Heading2,
   Heading3,
@@ -24,6 +25,7 @@ import {
   Support,
   Typography,
   typographyColorValues,
+  typographyOverflowWrapValues,
   TypographyProps,
   typographyVariantMapping,
   TypographyVariantValue,
@@ -33,6 +35,8 @@ import { createElement } from "react";
 
 import {
   staticBoardParameters,
+  StoryCell,
+  StoryRow,
   StorySection,
 } from "../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
@@ -50,6 +54,30 @@ const variantMapping = {
   subordinate: Subordinate,
   support: Support,
 };
+
+const StyledOverflowContainer = createOdysseyStyledComponent({
+  tag: "div",
+  shouldForwardProp: (prop) => prop !== "isFlexContainer",
+})<{ isFlexContainer?: boolean }>(
+  ({ isFlexContainer, odysseyDesignTokens }) => ({
+    borderColor: odysseyDesignTokens.BorderColorDisplay,
+    borderRadius: odysseyDesignTokens.BorderRadiusTight,
+    borderStyle: odysseyDesignTokens.BorderStyleMain,
+    borderWidth: odysseyDesignTokens.BorderWidthMain,
+    display: isFlexContainer ? "flex" : "block",
+    overflow: "hidden",
+    padding: odysseyDesignTokens.Spacing3,
+    width: "200px",
+  }),
+);
+
+const StyledOverflowBoard = createOdysseyStyledComponent({ tag: "div" })(
+  ({ odysseyDesignTokens }) => ({
+    display: "flex",
+    flexDirection: "column",
+    gap: odysseyDesignTokens.Spacing6,
+  }),
+);
 
 const ariaCurrentOptions = [
   "false",
@@ -164,6 +192,21 @@ const storybookMeta: Meta<typeof Typography> = {
         },
       },
     },
+    overflowWrap: {
+      options: typographyOverflowWrapValues,
+      control: { type: "select" },
+      description:
+        "Controls where the text may break to avoid overflowing its container",
+      table: {
+        category: "Visual",
+        defaultValue: {
+          summary: "normal",
+        },
+        type: {
+          summary: typographyOverflowWrapValues.join(" | "),
+        },
+      },
+    },
     testId: {
       control: "text",
       description:
@@ -238,6 +281,57 @@ export const AllVariants: StoryObj<typeof Typography> = {
         <Subordinate>This is subordinate text.</Subordinate>
         <Support>This is support text.</Support>
       </StorySection>
+    );
+  },
+};
+
+export const AllOverflowBehaviors: StoryObj<typeof Typography> = {
+  name: "All overflow behaviors",
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StyledOverflowBoard>
+        {[
+          {
+            isFlexContainer: false,
+            sample: "0oa4b8c2d6e0f5g9h3i7j1k5l9m2n6o0p4q8r2s6t0u4v8w1x5y9z3",
+            title:
+              "One long identifier, with no spaces. Normal keeps it on one line. The box cuts the end.",
+          },
+          {
+            isFlexContainer: false,
+            sample:
+              "The agent could not be reached, so its last known state is shown below for agent 0oa4b8c2d6e0f5g9h3i7j1k5l9m2n6o0p4q8r2s6t0u4v8w1x5y9z3.",
+            title:
+              "A sentence that ends with a long identifier. Normal breaks the sentence at the spaces. The identifier is still too wide, so the box cuts the end.",
+          },
+          {
+            isFlexContainer: false,
+            sample:
+              "Every word in this sentence is short enough to wrap on its own.",
+            title:
+              "A sentence with only short words. The three values give the same result.",
+          },
+          {
+            isFlexContainer: true,
+            sample: "0oa4b8c2d6e0f5g9h3i7j1k5l9m2n6o0p4q8r2s6t0u4v8w1x5y9z3",
+            title:
+              "The same identifier inside a flex box. A flex item stays as wide as its longest unbroken word. Anywhere adds a break point at each character, so the item can be narrow. Break-word does not add one, so the box cuts the end, the same as normal.",
+          },
+        ].map(({ isFlexContainer, sample, title }) => (
+          <StorySection key={title} title={title}>
+            <StoryRow>
+              {typographyOverflowWrapValues.map((overflowWrap) => (
+                <StoryCell key={overflowWrap} label={overflowWrap}>
+                  <StyledOverflowContainer isFlexContainer={isFlexContainer}>
+                    <Paragraph overflowWrap={overflowWrap}>{sample}</Paragraph>
+                  </StyledOverflowContainer>
+                </StoryCell>
+              ))}
+            </StoryRow>
+          </StorySection>
+        ))}
+      </StyledOverflowBoard>
     );
   },
 };

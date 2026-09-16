@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-design-tokens",
-  "version": "1.67.0",
+  "version": "1.69.0",
   "nx": {
     "tags": [
       "scope:core"
@@ -19,7 +19,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./scss": "./dist/index.scss"
   },
   "repository": {
     "type": "git",

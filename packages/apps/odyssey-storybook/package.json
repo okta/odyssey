@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.67.0",
+  "version": "1.69.0",
   "description": "Documentation for Odyssey, Okta's design system",
   "nx": {
     "tags": [
@@ -34,7 +34,7 @@
     "directory": "packages/apps/odyssey-storybook"
   },
   "devDependencies": {
-    "@applitools/eyes-storybook": "3.67.3",
+    "@applitools/eyes-storybook": "3.68.3",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^5.18.0",
@@ -44,6 +44,8 @@
     "@okta/odyssey-contributions-iga-components": "workspace:*",
     "@okta/odyssey-contributions-oin-components": "workspace:*",
     "@okta/odyssey-contributions-opa-components": "workspace:*",
+    "@okta/odyssey-contributions-orpheus-components": "workspace:*",
+    "@okta/odyssey-contributions-passwordless-components": "workspace:*",
     "@okta/odyssey-contributions-policy-rules-components": "workspace:*",
     "@okta/odyssey-contributions-resource-access-policy-components": "workspace:*",
     "@okta/odyssey-contributions-ud-components": "workspace:*",

@@ -10,11 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { Checkbox } from "@okta/odyssey-contributions-passwordless-components";
+import {
+  Checkbox,
+  type SecureSettingsIndicatorLevel,
+} from "@okta/odyssey-contributions-passwordless-components";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
 import { fieldComponentPropsMetaData } from "../../Odyssey Core/Fields/fieldComponentPropsMetaData.js";
+import {
+  staticBoardParameters,
+  StoryFieldCell,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { PasswordlessComponentsOdysseyStorybookThemeDecorator } from "../../tools/PasswordlessComponentsOdysseyStorybookThemeDecorator.js";
 
 const meta = {
@@ -105,72 +114,85 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Playground: Story = {};
 
-export const WithHint: Story = {
-  args: {
-    hint: "Adds an extra layer of security for sensitive operations",
-  },
-};
-
-export const SecureLevelMore: Story = {
-  args: {
-    secureLevel: "more",
-  },
-};
-
-export const SecureLevelMost: Story = {
-  args: {
-    secureLevel: "most",
-  },
-};
-
-export const SecureLevelWithHint: Story = {
-  args: {
-    secureLevel: "most",
-    hint: "Adds an extra layer of security for sensitive operations",
-  },
-};
-
-export const Required: Story = {
-  args: {
-    isRequired: true,
-    secureLevel: "most",
-  },
-};
-
-export const Indeterminate: Story = {
-  args: {
-    isIndeterminate: true,
-    secureLevel: "more",
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    isDisabled: true,
-    secureLevel: "most",
-  },
-};
-
-export const ReadOnly: Story = {
+export const AllSecureLevels: Story = {
+  name: "All secure levels",
+  parameters: staticBoardParameters,
   render: function C() {
-    const [isChecked, setIsChecked] = useState(true);
+    const secureLevels: Array<SecureSettingsIndicatorLevel | undefined> = [
+      undefined,
+      "more",
+      "most",
+    ];
+
     return (
-      <Checkbox
-        isChecked={isChecked}
-        isReadOnly={true}
-        label="Require passkey for admin actions"
-        onChange={(_, checked) => setIsChecked(checked)}
-        secureLevel="most"
-      />
+      <StorySection title="Every secure level, with and without a hint.">
+        <StoryGrid columns={3}>
+          {secureLevels.map((secureLevel) => (
+            <StoryFieldCell key={secureLevel ?? "none"}>
+              <Checkbox
+                label={`secureLevel: ${secureLevel ?? "none"}`}
+                secureLevel={secureLevel}
+              />
+            </StoryFieldCell>
+          ))}
+
+          {secureLevels.map((secureLevel) => (
+            <StoryFieldCell key={`${secureLevel ?? "none"}-hint`}>
+              <Checkbox
+                hint="Adds an extra layer of security for sensitive operations"
+                label={`secureLevel: ${secureLevel ?? "none"}`}
+                secureLevel={secureLevel}
+              />
+            </StoryFieldCell>
+          ))}
+        </StoryGrid>
+      </StorySection>
     );
   },
 };
 
-export const Invalid: Story = {
-  args: {
-    validity: "invalid",
-    secureLevel: "most",
+export const AllStates: Story = {
+  name: "All states",
+  parameters: staticBoardParameters,
+  render: function C() {
+    const [isReadOnlyChecked, setIsReadOnlyChecked] = useState(true);
+
+    return (
+      <StorySection title="Every checkbox state, shown at the highest secure level.">
+        <StoryGrid columns={3}>
+          <StoryFieldCell>
+            <Checkbox isRequired label="Required" secureLevel="most" />
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <Checkbox
+              isIndeterminate
+              label="Indeterminate"
+              secureLevel="more"
+            />
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <Checkbox isDisabled label="Disabled" secureLevel="most" />
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <Checkbox
+              isChecked={isReadOnlyChecked}
+              isReadOnly
+              label="Read-only"
+              onChange={(_event, isChecked) => setIsReadOnlyChecked(isChecked)}
+              secureLevel="most"
+            />
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <Checkbox label="Invalid" secureLevel="most" validity="invalid" />
+          </StoryFieldCell>
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };

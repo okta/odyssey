@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.69.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.68.0...v1.69.0) (2026-09-16)
+
+### Bug Fixes
+
+* undo i18n overrides on provider unmount ([#756](https://github.com/atko-eng/odyssey-design-system/issues/756)) ([1b67b62](https://github.com/atko-eng/odyssey-design-system/commit/1b67b62509a2d8a9588265e8de02f276a84605b3))
+
+
+# [1.68.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.67.0...v1.68.0) (2026-09-02)
+
+**Note:** Version bump only for package @okta/odyssey-contribution-tooling
+
 # [1.67.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.66.1...v1.67.0) (2026-08-19)
 
 **Note:** Version bump only for package @okta/odyssey-contribution-tooling

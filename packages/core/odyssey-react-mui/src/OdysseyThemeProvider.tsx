@@ -119,9 +119,10 @@ const OdysseyThemeProvider = ({
 
   const contrastModeProviderValue = useMemo(
     () => ({
+      contrastContainerRef,
       contrastMode,
     }),
-    [contrastMode],
+    [contrastContainerRef, contrastMode],
   );
 
   const providerComponents = useMemo(

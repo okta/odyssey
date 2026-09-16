@@ -21,6 +21,12 @@ import {
 import { Button } from "@okta/odyssey-react-mui";
 import { fn } from "storybook/test";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 import { WorkflowsComponentsStorybookThemeDecorator } from "../../tools/WorkflowsComponentsStorybookThemeDecorator.js";
 
@@ -155,152 +161,165 @@ const storybookMeta: Meta<CalloutProps> = {
 
 export default storybookMeta;
 
-export const Info: StoryObj<CalloutProps> = {
+export const Playground: StoryObj<CalloutProps> = {
   args: {
     role: "status",
     severity: "info",
-    title: "Authentication status",
     text: "You're signed in from Moonbase Alpha-6, located on Luna.",
+    title: "Authentication status",
   },
 };
 
-export const Error: StoryObj<CalloutProps> = {
-  args: {
-    role: "alert",
-    severity: "error",
-    title: "Safety checks failed",
-    text: "Reconfigure the fuel mixture ratios and perform safety checks again.",
+export const AllSeverities: StoryObj<CalloutProps> = {
+  name: "All severities",
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every severity.">
+        <StoryGrid columns={2}>
+          {calloutSeverityValues.map((severity) => (
+            <StoryCell key={severity} label={severity}>
+              <Callout
+                role={severity === "error" ? "alert" : "status"}
+                severity={severity}
+                text={`This is a ${severity} callout.`}
+                title={`${severity} title`}
+              />
+            </StoryCell>
+          ))}
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };
 
-export const Warning: StoryObj<CalloutProps> = {
-  args: {
-    role: "status",
-    severity: "warning",
-    title: "Safety checks incomplete",
-    text: "Complete all safety checks before requesting approval to launch your mission.",
+export const AllContentPatterns: StoryObj<CalloutProps> = {
+  name: "All content patterns",
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every combination of title, body text, children, and link.">
+        <StoryGrid columns={2}>
+          <StoryCell label="text + linkUrl">
+            <Callout
+              linkText="Visit fueling console"
+              linkUrl="#"
+              role="alert"
+              severity="error"
+              text="There is an issue with the fuel mixture ratios."
+              title="Safety checks failed"
+            />
+          </StoryCell>
+
+          <StoryCell label="linkTarget=_blank">
+            <Callout
+              linkTarget="_blank"
+              linkText="Visit fueling console"
+              linkUrl="#"
+              role="alert"
+              severity="error"
+              text="There is an issue with the fuel mixture ratios."
+              title="Safety checks failed"
+            />
+          </StoryCell>
+
+          <StoryCell label="children as list">
+            <Callout
+              role="status"
+              severity="info"
+              title="Delivery details needed to complete your user profile"
+            >
+              <ul>
+                <li>Secondary email</li>
+                <li>Street address</li>
+                <li>City</li>
+              </ul>
+            </Callout>
+          </StoryCell>
+
+          <StoryCell label="children + linkUrl">
+            <Callout
+              linkText="Visit fueling console"
+              linkUrl="#"
+              role="alert"
+              severity="error"
+              title="Safety checks failed"
+            >
+              There is an issue with the fuel mixture ratios. Reconfigure the
+              fuel mixture and perform the safety checks again.
+            </Callout>
+          </StoryCell>
+
+          <StoryCell label="onLinkClick instead of linkUrl">
+            <Callout
+              linkText="Visit fueling console"
+              onLinkClick={fn()}
+              role="alert"
+              severity="error"
+              text="There is an issue with the fuel mixture ratios."
+              title="Safety checks failed"
+            />
+          </StoryCell>
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };
 
-export const Success: StoryObj<CalloutProps> = {
-  args: {
-    role: "status",
-    severity: "success",
-    title: "Approved for launch",
-    text: "Safety checks are complete. Your mission is ready for liftoff.",
-  },
-};
+export const AllActionPatterns: StoryObj<CalloutProps> = {
+  name: "All action patterns",
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every combination of buttonComponent and link.">
+        <StoryGrid columns={2}>
+          <StoryCell label="buttonComponent (secondary)">
+            <Callout
+              buttonComponent={
+                <Button
+                  label="View connectors"
+                  onClick={fn()}
+                  variant="secondary"
+                />
+              }
+              role="status"
+              severity="success"
+              text="Your connectors have been successfully migrated to the new platform."
+              title="Migration complete"
+            />
+          </StoryCell>
 
-export const WithLink: StoryObj<CalloutProps> = {
-  args: {
-    role: "alert",
-    severity: "error",
-    title: "Safety checks failed",
-    text: "There is an issue with the fuel mixture ratios. Reconfigure the fuel mixture and perform the safety checks again.",
-    linkText: "Visit fueling console",
-    linkUrl: "#",
-  },
-};
+          <StoryCell label="buttonComponent (primary)">
+            <Callout
+              buttonComponent={
+                <Button
+                  label="Retry connection"
+                  onClick={fn()}
+                  variant="primary"
+                />
+              }
+              role="alert"
+              severity="error"
+              text="Unable to connect to the authentication server."
+              title="Connection failed"
+            />
+          </StoryCell>
 
-export const WithLinkAndTarget: StoryObj<CalloutProps> = {
-  args: {
-    role: "alert",
-    severity: "error",
-    title: "Safety checks failed",
-    text: "There is an issue with the fuel mixture ratios. Reconfigure the fuel mixture and perform the safety checks again.",
-    linkTarget: "_blank",
-    linkText: "Visit fueling console",
-    linkUrl: "#",
-  },
-};
-
-export const ChildrenWithList: StoryObj<CalloutProps> = {
-  args: {
-    role: "status",
-    severity: "info",
-    title: "Delivery details needed to complete your user profile",
-    text: undefined,
-    children: (
-      <>
-        <ul>
-          <li>Secondary email</li>
-          <li>Street address</li>
-          <li>City</li>
-        </ul>
-      </>
-    ),
-  },
-};
-
-export const ChildrenWithLink: StoryObj<CalloutProps> = {
-  args: {
-    role: "alert",
-    severity: "error",
-    title: "Safety checks failed",
-    text: undefined,
-    children:
-      "There is an issue with the fuel mixture ratios. Reconfigure the fuel mixture and perform the safety checks again.",
-    linkText: "Visit fueling console",
-    linkUrl: "#",
-  },
-};
-
-export const TitleWithLink: StoryObj<CalloutProps> = {
-  args: {
-    role: "alert",
-    severity: "error",
-    title: "Safety checks failed",
-    text: undefined,
-    linkText: "Visit fueling console",
-    linkUrl: "#",
-  },
-};
-
-export const TitleWithLinkWithOnLinkClick: StoryObj<CalloutProps> = {
-  args: {
-    linkText: "Visit fueling console",
-    onLinkClick: fn(),
-    role: "alert",
-    severity: "error",
-    text: undefined,
-    title: "Safety checks failed",
-  },
-};
-
-export const SuccessWithButton: StoryObj<CalloutProps> = {
-  args: {
-    role: "status",
-    severity: "success",
-    title: "Migration complete",
-    text: "Your connectors have been successfully migrated to the new platform.",
-    buttonComponent: (
-      <Button label="View connectors" onClick={fn()} variant="secondary" />
-    ),
-  },
-};
-
-export const ErrorWithButton: StoryObj<CalloutProps> = {
-  args: {
-    role: "alert",
-    severity: "error",
-    title: "Connection failed",
-    text: "Unable to connect to the authentication server. Check your network settings and try again.",
-    buttonComponent: (
-      <Button label="Retry connection" onClick={fn()} variant="primary" />
-    ),
-  },
-};
-
-export const WithButtonAndLink: StoryObj<CalloutProps> = {
-  args: {
-    role: "alert",
-    severity: "warning",
-    title: "Action required",
-    text: "Your trial period expires in 7 days. Upgrade your plan to maintain access to premium features.",
-    buttonComponent: (
-      <Button label="Upgrade plan" onClick={fn()} variant="primary" />
-    ),
-    linkText: "Learn about pricing",
-    linkUrl: "#",
+          <StoryCell label="buttonComponent + linkUrl">
+            <Callout
+              buttonComponent={
+                <Button label="Upgrade plan" onClick={fn()} variant="primary" />
+              }
+              linkText="Learn about pricing"
+              linkUrl="#"
+              role="alert"
+              severity="warning"
+              text="Your trial period expires in 7 days."
+              title="Action required"
+            />
+          </StoryCell>
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.69.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.68.0...v1.69.0) (2026-09-16)
+
+**Note:** Version bump only for package @okta/odyssey-design-tokens
+
+
+
+
+
+# [1.68.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.67.0...v1.68.0) (2026-09-02)
+
+### Features
+
+- **tokens:** export SCSS via ./scss subpath ([#751](https://github.com/atko-eng/odyssey-design-system/issues/751)) ([53dfc21](https://github.com/atko-eng/odyssey-design-system/commit/53dfc219f50a6767de7fa3d985ecf30bf3e116a0))
+
 # [1.67.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.66.1...v1.67.0) (2026-08-19)
 
 **Note:** Version bump only for package @okta/odyssey-design-tokens

@@ -17,14 +17,15 @@ import {
 } from "@okta/odyssey-contributions-wp-components";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryConstrainedWidth,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 import { WpComponentsStorybookThemeDecorator } from "../../tools/WpComponentsStorybookThemeDecorator.js";
-
-const containerStyle: React.CSSProperties = {
-  maxWidth: "400px",
-  border: "1px dashed #ccc",
-  padding: "16px",
-};
 
 const meta = {
   component: Typography,
@@ -73,99 +74,65 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const WordBreak: Story = {
-  render: () => (
-    <div style={containerStyle}>
-      <Typography wordBreak="break-all">
-        ThisIsAVeryLongWordWithoutSpacesThatNeedsToBeHandledProperly_AnExampleOfURLOrIdentifier
-      </Typography>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Use `wordBreak` to control how long words or URLs should break within the container. Useful for preventing overflow from long unbroken strings.",
-      },
-    },
+export const Playground: Story = {
+  render: function C(args) {
+    return <Typography {...args} />;
   },
 };
 
-export const LineClamp: Story = {
-  render: () => (
-    <div style={containerStyle}>
-      <Typography clampLines={3}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.
-      </Typography>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Use `clampLines` to limit the number of visible lines and add ellipsis when content overflows. Great for truncating long text in cards or lists.",
-      },
-    },
-  },
-};
+export const AllOverflowBehaviors: Story = {
+  name: "All overflow behaviors",
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Every combination of wordBreak and clampLines, in a bounded container.">
+        <StoryGrid columns={2}>
+          <StoryCell label='wordBreak="break-all"'>
+            <StoryConstrainedWidth width="400px">
+              <Typography wordBreak="break-all">
+                ThisIsAVeryLongWordWithoutSpacesThatNeedsToBeHandledProperly_AnExampleOfURLOrIdentifier
+              </Typography>
+            </StoryConstrainedWidth>
+          </StoryCell>
 
-export const CombinedWordBreakAndClamp: Story = {
-  render: () => (
-    <div style={containerStyle}>
-      <Typography clampLines={2} wordBreak="break-word">
-        ThisIsAVeryLongWordWithoutSpaces_FollowedByMoreText_AndEvenMoreText_ThatWillDemonstrateHowBothPropsWorkTogether.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </Typography>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Combine `wordBreak` and `clampLines` to handle long words while limiting the number of visible lines. This ensures content fits within the container both horizontally and vertically.",
-      },
-    },
-  },
-};
+          <StoryCell label="clampLines={3}">
+            <StoryConstrainedWidth width="400px">
+              <Typography clampLines={3}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </Typography>
+            </StoryConstrainedWidth>
+          </StoryCell>
 
-export const HeadingWithClamp: Story = {
-  render: () => (
-    <div style={containerStyle}>
-      <Heading2 clampLines={2}>
-        This Is A Very Long Heading That Should Be Clamped To Two Lines And Show
-        Ellipsis When It Overflows The Container
-      </Heading2>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Example of using `clampLines` with a heading component to prevent long titles from taking up too much space.",
-      },
-    },
-  },
-};
+          <StoryCell label='clampLines={2} + wordBreak="break-word"'>
+            <StoryConstrainedWidth width="400px">
+              <Typography clampLines={2} wordBreak="break-word">
+                ThisIsAVeryLongWordWithoutSpaces_FollowedByMoreText_AndEvenMoreText_ThatWillDemonstrateHowBothPropsWorkTogether.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </Typography>
+            </StoryConstrainedWidth>
+          </StoryCell>
 
-export const ParagraphWithWordBreak: Story = {
-  render: () => (
-    <div style={containerStyle}>
-      <Paragraph wordBreak="break-all">
-        https://example.com/very-long-url-path/that-would-normally-overflow/the-container/without-proper-word-breaking
-      </Paragraph>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Example of using `wordBreak` with a paragraph to handle long URLs that would otherwise overflow the container.",
-      },
-    },
+          <StoryCell label="Heading2 clampLines={2}">
+            <StoryConstrainedWidth width="400px">
+              <Heading2 clampLines={2}>
+                This Is A Very Long Heading That Should Be Clamped To Two Lines
+                And Show Ellipsis When It Overflows The Container
+              </Heading2>
+            </StoryConstrainedWidth>
+          </StoryCell>
+
+          <StoryCell label='Paragraph wordBreak="break-all"'>
+            <StoryConstrainedWidth width="400px">
+              <Paragraph wordBreak="break-all">
+                https://example.com/very-long-url-path/that-would-normally-overflow/the-container/without-proper-word-breaking
+              </Paragraph>
+            </StoryConstrainedWidth>
+          </StoryCell>
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };

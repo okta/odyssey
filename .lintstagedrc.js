@@ -13,7 +13,13 @@
 process.env.IS_COMMITTING = "true";
 
 module.exports = {
-  "*": "prettier --ignore-unknown --log-level warn --write",
+  // `--no-errors-on-unmatched` because the glob is every staged file while biome
+  // formats only the languages it supports. Markdown is not one of them, so a
+  // docs-only commit hands biome a set it ignores entirely, and without the flag
+  // "No files were processed in the specified paths" is an error that fails the
+  // whole pre-commit hook. A mixed commit hid this: one staged `.ts` is enough for
+  // biome to process something and exit 0.
+  "*": "biome format --write --no-errors-on-unmatched",
   "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}": "eslint --fix",
   "packages/**/**/properties/*.properties": () => [
     "yarn generate:i18n:pseudoLocaleProperties",

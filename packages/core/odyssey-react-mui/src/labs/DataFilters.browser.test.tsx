@@ -199,7 +199,9 @@ describe("DataFilters", () => {
 
   const renderFilterWithDescription = async ({
     value,
-  }: { value?: string } = {}) => {
+  }: {
+    value?: string;
+  } = {}) => {
     await renderWithOdysseyProvider(
       <DataFilters
         filters={[

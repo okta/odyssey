@@ -10,8 +10,11 @@ import {
   useTranslation as useI18nNextTranslation,
 } from "react-i18next";
 
+import type { TranslationBundleGroup } from "./getTranslationOverrideRestorePlan.js";
 import type { DefaultSupportedLanguages } from "./translationServices.types.js";
 
+import { getBundleWithRestoredOverrides } from "./getBundleWithRestoredOverrides.js";
+import { getTranslationOverrideRestorePlan } from "./getTranslationOverrideRestorePlan.js";
 import { getTypedObjectEntries } from "./getTypedObjectEntries.js";
 
 /** A record of translation keys and their corresponding translated strings. */
@@ -206,6 +209,13 @@ export function getTranslationServices<
     i18nInstance.addResourceBundle(languageCode, namespace, bundle);
   });
 
+  // `getResourceBundle` is typed `any`, and it returns `undefined` rather than an
+  // empty bundle when the instance holds nothing for that language.
+  const getStoredBundle = (languageCode: string) =>
+    i18nInstance.getResourceBundle(languageCode, namespace) as
+      | TranslationBundleGroup
+      | undefined;
+
   const TranslationProvider = <
     ProviderSupportedLanguageCodes extends string = DefaultSupportedLanguages,
   >({
@@ -224,19 +234,64 @@ export function getTranslationServices<
     }, [languageCode]);
 
     useEffect(() => {
-      if (translationOverrides) {
-        getTypedObjectEntries(translationOverrides).forEach(
-          ([languageCode, overrideBundle]) => {
-            i18nInstance.addResourceBundle(
-              languageCode,
-              namespace,
-              overrideBundle,
-              true,
-              true,
-            );
-          },
-        );
+      if (!translationOverrides) {
+        return;
       }
+
+      const overrideEntries = getTypedObjectEntries(translationOverrides);
+
+      // Snapshotting the live bundle, rather than the bundle
+      // `getTranslationServices` was called with, is what makes teardown safe
+      // for anything else that has written to this instance: an outer provider's
+      // overrides and a consumer's own `addResourceBundle` are both part of the
+      // state this provider restores.
+      const restorePlanEntries = overrideEntries.map(
+        ([languageCode, overrideBundle]) =>
+          [
+            languageCode,
+            getTranslationOverrideRestorePlan({
+              currentBundle: getStoredBundle(languageCode),
+              overrideBundle,
+            }),
+          ] as const,
+      );
+
+      overrideEntries.forEach(([languageCode, overrideBundle]) => {
+        i18nInstance.addResourceBundle(
+          languageCode,
+          namespace,
+          overrideBundle,
+          true,
+          true,
+        );
+      });
+
+      // `i18nInstance` is created once per package and shared by every consumer,
+      // so an override applied here outlives the provider that asked for it
+      // unless it is undone. Undoing it keeps a tree that mounts later in the
+      // same page from inheriting strings it never opted into. In Storybook that
+      // showed up as one story's overrides bleeding into unrelated stories
+      // rendered after it in the same tab.
+      return () => {
+        restorePlanEntries.forEach(([languageCode, restorePlan]) => {
+          const restoredBundle = getBundleWithRestoredOverrides({
+            overriddenBundle: getStoredBundle(languageCode) ?? {},
+            restorePlan,
+          });
+
+          // `removeResourceBundle` splices the namespace out of `options.ns`
+          // whether or not the bundle existed, and only `addResourceBundle` puts
+          // it back, so the re-add has to run on every path.
+          i18nInstance.removeResourceBundle(languageCode, namespace);
+          i18nInstance.addResourceBundle(
+            languageCode,
+            namespace,
+            restoredBundle,
+            true,
+            true,
+          );
+        });
+      };
     }, [translationOverrides]);
 
     return <I18nextProvider i18n={i18nInstance}>{children}</I18nextProvider>;
