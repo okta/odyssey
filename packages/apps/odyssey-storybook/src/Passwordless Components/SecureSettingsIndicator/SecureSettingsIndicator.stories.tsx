@@ -10,9 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { SecureSettingsIndicator } from "@okta/odyssey-contributions-passwordless-components";
+import {
+  SecureSettingsIndicator,
+  type SecureSettingsIndicatorLevel,
+} from "@okta/odyssey-contributions-passwordless-components";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { PasswordlessComponentsOdysseyStorybookThemeDecorator } from "../../tools/PasswordlessComponentsOdysseyStorybookThemeDecorator.js";
 
 const meta = {
@@ -43,14 +52,31 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const MoreSecure: Story = {
+export const Playground: Story = {
   args: {
-    level: "more",
+    level: "most",
   },
 };
 
-export const MostSecure: Story = {
+export const AllLevels: Story = {
+  name: "All levels",
   args: {
     level: "most",
+  },
+  parameters: staticBoardParameters,
+  render: function C() {
+    const levels: Array<SecureSettingsIndicatorLevel> = ["more", "most"];
+
+    return (
+      <StorySection title="Every security level.">
+        <StoryGrid columns={2}>
+          {levels.map((level) => (
+            <StoryCell key={level} label={level}>
+              <SecureSettingsIndicator level={level} />
+            </StoryCell>
+          ))}
+        </StoryGrid>
+      </StorySection>
+    );
   },
 };

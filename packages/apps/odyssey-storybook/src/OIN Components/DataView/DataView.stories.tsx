@@ -15,13 +15,13 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   DataView,
   DataViewProps,
+  MenuItem,
 } from "@okta/odyssey-contributions-oin-components";
 import {
   Box,
   Button,
   DataTableRowData,
   EmptyState,
-  MenuItem,
   paginationTypeValues,
   Status,
 } from "@okta/odyssey-react-mui";
@@ -1177,6 +1177,46 @@ export const PaginationHook: Story = {
         getData={getData}
         hasPagination
         onPaginationChange={onPaginationChange}
+        tableLayoutOptions={tableLayoutOptions}
+      />
+    );
+  },
+};
+
+export const ControlledPagination: Story = {
+  render: function C() {
+    const [data, setData] = useState<Person[]>(personData);
+    const { getData } = useDataCallbacks(data, setData);
+
+    const [pagination, setPagination] = useState({
+      pageIndex: 1,
+      pageSize: 20,
+    });
+
+    const onPaginationChange = useCallback<
+      Required<DataViewProps<Person>>["onPaginationChange"]
+    >((nextPagination: { pageIndex: number; pageSize: number }) => {
+      action("onPaginationChange")(nextPagination);
+      setPagination(nextPagination);
+    }, []);
+
+    const loadedRowsCount = pagination.pageIndex * pagination.pageSize;
+    const hasNextPage = loadedRowsCount < data.length;
+
+    const tableLayoutOptions = useMemo(
+      () => ({
+        columns: personColumns,
+      }),
+      [],
+    );
+
+    return (
+      <DataView
+        getData={getData}
+        hasPagination
+        isPaginationMoreDisabled={!hasNextPage}
+        onPaginationChange={onPaginationChange}
+        pagination={pagination}
         tableLayoutOptions={tableLayoutOptions}
       />
     );

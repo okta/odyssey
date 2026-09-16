@@ -75,4 +75,6 @@ const MemoizedOdysseyThemeProviderPropsProvider = memo(
 MemoizedOdysseyThemeProviderPropsProvider.displayName =
   "OdysseyThemeProviderPropsProvider";
 
-export { MemoizedOdysseyThemeProviderPropsProvider as OdysseyThemeProviderPropsProvider };
+export {
+  MemoizedOdysseyThemeProviderPropsProvider as OdysseyThemeProviderPropsProvider,
+};

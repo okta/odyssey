@@ -11,6 +11,8 @@
  */
 
 import {
+  ABSOLUTE_MINIMUM_HEIGHT,
+  ABSOLUTE_MINIMUM_WIDTH,
   Accordion,
   Box,
   Button,
@@ -22,6 +24,7 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback, useState } from "react";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
+import { getReflowEyesParameters } from "../../../tools/reflowEyesParameters.js";
 
 const gridStubText = (
   <>
@@ -217,7 +220,8 @@ const meta = {
     variant: {
       options: variantValues,
       control: { type: "radio" },
-      description: "The type of drawer",
+      description:
+        "The type of drawer. A `temporary` Drawer spans the full viewport width at 400 pixels and below. A `persistent` Drawer keeps its width of about 360 pixels at every viewport size.",
       table: {
         type: {
           summary: variantValues.join(" | "),
@@ -463,4 +467,34 @@ export const NoFooter: Story = {
     children: drawerLongText,
     title: "Okta Privileged Access",
   } as DrawerProps, // This is a hack
+};
+
+export const AbsoluteMinimumViewport: Story = {
+  ...DefaultTemplate,
+  globals: {
+    viewport: { value: "absoluteMinimum", isRotated: false },
+  },
+  args: {
+    children: drawerLongText,
+    primaryCallToActionComponent: <Button label="Save" variant="primary" />,
+    secondaryCallToActionComponent: (
+      <Button label="Cancel" variant="secondary" />
+    ),
+    tertiaryCallToActionComponent: (
+      <Button label="Learn more" variant="floating" />
+    ),
+    title: "Okta Privileged Access resource group access request",
+  } as DrawerProps, // This is a hack
+  parameters: {
+    eyes: getReflowEyesParameters({
+      height: ABSOLUTE_MINIMUM_HEIGHT,
+      width: ABSOLUTE_MINIMUM_WIDTH,
+    }),
+    docs: {
+      description: {
+        story:
+          "At 320 by 256, the WCAG 1.4.10 Reflow floor, the temporary Drawer spans the full viewport width. The page does not scroll horizontally. The title wraps and the close button stays inside the panel. The footer buttons wrap onto more than one row.",
+      },
+    },
+  },
 };

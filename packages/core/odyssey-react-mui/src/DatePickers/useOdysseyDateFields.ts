@@ -28,24 +28,56 @@ import {
   CalendarIcon,
   ChevronDownIcon,
 } from "../icons.generated/index.js";
-import { ComponentControlledState, getControlState } from "../inputUtils.js";
 import { TimeZoneOption, TimeZonePickerProps } from "./TimeZonePicker.js";
 import { useDateFieldsTranslations } from "./useDateFieldsTranslations.js";
-
-const { CONTROLLED } = ComponentControlledState;
 
 const isValidDateTime = (dateTime: DateTime) => dateTime.isValid;
 
 const utcDateTimeFromIsoString = (dateString: string) =>
   DateTime.fromISO(dateString).toUTC();
 
-export type OdysseyDateFieldProps = {
+const utcDateTimeFromParsableIsoString = (dateString?: string) => {
+  if (!dateString) {
+    return null;
+  }
+
+  const dateTimeFromIsoString = utcDateTimeFromIsoString(dateString);
+
+  return isValidDateTime(dateTimeFromIsoString) ? dateTimeFromIsoString : null;
+};
+
+export type UncontrolledDateFieldProps = {
   /**
-   * default value when uncontrolled.
+   * Value the field is seeded with while it mounts. Read only on that first
+   * render, so a later change is ignored.
    *
    * NOTE: Must be a date string in ISO format
    */
   defaultValue?: string;
+  /**
+   * Value the field displays for its whole life.
+   * Should not be used if `defaultValue` is used
+   */
+  value?: never;
+};
+
+export type ControlledDateFieldProps = {
+  /**
+   * Value the field is seeded with while it mounts.
+   * Should not be used if `value` is used
+   */
+  defaultValue?: never;
+  /**
+   * Value the field displays for its whole life, so passing an empty value
+   * clears it.
+   *
+   * NOTE: Must be a date string in ISO format. Anything that cannot be parsed
+   * leaves the field empty
+   */
+  value?: string;
+};
+
+export type OdysseyDateFieldBaseProps = {
   /**
    * Disable specific date(s).
    *
@@ -106,13 +138,10 @@ export type OdysseyDateFieldProps = {
    * label for `TimeZonePicker`
    */
   timeZonePickerLabel?: TimeZonePickerProps["label"];
-  /**
-   * value when controlled.
-   *
-   * NOTE: Must be a date string in ISO format or it will not be applied
-   */
-  value?: string;
 };
+
+export type OdysseyDateFieldProps = OdysseyDateFieldBaseProps &
+  (ControlledDateFieldProps | UncontrolledDateFieldProps);
 
 type FormatDateTimeToUtcIsoDateString = (value: DateTime) => string | undefined;
 
@@ -182,13 +211,6 @@ export const useOdysseyDateFields = ({
 
   const localeText = useDateFieldsTranslations();
 
-  const controlledStateRef = useRef(
-    getControlState({
-      controlledValue: value,
-      uncontrolledValue: defaultValue,
-    }),
-  );
-
   const defaultedLanguageCode = isInvalidLocale
     ? "en-US"
     : language.replaceAll("_", "-");
@@ -219,29 +241,26 @@ export const useOdysseyDateFields = ({
     [isYearEnabled],
   );
 
-  const inputValues = useMemo(() => {
-    if (value && controlledStateRef.current === CONTROLLED) {
-      const valueAsUTCDateTime = utcDateTimeFromIsoString(value);
+  // MUI's picker captures `defaultValue` while it mounts and never reads it
+  // again, so `defaultValue` can only ever seed the first render. Freezing the
+  // seed here keeps that contract explicit instead of letting a later
+  // `defaultValue` overwrite whatever the reader has since typed.
+  const [seedValueFromDefaultValue] = useState(() =>
+    utcDateTimeFromParsableIsoString(defaultValue),
+  );
 
-      if (isValidDateTime(valueAsUTCDateTime)) {
-        return {
-          value: valueAsUTCDateTime,
-        };
-      }
-    }
-
-    if (defaultValue) {
-      const defaultValueAsUTCDateTime = utcDateTimeFromIsoString(defaultValue);
-
-      if (isValidDateTime(defaultValueAsUTCDateTime)) {
-        return {
-          defaultValue: defaultValueAsUTCDateTime,
-        };
-      }
-    }
-
-    return null;
-  }, [defaultValue, value]);
+  // Both props resolve to the one `value` the picker is handed on every render,
+  // which keeps it controlled for its whole life. Handing MUI `defaultValue` for
+  // an uncontrolled field instead would make the picker stop following `value`
+  // after mount, so a date arriving later (or a field being cleared) would never
+  // reach the input.
+  const pickerValue = useMemo(
+    () =>
+      value === undefined
+        ? seedValueFromDefaultValue
+        : utcDateTimeFromParsableIsoString(value),
+    [seedValueFromDefaultValue, value],
+  );
 
   const onTimeZoneChange = useCallback(
     (timeZone: string | undefined) => {
@@ -283,7 +302,6 @@ export const useOdysseyDateFields = ({
     defaultedLanguageCode,
     formatDateTimeToUtcIsoDateString,
     formatDayOfWeek,
-    inputValues,
     internalTimeZone,
     internalValueRef,
     isOpen,
@@ -294,6 +312,7 @@ export const useOdysseyDateFields = ({
     popperElement,
     onInputChange,
     onTimeZoneChange,
+    pickerValue,
     setInternalTimeZone,
     setIsOpen,
     setPopperElement,

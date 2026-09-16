@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.69.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.68.0...v1.69.0) (2026-09-16)
+
+### Bug Fixes
+
+* drawer reflows at compact viewport width ([#725](https://github.com/atko-eng/odyssey-design-system/issues/725)) ([5dedf14](https://github.com/atko-eng/odyssey-design-system/commit/5dedf14bea5f5852a5d914aacee1d7627cfe8c3c))
+* make DatePicker follow its value prop (OKTA-1252948) ([#734](https://github.com/atko-eng/odyssey-design-system/issues/734)) ([9f9d1e8](https://github.com/atko-eng/odyssey-design-system/commit/9f9d1e8448a1c1a715f8b2efa10fbecfb75a6f5b))
+* **storybook:** pin picker story date zones (OKTA-1265996) ([#778](https://github.com/atko-eng/odyssey-design-system/issues/778)) ([0ee4a1a](https://github.com/atko-eng/odyssey-design-system/commit/0ee4a1a7b4fb592769b187df6b24e5920b277a2d))
+
+### Features
+
+* add charts entrypoint and LineChart ([#692](https://github.com/atko-eng/odyssey-design-system/issues/692)) ([9c467d5](https://github.com/atko-eng/odyssey-design-system/commit/9c467d5387cfec61060713df005f4141b387a6c1))
+* add CollapsibleCard to opa-components ([#774](https://github.com/atko-eng/odyssey-design-system/issues/774)) ([920a013](https://github.com/atko-eng/odyssey-design-system/commit/920a013ce214292514a5f7d3910b7a12cc5cb184))
+* add overflowWrap prop to Typography ([#817](https://github.com/atko-eng/odyssey-design-system/issues/817)) ([948893d](https://github.com/atko-eng/odyssey-design-system/commit/948893db9104121d7e5a0fd6f4bd1d2bebb66d99))
+* **workflow-components:** adds GraphActionDrawer component ([#819](https://github.com/atko-eng/odyssey-design-system/issues/819)) ([9afb415](https://github.com/atko-eng/odyssey-design-system/commit/9afb415c066b32ca2aac3e311c2e76b46106d4da))
+* **workflow-components:** adds GraphCanvasHeader, MaximizeIcon, MinimizeIcon ([#803](https://github.com/atko-eng/odyssey-design-system/issues/803)) ([db8b4f8](https://github.com/atko-eng/odyssey-design-system/commit/db8b4f8ce09a357cec55318507583ab3710dbb38))
+* **workflow-components:** adds GraphControls and FitViewIcon ([#802](https://github.com/atko-eng/odyssey-design-system/issues/802)) ([53121f3](https://github.com/atko-eng/odyssey-design-system/commit/53121f384f47d3cc33778c94ca100208e488a32c))
+* **workflow-components:** adds GraphEdge components ([#818](https://github.com/atko-eng/odyssey-design-system/issues/818)) ([6dbd451](https://github.com/atko-eng/odyssey-design-system/commit/6dbd451fe69a2ccaa350761f6ca86d00fec45dd6))
+* **workflow-components:** adds GraphHintBanner component ([#804](https://github.com/atko-eng/odyssey-design-system/issues/804)) ([32ab398](https://github.com/atko-eng/odyssey-design-system/commit/32ab3984592a873607593c779b6ddf4605c469d0))
+* **workflow-components:** moves graph/icon components from workflows-components to wp-components ([#823](https://github.com/atko-eng/odyssey-design-system/issues/823)) ([59c9699](https://github.com/atko-eng/odyssey-design-system/commit/59c9699f4133b45f9f5923d4b9755d538049441d))
+* **workflows-components:** adds GraphCanvasStateProvider, GraphNodeAttribute and GraphNodeCard ([#773](https://github.com/atko-eng/odyssey-design-system/issues/773)) ([3e10296](https://github.com/atko-eng/odyssey-design-system/commit/3e10296388591493a60540433e39d33906009ba8))
+* **workflows-components:** adds per type GraphNodeCard implementations ([#795](https://github.com/atko-eng/odyssey-design-system/issues/795)) ([ee4e372](https://github.com/atko-eng/odyssey-design-system/commit/ee4e3723cf727d9e69a1039019cceb483b44ac24))
+
+
+# [1.68.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.67.0...v1.68.0) (2026-09-02)
+
+### Bug Fixes
+
+- close row-action menu on select in App Instance List ([#732](https://github.com/atko-eng/odyssey-design-system/issues/732)) ([33e47d7](https://github.com/atko-eng/odyssey-design-system/commit/33e47d7d3f76f4c8c6775239a82c967ba1323077))
+
+### Features
+
+- add blueprint app and page-template blocks ([#715](https://github.com/atko-eng/odyssey-design-system/issues/715)) ([6490875](https://github.com/atko-eng/odyssey-design-system/commit/6490875745f529ef6043af772969932a585affad))
+- add blueprint button blocks (OKTA-1252912) ([#711](https://github.com/atko-eng/odyssey-design-system/issues/711)) ([4a0152e](https://github.com/atko-eng/odyssey-design-system/commit/4a0152ec4e172e149dde2be654d550fb13b8fde6))
+- add blueprint choice fields at parity ([#701](https://github.com/atko-eng/odyssey-design-system/issues/701)) ([767a0b2](https://github.com/atko-eng/odyssey-design-system/commit/767a0b2b5fecc948bd894382eb3079c00bca6b64))
+- add blueprint data view blocks ([#716](https://github.com/atko-eng/odyssey-design-system/issues/716)) ([426c635](https://github.com/atko-eng/odyssey-design-system/commit/426c635f27161e5034978f052c420913aee6eb4b))
+- add blueprint data-table blocks ([#709](https://github.com/atko-eng/odyssey-design-system/issues/709)) ([3bc5cea](https://github.com/atko-eng/odyssey-design-system/commit/3bc5cea350eb1fcbf4fcf157e15a9dac570055bb))
+- add blueprint dateTime field blocks (OKTA-1252868) ([#703](https://github.com/atko-eng/odyssey-design-system/issues/703)) ([3caca6f](https://github.com/atko-eng/odyssey-design-system/commit/3caca6ff4809c786d94f5bdf5a0267ea8ff4f6d0))
+- add blueprint display primitive blocks (OKTA-1252872) ([#713](https://github.com/atko-eng/odyssey-design-system/issues/713)) ([470c399](https://github.com/atko-eng/odyssey-design-system/commit/470c39951c416c9eb2436899f6f360ca08fc546a))
+- add blueprint file field block ([#700](https://github.com/atko-eng/odyssey-design-system/issues/700)) ([dec3760](https://github.com/atko-eng/odyssey-design-system/commit/dec3760def633d051d9e34cbfe6cfc76ab622544))
+- add blueprint icon and logo blocks ([#712](https://github.com/atko-eng/odyssey-design-system/issues/712)) ([fcb3037](https://github.com/atko-eng/odyssey-design-system/commit/fcb30371bc9fec99e109f35f7cc9b2c8292f33e2)), closes [#699](https://github.com/atko-eng/odyssey-design-system/issues/699)
+- add blueprint overlay building blocks (OKTA-1252873) ([#706](https://github.com/atko-eng/odyssey-design-system/issues/706)) ([7e38b51](https://github.com/atko-eng/odyssey-design-system/commit/7e38b516bcaccc108f07141057230f986908ded8))
+- add blueprint pagination block at prop parity ([#705](https://github.com/atko-eng/odyssey-design-system/issues/705)) ([5870451](https://github.com/atko-eng/odyssey-design-system/commit/587045194697811c3ae8c13e4e1cd34ae9474524))
+- add blueprint picker blocks ([#714](https://github.com/atko-eng/odyssey-design-system/issues/714)) ([b21a0e7](https://github.com/atko-eng/odyssey-design-system/commit/b21a0e7dcdeaa11e0c142b89a3776156f48efba9))
+- add blueprint select family blocks ([#702](https://github.com/atko-eng/odyssey-design-system/issues/702)) ([e0bf986](https://github.com/atko-eng/odyssey-design-system/commit/e0bf98653ff1ed5eafdbe30ec50398b4c7f2383d))
+- add loading state to Button ([#708](https://github.com/atko-eng/odyssey-design-system/issues/708)) ([b3ab584](https://github.com/atko-eng/odyssey-design-system/commit/b3ab584fa38bfe5ff6e8167b6ead92bddb7e5101))
+- add remaining blueprint building blocks (OKTA-1252874) ([#704](https://github.com/atko-eng/odyssey-design-system/issues/704)) ([8d4968b](https://github.com/atko-eng/odyssey-design-system/commit/8d4968b909056c81af6c6dc59497bbf270aff062))
+
 # [1.67.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.66.1...v1.67.0) (2026-08-19)
 
 ### Bug Fixes

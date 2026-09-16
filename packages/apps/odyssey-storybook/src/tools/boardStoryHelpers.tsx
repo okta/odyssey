@@ -19,7 +19,8 @@ import { type ReactNode } from "react";
 
 /**
  * Shared layout primitives for "board" stories: a labelled grid for
- * `AllVariants`, a wrapping row for `AllSizes`/`AllStates`, a titled section so
+ * `AllVariants` that takes either a fixed column count or a minimum column
+ * width, a wrapping row for `AllSizes`/`AllStates`, a titled section so
  * a reviewer can read what a board is showing, and a white-vs-gray
  * `StoryContrastBoard` for components whose appearance changes with the
  * background contrast. Consolidating the per-variant stories into these boards
@@ -44,22 +45,31 @@ export const staticBoardParameters = {
 
 const StyledGrid = createOdysseyStyledComponent({
   tag: "div",
-  shouldForwardProp: (prop) => prop !== "columns",
-})<{ columns: number }>(({ columns, odysseyDesignTokens }) => ({
-  alignItems: "start",
-  display: "grid",
-  gap: odysseyDesignTokens.Spacing4,
-  gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-}));
-
-const StyledCell = createOdysseyStyledComponent({ tag: "div" })(
-  ({ odysseyDesignTokens }) => ({
+  shouldForwardProp: (prop) => prop !== "columns" && prop !== "minColumnWidth",
+})<{ columns: number; minColumnWidth?: string }>(
+  ({ columns, minColumnWidth, odysseyDesignTokens }) => ({
     alignItems: "start",
-    display: "flex",
-    flexDirection: "column",
-    gap: odysseyDesignTokens.Spacing2,
+    display: "grid",
+    gap: odysseyDesignTokens.Spacing4,
+    // `minmax` treats its minimum as a floor that a track may not go under, so
+    // a bare `minColumnWidth` overflows the canvas once the canvas is narrower
+    // than one column. The `min()` lets the single remaining column fall back
+    // to the width of the canvas instead.
+    gridTemplateColumns: minColumnWidth
+      ? `repeat(auto-fit, minmax(min(${minColumnWidth}, 100%), 1fr))`
+      : `repeat(${columns}, minmax(0, 1fr))`,
   }),
 );
+
+const StyledCell = createOdysseyStyledComponent({
+  tag: "div",
+  shouldForwardProp: (prop) => prop !== "hasFilledWidth",
+})<{ hasFilledWidth: boolean }>(({ hasFilledWidth, odysseyDesignTokens }) => ({
+  alignItems: hasFilledWidth ? "stretch" : "start",
+  display: "flex",
+  flexDirection: "column",
+  gap: odysseyDesignTokens.Spacing2,
+}));
 
 const StyledCellLabel = createOdysseyStyledComponent({ tag: "span" })(
   ({ odysseyDesignTokens }) => ({
@@ -100,19 +110,42 @@ const StyledSectionTitle = createOdysseyStyledComponent({ tag: "p" })(
 export const StoryGrid = ({
   children,
   columns = 4,
+  minColumnWidth,
 }: {
   children: ReactNode;
+  /**
+   * The number of columns the grid draws at every canvas width. The grid
+   * ignores this count when `minColumnWidth` has a value.
+   */
   columns?: number;
-}) => <StyledGrid columns={columns}>{children}</StyledGrid>;
+  /**
+   * The narrowest a column may be, as a CSS length. The grid then fits as many
+   * columns of at least this width as the canvas holds, and wraps the rest onto
+   * a new row. Use this for a cell whose content is unreadable under a given
+   * width, such as a chart.
+   */
+  minColumnWidth?: string;
+}) => (
+  <StyledGrid columns={columns} minColumnWidth={minColumnWidth}>
+    {children}
+  </StyledGrid>
+);
 
 export const StoryCell = ({
   children,
+  hasFilledWidth = false,
   label,
 }: {
   children: ReactNode;
+  /**
+   * If `true`, the content of the cell fills the width of the cell rather than
+   * shrinking to its own content. Use this for content that measures its own
+   * container to size itself.
+   */
+  hasFilledWidth?: boolean;
   label: string;
 }) => (
-  <StyledCell>
+  <StyledCell hasFilledWidth={hasFilledWidth}>
     <StyledCellLabel>{label}</StyledCellLabel>
 
     {children}
@@ -149,15 +182,20 @@ export const StoryFilledWidth = ({ children }: { children: ReactNode }) => (
 
 // Overflow and truncation only show up when the component is narrower than its
 // content, so a board cell demonstrating them needs a bounded width.
-const StyledConstrainedWidth = createOdysseyStyledComponent({ tag: "div" })({
-  width: "200px",
-});
+const StyledConstrainedWidth = createOdysseyStyledComponent({
+  tag: "div",
+  shouldForwardProp: (prop) => prop !== "width",
+})<{ width: string }>(({ width }) => ({
+  width,
+}));
 
 export const StoryConstrainedWidth = ({
   children,
+  width = "200px",
 }: {
   children: ReactNode;
-}) => <StyledConstrainedWidth>{children}</StyledConstrainedWidth>;
+  width?: string;
+}) => <StyledConstrainedWidth width={width}>{children}</StyledConstrainedWidth>;
 
 export const StorySection = ({
   children,

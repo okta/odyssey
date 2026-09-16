@@ -48,4 +48,6 @@ const MemoizedIdentityGovernanceSelectedIcon = memo(
 MemoizedIdentityGovernanceSelectedIcon.displayName =
   "IdentityGovernanceSelectedIcon";
 
-export { MemoizedIdentityGovernanceSelectedIcon as IdentityGovernanceSelectedIcon };
+export {
+  MemoizedIdentityGovernanceSelectedIcon as IdentityGovernanceSelectedIcon,
+};

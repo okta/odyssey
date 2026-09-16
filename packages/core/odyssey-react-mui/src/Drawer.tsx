@@ -15,6 +15,8 @@ import {
   Drawer as MuiDrawer,
   DrawerProps as MuiDrawerProps,
 } from "@mui/material";
+import { buttonClasses } from "@mui/material/Button";
+import { typographyClasses } from "@mui/material/Typography";
 import {
   memo,
   ReactElement,
@@ -80,6 +82,10 @@ export type DrawerProps = {
    * Controls how the Drawer positions relative to page content.
    * - If `'temporary'`, overlays content and dismisses when the user clicks the backdrop.
    * - If `'persistent'`, pushes the page layout to the side and stays open until explicitly closed.
+   *
+   * A `'temporary'` Drawer spans the full viewport width at 400 pixels and
+   * below. A `'persistent'` Drawer keeps its width of about 360 pixels at every
+   * viewport size.
    * @default "temporary"
    */
   variant?: (typeof variantValues)[number];
@@ -138,8 +144,15 @@ const DrawerHeader = styled("div", {
     odysseyDesignTokens.HueNeutralWhite};
   border-bottom: ${({ hasDividers, odysseyDesignTokens }) =>
     hasDividers ? `1px solid ${odysseyDesignTokens.HueNeutral200}` : "none"};
-  & h5 {
+  /* Target the MUI classes, not the tag. Odyssey Typography and Button accept
+     no className, so these styles cannot move onto the components themselves,
+     and a tag selector stops applying after a change of heading level. */
+  & > .${typographyClasses.root} {
     margin-bottom: 0;
+    min-width: 0;
+  }
+  & > .${buttonClasses.root} {
+    flex-shrink: 0;
   }
 `;
 
@@ -178,9 +191,11 @@ const DrawerFooter = styled("div", {
   position: sticky;
   bottom: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
   align-content: center;
+  row-gap: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing2};
   padding: ${({ odysseyDesignTokens }) => odysseyDesignTokens.Spacing4};
   border-top: ${({ hasDividers, odysseyDesignTokens }) =>
     hasDividers ? `1px solid ${odysseyDesignTokens.HueNeutral200}` : "none"};

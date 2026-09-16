@@ -111,24 +111,44 @@ export const COMPACT_MAX_HEIGHT =
   ABSOLUTE_MINIMUM_HEIGHT + COMPACT_HEIGHT_ACTIVATION_BUFFER;
 
 /**
- * The `matchMedia`/CSS condition that matches when the viewport is
- * compact-width. Single source of truth shared by the hook and style
- * overrides so the two cannot drift.
+ * The `matchMedia` and CSS condition for each axis. This is the only place that
+ * turns a threshold into a condition string, so the hook and the style overrides
+ * cannot drift.
  */
-export const COMPACT_MAX_WIDTH_CONDITION = `(max-width: ${COMPACT_MAX_WIDTH}px)`;
+const COMPACT_CONDITION_BY_AXIS = {
+  height: `(max-height: ${COMPACT_MAX_HEIGHT}px)`,
+  width: `(max-width: ${COMPACT_MAX_WIDTH}px)`,
+} as const;
+
+/** The axis names that `toCompactMediaQuery` accepts. */
+export type CompactViewportAxis = keyof typeof COMPACT_CONDITION_BY_AXIS;
 
 /**
- * The `matchMedia`/CSS condition that matches when the viewport is
- * compact-height. Single source of truth shared by the hook and style
- * overrides so the two cannot drift.
+ * Builds the compact CSS `@media` rule for the given axes. The rule matches when
+ * any one of those axes is compact. Use the result as a key in a style override
+ * object, where a React hook cannot run.
+ *
+ * Give the name of an axis, not a condition string. The function holds the
+ * threshold, so no caller can pass a wrong pixel value, and the compact
+ * conditions need no export at all.
+ *
+ * A viewport has two axes, so the parameters spell out every legal call: one
+ * axis, then at most one axis that the first call did not name. TypeScript
+ * rejects a call with no axis, a repeated axis, or a third axis.
+ *
+ * Call `useCompactViewportMatches` in a component instead.
+ *
+ * This function stays internal to the package. Add it to the public `index.ts`
+ * only when a consumer outside the package needs it.
  */
-export const COMPACT_MAX_HEIGHT_CONDITION = `(max-height: ${COMPACT_MAX_HEIGHT}px)`;
-
-/**
- * The combined CSS media query for use in style overrides, where a React hook
- * cannot run. The comma matches when either dimension is compact.
- */
-export const COMPACT_MEDIA_QUERY = `@media ${COMPACT_MAX_WIDTH_CONDITION}, ${COMPACT_MAX_HEIGHT_CONDITION}`;
+export const toCompactMediaQuery = <FirstAxis extends CompactViewportAxis>(
+  firstAxis: FirstAxis,
+  otherAxis?: Exclude<CompactViewportAxis, FirstAxis>,
+) =>
+  `@media ${[firstAxis, otherAxis]
+    .filter((axis) => axis !== undefined)
+    .map((axis) => COMPACT_CONDITION_BY_AXIS[axis])
+    .join(",")}`;
 
 /**
  * Reports whether the viewport is within the compact range, i.e. approaching
@@ -138,12 +158,12 @@ export const COMPACT_MEDIA_QUERY = `@media ${COMPACT_MAX_WIDTH_CONDITION}, ${COM
  * viewport approaches the WCAG 1.4.10 reflow floor rather than snapping exactly
  * at it.
  *
- * `isWithinCompactWidthOrHeight` is `true` when either dimension is compact,
- * matching the OR semantics of `COMPACT_MEDIA_QUERY`.
+ * `isWithinCompactWidthOrHeight` is `true` when either dimension is compact. It
+ * matches a style override that gives both axes to `toCompactMediaQuery`.
  */
 export const useCompactViewportMatches = () => {
-  const isWithinCompactWidth = useMediaQuery(COMPACT_MAX_WIDTH_CONDITION);
-  const isWithinCompactHeight = useMediaQuery(COMPACT_MAX_HEIGHT_CONDITION);
+  const isWithinCompactWidth = useMediaQuery(COMPACT_CONDITION_BY_AXIS.width);
+  const isWithinCompactHeight = useMediaQuery(COMPACT_CONDITION_BY_AXIS.height);
 
   return useMemo(
     () => ({

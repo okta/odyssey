@@ -15,6 +15,7 @@ import {
   TypographyProps as MuiTypographyProps,
 } from "@mui/material";
 import {
+  CSSProperties,
   ElementType,
   memo,
   ReactNode,
@@ -64,6 +65,15 @@ export const typographyColorValues = [
   "error",
 ] as const;
 
+export const typographyOverflowWrapValues = [
+  "normal",
+  "break-word",
+  "anywhere",
+] as const satisfies readonly NonNullable<CSSProperties["overflowWrap"]>[];
+
+export type TypographyOverflowWrapValue =
+  (typeof typographyOverflowWrapValues)[number];
+
 export type TypographyProps = {
   /**
    * The text content of the component.
@@ -90,6 +100,18 @@ export type TypographyProps = {
    * If `true`, the element is treated as presentational and ignored by screen readers.
    */
   isPresentational?: boolean;
+  /**
+   * Controls where the text may break to avoid overflowing its container.
+   * - If `'normal'`, breaks only at normal word-break points, so a long unbroken
+   *   string such as an ID or URL overflows.
+   * - If `'break-word'`, breaks inside a word only when the word cannot fit on a
+   *   line of its own.
+   * - If `'anywhere'`, breaks inside a word as soon as it reaches the container
+   *   edge, and the broken word counts toward the container's `min-content` size.
+   * @default "normal"
+   * @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap
+   */
+  overflowWrap?: TypographyOverflowWrapValue;
   /**
    * Ref attached to the underlying typography element.
    */
@@ -124,6 +146,7 @@ const Typography = ({
   component: componentProp,
   id,
   isPresentational,
+  overflowWrap,
   testId,
   translate,
   typographyRef,
@@ -167,6 +190,7 @@ const Typography = ({
       id={id}
       ref={localTypographyRef}
       role={isPresentational ? "presentation" : undefined}
+      style={overflowWrap ? { overflowWrap } : undefined}
       tabIndex={-1}
       translate={translate}
       variant={typographyVariantMapping[variant]}
@@ -191,6 +215,7 @@ const Heading1 = ({
   component,
   id,
   isPresentational,
+  overflowWrap,
   testId,
   translate,
 }: TypographyProps) => (
@@ -204,6 +229,7 @@ const Heading1 = ({
     component={component}
     id={id}
     isPresentational={isPresentational}
+    overflowWrap={overflowWrap}
     testId={testId}
     translate={translate}
     variant="h1"
@@ -225,6 +251,7 @@ const Heading2 = ({
   color,
   component,
   id,
+  overflowWrap,
   testId,
   translate,
 }: TypographyProps) => (
@@ -237,6 +264,7 @@ const Heading2 = ({
     color={color}
     component={component}
     id={id}
+    overflowWrap={overflowWrap}
     testId={testId}
     translate={translate}
     variant="h2"
@@ -258,6 +286,7 @@ const Heading3 = ({
   color,
   component,
   id,
+  overflowWrap,
   testId,
   translate,
 }: TypographyProps) => (
@@ -270,6 +299,7 @@ const Heading3 = ({
     color={color}
     component={component}
     id={id}
+    overflowWrap={overflowWrap}
     testId={testId}
     translate={translate}
     variant="h3"
@@ -291,6 +321,7 @@ const Heading4 = ({
   color,
   component,
   id,
+  overflowWrap,
   testId,
   translate,
 }: TypographyProps) => (
@@ -303,6 +334,7 @@ const Heading4 = ({
     color={color}
     component={component}
     id={id}
+    overflowWrap={overflowWrap}
     testId={testId}
     translate={translate}
     variant="h4"
@@ -324,6 +356,7 @@ const Heading5 = ({
   color,
   component,
   id,
+  overflowWrap,
   testId,
   translate,
 }: TypographyProps) => (
@@ -336,6 +369,7 @@ const Heading5 = ({
     color={color}
     component={component}
     id={id}
+    overflowWrap={overflowWrap}
     testId={testId}
     translate={translate}
     variant="h5"
@@ -357,6 +391,7 @@ const Heading6 = ({
   color,
   component,
   id,
+  overflowWrap,
   testId,
   translate,
 }: TypographyProps) => (
@@ -369,6 +404,7 @@ const Heading6 = ({
     color={color}
     component={component}
     id={id}
+    overflowWrap={overflowWrap}
     testId={testId}
     translate={translate}
     variant="h6"
@@ -390,6 +426,7 @@ const Paragraph = ({
   color,
   component,
   id,
+  overflowWrap,
   testId,
   translate,
 }: TypographyProps) => (
@@ -402,6 +439,7 @@ const Paragraph = ({
     color={color}
     component={component}
     id={id}
+    overflowWrap={overflowWrap}
     testId={testId}
     translate={translate}
     variant="body"
@@ -424,6 +462,7 @@ const Subordinate = ({
   color,
   component,
   id,
+  overflowWrap,
   testId,
   translate,
 }: TypographyProps) => (
@@ -436,6 +475,7 @@ const Subordinate = ({
     color={color}
     component={component}
     id={id}
+    overflowWrap={overflowWrap}
     testId={testId}
     translate={translate}
     variant="subordinate"
@@ -458,6 +498,7 @@ const Support = ({
   color,
   component,
   id,
+  overflowWrap,
   testId,
   translate,
 }: TypographyProps) => (
@@ -470,6 +511,7 @@ const Support = ({
     color={color}
     component={component}
     id={id}
+    overflowWrap={overflowWrap}
     testId={testId}
     translate={translate}
     variant="support"
@@ -490,6 +532,7 @@ const Legend = ({
   color,
   component,
   id,
+  overflowWrap,
   testId,
   translate,
 }: TypographyProps) => (
@@ -501,6 +544,7 @@ const Legend = ({
     color={color}
     component={component}
     id={id}
+    overflowWrap={overflowWrap}
     testId={testId}
     translate={translate}
     variant="legend"
@@ -522,6 +566,7 @@ const Overline = ({
   color,
   component,
   id,
+  overflowWrap,
   testId,
   translate,
 }: TypographyProps) => (
@@ -533,6 +578,7 @@ const Overline = ({
     color={color}
     component={component}
     id={id}
+    overflowWrap={overflowWrap}
     testId={testId}
     translate={translate}
     variant="overline"

@@ -13,11 +13,18 @@
 import {
   Checkbox,
   CheckboxGroup,
+  type SecureSettingsIndicatorLevel,
 } from "@okta/odyssey-contributions-passwordless-components";
 import { Link } from "@okta/odyssey-react-mui";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { fieldComponentPropsMetaData } from "../../Odyssey Core/Fields/fieldComponentPropsMetaData.js";
+import {
+  staticBoardParameters,
+  StoryFieldCell,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { PasswordlessComponentsOdysseyStorybookThemeDecorator } from "../../tools/PasswordlessComponentsOdysseyStorybookThemeDecorator.js";
 
 const meta = {
@@ -77,7 +84,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const Template: Story = {
+export const Playground: Story = {
   args: {} as Story["args"],
   render: function C(props) {
     return (
@@ -90,119 +97,162 @@ const Template: Story = {
   },
 };
 
-export const Default: Story = {
-  ...Template,
-};
+export const AllSecureLevels: Story = {
+  args: {} as Story["args"],
+  name: "All secure levels",
+  parameters: staticBoardParameters,
+  render: function C() {
+    const groupLevels: Array<SecureSettingsIndicatorLevel | undefined> = [
+      undefined,
+      "more",
+      "most",
+    ];
 
-export const WithHint: Story = {
-  ...Template,
-  args: {
-    hint: "Select all security features you want to enable",
-  } as Story["args"],
-};
-
-export const WithHintLink: Story = {
-  ...Template,
-  args: {
-    hint: "Select all security features you want to enable",
-    HintLinkComponent: (
-      <Link href="#link">Learn more about security options</Link>
-    ),
-  } as Story["args"],
-};
-
-export const GroupSecureLevelMore: Story = {
-  ...Template,
-  args: {
-    secureLevel: "more",
-  } as Story["args"],
-};
-
-export const GroupSecureLevelMost: Story = {
-  ...Template,
-  args: {
-    secureLevel: "most",
-  } as Story["args"],
-};
-
-export const IndividualSecureLevels: Story = {
-  args: {
-    label: "Security Options",
-  } as Story["args"],
-  render: function C(props) {
     return (
-      <CheckboxGroup {...props}>
-        <Checkbox
-          hint="Hardware-backed authentication"
-          label="Require passkey for admin actions"
-          secureLevel="most"
-          value="passkey"
-        />
-        <Checkbox
-          hint="Passwordless email verification"
-          label="Enable magic link fallback"
-          secureLevel="more"
-          value="magiclink"
-        />
-        <Checkbox
-          hint="Text message verification"
-          label="Allow SMS verification"
-          value="sms"
-        />
-      </CheckboxGroup>
+      <StorySection title="Group-level secure levels, per-checkbox levels, and the two combined.">
+        <StoryGrid columns={2}>
+          {groupLevels.map((secureLevel) => (
+            <StoryFieldCell key={secureLevel ?? "none"}>
+              <CheckboxGroup
+                label={`Group secureLevel: ${secureLevel ?? "none"}`}
+                secureLevel={secureLevel}
+              >
+                <Checkbox
+                  label="Require passkey for admin actions"
+                  value="passkey"
+                />
+                <Checkbox
+                  label="Enable magic link fallback"
+                  value="magiclink"
+                />
+                <Checkbox label="Allow SMS verification" value="sms" />
+              </CheckboxGroup>
+            </StoryFieldCell>
+          ))}
+
+          <StoryFieldCell>
+            <CheckboxGroup label="Individual levels only">
+              <Checkbox
+                hint="Hardware-backed authentication"
+                label="Require passkey for admin actions"
+                secureLevel="most"
+                value="passkey"
+              />
+              <Checkbox
+                hint="Passwordless email verification"
+                label="Enable magic link fallback"
+                secureLevel="more"
+                value="magiclink"
+              />
+              <Checkbox
+                hint="Text message verification"
+                label="Allow SMS verification"
+                value="sms"
+              />
+            </CheckboxGroup>
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <CheckboxGroup
+              label="Group and individual combined"
+              secureLevel="most"
+            >
+              <Checkbox
+                hint="Hardware-backed authentication"
+                label="Require passkey for admin actions"
+                secureLevel="most"
+                value="passkey"
+              />
+              <Checkbox
+                hint="Passwordless email verification"
+                label="Enable magic link fallback"
+                secureLevel="more"
+                value="magiclink"
+              />
+              <Checkbox
+                hint="Text message verification"
+                label="Allow SMS verification"
+                value="sms"
+              />
+            </CheckboxGroup>
+          </StoryFieldCell>
+        </StoryGrid>
+      </StorySection>
     );
   },
 };
 
-export const CombinedSecureLevels: Story = {
-  args: {
-    label: "Security Options",
-    secureLevel: "most",
-  } as Story["args"],
-  render: function C(props) {
+export const AllStates: Story = {
+  args: {} as Story["args"],
+  name: "All states",
+  parameters: staticBoardParameters,
+  render: function C() {
     return (
-      <CheckboxGroup {...props}>
-        <Checkbox
-          hint="Hardware-backed authentication"
-          label="Require passkey for admin actions"
-          secureLevel="most"
-          value="passkey"
-        />
-        <Checkbox
-          hint="Passwordless email verification"
-          label="Enable magic link fallback"
-          secureLevel="more"
-          value="magiclink"
-        />
-        <Checkbox
-          hint="Text message verification"
-          label="Allow SMS verification"
-          value="sms"
-        />
-      </CheckboxGroup>
+      <StorySection title="Every group state, shown at the highest secure level.">
+        <StoryGrid columns={2}>
+          <StoryFieldCell>
+            <CheckboxGroup
+              hint="Select all security features you want to enable"
+              label="With hint"
+            >
+              <Checkbox
+                label="Require passkey for admin actions"
+                value="passkey"
+              />
+              <Checkbox label="Enable magic link fallback" value="magiclink" />
+            </CheckboxGroup>
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <CheckboxGroup
+              hint="Select all security features you want to enable"
+              HintLinkComponent={
+                <Link href="#link">Learn more about security options</Link>
+              }
+              label="With hint link"
+            >
+              <Checkbox
+                label="Require passkey for admin actions"
+                value="passkey"
+              />
+              <Checkbox label="Enable magic link fallback" value="magiclink" />
+            </CheckboxGroup>
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <CheckboxGroup isDisabled label="Disabled" secureLevel="most">
+              <Checkbox
+                label="Require passkey for admin actions"
+                value="passkey"
+              />
+              <Checkbox label="Enable magic link fallback" value="magiclink" />
+            </CheckboxGroup>
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <CheckboxGroup isReadOnly label="Read-only" secureLevel="most">
+              <Checkbox
+                label="Require passkey for admin actions"
+                value="passkey"
+              />
+              <Checkbox label="Enable magic link fallback" value="magiclink" />
+            </CheckboxGroup>
+          </StoryFieldCell>
+
+          <StoryFieldCell>
+            <CheckboxGroup
+              errorMessage="Please select at least one security option"
+              label="With error"
+            >
+              <Checkbox
+                label="Require passkey for admin actions"
+                value="passkey"
+              />
+              <Checkbox label="Enable magic link fallback" value="magiclink" />
+            </CheckboxGroup>
+          </StoryFieldCell>
+        </StoryGrid>
+      </StorySection>
     );
   },
-};
-
-export const Disabled: Story = {
-  ...Template,
-  args: {
-    isDisabled: true,
-    secureLevel: "most",
-  } as Story["args"],
-};
-
-export const ReadOnly: Story = {
-  ...Template,
-  args: {
-    isReadOnly: true,
-    secureLevel: "most",
-  } as Story["args"],
-};
-
-export const WithError: Story = {
-  ...Template,
-  args: {
-    errorMessage: "Please select at least one security option",
-  } as Story["args"],
 };

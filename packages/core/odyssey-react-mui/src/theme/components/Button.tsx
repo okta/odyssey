@@ -65,6 +65,10 @@ export const buttonComponents = ({
             outlineOffset: "1px",
           },
 
+          // A loading button is inert too, so it also carries aria-disabled and
+          // picks up this rule. Design does want it to keep the background and
+          // border of its default state though, which is why every variant
+          // below narrows its disabled colors with :not([aria-busy='true']).
           "&&[aria-disabled='true']": {
             pointerEvents: "none",
             cursor: "default",
@@ -112,7 +116,7 @@ export const buttonComponents = ({
                 backgroundColor: odysseyTokens.PalettePrimaryDarker,
               },
 
-            "&[aria-disabled='true']": {
+            "&[aria-disabled='true']:not([aria-busy='true'])": {
               color: odysseyTokens.PalettePrimaryLight,
               backgroundColor: odysseyTokens.HueBlue100,
             },
@@ -135,7 +139,7 @@ export const buttonComponents = ({
                 color: odysseyTokens.TypographyColorAction,
               },
 
-            "&[aria-disabled='true']": {
+            "&[aria-disabled='true']:not([aria-busy='true'])": {
               backgroundColor: odysseyTokens.HueNeutral200,
               borderColor: "transparent",
               color: odysseyTokens.TypographyColorDisabled,
@@ -155,7 +159,7 @@ export const buttonComponents = ({
                 backgroundColor: odysseyTokens.PaletteDangerDarker,
               },
 
-            "&[aria-disabled='true']": {
+            "&[aria-disabled='true']:not([aria-busy='true'])": {
               color: odysseyTokens.PaletteDangerLight,
               backgroundColor: odysseyTokens.HueRed100,
             },
@@ -179,7 +183,7 @@ export const buttonComponents = ({
                 color: odysseyTokens.PaletteDangerMain,
               },
 
-            "&[aria-disabled='true']": {
+            "&[aria-disabled='true']:not([aria-busy='true'])": {
               backgroundColor: odysseyTokens.PaletteDangerHighlight,
               borderColor: "transparent",
               color: odysseyTokens.PaletteDangerLight,
@@ -201,7 +205,7 @@ export const buttonComponents = ({
                 borderColor: odysseyTokens.HueBlue600,
               },
 
-            "&[aria-disabled='true']": {
+            "&[aria-disabled='true']:not([aria-busy='true'])": {
               backgroundColor: "transparent",
               color: odysseyTokens.TypographyColorDisabled,
             },
@@ -221,7 +225,7 @@ export const buttonComponents = ({
                 borderColor: odysseyTokens.HueBlue600,
               },
 
-            "&[aria-disabled='true']": {
+            "&[aria-disabled='true']:not([aria-busy='true'])": {
               backgroundColor: "transparent",
               color: odysseyTokens.TypographyColorDisabled,
             },

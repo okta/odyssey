@@ -22,7 +22,7 @@ import { expect, userEvent, within } from "storybook/test";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 
-const storybookMeta: Meta<DateTimePickerProps> = {
+const storybookMeta = {
   component: DateTimePicker,
   decorators: [OdysseyStorybookThemeDecorator],
   tags: ["autodocs"],
@@ -94,13 +94,15 @@ const storybookMeta: Meta<DateTimePickerProps> = {
     label: "DateTime picker label",
     hint: "Select a date.",
   },
-};
+} satisfies Meta<typeof DateTimePicker>;
 
 export default storybookMeta;
 
-export const Default: StoryObj<DateTimePickerProps> = {
+type Story = StoryObj<typeof storybookMeta>;
+
+export const Default: Story = {
   args: {
-    defaultValue: "2024-07-11T03:00:00.000Z",
+    defaultValue: "2024-07-11T03:00:00",
   },
   play: async ({ canvasElement, step }) => {
     await step("Open calendar", async () => {
@@ -110,62 +112,62 @@ export const Default: StoryObj<DateTimePickerProps> = {
       const selectedCell = await within(dialog).findByRole("gridcell", {
         selected: true,
       });
-      await expect(selectedCell).toHaveAccessibleName(/10/);
+      await expect(selectedCell).toHaveAccessibleName(/11/);
     });
   },
 };
-export const Disabled: StoryObj<DateTimePickerProps> = {
+export const Disabled: Story = {
   args: {
     isDisabled: true,
   },
 };
 
-export const ReadOnly: StoryObj<DateTimePickerProps> = {
+export const ReadOnly: Story = {
   args: {
     isReadOnly: true,
-    value: "2024-07-11T03:00:00.000Z",
+    value: "2024-07-11T03:00:00",
   },
 };
 
-export const Error: StoryObj<DateTimePickerProps> = {
+export const Error: Story = {
   args: {
     errorMessage: "Select a date",
   },
 };
 
-export const MinDate: StoryObj<DateTimePickerProps> = {
+export const MinDate: Story = {
   args: {
     hint: "Select a date after July 16, 2024",
     minDate: "2024-07-16",
   },
 };
 
-export const MinDateWithError: StoryObj<DateTimePickerProps> = {
+export const MinDateWithError: Story = {
   args: {
     hint: "Select a date after July 16, 2024",
-    minDate: "2024-07-16T03:00:00.000Z",
-    value: "2024-07-11T03:00:00.000Z",
+    minDate: "2024-07-16",
+    value: "2024-07-11T03:00:00",
   },
 };
 
-export const MaxDate: StoryObj<DateTimePickerProps> = {
+export const MaxDate: Story = {
   args: {
     hint: "Select a date before July 19, 2024",
     maxDate: "2024-07-18",
   },
 };
 
-export const MaxDateWithError: StoryObj<DateTimePickerProps> = {
+export const MaxDateWithError: Story = {
   args: {
     hint: "Select a date before July 18, 2024",
-    maxDate: "2024-07-18T03:00:00.000Z",
-    value: "2024-07-21T03:00:00.000Z",
+    maxDate: "2024-07-18",
+    value: "2024-07-21T03:00:00",
   },
 };
 
-export const WithTimeZonePicker: StoryObj<DateTimePickerProps> = {
+export const WithTimeZonePicker: Story = {
   args: {
-    defaultValue: "2024-07-11T03:00:00.000Z",
+    defaultValue: "2024-07-11T03:00:00",
     timeZonePickerLabel: "Time zone picker label",
     timeZoneOptions: [
       { label: "New York", value: "America/New_York" },
@@ -181,14 +183,18 @@ export const WithTimeZonePicker: StoryObj<DateTimePickerProps> = {
       const selectedCell = await within(dialog).findByRole("gridcell", {
         selected: true,
       });
-      await expect(selectedCell).toHaveAccessibleName(/10/);
+      await expect(selectedCell).toHaveAccessibleName(/11/);
     });
   },
 };
 
-export const Controlled: StoryObj<DateTimePickerProps> = {
+// `value` and `defaultValue` are mutually exclusive, so a controlled story has
+// no `defaultValue` arg to forward.
+// The only story that pins `timeZone`, so it is also the only one whose seed keeps
+// its UTC offset: the rendering zone is fixed, so the seed has to name an instant
+// rather than a wall-clock time the machine's zone would reinterpret.
+export const Controlled: StoryObj<Omit<DateTimePickerProps, "defaultValue">> = {
   args: {
-    defaultValue: "2024-07-11T03:00:00.000Z",
     timeZonePickerLabel: "Time zone picker label",
     timeZone: "America/New_York",
     timeZoneOptions: [
@@ -212,23 +218,27 @@ export const Controlled: StoryObj<DateTimePickerProps> = {
   render: function C({ ...props }) {
     const [value, setValue] = useState<string>("2024-07-11T03:00:00.000Z");
 
-    const dateTimePickerProps: DateTimePickerProps = useMemo(
-      () => ({
-        ...props,
-        onCalendarDateChange: ({ value }) => {
-          if (typeof value === "string") {
-            setValue(value);
-          }
-        },
-        onInputChange: (value) => {
-          if (typeof value === "string") {
-            setValue(value);
-          }
-        },
-        value,
-      }),
-      [props, value],
-    );
+    // Annotated `Omit<…, "defaultValue">` rather than `DateTimePickerProps`: a
+    // controlled field cannot carry a seed now that the two props are an
+    // exclusive union, so the full props type no longer describes this object.
+    const dateTimePickerProps: Omit<DateTimePickerProps, "defaultValue"> =
+      useMemo(
+        () => ({
+          ...props,
+          onCalendarDateChange: ({ value }) => {
+            if (typeof value === "string") {
+              setValue(value);
+            }
+          },
+          onInputChange: (value) => {
+            if (typeof value === "string") {
+              setValue(value);
+            }
+          },
+          value,
+        }),
+        [props, value],
+      );
 
     return <DateTimePicker {...dateTimePickerProps} />;
   },

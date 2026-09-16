@@ -2,6 +2,7 @@
   "recommendations": [
     "vitest.explorer",
     "dbaeumer.vscode-eslint",
+    "biomejs.biome",
     "mariusschulz.yarn-lock-syntax",
     "arcanis.vscode-zipfs"
   ]

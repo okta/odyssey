@@ -209,43 +209,46 @@ const tokenTables = Object.entries(Tokens as Record<TokenName, TokenValue>)
     name: key as TokenName,
     value,
   }))
-  .reduce((tokenTables, { name, value }) => {
-    const parts = name.match(/[A-Z][a-z]+/g);
+  .reduce(
+    (tokenTables, { name, value }) => {
+      const parts = name.match(/[A-Z][a-z]+/g);
 
-    if (!parts) {
-      return tokenTables;
-    }
+      if (!parts) {
+        return tokenTables;
+      }
 
-    const tableName =
-      parts[0] === "Color" || parts[0] === "Hue" || parts[0] === "Palette"
-        ? `${parts[1]} ${parts[0]}s`
-        : parts[0];
+      const tableName =
+        parts[0] === "Color" || parts[0] === "Hue" || parts[0] === "Palette"
+          ? `${parts[1]} ${parts[0]}s`
+          : parts[0];
 
-    const existingTokenTable =
-      tokenTables.find(({ name }) => name === tableName) ||
-      ({
-        name: tableName,
-        values: [],
-      } satisfies TableData);
+      const existingTokenTable =
+        tokenTables.find(({ name }) => name === tableName) ||
+        ({
+          name: tableName,
+          values: [],
+        } satisfies TableData);
 
-    return tokenTables
-      .filter(({ name }) => name !== tableName)
-      .concat({
-        ...existingTokenTable,
-        values: existingTokenTable.values
-          .concat({
-            name,
-            tableName,
-            value,
-          })
-          .sort((a, b) => {
-            return a.name.localeCompare(b.name, "en", {
-              numeric: true,
-              sensitivity: "base",
-            });
-          }),
-      });
-  }, [] as Array<TableData>);
+      return tokenTables
+        .filter(({ name }) => name !== tableName)
+        .concat({
+          ...existingTokenTable,
+          values: existingTokenTable.values
+            .concat({
+              name,
+              tableName,
+              value,
+            })
+            .sort((a, b) => {
+              return a.name.localeCompare(b.name, "en", {
+                numeric: true,
+                sensitivity: "base",
+              });
+            }),
+        });
+    },
+    [] as Array<TableData>,
+  );
 
 function getDisplayedValue(tableName: string, value: TokenValue) {
   if (!tableName.includes("Colors") || tableName === "Palette Colors") {

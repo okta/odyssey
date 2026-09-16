@@ -66,7 +66,8 @@ export type CalloutProps = {
     }
 ) &
   // if linkText is provided, either linkUrl or onLinkClick must be provided
-  (| {
+  (
+    | {
         /** The `rel` attribute forwarded to the action link. */
         linkRel?: LinkProps["rel"];
         /** The `target` attribute forwarded to the action link. */

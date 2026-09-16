@@ -48,7 +48,8 @@ export type BannerProps = {
   text: string;
 } & Pick<HtmlProps, "testId" | "translate"> &
   // if linkText is provided, either linkUrl or onLinkClick must be provided
-  (| {
+  (
+    | {
         /** The `rel` attribute of the action link. */
         linkRel?: LinkProps["rel"];
         /** The `target` attribute of the action link (e.g., `"_blank"`). */

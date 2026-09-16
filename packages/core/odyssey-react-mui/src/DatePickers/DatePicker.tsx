@@ -116,7 +116,6 @@ const DatePicker = ({
     defaultedLanguageCode,
     formatDateTimeToUtcIsoDateString,
     formatDayOfWeek,
-    inputValues,
     internalTimeZone,
     isOpen,
     localeText,
@@ -124,6 +123,7 @@ const DatePicker = ({
     maxDate,
     onInputChange,
     onTimeZoneChange,
+    pickerValue,
     popperElement,
     setPopperElement,
     shouldDisableDate,
@@ -265,7 +265,6 @@ const DatePicker = ({
           >
             <MuiDatePicker
               dayOfWeekFormatter={formatDayOfWeek}
-              defaultValue={inputValues?.defaultValue}
               disabled={isDisabled}
               fixedWeekNumber={6}
               inputRef={inputRef}
@@ -283,7 +282,7 @@ const DatePicker = ({
               slotProps={slotProps}
               slots={slots}
               timezone={internalTimeZone}
-              value={inputValues?.value}
+              value={pickerValue}
             />
           </DatePickerWidthContainer>
         </DatePickerContainer>

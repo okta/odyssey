@@ -7,11 +7,11 @@ import { Meta } from "@storybook/addon-docs/blocks";
 `OdysseyBlueprintRenderer` turns a Blueprint schema into a React component
 tree. A blueprint is a plain JS object (or the result of `parseYamlWithSchema`)
 whose shape is described in [`SPEC.md`](https://github.com/atko-eng/odyssey-design-system/blob/master/docs/blueprint/SPEC.md).
-This page documents the v3 shape that authors and host applications work with.
+This page documents the shape that authors and host applications work with.
 
 ## Glossary
 
-The v3 shape factors a blueprint entry into a small, fixed set of fields. Each
+A blueprint entry factors into a small, fixed set of fields. Each
 serves a different role; the longer treatment is in the
 [`SPEC.md` Recommended blueprint shape section](https://github.com/atko-eng/odyssey-design-system/blob/master/docs/blueprint/SPEC.md#recommended-blueprint-shape).
 
@@ -21,25 +21,25 @@ serves a different role; the longer treatment is in the
 - **`instanceId`** — stable identity for state and refs. Optional in
   author-written YAML; the loader auto-fills any missing ids before the entry
   reaches the renderer.
-- **`inputs:`** — schema-validated values **consumed** by the block (continuous
+- **`inputs`** — schema-validated values **consumed** by the block (continuous
   data in). Children of layout blocks live at `inputs.children`.
-- **`outputs:`** — schema-typed values **produced** by the block (continuous
+- **`outputs`** — schema-typed values **produced** by the block (continuous
   data out). The React component writes these at runtime; other entries read
   them with an `{ instance: { id, port: outputs, name } }` ref.
 - **`events`** — schema-declared one-shot signals (a click, a submit). Declared
   on the schema, fired at runtime via `fireEvent`, referenced from other
   entries with `port: events`.
-- **`actions:`** — declarative side effects. Each action names a receiver and
+- **`actions`** — declarative side effects. Each action names a receiver and
   a handler the receiver registered via `setActions`.
-- **`subscriptions:`** — when an event fires elsewhere, run a named action on
-  this entry. Pairs with `events` and `actions:`.
+- **`subscriptions`** — when an event fires elsewhere, run a named action on
+  this entry. Pairs with `events` and `actions`.
 - **`__extraInputs`** — last-resort passthrough for values that don't belong
   in any schema yet. Not validated, not type-safe; prefer extending the schema
   via [`defineBlueprintExtension`](#extending-with-your-own-building-blocks).
 
 ## Quick start
 
-The simplest form: pass a v3 blueprint directly to the renderer. `from`
+The simplest form: pass a blueprint directly to the renderer. `from`
 identifies the building block, `instanceId` names this instance, and `inputs`
 carries the configuration.
 
@@ -198,7 +198,7 @@ inputs:
 
 Every blueprint entry that participates in state registers itself with the
 renderer's store. Building-block authors use three hooks; the contracts are
-spelled out in the [`SPEC.md` State section](https://github.com/atko-eng/odyssey-design-system/blob/master/docs/blueprint/SPEC.md#recommended-blueprint-shape).
+spelled out in the [`SPEC.md` State section](https://github.com/atko-eng/odyssey-design-system/blob/master/docs/blueprint/SPEC.md#state-management-for-custom-building-blocks).
 
 ### `useRegisterBlueprintInstance`
 
@@ -339,31 +339,3 @@ mount.
 For anything reusable across pages, prefer authoring a real schema —
 slots are deliberately scoped per blueprint and do not survive
 copy-paste between blueprint files.
-
-## Migration from the legacy shape
-
-The pre-v3 shape used `kind` and `id` and inlined configuration at the top
-level. The v3 shape replaces them with `from`, `instanceId`, and `inputs:`.
-For example:
-
-```yaml
-# Legacy
-kind: banner
-id: my-banner
-severity: info
-text: "Hello"
-
-# v3
-from: odyssey-blueprint/banner@1
-instanceId: my-banner
-inputs:
-  severity: info
-  text: "Hello"
-```
-
-A codemod ships with `@okta/odyssey-blueprint` to rewrite source files in
-place. During the transition window the loader continues to accept the
-legacy shape with a one-time deprecation warning per file; the alias is
-removed in the next major release. Authors should run the codemod and
-type-check before the alias is removed. The full migration plan is recorded
-in the [SPEC's Migration section](https://github.com/atko-eng/odyssey-design-system/blob/master/docs/blueprint/SPEC.md#migration-silent-alias-for-shape-hard-error-for-string-dsls-mandatory-codemod).

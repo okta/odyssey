@@ -24,7 +24,7 @@ truncate_lines_at = 220
 on_empty = "typecheck: ok"
 
 [filters.yarn-lint]
-description = "Compress yarn lint output (eslint + prettier-check)"
+description = "Compress yarn lint output (eslint + biome format)"
 match_command = "^yarn\\s+lint\\b"
 strip_ansi = true
 filter_stderr = true
@@ -53,24 +53,23 @@ replace = [
 ]
 on_empty = "eslint: ok"
 
-[filters.yarn-prettier]
-description = "Compress prettier-check output"
-match_command = "^yarn\\s+prettier(-check|--check|-write|--write)?\\b"
+[filters.yarn-format]
+description = "Compress biome format output"
+match_command = "^yarn\\s+format(:write)?\\b"
 strip_ansi = true
 filter_stderr = true
 strip_lines_matching = [
   "^\\s*$",
   "^Shell cwd was reset to ",
   "^Done in [\\d.]+s\\.$",
-  "^Checking formatting\\.\\.\\.$",
 ]
 replace = [
   { pattern = "/Users/[^/]+/okta/odyssey-design-system/", replacement = "./" },
 ]
 match_output = [
-  { pattern = "All matched files use Prettier formatting", message = "prettier: ok" }
+  { pattern = "No fixes applied", message = "format: ok" }
 ]
-on_empty = "prettier: ok"
+on_empty = "format: ok"
 
 [filters.yarn-test]
 description = "Compress yarn test output (vitest browser + unit)"

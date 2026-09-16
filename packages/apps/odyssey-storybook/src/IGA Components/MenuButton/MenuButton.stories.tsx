@@ -18,6 +18,12 @@ import { Meta, StoryObj } from "@storybook/react-vite";
 
 import type { A11yParameters } from "../../../.storybook/a11yTypes.js";
 
+import {
+  staticBoardParameters,
+  StoryCell,
+  StoryGrid,
+  StorySection,
+} from "../../tools/boardStoryHelpers.js";
 import { IgaComponentsOdysseyStorybookThemeDecorator } from "../../tools/IgaComponentsOdysseyStorybookThemeDecorator.js";
 
 const meta: Meta<typeof MenuButton> = {
@@ -63,13 +69,33 @@ export default meta;
 
 type Story = StoryObj<typeof MenuButton>;
 
-export const DisabledWithTooltip: Story = {
-  name: "Disabled with Tooltip",
+export const Playground: Story = {
+  args: {
+    buttonLabel: "Actions",
+  },
+  render: function C({ ariaDisabled, buttonLabel, buttonVariant, isDisabled }) {
+    return (
+      <MenuButton
+        ariaDisabled={ariaDisabled}
+        buttonLabel={buttonLabel ?? "Actions"}
+        buttonVariant={buttonVariant}
+        isDisabled={isDisabled}
+      >
+        <MenuItem>Edit</MenuItem>
+        <MenuItem>Delete</MenuItem>
+      </MenuButton>
+    );
+  },
+};
+
+export const AllDisabledVariants: Story = {
+  name: "All disabled variants",
   parameters: {
+    ...staticBoardParameters,
     docs: {
       description: {
         story:
-          "Menu buttons can display tooltips when disabled by using `ariaDisabled` instead of `isDisabled`. Wrap the MenuButton with a Tooltip component to show the tooltip on hover.",
+          "Menu buttons can display tooltips when disabled by using `ariaDisabled` instead of `isDisabled`.",
       },
     },
     // Disable color-contrast check because we intentionally match Odyssey's
@@ -81,97 +107,27 @@ export const DisabledWithTooltip: Story = {
       },
     } satisfies A11yParameters,
   },
-  render: function Render() {
-    return (
-      <MenuButton
-        ariaDisabled
-        buttonLabel="Actions"
-        tooltipText="You do not have permission to perform actions."
-      >
-        <MenuItem>Edit</MenuItem>
-        <MenuItem>Delete</MenuItem>
-      </MenuButton>
-    );
-  },
-};
+  render: function C() {
+    const buttonVariants = ["primary", "secondary", "floating"] as const;
 
-const ariaDisabledA11yParameters = {
-  config: {
-    rules: [{ id: "color-contrast", enabled: false }],
-  },
-} satisfies A11yParameters;
-
-export const DisabledPrimaryWithTooltip: Story = {
-  name: "Disabled Primary with Tooltip",
-  parameters: {
-    docs: {
-      description: {
-        story: "Primary menu button with `ariaDisabled` and tooltip.",
-      },
-    },
-    a11y: ariaDisabledA11yParameters,
-  },
-  render: function Render() {
     return (
-      <MenuButton
-        ariaDisabled
-        buttonLabel="Primary Actions"
-        buttonVariant="primary"
-        tooltipText="You do not have permission to perform actions."
-      >
-        <MenuItem>Edit</MenuItem>
-        <MenuItem>Delete</MenuItem>
-      </MenuButton>
-    );
-  },
-};
-
-export const DisabledSecondaryWithTooltip: Story = {
-  name: "Disabled Secondary with Tooltip",
-  parameters: {
-    docs: {
-      description: {
-        story: "Secondary menu button with `ariaDisabled` and tooltip.",
-      },
-    },
-    a11y: ariaDisabledA11yParameters,
-  },
-  render: function Render() {
-    return (
-      <MenuButton
-        ariaDisabled
-        buttonLabel="Secondary Actions"
-        buttonVariant="secondary"
-        tooltipText="You do not have permission to perform actions."
-      >
-        <MenuItem>Edit</MenuItem>
-        <MenuItem>Delete</MenuItem>
-      </MenuButton>
-    );
-  },
-};
-
-export const DisabledFloatingWithTooltip: Story = {
-  name: "Disabled Floating with Tooltip",
-  parameters: {
-    docs: {
-      description: {
-        story: "Floating menu button with `ariaDisabled` and tooltip.",
-      },
-    },
-    a11y: ariaDisabledA11yParameters,
-  },
-  render: function Render() {
-    return (
-      <MenuButton
-        ariaDisabled
-        buttonLabel="Floating Actions"
-        buttonVariant="floating"
-        tooltipText="You do not have permission to perform actions."
-      >
-        <MenuItem>Edit</MenuItem>
-        <MenuItem>Delete</MenuItem>
-      </MenuButton>
+      <StorySection title="Every button variant with `ariaDisabled` and a tooltip.">
+        <StoryGrid columns={3}>
+          {buttonVariants.map((buttonVariant) => (
+            <StoryCell key={buttonVariant} label={buttonVariant}>
+              <MenuButton
+                ariaDisabled
+                buttonLabel={buttonVariant}
+                buttonVariant={buttonVariant}
+                tooltipText="You do not have permission to perform actions."
+              >
+                <MenuItem>Edit</MenuItem>
+                <MenuItem>Delete</MenuItem>
+              </MenuButton>
+            </StoryCell>
+          ))}
+        </StoryGrid>
+      </StorySection>
     );
   },
 };

@@ -43,4 +43,6 @@ const MemoizedDateFieldLocalizationProvider = memo(
 MemoizedDateFieldLocalizationProvider.displayName =
   "DateFieldLocalizationProvider";
 
-export { MemoizedDateFieldLocalizationProvider as DateFieldLocalizationProvider };
+export {
+  MemoizedDateFieldLocalizationProvider as DateFieldLocalizationProvider,
+};

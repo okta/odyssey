@@ -65,6 +65,12 @@ const meta = {
         "If `true`, the button will take up the full width available",
       table: { category: "Visual", type: { summary: "boolean" } },
     },
+    isLoading: {
+      control: "boolean",
+      description:
+        "If `true`, the button shows a progress spinner and stops responding to clicks",
+      table: { category: "Visual", type: { summary: "boolean" } },
+    },
     label: {
       control: "text",
       description:
@@ -226,6 +232,48 @@ export const AllStates: Story = {
             variant="primary"
           />
         </StoryCell>
+      </StorySection>
+    );
+  },
+};
+
+export const AllLoadingStates: Story = {
+  parameters: staticBoardParameters,
+  render: function C() {
+    return (
+      <StorySection title="Loading state: every variant renders the spinner in its own label color, at every size.">
+        <StoryGrid columns={3}>
+          {buttonVariantValues.map((variant) => (
+            <StoryCell key={variant} label={variant}>
+              <Button isLoading label={variant} variant={variant} />
+            </StoryCell>
+          ))}
+        </StoryGrid>
+
+        <StoryRow>
+          <StoryCell label="sizes">
+            <StoryRow>
+              {buttonSizeValues.map((size) => (
+                <Button
+                  isLoading
+                  key={size}
+                  label={size}
+                  size={size}
+                  variant="primary"
+                />
+              ))}
+            </StoryRow>
+          </StoryCell>
+
+          <StoryCell label="icon-only">
+            <Button
+              ariaLabel="Add"
+              isLoading
+              startIcon={<AddIcon />}
+              variant="primary"
+            />
+          </StoryCell>
+        </StoryRow>
       </StorySection>
     );
   },

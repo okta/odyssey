@@ -96,11 +96,11 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof DatePicker>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    defaultValue: "2024-07-11T03:00:00.000Z",
+    defaultValue: "2024-07-11T03:00:00",
   },
   play: async ({ canvasElement, step }) => {
     await step("Open calendar", async () => {
@@ -110,7 +110,7 @@ export const Default: Story = {
       const selectedCell = await within(dialog).findByRole("gridcell", {
         selected: true,
       });
-      await expect(selectedCell).toHaveAccessibleName(/10/);
+      await expect(selectedCell).toHaveAccessibleName(/11/);
     });
   },
 };
@@ -143,8 +143,8 @@ export const MinDate: Story = {
 export const MinDateWithError: Story = {
   args: {
     hint: "Select a date after July 16, 2024",
-    minDate: "2024-07-16T03:00:00.000Z",
-    value: "2024-07-11T03:00:00.000Z",
+    minDate: "2024-07-16",
+    value: "2024-07-11T03:00:00",
   },
 };
 
@@ -158,14 +158,14 @@ export const MaxDate: Story = {
 export const MaxDateWithError: Story = {
   args: {
     hint: "Select a date before July 18, 2024",
-    maxDate: "2024-07-18T03:00:00.000Z",
-    value: "2024-07-21T03:00:00.000Z",
+    maxDate: "2024-07-18",
+    value: "2024-07-21T03:00:00",
   },
 };
 
 export const WithTimeZonePicker: Story = {
   args: {
-    value: "2024-07-21T03:00:00.000Z",
+    value: "2024-07-21T03:00:00",
     timeZonePickerLabel: "Time zone picker label",
     timeZoneOptions: [
       { label: "New York", value: "America/New_York" },
@@ -181,12 +181,17 @@ export const WithTimeZonePicker: Story = {
       const selectedCell = await within(dialog).findByRole("gridcell", {
         selected: true,
       });
-      await expect(selectedCell).toHaveAccessibleName(/20/);
+      await expect(selectedCell).toHaveAccessibleName(/21/);
     });
   },
 };
 
-export const Controlled: Story = {
+// `value` and `defaultValue` are mutually exclusive, so a controlled story has
+// no `defaultValue` arg to forward.
+// The only story that pins `timeZone`, so it is also the only one whose seed keeps
+// its UTC offset: the rendering zone is fixed, so the seed has to name an instant
+// rather than a wall-clock time the machine's zone would reinterpret.
+export const Controlled: StoryObj<Omit<DatePickerProps, "defaultValue">> = {
   args: {
     timeZonePickerLabel: "Time zone picker label",
     timeZone: "America/New_York",
@@ -211,7 +216,10 @@ export const Controlled: Story = {
   render: function C({ ...props }) {
     const [value, setValue] = useState<string>("2024-07-11T03:00:00.000Z");
 
-    const datePickerProps: DatePickerProps = useMemo(
+    // Annotated `Omit<…, "defaultValue">` rather than `DatePickerProps`: a
+    // controlled field cannot carry a seed now that the two props are an
+    // exclusive union, so the full props type no longer describes this object.
+    const datePickerProps: Omit<DatePickerProps, "defaultValue"> = useMemo(
       () => ({
         ...props,
         onCalendarDateChange: ({ value }) => {
@@ -239,7 +247,7 @@ const NarrowContainer = styled.div`
 
 export const InNarrowContainer: Story = {
   args: {
-    defaultValue: "2024-07-11T03:00:00.000Z",
+    defaultValue: "2024-07-11T03:00:00",
   },
   play: async ({ canvasElement, step }) => {
     await step("Open calendar", async () => {

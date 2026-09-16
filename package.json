@@ -10,8 +10,8 @@
   "nx": {
     "includedScripts": [],
     "targets": {
-      "prettier-check": {
-        "command": "yarn prettier-check",
+      "format": {
+        "command": "yarn format",
         "inputs": [
           "formatting"
         ],
@@ -29,6 +29,8 @@
     "build": "nx run-many -t build --exclude=@okta/odyssey-icons,@okta/odyssey-storybook,@okta/odyssey-prototype",
     "create-contribution": "ok-ui create-package --from ./packages/contributions/example-components --output-dir ./packages/contributions",
     "eslint": "nx run-many -t eslint",
+    "format": "biome format .",
+    "format:write": "biome format --write .",
     "generate:i18n:pseudoLocaleProperties": "yarn nx build @okta/odyssey-cli && yarn workspaces foreach --all --parallel run generate:i18n:pseudoLocaleProperties",
     "generate:i18n": "yarn nx build @okta/odyssey-cli && yarn workspaces foreach --all --parallel run generate:i18n",
     "generate:blueprint-schema": "yarn workspace @okta/odyssey-blueprint generate-json-schema",
@@ -36,21 +38,21 @@
     "lerna-publish": "lerna publish from-package --no-verify-registry --no-push --force-publish --ignore-changes 'packages/contributions/**' --ignore-changes 'packages/platform/**'",
     "lerna-version": "lerna version --no-git-tag-version --include-merged-tags --conventional-commits --no-push --force-publish --ignore-changes 'packages/contributions/**' --ignore-changes 'packages/platform/**'",
     "lint:fix": "HAS_SORTING=true nx run-many -t eslint --fix",
-    "lint": "yarn eslint && nx run odyssey:prettier-check",
+    "lint": "yarn eslint && nx run odyssey:format",
     "playwright-install": "yarn workspaces foreach --all run playwright-install",
     "postinstall": "husky && yarn workspace @okta/odyssey-contributions-promotion-check build",
-    "prettier-check": "prettier --ignore-unknown --log-level warn --check .",
-    "prettier-write": "prettier --ignore-unknown --log-level warn --write .",
     "start:dev": "yarn workspaces foreach --all --parallel --interlaced --jobs unlimited --exclude=@okta/odyssey-icons --exclude=@okta/odyssey-storybook --exclude=@okta/odyssey-prototype run dev",
     "start:prototype": "yarn install && yarn build && yarn workspace @okta/odyssey-prototype dev",
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "start": "yarn install && yarn build && yarn concurrently npm:start:dev npm:start:storybook",
+    "test:release-scripts": "bash scripts/release/release-scripts.test.sh",
     "test": "nx run-many -t test --exclude=@okta/ui-stacks-component-libraries-odyssey-contributions",
     "topic": "OKTA_NPM_REGISTRY_SERVER=https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-all yarn",
     "typecheck": "nx run-many -t typecheck",
     "provision:contributions": "yarn workspaces foreach --all --interlaced run provision"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.11",
     "@nx/eslint": "23.1.1",
     "@nx/eslint-plugin": "23.1.1",
     "@okta/odyssey-cli": "workspace:*",
@@ -59,7 +61,7 @@
     "@okta/ok-ui": "^4.21.0",
     "caniuse-lite": "^1.0.30001677",
     "concurrently": "^9.1.0",
-    "decode-uri-component": "^0.4.1",
+    "decode-uri-component": "^0.5.0",
     "eslint": "^9.31.0",
     "husky": "^9.1.6",
     "jiti": "^2.4.2",
@@ -68,7 +70,6 @@
     "loader-utils": "^3.2.1",
     "nwsapi": "^2.2.7",
     "nx": "23.1.1",
-    "prettier": "^3.3.3",
     "prompts": "^2.4.2",
     "wait-on": "^7.2.0",
     "workspace": "^0.0.1-preview.1"
@@ -83,6 +84,7 @@
     "@okta/auth-foundation": "patch:@okta/auth-foundation@npm:0.5.3-g57e7859#./.yarn/patches/@okta-auth-foundation-npm-0.5.3-g57e7859.patch",
     "@okta/ui-libraries-fetch": "patch:@okta/ui-libraries-fetch@npm:1.14.0#./.yarn/patches/@okta-ui-libraries-fetch-npm-1.14.0.patch",
     "@okta/ui-libraries-monolith": "patch:@okta/ui-libraries-monolith@npm:2.2.0#./.yarn/patches/@okta-ui-libraries-monolith-npm-2.2.0.patch",
+    "@isaacs/brace-expansion@npm:^5.0.0": "^5.0.1",
     "@joshwooding/vite-plugin-react-docgen-typescript/glob@^7.2.0": "^9.0.0",
     "flatted@npm:^3.2.9": "^3.4.2",
     "flatted@npm:^3.3.3": "^3.4.2",

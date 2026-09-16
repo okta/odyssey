@@ -257,15 +257,16 @@ export {
   ABSOLUTE_MINIMUM_HEIGHT,
   ABSOLUTE_MINIMUM_WIDTH,
   COMPACT_MAX_HEIGHT,
-  COMPACT_MAX_HEIGHT_CONDITION,
   COMPACT_MAX_WIDTH,
-  COMPACT_MAX_WIDTH_CONDITION,
-  COMPACT_MEDIA_QUERY,
   createOdysseyMuiTheme,
   type DesignTokens,
   type DesignTokensOverride,
   pxToRem,
+  useAppElementContainerQuery,
+  type UseAppElementContainerQueryProps,
   useCompactViewportMatches,
+  useContainerQuery,
+  type UseContainerQueryProps,
   useMediaQuery,
 } from "./theme/theme.js";
 export {
@@ -290,12 +291,15 @@ export {
   Support,
   Typography,
   typographyColorValues,
+  type TypographyOverflowWrapValue,
+  typographyOverflowWrapValues,
   type TypographyProps,
   typographyVariantMapping,
   type TypographyVariantValue,
 } from "./Typography.js";
 export type { ContrastMode } from "./useContrastMode.js";
 export { useMountLifecycleEffect } from "./useMountLifecycleEffect.js";
+export { useStableCallback } from "./useStableCallback.js";
 export { useUniqueId } from "./useUniqueId.js";
 export {
   createShadowDomElements,

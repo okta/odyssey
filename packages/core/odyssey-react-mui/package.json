@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.67.0",
+  "version": "1.69.0",
   "nx": {
     "tags": [
       "scope:core"
@@ -46,59 +46,89 @@
       ],
       "web-component": [
         "./dist/types/web-component/index.d.ts"
+      ],
+      "charts": [
+        "./dist/types/Charts/index.d.ts"
       ]
     }
   },
   "exports": {
     "./__internal": {
       "types": "./dist/types/__internal.d.ts",
+      "node": "./dist/cjs/__internal.cjs",
       "import": "./dist/esm/__internal.js",
-      "require": "./dist/cjs/__internal.cjs"
+      "require": "./dist/cjs/__internal.cjs",
+      "default": "./dist/cjs/__internal.cjs"
     },
     "./icons": {
       "types": "./dist/types/icons.generated/index.d.ts",
+      "node": "./dist/cjs/icons.generated/index.cjs",
       "import": "./dist/esm/icons.generated/index.js",
-      "require": "./dist/cjs/icons.generated/index.cjs"
+      "require": "./dist/cjs/icons.generated/index.cjs",
+      "default": "./dist/cjs/icons.generated/index.cjs"
     },
     "./lazy-loaded-icons": {
       "types": "./dist/types/icons.generated/lazyIconDictionary.d.ts",
+      "node": "./dist/cjs/icons.generated/lazyIconDictionary.cjs",
       "import": "./dist/esm/icons.generated/lazyIconDictionary.js",
-      "require": "./dist/cjs/icons.generated/lazyIconDictionary.cjs"
+      "require": "./dist/cjs/icons.generated/lazyIconDictionary.cjs",
+      "default": "./dist/cjs/icons.generated/lazyIconDictionary.cjs"
     },
     "./icon-names": {
       "types": "./dist/types/icons.generated/names.d.ts",
+      "node": "./dist/cjs/icons.generated/names.cjs",
       "import": "./dist/esm/icons.generated/names.js",
-      "require": "./dist/cjs/icons.generated/names.cjs"
+      "require": "./dist/cjs/icons.generated/names.cjs",
+      "default": "./dist/cjs/icons.generated/names.cjs"
     },
     "./logos": {
       "types": "./dist/types/logos.generated/index.d.ts",
+      "node": "./dist/cjs/logos.generated/index.cjs",
       "import": "./dist/esm/logos.generated/index.js",
-      "require": "./dist/cjs/logos.generated/index.cjs"
+      "require": "./dist/cjs/logos.generated/index.cjs",
+      "default": "./dist/cjs/logos.generated/index.cjs"
     },
     "./labs": {
       "types": "./dist/types/labs/index.d.ts",
+      "node": "./dist/cjs/labs/index.cjs",
       "import": "./dist/esm/labs/index.js",
-      "require": "./dist/cjs/labs/index.cjs"
+      "require": "./dist/cjs/labs/index.cjs",
+      "default": "./dist/cjs/labs/index.cjs"
     },
     "./test-selectors": {
       "types": "./dist/types/test-selectors/index.d.ts",
+      "node": "./dist/cjs/test-selectors/index.cjs",
       "import": "./dist/esm/test-selectors/index.js",
-      "require": "./dist/cjs/test-selectors/index.cjs"
+      "require": "./dist/cjs/test-selectors/index.cjs",
+      "default": "./dist/cjs/test-selectors/index.cjs"
     },
     "./ui-shell": {
       "types": "./dist/types/ui-shell/index.d.ts",
+      "node": "./dist/cjs/ui-shell/index.cjs",
       "import": "./dist/esm/ui-shell/index.js",
-      "require": "./dist/cjs/ui-shell/index.cjs"
+      "require": "./dist/cjs/ui-shell/index.cjs",
+      "default": "./dist/cjs/ui-shell/index.cjs"
     },
     "./web-component": {
       "types": "./dist/types/web-component/index.d.ts",
+      "node": "./dist/cjs/web-component/index.cjs",
       "import": "./dist/esm/web-component/index.js",
-      "require": "./dist/cjs/web-component/index.cjs"
+      "require": "./dist/cjs/web-component/index.cjs",
+      "default": "./dist/cjs/web-component/index.cjs"
+    },
+    "./charts": {
+      "types": "./dist/types/Charts/index.d.ts",
+      "node": "./dist/cjs/Charts/index.cjs",
+      "import": "./dist/esm/Charts/index.js",
+      "require": "./dist/cjs/Charts/index.cjs",
+      "default": "./dist/cjs/Charts/index.cjs"
     },
     ".": {
       "types": "./dist/types/index.d.ts",
+      "node": "./dist/cjs/index.cjs",
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.cjs"
+      "require": "./dist/cjs/index.cjs",
+      "default": "./dist/cjs/index.cjs"
     },
     "./README.md": "./README.md"
   },
@@ -142,6 +172,7 @@
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@highcharts/react": "^5.2.2",
     "@mui/icons-material": "^5.18.0",
     "@mui/lab": "^5.0.0-alpha.175",
     "@mui/material": "^5.18.0",
@@ -153,6 +184,7 @@
     "@types/luxon": "^3.4.2",
     "date-fns": "^2.30.0",
     "dom-accessibility-api": "^0.7.0",
+    "highcharts": "^13.0.0",
     "lodash.isequal": "^4.5.0",
     "luxon": "^3.4.4",
     "material-react-table": "^2.11.3",
