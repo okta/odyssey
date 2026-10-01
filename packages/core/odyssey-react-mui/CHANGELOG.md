@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.70.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.69.0...v1.70.0) (2026-09-30)
+
+### Bug Fixes
+
+* correct chart hover and animation ([#913](https://github.com/atko-eng/odyssey-design-system/issues/913)) ([0aaebf2](https://github.com/atko-eng/odyssey-design-system/commit/0aaebf2d09884c5522811e719e1eb9342ff02b0a))
+
+### Features
+
+* add BarChart to odyssey-react-mui ([#824](https://github.com/atko-eng/odyssey-design-system/issues/824)) ([e348517](https://github.com/atko-eng/odyssey-design-system/commit/e348517087ba25babdd894da01fb6e4fff4ace7b))
+* **extractor:** select models and await controls ([#809](https://github.com/atko-eng/odyssey-design-system/issues/809)) ([cbe06c1](https://github.com/atko-eng/odyssey-design-system/commit/cbe06c15444af97ea412c0adf9c6fbfd6aa2c4c3))
+* **odyssey-react-mui:** forward refs and export MuiPropsContext ([#807](https://github.com/atko-eng/odyssey-design-system/issues/807)) ([a77505c](https://github.com/atko-eng/odyssey-design-system/commit/a77505cd15b3febee2d47ad6e70b3115bc1e11af))
+* Translations for odyssey-design-system:enduser ([#853](https://github.com/atko-eng/odyssey-design-system/issues/853)) ([697dd59](https://github.com/atko-eng/odyssey-design-system/commit/697dd59cae201d79ab01124125744b1cef9d40b5))
+
+
 # [1.69.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.68.0...v1.69.0) (2026-09-16)
 
 ### Bug Fixes

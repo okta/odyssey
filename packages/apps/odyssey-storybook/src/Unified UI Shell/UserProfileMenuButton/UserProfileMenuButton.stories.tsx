@@ -24,10 +24,10 @@ import {
   UserProfileMenuButton,
   UserProfileMenuButtonProps,
 } from "@okta/odyssey-react-mui/labs";
+import { odysseyIconStoryOptions as icons } from "@okta/odyssey-storybook-preset/story-helpers";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { ReactNode } from "react";
 
-import icons from "../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const BoxWithBottomMargin = ({ children }: { children: ReactNode }) => {

@@ -1,10 +1,49 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.69.0",
+  "version": "1.70.0",
   "nx": {
     "tags": [
       "scope:core"
-    ]
+    ],
+    "targets": {
+      "coverage": {
+        "dependsOn": [
+          "^build",
+          "build"
+        ],
+        "inputs": [
+          "default",
+          "^production"
+        ],
+        "outputs": [
+          "{projectRoot}/coverage"
+        ],
+        "cache": true
+      },
+      "generate:icons": {
+        "dependsOn": [
+          "^build",
+          {
+            "projects": [
+              "@okta/odyssey-icons"
+            ],
+            "target": "build"
+          }
+        ],
+        "inputs": [
+          "production",
+          "^production",
+          {
+            "dependentTasksOutputFiles": "packages/core/odyssey-icons/dist/**/*"
+          }
+        ],
+        "outputs": [
+          "{projectRoot}/src/icons.generated",
+          "{projectRoot}/src/logos.generated"
+        ],
+        "cache": true
+      }
+    }
   },
   "description": "React MUI components for Odyssey, Okta's design system",
   "author": "Okta, Inc.",
@@ -22,6 +61,9 @@
       ],
       "__internal": [
         "./dist/types/__internal.d.ts"
+      ],
+      "charts": [
+        "./dist/types/charts/index.d.ts"
       ],
       "icons": [
         "./dist/types/icons.generated/index.d.ts"
@@ -46,9 +88,6 @@
       ],
       "web-component": [
         "./dist/types/web-component/index.d.ts"
-      ],
-      "charts": [
-        "./dist/types/Charts/index.d.ts"
       ]
     }
   },
@@ -59,6 +98,13 @@
       "import": "./dist/esm/__internal.js",
       "require": "./dist/cjs/__internal.cjs",
       "default": "./dist/cjs/__internal.cjs"
+    },
+    "./charts": {
+      "types": "./dist/types/charts/index.d.ts",
+      "node": "./dist/cjs/charts/index.cjs",
+      "import": "./dist/esm/charts/index.js",
+      "require": "./dist/cjs/charts/index.cjs",
+      "default": "./dist/cjs/charts/index.cjs"
     },
     "./icons": {
       "types": "./dist/types/icons.generated/index.d.ts",
@@ -116,13 +162,6 @@
       "require": "./dist/cjs/web-component/index.cjs",
       "default": "./dist/cjs/web-component/index.cjs"
     },
-    "./charts": {
-      "types": "./dist/types/Charts/index.d.ts",
-      "node": "./dist/cjs/Charts/index.cjs",
-      "import": "./dist/esm/Charts/index.js",
-      "require": "./dist/cjs/Charts/index.cjs",
-      "default": "./dist/cjs/Charts/index.cjs"
-    },
     ".": {
       "types": "./dist/types/index.d.ts",
       "node": "./dist/cjs/index.cjs",
@@ -140,7 +179,7 @@
     "build:i18n:ts": "odyssey-i18n i18n build:ts",
     "build:types": "tsc --project tsconfig.production.json",
     "build": "yarn build:clean && yarn build:i18n:ts && yarn build:types && yarn build:source",
-    "ci:coverage": "NODE_ENV=test yarn vitest run --coverage --reporter=default",
+    "coverage": "NODE_ENV=test yarn vitest run --coverage --reporter=default",
     "dev:coverage": "NODE_ENV=test yarn vitest --coverage",
     "dev:source": "yarn build:source:esm --watch",
     "dev:test": "NODE_ENV=test vitest --reporter=verbose",

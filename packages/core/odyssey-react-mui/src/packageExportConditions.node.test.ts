@@ -62,6 +62,7 @@ describe("package export conditions", () => {
   test("declares a conditional subpath for every entry point the build emits", () => {
     expect(conditionalSubpaths.map(([subpath]) => subpath)).toStrictEqual([
       "./__internal",
+      "./charts",
       "./icons",
       "./lazy-loaded-icons",
       "./icon-names",
@@ -70,7 +71,6 @@ describe("package export conditions", () => {
       "./test-selectors",
       "./ui-shell",
       "./web-component",
-      "./charts",
       ".",
     ]);
   });

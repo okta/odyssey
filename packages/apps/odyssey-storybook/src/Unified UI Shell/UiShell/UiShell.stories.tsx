@@ -51,6 +51,7 @@ import {
   type UiShellNavComponentProps,
   type UiShellProps,
 } from "@okta/odyssey-react-mui/ui-shell";
+import { getReflowEyesParameters } from "@okta/odyssey-storybook-preset/story-helpers";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { action } from "storybook/actions";
@@ -59,7 +60,6 @@ import { fn } from "storybook/test";
 import PlaceholderLogo from "../../Odyssey Core/Fields/PickerWithOptionAdornment/PlaceholderLogo.js";
 import { STANDARD_APPLITOOLS_WIDTH } from "../../tools/applitoolsBrowserSize.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
-import { getReflowEyesParameters } from "../../tools/reflowEyesParameters.js";
 
 const meta = {
   component: UiShell,

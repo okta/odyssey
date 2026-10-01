@@ -16,14 +16,14 @@ import {
   CheckboxGroupProps,
   Link,
 } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react-vite";
-
 import {
   staticBoardParameters,
   StoryCell,
   StoryGrid,
   StorySection,
-} from "../../../tools/boardStoryHelpers.js";
+} from "@okta/odyssey-storybook-preset/story-helpers";
+import { Meta, StoryObj } from "@storybook/react-vite";
+
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 

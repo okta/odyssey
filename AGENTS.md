@@ -177,6 +177,7 @@ Documentation is organized by purpose:
 
 - Follow existing formatting in the edited file.
 - Avoid reformatting unrelated code.
+- Biome's 80-character line width applies to formatted source code, not prose or comments. Do not hard-wrap Markdown paragraphs, comments, JSDoc descriptions, commit messages, or pull request text at 80 characters. Keep intentional breaks that communicate structure, such as separate paragraphs, list items, JSDoc tags, and code samples.
 - **Biome** formats the repo (`yarn format` / `yarn format:write`); Prettier was removed. Do not add a `.prettierrc` or the `prettier` dependency. Biome does not format Markdown or YAML, so those file types are no longer auto-formatted. See [decision record](docs/decisions/2026-08-06-biome-over-prettier.md).
 
 ### Accessibility & UX
@@ -211,7 +212,7 @@ Each links to the decision record that explains why and what was rejected.
 - Project-shared config belongs in the repo's checked-in settings, not the user's local-global settings. See [decision record](docs/decisions/2026-06-23-shared-config-in-repo-not-local-global.md).
 - Keep a PR's diff scoped to the files the task requires; do not sweep in unrelated packages, components, or stories.
 - Do not reference internal product details (internal system codenames, architecture) in committed content — this repo syncs to a public mirror. See [decision record](docs/decisions/2026-06-12-no-internal-product-details-public-mirror.md).
-- Never make a build a side effect of `yarn install`. The root `postinstall` only installs husky's git hooks and bootstraps `@okta/odyssey-contributions-promotion-check`; the blanket `yarn build` lives in `scripts/setup.sh`, and anything else that needs a built tree runs `yarn build` itself. See [decision record](docs/decisions/2026-08-10-build-in-setup-not-postinstall.md).
+- Never make a build a side effect of `yarn install`, and never put one back into `scripts/setup.sh`. The root `postinstall` only installs husky's git hooks and bootstraps `@okta/odyssey-contributions-promotion-check`, and `setup.sh` only installs dependencies. Each Bacon suite provisions the build graph it consumes: through an Nx target whose `dependsOn` declares it, or through an explicit build command in the suite's own script. See [decision records](docs/decisions/2026-09-17-every-suite-provisions-its-own-build.md) for the current rule and [2026-08-10](docs/decisions/2026-08-10-build-in-setup-not-postinstall.md) for the superseded one.
 - Install husky from `postinstall`, not `prepare`. Yarn 4 never runs a root `prepare` script, so the recipe in husky's own docs silently installs nothing and leaves every clone with no pre-commit hook. See [decision record](docs/decisions/2026-08-18-husky-hooks-via-postinstall-not-prepare.md).
 - Check push access to the public mirror with the real push under `--dry-run`, through the credential that will perform it. `gh api repos/okta/odyssey --jq .permissions.push` answers about a different credential and reports `false` for a token that can push, so gating a release on it fails every release on a machine whose push works. See [decision record](docs/decisions/2026-08-19-preflight-probes-the-pushing-credential.md).
 - Key a release checkpoint on the moment the release started, archive a finished checkpoint instead of resuming it, and never patch a recorded checkpoint's inputs with the current invocation's flags. Sharing one path per release type let a new release adopt the previous one's all-succeeded stages, report success, and ship nothing. See [decision record](docs/decisions/2026-08-19-unique-release-checkpoints-never-resume-finished.md).
@@ -229,10 +230,10 @@ Each links to the decision record that explains why and what was rejected.
 
 ### Reference fixtures are not style exemplars
 
-`packages/apps/extractor-fixture/**` is a deliberately non-Odyssey, plain-MUI
+`packages/apps/cartographer-fixture/**` is a deliberately non-Odyssey, plain-MUI
 React app. It exists only as a migration _source_: a realistic "legacy" target
-the `@okta/extractor` pipeline is calibrated against, and the "before" that
-Blueprint reproduces with Odyssey components. Its patterns (plain MUI, the `sx`
+the `@okta/odyssey-cartographer` pipeline is calibrated against, and the "before" that
+Atlas reproduces with Odyssey components. Its patterns (plain MUI, the `sx`
 prop, a home-rolled auth context and fetch client, no react-query) are
 intentional and are not how Odyssey UI should be written.
 
@@ -240,15 +241,15 @@ Two rules follow, and they point in opposite directions:
 
 - **Do not copy its patterns out.** When writing or generating any
   Odyssey-owned code, never reuse a pattern because you found it in
-  `extractor-fixture/`. Follow the handbook and the styling and component rules
+  `cartographer-fixture/`. Follow the handbook and the styling and component rules
   above (Odyssey components, `createOdysseyStyledComponent`, design tokens)
   regardless of what grep surfaces there.
 - **Do not "align" it in.** Do not convert this package to Odyssey conventions
   as drive-by cleanup or to satisfy a lint rule. Its non-Odyssey shape is the
-  point, and changing it also churns the extractor's golden snapshot.
+  point, and changing it also churns Cartographer's golden snapshot.
 
 This does not fence off the package: when a task explicitly targets
-`extractor-fixture` (for example, fixing its own behavior), edit it normally.
+`cartographer-fixture` (for example, fixing its own behavior), edit it normally.
 The Odyssey and Backbone re-implementations of this app are tracked as separate
 work and live as their own packages, not as edits that "upgrade" this one.
 
@@ -314,11 +315,11 @@ yarn workspace @okta/odyssey-cli migrate-styled <path>
 
 The codemod handles `styled.tag(styles)`, `styled("tag")(styles)`, and `styled("tag", opts)(styles)`. Files using tagged template literals are skipped with a warning and require manual migration.
 
-#### Blueprint-specific patterns
+#### Atlas-specific patterns
 
-These apply only when working in `packages/contributions/odyssey-blueprint`. Blueprint is not yet published, so they are unlikely to be relevant to other packages.
+These apply only when working in `packages/contributions/odyssey-atlas`. Atlas is not yet published, so they are unlikely to be relevant to other packages.
 
-- Prefer Jotai atoms over window events for cross-component state. Use Blueprint's Jotai store for cross-component coordination — never `window.dispatchEvent` / `CustomEvent`.
+- Prefer Jotai atoms over window events for cross-component state. Use Atlas's Jotai store for cross-component coordination — never `window.dispatchEvent` / `CustomEvent`.
 - Use data-driven building blocks; do not hardcode lists. YAML pages and similar config-driven UIs must drive content from `source` + `rowTemplate` (or equivalent data binding), never from hardcoded item arrays in JSX.
 - Use the `V1` (no underscore) suffix in component `displayName` values, e.g. `"AppLaunchGridV1"` not `"AppLaunchGrid_v1"`.
 
@@ -332,7 +333,7 @@ These apply only when working in `packages/contributions/odyssey-blueprint`. Blu
 
 ### API keys live in a gitignored `.env`
 
-`ANTHROPIC_API_KEY` (for `@okta/extractor`) and `APPLITOOLS_API_KEY` (for the
+`ANTHROPIC_API_KEY` (for `@okta/odyssey-cartographer`) and `APPLITOOLS_API_KEY` (for the
 visual regression suite) are in `.env` at the repository root. That file is
 gitignored; [`.env.example`](.env.example) is the tracked template and documents
 each key. Never put a real value in the template, a committed file, or a command
@@ -351,7 +352,7 @@ the main checkout's `.env` by
 are already there and rotating the token in one place covers every worktree.
 
 Check for the key before concluding a tool is broken. Without
-`ANTHROPIC_API_KEY` the extractor silently falls back to shelling out to the
+`ANTHROPIC_API_KEY` Cartographer silently falls back to shelling out to the
 `claude` CLI, which is a different code path with different failure modes, so a
 run that behaves strangely is worth repeating with the key loaded.
 
@@ -428,14 +429,14 @@ Run it after any bulk history rewrite, such as a mass rebase or amend across sev
   decisions. List the records and read the relevant ones before non-trivial work;
   [its README](docs/decisions/README.md) carries the lookup queries.
 - `docs/runbooks/` contains repeatable procedures for specific operational tasks.
-- `docs/blueprint/` contains the Blueprint design package: the normative
-  [`SPEC.md`](docs/blueprint/SPEC.md), the authoring tutorial, and the use-case
+- `docs/atlas/` contains the Atlas design package: the normative
+  [`SPEC.md`](docs/atlas/SPEC.md), the authoring tutorial, and the use-case
   catalog. Read the spec before changing
-  `packages/contributions/odyssey-blueprint`; where the package has not caught up
+  `packages/contributions/odyssey-atlas`; where the package has not caught up
   to the spec, the gap is recorded in
-  [`FUTURE-WORK.md`](docs/blueprint/FUTURE-WORK.md), not edited out of the spec.
-  Blueprint's design rationale lives in `docs/decisions/` with the rest, tagged
-  `#blueprint`.
+  [`FUTURE-WORK.md`](docs/atlas/FUTURE-WORK.md), not edited out of the spec.
+  Atlas's design rationale lives in `docs/decisions/` with the rest, tagged
+  `#atlas`.
 - `packages/*/README.md` and `packages/*/docs/` contain package-owned API,
   integration, and operational guidance.
 - Package-specific `AGENTS.md` files extend or override this file only for their
@@ -446,7 +447,7 @@ rationale, runbooks, or package documentation here; link to the owning document.
 
 ### JSDoc for Components (`odyssey-react-mui`)
 
-Component source files are the single source of truth for documentation, and JSDoc must be updated in the same commit as any component or prop change. See [odyssey-react-mui AGENTS.md](packages/core/odyssey-react-mui/AGENTS.md) for the full conventions (component/prop placement, `@default`/`@deprecated`/`@see` tags, boolean/enum prop phrasing, line-wrap rule). Only load that file when editing component source in that package.
+Component source files are the single source of truth for documentation, and JSDoc must be updated in the same commit as any component or prop change. See [odyssey-react-mui AGENTS.md](packages/core/odyssey-react-mui/AGENTS.md) for the full conventions (component/prop placement, `@default`/`@deprecated`/`@see` tags, boolean/enum prop phrasing, prose line-length rule). Only load that file when editing component source in that package.
 
 ### Architectural Decision Records (`docs/decisions/`)
 
@@ -461,7 +462,7 @@ Component source files are the single source of truth for documentation, and JSD
 
 See [docs/agents/storybook-and-vrt.md](docs/agents/storybook-and-vrt.md) for story-writing conventions (no top-level one-time-use variables, prefer Odyssey components, `render: function C()`). Only load that file when writing or editing Storybook stories.
 
-**Board stories are the default story shape**, in Odyssey Core, Odyssey Blueprint, and every contributions package, without being asked: one args-driven `Playground` plus static boards, never one story export per variant. The rules are in [.claude/rules/storybook.md](.claude/rules/storybook.md), the helper table and worked example are in [docs/agents/storybook-and-vrt.md](docs/agents/storybook-and-vrt.md), and the reasoning is in the [decision record](docs/decisions/2026-09-04-board-stories-are-the-default-story-shape.md).
+**Board stories are the default story shape**, in Odyssey Core, Odyssey Atlas, and every contributions package, without being asked: one args-driven `Playground` plus static boards, never one story export per variant. The rules are in [.claude/rules/storybook.md](.claude/rules/storybook.md), the helper table and worked example are in [docs/agents/storybook-and-vrt.md](docs/agents/storybook-and-vrt.md), and the reasoning is in the [decision record](docs/decisions/2026-09-04-board-stories-are-the-default-story-shape.md).
 
 For VRT, render the visual state Applitools should capture directly; interaction behavior belongs in browser tests. Overlays with a boolean open prop (Dialog, Drawer, Toast, Accordion) render open by default, paired with a manual `Component.mdx` docs page (see [decision record](docs/decisions/2026-07-28-open-by-default-overlays-in-stories.md)). Seed date and time args with a fixed date in the past, so the calendar's current-day ring stays out of the captured month (see [decision record](docs/decisions/2026-08-18-fixed-past-offsetless-dates-in-stories.md)). Match the seed's offset to the zone the field renders in: leave `timeZone` unset and write the seed without an offset (`"2024-07-15T14:30:00"`), or pin `timeZone` and write the instant (`"2026-03-04T05:06:00.000Z"`). Never mix the two, and verify across offsets rather than reasoning about them, because CI runs at offset zero and a one-zone pass proves nothing (see [decision record](docs/decisions/2026-09-02-seed-zone-matches-render-zone.md)). Full VRT authoring guidance lives in [docs/handbook/testing/visual-regression-testing.md](docs/handbook/testing/visual-regression-testing.md).
 
@@ -559,20 +560,43 @@ If you need a package in these paths to be published and the change doesn't natu
 - Branch names cannot contain slashes (`/`) — use underscores (`_`) or hyphens (`-`) instead.
 - Optionally include your Jira ticket (e.g. `rj_fix_button_spacing_OKTA-123456`).
 
+### Pushing
+
+**Advance a pushed branch with a regular `git push`.** Never force-push, and never rewrite a commit that is already on the remote (`rebase`, `commit --amend`, `reset --hard` to an earlier point followed by a push). If you believe a rewrite is genuinely necessary, stop and ask first. Approval for one rewrite is not approval for the next.
+
+The reason this is a flat rule and not a tradeoff: **every PR here is squash-merged**, so a branch collapses into a single commit on `master` and its internal history never lands. Tidying that history costs review comments and buys nothing. GitHub anchors an inline review comment to a SHA, so replacing the commits detaches every thread from the code it was about, and a reviewer mid-review loses their place.
+
+Verify the squash for yourself rather than taking it on faith: every recent `master` commit has one parent (`git log --format='%h %p' origin/master`), and `d462f4da` carries all four of its branch commit messages concatenated into one body.
+
+So when a branch needs to catch up to `master`, **merge, do not rebase**:
+
+```sh
+git fetch origin master
+git merge origin/master
+git push
+```
+
+A merge appends a commit, so the push stays a fast-forward, and the merge commit never reaches `master` because of the squash. This is already the practice in this repository's history: `e3cfd813`, `2fe7f9ca`, and `bf916c67` are each a `Merge branch 'master' into <feature branch>` commit.
+
+Three things that follow:
+
+- **Do not rebase to resolve a "failing CI" hunch.** A rebase does not fix a flaky test, and it destroys the review thread you would otherwise still have. Re-run the suite.
+- **A branch cut from an unmerged parent branch also merges rather than rebases.** Once the parent's PR squash-merges, `git merge origin/master` drops the parent's work out of your diff, because the squash brought the same content in from the other side. Verified, not assumed: before the merge the diff carries the parent's files, and after it only your own remain. `/workon` and [worktree-setup.md](.claude/commands/shared/worktree-setup.md) carry the full sequence.
+- **Re-signing your own unsigned commits is the one sanctioned rewrite**, and it is still not yours to start unasked. It is covered under [commit signing](#additional-coding-rules-from-decision-records), which is why that rule says to prefer `git commit-tree -S`: it preserves the tree, parents, identities, dates, and message bytes exactly, so the rewrite changes as little as possible. It applies only to commits **you authored**: GitHub leaves a commit Unverified when the signing key's verified email does not match the committer email, so re-signing someone else's commit rewrites their history and still does not make it Verified. Ask before doing it.
+
+See [decision record](docs/decisions/2026-09-21-regular-pushes-not-force-pushes.md).
+
 ### Pull Requests
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full PR process (Jira ticket requirement, Bacon CI, Slack notification, and merge steps).
+
+**Writing the body** is the [`pr-description` skill](.claude/skills/pr-description/SKILL.md): section skeleton, tables over prose, voice rules, length ceiling, and which screenshots a UI change owes. Load it before drafting or editing any PR description. The rules below are PR mechanics, which the skill does not cover.
 
 **Base branch:** every PR targets `master`. Pass `--base master` explicitly when creating PRs with `gh pr create` rather than relying on the default.
 
 **Stacked PRs are not supported.** Bacon cannot merge a PR whose base is another open PR's branch, because the sync endpoint Bacon calls to request the merge has no GitHub API support for it. A stacked PR will run CI and then be unmergeable, so do not open one. Split the work into changes that each stand on their own against `master`, and land them in sequence. If a later change genuinely depends on an earlier one, wait for the earlier PR to merge to `master`, rebase, then open the next PR. See [decision record](docs/decisions/2026-08-14-no-stacked-prs-bacon-cannot-merge.md).
 
-**Screenshots for any UI work.** Every PR that touches UI carries images in its description, not only the PRs that change something already on screen. Two cases:
-
-- **A prior state exists** (a restyle, a bug fix, a layout change, a token swap): show before and after. The "before" has to be captured before any source is edited, because recovering it afterwards means checking out the base commit again.
-- **No prior state exists** (a new component, a new story, a new variant, a new prop's state): show the new UI on its own, one image per state a reviewer would want to see, and say plainly in the PR that there is no "before".
-
-"UI work" is any change to rendered output, including a change reachable only through a prop or a story. A written description, a story link, or an Applitools link is not a substitute: Applitools sits behind a separate login, and a brand new story has no baseline for it to diff against.
+**Attaching screenshots.** Which images a UI change owes is in the [`pr-description` skill](.claude/skills/pr-description/SKILL.md); getting them into the body is the mechanics below.
 
 Attach each image with `gh`'s repeatable `--attach` flag, which needs no upload step and no cleanup:
 
@@ -588,15 +612,15 @@ Alt text follows the path after `#`; without it the filename is used. Reference 
 
 One consequence of `--attach` worth knowing where it does work: the resulting `github.com/user-attachments/assets/...` URL is gated behind an interactive SSO browser session, so it renders for a signed-in reviewer but an agent cannot fetch it back with a token. Verify what you uploaded from the local file before attaching, not from the URL afterwards. Follow [docs/runbooks/pr-review-screenshots.md](docs/runbooks/pr-review-screenshots.md). Two decision records cover this: [what has to be shown](docs/decisions/2026-09-01-screenshots-for-all-ui-work.md), and [how the images get there](docs/decisions/2026-09-09-pr-screenshots-via-gh-attach.md), which records which alternatives are dead ends and which credential types each method needs.
 
-**Downstream verification for pipeline changes.** A change to what `@okta/extractor` emits (features, harness, mocks, graph) or to the runner contract its harnesses call is verified against a real downstream app before it ships, and the run leaves a **pushed branch** in that app's repo. Unit tests prove the emitter; only a run proves the artifact.
+**Downstream verification for pipeline changes.** A change to what `@okta/odyssey-cartographer` emits (features, harness, mocks, graph) or to the runner contract its harnesses call is verified against a real downstream app before it ships, and the run leaves a **pushed branch** in that app's repo. Unit tests prove the emitter; only a run proves the artifact. This is the one rule that mandates a PR section, and only for these changes; the [`pr-description` skill](.claude/skills/pr-description/SKILL.md) gives that section its tabular shape.
 
 The branch is the deliverable, not a summary of it:
 
 - **Two commits.** The generated artifacts as the base build produces them, then the same artifacts regenerated with the change. The second commit's diff is the effect.
-- **The inputs to re-run it**, committed alongside (for the extractor: the graph and the synthesis cache, so a replay needs no install and no model calls).
+- **The inputs to re-run it**, committed alongside (for Cartographer: the graph and the synthesis cache, so a replay needs no install and no model calls).
 - **A short doc naming what the run does not cover.** A green figure is not a proof on its own; a harness that collects nothing also reports green.
 
-Reporting a downstream result instead of leaving one is the failure this exists to prevent. A description in a PR body cannot be re-run, cannot be diffed, and was written by whoever made the change. Never run inside an existing worktree holding someone else's uncommitted work, and never delete the artifacts afterwards to leave the tree clean, which deletes the evidence with them. If a change genuinely has no downstream surface, say so in the PR in one line rather than skipping the section. Mechanics live in [`/extractor-validate`](.claude/commands/extractor-validate/SKILL.md) and [running-tests.md](packages/platform/extractor/docs/running-tests.md); outcomes belong in [validation-ledger.md](packages/platform/extractor/docs/validation-ledger.md). See [decision record](docs/decisions/2026-09-08-downstream-verification-leaves-a-branch.md).
+Reporting a downstream result instead of leaving one is the failure this exists to prevent. A description in a PR body cannot be re-run, cannot be diffed, and was written by whoever made the change. Never run inside an existing worktree holding someone else's uncommitted work, and never delete the artifacts afterwards to leave the tree clean, which deletes the evidence with them. If a change genuinely has no downstream surface, say so in the PR in one line rather than skipping the section. Mechanics live in [`/cartographer-validate`](.claude/commands/cartographer-validate/SKILL.md) and [running-tests.md](packages/platform/odyssey-cartographer/docs/running-tests.md); outcomes belong in [validation-ledger.md](packages/platform/odyssey-cartographer/docs/validation-ledger.md). See [decision record](docs/decisions/2026-09-08-downstream-verification-leaves-a-branch.md).
 
 ### AI-authored PR and issue comments
 
@@ -639,9 +663,9 @@ repo-wide rules. Only load a package-specific file when you are working in that 
 | ------------------------------------------ | --------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | `packages/apps/odyssey-prototype`          | [AGENTS.md](packages/apps/odyssey-prototype/AGENTS.md)          | Only when modifying files inside `packages/apps/odyssey-prototype/`                  |
 | `packages/apps/odyssey-ui-builder`         | [AGENTS.md](packages/apps/odyssey-ui-builder/AGENTS.md)         | Only when modifying files inside `packages/apps/odyssey-ui-builder/`                 |
-| `packages/contributions/odyssey-blueprint` | [AGENTS.md](packages/contributions/odyssey-blueprint/AGENTS.md) | Only when modifying files inside `packages/contributions/odyssey-blueprint/`         |
+| `packages/contributions/odyssey-atlas` | [AGENTS.md](packages/contributions/odyssey-atlas/AGENTS.md) | Only when modifying files inside `packages/contributions/odyssey-atlas/`         |
 | `packages/core/odyssey-react-mui`          | [AGENTS.md](packages/core/odyssey-react-mui/AGENTS.md)          | Only when modifying JSDoc or browser tests inside `packages/core/odyssey-react-mui/` |
-| `packages/platform/extractor`              | [AGENTS.md](packages/platform/extractor/AGENTS.md)              | Only when modifying files inside `packages/platform/extractor/`                      |
+| `packages/platform/odyssey-cartographer`   | [AGENTS.md](packages/platform/odyssey-cartographer/AGENTS.md)   | Only when modifying files inside `packages/platform/odyssey-cartographer/`           |
 
 ---
 

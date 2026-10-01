@@ -12,12 +12,13 @@
 
 import type {
   ComponentPropsWithoutRef,
+  ComponentRef,
   ComponentType,
   ElementType,
 } from "react";
 
 import styled, { type CSSObject } from "@emotion/styled";
-import { memo } from "react";
+import { forwardRef, memo } from "react";
 
 import {
   type DesignTokens,
@@ -66,6 +67,14 @@ type OdysseyStyleFunction<
  * }));
  * <StyledButton isActive={true}>click me</StyledButton>
  * ```
+ *
+ * @example As a ref target
+ * ```tsx
+ * // The returned component forwards its ref to the underlying DOM node, so it
+ * // can anchor a MUI Tooltip or Popper, or be focused and measured directly.
+ * const buttonRef = useRef<HTMLButtonElement>(null);
+ * <StyledButton isActive={false} ref={buttonRef} />
+ * ```
  */
 export const createOdysseyStyledComponent =
   <Tag extends ElementType>({
@@ -94,13 +103,24 @@ export const createOdysseyStyledComponent =
 
     type PublicProps = ComponentPropsWithoutRef<Tag> & StyleProps;
 
-    return memo(function OdysseyStyledComponent(props: PublicProps) {
-      const odysseyDesignTokens = useOdysseyDesignTokens();
-      return (
-        <InternalComponent
-          {...props}
-          odysseyDesignTokens={odysseyDesignTokens}
-        />
-      );
-    });
+    // forwardRef, not a plain function component: emotion's styled(tag) already
+    // forwards a ref to the underlying DOM node, so without this wrapper passing
+    // one through, the ref is dropped and the DOM node is unreachable. MUI
+    // clones a Tooltip/Popper child with an injected ref to anchor the popper
+    // (childNode/anchorEl in @mui/material/Tooltip/Tooltip.js), so a component
+    // that cannot carry a ref silently fails to open on hover.
+    return memo(
+      forwardRef<ComponentRef<Tag>, PublicProps>(
+        function OdysseyStyledComponent(props, componentReference) {
+          const odysseyDesignTokens = useOdysseyDesignTokens();
+          return (
+            <InternalComponent
+              {...props}
+              odysseyDesignTokens={odysseyDesignTokens}
+              ref={componentReference}
+            />
+          );
+        },
+      ),
+    );
   };

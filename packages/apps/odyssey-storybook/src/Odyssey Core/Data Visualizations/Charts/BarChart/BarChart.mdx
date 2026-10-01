@@ -1,0 +1,229 @@
+import {
+  Canvas,
+  Controls,
+  Description,
+  Meta,
+  Primary,
+  Subtitle,
+  Title,
+} from "@storybook/addon-docs/blocks";
+import * as BarChartStories from "./BarChart.stories";
+
+<Meta of={BarChartStories} />
+
+<Title of={BarChartStories} />
+<Subtitle of={BarChartStories} />
+<Description of={BarChartStories} />
+<Primary of={BarChartStories} />
+<Controls />
+
+The controls above name types such as `ChartSeries` and `ChartPoint`. The [Types](#types)
+section gives the shape of each one.
+
+The `BarChart` component draws one horizontal bar for each series, grouped by category. All
+series in one chart share the same categories.
+
+The chart takes its width and its height from the parent element. Put the chart in a parent
+element that has the size you want. The chart carries a minimum height of 400px, so a parent with
+no height of its own still renders the chart at a usable size.
+
+## Which prop labels which axis
+
+`BarChart` draws its categories down the vertical axis and its values along the horizontal axis.
+This is the opposite of `LineChart`, which draws its categories along the horizontal axis. The
+props on `BarChart` are named for the axis as you see it on screen, not for the role of the data,
+so:
+
+- `yAxisLabel` labels the vertical axis, which carries the categories.
+- `xAxisLabel` labels the horizontal axis, which carries the values.
+- `xAxisFormat` formats the values on the horizontal, value axis. There is no `yAxisFormat`
+  on this component, because the vertical axis carries categories, and a category is text, not a
+  number.
+
+This crossing over is easy to misread as a mistake. It is not: `x` always means the horizontal
+axis and `y` always means the vertical axis, on every chart. A bar chart simply puts its
+categories on the axis that a line chart puts its values on.
+
+## Title, subtitle, and body states
+
+The chart draws its title and its subtitle as real HTML above the chart, so the title and the
+subtitle stay on screen through every state. The body below them renders exactly one of three
+states: the chart, a loading placeholder, or an error state.
+
+Set `isLoading` to show a loading placeholder shaped like the chart, in place of the plot only.
+Set `hasError` to show an error state in place of the plot instead. `isLoading` takes precedence
+over `hasError`, so a loading state hides the error state even when both props are set. The error
+state's copy comes from the library, not from a prop you set. Give `onRetry` a function to
+add a retry button to the error state.
+
+On `onRetry`, set `isLoading` to `true`. The chart shows the loading skeleton while the
+request is in flight, then set `hasError` to `false` when the data arrives.
+
+<Canvas of={BarChartStories.AllStates} />
+
+The chart ignores a subtitle that arrives with no title, because a subtitle gives more
+information about a title. Omit both props when the surrounding layout supplies the heading.
+
+<Canvas of={BarChartStories.AllHeaders} />
+
+## Series
+
+The `categories` prop and the `series` prop are both necessary. `categories` declares the
+category axis once, in the order that the chart shows it. Each series in `series` supplies one
+value for each category, at the same index. A series `data` array must therefore have the same
+length as `categories`.
+
+```tsx
+const categories = ["Week 1", "Week 2"];
+
+const series = [
+  {
+    name: "Succeeded",
+    data: [340, 360],
+  },
+  {
+    name: "Failed",
+    data: [80, null],
+  },
+];
+```
+
+A `null` entry in a series `data` array means that series has no measurement at that category.
+The chart draws no bar at that category, rather than a bar with the value zero. In the example,
+the `Failed` series has `null` at `Week 2`, so the chart draws no `Failed` bar at `Week 2`.
+
+A series `data` array of the wrong length is a thrown error, not a chart that pads or truncates the
+series to fit. If a `data` array has more or fewer entries than `categories`, the chart throws an
+`Error` rather than rendering that series. Two series in one chart cannot share a `name` either;
+the chart throws an `Error` for that too.
+
+A value in a series `data` array can be less than zero. If this occurs, the horizontal axis
+continues below zero.
+
+The `series` prop can be an empty array. If this occurs, the chart draws the title, the subtitle,
+and the axes. The chart omits the bars.
+
+Each series has its own color. The chart assigns the colors from a fixed palette, in series order.
+A series takes no color prop, so the palette is the only source of a series color. The palette holds
+six colors, so a chart of six series shows every color the chart can draw.
+
+The number of series also controls the legend. The chart draws a legend for a chart of more than one
+series, and no legend for a chart of one series, where the title of the chart already gives the name
+of that series. There is no prop for the legend.
+
+<Canvas of={BarChartStories.AllSeries} />
+
+## Value formats
+
+The `xAxisFormat` prop and the `pointPopoverValueFormat` prop accept one of these values:
+
+- One of three presets: `"decimal"`, `"compact"`, or `"percent"`.
+- A currency object: `{ style: "currency", currency: "EUR" }`.
+- A function. The function receives the number and returns a string.
+
+The default for `xAxisFormat` is `"compact"`. If you set a different preset, the new preset
+replaces the default. If no preset gives the result you want, use a function.
+
+The `"percent"` preset multiplies the value by 100. Give the `"percent"` preset a fraction, not a
+whole number. For example, a value of `0.42` shows as `42%`. A value of `42` shows as `4,200%`.
+
+The currency object must include the `currency` code. The `currency` code has no default. The
+chart shows the currency that you specify.
+
+<Canvas of={BarChartStories.AllValueFormats} />
+
+## Bar clicks
+
+You can give the `onPointClick` prop a function. The chart calls this function when the user
+clicks a bar. The function receives one `ChartPoint` object with the `seriesName`, `category`, and
+`value` of the bar. The `category` is a string, resolved from the position of the clicked value in
+`categories`, and not a property that the series data carries itself.
+
+### Keep a function prop at the same identity
+
+The chart builds a click handler for each point, and it builds those handlers again when the
+identity of `onPointClick` changes. A function that you write inline in the JSX is a new function
+on each render of your component, so the chart rebuilds every point each time your component
+renders. Wrap the function in `useCallback` instead.
+
+```tsx
+// Wrong: a new function on each render, so the chart rebuilds every point.
+<BarChart onPointClick={(point) => setSelectedPoint(point)} {...chartProps} />;
+
+// Right: one function that keeps its identity.
+const handlePointClick = useCallback(
+  (point: ChartPoint) => setSelectedPoint(point),
+  [setSelectedPoint],
+);
+
+<BarChart onPointClick={handlePointClick} {...chartProps} />;
+```
+
+The same rule applies to a function that you give to `xAxisFormat` or to `pointPopoverValueFormat`, and
+to the `categories` array and the `series` array. Build each of them outside the render, or wrap
+each one in `useMemo`.
+
+## Types
+
+The charts entry point exports each of these types. Import a type from
+`@okta/odyssey-react-mui/charts` when you declare your own data or your own handler.
+
+```tsx
+import type {
+  ChartPoint,
+  ChartSeries,
+  ChartValueFormat,
+} from "@okta/odyssey-react-mui/charts";
+```
+
+### `ChartSeries`
+
+One group of bars on the chart, one bar per category. The `series` prop takes an array of these
+objects. See [Series](#series).
+
+```tsx
+type ChartSeries = {
+  /** The values of the series, one for each category, in the order of `categories`.
+      A `null` entry draws no bar, and not a bar at zero. */
+  data: Array<number | null>;
+  /** The name that the legend and the popover show. Each name in one chart must be different. */
+  name: string;
+};
+```
+
+### `ChartPoint`
+
+The one `ChartPoint` object that the chart gives to `onPointClick`. See [Bar clicks](#bar-clicks).
+
+```tsx
+type ChartPoint = {
+  /** The category of the point, from the position of the value in `categories`. */
+  category: string;
+  /** The name of the series that holds the point. */
+  seriesName: string;
+  /** The value of the point. The chart draws no bar at a gap, so this value is never `null`. */
+  value: number;
+};
+```
+
+### `ChartValueFormat`
+
+The type of the `xAxisFormat` prop and the `pointPopoverValueFormat` prop. See
+[Value formats](#value-formats).
+
+```tsx
+type ChartValueFormat =
+  // A named preset.
+  | "decimal"
+  | "compact"
+  | "percent"
+  // An explicit currency. The `currency` code is an ISO 4217 code such as "USD".
+  | { style: "currency"; currency: string }
+  // Your own function. It takes the raw number and returns the text to show.
+  | ((value: number) => string);
+```
+
+The presets are a closed set, and not the full `Intl.NumberFormatOptions` type. That type
+permits options that fail when the chart builds them. For example,
+`{ style: "currency" }` with no `currency` code passes the type check, then raises a
+`TypeError`. Supply a function when you need options outside of the preset set.

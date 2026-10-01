@@ -13,6 +13,7 @@
 import { ScopedCssBaseline } from "@mui/material";
 import { memo, ReactNode, useMemo } from "react";
 
+import { AnimationProvider } from "./AnimationContext.js";
 import {
   ConditionalWrapper,
   ConditionalWrapperProps,
@@ -49,6 +50,12 @@ export type OdysseyProviderProps<
     /** The content to render within the Odyssey context providers. */
     children: ReactNode;
     /**
+     * If `true`, Odyssey components may animate unless the user prefers
+     * reduced motion.
+     * @default true
+     */
+    hasAnimations?: boolean;
+    /**
      * If `true`, emits global CssBaseline reset styles.
      * @default true
      */
@@ -77,6 +84,7 @@ const OdysseyProvider = <SupportedLanguages extends string>({
   emotionRoot,
   emotionRootElement,
   fullScreenOverlayId,
+  hasAnimations = true,
   hasCssBaseline: hasGlobalCss,
   hasScopedCssBaseline = true,
   hasTranslationProvider = true,
@@ -116,27 +124,29 @@ const OdysseyProvider = <SupportedLanguages extends string>({
         shadowRootElement={shadowRootElement ?? shadowDomElement}
         themeOverride={themeOverride}
       >
-        <ConditionalWrapper
-          isWrapped={hasTranslationProvider}
-          Wrapper={TranslationWrapper}
-        >
-          <FullScreenOverlayProvider
-            fullScreenOverlayId={fullScreenOverlayId}
-            hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
-            overlayParentElement={overlayParentElement}
-            overlayType={overlayType}
+        <AnimationProvider hasAnimations={hasAnimations}>
+          <ConditionalWrapper
+            isWrapped={hasTranslationProvider}
+            Wrapper={TranslationWrapper}
           >
-            {hasGlobalCss && <CssBaseline />}
+            <FullScreenOverlayProvider
+              fullScreenOverlayId={fullScreenOverlayId}
+              hasShadowDom={Boolean(shadowRootElement || shadowDomElement)}
+              overlayParentElement={overlayParentElement}
+              overlayType={overlayType}
+            >
+              {hasGlobalCss && <CssBaseline />}
 
-            {hasScopedCssBaseline ? (
-              <ScopedCssBaseline sx={scopedCssBaselineStyles}>
-                {children}
-              </ScopedCssBaseline>
-            ) : (
-              children
-            )}
-          </FullScreenOverlayProvider>
-        </ConditionalWrapper>
+              {hasScopedCssBaseline ? (
+                <ScopedCssBaseline sx={scopedCssBaselineStyles}>
+                  {children}
+                </ScopedCssBaseline>
+              ) : (
+                children
+              )}
+            </FullScreenOverlayProvider>
+          </ConditionalWrapper>
+        </AnimationProvider>
       </OdysseyThemeProvider>
     </OdysseyCacheProvider>
   );

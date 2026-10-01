@@ -250,10 +250,14 @@ const eslintConfig = createTsEslintConfig(
       "**/public/mockServiceWorker.js",
       "**/public/mockServiceWorker.generated.js",
       "**/src/properties/ts/*.ts",
-      // Generated Blueprint authoring schema (~3.5 MB); linting it OOMs the
+      // Each package Storybook builds here, the way the host builds into dist.
+      // Linting those bundles reports tens of thousands of problems in minified
+      // output, so a developer who builds a Storybook then lints sees nothing else.
+      "**/storybook-static/**/*",
+      // Generated Atlas authoring schema (~3.5 MB); linting it OOMs the
       // type-aware parser and it is a build artifact, not authored source.
-      "packages/contributions/odyssey-blueprint/blueprint.schema.generated.json",
-      "packages/platform/extractor/test/golden/**/*",
+      "packages/contributions/odyssey-atlas/atlas.schema.generated.json",
+      "packages/platform/odyssey-cartographer/test/golden/**/*",
       "packages/platform/odyssey-contributions-stack/**/files/**/*",
       "packages/platform/odyssey-contributions-promotion-check/src/utils/componentExports.ts",
     ],
@@ -264,7 +268,7 @@ const eslintConfig = createTsEslintConfig(
     // bin/*.mjs scripts import from dist/ which doesn't exist at lint time —
     // the import is valid at runtime after `yarn build`. Disabling resolution
     // at the config level is cleaner than per-file inline disables.
-    files: ["packages/contributions/odyssey-blueprint/bin/*.mjs"],
+    files: ["packages/contributions/odyssey-atlas/bin/*.mjs"],
     rules: {
       "import/no-unresolved": "off",
     },

@@ -14,20 +14,22 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Link, linkVariantValues } from "@okta/odyssey-react-mui";
 import { InformationCircleFilledIcon } from "@okta/odyssey-react-mui/icons";
-
 import {
+  odysseyIconStoryOptions as icons,
   staticBoardParameters,
   StoryCell,
   StoryRow,
   StorySection,
-} from "../../tools/boardStoryHelpers.js";
-import icons from "../../tools/iconUtils.js";
+} from "@okta/odyssey-storybook-preset/story-helpers";
+
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {
   component: Link,
   decorators: [OdysseyStorybookThemeDecorator],
-  tags: ["autodocs"],
+  // Link has a manual Link.mdx docs page, so it opts out of autodocs (matching
+  // the repo's other MDX-paired stories) to avoid the indexer conflict.
+  tags: ["!autodocs"],
   argTypes: {
     children: {
       control: "text",

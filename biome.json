@@ -12,11 +12,11 @@
       "!**/*.generated.*",
       "!nx.json",
       "!**/public/mockServiceWorker.js",
-      "!**/.extractor-cache/**",
+      "!**/.cartographer-cache/**",
       "!**/.gherkin-cache/**",
       "!**/.mocks-cache/**",
-      "!packages/apps/extractor-fixture/features/README.md",
-      "!**/extractor-graph.json"
+      "!packages/apps/cartographer-fixture/features/README.md",
+      "!**/cartographer-graph.json"
     ],
     "maxSize": 3145728
   },

@@ -60,7 +60,9 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
-  tags: ["autodocs"],
+  // SideNav has a manual SideNav.mdx docs page, so it opts out of autodocs
+  // (matching the repo's other MDX-paired stories) to avoid the indexer conflict.
+  tags: ["!autodocs"],
   argTypes: {
     appName: {
       control: "text",

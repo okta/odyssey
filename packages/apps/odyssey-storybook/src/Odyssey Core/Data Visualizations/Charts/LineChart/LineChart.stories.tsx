@@ -11,14 +11,14 @@
  */
 
 import { LineChart, type LineChartProps } from "@okta/odyssey-react-mui/charts";
-import { Meta, StoryObj } from "@storybook/react-vite";
-
 import {
   staticBoardParameters,
   StoryCell,
   StoryGrid,
   StorySection,
-} from "../../../../tools/boardStoryHelpers.js";
+} from "@okta/odyssey-storybook-preset/story-helpers";
+import { Meta, StoryObj } from "@storybook/react-vite";
+
 import { OdysseyStorybookThemeDecorator } from "../../../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {
@@ -117,7 +117,7 @@ const meta = {
       action: "onPointClick",
       control: false,
       description:
-        "The chart calls this function when the user clicks a point. The function receives the series name, the category, and the value of the point.",
+        "The chart calls this function when the user clicks a point. The function receives one `ChartPoint` object with the series name, category, and value of the point.",
       table: { type: { summary: "(point: ChartPoint) => void" } },
     },
     onRetry: {
@@ -144,8 +144,8 @@ export const Playground: Story = {
     },
   },
   args: {
-    title: "Weekly Sign-in Success Rate",
-    subtitle: "Sample data, trailing 6 weeks",
+    title: "Weekly sign-in success rate",
+    subtitle: "Trailing 6 weeks",
     ariaDescription:
       "Line chart of sample weekly sign-in success and failure counts, trending across six weeks.",
     xAxisLabel: "Week",
@@ -184,7 +184,7 @@ export const AllSeries: Story = {
                   data: [420, 460, 395, 510],
                 },
               ]}
-              title="Sample Weekly Sign-in Attempts"
+              title="Sample weekly sign-in attempts"
               xAxisLabel="Week"
               yAxisLabel="Attempts"
             />
@@ -208,7 +208,7 @@ export const AllSeries: Story = {
                   data: [60, 55, 50, 45],
                 },
               ]}
-              title="Sample Weekly Sign-in Attempts by Factor"
+              title="Weekly sign-in attempts by factor"
               xAxisLabel="Week"
               yAxisLabel="Attempts"
             />
@@ -228,7 +228,7 @@ export const AllSeries: Story = {
                   data: [80, 65, null, 70],
                 },
               ]}
-              title="Sample Weekly Sign-in Attempts"
+              title="Sample weekly sign-in attempts"
               xAxisLabel="Week"
               yAxisLabel="Attempts"
             />
@@ -267,7 +267,7 @@ export const AllSeries: Story = {
                   data: [12, 10, 15, 9],
                 },
               ]}
-              title="Sample Weekly Sign-in Attempts by Factor"
+              title="Weekly sign-in attempts by factor"
               xAxisLabel="Week"
               yAxisLabel="Attempts"
             />
@@ -278,7 +278,7 @@ export const AllSeries: Story = {
               ariaDescription="Line chart with no series, showing only its axes."
               categories={["Week 1", "Week 2", "Week 3", "Week 4"]}
               series={[]}
-              title="Sample Weekly Sign-in Attempts"
+              title="Sample weekly sign-in attempts"
               xAxisLabel="Week"
               yAxisLabel="Attempts"
             />
@@ -294,7 +294,7 @@ export const AllSeries: Story = {
                   data: [120, -45, -80, 60],
                 },
               ]}
-              title="Sample Weekly Net Change in Active Users"
+              title="Weekly net active user change"
               xAxisLabel="Week"
               yAxisLabel="Net change"
             />
@@ -320,7 +320,7 @@ export const AllValueFormats: Story = {
               ariaDescription="Line chart of sample weekly request counts, using the default compact axis formatting."
               categories={weeklyCategories}
               series={[{ name: "Requests", data: weeklyRequestCounts }]}
-              title="Sample Weekly Requests"
+              title="Sample weekly requests"
               xAxisLabel="Week"
               yAxisLabel="Requests"
             />
@@ -331,7 +331,7 @@ export const AllValueFormats: Story = {
               ariaDescription="Line chart of sample weekly request counts, using full numbers rather than compact notation."
               categories={weeklyCategories}
               series={[{ name: "Requests", data: weeklyRequestCounts }]}
-              title="Sample Weekly Requests"
+              title="Sample weekly requests"
               xAxisLabel="Week"
               yAxisFormat="decimal"
               yAxisLabel="Requests"
@@ -344,7 +344,7 @@ export const AllValueFormats: Story = {
               categories={weeklyCategories}
               pointPopoverValueFormat="percent"
               series={[{ name: "Error rate", data: weeklyErrorRates }]}
-              title="Sample Weekly Error Rate"
+              title="Sample weekly error rate"
               xAxisLabel="Week"
               yAxisFormat="percent"
               yAxisLabel="Error rate"
@@ -360,7 +360,7 @@ export const AllValueFormats: Story = {
               categories={weeklyCategories}
               pointPopoverValueFormat={{ style: "currency", currency: "EUR" }}
               series={[{ name: "Revenue", data: weeklyRequestCounts }]}
-              title="Sample Weekly Revenue"
+              title="Sample weekly revenue"
               xAxisLabel="Week"
               yAxisFormat={{ style: "currency", currency: "EUR" }}
               yAxisLabel="Revenue"
@@ -378,7 +378,7 @@ export const AllValueFormats: Story = {
                   data: [120, 135, 110, 128],
                 },
               ]}
-              title="Sample Weekly Latency"
+              title="Sample weekly latency"
               xAxisLabel="Week"
               yAxisFormat={(value) => `${value}ms`}
               yAxisLabel="Latency"
@@ -413,7 +413,7 @@ export const AllHeaders: Story = {
               ariaDescription="Line chart of sample sign-in attempts, with a title and no subtitle."
               categories={headerCategories}
               series={attemptsBySeries}
-              title="Sample Sign-in Attempts"
+              title="Sample sign-in attempts"
             />
           </StoryCell>
 
@@ -423,7 +423,7 @@ export const AllHeaders: Story = {
               categories={headerCategories}
               series={attemptsBySeries}
               subtitle="Illustrative data, not a real deployment"
-              title="Sample Sign-in Attempts"
+              title="Sample sign-in attempts"
             />
           </StoryCell>
 
@@ -469,7 +469,7 @@ export const AllStates: Story = {
               categories={statesCategories}
               series={attempts}
               subtitle="Sample data"
-              title="Sample Sign-in Attempts"
+              title="Sample sign-in attempts"
             />
           </StoryCell>
 
@@ -480,7 +480,7 @@ export const AllStates: Story = {
               isLoading
               series={attempts}
               subtitle="Sample data"
-              title="Sample Sign-in Attempts"
+              title="Sample sign-in attempts"
             />
           </StoryCell>
 
@@ -492,7 +492,7 @@ export const AllStates: Story = {
               onRetry={() => {}}
               series={attempts}
               subtitle="Sample data"
-              title="Sample Sign-in Attempts"
+              title="Sample sign-in attempts"
             />
           </StoryCell>
 
@@ -503,7 +503,7 @@ export const AllStates: Story = {
               hasError
               series={attempts}
               subtitle="Sample data"
-              title="Sample Sign-in Attempts"
+              title="Sample sign-in attempts"
             />
           </StoryCell>
         </StoryGrid>

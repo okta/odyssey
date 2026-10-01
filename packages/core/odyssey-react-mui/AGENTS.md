@@ -121,9 +121,9 @@ sentence is sufficient; per-value bullets add no information.
 size?: "small" | "medium" | "large";
 ```
 
-#### Line length in JSDoc
+#### Prose and comment line length
 
-Wrap JSDoc prose at 80 characters. The `*` prefix counts toward the limit.
+Biome's 80-character line width applies to formatted source code, not prose or comments. Do not hard-wrap JSDoc prose or comments at 80 characters. Keep intentional breaks that communicate structure, such as separate paragraphs, list items, JSDoc tags, and code samples.
 
 ### Browser Test Specifics
 

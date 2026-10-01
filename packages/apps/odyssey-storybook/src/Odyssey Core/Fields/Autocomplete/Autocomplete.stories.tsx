@@ -11,11 +11,6 @@
  */
 
 import { Autocomplete, Link } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { SyntheticEvent, useCallback, useState } from "react";
-import { action } from "storybook/actions";
-import { screen, userEvent, within } from "storybook/test";
-
 import {
   staticBoardParameters,
   StoryCell,
@@ -23,7 +18,12 @@ import {
   StoryFilledWidth,
   StoryGrid,
   StorySection,
-} from "../../../tools/boardStoryHelpers.js";
+} from "@okta/odyssey-storybook-preset/story-helpers";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { SyntheticEvent, useCallback, useState } from "react";
+import { action } from "storybook/actions";
+import { screen, userEvent, within } from "storybook/test";
+
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 import { LargeDataSet, largeDataSet } from "./large-data-collection.js";

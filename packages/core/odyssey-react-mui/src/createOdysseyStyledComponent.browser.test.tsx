@@ -10,10 +10,18 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { page } from "vitest/browser";
+import { Tooltip as MuiTooltip } from "@mui/material";
+import { createRef } from "react";
+import { page, userEvent } from "vitest/browser";
 
 import { createOdysseyStyledComponent } from "./createOdysseyStyledComponent.js";
 import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
+
+const StyledButton = createOdysseyStyledComponent({ tag: "button" })(
+  ({ odysseyDesignTokens }) => ({
+    padding: odysseyDesignTokens.Spacing2,
+  }),
+);
 
 const StyledBox = createOdysseyStyledComponent({ tag: "div" })(
   ({ odysseyDesignTokens }) => ({
@@ -70,6 +78,44 @@ describe(createOdysseyStyledComponent.name, () => {
       .element()
       .getAttribute("isHighlighted");
     expect(isHighlightedAttribute).toBeNull();
+  });
+
+  test("ref points at the underlying DOM node", async () => {
+    const buttonRef = createRef<HTMLButtonElement>();
+
+    const { container } = await renderWithOdysseyProvider(
+      <StyledButton ref={buttonRef} type="button">
+        press me
+      </StyledButton>,
+    );
+
+    await expect(container).toBeAccessible();
+    await expect
+      .element(page.getByRole("button", { name: "press me" }))
+      .toBeVisible();
+    expect(buttonRef.current).toBe(
+      page.getByRole("button", { name: "press me" }).element(),
+    );
+  });
+
+  test("anchors a MUI Tooltip opened by hover", async () => {
+    const { container } = await renderWithOdysseyProvider(
+      // describeChild so the trigger keeps its own accessible name; without it
+      // MUI maps title onto the child's aria-label and renames the button.
+      <MuiTooltip describeChild={true} title="tooltip text">
+        <StyledButton type="button">hover me</StyledButton>
+      </MuiTooltip>,
+    );
+
+    await expect(container).toBeAccessible();
+    await userEvent.hover(page.getByRole("button", { name: "hover me" }));
+
+    // A Popper with no anchor node never mounts, so the tooltip appearing is the
+    // assertion that the ref reached the DOM element.
+    await expect.element(page.getByRole("tooltip")).toBeVisible();
+    await expect.element(page.getByText("tooltip text")).toBeVisible();
+    // Scoped to the tooltip rather than the container, since it renders in a portal.
+    await expect.element(page.getByRole("tooltip")).toBeAccessible();
   });
 
   test("odysseyDesignTokens prop not forwarded to DOM", async () => {

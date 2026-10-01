@@ -12,9 +12,9 @@
 
 import { MenuItem, MenuItemProps, MenuList } from "@okta/odyssey-react-mui";
 import { DeleteIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
+import { staticBoardParameters } from "@okta/odyssey-storybook-preset/story-helpers";
 import { Meta, StoryObj } from "@storybook/react-vite";
 
-import { staticBoardParameters } from "../../../../tools/boardStoryHelpers.js";
 import { OdysseyStorybookThemeDecorator } from "../../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../../../Fields/fieldComponentPropsMetaData.js";
 

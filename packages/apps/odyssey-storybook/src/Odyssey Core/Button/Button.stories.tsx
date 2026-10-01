@@ -20,16 +20,16 @@ import {
   buttonVariantValues,
 } from "@okta/odyssey-react-mui";
 import { AddIcon } from "@okta/odyssey-react-mui/icons";
-import { action } from "storybook/actions";
-
 import {
+  odysseyIconStoryOptions as icons,
   staticBoardParameters,
   StoryCell,
   StoryGrid,
   StoryRow,
   StorySection,
-} from "../../tools/boardStoryHelpers.js";
-import icons from "../../tools/iconUtils.js";
+} from "@okta/odyssey-storybook-preset/story-helpers";
+import { action } from "storybook/actions";
+
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {
