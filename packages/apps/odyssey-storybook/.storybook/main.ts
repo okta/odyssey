@@ -10,58 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { StorybookConfig } from "@storybook/react-vite";
+import { createStorybookMain } from "@okta/odyssey-storybook-preset";
 
-import { createRequire } from "node:module";
-import { dirname, join } from "node:path";
-
-const require = createRequire(import.meta.url);
-
-/**
- * This function is used to resolve the absolute path of a package.
- * It is needed in projects that use Yarn PnP or are set up within a monorepo.
- */
-const getAbsolutePath = (value: string) => {
-  return dirname(require.resolve(join(value, "package.json")));
-};
-
-const config: StorybookConfig = {
-  addons: [
-    {
-      name: getAbsolutePath("@storybook/addon-docs"),
-      options: {
-        transcludeMarkdown: true,
-      },
-    },
-    getAbsolutePath("@storybook/addon-links"),
-    getAbsolutePath("@storybook/addon-a11y"),
-    "storybook-addon-rtl",
-    getAbsolutePath("storybook-addon-tag-badges"),
-  ],
-
-  core: {
-    disableTelemetry: true,
-  },
-
-  framework: {
-    name: getAbsolutePath("@storybook/react-vite"),
-    options: {},
-  },
-
+// The host Storybook composes the per-package Storybooks named in STORYBOOK_REFS
+// on top of its own remaining stories (Odyssey Core, Unified UI Shell, and the
+// cross-cutting Docs). Shared stories glob, preview head, addons, framework,
+// typescript, and refs come from the preset so every Storybook in the fleet
+// stays consistent.
+export default createStorybookMain({
   staticDirs: ["../src/static"],
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
-
-  typescript: {
-    check: false,
-    reactDocgen: false,
-  },
-
-  // BUILD_BASE is set by publish-storybook.sh so asset URLs resolve under the
-  // CDN sub-path (e.g. /storybook). Defaults to undefined (Vite root) for local dev.
-  viteFinal: (config) => ({
-    ...config,
-    base: process.env.BUILD_BASE ?? config.base,
-  }),
-};
-
-export default config;
+});

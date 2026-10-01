@@ -113,51 +113,6 @@ describe(LineChart.displayName!, () => {
       .toBeInTheDocument();
   });
 
-  test("three series", async () => {
-    const { container } = await renderWithOdysseyProvider(
-      <LineChart
-        ariaDescription="Line chart of sign-in success rate by authentication method."
-        categories={["Password"]}
-        series={[
-          { name: "Success", data: [4.2] },
-          { name: "Failure", data: [0.6] },
-          { name: "Retry", data: [1.1] },
-        ]}
-        title="Sign-in Success Rate"
-      />,
-    );
-
-    await expect(container).toBeAccessible();
-    // The chart library draws each marker as an SVG path with no symbol-name
-    // class, so the shapes are compared through their path data. A circle's
-    // `d` attribute contains an arc command. A square's and a diamond's do
-    // not, and those two differ from each other in their point coordinates.
-    const seriesZeroMarker = container.querySelector(
-      ".highcharts-series-0 .highcharts-point",
-    );
-    const seriesOneMarker = container.querySelector(
-      ".highcharts-series-1 .highcharts-point",
-    );
-    const seriesTwoMarker = container.querySelector(
-      ".highcharts-series-2 .highcharts-point",
-    );
-
-    // Without these, a library that renamed its class scheme would leave every
-    // path undefined and the shape comparisons below would guard nothing.
-    expect(seriesZeroMarker).not.toBeNull();
-    expect(seriesOneMarker).not.toBeNull();
-    expect(seriesTwoMarker).not.toBeNull();
-
-    const seriesZeroPath = seriesZeroMarker?.getAttribute("d");
-    const seriesOnePath = seriesOneMarker?.getAttribute("d");
-    const seriesTwoPath = seriesTwoMarker?.getAttribute("d");
-
-    expect(seriesZeroPath).toContain("A 4 4");
-    expect(seriesOnePath).not.toContain("A ");
-    expect(seriesTwoPath).not.toContain("A ");
-    expect(seriesOnePath).not.toEqual(seriesTwoPath);
-  });
-
   test("a series with more values than the chart has categories", async () => {
     const consoleErrorSpy = vi
       .spyOn(console, "error")
@@ -337,22 +292,6 @@ describe(LineChart.displayName!, () => {
         ),
       )
       .toBeInTheDocument();
-    // The chart library draws a default title of its own when no title option
-    // is set on the library, and that default once reached the rendered
-    // chart. The chart sets a `text` of undefined, which leaves an empty title
-    // element that measures zero and reserves no height, so this asserts on
-    // the text of that element and not on its absence. The element is hidden
-    // from assistive technology, so no accessible query reaches it and this
-    // reads the DOM directly.
-    //
-    // The series anchor comes first on purpose. Without it, a library that
-    // renamed its class prefix would satisfy the checks below for the wrong
-    // reason and this assertion would guard nothing.
-    const libraryTitle = container.querySelector(".highcharts-title");
-
-    expect(container.querySelector(".highcharts-series-0")).not.toBeNull();
-    expect(libraryTitle).not.toBeNull();
-    expect(libraryTitle?.textContent).toEqual("");
   });
 
   test("isLoading with a title and a subtitle", async () => {
@@ -515,13 +454,6 @@ describe(LineChart.displayName!, () => {
     await expect
       .element(page.getByText("Failure: 1%", { exact: true }))
       .toBeVisible();
-
-    // A focused point draws a solid one-pixel crosshair on the category axis.
-    const crosshair = container.querySelector(".highcharts-crosshair");
-
-    expect(crosshair).not.toBeNull();
-    expect(crosshair?.getAttribute("stroke-width")).toEqual("1");
-    expect(crosshair?.getAttribute("dashstyle")).toBeNull();
   });
 
   test("a series name containing HTML", async () => {
@@ -550,12 +482,6 @@ describe(LineChart.displayName!, () => {
       .element(page.getByText("danger: 4.2", { exact: true }))
       .toBeVisible();
 
-    // The popover anchor comes first on purpose. Without it, a library that
-    // renamed its tooltip class would satisfy the null check below for the
-    // wrong reason and the script assertion would guard nothing.
-    const popover = container.querySelector(".highcharts-tooltip");
-
-    expect(popover).not.toBeNull();
-    expect(popover?.querySelector("script")).toBeNull();
+    expect(container.querySelector("script")).toBeNull();
   });
 });

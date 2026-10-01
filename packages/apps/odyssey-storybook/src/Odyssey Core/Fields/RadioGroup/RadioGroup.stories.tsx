@@ -11,15 +11,15 @@
  */
 
 import { Link, Radio, RadioGroup } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { ChangeEvent, useCallback, useState } from "react";
-
 import {
   staticBoardParameters,
   StoryCell,
   StoryGrid,
   StorySection,
-} from "../../../tools/boardStoryHelpers.js";
+} from "@okta/odyssey-storybook-preset/story-helpers";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { ChangeEvent, useCallback, useState } from "react";
+
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../fieldComponentPropsMetaData.js";
 

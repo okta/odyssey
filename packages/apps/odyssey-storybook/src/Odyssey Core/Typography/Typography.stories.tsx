@@ -30,15 +30,15 @@ import {
   typographyVariantMapping,
   TypographyVariantValue,
 } from "@okta/odyssey-react-mui";
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { createElement } from "react";
-
 import {
   staticBoardParameters,
   StoryCell,
   StoryRow,
   StorySection,
-} from "../../tools/boardStoryHelpers.js";
+} from "@okta/odyssey-storybook-preset/story-helpers";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { createElement } from "react";
+
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const variantMapping = {

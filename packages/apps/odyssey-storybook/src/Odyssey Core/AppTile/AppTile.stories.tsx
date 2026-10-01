@@ -20,16 +20,16 @@ import {
 } from "@okta/odyssey-react-mui";
 import { MoreIcon, SettingsIcon } from "@okta/odyssey-react-mui/icons";
 import { AppTile, appTileVariantValues } from "@okta/odyssey-react-mui/labs";
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { useCallback, useState } from "react";
-import { action } from "storybook/actions";
-
 import {
   staticBoardParameters,
   StoryCell,
   StoryGrid,
   StorySection,
-} from "../../tools/boardStoryHelpers.js";
+} from "@okta/odyssey-storybook-preset/story-helpers";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { useCallback, useState } from "react";
+import { action } from "storybook/actions";
+
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {

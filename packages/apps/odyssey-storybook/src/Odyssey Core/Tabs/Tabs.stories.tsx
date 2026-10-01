@@ -19,10 +19,10 @@ import {
   TabsProps,
 } from "@okta/odyssey-react-mui";
 import { BugIcon } from "@okta/odyssey-react-mui/icons";
+import { odysseyIconStoryOptions as icons } from "@okta/odyssey-storybook-preset/story-helpers";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
-import icons from "../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const storybookMeta: Meta<TabsProps & TabItemProps> = {

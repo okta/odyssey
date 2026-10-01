@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.70.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.69.0...v1.70.0) (2026-09-30)
+
+### Bug Fixes
+
+* correct chart hover and animation ([#913](https://github.com/atko-eng/odyssey-design-system/issues/913)) ([0aaebf2](https://github.com/atko-eng/odyssey-design-system/commit/0aaebf2d09884c5522811e719e1eb9342ff02b0a))
+* point BarChart story at preset helpers ([#891](https://github.com/atko-eng/odyssey-design-system/issues/891)) ([2c43f1b](https://github.com/atko-eng/odyssey-design-system/commit/2c43f1bcc45e596803677b3adbabc0e10a18c7e5))
+
+### Features
+
+* add BarChart to odyssey-react-mui ([#824](https://github.com/atko-eng/odyssey-design-system/issues/824)) ([e348517](https://github.com/atko-eng/odyssey-design-system/commit/e348517087ba25babdd894da01fb6e4fff4ace7b))
+* migrate contribution packages to package-owned Storybooks ([#759](https://github.com/atko-eng/odyssey-design-system/issues/759)) ([5b44489](https://github.com/atko-eng/odyssey-design-system/commit/5b4448917fbe3056b301f5e764f74a96a2813547)), closes [#858](https://github.com/atko-eng/odyssey-design-system/issues/858)
+* style every Storybook from design tokens ([#888](https://github.com/atko-eng/odyssey-design-system/issues/888)) ([4971ffe](https://github.com/atko-eng/odyssey-design-system/commit/4971ffe4c9fca5c16cebe6aefef6a0c5276fe302))
+* **wp-components:** decompose GraphEdge and add GraphCanvas types ([#875](https://github.com/atko-eng/odyssey-design-system/issues/875)) ([0f766eb](https://github.com/atko-eng/odyssey-design-system/commit/0f766eb7638a5682f8d528cea337aeb931e7150e))
+
+
 # [1.69.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.68.0...v1.69.0) (2026-09-16)
 
 ### Bug Fixes

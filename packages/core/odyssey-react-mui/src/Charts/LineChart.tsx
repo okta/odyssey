@@ -23,20 +23,38 @@ import { Accessibility } from "@highcharts/react/modules/Accessibility.js";
 import { LineSeries } from "@highcharts/react/series/Line.js";
 import { memo, useMemo } from "react";
 
-import type { CartesianChartProps } from "./chartTypes.js";
-import type { ChartValueFormat } from "./formatChartValue.js";
+import type { CartesianChartProps } from "./utils/chartTypes.js";
+import type { ChartValueFormat } from "./utils/formatChartValue.js";
 
-import { useMediaQuery } from "../theme/useMediaQuery.js";
 import { useStableCallback } from "../useStableCallback.js";
-import { ChartFrame } from "./ChartFrame.js";
-import { ChartPopoverContent } from "./ChartPopoverContent.js";
-import { useChartTokens } from "./chartTokens.js";
-import { getChartSeriesPointData } from "./getChartSeriesPointData.js";
-import { hasDuplicateSeries } from "./hasDuplicateSeries.js";
-import { useChartValueFormatter } from "./useChartValueFormatter.js";
-import { useStableValue } from "./useStableValue.js";
+import { ChartContainer } from "./components/ChartContainer.js";
+import { ChartFrame } from "./components/ChartFrame.js";
+import {
+  type ChartMarkerSymbol,
+  ChartPopoverContent,
+} from "./components/ChartPopoverContent.js";
+import { useChartAnimation } from "./useChartAnimation.js";
+import { useChartTokens } from "./utils/chartTokens.js";
+import { getChartSeriesPointData } from "./utils/getChartSeriesPointData.js";
+import { hasDuplicateSeries } from "./utils/hasDuplicateSeries.js";
+import { useChartValueFormatter } from "./utils/useChartValueFormatter.js";
+import { useStableValue } from "./utils/useStableValue.js";
 
-const REDUCED_MOTION_CONDITION = "(prefers-reduced-motion: reduce)";
+// The Highcharts default marker symbols, in the order that Highcharts gives
+// them to the series of a chart. The chart draws these markers itself. This
+// list exists so that the popover can draw the same marker next to the name of
+// a series, and the popover selects one entry by `series.symbolIndex`.
+//
+// A change to this order, a Highcharts release that changes its own default
+// list, or a `marker.symbol` set on a series all make the popover show the
+// wrong shape.
+const LINE_SERIES_MARKER_SYMBOLS = [
+  "circle",
+  "diamond",
+  "square",
+  "triangle",
+  "triangleDown",
+] as const satisfies readonly ChartMarkerSymbol[];
 
 /** The props for a line chart. */
 export type LineChartProps = CartesianChartProps & {
@@ -59,55 +77,14 @@ const LineChartContent = ({
   yAxisFormat = "compact",
   yAxisLabel,
 }: LineChartProps) => {
-  const {
-    animationDuration,
-    axisLabelStyle,
-    axisValueStyle,
-    bodyFontFamily,
-    borderColor,
-    borderWidth,
-    chartBackgroundColor,
-    crosshairColor,
-    crosshairWidth,
-    edgeSpacing,
-    focusRingColor,
-    focusRingOffset,
-    focusRingRadius,
-    focusRingWidth,
-    legendItemHiddenStyle,
-    legendItemHoverStyle,
-    legendItemSpacing,
-    legendItemStyle,
-    legendLineSymbolHeight,
-    legendLineSymbolWidth,
-    legendSpacing,
-    legendSymbolSpacing,
-    lineHoverStrokeWidthPlus,
-    lineMarkerHoverHaloOpacity,
-    lineMarkerHoverHaloRadius,
-    lineMarkerHoverRadius,
-    lineMarkerRadius,
-    lineStrokeWidth,
-    odysseyDesignTokens,
-    popoverBackgroundColor,
-    popoverRadius,
-    popoverSpacing,
-    popoverStyle,
-    seriesColors,
-    topEdgeSpacing,
-    xAxisLabelSpacing,
-    yAxisLabelSpacing,
-  } = useChartTokens();
-  const prefersReducedMotion = useMediaQuery(REDUCED_MOTION_CONDITION);
+  const chartTokens = useChartTokens();
   const formatValue = useChartValueFormatter();
 
   if (hasDuplicateSeries({ series })) {
     throw new Error("This chart has two or more series with the same name.");
   }
 
-  const animation = prefersReducedMotion
-    ? (false as const)
-    : { duration: animationDuration };
+  const animation = useChartAnimation();
 
   // This memo builds a click handler and formats the value for each point.
   // Highcharts registers a new click handler for a point whenever the
@@ -142,149 +119,185 @@ const LineChartContent = ({
   );
   const hasLegend = useMemo(() => series.length > 1, [series.length]);
 
-  const options = {
-    chart: {
-      animation,
-      backgroundColor: chartBackgroundColor,
-      spacingBottom: edgeSpacing,
-      spacingLeft: edgeSpacing,
-      spacingRight: edgeSpacing,
-      spacingTop: topEdgeSpacing,
-      style: { fontFamily: bodyFontFamily },
-    },
-    // Each series takes the next color from this list. So a change to the
-    // order of `seriesColors`, in `chartTokens.ts`, changes the color of every
-    // series.
-    colors: seriesColors,
-    // The chart library ships a default title text of "Chart title". Its
-    // documented way to disable a title is a `text` of undefined, which draws
-    // an empty text element that measures zero and so reserves no height. A
-    // whole `title` of undefined does not work, because the React wrapper
-    // always merges a `title` object over the `options` prop.
-    subtitle: { text: undefined },
-    title: { text: undefined },
-  };
+  const options = useMemo(
+    () => ({
+      chart: {
+        animation,
+        backgroundColor: chartTokens.chart.backgroundColor,
+        spacingBottom: chartTokens.chart.edgeSpacing,
+        spacingLeft: chartTokens.chart.edgeSpacing,
+        spacingRight: chartTokens.chart.edgeSpacing,
+        spacingTop: chartTokens.chart.topEdgeSpacing,
+        style: { fontFamily: chartTokens.chart.fontFamily },
+      },
+      // Each series takes the next color from this list. So a change to the
+      // order of `seriesColors`, in `chartTokens.ts`, changes the color of every
+      // series.
+      colors: chartTokens.seriesColors,
+      // The chart library ships a default title text of "Chart title". Its
+      // documented way to disable a title is a `text` of undefined, which draws
+      // an empty text element that measures zero and so reserves no height. A
+      // whole `title` of undefined does not work, because the React wrapper
+      // always merges a `title` object over the `options` prop.
+      subtitle: { text: undefined },
+      title: { text: undefined },
+    }),
+    [animation, chartTokens],
+  );
+
+  const keyboardNavigation = useMemo(
+    () => ({
+      focusBorder: {
+        margin: chartTokens.focusRing.offset,
+        style: {
+          borderRadius: chartTokens.focusRing.radius,
+          color: chartTokens.focusRing.color,
+          lineWidth: chartTokens.focusRing.width,
+        },
+      },
+    }),
+    [chartTokens],
+  );
+  const xAxisCrosshair = useMemo(
+    () => ({
+      color: chartTokens.axis.crosshairColor,
+      width: chartTokens.axis.crosshairWidth,
+    }),
+    [chartTokens],
+  );
+  const xAxisLabels = useMemo(
+    () => ({ style: chartTokens.axis.valueStyle }),
+    [chartTokens],
+  );
+  const xAxisTitle = useMemo(
+    () => ({
+      align: "middle" as const,
+      margin: chartTokens.axis.uprightLabelSpacing,
+      style: chartTokens.axis.labelStyle,
+      text: xAxisLabel,
+    }),
+    [chartTokens, xAxisLabel],
+  );
+  const yAxisLabels = useMemo(
+    () => ({
+      formatter: (context: { value: unknown }) =>
+        formatValue({
+          format: yAxisFormat,
+          value: Number(context.value),
+        }),
+      style: chartTokens.axis.valueStyle,
+    }),
+    [chartTokens, formatValue, yAxisFormat],
+  );
+  const yAxisTitle = useMemo(
+    () => ({
+      align: "middle" as const,
+      // This axis draws up the left side, so its label is the rotated one.
+      margin: chartTokens.axis.rotatedLabelSpacing,
+      style: chartTokens.axis.labelStyle,
+      text: yAxisLabel,
+    }),
+    [chartTokens, yAxisLabel],
+  );
+  const seriesIndicator = useMemo(
+    () => ({
+      symbols: LINE_SERIES_MARKER_SYMBOLS,
+      type: "lineMarker" as const,
+    }),
+    [],
+  );
+  const linePlotOptions = useMemo(
+    () => ({
+      dataLabels: { enabled: false },
+      lineWidth: chartTokens.line.strokeWidth,
+      marker: {
+        lineWidth: 0,
+        radius: chartTokens.line.markerRadius,
+        states: {
+          hover: {
+            lineWidthPlus: 0,
+            radius: chartTokens.line.markerHoverRadius,
+          },
+        },
+      },
+      states: {
+        hover: {
+          halo: {
+            opacity: chartTokens.line.markerHoverHaloOpacity,
+            size: chartTokens.line.markerHoverHaloRadius,
+          },
+          lineWidthPlus: chartTokens.line.hoverStrokeWidthPlus,
+        },
+      },
+    }),
+    [chartTokens],
+  );
+  const seriesPlotOptions = useMemo(() => ({ animation }), [animation]);
 
   return (
-    <Chart options={options} type="line">
-      <Accessibility
-        description={ariaDescription}
-        enabled
-        keyboardNavigation={{
-          focusBorder: {
-            margin: focusRingOffset,
-            style: {
-              borderRadius: focusRingRadius,
-              color: focusRingColor,
-              lineWidth: focusRingWidth,
-            },
-          },
-        }}
-        landmarkVerbosity="disabled"
-      />
-      <XAxis
-        categories={categories}
-        crosshair={{ color: crosshairColor, width: crosshairWidth }}
-        gridLineColor={borderColor}
-        gridLineWidth={0}
-        labels={{ style: axisValueStyle }}
-        lineColor={borderColor}
-        lineWidth={0}
-        tickColor={borderColor}
-        tickLength={0}
-        title={{
-          align: "middle",
-          margin: xAxisLabelSpacing,
-          style: axisLabelStyle,
-          text: xAxisLabel,
-        }}
-      />
-      <YAxis
-        gridLineColor={borderColor}
-        gridLineWidth={borderWidth}
-        labels={{
-          formatter: (context) =>
-            formatValue({
-              format: yAxisFormat,
-              value: Number(context.value),
-            }),
-          style: axisValueStyle,
-        }}
-        lineColor="transparent"
-        tickColor="transparent"
-        title={{
-          align: "middle",
-          margin: yAxisLabelSpacing,
-          style: axisLabelStyle,
-          text: yAxisLabel,
-        }}
-      />
-      <Legend
-        borderWidth={0}
-        enabled={hasLegend}
-        itemDistance={legendItemSpacing}
-        itemHiddenStyle={legendItemHiddenStyle}
-        itemHoverStyle={legendItemHoverStyle}
-        itemStyle={legendItemStyle}
-        margin={legendSpacing}
-        padding={0}
-        symbolHeight={legendLineSymbolHeight}
-        symbolPadding={legendSymbolSpacing}
-        symbolWidth={legendLineSymbolWidth}
-      />
-      <Popover
-        backgroundColor={popoverBackgroundColor}
-        borderColor={borderColor}
-        borderRadius={popoverRadius}
-        borderWidth={borderWidth}
-        padding={popoverSpacing}
-        shadow={false}
-        shared
-        style={popoverStyle}
-      >
-        <ChartPopoverContent
-          categoryPlaceholder="{point.key}"
-          isShared
-          odysseyDesignTokens={odysseyDesignTokens}
-          seriesLabelPlaceholder="{series.name}"
-          valuePlaceholder="{point.custom.formattedValue}"
+    <ChartContainer>
+      <Chart options={options} type="line">
+        <Accessibility
+          description={ariaDescription}
+          enabled
+          keyboardNavigation={keyboardNavigation}
+          landmarkVerbosity="disabled"
         />
-      </Popover>
-      <PlotOptions
-        line={{
-          dataLabels: { enabled: false },
-          lineWidth: lineStrokeWidth,
-          marker: {
-            lineWidth: 0,
-            radius: lineMarkerRadius,
-            states: {
-              hover: {
-                lineWidthPlus: 0,
-                radius: lineMarkerHoverRadius,
-              },
-            },
-          },
-          states: {
-            hover: {
-              halo: {
-                opacity: lineMarkerHoverHaloOpacity,
-                size: lineMarkerHoverHaloRadius,
-              },
-              lineWidthPlus: lineHoverStrokeWidthPlus,
-            },
-          },
-        }}
-        series={{ animation }}
-      />
-      <Credits enabled={false} />
-      {seriesList.map(({ chartSeries, pointData }) => (
-        <LineSeries
-          data={pointData}
-          key={chartSeries.name}
-          name={chartSeries.name}
+        <XAxis
+          categories={categories}
+          crosshair={xAxisCrosshair}
+          gridLineColor={chartTokens.axis.lineColor}
+          gridLineWidth={0}
+          labels={xAxisLabels}
+          lineColor={chartTokens.axis.lineColor}
+          lineWidth={0}
+          tickColor={chartTokens.axis.lineColor}
+          tickLength={0}
+          title={xAxisTitle}
         />
-      ))}
-    </Chart>
+        <YAxis
+          gridLineColor={chartTokens.axis.lineColor}
+          gridLineWidth={chartTokens.axis.gridLineWidth}
+          labels={yAxisLabels}
+          lineColor="transparent"
+          tickColor="transparent"
+          title={yAxisTitle}
+        />
+        <Legend
+          enabled={hasLegend}
+          {...chartTokens.legend.shared}
+          {...chartTokens.legend.line}
+        />
+        <Popover
+          backgroundColor={chartTokens.popover.backgroundColor}
+          borderColor={chartTokens.popover.borderColor}
+          borderRadius={chartTokens.popover.borderRadius}
+          borderWidth={chartTokens.popover.borderWidth}
+          padding={chartTokens.popover.padding}
+          shadow={false}
+          shared
+          style={chartTokens.popover.containerStyle}
+        >
+          <ChartPopoverContent
+            categoryPlaceholder="{point.key}"
+            chartTokens={chartTokens}
+            isShared
+            seriesIndicator={seriesIndicator}
+            seriesLabelPlaceholder="{series.name}"
+            valuePlaceholder="{point.custom.formattedValue}"
+          />
+        </Popover>
+        <PlotOptions line={linePlotOptions} series={seriesPlotOptions} />
+        <Credits enabled={false} />
+        {seriesList.map(({ chartSeries, pointData }) => (
+          <LineSeries
+            data={pointData}
+            key={chartSeries.name}
+            name={chartSeries.name}
+          />
+        ))}
+      </Chart>
+    </ChartContainer>
   );
 };
 
@@ -311,7 +324,7 @@ const LineChart = (props: LineChartProps) => {
   // own render creates a new array on every render. That new array would
   // reach every child below this point.
   //
-  // useStableValue holds one props object while its contents stay the same,
+  // useStableValue holds one chart props object while its contents stay the same,
   // so `MemoizedLineChartContent` keeps the same children across those
   // renders.
   //
@@ -327,20 +340,23 @@ const LineChart = (props: LineChartProps) => {
   // The condition below keeps that behavior, and returns the one stable
   // callback in every other case.
   const stableOnPointClick = useStableCallback(props.onPointClick);
-  const stableProps = useStableValue({
-    ...props,
+  const stableOnRetry = useStableCallback(props.onRetry);
+  const { hasError, isLoading, onRetry, subtitle, title, ...chartProps } =
+    props;
+  const stableChartProps = useStableValue({
+    ...chartProps,
     onPointClick: props.onPointClick ? stableOnPointClick : undefined,
   });
 
   return (
     <ChartFrame
-      hasError={stableProps.hasError}
-      isLoading={stableProps.isLoading}
-      onRetry={stableProps.onRetry}
-      subtitle={stableProps.subtitle}
-      title={stableProps.title}
+      hasError={hasError}
+      isLoading={isLoading}
+      onRetry={onRetry ? stableOnRetry : undefined}
+      subtitle={subtitle}
+      title={title}
     >
-      <MemoizedLineChartContent {...stableProps} />
+      <MemoizedLineChartContent {...stableChartProps} />
     </ChartFrame>
   );
 };

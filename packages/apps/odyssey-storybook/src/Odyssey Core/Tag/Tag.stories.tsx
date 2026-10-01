@@ -17,18 +17,18 @@ import {
   tagSizeValues,
 } from "@okta/odyssey-react-mui";
 import { GroupIcon } from "@okta/odyssey-react-mui/icons";
-import { Meta, StoryObj } from "@storybook/react-vite";
-import { action } from "storybook/actions";
-
 import {
+  odysseyIconStoryOptions as icons,
   staticBoardParameters,
   StoryCell,
   StoryContrastBoard,
   StoryGrid,
   StoryRow,
   StorySection,
-} from "../../tools/boardStoryHelpers.js";
-import icons from "../../tools/iconUtils.js";
+} from "@okta/odyssey-storybook-preset/story-helpers";
+import { Meta, StoryObj } from "@storybook/react-vite";
+import { action } from "storybook/actions";
+
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
 const meta = {

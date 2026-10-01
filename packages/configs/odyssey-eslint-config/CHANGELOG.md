@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.70.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.69.0...v1.70.0) (2026-09-30)
+
+### Features
+
+* migrate contribution packages to package-owned Storybooks ([#759](https://github.com/atko-eng/odyssey-design-system/issues/759)) ([5b44489](https://github.com/atko-eng/odyssey-design-system/commit/5b4448917fbe3056b301f5e764f74a96a2813547)), closes [#858](https://github.com/atko-eng/odyssey-design-system/issues/858)
+
+
 # [1.69.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.68.0...v1.69.0) (2026-09-16)
 
 ### Bug Fixes

@@ -18,12 +18,14 @@ import {
   DialogContentText,
   DialogProps,
 } from "@okta/odyssey-react-mui";
+import {
+  getReflowEyesParameters,
+  useStoryArgOrLocalState,
+} from "@okta/odyssey-storybook-preset/story-helpers";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback } from "storybook/preview-api";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
-import { getReflowEyesParameters } from "../../../tools/reflowEyesParameters.js";
-import { useStoryArgOrLocalState } from "../../../tools/useStoryArgOrLocalState.js";
 
 // Explicitly type the Meta object
 const storybookMeta: Meta<typeof Dialog> = {

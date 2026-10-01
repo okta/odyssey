@@ -30,6 +30,7 @@ const odysseyTheme = createOdysseyMuiTheme({
 
 export const OdysseyStorybookThemeDecorator: Decorator = (Story, context) => (
   <OdysseyProvider
+    hasAnimations={context.viewMode !== "docs"}
     hasCssBaseline
     languageCode={context.globals.locale as string}
   >

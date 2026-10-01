@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.70.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.69.0...v1.70.0) (2026-09-30)
+
+### Bug Fixes
+
+* await validation error description ([#859](https://github.com/atko-eng/odyssey-design-system/issues/859)) ([26cebd6](https://github.com/atko-eng/odyssey-design-system/commit/26cebd6f1b32295f0cf6c3d7539e83e3725ba4d6))
+* **cartographer:** decline ambiguous urlRoot resolution ([#862](https://github.com/atko-eng/odyssey-design-system/issues/862)) ([ad6b3a6](https://github.com/atko-eng/odyssey-design-system/commit/ad6b3a6c501b11ddbf812d937d3226dde2984c17))
+* **cartographer:** derive gherkin scenario tags ([#867](https://github.com/atko-eng/odyssey-design-system/issues/867)) ([5e7c222](https://github.com/atko-eng/odyssey-design-system/commit/5e7c2222a14b0574dc1904831f8362285717f5ae))
+* **cartographer:** format scaffolded harness ([#897](https://github.com/atko-eng/odyssey-design-system/issues/897)) ([62589d4](https://github.com/atko-eng/odyssey-design-system/commit/62589d4b9bc97666f685981ee51bfb1dc43bb1b9))
+* **cartographer:** ground navigation targets ([#898](https://github.com/atko-eng/odyssey-design-system/issues/898)) ([eeb12a1](https://github.com/atko-eng/odyssey-design-system/commit/eeb12a177d4e98e885e38cb71badcf90b46f244d))
+* **cartographer:** key golden diff by content ([#872](https://github.com/atko-eng/odyssey-design-system/issues/872)) ([52a250c](https://github.com/atko-eng/odyssey-design-system/commit/52a250c9d18838d1b0444218055197ccc265dfa6))
+* **cartographer:** raise the vitest test timeout ([#855](https://github.com/atko-eng/odyssey-design-system/issues/855)) ([74ae8db](https://github.com/atko-eng/odyssey-design-system/commit/74ae8db9b28a5b9a315a153d01996d336d3207a5))
+* **cartographer:** refuse an ambiguous step label ([#900](https://github.com/atko-eng/odyssey-design-system/issues/900)) ([abf5e87](https://github.com/atko-eng/odyssey-design-system/commit/abf5e87c58219a7e31ad3abbb580224c417508f9))
+* **cartographer:** refuse ungrounded synthesis pairings ([#904](https://github.com/atko-eng/odyssey-design-system/issues/904)) ([058f1ab](https://github.com/atko-eng/odyssey-design-system/commit/058f1abb0b8c05f0fb87ef029aa50b5c70c204d3))
+* correct chart hover and animation ([#913](https://github.com/atko-eng/odyssey-design-system/issues/913)) ([0aaebf2](https://github.com/atko-eng/odyssey-design-system/commit/0aaebf2d09884c5522811e719e1eb9342ff02b0a))
+* correct Orpheus codeowner team ([#887](https://github.com/atko-eng/odyssey-design-system/issues/887)) ([c3ad929](https://github.com/atko-eng/odyssey-design-system/commit/c3ad9295182c6b746c335927824bea9f1b409e49))
+* **odyssey-cartographer:** report unmapped value tokens at end of run ([#868](https://github.com/atko-eng/odyssey-design-system/issues/868)) ([69e5e4f](https://github.com/atko-eng/odyssey-design-system/commit/69e5e4f3dde54b487e1ab750ae33ae2b6ad095af))
+* **odyssey-i18n:** resolve the show-keys repo name ([#836](https://github.com/atko-eng/odyssey-design-system/issues/836)) ([ec47365](https://github.com/atko-eng/odyssey-design-system/commit/ec47365df904de3f05f426439ac76efac13e1693)), closes [#840](https://github.com/atko-eng/odyssey-design-system/issues/840) [#807](https://github.com/atko-eng/odyssey-design-system/issues/807) [#829](https://github.com/atko-eng/odyssey-design-system/issues/829) [#831](https://github.com/atko-eng/odyssey-design-system/issues/831)
+* point BarChart story at preset helpers ([#891](https://github.com/atko-eng/odyssey-design-system/issues/891)) ([2c43f1b](https://github.com/atko-eng/odyssey-design-system/commit/2c43f1bcc45e596803677b3adbabc0e10a18c7e5))
+* raise a host's vitest below the scaffolded config floor ([#840](https://github.com/atko-eng/odyssey-design-system/issues/840)) ([7b7c4f5](https://github.com/atko-eng/odyssey-design-system/commit/7b7c4f57a43be30994f5c0ff3827de905488d142))
+* remove stale WP GraphEdge story ([#889](https://github.com/atko-eng/odyssey-design-system/issues/889)) ([96b0f73](https://github.com/atko-eng/odyssey-design-system/commit/96b0f73e47057a7bf7d653ae677f67ef81f3ba58))
+* **wp-components:** externalizes Odyssey/MUI/Emotion in build ([#826](https://github.com/atko-eng/odyssey-design-system/issues/826)) ([3fe48f6](https://github.com/atko-eng/odyssey-design-system/commit/3fe48f661920bbfd29523c3d487c777c220bf411))
+* **wp-components:** refit graph on canvas resize ([#905](https://github.com/atko-eng/odyssey-design-system/issues/905)) ([46b0fdb](https://github.com/atko-eng/odyssey-design-system/commit/46b0fdbb6790f6d63234d7ebf4847d9ab0442c8d))
+
+### Features
+
+* add --base-branch flag to /workon ([#820](https://github.com/atko-eng/odyssey-design-system/issues/820)) ([094ec82](https://github.com/atko-eng/odyssey-design-system/commit/094ec8259ffa11e2d6860be722a16e6aeee6d80c))
+* add BarChart to odyssey-react-mui ([#824](https://github.com/atko-eng/odyssey-design-system/issues/824)) ([e348517](https://github.com/atko-eng/odyssey-design-system/commit/e348517087ba25babdd894da01fb6e4fff4ace7b))
+* add Odyssey variant of Cartographer fixture ([#871](https://github.com/atko-eng/odyssey-design-system/issues/871)) ([03559ed](https://github.com/atko-eng/odyssey-design-system/commit/03559ed1389d7814b9380020c56866e8c0401702))
+* byte-compare committed feature files ([#866](https://github.com/atko-eng/odyssey-design-system/issues/866)) ([f7fb7fe](https://github.com/atko-eng/odyssey-design-system/commit/f7fb7fe1e912cffbcbb0bc66c580adab198952b1))
+* **cartographer:** gherkin complete-cache flag ([#863](https://github.com/atko-eng/odyssey-design-system/issues/863)) ([3eca7b9](https://github.com/atko-eng/odyssey-design-system/commit/3eca7b9a896ae78b6f50db4fc2dac7473114bde0))
+* extractor assert exact table contents ([#828](https://github.com/atko-eng/odyssey-design-system/issues/828)) ([e3c3b28](https://github.com/atko-eng/odyssey-design-system/commit/e3c3b28b256518045cd0c0dfc6b46c90cea5d2e9)), closes [#768](https://github.com/atko-eng/odyssey-design-system/issues/768) [#821](https://github.com/atko-eng/odyssey-design-system/issues/821) [#814](https://github.com/atko-eng/odyssey-design-system/issues/814)
+* **extractor:** select models and await controls ([#809](https://github.com/atko-eng/odyssey-design-system/issues/809)) ([cbe06c1](https://github.com/atko-eng/odyssey-design-system/commit/cbe06c15444af97ea412c0adf9c6fbfd6aa2c4c3))
+* gate synthesized features on known-bad shapes ([#821](https://github.com/atko-eng/odyssey-design-system/issues/821)) ([c318a2c](https://github.com/atko-eng/odyssey-design-system/commit/c318a2c8edc5c0c227d9baf8c63fdf0f7a079c1e))
+* improve courage extraction ([#842](https://github.com/atko-eng/odyssey-design-system/issues/842)) ([4615180](https://github.com/atko-eng/odyssey-design-system/commit/4615180a91e8a3dcad6f6f30b43a66f2f1d745f3)), closes [#18](https://github.com/atko-eng/odyssey-design-system/issues/18) [#40](https://github.com/atko-eng/odyssey-design-system/issues/40) [#40](https://github.com/atko-eng/odyssey-design-system/issues/40)
+* make condition-gated scenarios runnable and falsifiable ([#843](https://github.com/atko-eng/odyssey-design-system/issues/843)) ([6cc0be1](https://github.com/atko-eng/odyssey-design-system/commit/6cc0be1093d4275b5a4e4f52a796c4312688b29d))
+* migrate contribution packages to package-owned Storybooks ([#759](https://github.com/atko-eng/odyssey-design-system/issues/759)) ([5b44489](https://github.com/atko-eng/odyssey-design-system/commit/5b4448917fbe3056b301f5e764f74a96a2813547)), closes [#858](https://github.com/atko-eng/odyssey-design-system/issues/858)
+* **odyssey-react-mui:** forward refs and export MuiPropsContext ([#807](https://github.com/atko-eng/odyssey-design-system/issues/807)) ([a77505c](https://github.com/atko-eng/odyssey-design-system/commit/a77505cd15b3febee2d47ad6e70b3115bc1e11af))
+* read a Backbone events hash as gestures ([#865](https://github.com/atko-eng/odyssey-design-system/issues/865)) ([99918e9](https://github.com/atko-eng/odyssey-design-system/commit/99918e9406d813626b55f5a53ba12394d6227a2f))
+* resolve courage model urls in api nodes ([#844](https://github.com/atko-eng/odyssey-design-system/issues/844)) ([68ce115](https://github.com/atko-eng/odyssey-design-system/commit/68ce1157ab33004e5d85e9fd87c5679ef30d0dee))
+* style every Storybook from design tokens ([#888](https://github.com/atko-eng/odyssey-design-system/issues/888)) ([4971ffe](https://github.com/atko-eng/odyssey-design-system/commit/4971ffe4c9fca5c16cebe6aefef6a0c5276fe302))
+* Translations for odyssey-design-system:enduser ([#853](https://github.com/atko-eng/odyssey-design-system/issues/853)) ([697dd59](https://github.com/atko-eng/odyssey-design-system/commit/697dd59cae201d79ab01124125744b1cef9d40b5))
+* **wp-components:** add GraphCanvas layout pipeline and ReactFlow adapter ([#876](https://github.com/atko-eng/odyssey-design-system/issues/876)) ([ba36c5e](https://github.com/atko-eng/odyssey-design-system/commit/ba36c5e2290d73cc07282838d82931a395466184))
+* **wp-components:** add GraphNodeProps root type and canvas state hooks ([#870](https://github.com/atko-eng/odyssey-design-system/issues/870)) ([fb20337](https://github.com/atko-eng/odyssey-design-system/commit/fb20337024286d0d6bc678d47f64fcd39a90f5ec))
+* **wp-components:** allow ReactNode edge labels ([#912](https://github.com/atko-eng/odyssey-design-system/issues/912)) ([a89d05c](https://github.com/atko-eng/odyssey-design-system/commit/a89d05c93fe2e2093caf968c37f14dcf9bb6f92f))
+* **wp-components:** decompose GraphEdge and add GraphCanvas types ([#875](https://github.com/atko-eng/odyssey-design-system/issues/875)) ([0f766eb](https://github.com/atko-eng/odyssey-design-system/commit/0f766eb7638a5682f8d528cea337aeb931e7150e))
+* **wp-components:** document isLoading default value ([#906](https://github.com/atko-eng/odyssey-design-system/issues/906)) ([13c664e](https://github.com/atko-eng/odyssey-design-system/commit/13c664e2bf21c6a0e7d6960698f0dc347f4b201c))
+* **wp-components:** GraphCanvas component ([#892](https://github.com/atko-eng/odyssey-design-system/issues/892)) ([9166854](https://github.com/atko-eng/odyssey-design-system/commit/91668545a2cc175d76593987f56f6784aabe22d5))
+
+
 # [1.69.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.68.0...v1.69.0) (2026-09-16)
 
 ### Bug Fixes

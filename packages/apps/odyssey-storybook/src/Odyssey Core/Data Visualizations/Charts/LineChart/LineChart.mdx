@@ -154,9 +154,9 @@ code `"JPY"` shows only whole numbers.
 ## Point clicks
 
 You can give the `onPointClick` prop a function. The chart calls this function when the user
-clicks a point. The function receives three values: the `seriesName`, the `category`, and the
-`value` of the point. The `category` is a string, resolved from the position of the clicked value
-in `categories`, and not a property that the series data carries itself.
+clicks a point. The function receives one `ChartPoint` object with the `seriesName`, `category`,
+and `value` of the point. The `category` is a string, resolved from the position of the clicked
+value in `categories`, and not a property that the series data carries itself.
 
 ### Keep a function prop at the same identity
 
@@ -212,7 +212,7 @@ type ChartSeries = {
 
 ### `ChartPoint`
 
-The one point that the chart gives to `onPointClick`. See [Point clicks](#point-clicks).
+The one `ChartPoint` object that the chart gives to `onPointClick`. See [Point clicks](#point-clicks).
 
 ```tsx
 type ChartPoint = {

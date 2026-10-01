@@ -73,6 +73,58 @@
       ],
       "cache": true
     },
+    "build:storybook": {
+      "dependsOn": [
+        "^build",
+        "build"
+      ],
+      "inputs": [
+        "full-source",
+        "^production",
+        {
+          "env": "BUILD_BASE"
+        }
+      ],
+      "outputs": [
+        "{projectRoot}/storybook-static"
+      ],
+      "cache": true
+    },
+    "eslint": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "generate:i18n": {
+      "dependsOn": [
+        {
+          "projects": [
+            "@okta/odyssey-cli"
+          ],
+          "target": "build"
+        }
+      ]
+    },
+    "generate:i18n:pseudoLocaleProperties": {
+      "dependsOn": [
+        {
+          "projects": [
+            "@okta/odyssey-cli"
+          ],
+          "target": "build"
+        }
+      ],
+      "inputs": [
+        "default",
+        {
+          "env": "ODYSSEY_I18N_REPO_NAME"
+        }
+      ],
+      "cache": true
+    },
+    "playwright-install": {
+      "cache": false
+    },
     "typecheck": {
       "dependsOn": [
         "^build",

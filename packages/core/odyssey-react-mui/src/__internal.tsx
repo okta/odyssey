@@ -57,6 +57,13 @@ export * from "./labs/DataView/testSupportData.js";
 export * from "./labs/DataView/useFilterConversion.js";
 // Odyssey Pickers
 export * from "./labs/OdysseyPickers/ComposablePicker.js";
+// MuiProps
+// Exported so a component outside this package can be the child of Odyssey's
+// Tooltip: Tooltip wraps its child in MuiPropsChild, which puts MUI's injected
+// hover/focus props and ref into context, and the child has to call useMuiProps
+// to receive them.
+export * from "./MuiPropsChild.js";
+export * from "./MuiPropsContext.js";
 // OdysseyDesignTokensContext
 export * from "./OdysseyDesignTokensContext.js";
 // SearchField

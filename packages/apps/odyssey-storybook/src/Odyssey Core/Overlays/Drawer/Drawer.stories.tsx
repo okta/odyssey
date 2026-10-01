@@ -20,11 +20,11 @@ import {
   DrawerProps,
   variantValues,
 } from "@okta/odyssey-react-mui";
+import { getReflowEyesParameters } from "@okta/odyssey-storybook-preset/story-helpers";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback, useState } from "react";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
-import { getReflowEyesParameters } from "../../../tools/reflowEyesParameters.js";
 
 const gridStubText = (
   <>

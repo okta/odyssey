@@ -33,10 +33,10 @@ import {
   GroupIcon,
   QuestionCircleIcon,
 } from "@okta/odyssey-react-mui/icons";
+import { odysseyIconStoryOptions as icons } from "@okta/odyssey-storybook-preset/story-helpers";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { userEvent, within } from "storybook/test";
 
-import icons from "../../../tools/iconUtils.js";
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
 import { fieldComponentPropsMetaData } from "../../Fields/fieldComponentPropsMetaData.js";
 

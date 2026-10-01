@@ -11,12 +11,12 @@
  */
 
 import { Accordion, AccordionProps } from "@okta/odyssey-react-mui";
+import { useStoryArgOrLocalState } from "@okta/odyssey-storybook-preset/story-helpers";
 import { Meta, StoryObj } from "@storybook/react-vite";
 import { useCallback, useState } from "react";
 import { useArgs } from "storybook/preview-api";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
-import { useStoryArgOrLocalState } from "../../tools/useStoryArgOrLocalState.js";
 
 const storybookMeta = {
   component: Accordion,

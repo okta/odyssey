@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2024-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -10,42 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-/**
- * Configuration for a single axe-core accessibility rule.
- */
-export interface A11yRuleConfig {
-  /** Whether the rule is enabled */
-  enabled: boolean;
-  /** The axe-core rule ID (e.g., "color-contrast", "button-name") */
-  id: string;
-}
-
-/**
- * Accessibility configuration that can be passed to story parameters.
- *
- * @example
- * ```tsx
- * export const MyStory: Story = {
- *   parameters: {
- *     a11y: {
- *       config: {
- *         rules: [{ id: "color-contrast", enabled: false }],
- *       },
- *     },
- *   },
- * };
- * ```
- */
-export interface A11yConfig {
-  rules?: A11yRuleConfig[];
-}
-
-/**
- * Full a11y parameters object for story parameters.
- */
-export interface A11yParameters {
-  /** Configuration for specific rule overrides */
-  config?: A11yConfig;
-  /** Set to true to disable all a11y checks for this story */
-  disable?: boolean;
-}
+export type {
+  A11yConfig,
+  A11yParameters,
+  A11yRuleConfig,
+} from "@okta/odyssey-storybook-preset/story-helpers";
