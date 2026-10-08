@@ -10,13 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createStorybookMain } from "@okta/odyssey-storybook-preset";
+import { createComposedStorybookMain } from "@okta/odyssey-storybook-preset";
 
-// The host Storybook composes the per-package Storybooks named in STORYBOOK_REFS
-// on top of its own remaining stories (Odyssey Core, Unified UI Shell, and the
-// cross-cutting Docs). Shared stories glob, preview head, addons, framework,
-// typescript, and refs come from the preset so every Storybook in the fleet
-// stays consistent.
-export default createStorybookMain({
+export default createComposedStorybookMain({
   staticDirs: ["../src/static"],
 });

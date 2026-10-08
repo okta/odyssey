@@ -27,7 +27,6 @@
   "scripts": {
     "atlas-validate": "yarn workspace @okta/odyssey-atlas validate **/*.{yaml,yml,json}",
     "build": "nx run-many -t build --exclude=@okta/odyssey-icons,@okta/odyssey-storybook,@okta/odyssey-prototype",
-    "check:storybook-refs": "bash scripts/check-storybook-refs.sh",
     "create-contribution": "ok-ui create-package --from ./packages/contributions/example-components --output-dir ./packages/contributions",
     "eslint": "nx run-many -t eslint",
     "format": "biome format .",
