@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.70.0",
+  "version": "1.70.1",
   "description": "Documentation for Odyssey, Okta's design system",
   "nx": {
     "tags": [
@@ -8,6 +8,10 @@
     ],
     "targets": {
       "build": {
+        "dependsOn": [
+          "^build",
+          "^build:storybook"
+        ],
         "outputs": [
           "{projectRoot}/dist"
         ],
@@ -15,10 +19,7 @@
           "full-source",
           "^production",
           {
-            "env": "BUILD_BASE"
-          },
-          {
-            "env": "STORYBOOK_REFS"
+            "dependentTasksOutputFiles": "**/storybook-static/**/*"
           }
         ]
       },
@@ -29,10 +30,7 @@
         ],
         "inputs": [
           "full-source",
-          "^production",
-          {
-            "env": "BUILD_BASE"
-          }
+          "^production"
         ],
         "outputs": [],
         "cache": false
@@ -110,7 +108,7 @@
     "dev:types": "tsc --build --noEmit --watch",
     "dev:visual-regression": "yarn build && yarn concurrently --kill-others --success first --names \"STORYBOOK-SERVER,VISUAL-REGRESSION-TEST\" --prefix-colors \"magenta,green\" npm:ci:server \"wait-on tcp:127.0.0.1:6006 && yarn eyes-storybook --conf ./applitools.config.cjs -u http://127.0.0.1:6006\"",
     "playwright-install": "yarn playwright install --with-deps chromium",
-    "prepack": "yarn build",
+    "prepack": "yarn run -T nx build @okta/odyssey-storybook",
     "start": "storybook dev -p 6006",
     "typecheck": "tsc --noEmit"
   }

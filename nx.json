@@ -80,10 +80,7 @@
       ],
       "inputs": [
         "full-source",
-        "^production",
-        {
-          "env": "BUILD_BASE"
-        }
+        "^production"
       ],
       "outputs": [
         "{projectRoot}/storybook-static"
