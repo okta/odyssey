@@ -22,6 +22,7 @@ import {
 } from "material-react-table";
 import {
   Dispatch,
+  type JSX,
   memo,
   ReactElement,
   ReactNode,
@@ -285,8 +286,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
     [innerWidthStyle, emptyState],
   );
 
-  // Scroll to the bottom as soon as data loads after clicking the
-  // loadMore pagination button
+  // Scroll to the bottom as soon as data loads after clicking the loadMore pagination button
   useEffect(() => {
     if (enableVirtualization) {
       shouldUpdateScroll.current = true;
@@ -401,11 +401,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
       className: rowDensityClassName,
       tabIndex: 0,
       /**
-       * This is a fix for an issue related to the empty state creating a
-       * vertical scrollbar when virtualization is enabled. The root cause
-       * is tablebody having height: 0 when virtualization is enabled and there
-       * being no data
-       * https://okta.slack.com/archives/C7T2H3KNJ/p1742842106148929
+       * This is a fix for an issue related to the empty state creating a vertical scrollbar when virtualization is enabled. The root cause is tablebody having height: 0 when virtualization is enabled and there being no data https://okta.slack.com/archives/C7T2H3KNJ/p1742842106148929
        */
       sx:
         isEmpty || isNoResults
@@ -482,9 +478,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
         columnSorting: newSortVal,
       }));
     },
-    // Our public API is "disabled"-framed (isRowSelectionDisabled), whereas
-    // MRT's enableRowSelection predicate is "enabled"-framed, so the value is
-    // inverted before handing it off.
+    // Our public API is "disabled"-framed (isRowSelectionDisabled), whereas MRT's enableRowSelection predicate is "enabled"-framed, so the value is inverted before handing it off.
     enableRowSelection: hasRowSelection
       ? isRowSelectionDisabled
         ? (row) => !isRowSelectionDisabled(row.original)

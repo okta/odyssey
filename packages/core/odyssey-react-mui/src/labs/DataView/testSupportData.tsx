@@ -225,9 +225,7 @@ export const filterData = ({
     return 0;
   };
 
-  // In a real-world scenario, the consumer would provide their own backend
-  // filtering/searching logic. This is a demo of what that could look like
-  // for the provided sample data and demo filters.
+  // In a real-world scenario, the consumer would provide their own backend filtering/searching logic. This is a demo of what that could look like for the provided sample data and demo filters.
   const columnFiltered = filters
     ? searchFiltered.filter((row) =>
         filters.every(({ id, value }: DataFilter) => {

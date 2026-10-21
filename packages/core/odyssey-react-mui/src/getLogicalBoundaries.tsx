@@ -13,8 +13,7 @@
 /**
  * Retrieves the logical boundaries (top, bottom, left, right) of a given HTML element.
  *
- * The function considers the document's text direction (`dir` attribute) to determine
- * whether the left and right boundaries should be swapped.
+ * The function considers the document's text direction (`dir` attribute) to determine whether the left and right boundaries should be swapped.
  */
 export const getLogicalBoundaries = (element: HTMLElement) => {
   const isRTL = document.documentElement.getAttribute("dir") === "rtl";

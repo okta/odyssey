@@ -56,8 +56,7 @@ export class WebComponentClass extends SsrFriendlyHtmlElementClass {
   }
 
   /**
-   * Provides the function used to initialize react content that is specific to this instance
-   * of the web component, which is used later in the connectedCallback.
+   * Provides the function used to initialize react content that is specific to this instance of the web component, which is used later in the connectedCallback.
    *
    * Always set immediately after creation via document.createElement
    */
@@ -101,8 +100,7 @@ export class WebComponentClass extends SsrFriendlyHtmlElementClass {
 }
 
 /**
- * Returns a constructed web component which manages it's own shadow dom and react dom roots
- * A custom name can be specified, otherwise a default is provided
+ * Returns a constructed web component which manages it's own shadow dom and react dom roots. A custom name can be specified, otherwise a default is provided
  */
 export const getReactWebComponent = ({
   webComponentName = versionedWebComponentName,
@@ -132,21 +130,17 @@ export type GetReactComponentInWebComponent = (
 
 export type RenderReactInWebComponentProps = {
   /**
-   * This is a callback function for rendering your React component or app in the Web Component.
-   * It gives you access to the Shadow DOM elements if you need them for Odyssey, Emotion, or MUI.
+   * This is a callback function for rendering your React component or app in the Web Component. It gives you access to the Shadow DOM elements if you need them for Odyssey, Emotion, or MUI.
    *
-   * You will need to add `<slot>` elements if you want to pass child elements or components or React apps.
-   * You can have multiple slots in your app if you add a `name` attribute to your `<slot>` elements.
+   * You will need to add `<slot>` elements if you want to pass child elements or components or React apps. You can have multiple slots in your app if you add a `name` attribute to your `<slot>` elements.
    */
   getReactComponent: GetReactComponentInWebComponent;
   /**
-   * Optional nonce for CSP compliance.
-   * Defaults to `window.cspNonce`.
+   * Optional nonce for CSP compliance. Defaults to `window.cspNonce`.
    */
   nonce?: string;
   /**
-   * One or more HTML elements that are going to render as `children` of the web component.
-   * If your React component doesn't take children, this is unnecessary.
+   * One or more HTML elements that are going to render as `children` of the web component. If your React component doesn't take children, this is unnecessary.
    *
    * Typically, a React app root element is passed, but it can include an array of other elements if there are multiple slots for children.
    *

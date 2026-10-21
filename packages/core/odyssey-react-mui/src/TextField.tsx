@@ -41,8 +41,7 @@ export const textFieldTypeValues = [
 
 export type TextFieldProps = {
   /**
-   * This prop helps users to fill forms faster, especially on mobile devices.
-   * The name can be confusing, as it's more like an autofill.
+   * This prop helps users to fill forms faster, especially on mobile devices. The name can be confusing, as it's more like an autofill.
    * @see https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
@@ -59,8 +58,7 @@ export type TextFieldProps = {
    */
   hasInitialFocus?: boolean;
   /**
-   * Hints at the type of data that might be entered by the user while editing the
-   * element or its contents.
+   * Hints at the type of data that might be entered by the user while editing the element or its contents.
    * @see https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute
    */
   inputMode?: InputHTMLAttributes<HTMLInputElement>["inputMode"];
@@ -109,8 +107,7 @@ export type TextFieldProps = {
    */
   step?: number;
   /**
-   * Type of the `input` element. It should be
-   * [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
+   * Type of the `input` element. It should be [a valid HTML5 input type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types).
    * @default "text"
    */
   type?: (typeof textFieldTypeValues)[number];
@@ -127,8 +124,7 @@ type FieldRenderProps = Partial<
   Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
 /**
- * A single-line or multiline text input field with label, hint, and error support.
- * Use for collecting free-form text input such as names, emails, URLs, or numbers.
+ * A single-line or multiline text input field with label, hint, and error support. Use for collecting free-form text input such as names, emails, URLs, or numbers.
  */
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (

@@ -13,29 +13,16 @@
 export const sandboxAttribute = "data-sandbox-root";
 
 /**
- * Attaches a element to `document.body` and tags it with a
- * data sandbox attribute so the global browser-test `afterEach` (in
- * `vitest-browser-setup.ts`) can remove it between tests.
+ * Attaches a element to `document.body` and tags it with a data sandbox attribute so the global browser-test `afterEach` (in `vitest-browser-setup.ts`) can remove it between tests.
  *
  * ### Why this exists
  *
- * A handful of tests build DOM nodes imperatively (`document.createElement`)
- * and append them directly to `document.body` to exercise hooks and utilities
- * that read layout/scroll/visibility off real DOM (e.g. `useScrollState`,
- * `useElementAtContainerEdge`, `SkipToContent`'s external-focus scenarios,
- * `UiShell`'s web-component bootstrapping). Those nodes live OUTSIDE React's
- * render tree, so vitest-browser-react's auto-cleanup cannot remove them —
- * without some form of cleanup they leak from one test to the next.
+ * A handful of tests build DOM nodes imperatively (`document.createElement`) and append them directly to `document.body` to exercise hooks and utilities that read layout/scroll/visibility off real DOM (e.g. `useScrollState`, `useElementAtContainerEdge`, `SkipToContent`'s external-focus scenarios, `UiShell`'s web-component bootstrapping). Those nodes live OUTSIDE React's render tree, so vitest-browser-react's auto-cleanup cannot remove them — without some form of cleanup they leak from one test to the next.
  *
  * ### Why not `document.body.innerHTML = ""` in a global afterEach
  *
  * It breaks every component that uses portals.
- * MUI portals (Dialog, Select, Tooltip, DatePicker, Autocomplete listbox,
- * Drawer, Menu, …) attach their content to `document.body` via
- * `ReactDOM.createPortal`. Wiping body while React is still mid-unmount
- * triggers `NotFoundError: Failed to execute 'removeChild' on 'Node'` because
- * React's reconciler tries to remove portal children that our wipe already
- * removed.
+ * MUI portals (Dialog, Select, Tooltip, DatePicker, Autocomplete listbox, Drawer, Menu, …) attach their content to `document.body` via `ReactDOM.createPortal`. Wiping body while React is still mid-unmount triggers `NotFoundError: Failed to execute 'removeChild' on 'Node'` because React's reconciler tries to remove portal children that our wipe already removed.
  *
  * ### Usage
  *

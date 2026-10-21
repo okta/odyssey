@@ -19,6 +19,7 @@ import {
 } from "material-react-table";
 import {
   Dispatch,
+  type JSX,
   memo,
   SetStateAction,
   useCallback,

@@ -100,8 +100,7 @@ describe(createOdysseyStyledComponent.name, () => {
 
   test("anchors a MUI Tooltip opened by hover", async () => {
     const { container } = await renderWithOdysseyProvider(
-      // describeChild so the trigger keeps its own accessible name; without it
-      // MUI maps title onto the child's aria-label and renames the button.
+      // describeChild so the trigger keeps its own accessible name; without it MUI maps title onto the child's aria-label and renames the button.
       <MuiTooltip describeChild={true} title="tooltip text">
         <StyledButton type="button">hover me</StyledButton>
       </MuiTooltip>,
@@ -110,8 +109,7 @@ describe(createOdysseyStyledComponent.name, () => {
     await expect(container).toBeAccessible();
     await userEvent.hover(page.getByRole("button", { name: "hover me" }));
 
-    // A Popper with no anchor node never mounts, so the tooltip appearing is the
-    // assertion that the ref reached the DOM element.
+    // A Popper with no anchor node never mounts, so the tooltip appearing is the assertion that the ref reached the DOM element.
     await expect.element(page.getByRole("tooltip")).toBeVisible();
     await expect.element(page.getByText("tooltip text")).toBeVisible();
     // Scoped to the tooltip rather than the container, since it renders in a portal.

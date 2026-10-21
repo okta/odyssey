@@ -14,11 +14,7 @@ import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-// The ESM build emits bare subpath imports into MUI (`@mui/material/Accordion`).
-// MUI 5 ships no `exports` map, so Node's ESM loader rejects those as directory
-// imports. The `node` condition is what steers Node at the CJS build instead,
-// and because Node evaluates conditions in declaration order it only works while
-// `node` precedes `import`.
+// The ESM build emits bare subpath imports into MUI (`@mui/material/Accordion`). MUI 5 ships no `exports` map, so Node's ESM loader rejects those as directory imports. The `node` condition is what steers Node at the CJS build instead, and because Node evaluates conditions in declaration order it only works while `node` precedes `import`.
 const packageManifest = JSON.parse(
   readFileSync(
     resolve(dirname(fileURLToPath(import.meta.url)), "..", "package.json"),
@@ -67,6 +63,7 @@ describe("package export conditions", () => {
       "./lazy-loaded-icons",
       "./icon-names",
       "./logos",
+      "./message-bus",
       "./labs",
       "./test-selectors",
       "./ui-shell",

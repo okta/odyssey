@@ -59,10 +59,8 @@ describe(Drawer.displayName!, () => {
     expect(onClose).toHaveBeenCalledWith(expect.anything(), "closeButtonClick");
   });
 
-  // One pixel inside the band, not at the threshold. The temporary panel is
-  // 28.571rem, which is 400px at the 14px root, and COMPACT_MAX_WIDTH is also
-  // 400. At exactly 400 the panel fills the viewport with or without the
-  // compact rule, so no assertion there can detect the rule.
+  // One pixel inside the band, not at the threshold. The temporary panel is 28.571rem, which is 400px at the 14px root, and COMPACT_MAX_WIDTH is also
+  // 400. At exactly 400 the panel fills the viewport with or without the compact rule, so no assertion there can detect the rule.
   test("viewport just inside the compact width threshold", async () => {
     await page.viewport(COMPACT_MAX_WIDTH - 1, ROOMY_HEIGHT);
     const onClose = vi.fn();
@@ -82,8 +80,7 @@ describe(Drawer.displayName!, () => {
       return;
     }
 
-    // Rounded because sub-pixel layout can leave the measured width a
-    // fraction off from the integer viewport width.
+    // Rounded because sub-pixel layout can leave the measured width a fraction off from the integer viewport width.
     expect(Math.round(paper.getBoundingClientRect().width)).toBe(
       window.innerWidth,
     );
@@ -110,14 +107,12 @@ describe(Drawer.displayName!, () => {
       return;
     }
 
-    // Rounded because sub-pixel layout can leave the measured width a
-    // fraction off from the integer viewport width.
+    // Rounded because sub-pixel layout can leave the measured width a fraction off from the integer viewport width.
     expect(Math.round(paper.getBoundingClientRect().width)).toBe(
       window.innerWidth,
     );
 
-    // Without the compact rule the panel is 400px wide, so the page scrolls
-    // horizontally at 320px.
+    // Without the compact rule the panel is 400px wide, so the page scrolls horizontally at 320px.
     expect(document.documentElement.scrollWidth).toBeLessThanOrEqual(
       window.innerWidth,
     );

@@ -12,7 +12,14 @@
 
 import { Checkbox as MuiCheckbox } from "@mui/material";
 import { MRT_DensityState, MRT_RowData } from "material-react-table";
-import { Dispatch, memo, SetStateAction, useCallback, useMemo } from "react";
+import {
+  Dispatch,
+  type JSX,
+  memo,
+  SetStateAction,
+  useCallback,
+  useMemo,
+} from "react";
 
 import { MenuButton } from "../../Buttons/MenuButton.js";
 import { MenuItem } from "../../Buttons/MenuItem.js";

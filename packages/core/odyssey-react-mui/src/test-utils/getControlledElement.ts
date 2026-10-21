@@ -22,8 +22,7 @@ class ElementError extends Error {
 }
 
 /**
- * Resolves the element controlled by a trigger via `aria-controls`, `aria-owns`,
- * or an `<input list>` association.
+ * Resolves the element controlled by a trigger via `aria-controls`, `aria-owns`, or an `<input list>` association.
  *
  * For `aria-haspopup`:
  * @see https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-haspopup

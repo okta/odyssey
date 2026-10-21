@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.71.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.70.1...v1.71.0) (2026-10-14)
+
+### Bug Fixes
+
+* allow React 19 as a peer of odyssey-react-mui ([#937](https://github.com/atko-eng/odyssey-design-system/issues/937)) ([db30004](https://github.com/atko-eng/odyssey-design-system/commit/db3000441ec5982d9a642c278251dc98e2fa612e))
+* **cartographer:** cap browser workers ([#938](https://github.com/atko-eng/odyssey-design-system/issues/938)) ([880ac26](https://github.com/atko-eng/odyssey-design-system/commit/880ac26beb439b3170441c5078a1c386e4e8ba80))
+* **cartographer:** detect React overlay openers ([#940](https://github.com/atko-eng/odyssey-design-system/issues/940)) ([2901341](https://github.com/atko-eng/odyssey-design-system/commit/290134160ff412d31b2a17e0863e9d3fa91397b0))
+* **cartographer:** open surfaces at host route ([#939](https://github.com/atko-eng/odyssey-design-system/issues/939)) ([79435e0](https://github.com/atko-eng/odyssey-design-system/commit/79435e0b78b91bef9a8e1e62b273787e8b313833))
+* **cartographer:** pair mutations with outcomes ([#917](https://github.com/atko-eng/odyssey-design-system/issues/917)) ([60726f8](https://github.com/atko-eng/odyssey-design-system/commit/60726f8b0aef7f3751168f78340b5e43368ed2c0)), closes [#919](https://github.com/atko-eng/odyssey-design-system/issues/919)
+* **cartographer:** stop guessing save() methods ([#919](https://github.com/atko-eng/odyssey-design-system/issues/919)) ([318b5c0](https://github.com/atko-eng/odyssey-design-system/commit/318b5c0179ea3a264f57e64df537b029848350a0))
+* close IGA MenuButton when a MenuItem is clicked ([#911](https://github.com/atko-eng/odyssey-design-system/issues/911)) ([67c6792](https://github.com/atko-eng/odyssey-design-system/commit/67c6792de60269fce3a3b55620e99080b1bec47b))
+* DatePicker spacing across calendar views ([#893](https://github.com/atko-eng/odyssey-design-system/issues/893)) ([026a18c](https://github.com/atko-eng/odyssey-design-system/commit/026a18c0c5201c8c3ff4f4f9bc9078fab64913c0))
+* ship package storybooks in host dist ([#929](https://github.com/atko-eng/odyssey-design-system/issues/929)) ([8d48ac2](https://github.com/atko-eng/odyssey-design-system/commit/8d48ac29f73a7c00a42b02fd364d0eafad65c3e9))
+* **storybook-preset:** render markdown tables in docs ([#947](https://github.com/atko-eng/odyssey-design-system/issues/947)) ([5ef66f2](https://github.com/atko-eng/odyssey-design-system/commit/5ef66f215b632fe34af5f09e370b8062401836b4))
+* truncate long IGA DataView headers with an ellipsis ([#909](https://github.com/atko-eng/odyssey-design-system/issues/909)) ([9638bf0](https://github.com/atko-eng/odyssey-design-system/commit/9638bf0e40f3e8a87587c015e405abbdda02c9bc))
+
+### Features
+
+* add browser message bus ([#931](https://github.com/atko-eng/odyssey-design-system/issues/931)) ([604e350](https://github.com/atko-eng/odyssey-design-system/commit/604e35079c63f8d8364d44aa543294313871e6d7))
+* **cartographer:** assert prefill, review echo ([#918](https://github.com/atko-eng/odyssey-design-system/issues/918)) ([fe014c7](https://github.com/atko-eng/odyssey-design-system/commit/fe014c71bf13b8fcd980a32382b78f91a4210ee8))
+* **cartographer:** detect new tabs, host events ([#920](https://github.com/atko-eng/odyssey-design-system/issues/920)) ([c0e3e4d](https://github.com/atko-eng/odyssey-design-system/commit/c0e3e4d9c47ee16a71b2cde5055e5a6bdd810b49))
+* **cartographer:** pin host page data in a fixture ([#902](https://github.com/atko-eng/odyssey-design-system/issues/902)) ([283d5fa](https://github.com/atko-eng/odyssey-design-system/commit/283d5fabba9180661c615ac59532540fa13baae1))
+* **cartographer:** read Courage row-action visibility guards ([#899](https://github.com/atko-eng/odyssey-design-system/issues/899)) ([38240b0](https://github.com/atko-eng/odyssey-design-system/commit/38240b063d4d2141a4ee3c8cb026eed9dab68388))
+* Translations for odyssey-design-system:enduser ([#925](https://github.com/atko-eng/odyssey-design-system/issues/925)) ([c4b9f98](https://github.com/atko-eng/odyssey-design-system/commit/c4b9f98a5f8fcce103d80b0843a78f2b0f9c437f))
+* Translations for odyssey-design-system:enduser ([#948](https://github.com/atko-eng/odyssey-design-system/issues/948)) ([e8d3056](https://github.com/atko-eng/odyssey-design-system/commit/e8d30563a6ce4f84ce1b579f8d8a96538289c39b))
+* **wp-components:** add attribute tooltip ([#945](https://github.com/atko-eng/odyssey-design-system/issues/945)) ([f75a906](https://github.com/atko-eng/odyssey-design-system/commit/f75a906e2ab07443e8965cf7ebef0e3d184cca0f))
+* **wp-components:** adds drawer size config ([#923](https://github.com/atko-eng/odyssey-design-system/issues/923)) ([f94ab7b](https://github.com/atko-eng/odyssey-design-system/commit/f94ab7b1e563193b2de9fae2088a3e0bfe9df2f7))
+* **wp-components:** fix graph node card widths ([#953](https://github.com/atko-eng/odyssey-design-system/issues/953)) ([d2aad40](https://github.com/atko-eng/odyssey-design-system/commit/d2aad4065dee61fa170cfa9b5658940240e628c0))
+* **wp-components:** spread parallel edges ([#956](https://github.com/atko-eng/odyssey-design-system/issues/956)) ([77cfee1](https://github.com/atko-eng/odyssey-design-system/commit/77cfee129ab474195de27b1269196ec9812e3d8a))
+
+
 # [1.70.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.69.0...v1.70.0) (2026-09-30)
 
 ### Bug Fixes

@@ -185,8 +185,7 @@ export const inputComponents = ({
           display: "none",
         },
 
-        // Chrome, Edge, and Safari (Blink/WebKit) reset border-radius on autofilled
-        // inputs, causing corners to appear square.
+        // Chrome, Edge, and Safari (Blink/WebKit) reset border-radius on autofilled inputs, causing corners to appear square.
         [`&:-webkit-autofill,
           &:-webkit-autofill:hover,
           &:-webkit-autofill:focus,

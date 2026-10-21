@@ -95,59 +95,48 @@ export const Default: StoryObj<OdysseyStackProps> = {};
 
 // export const ErrorPill: StoryObj<StackProps> = {
 //   args: {
-//     label: "Warp drive unstable",
-//     severity: "error",
+//     label: "Warp drive unstable", severity: "error",
 //   },
 // };
 
 // export const Info: StoryObj<StackProps> = {
 //   args: {
-//     label: "Warp drive unstable",
-//     severity: "info",
+//     label: "Warp drive unstable", severity: "info",
 //   },
 // };
 
 // export const Success: StoryObj<StatusProps> = {
 //   args: {
-//     label: "Warp drive online",
-//     severity: "success",
+//     label: "Warp drive online", severity: "success",
 //   },
 // };
 
 // export const WarningPill: StoryObj<StatusProps> = {
 //   args: {
-//     label: "Warp fuel low",
-//     severity: "warning",
+//     label: "Warp fuel low", severity: "warning",
 //   },
 // };
 
 // export const DefaultLamp: StoryObj<StatusProps> = {
 //   args: {
-//     label: "Warp drive in standby",
-//     variant: "lamp",
+//     label: "Warp drive in standby", variant: "lamp",
 //   },
 // };
 
 // export const ErrorLamp: StoryObj<StatusProps> = {
 //   args: {
-//     label: "Warp drive unstable",
-//     severity: "error",
-//     variant: "lamp",
+//     label: "Warp drive unstable", severity: "error", variant: "lamp",
 //   },
 // };
 
 // export const SuccessLamp: StoryObj<StatusProps> = {
 //   args: {
-//     label: "Warp drive online",
-//     severity: "success",
-//     variant: "lamp",
+//     label: "Warp drive online", severity: "success", variant: "lamp",
 //   },
 // };
 
 // export const WarningLamp: StoryObj<StatusProps> = {
 //   args: {
-//     label: "Warp fuel low",
-//     severity: "warning",
-//     variant: "lamp",
+//     label: "Warp fuel low", severity: "warning", variant: "lamp",
 //   },
 // };

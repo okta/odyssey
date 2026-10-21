@@ -41,8 +41,7 @@ export type OdysseyStackProps = {
 };
 
 /**
- * A layout component that arranges its children in a one-dimensional row or column
- * with consistent spacing between them.
+ * A layout component that arranges its children in a one-dimensional row or column with consistent spacing between them.
  */
 const Stack = ({
   children,

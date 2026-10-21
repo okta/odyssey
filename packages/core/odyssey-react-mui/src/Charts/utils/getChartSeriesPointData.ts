@@ -19,16 +19,11 @@ import type { ChartValueFormat } from "./formatChartValue.js";
 import type { ChartValueFormatter } from "./useChartValueFormatter.js";
 
 /**
- * One point of a series that plots against a category axis. The category axis
- * gives the position, so the point holds only its value.
+ * One point of a series that plots against a category axis. The category axis gives the position, so the point holds only its value.
  *
- * Highcharts names the value axis `y` for a line chart and also for a
- * horizontal bar chart, because a bar chart inverts the drawing and not the
- * data. So `y` means the measured value here, and not a vertical position.
+ * Highcharts names the value axis `y` for a line chart and also for a horizontal bar chart, because a bar chart inverts the drawing and not the data. So `y` means the measured value here, and not a vertical position.
  *
- * A chart that needs a position on both axes, such as a scatter chart, takes a
- * point type of its own that adds `x`. That type shares
- * `ChartPointDecoration` and does not extend this type.
+ * A chart that needs a position on both axes, such as a scatter chart, takes a point type of its own that adds `x`. That type shares `ChartPointDecoration` and does not extend this type.
  */
 export type ChartSeriesPointDatum = ChartPointDecoration & {
   y: number;
@@ -43,15 +38,9 @@ export type GetChartSeriesPointDataProps = {
 };
 
 /**
- * Returns one data point for each entry in `categories`, lined up by index
- * with `chartSeries.data`. A `null` entry in `chartSeries.data` returns
- * `null`. Highcharts then draws a gap, instead of a point with the value
- * zero.
+ * Returns one data point for each entry in `categories`, lined up by index with `chartSeries.data`. A `null` entry in `chartSeries.data` returns `null`. Highcharts then draws a gap, instead of a point with the value zero.
  *
- * The function throws if `chartSeries.data` and `categories` have different
- * lengths. A value with no matching category has no position on the axis. If
- * the chart silently cut or padded the series to fit, the chart would look
- * correct while showing the wrong data. Throwing catches the mistake instead.
+ * The function throws if `chartSeries.data` and `categories` have different lengths. A value with no matching category has no position on the axis. If the chart silently cut or padded the series to fit, the chart would look correct while showing the wrong data. Throwing catches the mistake instead.
  */
 export const getChartSeriesPointData = ({
   categories,

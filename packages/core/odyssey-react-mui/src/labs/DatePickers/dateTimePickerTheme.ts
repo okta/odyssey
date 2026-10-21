@@ -28,7 +28,7 @@ import { addSpecificity } from "../../tools/addSpecificity.js";
 import { DateTimePickerSize } from "./DateTimePicker.js";
 
 const DateTimePickerComponentSize = {
-  dateCalendarMaxHeight: `${pxToRem(336)}rem`,
+  timeListMaxHeight: `${pxToRem(336)}rem`,
   slideTransitionMinHeight: `${pxToRem(240)}rem`,
 };
 
@@ -62,8 +62,8 @@ const theme: ThemeOptions = {
         root: {
           display: "block",
           width: "100%",
-          maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
-          height: DateTimePickerComponentSize.dateCalendarMaxHeight,
+          maxHeight: "none",
+          height: "auto",
         },
       },
     },
@@ -107,7 +107,7 @@ const theme: ThemeOptions = {
           [`${addSpecificity(2, `.${multiSectionDigitalClockClasses.root}`)},
             ${addSpecificity(2, ` .${multiSectionDigitalClockSectionClasses.root}`)},
             ${addSpecificity(2, `.${digitalClockClasses.root}`)}`]: {
-            maxHeight: DateTimePickerComponentSize.dateCalendarMaxHeight,
+            maxHeight: DateTimePickerComponentSize.timeListMaxHeight,
           },
         },
       },

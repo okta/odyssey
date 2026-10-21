@@ -50,8 +50,7 @@ export const useRowReordering = <TData extends MRT_RowData>({
       return;
     }
 
-    // Needs to include the totalRows check because totalRows might not
-    // be set. If it isn't set, this whole check doesn't matter.
+    // Needs to include the totalRows check because totalRows might not be set. If it isn't set, this whole check doesn't matter.
     if (totalRows && newRowIndex > totalRows) {
       return;
     }
@@ -108,9 +107,7 @@ export const useRowReordering = <TData extends MRT_RowData>({
 
   const setHoveredRow = (table: MRT_TableInstance<TData>, id: TData["id"]) => {
     if (id) {
-      // The `as MRT_Row<TData>` is necessary here to overcome some type/generic
-      // issues with the type of `setHoveredRow` defined by MRT. It's not ideal code,
-      // but it's the only way that works without a much larger rewrite.
+      // The `as MRT_Row<TData>` is necessary here to overcome some type/generic issues with the type of `setHoveredRow` defined by MRT. It's not ideal code, but it's the only way that works without a much larger rewrite.
       const nextRow = table.getRow(id) as MRT_Row<TData>;
 
       if (nextRow) {

@@ -57,13 +57,11 @@ export type UiShellContext = {
    */
   closeSideNavMenu: MessageBus<void>["publish"];
   /**
-   * This is a callback that provides a subscriber callback to listen for changes to state.
-   * It allows UI Shell to listen for a publisher that asks us to close the right-side menu.
+   * This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for a publisher that asks us to close the right-side menu.
    */
   subscribeToCloseRightSideMenu: MessageBus<void>["subscribe"];
   /**
-   * This is a callback that provides a subscriber callback to listen for changes to state.
-   * It allows UI Shell to listen for a publisher that asks us to close the side nav.
+   * This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for a publisher that asks us to close the side nav.
    */
   subscribeToCloseSideNavMenu: MessageBus<void>["subscribe"];
 } & UiShellColors;

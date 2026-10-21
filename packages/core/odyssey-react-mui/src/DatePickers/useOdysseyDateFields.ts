@@ -48,28 +48,24 @@ const utcDateTimeFromParsableIsoString = (dateString?: string) => {
 
 export type UncontrolledDateFieldProps = {
   /**
-   * Value the field is seeded with while it mounts. Read only on that first
-   * render, so a later change is ignored.
+   * Value the field is seeded with while it mounts. Read only on that first render, so a later change is ignored.
    *
    * NOTE: Must be a date string in ISO format
    */
   defaultValue?: string;
   /**
-   * Value the field displays for its whole life.
-   * Should not be used if `defaultValue` is used
+   * Value the field displays for its whole life. Should not be used if `defaultValue` is used
    */
   value?: never;
 };
 
 export type ControlledDateFieldProps = {
   /**
-   * Value the field is seeded with while it mounts.
-   * Should not be used if `value` is used
+   * Value the field is seeded with while it mounts. Should not be used if `value` is used
    */
   defaultValue?: never;
   /**
-   * Value the field displays for its whole life, so passing an empty value
-   * clears it.
+   * Value the field displays for its whole life, so passing an empty value clears it.
    *
    * NOTE: Must be a date string in ISO format. Anything that cannot be parsed
    * leaves the field empty
@@ -241,19 +237,12 @@ export const useOdysseyDateFields = ({
     [isYearEnabled],
   );
 
-  // MUI's picker captures `defaultValue` while it mounts and never reads it
-  // again, so `defaultValue` can only ever seed the first render. Freezing the
-  // seed here keeps that contract explicit instead of letting a later
-  // `defaultValue` overwrite whatever the reader has since typed.
+  // MUI's picker captures `defaultValue` while it mounts and never reads it again, so `defaultValue` can only ever seed the first render. Freezing the seed here keeps that contract explicit instead of letting a later `defaultValue` overwrite whatever the reader has since typed.
   const [seedValueFromDefaultValue] = useState(() =>
     utcDateTimeFromParsableIsoString(defaultValue),
   );
 
-  // Both props resolve to the one `value` the picker is handed on every render,
-  // which keeps it controlled for its whole life. Handing MUI `defaultValue` for
-  // an uncontrolled field instead would make the picker stop following `value`
-  // after mount, so a date arriving later (or a field being cleared) would never
-  // reach the input.
+  // Both props resolve to the one `value` the picker is handed on every render, which keeps it controlled for its whole life. Handing MUI `defaultValue` for an uncontrolled field instead would make the picker stop following `value` after mount, so a date arriving later (or a field being cleared) would never reach the input.
   const pickerValue = useMemo(
     () =>
       value === undefined

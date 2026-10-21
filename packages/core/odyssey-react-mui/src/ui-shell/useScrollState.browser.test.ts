@@ -48,8 +48,7 @@ const renderElements = ({
   containerElement.style.setProperty("height", containerElementHeight);
   childElement.style.setProperty("height", scrollableElementHeight);
 
-  // For these Elements to have height, they need to be appended to the DOM.
-  // Tagged via `appendToSandbox` so the global afterEach removes it.
+  // For these Elements to have height, they need to be appended to the DOM. Tagged via `appendToSandbox` so the global afterEach removes it.
   appendToSandbox(containerElement);
   containerElement.append(childElement);
 

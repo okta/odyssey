@@ -14,10 +14,7 @@ import type { ThemeOptions } from "@mui/material";
 
 import type { GetComponentsProps } from "./types.js";
 
-// MUI draws the ring inside a fixed 44-unit viewBox and passes `thickness`
-// straight through as the SVG `stroke-width`, so the rendered stroke works out
-// to `thickness * size / 44`. Design specifies the same 1:12 stroke-to-diameter
-// ratio the icons use, which holds at every size when thickness is 44 / 12:
+// MUI draws the ring inside a fixed 44-unit viewBox and passes `thickness` straight through as the SVG `stroke-width`, so the rendered stroke works out to `thickness * size / 44`. Design specifies the same 1:12 stroke-to-diameter ratio the icons use, which holds at every size when thickness is 44 / 12:
 // 2px at the default 24px, and 1.33px where Button renders it at 16px.
 const STROKE_WIDTH_FOR_ONE_TO_TWELVE_RATIO = 44 / 12;
 

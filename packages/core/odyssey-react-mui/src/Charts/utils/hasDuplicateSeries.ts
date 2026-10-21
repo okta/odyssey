@@ -19,9 +19,7 @@ export type HasDuplicateSeriesProps = {
 /**
  * Returns `true` when two or more series share one name.
  *
- * A chart uses the name of a series as its React key and as its legend label.
- * When two series share one name, React drops one of them, and the chart draws
- * fewer lines than the data holds.
+ * A chart uses the name of a series as its React key and as its legend label. When two series share one name, React drops one of them, and the chart draws fewer lines than the data holds.
  */
 export const hasDuplicateSeries = ({ series }: HasDuplicateSeriesProps) =>
   new Set(series.map((chartSeries) => chartSeries.name)).size !== series.length;

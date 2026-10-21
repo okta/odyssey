@@ -82,25 +82,19 @@ export const StyledSideNavListItem = styled("li", {
   shouldForwardProp: sideNavListItemShouldForwardProp,
 })<SideNavListItemStyleProps>(sideNavListItemStyles);
 
-// Inside a sortable list, `SortableItem` supplies the `<li>`, so the item
-// content renders this `<div>` variant instead — nesting a `<li>` (or its own
-// one-item `<ul>`) inside each row would break the list's screen-reader
-// semantics.
+// Inside a sortable list, `SortableItem` supplies the `<li>`, so the item content renders this `<div>` variant instead — nesting a `<li>` (or its own one-item `<ul>`) inside each row would break the list's screen-reader semantics.
 const StyledSideNavListItemAsDiv = styled("div", {
   shouldForwardProp: sideNavListItemShouldForwardProp,
 })<SideNavListItemStyleProps>(sideNavListItemStyles);
 
 type SideNavListItemProps = HTMLAttributes<HTMLElement> &
   SideNavListItemStyleProps & {
-    // When rendered inside a sortable list, the root element is a `<div>`
-    // rather than the default `<li>` (see `StyledSideNavListItemAsDiv`).
+    // When rendered inside a sortable list, the root element is a `<div>` rather than the default `<li>` (see `StyledSideNavListItemAsDiv`).
     isWithinSortableList?: boolean;
   };
 
-// Selecting the `<li>` or `<div>` root inside JSX and asserting a single styled
-// type would mistype the forwarded ref as `HTMLLIElement` even when the DOM
-// node is a `<div>`. Wrapping the choice in a `forwardRef<HTMLElement>` keeps
-// the ref honestly typed for both variants.
+// Selecting the `<li>` or `<div>` root inside JSX and asserting a single styled type would mistype the forwarded ref as `HTMLLIElement` even when the DOM
+// node is a `<div>`. Wrapping the choice in a `forwardRef<HTMLElement>` keeps the ref honestly typed for both variants.
 const SideNavListItem = forwardRef<HTMLElement, SideNavListItemProps>(
   ({ isWithinSortableList, ...sideNavListItemProps }, sideNavListItemRef) =>
     isWithinSortableList ? (
@@ -131,9 +125,7 @@ type ScrollIntoViewHandle = {
   scrollIntoView: () => void;
 };
 
-// The row's active background: neutral by default, or the selected-item blue +
-// action color when selected. Shared by the drag-active and hover/focus states
-// so they stay identical.
+// The row's active background: neutral by default, or the selected-item blue + action color when selected. Shared by the drag-active and hover/focus states so they stay identical.
 const getActiveRowBackgroundStyles = ({
   isSelected,
   odysseyDesignTokens,
@@ -167,9 +159,7 @@ export const getBaseNavItemContentStyles = ({
 }: {
   isActiveDropTarget: boolean;
   isDisabled?: boolean;
-  // True for the copy shown during a drag (the overlay). Applies the row's
-  // active background independent of hover/focus, so mouse and keyboard drags
-  // look identical. See getBaseNavItemContentStyles usage of isActiveDropTarget.
+  // True for the copy shown during a drag (the overlay). Applies the row's active background independent of hover/focus, so mouse and keyboard drags look identical. See getBaseNavItemContentStyles usage of isActiveDropTarget.
   isDragActive?: boolean;
   isSelected?: boolean;
   odysseyDesignTokens: DesignTokens;
@@ -195,10 +185,7 @@ export const getBaseNavItemContentStyles = ({
       odysseyDesignTokens.HueNeutral50,
   }),
 
-  // The dragged copy (overlay) carries the active row background regardless of
-  // hover/focus, so keyboard and mouse drags render identically. The hover
-  // selector below only fires for pointer hover / handle focus, which the
-  // overlay copy never has.
+  // The dragged copy (overlay) carries the active row background regardless of hover/focus, so keyboard and mouse drags render identically. The hover selector below only fires for pointer hover / handle focus, which the overlay copy never has.
   ...(isDragActive &&
     getActiveRowBackgroundStyles({
       isSelected,
@@ -402,9 +389,7 @@ const SideNavItemContent = ({
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
   const [isActiveDropTarget, setIsActiveDropTarget] = useState(false);
-  // True only for the copy rendered inside the DragOverlay (the visible copy
-  // during a drag), so the active row background shows for both mouse and
-  // keyboard drags rather than relying on pointer hover / handle focus.
+  // True only for the copy rendered inside the DragOverlay (the visible copy during a drag), so the active row background shows for both mouse and keyboard drags rather than relying on pointer hover / handle focus.
   const { isGrabbed } = useDragOverlayContext();
 
   const localScrollRef = useRef<HTMLElement>(null);
@@ -461,11 +446,7 @@ const SideNavItemContent = ({
       {
         // Use Link for nav items with links and div for disabled or non-link items
         isDisabled ? (
-          // `aria-disabled` is only announced on a widget role, so the
-          // disabled state lives on this `role="button"` element (mirroring
-          // the interactive branch below and the disabled accordion summary)
-          // rather than the wrapper, whose `listitem` role (or plain `<div>`
-          // in sortable mode) can't carry a disabled state for AT.
+          // `aria-disabled` is only announced on a widget role, so the disabled state lives on this `role="button"` element (mirroring the interactive branch below and the disabled accordion summary) rather than the wrapper, whose `listitem` role (or plain `<div>` in sortable mode) can't carry a disabled state for AT.
           <NavItemContentContainer
             aria-current={isSelected ? "page" : undefined}
             aria-disabled={isDisabled}

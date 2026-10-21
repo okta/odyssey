@@ -72,8 +72,7 @@ export type PlaceholderRecord<
 > = Record<ExtractPlaceholders<TResourceBundle[TKey]>, PlaceholderValues>;
 
 /**
- * Custom function signature that enforces strong typing
- * against the keys of a specific resource bundle.
+ * Custom function signature that enforces strong typing against the keys of a specific resource bundle.
  */
 export type TypedTFunction<TResourceBundle extends I18nTranslationBundle> = <
   TKey extends keyof TResourceBundle & string,
@@ -91,8 +90,7 @@ export type TypedTFunction<TResourceBundle extends I18nTranslationBundle> = <
 /**
  * Return type of our strongly-typed `useTranslation` hook.
  *
- * Matches the original `useTranslation` return type, but with
- * our `TypedTFunction` rather than the generic `TFunction`.
+ * Matches the original `useTranslation` return type, but with our `TypedTFunction` rather than the generic `TFunction`.
  */
 export type TypedUseTranslationResponse<
   TResourceBundle extends I18nTranslationBundle,
@@ -114,8 +112,7 @@ export type UseTranslationOptions<TNamespace extends string> = Omit<
 >;
 
 /**
- * A strongly-typed version of the `useTranslation` hook from `react-i18next`,
- * bound to a specific namespace and resource bundle type.
+ * A strongly-typed version of the `useTranslation` hook from `react-i18next`, bound to a specific namespace and resource bundle type.
  */
 export type UseTranslation<
   TNamespace extends string,
@@ -163,8 +160,7 @@ export type TranslationServices<
 };
 
 /**
- * Initializes an `i18next` instance and provides strongly-typed
- * translation utilities: `useTranslation`, `Trans`, and `TranslationProvider`.
+ * Initializes an `i18next` instance and provides strongly-typed translation utilities: `useTranslation`, `Trans`, and `TranslationProvider`.
  */
 export function getTranslationServices<
   TNamespace extends string,
@@ -209,8 +205,7 @@ export function getTranslationServices<
     i18nInstance.addResourceBundle(languageCode, namespace, bundle);
   });
 
-  // `getResourceBundle` is typed `any`, and it returns `undefined` rather than an
-  // empty bundle when the instance holds nothing for that language.
+  // `getResourceBundle` is typed `any`, and it returns `undefined` rather than an empty bundle when the instance holds nothing for that language.
   const getStoredBundle = (languageCode: string) =>
     i18nInstance.getResourceBundle(languageCode, namespace) as
       | TranslationBundleGroup
@@ -240,11 +235,7 @@ export function getTranslationServices<
 
       const overrideEntries = getTypedObjectEntries(translationOverrides);
 
-      // Snapshotting the live bundle, rather than the bundle
-      // `getTranslationServices` was called with, is what makes teardown safe
-      // for anything else that has written to this instance: an outer provider's
-      // overrides and a consumer's own `addResourceBundle` are both part of the
-      // state this provider restores.
+      // Snapshotting the live bundle, rather than the bundle `getTranslationServices` was called with, is what makes teardown safe for anything else that has written to this instance: an outer provider's overrides and a consumer's own `addResourceBundle` are both part of the state this provider restores.
       const restorePlanEntries = overrideEntries.map(
         ([languageCode, overrideBundle]) =>
           [
@@ -266,12 +257,7 @@ export function getTranslationServices<
         );
       });
 
-      // `i18nInstance` is created once per package and shared by every consumer,
-      // so an override applied here outlives the provider that asked for it
-      // unless it is undone. Undoing it keeps a tree that mounts later in the
-      // same page from inheriting strings it never opted into. In Storybook that
-      // showed up as one story's overrides bleeding into unrelated stories
-      // rendered after it in the same tab.
+      // `i18nInstance` is created once per package and shared by every consumer, so an override applied here outlives the provider that asked for it unless it is undone. Undoing it keeps a tree that mounts later in the same page from inheriting strings it never opted into. In Storybook that showed up as one story's overrides bleeding into unrelated stories rendered after it in the same tab.
       return () => {
         restorePlanEntries.forEach(([languageCode, restorePlan]) => {
           const restoredBundle = getBundleWithRestoredOverrides({
@@ -279,9 +265,7 @@ export function getTranslationServices<
             restorePlan,
           });
 
-          // `removeResourceBundle` splices the namespace out of `options.ns`
-          // whether or not the bundle existed, and only `addResourceBundle` puts
-          // it back, so the re-add has to run on every path.
+          // `removeResourceBundle` splices the namespace out of `options.ns` whether or not the bundle existed, and only `addResourceBundle` puts it back, so the re-add has to run on every path.
           i18nInstance.removeResourceBundle(languageCode, namespace);
           i18nInstance.addResourceBundle(
             languageCode,

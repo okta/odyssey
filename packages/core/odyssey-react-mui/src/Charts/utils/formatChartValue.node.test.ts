@@ -79,8 +79,7 @@ describe(formatChartValue.name, () => {
       languageCode: "de",
     });
 
-    // The test escapes the no-break space before the currency symbol.
-    // A no-break space looks like a plain space in an editor.
+    // The test escapes the no-break space before the currency symbol. A no-break space looks like a plain space in an editor.
     expect(formattedValue).toBe("1.234,50\u00A0$");
   });
 

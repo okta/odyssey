@@ -85,13 +85,11 @@ export type UpdateFiltersOrValues = ({
 // This is the shape of each individual filter
 export type DataFilter = {
   /**
-   * Optional description for the filter that appears as subtext in the menu,
-   * between the filter label and the dynamic selection text.
+   * Optional description for the filter that appears as subtext in the menu, between the filter label and the dynamic selection text.
    */
   description?: string;
   /**
-   * A unique ID for the filter, typically the same id
-   * as the column it'll be applied to.
+   * A unique ID for the filter, typically the same id as the column it'll be applied to.
    */
   id: Exclude<MRT_ColumnDef<MRT_RowData>["accessorKey"], undefined>;
   /**
@@ -105,8 +103,7 @@ export type DataFilter = {
    */
   label: string;
   /**
-   * If the filter control has preset options (such as a select or multi-select),
-   * these are the options provided.
+   * If the filter control has preset options (such as a select or multi-select), these are the options provided.
    */
   options?: Option[];
   /**
@@ -114,14 +111,11 @@ export type DataFilter = {
    */
   render?: (updateFilters: UpdateFiltersOrValues) => ReactNode;
   /**
-   * The current value of the filter. Typically a string, but
-   * filters that allow for multiple selections (such as multi-select)
-   * can accept an array.
+   * The current value of the filter. Typically a string, but filters that allow for multiple selections (such as multi-select) can accept an array.
    */
   value?: DataFilterValue;
   /**
-   * The type of filter, which determines which filtering control
-   * is shown.
+   * The type of filter, which determines which filtering control is shown.
    */
   variant?: MRT_ColumnDef<MRT_RowData>["filterVariant"];
 };
@@ -129,8 +123,7 @@ export type DataFilter = {
 // This is the type of the DataFilters component itself
 export type DataFiltersProps = {
   /**
-   * A slot for optional additional actions, like buttons, to be displayed
-   * on the opposite side of the top row from the search and filter controls.
+   * A slot for optional additional actions, like buttons, to be displayed on the opposite side of the top row from the search and filter controls.
    */
   additionalActions?: ReactNode;
   /**
@@ -138,8 +131,7 @@ export type DataFiltersProps = {
    */
   defaultSearchTerm?: string;
   /**
-   * The filters available in the filter menu. If undefined,
-   * the filter menu won't be shown.
+   * The filters available in the filter menu. If undefined, the filter menu won't be shown.
    */
   filters?: Array<DataFilter>;
   /**
@@ -155,15 +147,12 @@ export type DataFiltersProps = {
    */
   onChangeFilters?: (filters: Array<DataFilter>) => void;
   /**
-   * The callback that's fired when the search input changes
-   * (either on change or on submit, based on the value of `hasSearchSubmitButton`).
+   * The callback that's fired when the search input changes (either on change or on submit, based on the value of `hasSearchSubmitButton`).
    * If this is undefined, the search input will not be shown.
    */
   onChangeSearch?: (value: string) => void;
   /**
-   * The debounce time, in milliseconds, for the search input firing
-   * `onChangeSearch` when changed. If `hasSearchSubmitButton` is true,
-   * this doesn't do anything.
+   * The debounce time, in milliseconds, for the search input firing `onChangeSearch` when changed. If `hasSearchSubmitButton` is true, this doesn't do anything.
    */
   searchDelayTime?: number;
   /**
@@ -451,12 +440,7 @@ const DataFilters = ({
     NonNullable<MuiPopoverProps["onClose"]>
   >(
     (ev, reason) => {
-      // Escape only backs out of the second-level popover, keeping
-      // the first-level filters menu open and returning focus to
-      // the filter option that opened it, so keyboard users don't
-      // lose their place (WCAG 2.4.3). A second Escape then lets
-      // MuiMenu's own focus restoration return focus to the
-      // "Filters" trigger button.
+      // Escape only backs out of the second-level popover, keeping the first-level filters menu open and returning focus to the filter option that opened it, so keyboard users don't lose their place (WCAG 2.4.3). A second Escape then lets MuiMenu's own focus restoration return focus to the "Filters" trigger button.
       if (reason === "escapeKeyDown") {
         handleFilterSubmit();
         setIsFilterPopoverOpen(false);
@@ -514,9 +498,7 @@ const DataFilters = ({
           transformOrigin={{ horizontal: "left", vertical: "top" }}
         >
           {filtersProp.map((filter) => {
-            // Unintuitively, we can't just use filter.value to grab the filter value.
-            // `filter` is the initial set of filters provided to the component, so its
-            // value prop may not reflect the current value of the filter.
+            // Unintuitively, we can't just use filter.value to grab the filter value. `filter` is the initial set of filters provided to the component, so its value prop may not reflect the current value of the filter.
             const latestFilterValue = filters.find(
               (f) => f.id === filter.id,
             )?.value;
@@ -628,9 +610,7 @@ const DataFilters = ({
               <MuiPopover
                 anchorEl={filterPopoverAnchorElement}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                // Positions the popover flush with the edge of the parent menu
-                // and at the right shadow elevation. These magic values are simply
-                // to match the default popover offset.
+                // Positions the popover flush with the edge of the parent menu and at the right shadow elevation. These magic values are simply to match the default popover offset.
                 elevation={2}
                 id="filter-form"
                 onClose={handleFilterPopoverClose}

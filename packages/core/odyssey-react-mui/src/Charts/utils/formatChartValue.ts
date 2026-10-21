@@ -13,11 +13,8 @@
 import { resolveChartLocale } from "./resolveChartLocale.js";
 
 /**
- * The `Intl.NumberFormat` options for each preset name. The preset union type
- * {@link ChartValueFormat} takes its members from the keys of this object.
- * This keeps the two lists in agreement. If a name exists in the union but
- * not here, it resolves to `undefined` options. The value then formats as a
- * plain decimal. The code gives no error.
+ * The `Intl.NumberFormat` options for each preset name. The preset union type {@link ChartValueFormat} takes its members from the keys of this object.
+ * This keeps the two lists in agreement. If a name exists in the union but not here, it resolves to `undefined` options. The value then formats as a plain decimal. The code gives no error.
  */
 const numberFormatOptionsByPreset = {
   compact: { notation: "compact" },
@@ -30,11 +27,7 @@ const numberFormatOptionsByPreset = {
  *
  * - `"decimal"` renders the value in full, for example `1,234.5`.
  * - `"compact"` shortens large values, for example `1.2K`.
- * - `"percent"` multiplies the value by 100 and adds a percent sign. For
- *   example, `0.4567` renders as `46%`. Supply the value as a fraction, not
- *   as a percentage that is already scaled to 100. If the value is already
- *   scaled, the preset scales it twice. For example, `42` renders as
- *   `4,200%`.
+ * - `"percent"` multiplies the value by 100 and adds a percent sign. For example, `0.4567` renders as `46%`. Supply the value as a fraction, not as a percentage that is already scaled to 100. If the value is already scaled, the preset scales it twice. For example, `42` renders as `4,200%`.
  */
 export type ChartValueFormatPreset = keyof typeof numberFormatOptionsByPreset;
 
@@ -50,16 +43,9 @@ export type ChartValueCurrencyFormat = {
 };
 
 /**
- * A chart value format is one of three kinds: a named preset, an explicit
- * currency, or a function. A function takes the raw number and returns a
- * string. A function gives the caller full control over the presentation.
+ * A chart value format is one of three kinds: a named preset, an explicit currency, or a function. A function takes the raw number and returns a string. A function gives the caller full control over the presentation.
  *
- * The presets are a closed set. They do not use the general type
- * `Intl.NumberFormatOptions`. That type allows combinations that fail when
- * the code builds them. For example, `{ style: "currency" }` without a
- * `currency` field passes the type check. However, it raises a `TypeError`
- * at construction. A caller that needs options outside the preset set can
- * pass a function instead.
+ * The presets are a closed set. They do not use the general type `Intl.NumberFormatOptions`. That type allows combinations that fail when the code builds them. For example, `{ style: "currency" }` without a `currency` field passes the type check. However, it raises a `TypeError` at construction. A caller that needs options outside the preset set can pass a function instead.
  */
 export type ChartValueFormat =
   | ChartValueFormatPreset
@@ -76,9 +62,7 @@ export type FormatChartValueProps = {
    */
   format?: ChartValueFormat;
   /**
-   * A language code from the Odyssey translation context, such as `"en"` or
-   * `"pt_BR"`. The function converts the language code to a BCP 47 tag
-   * before the value reaches `Intl`.
+   * A language code from the Odyssey translation context, such as `"en"` or `"pt_BR"`. The function converts the language code to a BCP 47 tag before the value reaches `Intl`.
    */
   languageCode: string;
   /** The number to format. */
@@ -88,12 +72,7 @@ export type FormatChartValueProps = {
 /**
  * Formats a single chart value into a locale aware string.
  *
- * When `format` is a function, the code calls it with `value`. The code
- * returns the result directly and ignores `languageCode`. A caller that
- * supplies a function controls the full presentation of the value.
- * Otherwise, the function formats the value with an `Intl.NumberFormat`
- * instance. It builds the instance from the resolved locale and the
- * requested preset or currency.
+ * When `format` is a function, the code calls it with `value`. The code returns the result directly and ignores `languageCode`. A caller that supplies a function controls the full presentation of the value. Otherwise, the function formats the value with an `Intl.NumberFormat` instance. It builds the instance from the resolved locale and the requested preset or currency.
  */
 export const formatChartValue = ({
   format = "decimal",

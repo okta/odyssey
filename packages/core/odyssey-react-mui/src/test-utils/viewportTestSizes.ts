@@ -15,9 +15,7 @@ import {
   COMPACT_MAX_WIDTH,
 } from "../theme/useMediaQuery.js";
 
-// Compact triggers when either dimension is at or below its max, so a "roomy"
-// value clears the relevant max by this buffer. Deriving from the thresholds
-// (rather than a hardcoded size) keeps viewport tests correct if the compact
+// Compact triggers when either dimension is at or below its max, so a "roomy" value clears the relevant max by this buffer. Deriving from the thresholds (rather than a hardcoded size) keeps viewport tests correct if the compact
 // activation buffers ever change.
 const ROOMY_BUFFER = 100;
 

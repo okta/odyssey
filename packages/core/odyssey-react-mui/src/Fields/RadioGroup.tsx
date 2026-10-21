@@ -66,8 +66,7 @@ type FieldRenderProps = Partial<
   Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
 /**
- * A group of mutually exclusive Radio inputs, allowing the user to select
- * exactly one option from a set.
+ * A group of mutually exclusive Radio inputs, allowing the user to select exactly one option from a set.
  */
 const RadioGroup = ({
   ariaDescribedBy,

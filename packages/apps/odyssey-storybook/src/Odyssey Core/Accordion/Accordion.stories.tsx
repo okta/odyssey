@@ -104,10 +104,7 @@ export const Single: Story = {
 export const Borderless: Story = {
   args: {
     children: "This is the content of the box.",
-    // Expanded by default so Applitools captures the open Accordion without a
-    // play function. useStoryArgOrLocalState keeps the isExpanded control live in
-    // Canvas and falls back to local state on the Docs page, where useArgs cannot
-    // drive a non-default story.
+    // Expanded by default so Applitools captures the open Accordion without a play function. useStoryArgOrLocalState keeps the isExpanded control live in Canvas and falls back to local state on the Docs page, where useArgs cannot drive a non-default story.
     isExpanded: true,
     variant: "borderless",
   },

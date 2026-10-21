@@ -54,8 +54,7 @@ export const generateContrastColors = ({
   // returns a number between 0(black) and 255(white)
   const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
 
-  // Luminance values between LUMINANCE_EDGE_MIN-LUMINANCE_EDGE_MAX can cause contrast ration issues
-  // Using #000000 helps in these cases
+  // Luminance values between LUMINANCE_EDGE_MIN-LUMINANCE_EDGE_MAX can cause contrast ration issues Using #000000 helps in these cases
   const luminanceValueInEdgeRange =
     luminance > LUMINANCE_EDGE_MIN && luminance < LUMINANCE_EDGE_MAX;
 

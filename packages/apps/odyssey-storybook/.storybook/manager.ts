@@ -14,10 +14,7 @@ import { setOdysseyStorybookManagerConfig } from "@okta/odyssey-storybook-preset
 
 import packageJson from "../package.json" with { type: "json" };
 
-// `scripts/publish-packages.sh` rewrites every version to `<release>-<short sha>`
-// before it publishes, so the Storybook that ships is built from a version string
-// no consumer can install. The brand slot names the release that goes out, so the
-// prerelease suffix comes off.
+// `scripts/publish-packages.sh` rewrites every version to `<release>-<short sha>` before it publishes, so the Storybook that ships is built from a version string no consumer can install. The brand slot names the release that goes out, so the prerelease suffix comes off.
 const releaseVersion = packageJson.version.split("-")[0];
 
 setOdysseyStorybookManagerConfig({

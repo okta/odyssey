@@ -106,8 +106,7 @@ const ContentContainer = styled("div", {
 }));
 
 /**
- * A non-dismissible inline message that draws attention to important contextual information. Use
- * Callout to surface status, warnings, errors, or supplementary guidance within a page or form.
+ * A non-dismissible inline message that draws attention to important contextual information. Use Callout to surface status, warnings, errors, or supplementary guidance within a page or form.
  */
 const Callout = ({
   children,

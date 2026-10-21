@@ -56,8 +56,7 @@ export type MenuItemProps = {
 } & Pick<HtmlProps, "id" | "testId">;
 
 /**
- * An individual action item rendered inside a Menu. Supports default and destructive visual
- * variants, disabled and selected states, and auto-closes the parent Menu on click by default.
+ * An individual action item rendered inside a Menu. Supports default and destructive visual variants, disabled and selected states, and auto-closes the parent Menu on click by default.
  */
 const MenuItem = ({
   children,

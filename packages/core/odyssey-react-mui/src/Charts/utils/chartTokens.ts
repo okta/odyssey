@@ -19,20 +19,15 @@ import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext.js";
 const CSS_ROOT_FONT_SIZE_PIXELS = 16;
 
 /**
- * The chart values that no Odyssey design token supplies. Each entry is either
- * a Highcharts implementation detail that no token will ever cover, or a chart
- * specification value that the design team has not yet turned into a token.
+ * The chart values that no Odyssey design token supplies. Each entry is either a Highcharts implementation detail that no token will ever cover, or a chart specification value that the design team has not yet turned into a token.
  */
 export const chartTokens = {
   // TransitionDurationMainAsNumber is 100, and the spec asks for 250.
   ChartAnimationDuration: 250,
-  // Highcharts positions its rectangular legend symbols from the text
-  // baseline, so a 14px square needs this downward optical correction.
+  // Highcharts positions its rectangular legend symbols from the text baseline, so a 14px square needs this downward optical correction.
   ChartLegendRectangleVerticalOffset: 1,
   ChartLegendSymbolSize: 14,
-  // The amount Highcharts adds to ChartLineStrokeWidth on hover, for the
-  // spec's 3px hover stroke. Set explicitly, so an undocumented Highcharts
-  // default cannot move the hover stroke out of spec.
+  // The amount Highcharts adds to ChartLineStrokeWidth on hover, for the spec's 3px hover stroke. Set explicitly, so an undocumented Highcharts default cannot move the hover stroke out of spec.
   ChartLineHoverStrokeWidthPlus: 1,
   ChartLineMarkerHoverHaloOpacity: 0.25,
   ChartLineMarkerHoverHaloSize: 20,
@@ -40,22 +35,14 @@ export const chartTokens = {
   ChartLineMarkerSize: 8,
   // The spec asks for 2px, and BorderWidthHeavy is 1.5px.
   ChartLineStrokeWidth: 2,
-  // The floor for a consumer that sets no height on the chart container. The
-  // spacing scale stops at Spacing9, which is 56px.
+  // The floor for a consumer that sets no height on the chart container. The spacing scale stops at Spacing9, which is 56px.
   ChartMinHeight: 400,
-  // Highcharts gives a rotated axis label less visible space than an upright
-  // one at the same `title.margin`. The comment on `axis.rotatedLabelSpacing`
-  // below gives the cause.
+  // Highcharts gives a rotated axis label less visible space than an upright one at the same `title.margin`. The comment on `axis.rotatedLabelSpacing` below gives the cause.
   ChartYAxisLabelBaselineCompensation: 8,
 } as const;
 
 /**
- * Converts an Odyssey design token length to a pixel number, because the
- * charting library takes numbers and not CSS length strings. The function
- * multiplies a `rem` token by the base font size. The function uses a `px`
- * token without a change, because a `px` value is already absolute. Therefore
- * the function does not scale a value such as `BorderRadiusTight` as a `rem`
- * value.
+ * Converts an Odyssey design token length to a pixel number, because the charting library takes numbers and not CSS length strings. The function multiplies a `rem` token by the base font size. The function uses a `px` token without a change, because a `px` value is already absolute. Therefore the function does not scale a value such as `BorderRadiusTight` as a `rem` value.
  */
 export const getTokenValueAsPixels = ({
   tokenValue,
@@ -70,9 +57,7 @@ export const getTokenValueAsPixels = ({
     : parseFloat(tokenValue);
 
 /**
- * Builds the chart values from the Odyssey design tokens. Every value sits in
- * the group named after the part of the chart that it styles, so a chart reads
- * one group per Highcharts child.
+ * Builds the chart values from the Odyssey design tokens. Every value sits in the group named after the part of the chart that it styles, so a chart reads one group per Highcharts child.
  *
  * {@link useChartTokens} wraps this function for a component. This function
  * takes the tokens as an argument, so a test calls it without a React render.
@@ -88,17 +73,13 @@ export const getChartTokens = ({
       typographySizeBase: odysseyDesignTokens.TypographySizeBase,
     });
 
-  // Highcharts reads a line height with `parseInt`, so it turns a unitless
-  // ratio such as `1.5` into 1 pixel and draws the wrapped lines of a label
-  // on top of each other.
+  // Highcharts reads a line height with `parseInt`, so it turns a unitless ratio such as `1.5` into 1 pixel and draws the wrapped lines of a label on top of each other.
   const lineHeight = `${
     toPixels(odysseyDesignTokens.TypographySizeBody) *
     odysseyDesignTokens.TypographyLineHeightBody
   }px`;
 
-  // The axis values, the axis labels and the legend items share this
-  // one style. The design specifies the same text treatment for all three,
-  // so an axis label carries no more weight than an axis value.
+  // The axis values, the axis labels and the legend items share this one style. The design specifies the same text treatment for all three, so an axis label carries no more weight than an axis value.
   const axisValueStyle = {
     color: odysseyDesignTokens.TypographyColorSubordinate,
     fontFamily: odysseyDesignTokens.TypographyFamilyBody,
@@ -112,9 +93,7 @@ export const getChartTokens = ({
     minHeight: `${chartTokens.ChartMinHeight}px`,
 
     /**
-     * The palette that a chart gives to the charting library as its series
-     * colors. The library assigns these colors to the series in order. A
-     * caller cannot set the color of a series.
+     * The palette that a chart gives to the charting library as its series colors. The library assigns these colors to the series in order. A caller cannot set the color of a series.
      */
     seriesColors: [
       odysseyDesignTokens.HueBlue600,
@@ -133,9 +112,7 @@ export const getChartTokens = ({
       labelStyle: axisValueStyle,
       // The grid lines, the axis line and the ticks share this one color.
       lineColor: odysseyDesignTokens.BorderColorDisplay,
-      // Highcharts renders the gap beside a rotated axis label about 3px
-      // smaller than requested. Add that difference back so both axis labels
-      // appear Spacing2 away from their values.
+      // Highcharts renders the gap beside a rotated axis label about 3px smaller than requested. Add that difference back so both axis labels appear Spacing2 away from their values.
       rotatedLabelSpacing:
         toPixels(odysseyDesignTokens.Spacing2) +
         chartTokens.ChartYAxisLabelBaselineCompensation,
@@ -149,8 +126,7 @@ export const getChartTokens = ({
 
     chart: {
       backgroundColor: "transparent",
-      // Without some outer spacing, Highcharts clips the left edge of the
-      // widest Y axis value.
+      // Without some outer spacing, Highcharts clips the left edge of the widest Y axis value.
       edgeSpacing: toPixels(odysseyDesignTokens.Spacing2),
       fontFamily: odysseyDesignTokens.TypographyFamilyBody,
       topEdgeSpacing: toPixels(odysseyDesignTokens.Spacing3),
@@ -159,8 +135,7 @@ export const getChartTokens = ({
     focusRing: {
       color: odysseyDesignTokens.BorderColorPrimaryControl,
       offset: toPixels(odysseyDesignTokens.FocusOutlineOffsetMain),
-      // Highcharts types the focus border style as a `CSSObject`, so this one
-      // radius carries its unit while every other length here is a number.
+      // Highcharts types the focus border style as a `CSSObject`, so this one radius carries its unit while every other length here is a number.
       radius: `${toPixels(odysseyDesignTokens.BorderRadiusTight)}px`,
       width: toPixels(odysseyDesignTokens.FocusOutlineWidthMain),
     },
@@ -172,30 +147,23 @@ export const getChartTokens = ({
         symbolWidth: chartTokens.ChartLegendSymbolSize,
       },
       line: {
-        // Highcharts also uses this as the limit for the marker in the
-        // legend: it draws that marker at a radius of half this height, or
-        // at `line.markerRadius`, whichever is less. Both come from
-        // ChartLineMarkerSize, so the legend cannot cut the marker down.
+        // Highcharts also uses this as the limit for the marker in the legend: it draws that marker at a radius of half this height, or at `line.markerRadius`, whichever is less. Both come from ChartLineMarkerSize, so the legend cannot cut the marker down.
         symbolHeight: chartTokens.ChartLineMarkerSize,
-        // The line symbol spans Spacing4, the same width as the line in the
-        // popover series indicator.
+        // The line symbol spans Spacing4, the same width as the line in the popover series indicator.
         symbolWidth: toPixels(odysseyDesignTokens.Spacing4),
       },
       shared: {
         alignColumns: false,
         borderWidth: 0,
         itemDistance: toPixels(odysseyDesignTokens.Spacing4),
-        // Highcharts merges this over `itemStyle` for a legend item whose
-        // series is hidden (toggled off). The spec's "Selected" state is
-        // this same toggled-off item, styled with Color/Disabled.
+        // Highcharts merges this over `itemStyle` for a legend item whose series is hidden (toggled off). The spec's "Selected" state is this same toggled-off item, styled with Color/Disabled.
         itemHiddenStyle: {
           color: odysseyDesignTokens.TypographyColorDisabled,
         },
         itemHoverStyle: {
           color: odysseyDesignTokens.TypographyColorBody,
         },
-        // The legend spec gives its label text a different default color
-        // (Color/Body) than the axis values and labels (subordinate gray),
+        // The legend spec gives its label text a different default color (Color/Body) than the axis values and labels (subordinate gray),
         // so the legend does not share `axisValueStyle`.
         itemStyle: {
           color: odysseyDesignTokens.TypographyColorSubordinate,
@@ -227,14 +195,7 @@ export const getChartTokens = ({
       padding: toPixels(odysseyDesignTokens.Spacing4),
 
       containerStyle: {
-        // Odyssey has no token named "Depth/Menu". DepthMedium is the
-        // closest match to the hover spec's "3-layer soft drop shadow": it
-        // has three shadow layers, and its opacities are lighter than
-        // DepthHigh's. The popover's own `shadow` prop stays `false` because
-        // Highcharts' built-in shadow is a single-layer SVG filter and
-        // cannot reproduce a 3-layer shadow; this CSS box-shadow applies
-        // instead through the popover's HTML container (Highcharts' `Tooltip`
-        // defaults to `useHTML`).
+        // Odyssey has no token named "Depth/Menu". DepthMedium is the closest match to the hover spec's "3-layer soft drop shadow": it has three shadow layers, and its opacities are lighter than DepthHigh's. The popover's own `shadow` prop stays `false` because Highcharts' built-in shadow is a single-layer SVG filter and cannot reproduce a 3-layer shadow; this CSS box-shadow applies instead through the popover's HTML container (Highcharts' `Tooltip` defaults to `useHTML`).
         boxShadow: odysseyDesignTokens.DepthMedium,
         color: odysseyDesignTokens.TypographyColorBody,
         fontFamily: odysseyDesignTokens.TypographyFamilyBody,
@@ -262,14 +223,9 @@ export const getChartTokens = ({
 /**
  * Returns the chart values that come from the Odyssey design tokens in context.
  *
- * A chart component calls this one hook, and does not resolve the tokens
- * itself. Therefore the same token choices apply to every chart in the family.
+ * A chart component calls this one hook, and does not resolve the tokens itself. Therefore the same token choices apply to every chart in the family.
  *
- * The whole object comes from one `useMemo`. A chart passes these values to the
- * React children of the chart library, and that library rebuilds and redraws the
- * whole chart when the identity of a child changes. A new style object on each
- * render therefore costs a redraw. One memo over the whole object keeps every
- * value stable while the tokens stay the same.
+ * The whole object comes from one `useMemo`. A chart passes these values to the React children of the chart library, and that library rebuilds and redraws the whole chart when the identity of a child changes. A new style object on each render therefore costs a redraw. One memo over the whole object keeps every value stable while the tokens stay the same.
  */
 export const useChartTokens = () => {
   const odysseyDesignTokens = useOdysseyDesignTokens();

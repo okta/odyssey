@@ -58,8 +58,7 @@ describe(hasDuplicateSeries.name, () => {
   });
 
   test("two series that share the empty string name", () => {
-    // An empty string is a legal series name, and two series that both use it
-    // collide on the React key in the same way as any other repeated name.
+    // An empty string is a legal series name, and two series that both use it collide on the React key in the same way as any other repeated name.
     expect(
       hasDuplicateSeries({
         series: [

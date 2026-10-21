@@ -180,11 +180,9 @@ type SelectRenderProps = Partial<
   Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
 /**
- * Options in Odyssey <Select> are passed as an array, which can contain any combination
- * of the following:
+ * Options in Odyssey <Select> are passed as an array, which can contain any combination of the following:
  *   - string —
- *     A simple string. The string will be both the text and the value of the resulting
- *     option. <option value="string">string</option>
+ *     A simple string. The string will be both the text and the value of the resulting option. <option value="string">string</option>
  *
  *   - { text: string } —
  *     Same as above, but the string is contained within an object.
@@ -199,8 +197,7 @@ type SelectRenderProps = Partial<
 
 const { CONTROLLED } = ComponentControlledState;
 /**
- * A form field that lets users choose one or more options from a dropdown list. Supports
- * single and multi-select modes, grouped options, and controlled or uncontrolled usage.
+ * A form field that lets users choose one or more options from a dropdown list. Supports single and multi-select modes, grouped options, and controlled or uncontrolled usage.
  */
 const Select = <
   Value extends SelectValueType<HasMultipleChoices>,
@@ -257,9 +254,7 @@ const Select = <
     number | undefined
   >(undefined);
 
-  // MUI measures anchorElement.clientWidth (excludes border) for the paper's
-  // minWidth, making the paper ~2px narrower than the field. Capturing
-  // offsetWidth (includes border) on open keeps both edges flush with the field.
+  // MUI measures anchorElement.clientWidth (excludes border) for the paper's minWidth, making the paper ~2px narrower than the field. Capturing offsetWidth (includes border) on open keeps both edges flush with the field.
   const handleMenuOpen = useCallback(() => {
     const anchor = selectRef.current?.parentNode as HTMLElement | null;
     if (anchor) {
@@ -307,15 +302,12 @@ const Select = <
     },
     [hasMultipleChoices, isDisabled, onChangeProp, isReadOnly],
   );
-  // Normalize the options array to accommodate the various
-  // data types that might be passed
+  // Normalize the options array to accommodate the various data types that might be passed
   const [normalizedOptions, normalizedOptionsMap] = useMemo(() => {
     const normalizedOptions = options.map((option) => {
       if (typeof option === "object") {
         /**
-         * If the value of `option?.value is an empty string, we need to make sure that we
-         * set an empty string to `value` in the normalized option so that the select component
-         * can potentially set it as the selected one in the text input
+         * If the value of `option?.value is an empty string, we need to make sure that we set an empty string to `value` in the normalized option so that the select component can potentially set it as the selected one in the text input
          */
         const value =
           option?.value === "" ? option.value : option.value || option.text;
@@ -386,9 +378,7 @@ const Select = <
                   <MuiChip
                     deleteIcon={
                       <CloseCircleFilledIcon
-                        // We need to stop event propagation on mouse down to prevent the deletion
-                        // from being blocked by the Select list opening, and also ensure that
-                        // the pointerEvent is registered even when the parent's are not
+                        // We need to stop event propagation on mouse down to prevent the deletion from being blocked by the Select list opening, and also ensure that the pointerEvent is registered even when the parent's are not
                         onMouseDown={stopPropagation}
                         sx={{ pointerEvents: "auto" }}
                       />
@@ -428,8 +418,7 @@ const Select = <
     ],
   );
 
-  // Convert the options into the ReactNode children
-  // that will populate the <Select>
+  // Convert the options into the ReactNode children that will populate the <Select>
   const renderedOptions = useMemo(
     () =>
       normalizedOptions.map((option, index) => {

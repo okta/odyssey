@@ -71,8 +71,7 @@ export type FieldsetProps = {
 } & Pick<HtmlProps, "testId" | "translate">;
 
 /**
- * A grouping of related form fields with a legend, optional description, and optional status alert.
- * Propagates a disabled state to all child fields via context.
+ * A grouping of related form fields with a legend, optional description, and optional status alert. Propagates a disabled state to all child fields via context.
  */
 const Fieldset = ({
   alert,

@@ -104,8 +104,7 @@ describe(SkipToContent.displayName!, () => {
       });
 
       await expect.element(skipButtonLocator).toBeInTheDocument();
-      // Container uses the sr-only clip pattern when not focused — it collapses
-      // to 1×1px and clips its content, visually hiding the button.
+      // Container uses the sr-only clip pattern when not focused — it collapses to 1×1px and clips its content, visually hiding the button.
       expect(
         getComputedStyle(skipButtonLocator.element().closest("div[class]")!)
           .width,
@@ -164,8 +163,7 @@ describe(SkipToContent.displayName!, () => {
       // Second Tab from external: interceptor must NOT fire again.
       await userEvent.keyboard("{Tab}");
 
-      // Focus moved naturally (to the next DOM element), not back to the
-      // skip button via the JavaScript interceptor.
+      // Focus moved naturally (to the next DOM element), not back to the skip button via the JavaScript interceptor.
       expect(document.activeElement).not.toBe(skipButtonLocator.element());
     });
   });
@@ -184,8 +182,7 @@ describe(SkipToContent.displayName!, () => {
       skipButtonLocator.element().focus();
       await expect.element(skipButtonLocator).toBeVisible();
 
-      // Click the button: should jump to main content, skipping the intervening
-      // element that would normally be the next Tab stop.
+      // Click the button: should jump to main content, skipping the intervening element that would normally be the next Tab stop.
       await userEvent.click(skipButtonLocator);
 
       expect(document.activeElement).toBe(mainContentElement);
@@ -204,8 +201,7 @@ describe(SkipToContent.displayName!, () => {
       skipButtonLocator.element().focus();
       await userEvent.keyboard("{Tab}");
 
-      // Focus moves naturally to the intervening element (next in DOM order),
-      // not to main content.
+      // Focus moves naturally to the intervening element (next in DOM order), not to main content.
       expect(document.activeElement).toBe(interveningElement);
     });
   });
@@ -228,8 +224,7 @@ describe(SkipToContent.displayName!, () => {
       await expect.element(skipButtonLocator).toHaveFocus();
       await expect.element(skipButtonLocator).toBeVisible();
 
-      // Tab from skip button: resume handler fires, restoring focus to the
-      // intercepted element so the browser continues Tab from there.
+      // Tab from skip button: resume handler fires, restoring focus to the intercepted element so the browser continues Tab from there.
       await userEvent.keyboard("{Tab}");
 
       expect(document.activeElement).toBe(afterInterceptedElement);
@@ -245,8 +240,7 @@ describe(SkipToContent.displayName!, () => {
       });
       await expect.element(skipButtonLocator).toBeInTheDocument();
 
-      // The button is sr-only until focused — Playwright refuses to click
-      // clipped elements, so focus it first to trigger :focus-within.
+      // The button is sr-only until focused — Playwright refuses to click clipped elements, so focus it first to trigger :focus-within.
       skipButtonLocator.element().focus();
       await expect.element(skipButtonLocator).toBeVisible();
 

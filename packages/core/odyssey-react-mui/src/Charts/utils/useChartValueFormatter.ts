@@ -19,9 +19,7 @@ import {
 } from "./formatChartValue.js";
 
 /**
- * The formatter functions from {@link useChartValueFormatter} accept these
- * props. The props match {@link FormatChartValueProps}, but without
- * `languageCode`. The hook binds the `languageCode` field from context.
+ * The formatter functions from {@link useChartValueFormatter} accept these props. The props match {@link FormatChartValueProps}, but without `languageCode`. The hook binds the `languageCode` field from context.
  */
 export type ChartValueFormatterProps = Omit<
   FormatChartValueProps,
@@ -34,14 +32,9 @@ export type ChartValueFormatterProps = Omit<
 export type ChartValueFormatter = (props: ChartValueFormatterProps) => string;
 
 /**
- * The hook reads the active language code from the Odyssey translation
- * context. The hook returns a version of {@link formatChartValue} that uses
- * that locale. A consumer only needs to supply `value` and an optional
- * `format`.
+ * The hook reads the active language code from the Odyssey translation context. The hook returns a version of {@link formatChartValue} that uses that locale. A consumer only needs to supply `value` and an optional `format`.
  *
- * The returned function stays referentially stable while the active
- * language stays the same. This makes it safe to add as a dependency of a
- * consumer's `useMemo`.
+ * The returned function stays referentially stable while the active language stays the same. This makes it safe to add as a dependency of a consumer's `useMemo`.
  */
 export const useChartValueFormatter = (): ChartValueFormatter => {
   const { i18n } = useTranslation();

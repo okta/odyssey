@@ -135,8 +135,7 @@ const StyledDragHandleButton = styled("button", {
   position: "absolute",
   opacity: 0,
   padding: odysseyDesignTokens.Spacing2,
-  // Transparent 1px border by default so toggling to the HueBlue600 grabbed
-  // border does not shift the icon.
+  // Transparent 1px border by default so toggling to the HueBlue600 grabbed border does not shift the icon.
   border: "1px solid transparent",
   borderRadius: odysseyDesignTokens.BorderRadiusMain,
   backgroundColor: "transparent",
@@ -156,8 +155,7 @@ const StyledDragHandleButton = styled("button", {
     },
   }),
 
-  // Focus ring for a resting handle (keyboard focus). Excludes the actively
-  // grabbed handle via aria-pressed so the isGrabbed block styles that state.
+  // Focus ring for a resting handle (keyboard focus). Excludes the actively grabbed handle via aria-pressed so the isGrabbed block styles that state.
   "&:focus-visible:not([aria-pressed='true'])": getFocusRingStyles({
     focusRingColor,
     odysseyDesignTokens,

@@ -100,9 +100,7 @@ describe(Dialog.displayName!, () => {
   });
 
   test("close button has no heading ancestor", async () => {
-    // Bug regression: the close button must not be a descendant of any
-    // heading element, otherwise screen readers announce it as
-    // "heading level N, Close, button".
+    // Bug regression: the close button must not be a descendant of any heading element, otherwise screen readers announce it as "heading level N, Close, button".
     const onClose = vi.fn();
     await renderWithOdysseyProvider(
       <Dialog isOpen onClose={onClose} title="Dialog title">
@@ -120,9 +118,7 @@ describe(Dialog.displayName!, () => {
   });
 
   test("dialog's aria-labelledby id remains stable across re-renders with the same title", async () => {
-    // Locks in id stability so future refactors don't accidentally
-    // regenerate ids on each render, that would force ATs to
-    // re-announce the dialog as the labelledby target changes.
+    // Locks in id stability so future refactors don't accidentally regenerate ids on each render, that would force ATs to re-announce the dialog as the labelledby target changes.
     const onClose = vi.fn();
     const { rerender } = await renderWithOdysseyProvider(
       <Dialog isOpen onClose={onClose} title="Reset">

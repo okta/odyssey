@@ -27,10 +27,7 @@ import {
 
 export { globalTypes };
 
-// The host extends the shared preset preview with its own story ordering and
-// the single-axis Applitools reflow viewports its remaining stories rely on for
-// visual regression. Both move into the preset (or per-package VRT config) as
-// the fleet migrates; kept here so the host behaves exactly as before today.
+// The host extends the shared preset preview with its own story ordering and the single-axis Applitools reflow viewports its remaining stories rely on for visual regression. Both move into the preset (or per-package VRT config) as the fleet migrates; kept here so the host behaves exactly as before today.
 const preview = {
   ...basePreview,
 

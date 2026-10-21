@@ -31,8 +31,7 @@ describe(PasswordField.displayName!, () => {
     const fieldElement = page.getByRole("textbox", { name: "Password" });
     await expect.element(fieldElement).toHaveAttribute("type", "password");
 
-    // The toggle keeps a stable accessible name; its pressed state is what
-    // conveys show/hide, following the ARIA toggle-button pattern.
+    // The toggle keeps a stable accessible name; its pressed state is what conveys show/hide, following the ARIA toggle-button pattern.
     const toggleButton = page.getByRole("button", {
       name: odysseyTranslate("passwordfield.icon.label.show"),
     });

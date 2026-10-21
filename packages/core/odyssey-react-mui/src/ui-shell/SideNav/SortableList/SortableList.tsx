@@ -38,9 +38,7 @@ export interface BaseItem {
   isSelected: boolean | undefined;
   isSortable: boolean | undefined;
   /**
-   * The item's visible label, used to give its drag handle a unique
-   * accessible name (e.g. "Drag handle for Work") so screen-reader users can
-   * distinguish handles that otherwise share the same name.
+   * The item's visible label, used to give its drag handle a unique accessible name (e.g. "Drag handle for Work") so screen-reader users can distinguish handles that otherwise share the same name.
    */
   label: string;
   navItem: ReactNode;
@@ -106,9 +104,7 @@ export const SortableList = <T extends BaseItem>({
     <DndContext
       accessibility={{
         announcements,
-        // Portal the drag live region to the document body: SortableList renders
-        // inside a semantic <ul>, and an inline role="status" element would be an
-        // invalid non-<li> child, breaking the list's accessibility semantics.
+        // Portal the drag live region to the document body: SortableList renders inside a semantic <ul>, and an inline role="status" element would be an invalid non-<li> child, breaking the list's accessibility semantics.
         container: typeof document !== "undefined" ? document.body : undefined,
       }}
       onDragCancel={() => {

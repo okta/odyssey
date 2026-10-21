@@ -63,8 +63,7 @@ export const formComponents = ({
         },
 
         ".MuiChip-root": {
-          // using 55ch - 24px to account for the 24px of padding on the right side of the container.
-          // Ensures chip does not enlarge the container
+          // using 55ch - 24px to account for the 24px of padding on the right side of the container. Ensures chip does not enlarge the container
           maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} - ${odysseyTokens.Spacing6})`,
         },
       }),
@@ -159,9 +158,7 @@ export const formComponents = ({
   },
   MuiFormLabel: {
     styleOverrides: {
-      // Align on the first text line so the optional indicator stays with the
-      // start of a multi-line wrapped group label rather than its vertical
-      // center.
+      // Align on the first text line so the optional indicator stays with the start of a multi-line wrapped group label rather than its vertical center.
       root: {
         alignItems: "baseline",
         color: odysseyTokens.TypographyColorBody,

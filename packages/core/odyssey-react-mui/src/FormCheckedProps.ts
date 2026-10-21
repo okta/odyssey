@@ -22,13 +22,11 @@ export type ControlledCheckedFieldProps<
    */
   isChecked: boolean;
   /**
-   * Determines whether the Checkbox is checked
-   * Should not be used if `isChecked` is used
+   * Determines whether the Checkbox is checked. Should not be used if `isChecked` is used
    */
   isDefaultChecked?: never;
   /**
-   * The change event handler for the Checkbox
-   * Must be used if `isChecked` is used
+   * The change event handler for the Checkbox. Must be used if `isChecked` is used
    */
   onChange: TogglableInputElement["onChange"];
 };
@@ -41,13 +39,11 @@ export type UncontrolledCheckedFieldProps<
    */
   isChecked?: never;
   /**
-   * Determines whether the Checkbox is checked
-   * Should not be used if `isChecked` is used
+   * Determines whether the Checkbox is checked. Should not be used if `isChecked` is used
    */
   isDefaultChecked?: boolean;
   /**
-   * The change event handler for the Checkbox
-   * Must be used if `isChecked` is used
+   * The change event handler for the Checkbox. Must be used if `isChecked` is used
    */
   onChange?: TogglableInputElement["onChange"];
 };

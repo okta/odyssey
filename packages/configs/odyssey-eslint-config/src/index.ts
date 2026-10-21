@@ -63,12 +63,7 @@ const modifiedReactHooksPlugin = {
 const getPrefixedEslintConfigName = (name: string) =>
   `odyssey-eslint-config/${name}`;
 
-// The @nx/eslint inferred lint target runs `eslint .` with cwd set to each
-// project directory, so process.cwd() would scope the TypeScript project
-// service to a single project and miss workspace-level config files it does not
-// include (e.g. a package's vitest.config.ts). Anchor tsconfigRootDir to the
-// monorepo root so resolution matches a root-level `eslint .`. Only the linted
-// project's own files are loaded per invocation, so memory stays bounded.
+// The @nx/eslint inferred lint target runs `eslint .` with cwd set to each project directory, so process.cwd() would scope the TypeScript project service to a single project and miss workspace-level config files it does not include (e.g. a package's vitest.config.ts). Anchor tsconfigRootDir to the monorepo root so resolution matches a root-level `eslint .`. Only the linted project's own files are loaded per invocation, so memory stays bounded.
 const findWorkspaceRoot = (startDirectory: string): string => {
   const packageJsonPath = resolve(startDirectory, "package.json");
 
@@ -142,9 +137,7 @@ const eslintConfig = createTsEslintConfig(
       importPlugin.flatConfigs.recommended,
       tsEslintConfigs.eslintRecommended,
     ],
-    // importPlugin.flatConfigs.recommended pins ecmaVersion to 2018, which
-    // rejects ES2020+ syntax (import.meta, ??, ?.) in plain JS/.mjs files.
-    // Restore the intended modern baseline for the JavaScript file group.
+    // importPlugin.flatConfigs.recommended pins ecmaVersion to 2018, which rejects ES2020+ syntax (import.meta, ??, ?.) in plain JS/.mjs files. Restore the intended modern baseline for the JavaScript file group.
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
@@ -250,12 +243,9 @@ const eslintConfig = createTsEslintConfig(
       "**/public/mockServiceWorker.js",
       "**/public/mockServiceWorker.generated.js",
       "**/src/properties/ts/*.ts",
-      // Each package Storybook builds here, the way the host builds into dist.
-      // Linting those bundles reports tens of thousands of problems in minified
-      // output, so a developer who builds a Storybook then lints sees nothing else.
+      // Each package Storybook builds here, the way the host builds into dist. Linting those bundles reports tens of thousands of problems in minified output, so a developer who builds a Storybook then lints sees nothing else.
       "**/storybook-static/**/*",
-      // Generated Atlas authoring schema (~3.5 MB); linting it OOMs the
-      // type-aware parser and it is a build artifact, not authored source.
+      // Generated Atlas authoring schema (~3.5 MB); linting it OOMs the type-aware parser and it is a build artifact, not authored source.
       "packages/contributions/odyssey-atlas/atlas.schema.generated.json",
       "packages/platform/odyssey-cartographer/test/golden/**/*",
       "packages/platform/odyssey-contributions-stack/**/files/**/*",
@@ -265,9 +255,7 @@ const eslintConfig = createTsEslintConfig(
 
   {
     name: getPrefixedEslintConfigName("bin-scripts"),
-    // bin/*.mjs scripts import from dist/ which doesn't exist at lint time —
-    // the import is valid at runtime after `yarn build`. Disabling resolution
-    // at the config level is cleaner than per-file inline disables.
+    // bin/*.mjs scripts import from dist/ which doesn't exist at lint time — the import is valid at runtime after `yarn build`. Disabling resolution at the config level is cleaner than per-file inline disables.
     files: ["packages/contributions/odyssey-atlas/bin/*.mjs"],
     rules: {
       "import/no-unresolved": "off",

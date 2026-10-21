@@ -12,8 +12,7 @@
 
 /**
  * Internal exports for all components, utilities, and types.
- * This module provides access to internal/unexported items for advanced use cases.
- * These exports are not part of the stable public API and may change without notice.
+ * This module provides access to internal/unexported items for advanced use cases. These exports are not part of the stable public API and may change without notice.
  */
 
 export * from "./Field.js";
@@ -58,10 +57,7 @@ export * from "./labs/DataView/useFilterConversion.js";
 // Odyssey Pickers
 export * from "./labs/OdysseyPickers/ComposablePicker.js";
 // MuiProps
-// Exported so a component outside this package can be the child of Odyssey's
-// Tooltip: Tooltip wraps its child in MuiPropsChild, which puts MUI's injected
-// hover/focus props and ref into context, and the child has to call useMuiProps
-// to receive them.
+// Exported so a component outside this package can be the child of Odyssey's Tooltip: Tooltip wraps its child in MuiPropsChild, which puts MUI's injected hover/focus props and ref into context, and the child has to call useMuiProps to receive them.
 export * from "./MuiPropsChild.js";
 export * from "./MuiPropsContext.js";
 // OdysseyDesignTokensContext

@@ -99,8 +99,7 @@ const StyledMenuButtonContainer = styled("div", {
 
 export type BaseMenuButtonProps = {
   /**
-   * The button children for the triggering Button. Only available internal to Odyssey here in
-   * BaseMenuButton. If set, buttonLabel is ignored.
+   * The button children for the triggering Button. Only available internal to Odyssey here in BaseMenuButton. If set, buttonLabel is ignored.
    */
   buttonChildren?: ReactNode;
   /**
@@ -155,9 +154,7 @@ export type BaseMenuButtonProps = {
   verticalDividerAlignment?: (typeof verticalDividerAlignmentValues)[number];
 };
 
-// These are split and exported separately from the above because wrappers of this (e.g. MenuButton) will
-// want to omit buttonChildren, which they cannot do from the combined union type. Instead, they should
-// omit from BaseMenuButtonProps, then union with the AdditionalBaseMenuButtonProps (as seen in MenuButton)
+// These are split and exported separately from the above because wrappers of this (e.g. MenuButton) will want to omit buttonChildren, which they cannot do from the combined union type. Instead, they should omit from BaseMenuButtonProps, then union with the AdditionalBaseMenuButtonProps (as seen in MenuButton)
 export type AdditionalBaseMenuButtonProps = Pick<
   HtmlProps,
   "ariaDescribedBy" | "ariaLabel" | "ariaLabelledBy" | "testId" | "translate"
@@ -198,9 +195,7 @@ export type AdditionalBaseMenuButtonProps = Pick<
   );
 
 /**
- * Base component for button-triggered menus and popovers. Renders a trigger button that opens a
- * dropdown menu or popover content on click. Used internally by MenuButton and overflow menu
- * patterns.
+ * Base component for button-triggered menus and popovers. Renders a trigger button that opens a dropdown menu or popover content on click. Used internally by MenuButton and overflow menu patterns.
  */
 const BaseMenuButton = ({
   ariaLabel,

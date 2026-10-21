@@ -31,8 +31,7 @@ describe(LineChart.displayName!, () => {
     );
 
     await expect(container).toBeAccessible();
-    // Every point carries its category, its value, and its series name, so a
-    // screen reader user can read a point without reading the legend.
+    // Every point carries its category, its value, and its series name, so a screen reader user can read a point without reading the legend.
     await expect
       .element(
         page.getByRole("img", {
@@ -97,14 +96,9 @@ describe(LineChart.displayName!, () => {
     await expect
       .element(page.getByLabelText("B, 0.1. Failure.", { exact: true }))
       .toBeVisible();
-    // A null value draws no marker. The chart library exposes the gap as an
-    // invisible accessibility placeholder with no `img` role, so these check
-    // presence in the document rather than visibility.
+    // A null value draws no marker. The chart library exposes the gap as an invisible accessibility placeholder with no `img` role, so these check presence in the document rather than visibility.
     //
-    // Series "Success" has the gap at B, where "Failure" has a value, and
-    // "Failure" has the gap at C, where "Success" has a value. The gap at B
-    // also sits between two values in the same series, which the earlier
-    // per-point data shape could not express.
+    // Series "Success" has the gap at B, where "Failure" has a value, and "Failure" has the gap at C, where "Success" has a value. The gap at B also sits between two values in the same series, which the earlier per-point data shape could not express.
     await expect
       .element(page.getByLabelText("B, No value. Success.", { exact: true }))
       .toBeInTheDocument();
@@ -254,8 +248,7 @@ describe(LineChart.displayName!, () => {
     );
 
     await expect(container).toBeAccessible();
-    // The title and the subtitle reach the page as real HTML above the chart,
-    // rather than as text inside the chart library's own output.
+    // The title and the subtitle reach the page as real HTML above the chart, rather than as text inside the chart library's own output.
     await expect
       .element(
         page.getByRole("heading", {
@@ -268,11 +261,7 @@ describe(LineChart.displayName!, () => {
     await expect
       .element(page.getByText("Last 90 days, by method", { exact: true }))
       .toBeVisible();
-    // The frame owns the accessible name, so the chart library's own container
-    // keeps the library's default label rather than the title. The loading
-    // state and the error state each assert that this container is gone.
-    // Asserting that it is here when the chart draws is what keeps those
-    // absence checks meaningful.
+    // The frame owns the accessible name, so the chart library's own container keeps the library's default label rather than the title. The loading state and the error state each assert that this container is gone. Asserting that it is here when the chart draws is what keeps those absence checks meaningful.
     await expect
       .element(
         page.getByRole("group", {
@@ -281,9 +270,7 @@ describe(LineChart.displayName!, () => {
         }),
       )
       .toBeVisible();
-    // The chart library renders `ariaDescription` into a screen-reader-only
-    // part of its output, not as visible text, so this checks presence in the
-    // document rather than visibility.
+    // The chart library renders `ariaDescription` into a screen-reader-only part of its output, not as visible text, so this checks presence in the document rather than visibility.
     await expect
       .element(
         page.getByText(
@@ -307,8 +294,7 @@ describe(LineChart.displayName!, () => {
     );
 
     await expect(container).toBeAccessible();
-    // The chart library draws no output while loading, so its own
-    // accessible container is gone.
+    // The chart library draws no output while loading, so its own accessible container is gone.
     expect(
       page
         .getByRole("group", {
@@ -325,8 +311,7 @@ describe(LineChart.displayName!, () => {
         }),
       )
       .toBeVisible();
-    // The heading and subtitle stay on screen, because the frame renders
-    // them outside the chart library's own output.
+    // The heading and subtitle stay on screen, because the frame renders them outside the chart library's own output.
     await expect
       .element(
         page.getByRole("heading", {
@@ -370,8 +355,7 @@ describe(LineChart.displayName!, () => {
         }),
       )
       .toBeVisible();
-    // The heading and subtitle stay on screen even though the chart library
-    // drew nothing.
+    // The heading and subtitle stay on screen even though the chart library drew nothing.
     await expect
       .element(
         page.getByRole("heading", {
@@ -386,12 +370,7 @@ describe(LineChart.displayName!, () => {
       .toBeVisible();
   });
 
-  // The chart forwards both flags to the frame, which is where the order of
-  // the two branches lives. This test exists at the chart level as well
-  // because a consumer sets these two props on the chart, not on the frame:
-  // a retry sets `isLoading` while the failed data is still on record, and
-  // checking `hasError` first would freeze the error the user just tried to
-  // clear. See docs/decisions/2026-08-25-chart-error-state-api.md.
+  // The chart forwards both flags to the frame, which is where the order of the two branches lives. This test exists at the chart level as well because a consumer sets these two props on the chart, not on the frame: a retry sets `isLoading` while the failed data is still on record, and checking `hasError` first would freeze the error the user just tried to clear. See docs/decisions/2026-08-25-chart-error-state-api.md.
   test("hasError and isLoading both true", async () => {
     const { container } = await renderWithOdysseyProvider(
       <LineChart
@@ -445,9 +424,7 @@ describe(LineChart.displayName!, () => {
       .toHaveFocus();
     await expect(container).toBeAccessible();
 
-    // The values render through `formatChartValue`, not as the raw numbers.
-    // One row per series proves the shared popover reads
-    // `point.custom.formattedValue` once per series rather than `point.y`.
+    // The values render through `formatChartValue`, not as the raw numbers. One row per series proves the shared popover reads `point.custom.formattedValue` once per series rather than `point.y`.
     await expect
       .element(page.getByText("Success: 4%", { exact: true }))
       .toBeVisible();

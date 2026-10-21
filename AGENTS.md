@@ -2,8 +2,7 @@
 
 This file is the canonical, repo-wide instruction set for AI agents.
 
-If your AI tool supports linking to a base instruction file, point it to this file.
-Examples:
+If your AI tool supports linking to a base instruction file, point it to this file. Examples:
 
 - .claude/ai.md → include/link to this file
 - .gemini/ai.md → include/link to this file
@@ -11,20 +10,12 @@ Examples:
 
 ## Agent Responses
 
-- Write user-facing responses in
-  [plain language](https://en.wikipedia.org/wiki/Plain_language): clear,
-  concise, and easy to understand and use.
-- Lead with the answer, result, or next action. Use familiar words, active
-  voice, and short sentences.
-- Keep technical terms when they add precision. Define unfamiliar terms when
-  the user may not know them.
-- Remove filler, repeated summaries, canned introductions, and unnecessary
-  detail. Do not omit risks, assumptions, blockers, or required next steps for
-  the sake of brevity.
-- Use headings, lists, and code examples only when they make the response
-  easier to scan or act on.
-- Match the depth of the response to the task and the user's request. Plain
-  language simplifies the writing, not the subject.
+- Write user-facing responses in [plain language](https://en.wikipedia.org/wiki/Plain_language): clear, concise, and easy to understand and use.
+- Lead with the answer, result, or next action. Use familiar words, active voice, and short sentences.
+- Keep technical terms when they add precision. Define unfamiliar terms when the user may not know them.
+- Remove filler, repeated summaries, canned introductions, and unnecessary detail. Do not omit risks, assumptions, blockers, or required next steps for the sake of brevity.
+- Use headings, lists, and code examples only when they make the response easier to scan or act on.
+- Match the depth of the response to the task and the user's request. Plain language simplifies the writing, not the subject.
 
 ---
 
@@ -32,10 +23,7 @@ Examples:
 
 - Monorepo with multiple packages under `packages/`.
 - Uses TypeScript, React, Vite, Storybook, Lerna.
-- A **contribution** is a home-team-owned package under
-  `packages/contributions/`. Changes elsewhere in the repository are
-  Odyssey-owned maintenance. See
-  [CONTRIBUTING.md](CONTRIBUTING.md) for ownership and workflow.
+- A **contribution** is a home-team-owned package under `packages/contributions/`. Changes elsewhere in the repository are Odyssey-owned maintenance. See [CONTRIBUTING.md](CONTRIBUTING.md) for ownership and workflow.
 
 Key top-level files:
 
@@ -44,14 +32,10 @@ Key top-level files:
 
 Documentation is organized by purpose:
 
-- Start with [docs/handbook/README.md](docs/handbook/README.md) for current
-  cross-package contribution, design, and testing guidance.
-- Use `docs/decisions/` for accepted and superseded rationale, and
-  [its README](docs/decisions/README.md) for the rules and lookup queries. Read
-  relevant decisions before non-trivial work.
+- Start with [docs/handbook/README.md](docs/handbook/README.md) for current cross-package contribution, design, and testing guidance.
+- Use `docs/decisions/` for accepted and superseded rationale, and [its README](docs/decisions/README.md) for the rules and lookup queries. Read relevant decisions before non-trivial work.
 - Use `docs/runbooks/` for repeatable operational procedures.
-- Use package `README.md` and `docs/` directories for package-owned API,
-  integration, and operational guidance.
+- Use package `README.md` and `docs/` directories for package-owned API, integration, and operational guidance.
 - Load a package-specific `AGENTS.md` when working in a package that has one.
 
 ---
@@ -230,28 +214,14 @@ Each links to the decision record that explains why and what was rejected.
 
 ### Reference fixtures are not style exemplars
 
-`packages/apps/cartographer-fixture/**` is a deliberately non-Odyssey, plain-MUI
-React app. It exists only as a migration _source_: a realistic "legacy" target
-the `@okta/odyssey-cartographer` pipeline is calibrated against, and the "before" that
-Atlas reproduces with Odyssey components. Its patterns (plain MUI, the `sx`
-prop, a home-rolled auth context and fetch client, no react-query) are
-intentional and are not how Odyssey UI should be written.
+`packages/apps/cartographer-fixture/**` is a deliberately non-Odyssey, plain-MUI React app. It exists only as a migration _source_: a realistic "legacy" target the `@okta/odyssey-cartographer` pipeline is calibrated against, and the "before" that Atlas reproduces with Odyssey components. Its patterns (plain MUI, the `sx` prop, a home-rolled auth context and fetch client, no react-query) are intentional and are not how Odyssey UI should be written.
 
 Two rules follow, and they point in opposite directions:
 
-- **Do not copy its patterns out.** When writing or generating any
-  Odyssey-owned code, never reuse a pattern because you found it in
-  `cartographer-fixture/`. Follow the handbook and the styling and component rules
-  above (Odyssey components, `createOdysseyStyledComponent`, design tokens)
-  regardless of what grep surfaces there.
-- **Do not "align" it in.** Do not convert this package to Odyssey conventions
-  as drive-by cleanup or to satisfy a lint rule. Its non-Odyssey shape is the
-  point, and changing it also churns Cartographer's golden snapshot.
+- **Do not copy its patterns out.** When writing or generating any Odyssey-owned code, never reuse a pattern because you found it in `cartographer-fixture/`. Follow the handbook and the styling and component rules above (Odyssey components, `createOdysseyStyledComponent`, design tokens) regardless of what grep surfaces there.
+- **Do not "align" it in.** Do not convert this package to Odyssey conventions as drive-by cleanup or to satisfy a lint rule. Its non-Odyssey shape is the point, and changing it also churns Cartographer's golden snapshot.
 
-This does not fence off the package: when a task explicitly targets
-`cartographer-fixture` (for example, fixing its own behavior), edit it normally.
-The Odyssey and Backbone re-implementations of this app are tracked as separate
-work and live as their own packages, not as edits that "upgrade" this one.
+This does not fence off the package: when a task explicitly targets `cartographer-fixture` (for example, fixing its own behavior), edit it normally. The Odyssey and Backbone re-implementations of this app are tracked as separate work and live as their own packages, not as edits that "upgrade" this one.
 
 ### MUI Theme Component Overrides
 
@@ -333,43 +303,24 @@ These apply only when working in `packages/contributions/odyssey-atlas`. Atlas i
 
 ### API keys live in a gitignored `.env`
 
-`ANTHROPIC_API_KEY` (for `@okta/odyssey-cartographer`) and `APPLITOOLS_API_KEY` (for the
-visual regression suite) are in `.env` at the repository root. That file is
-gitignored; [`.env.example`](.env.example) is the tracked template and documents
-each key. Never put a real value in the template, a committed file, or a command
-you paste into a pull request.
+`ANTHROPIC_API_KEY` (for `@okta/odyssey-cartographer`) and `APPLITOOLS_API_KEY` (for the visual regression suite) are in `.env` at the repository root. That file is gitignored; [`.env.example`](.env.example) is the tracked template and documents each key. Never put a real value in the template, a committed file, or a command you paste into a pull request.
 
-**Nothing loads `.env` for you.** There is no direnv in the container and
-`.envrc` does not source it, so read it in before a command that needs a key:
+**Nothing loads `.env` for you.** There is no direnv in the container and `.envrc` does not source it, so read it in before a command that needs a key:
 
 ```sh
 set -a; . ./.env; set +a
 ```
 
-A worktree created through the `WorktreeCreate` hook is given a **symlink** to
-the main checkout's `.env` by
-[`setup-worktree-deps.sh`](.claude/scripts/setup-worktree-deps.sh), so the keys
-are already there and rotating the token in one place covers every worktree.
+A worktree created through the `WorktreeCreate` hook is given a **symlink** to the main checkout's `.env` by [`setup-worktree-deps.sh`](.claude/scripts/setup-worktree-deps.sh), so the keys are already there and rotating the token in one place covers every worktree.
 
-Check for the key before concluding a tool is broken. Without
-`ANTHROPIC_API_KEY` Cartographer silently falls back to shelling out to the
-`claude` CLI, which is a different code path with different failure modes, so a
-run that behaves strangely is worth repeating with the key loaded.
+Check for the key before concluding a tool is broken. Without `ANTHROPIC_API_KEY` Cartographer silently falls back to shelling out to the `claude` CLI, which is a different code path with different failure modes, so a run that behaves strangely is worth repeating with the key loaded.
 
 Two failure modes worth recognising:
 
-- **A key for a custom endpoint also needs `ANTHROPIC_BASE_URL`.** If the key
-  provider requires a custom Anthropic-compatible endpoint, set the base URL it
-  provides. The Anthropic SDK reads that variable itself, so no code passes it
-  through.
-- **An invalid key is worse than none.** Absent an explicit `--auth-mode`,
-  `createLlmClient` picks with `resolvedKey ? "api-key" : "claude-cli"`, so a key
-  that is merely present sends every prompt to the API and 401s on all of them.
-  With no key it falls back to the `claude` CLI and succeeds, which is why an
-  empty variable is safe and a wrong one is not.
+- **A key for a custom endpoint also needs `ANTHROPIC_BASE_URL`.** If the key provider requires a custom Anthropic-compatible endpoint, set the base URL it provides. The Anthropic SDK reads that variable itself, so no code passes it through.
+- **An invalid key is worse than none.** Absent an explicit `--auth-mode`, `createLlmClient` picks with `resolvedKey ? "api-key" : "claude-cli"`, so a key that is merely present sends every prompt to the API and 401s on all of them. With no key it falls back to the `claude` CLI and succeeds, which is why an empty variable is safe and a wrong one is not.
 
-See [decision record](docs/decisions/2026-09-11-api-keys-in-a-symlinked-gitignored-env.md)
-for why the file is symlinked rather than copied and why nothing auto-loads it.
+See [decision record](docs/decisions/2026-09-11-api-keys-in-a-symlinked-gitignored-env.md) for why the file is symlinked rather than copied and why nothing auto-loads it.
 
 ### Common Tasks
 
@@ -423,27 +374,14 @@ Run it after any bulk history rewrite, such as a mass rebase or amend across sev
 
 ### Documentation Map
 
-- `docs/handbook/` contains current cross-package guidance for contributors,
-  design, and testing. Start with its [index](docs/handbook/README.md).
-- `docs/decisions/` contains append-only rationale for accepted and superseded
-  decisions. List the records and read the relevant ones before non-trivial work;
-  [its README](docs/decisions/README.md) carries the lookup queries.
+- `docs/handbook/` contains current cross-package guidance for contributors, design, and testing. Start with its [index](docs/handbook/README.md).
+- `docs/decisions/` contains append-only rationale for accepted and superseded decisions. List the records and read the relevant ones before non-trivial work; [its README](docs/decisions/README.md) carries the lookup queries.
 - `docs/runbooks/` contains repeatable procedures for specific operational tasks.
-- `docs/atlas/` contains the Atlas design package: the normative
-  [`SPEC.md`](docs/atlas/SPEC.md), the authoring tutorial, and the use-case
-  catalog. Read the spec before changing
-  `packages/contributions/odyssey-atlas`; where the package has not caught up
-  to the spec, the gap is recorded in
-  [`FUTURE-WORK.md`](docs/atlas/FUTURE-WORK.md), not edited out of the spec.
-  Atlas's design rationale lives in `docs/decisions/` with the rest, tagged
-  `#atlas`.
-- `packages/*/README.md` and `packages/*/docs/` contain package-owned API,
-  integration, and operational guidance.
-- Package-specific `AGENTS.md` files extend or override this file only for their
-  package. Load one when working in that package.
+- `docs/atlas/` contains the Atlas design package: the normative [`SPEC.md`](docs/atlas/SPEC.md), the authoring tutorial, and the use-case catalog. Read the spec before changing `packages/contributions/odyssey-atlas`; where the package has not caught up to the spec, the gap is recorded in [`FUTURE-WORK.md`](docs/atlas/FUTURE-WORK.md), not edited out of the spec. Atlas's design rationale lives in `docs/decisions/` with the rest, tagged `#atlas`.
+- `packages/*/README.md` and `packages/*/docs/` contain package-owned API, integration, and operational guidance.
+- Package-specific `AGENTS.md` files extend or override this file only for their package. Load one when working in that package.
 
-Keep machine constraints in this file. Do not copy handbook workflows, decision
-rationale, runbooks, or package documentation here; link to the owning document.
+Keep machine constraints in this file. Do not copy handbook workflows, decision rationale, runbooks, or package documentation here; link to the owning document.
 
 ### JSDoc for Components (`odyssey-react-mui`)
 
@@ -506,14 +444,8 @@ For VRT, render the visual state Applitools should capture directly; interaction
 
 ## 7. Safety & Security
 
-- Do not add secrets, tokens, or credentials to anything tracked, and that
-  includes a pull request body, a commit message, and a decision record, not just
-  source. Real keys belong in the gitignored `.env` described under
-  [API keys](#api-keys-live-in-a-gitignored-env); `.env.example` carries the
-  names with empty values.
-- Do not log sensitive information. A key read out of `.env` must not be echoed,
-  printed by a script, or pasted into a command whose output ends up in a pull
-  request.
+- Do not add secrets, tokens, or credentials to anything tracked, and that includes a pull request body, a commit message, and a decision record, not just source. Real keys belong in the gitignored `.env` described under [API keys](#api-keys-live-in-a-gitignored-env); `.env.example` carries the names with empty values.
+- Do not log sensitive information. A key read out of `.env` must not be echoed, printed by a script, or pasted into a command whose output ends up in a pull request.
 - Only consider new tooling that is actively maintained and well-supported.
 - Do not reference internal Jira ticket IDs (e.g. `OKTA-123456`) in source code or comments — this repo syncs to a public mirror, and ticket IDs leak internal details. The ticket belongs in the commit message or PR body instead. The only exception is a `TODO` comment that genuinely needs a tracking link, and even those should be rare; a comment explaining a past fix should describe the _why_ on its own, without the ticket.
 
@@ -656,8 +588,7 @@ If your AI system supports includes, place a small file that points here, e.g.
 
 ## 10. Package-Specific Instructions
 
-Some packages have their own agent instruction files that extend or override these
-repo-wide rules. Only load a package-specific file when you are working in that package.
+Some packages have their own agent instruction files that extend or override these repo-wide rules. Only load a package-specific file when you are working in that package.
 
 | Package                                    | Instructions                                                    | When to use                                                                          |
 | ------------------------------------------ | --------------------------------------------------------------- | ------------------------------------------------------------------------------------ |

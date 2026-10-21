@@ -39,11 +39,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["defaultValue"];
   /**
-   * Determines the filtered options to display when typing in the input.
-   * Defaults to MUI's client-side substring match against `getOptionLabel`.
-   * Override this (e.g. `(options) => options`) when `options` is already
-   * filtered server-side, to avoid MUI re-filtering already-matching results
-   * away.
+   * Determines the filtered options to display when typing in the input. Defaults to MUI's client-side substring match against `getOptionLabel`. Override this (e.g. `(options) => options`) when `options` is already filtered server-side, to avoid MUI re-filtering already-matching results away.
    */
   filterOptions?: MuiAutocompleteProps<
     OptionType,
@@ -52,19 +48,14 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["filterOptions"];
   /**
-   * Used to determine if the option represents the given value. Uses strict equality by default if
-   * none provided. Both arguments need to be handled, an option can only match with one value.
-   * option: the option to test
-   * value: the value to test against
+   * Used to determine if the option represents the given value. Uses strict equality by default if none provided. Both arguments need to be handled, an option can only match with one value. option: the option to test value: the value to test against
    *
    * You will need to implement this function if your `option` items are objects.
    */
   getIsOptionEqualToValue?: (option: OptionType, value: OptionType) => boolean;
 
   /**
-   * Used to determine the string value for a given option. It's used to fill the input (and the
-   * list box options if renderOption is not provided). If used in free solo mode, it must accept
-   * both the type of the options and a string.
+   * Used to determine the string value for a given option. It's used to fill the input (and the list box options if renderOption is not provided). If used in free solo mode, it must accept both the type of the options and a string.
    *
    * `function(option: Value) => string`
    */
@@ -129,8 +120,7 @@ export type AutocompleteProps<
     IsCustomValueAllowed
   >["readOnly"];
   /**
-   * If `true`, renders the options list using virtualization.
-   * Recommended when the list contains hundreds of items or more.
+   * If `true`, renders the options list using virtualization. Recommended when the list contains hundreds of items or more.
    */
   isVirtualized?: boolean;
   /**
@@ -205,9 +195,7 @@ export type AutocompleteProps<
   Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
 /**
- * An input field with a dropdown list of selectable options that supports filtering, multi-select,
- * and free-text entry. Use when users need to search or choose from a potentially large set of
- * values.
+ * An input field with a dropdown list of selectable options that supports filtering, multi-select, and free-text entry. Use when users need to search or choose from a potentially large set of values.
  */
 const Autocomplete = <
   OptionType,
@@ -270,9 +258,7 @@ const Autocomplete = <
     <MuiAutocomplete
       {...valueProps}
       {...inputValueProp}
-      // MUI's value type is incompatible between single (null) and multiple (array)
-      // modes. Changing `multiple` on a live instance causes a null.length crash,
-      // so we force a remount when the mode changes. This resets internal UI state.
+      // MUI's value type is incompatible between single (null) and multiple (array) modes. Changing `multiple` on a live instance causes a null.length crash, so we force a remount when the mode changes. This resets internal UI state.
       key={hasMultipleChoices ? "multiple" : "single"}
       // conditionally provide the ListboxComponent if this needs to be virtualized
       {...(isVirtualizedRef.current && {

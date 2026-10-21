@@ -25,6 +25,7 @@ import type { HtmlProps } from "../HtmlProps.js";
 import type { FocusHandle } from "../inputUtils.js";
 
 import { Button } from "../Buttons/Button.js";
+import { useHasActiveFullscreen } from "../fullscreen/useFullscreen.js";
 import { hexToRgb } from "../hexToRgb.js";
 import { useTranslation } from "../i18n.generated/i18n.js";
 import { CloseIcon } from "../icons.generated/Close.js";
@@ -51,6 +52,7 @@ import {
   UI_SHELL_BASE_Z_INDEX,
   UI_SHELL_OVERLAY_Z_INDEX,
 } from "./uiShellSharedConstants.js";
+import { useFullscreenChromeCollapse } from "./useFullscreenChromeCollapse.js";
 import { useMatchAppElementToUiShellAppArea } from "./useMatchAppElementToUiShellAppArea.js";
 import { useScrollState } from "./useScrollState.js";
 
@@ -195,6 +197,11 @@ const StyledTopNav = styled("div", {
   position: "relative",
   transition: `box-shadow ${odysseyDesignTokens.TransitionDurationMain} ${odysseyDesignTokens.TransitionTimingMain}`,
   zIndex: UI_SHELL_BASE_Z_INDEX,
+
+  // The `display` above outranks the browser's own `[hidden]` rule, so `hidden` needs restating to take effect.
+  "&[hidden]": {
+    display: "none",
+  },
 }));
 
 const StyledTopNavMenu = styled("div", {
@@ -252,12 +259,26 @@ const NarrowUiShellContent = ({
 
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const uiShellContext = useUiShellContext();
+  const hasActiveFullscreen = useHasActiveFullscreen();
 
   const { isContentScrolled } = useScrollState(appElement);
 
+  const bannersContainerRef = useRef<HTMLDivElement>(null);
   const sideNavContainerRef = useRef<HTMLDivElement>(null);
   const topNavContainerRef = useRef<HTMLDivElement>(null);
   const uiShellAppAreaRef = useRef<HTMLDivElement>(null);
+
+  const { isChromeHidden: isBannersHidden } = useFullscreenChromeCollapse({
+    chromeElementRef: bannersContainerRef,
+    collapsedDimension: "height",
+    isCollapsed: hasActiveFullscreen,
+  });
+
+  const { isChromeHidden: isTopNavHidden } = useFullscreenChromeCollapse({
+    chromeElementRef: topNavContainerRef,
+    collapsedDimension: "height",
+    isCollapsed: hasActiveFullscreen,
+  });
 
   const leftSideContainerRef = useRef<HTMLDivElement>(null);
   const leftSideMenuToggleRef = useRef<FocusHandle>(null);
@@ -288,6 +309,13 @@ const NarrowUiShellContent = ({
     };
   }, [closeSideMenus, uiShellContext]);
 
+  // An open menu would otherwise float over the fullscreen content with its top nav toggle hidden, leaving no visible way to close it.
+  useEffect(() => {
+    if (hasActiveFullscreen) {
+      closeSideMenus();
+    }
+  }, [closeSideMenus, hasActiveFullscreen]);
+
   const toggleLeftSideMenu = useCallback(() => {
     setIsRightSideMenuOpen(false);
     setIsLeftSideMenuOpen((isLeftSideMenuOpen) => !isLeftSideMenuOpen);
@@ -298,12 +326,8 @@ const NarrowUiShellContent = ({
     setIsRightSideMenuOpen((isRightSideMenuOpen) => !isRightSideMenuOpen);
   }, []);
 
-  // WCAG 1.3.2: when the left nav opens, focus must move into it so screen
-  // reader and keyboard users land on the newly revealed content instead of
-  // being stranded on the header. On close we return focus to the toggle
-  // (disclosure pattern) — the container is `display: none` by the time this
-  // effect runs, so its children can no longer hold focus and we cannot rely
-  // on an activeElement containment check.
+  // WCAG 1.3.2: when the left nav opens, focus must move into it so screen reader and keyboard users land on the newly revealed content instead of being stranded on the header. On close we return focus to the toggle (disclosure pattern) — the container is `display: none` by the time this
+  // effect runs, so its children can no longer hold focus and we cannot rely on an activeElement containment check.
   const isLeftSideMenuOpenRef = useRef(false);
 
   useEffect(() => {
@@ -357,15 +381,21 @@ const NarrowUiShellContent = ({
       >
         <SkipToContent appElement={appElement} />
 
-        <StyledBannersContainer>
+        <StyledBannersContainer
+          hidden={isBannersHidden}
+          ref={bannersContainerRef}
+        >
           {optionalComponents?.banners}
         </StyledBannersContainer>
 
         {(initialVisibleSections?.includes("TopNav") || topNavProps) && (
           <ErrorBoundary fallback={null} onError={onError}>
             <StyledTopNav
+              // Hidden instead of unmounted, so the top nav and the consumer's `topNavLeftSide` keep their state through fullscreen.
+              hidden={isTopNavHidden}
               isContentScrolled={isContentScrolled}
               odysseyDesignTokens={odysseyDesignTokens}
+              ref={topNavContainerRef}
               topNavBackgroundColor={uiShellContext?.topNavBackgroundColor}
             >
               <StyledTopNavMenu

@@ -412,9 +412,7 @@ const filterData = ({
           );
         }
 
-        // In the custom filter examples, we provide a "starting letter"
-        // control that allows the user to filter by whether the
-        // first letter is a vowel or consonant
+        // In the custom filter examples, we provide a "starting letter" control that allows the user to filter by whether the first letter is a vowel or consonant
         if (id === "startLetter" && typeof row.name === "string") {
           const firstLetter = row.name[0]?.toLowerCase();
           if (value === "vowel") return "aeiou".includes(firstLetter);
@@ -621,9 +619,7 @@ export const Empty: StoryObj<DataTableProps> = {
     hasColumnResizing: true,
     hasColumnVisibility: false,
     hasFilters: true,
-    // resultsPerPage > 50 would normally enable row virtualization,
-    // but this story verifies virtualization stays disabled for empty data
-    // so the empty placeholder is not clipped.
+    // resultsPerPage > 50 would normally enable row virtualization, but this story verifies virtualization stays disabled for empty data so the empty placeholder is not clipped.
     hasPagination: true,
     resultsPerPage: 100,
     hasRowSelection: true,

@@ -51,9 +51,7 @@ export const autocompleteComponents = ({
     },
     styleOverrides: {
       root: {
-        // MUI wraps Autocomplete in an outer div, making the inner MuiFormControl
-        // always :last-child of that wrapper (so its margin is always 0). Move
-        // the spacing responsibility here so :last-child works against form siblings.
+        // MUI wraps Autocomplete in an outer div, making the inner MuiFormControl always :last-child of that wrapper (so its margin is always 0). Move the spacing responsibility here so :last-child works against form siblings.
         marginBlockEnd: odysseyTokens.Spacing4,
         "&:last-child": {
           marginBlockEnd: 0,
@@ -157,8 +155,7 @@ export const autocompleteComponents = ({
       paper: ({ ownerState }) => ({
         /**
          * ListboxComponent is used when `isVirtualized` prop is true.
-         * This style is needed to render the virtualized window. It renders out a parent div
-         * that needs a height to be set, otherwise the height is 0 and nothing appears.
+         * This style is needed to render the virtualized window. It renders out a parent div that needs a height to be set, otherwise the height is 0 and nothing appears.
          */
         ...(ownerState.ListboxComponent !== undefined && {
           height: "100%",
@@ -174,8 +171,7 @@ export const autocompleteComponents = ({
         }),
 
         ".MuiChip-root": {
-          // using 55ch - (48px(padding + clear button) + 4px) for spacing between chip and clear button to account for the 24px of padding on the right side of the container and the width of the clear button.
-          // Ensures chip does not enlarge the container or overlap the clear button
+          // using 55ch - (48px(padding + clear button) + 4px) for spacing between chip and clear button to account for the 24px of padding on the right side of the container and the width of the clear button. Ensures chip does not enlarge the container or overlap the clear button
           maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} - (${odysseyTokens.Spacing6} + ${odysseyTokens.Spacing6} + ${odysseyTokens.Spacing1}))`,
         },
       }),

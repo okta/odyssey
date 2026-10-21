@@ -148,15 +148,13 @@ export type PaginationProps = {
    */
   totalRows?: number;
   /**
-   * The type of pagination controls shown. Defaults to next/prev buttons, but can be
-   * set to a simple "Load more" button by setting to "loadMore".
+   * The type of pagination controls shown. Defaults to next/prev buttons, but can be set to a simple "Load more" button by setting to "loadMore".
    */
   variant?: (typeof paginationTypeValues)[number];
 };
 
 /**
- * A pagination control that allows users to navigate between pages of data or load more items.
- * Supports paged navigation with previous/next buttons and a "load more" variant.
+ * A pagination control that allows users to navigate between pages of data or load more items. Supports paged navigation with previous/next buttons and a "load more" variant.
  */
 const Pagination = ({
   currentPageLabel: currentPageLabelProp,
@@ -237,9 +235,7 @@ const Pagination = ({
     });
   }, [page, rowsPerPage, onPaginationChange, totalRows]);
 
-  // The following handlers use React.KeyboardEvent (rather than just KeyboardEvent) because React.KeyboardEvent
-  // is generic, while plain KeyboardEvent is not. We need this generic so we can specify the HTMLInputElement,
-  // which allows us to use currentTarget.value
+  // The following handlers use React.KeyboardEvent (rather than just KeyboardEvent) because React.KeyboardEvent is generic, while plain KeyboardEvent is not. We need this generic so we can specify the HTMLInputElement, which allows us to use currentTarget.value
   const handlePageSubmit = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       if (event.key === "Enter") {

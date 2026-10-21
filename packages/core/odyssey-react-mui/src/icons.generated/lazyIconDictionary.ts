@@ -235,6 +235,16 @@ export const lazyIconDictionary: Record<IconName, LazyIconComponent> = {
   Folder: lazy(() =>
     import("./Folder.js").then((module) => ({ default: module.FolderIcon })),
   ),
+  FullscreenEnter: lazy(() =>
+    import("./FullscreenEnter.js").then((module) => ({
+      default: module.FullscreenEnterIcon,
+    })),
+  ),
+  FullscreenExit: lazy(() =>
+    import("./FullscreenExit.js").then((module) => ({
+      default: module.FullscreenExitIcon,
+    })),
+  ),
   Globe: lazy(() =>
     import("./Globe.js").then((module) => ({ default: module.GlobeIcon })),
   ),

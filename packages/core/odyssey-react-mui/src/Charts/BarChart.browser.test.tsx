@@ -31,8 +31,7 @@ describe(BarChart.displayName!, () => {
     );
 
     await expect(container).toBeAccessible();
-    // Every point carries its category, its value, and its series name, so a
-    // screen reader user can read a point without reading the legend.
+    // Every point carries its category, its value, and its series name, so a screen reader user can read a point without reading the legend.
     await expect
       .element(
         page.getByRole("img", {
@@ -123,12 +122,9 @@ describe(BarChart.displayName!, () => {
     await expect
       .element(page.getByLabelText("B, 0.1. Failure.", { exact: true }))
       .toBeVisible();
-    // A null value draws no bar. The chart library exposes the gap as an
-    // invisible accessibility placeholder with no `img` role, so these check
-    // presence in the document rather than visibility.
+    // A null value draws no bar. The chart library exposes the gap as an invisible accessibility placeholder with no `img` role, so these check presence in the document rather than visibility.
     //
-    // Series "Success" has the gap at B, where "Failure" has a value, and
-    // "Failure" has the gap at C, where "Success" has a value.
+    // Series "Success" has the gap at B, where "Failure" has a value, and "Failure" has the gap at C, where "Success" has a value.
     await expect
       .element(page.getByLabelText("B, No value. Success.", { exact: true }))
       .toBeInTheDocument();
@@ -225,15 +221,7 @@ describe(BarChart.displayName!, () => {
       />,
     );
 
-    // An axis label carries no accessible role, and "Attempts" and "Method"
-    // each render as a plain axis label whichever axis they land on. So an
-    // accessible query, or a text query, passes just as well on a build that
-    // swaps xAxisLabel and yAxisLabel onto the wrong library axis. The chart
-    // library groups each axis's own elements under a class named for that
-    // library axis, `highcharts-xaxis` or `highcharts-yaxis`, so reading that
-    // group is the only way to assert which library axis actually received
-    // which label. Do not replace this with `getByText`. That query cannot
-    // fail on the one regression this test exists to catch.
+    // An axis label carries no accessible role, and "Attempts" and "Method" each render as a plain axis label whichever axis they land on. So an accessible query, or a text query, passes just as well on a build that swaps xAxisLabel and yAxisLabel onto the wrong library axis. The chart library groups each axis's own elements under a class named for that library axis, `highcharts-xaxis` or `highcharts-yaxis`, so reading that group is the only way to assert which library axis actually received which label. Do not replace this with `getByText`. That query cannot fail on the one regression this test exists to catch.
     const libraryXAxisLabel = container.querySelector(
       ".highcharts-xaxis .highcharts-axis-title",
     );
@@ -243,11 +231,9 @@ describe(BarChart.displayName!, () => {
 
     expect(libraryXAxisLabel).not.toBeNull();
     expect(libraryYAxisLabel).not.toBeNull();
-    // The library's XAxis holds the categories in a bar chart, so it
-    // receives yAxisLabel, the public prop that names the category axis.
+    // The library's XAxis holds the categories in a bar chart, so it receives yAxisLabel, the public prop that names the category axis.
     expect(libraryXAxisLabel?.textContent).toEqual("Method");
-    // The library's YAxis holds the values in a bar chart, so it receives
-    // xAxisLabel, the public prop that names the value axis.
+    // The library's YAxis holds the values in a bar chart, so it receives xAxisLabel, the public prop that names the value axis.
     expect(libraryYAxisLabel?.textContent).toEqual("Attempts");
   });
 
@@ -295,8 +281,7 @@ describe(BarChart.displayName!, () => {
     );
 
     await expect(container).toBeAccessible();
-    // The title and the subtitle reach the page as real HTML above the chart,
-    // rather than as text inside the chart library's own output.
+    // The title and the subtitle reach the page as real HTML above the chart, rather than as text inside the chart library's own output.
     await expect
       .element(
         page.getByRole("heading", {
@@ -332,8 +317,7 @@ describe(BarChart.displayName!, () => {
     );
 
     await expect(container).toBeAccessible();
-    // The chart library draws no output while loading, so its own
-    // accessible container is gone.
+    // The chart library draws no output while loading, so its own accessible container is gone.
     expect(
       page
         .getByRole("group", {
@@ -350,8 +334,7 @@ describe(BarChart.displayName!, () => {
         }),
       )
       .toBeVisible();
-    // The heading and subtitle stay on screen, because the frame renders
-    // them outside the chart library's own output.
+    // The heading and subtitle stay on screen, because the frame renders them outside the chart library's own output.
     await expect
       .element(
         page.getByRole("heading", {
@@ -398,8 +381,7 @@ describe(BarChart.displayName!, () => {
         }),
       )
       .toBeVisible();
-    // The heading and subtitle stay on screen even though the chart library
-    // drew nothing.
+    // The heading and subtitle stay on screen even though the chart library drew nothing.
     await expect
       .element(
         page.getByRole("heading", {
@@ -477,9 +459,7 @@ describe(BarChart.displayName!, () => {
       .toHaveFocus();
     await expect(container).toBeAccessible();
 
-    // The values render through `formatChartValue`, not as the raw numbers.
-    // One row per series proves the shared popover reads
-    // `point.custom.formattedValue` once per series rather than `point.y`.
+    // The values render through `formatChartValue`, not as the raw numbers. One row per series proves the shared popover reads `point.custom.formattedValue` once per series rather than `point.y`.
     await expect
       .element(page.getByText("Success: 4%", { exact: true }))
       .toBeVisible();

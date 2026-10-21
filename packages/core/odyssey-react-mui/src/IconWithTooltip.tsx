@@ -62,8 +62,7 @@ export type IconWithTooltipProps = {
 } & Pick<HtmlProps, "testId" | "translate">;
 
 /**
- * Displays an icon (defaulting to an information circle) that reveals a tooltip on focus or hover.
- * Use it to surface supplementary help text inline next to a label or form field.
+ * Displays an icon (defaulting to an information circle) that reveals a tooltip on focus or hover. Use it to surface supplementary help text inline next to a label or form field.
  */
 const IconWithTooltip = ({
   IconComponent = <InformationCircleIcon />,

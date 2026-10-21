@@ -107,12 +107,7 @@ describe(SideNav.displayName!, () => {
 
     await userEvent.click(page.getByLabelText("Close navigation"));
 
-    // `inert` flips synchronously on collapse; the visual hide runs on a CSS
-    // width/opacity transition. Assert `opacity` reaches 0 first — that retry
-    // waits out the animation, so `not.toBeVisible()` (which needs the settled
-    // zero-width box) checks the finished state rather than a mid-animation
-    // frame. Keep this order: without a preceding wait, a visibility matcher
-    // would race the transition and pass against the still-open frame.
+    // `inert` flips synchronously on collapse; the visual hide runs on a CSS width/opacity transition. Assert `opacity` reaches 0 first — that retry waits out the animation, so `not.toBeVisible()` (which needs the settled zero-width box) checks the finished state rather than a mid-animation frame. Keep this order: without a preceding wait, a visibility matcher would race the transition and pass against the still-open frame.
     await expect.element(collapsibleRegion).toHaveAttribute("inert");
     await expect.element(collapsibleRegion).toHaveStyle({ opacity: "0" });
     await expect.element(collapsibleRegion).not.toBeVisible();
@@ -153,9 +148,7 @@ describe(SideNav.displayName!, () => {
 
     await userEvent.click(page.getByLabelText("Close navigation"));
 
-    // SC 1.3.2 — the collapsed region is marked `inert`, removing its logo link and
-    // menu items from the accessibility tree so a screen reader no longer announces
-    // them while browsing with arrow keys. `opacity: 0` alone left them exposed.
+    // SC 1.3.2 — the collapsed region is marked `inert`, removing its logo link and menu items from the accessibility tree so a screen reader no longer announces them while browsing with arrow keys. `opacity: 0` alone left them exposed.
     await expect
       .element(
         page.elementLocator(
@@ -164,8 +157,7 @@ describe(SideNav.displayName!, () => {
       )
       .toHaveAttribute("inert");
 
-    // SC 2.4.3 — the hidden logo link is no longer a keyboard tab stop. Focus cannot
-    // land inside an `inert` subtree, so focusing the link is a no-op.
+    // SC 2.4.3 — the hidden logo link is no longer a keyboard tab stop. Focus cannot land inside an `inert` subtree, so focusing the link is a no-op.
     const logoLink = document.querySelector<HTMLAnchorElement>(
       '[data-se="sidenav-header-logo"]',
     )!;
@@ -439,14 +431,11 @@ describe(SideNav.displayName!, () => {
       />,
     );
 
-    // The nav container and the nested sub-nav must both be conveyed as lists.
-    // role="none"/role="presentation" previously stripped these semantics so
-    // screen readers announced no list structure at all (WCAG 1.3.1).
+    // The nav container and the nested sub-nav must both be conveyed as lists. role="none"/role="presentation" previously stripped these semantics so screen readers announced no list structure at all (WCAG 1.3.1).
     const lists = page.getByRole("list").elements();
     expect(lists.length).toBeGreaterThanOrEqual(2);
 
-    // The nested sub-nav is named after its parent item so screen readers
-    // announce it as e.g. "My Apps, list" rather than an unnamed list.
+    // The nested sub-nav is named after its parent item so screen readers announce it as e.g. "My Apps, list" rather than an unnamed list.
     await expect
       .element(page.getByRole("list", { name: "My Apps" }))
       .toBeInTheDocument();
@@ -596,9 +585,7 @@ describe(SideNav.displayName!, () => {
           />,
         );
 
-        // Collapsed, the region is visually hidden. Its removal from the
-        // accessibility tree and tab order via `inert` is asserted separately, in
-        // "collapsed content is not exposed to screen readers or keyboard".
+        // Collapsed, the region is visually hidden. Its removal from the accessibility tree and tab order via `inert` is asserted separately, in "collapsed content is not exposed to screen readers or keyboard".
         await expect
           .element(
             page.elementLocator(
@@ -637,9 +624,7 @@ describe(SideNav.displayName!, () => {
           />,
         );
 
-        // Collapsed, the region is visually hidden. Its removal from the
-        // accessibility tree and tab order via `inert` is asserted separately, in
-        // "collapsed content is not exposed to screen readers or keyboard".
+        // Collapsed, the region is visually hidden. Its removal from the accessibility tree and tab order via `inert` is asserted separately, in "collapsed content is not exposed to screen readers or keyboard".
         await expect
           .element(
             page.elementLocator(
@@ -740,10 +725,7 @@ describe(SideNav.displayName!, () => {
 
       const workLink = page.getByRole("link", { name: "Work" }).element();
 
-      // Each sortable row previously wrapped its content in its own <ul>, so
-      // the nearest list to a row's link was a single-item list — screen
-      // readers announced "list, 1 item" per row. The nearest enclosing list
-      // must now be the shared sortable list holding every row.
+      // Each sortable row previously wrapped its content in its own <ul>, so the nearest list to a row's link was a single-item list — screen readers announced "list, 1 item" per row. The nearest enclosing list must now be the shared sortable list holding every row.
       const sortableList = workLink.closest("ul");
       expect(sortableList).not.toBeNull();
 
@@ -777,8 +759,7 @@ describe(SideNav.displayName!, () => {
         />,
       );
 
-      // Screen readers convey the current page from the interactive anchor,
-      // so aria-current must live on the link — not its wrapping list item.
+      // Screen readers convey the current page from the interactive anchor, so aria-current must live on the link — not its wrapping list item.
       const link = page.getByRole("link", { name: menuItemText });
       await expect.element(link).toHaveAttribute("aria-current", "page");
 
@@ -856,9 +837,7 @@ describe(SideNav.displayName!, () => {
         />,
       );
 
-      // The presentational external-link icon conveys "opens in a new tab"
-      // visually; the ScreenReaderText makes the same hint part of the link's
-      // accessible name (WCAG 1.1.1).
+      // The presentational external-link icon conveys "opens in a new tab" visually; the ScreenReaderText makes the same hint part of the link's accessible name (WCAG 1.1.1).
       await expect
         .element(
           page.getByRole("link", { name: `${linkLabel} ${newWindowText}` }),
@@ -886,11 +865,7 @@ describe(SideNav.displayName!, () => {
         />,
       );
 
-      // `aria-disabled` is only announced on a widget role, so the disabled
-      // leaf carries `role="button"` and the state must live there rather
-      // than on the wrapper, whose `listitem` role (or plain `<div>` in
-      // sortable mode) can't carry it for AT (WCAG 4.1.2). This mirrors how
-      // a disabled accordion item announces "dimmed".
+      // `aria-disabled` is only announced on a widget role, so the disabled leaf carries `role="button"` and the state must live there rather than on the wrapper, whose `listitem` role (or plain `<div>` in sortable mode) can't carry it for AT (WCAG 4.1.2). This mirrors how a disabled accordion item announces "dimmed".
       const disabledItem = page.getByRole("button", { name: menuItemText });
       await expect
         .element(disabledItem)

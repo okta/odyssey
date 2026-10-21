@@ -18,9 +18,7 @@ export type SideNavItemContentContextValue = {
   isCompact?: boolean;
   isSortable?: boolean;
   /**
-   * If `true`, the item is rendered inside a `SortableItem`, which already
-   * supplies the list item (`<li>`) element. The item content must then render
-   * a non-`<li>` root to avoid nesting a one-item list inside every row.
+   * If `true`, the item is rendered inside a `SortableItem`, which already supplies the list item (`<li>`) element. The item content must then render a non-`<li>` root to avoid nesting a one-item list inside every row.
    */
   isWithinSortableList?: boolean;
 };

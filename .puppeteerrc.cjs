@@ -10,11 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-// eyes-storybook's Chromium is only exercised by the Visual Regression Test
-// suite, which installs the browser explicitly (see
-// scripts/visual-regression-test.sh). Skipping the automatic postinstall
-// download keeps every `yarn install` off the open internet
-// (storage.googleapis.com) -- the Okto sandbox blocks that egress -- and speeds
+// eyes-storybook's Chromium is only exercised by the Visual Regression Test suite, which installs the browser explicitly (see scripts/visual-regression-test.sh). Skipping the automatic postinstall download keeps every `yarn install` off the open internet (storage.googleapis.com) -- the Okto sandbox blocks that egress -- and speeds
 // up installs that never launch a browser.
 module.exports = {
   skipDownload: true,

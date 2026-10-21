@@ -52,18 +52,15 @@ export type DialogProps = {
   ariaLabel?: string;
 
   /**
-   * @deprecated Will be removed in a future Odyssey version. Use
-   * `primaryCallToActionComponent` instead.
+   * @deprecated Will be removed in a future Odyssey version. Use `primaryCallToActionComponent` instead.
    */
   callToActionFirstComponent?: ReactElement<typeof Button>;
   /**
-   * @deprecated Will be removed in a future Odyssey version. Use
-   * `tertiaryCallToActionComponent` instead.
+   * @deprecated Will be removed in a future Odyssey version. Use `tertiaryCallToActionComponent` instead.
    */
   callToActionLastComponent?: ReactElement<typeof Button>;
   /**
-   * @deprecated Will be removed in a future Odyssey version. Use
-   * `secondaryCallToActionComponent` instead.
+   * @deprecated Will be removed in a future Odyssey version. Use `secondaryCallToActionComponent` instead.
    */
   callToActionSecondComponent?: ReactElement<typeof Button>;
   /**
@@ -83,14 +80,12 @@ export type DialogProps = {
    */
   primaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
-   * An optional Button object to be situated in the Dialog footer as the
-   * secondary call to action, alongside the `primaryCallToActionComponent`.
+   * An optional Button object to be situated in the Dialog footer as the secondary call to action, alongside the `primaryCallToActionComponent`.
    */
   secondaryCallToActionComponent?: ReactElement<typeof Button>;
 
   /**
-   * An optional Button object to be situated in the Dialog footer as the
-   * tertiary call to action, alongside the other `callToAction` components.
+   * An optional Button object to be situated in the Dialog footer as the tertiary call to action, alongside the other `callToAction` components.
    */
   tertiaryCallToActionComponent?: ReactElement<typeof Button>;
 
@@ -130,8 +125,7 @@ const DialogTitleContainer = createOdysseyStyledComponent({ tag: "div" })(
 );
 
 /**
- * A modal overlay that interrupts the user to present critical information,
- * collect input, or require confirmation before proceeding.
+ * A modal overlay that interrupts the user to present critical information, collect input, or require confirmation before proceeding.
  */
 const Dialog = ({
   primaryCallToActionComponent,

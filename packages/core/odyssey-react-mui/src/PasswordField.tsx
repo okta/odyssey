@@ -78,13 +78,7 @@ export type PasswordFieldProps = {
    */
   placeholder?: string;
   /**
-   * Accessible name for the password visibility toggle. This is a stable name
-   * that does not change when the password is shown or hidden — the toggle's
-   * pressed state is conveyed through `aria-pressed`, so the name must stay
-   * constant to follow the ARIA toggle-button pattern. Override per instance
-   * when a page has more than one PasswordField (or when collecting other
-   * sensitive input such as a security answer) so screen-reader users can tell
-   * the toggles apart (e.g. "Show re-entered password").
+   * Accessible name for the password visibility toggle. This is a stable name that does not change when the password is shown or hidden — the toggle's pressed state is conveyed through `aria-pressed`, so the name must stay constant to follow the ARIA toggle-button pattern. Override per instance when a page has more than one PasswordField (or when collecting other sensitive input such as a security answer) so screen-reader users can tell the toggles apart (e.g. "Show re-entered password").
    */
   showPasswordToggleAriaLabel?: string;
   /**
@@ -100,8 +94,7 @@ type FieldRenderProps = Partial<
   Pick<FieldComponentRenderProps, "id" | "labelElementId">;
 
 /**
- * A text field for collecting sensitive input such as passwords. Renders a masked
- * input with an optional toggle button that lets users reveal or hide the entered value.
+ * A text field for collecting sensitive input such as passwords. Renders a masked input with an optional toggle button that lets users reveal or hide the entered value.
  */
 const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   (

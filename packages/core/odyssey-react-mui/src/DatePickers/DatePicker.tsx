@@ -78,9 +78,7 @@ export type DatePickerProps = OdysseyDateFieldProps &
   >;
 
 /**
- * A date input field with an optional calendar popover for selecting a single date.
- * Supports controlled and uncontrolled usage, date range constraints,
- * per-day/month/year disabling, and an optional inline time zone picker.
+ * A date input field with an optional calendar popover for selecting a single date. Supports controlled and uncontrolled usage, date range constraints, per-day/month/year disabling, and an optional inline time zone picker.
  */
 const DatePicker = ({
   defaultValue: defaultValueProp,

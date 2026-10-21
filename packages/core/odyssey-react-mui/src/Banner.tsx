@@ -79,8 +79,7 @@ export type BannerProps = {
   );
 
 /**
- * A full-width alert strip displayed at the top of a page or section to communicate
- * high-priority information such as errors, warnings, or status updates.
+ * A full-width alert strip displayed at the top of a page or section to communicate high-priority information such as errors, warnings, or status updates.
  */
 const Banner = ({
   linkRel,

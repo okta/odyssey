@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.70.1",
+  "version": "1.71.1",
   "nx": {
     "tags": [
       "scope:core"
@@ -77,6 +77,9 @@
       "logos": [
         "./dist/types/logos.generated/index.d.ts"
       ],
+      "message-bus": [
+        "./dist/types/message-bus/index.d.ts"
+      ],
       "labs": [
         "./dist/types/labs/index.d.ts"
       ],
@@ -133,6 +136,13 @@
       "import": "./dist/esm/logos.generated/index.js",
       "require": "./dist/cjs/logos.generated/index.cjs",
       "default": "./dist/cjs/logos.generated/index.cjs"
+    },
+    "./message-bus": {
+      "types": "./dist/types/message-bus/index.d.ts",
+      "node": "./dist/cjs/message-bus/index.cjs",
+      "import": "./dist/esm/message-bus/index.js",
+      "require": "./dist/cjs/message-bus/index.cjs",
+      "default": "./dist/cjs/message-bus/index.cjs"
     },
     "./labs": {
       "types": "./dist/types/labs/index.d.ts",
@@ -277,7 +287,7 @@
     "yargs": "^17.7.2"
   },
   "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^18.3.1 || ^19.0.0",
+    "react-dom": "^18.3.1 || ^19.0.0"
   }
 }

@@ -33,11 +33,7 @@ type DragOverlayContextValue = {
   isGrabbed: boolean;
 };
 
-// @dnd-kit renders two copies of the dragged row: the source item that stays in
-// the list (flagged by `useSortable().isDragging`) and this floating overlay
-// copy that follows the pointer. The overlay renders outside SortableContext,
-// so it has no `isDragging` flag of its own. This context lets nested components
-// tell they are inside the overlay (the "grabbed" copy) vs. the source ghost.
+// @dnd-kit renders two copies of the dragged row: the source item that stays in the list (flagged by `useSortable().isDragging`) and this floating overlay copy that follows the pointer. The overlay renders outside SortableContext, so it has no `isDragging` flag of its own. This context lets nested components tell they are inside the overlay (the "grabbed" copy) vs. the source ghost.
 const DragOverlayContext = createContext<DragOverlayContextValue>({
   isGrabbed: false,
 });

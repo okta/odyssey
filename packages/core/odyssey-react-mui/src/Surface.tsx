@@ -43,8 +43,7 @@ export type SurfaceProps = {
 };
 
 /**
- * A styled container that provides a visually distinct background for grouping related
- * content. Automatically adapts its border and theme to the current contrast mode.
+ * A styled container that provides a visually distinct background for grouping related content. Automatically adapts its border and theme to the current contrast mode.
  */
 const Surface = ({ children }: SurfaceProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();

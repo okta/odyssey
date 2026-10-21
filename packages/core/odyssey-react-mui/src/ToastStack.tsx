@@ -24,10 +24,7 @@ export type ToastListProps = {
   children: ReactElement<typeof Toast> | Array<ReactElement<typeof Toast>>;
 };
 
-// Inside `FullScreenOverlay`, `shadowRootElement` is the shared overlay root
-// Dialog's Modal also uses. MUI's Snackbar renders inline, so we Portal it
-// there ourselves — placing its DOM (and thus its z-index) in the same
-// stacking context as the Dialog backdrop.
+// Inside `FullScreenOverlay`, `shadowRootElement` is the shared overlay root Dialog's Modal also uses. MUI's Snackbar renders inline, so we Portal it there ourselves — placing its DOM (and thus its z-index) in the same stacking context as the Dialog backdrop.
 const ToastStackContent = ({ children }: ToastListProps) => {
   const { shadowRootElement } = useOdysseyThemeProviderPropsContext();
 
@@ -49,8 +46,7 @@ const ToastStackContent = ({ children }: ToastListProps) => {
 };
 
 /**
- * A container that stacks Toast notifications in a fixed position on the screen. Renders
- * its Toast children in a vertically stacked column for simultaneous display.
+ * A container that stacks Toast notifications in a fixed position on the screen. Renders its Toast children in a vertically stacked column for simultaneous display.
  */
 const ToastStack = ({ children }: ToastListProps) => {
   return (

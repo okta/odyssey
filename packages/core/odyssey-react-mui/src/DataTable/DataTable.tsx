@@ -90,12 +90,9 @@ type DataTableCell<T extends DataTableRowData> = Omit<MRT_Cell<T>, "column"> & {
 /**
  * Utility type to extract a callback function type from a given key of `MRT_TableOptions`.
  *
- * The `Extract<>` utility is used to filter out only the function type from the property,
- * as some `MRT_TableOptions` properties can be union types (e.g., `function` | `object`).
+ * The `Extract<>` utility is used to filter out only the function type from the property, as some `MRT_TableOptions` properties can be union types (e.g., `function` | `object`).
  *
- * The `@typescript-eslint/no-unsafe-function-type` rule is disabled here because we must extract
- * a function type from a property of `MRT_TableOptions`, but the exact function signature varies
- * depending on the key.
+ * The `@typescript-eslint/no-unsafe-function-type` rule is disabled here because we must extract a function type from a property of `MRT_TableOptions`, but the exact function signature varies depending on the key.
  */
 type MRT_TableOptionsCallback<
   TableOptionKey extends keyof Required<MRT_TableOptions<MRT_RowData>>,
@@ -133,8 +130,7 @@ export type DataTableProps = {
    */
   additionalActionMenuItems?: ReactNode;
   /**
-   * Menu items to include in the bulk actions menu, which appears above the
-   * table if a row or rows are selected
+   * Menu items to include in the bulk actions menu, which appears above the table if a row or rows are selected
    */
   bulkActionMenuItems?: (
     selectedRows: MRT_RowSelectionState,
@@ -161,8 +157,7 @@ export type DataTableProps = {
    */
   filters?: Array<DataFilter | DataTableColumn<DataTableRowData> | string>;
   /**
-   * Called whenever the table needs to fetch new data, due to changes in
-   * page, results per page, search input, filters, or sorting
+   * Called whenever the table needs to fetch new data, due to changes in page, results per page, search input, filters, or sorting
    */
   getData: ({
     page,
@@ -219,8 +214,7 @@ export type DataTableProps = {
    */
   hasSorting?: boolean;
   /**
-   * The initial density (height & padding) of the table rows. This is available even if the
-   * table density isn't changeable by the end user via hasChangeableDensity.
+   * The initial density (height & padding) of the table rows. This is available even if the table density isn't changeable by the end user via hasChangeableDensity.
    * @default "comfortable"
    */
   initialDensity?: (typeof densityValues)[number];
@@ -238,8 +232,7 @@ export type DataTableProps = {
    */
   maxPages?: number;
   /**
-   * The largest number of rows allowed to be shown per page. This only affects the row input
-   * in pagination.
+   * The largest number of rows allowed to be shown per page. This only affects the row input in pagination.
    */
   maxResultsPerPage?: number;
   /**
@@ -251,13 +244,11 @@ export type DataTableProps = {
    */
   onChangeRowSelection?: (rowSelection: DataTableRowSelectionState) => void;
   /**
-   * Called when the user reorders rows within the table. Can be used
-   * to propagate order change to the backend.
+   * Called when the user reorders rows within the table. Can be used to propagate order change to the backend.
    */
   onReorderRows?: ({ rowId, newRowIndex }: DataTableOnReorderRowsType) => void;
   /**
-   * The type of pagination controls shown. Defaults to next/prev buttons, but can be
-   * set to a simple "Load more" button by setting to "loadMore".
+   * The type of pagination controls shown. Defaults to next/prev buttons, but can be set to a simple "Load more" button by setting to "loadMore".
    * @default "paged"
    */
   paginationType?: (typeof paginationTypeValues)[number];
@@ -279,9 +270,7 @@ export type DataTableProps = {
    */
   rowActionMenuItems?: DataTableRowActionsProps["rowActionMenuItems"];
   /**
-   * The debounce time, in milliseconds, for the search input firing
-   * `onChangeSearch` when changed. If `hasSearchSubmitButton` is true,
-   * this doesn't do anything.
+   * The debounce time, in milliseconds, for the search input firing `onChangeSearch` when changed. If `hasSearchSubmitButton` is true, this doesn't do anything.
    */
   searchDelayTime?: number;
   /**
@@ -289,13 +278,11 @@ export type DataTableProps = {
    */
   searchFieldLabel?: string;
   /**
-   * Allows for external control of the selected row state
-   * use in tandem with onChangeRowSelection to manage your state
+   * Allows for external control of the selected row state use in tandem with onChangeRowSelection to manage your state
    */
   selectedRows?: DataTableRowSelectionState;
   /**
-   * The total number of rows in the table. Optional, because it's sometimes impossible
-   * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
+   * The total number of rows in the table. Optional, because it's sometimes impossible to calculate. Used in table pagination to know when to disable the "next"/"more" button.
    */
   totalRows?: number;
 };
@@ -354,10 +341,7 @@ const ScrollableTableContainer = styled("div", {
 const defaultGetRowId: DataTableProps["getRowId"] = (row) => row.id as string;
 
 /**
- * A full-featured data table with support for sorting, filtering, pagination,
- * row selection, row reordering, and column visibility controls. Delegates
- * data fetching to the caller via `getData`, which is invoked whenever page,
- * search, filters, or sort state changes.
+ * A full-featured data table with support for sorting, filtering, pagination, row selection, row reordering, and column visibility controls. Delegates data fetching to the caller via `getData`, which is invoked whenever page, search, filters, or sort state changes.
  * @deprecated use DataView instead for new cases
  */
 const DataTable = ({
@@ -503,8 +487,7 @@ const DataTable = ({
   );
 
   /**
-   * This hack is to provide compatibility with Material-React-Table's
-   * filterOptions format, which allows for strings and { label: string, value: string }
+   * This hack is to provide compatibility with Material-React-Table's filterOptions format, which allows for strings and { label: string, value: string }
    */
   const convertFilterSelectOptions = useCallback(
     (options: DataTableColumn<DataTableRowData>["filterSelectOptions"]) =>
@@ -539,9 +522,7 @@ const DataTable = ({
   );
 
   /**
-   * Filters default to the columns, but can be overridden
-   * with the `filters` prop. `filters` should be an array
-   * of column accessorKeys, column defs, or DataFilters.
+   * Filters default to the columns, but can be overridden with the `filters` prop. `filters` should be an array of column accessorKeys, column defs, or DataFilters.
    */
   const dataTableFilters = useMemo(() => {
     const providedFilters = filtersProp || columns;
@@ -828,8 +809,7 @@ const DataTable = ({
             width: "auto",
           },
           children: (
-            // Add a spacer to simulate the width of the drag handle in the column.
-            // Without this, the head cells are offset from their body cell counterparts
+            // Add a spacer to simulate the width of the drag handle in the column. Without this, the head cells are offset from their body cell counterparts
             <Box sx={{ marginInline: "-0.1rem" }}>
               <DragIndicatorIcon sx={{ marginInline: 1, opacity: 0 }} />
             </Box>

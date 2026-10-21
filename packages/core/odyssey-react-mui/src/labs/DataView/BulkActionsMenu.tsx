@@ -97,8 +97,7 @@ const BulkActionsMenu = <TData extends MRT_RowData>({
       )}
       <Box>
         <Button
-          // >= rather than ===: a controlled rowSelection can carry disabled or
-          // off-page rows, so selectedRowCount may exceed the selectable count.
+          // >= rather than ===: a controlled rowSelection can carry disabled or off-page rows, so selectedRowCount may exceed the selectable count.
           isDisabled={selectedRowCount >= selectableRowCount}
           label={t("table.actions.selectall")}
           onClick={handleSelectAll}

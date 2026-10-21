@@ -81,9 +81,7 @@ export type CheckboxProps = {
   Pick<HtmlProps, "ariaLabel" | "ariaLabelledBy" | "testId" | "translate">;
 
 /**
- * A single checkbox input that allows a user to select or deselect a binary
- * option. Use within a CheckboxGroup for grouped selections, or standalone
- * for independent boolean choices.
+ * A single checkbox input that allows a user to select or deselect a binary option. Use within a CheckboxGroup for grouped selections, or standalone for independent boolean choices.
  */
 const Checkbox = ({
   ariaLabel,

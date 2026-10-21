@@ -25,8 +25,7 @@ import {
 } from "../../icons.generated/index.js";
 import { DataTableProps } from "./DataTable.js";
 
-// Rows coming from TableLayoutContent will be in the MRT-expected row format,
-// while rows coming from CardLayoutContent will be pure data
+// Rows coming from TableLayoutContent will be in the MRT-expected row format, while rows coming from CardLayoutContent will be pure data
 type RowOrTableRow<TData extends MRT_RowData> = MRT_Row<TData> | TData;
 
 export type RowActionsProps<TData extends MRT_RowData> = {

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.71.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.70.1...v1.71.0) (2026-10-14)
+
+### Bug Fixes
+
+* allow React 19 as a peer of odyssey-react-mui ([#937](https://github.com/atko-eng/odyssey-design-system/issues/937)) ([db30004](https://github.com/atko-eng/odyssey-design-system/commit/db3000441ec5982d9a642c278251dc98e2fa612e))
+* DatePicker spacing across calendar views ([#893](https://github.com/atko-eng/odyssey-design-system/issues/893)) ([026a18c](https://github.com/atko-eng/odyssey-design-system/commit/026a18c0c5201c8c3ff4f4f9bc9078fab64913c0))
+
+### Features
+
+* add browser message bus ([#931](https://github.com/atko-eng/odyssey-design-system/issues/931)) ([604e350](https://github.com/atko-eng/odyssey-design-system/commit/604e35079c63f8d8364d44aa543294313871e6d7))
+* Translations for odyssey-design-system:enduser ([#948](https://github.com/atko-eng/odyssey-design-system/issues/948)) ([e8d3056](https://github.com/atko-eng/odyssey-design-system/commit/e8d30563a6ce4f84ce1b579f8d8a96538289c39b))
+
+
 # [1.70.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.69.0...v1.70.0) (2026-09-30)
 
 ### Bug Fixes

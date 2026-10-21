@@ -60,18 +60,15 @@ export type DrawerProps = {
    */
   onClose: (event: MuiOnCloseEvent, reason: DrawerOnCloseReason) => void;
   /**
-   * An optional Button object to be situated in the Drawer footer. Should
-   * almost always be of variant `primary`.
+   * An optional Button object to be situated in the Drawer footer. Should almost always be of variant `primary`.
    */
   primaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
-   * An optional Button object to be situated in the Drawer footer, alongside
-   * the `callToActionPrimaryComponent`.
+   * An optional Button object to be situated in the Drawer footer, alongside the `callToActionPrimaryComponent`.
    */
   secondaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
-   * An optional Button object to be situated in the Drawer footer, alongside
-   * the other two `callToAction` components.
+   * An optional Button object to be situated in the Drawer footer, alongside the other two `callToAction` components.
    */
   tertiaryCallToActionComponent?: ReactElement<typeof Button>;
   /**
@@ -83,9 +80,7 @@ export type DrawerProps = {
    * - If `'temporary'`, overlays content and dismisses when the user clicks the backdrop.
    * - If `'persistent'`, pushes the page layout to the side and stays open until explicitly closed.
    *
-   * A `'temporary'` Drawer spans the full viewport width at 400 pixels and
-   * below. A `'persistent'` Drawer keeps its width of about 360 pixels at every
-   * viewport size.
+   * A `'temporary'` Drawer spans the full viewport width at 400 pixels and below. A `'persistent'` Drawer keeps its width of about 360 pixels at every viewport size.
    * @default "temporary"
    */
   variant?: (typeof variantValues)[number];
@@ -204,8 +199,7 @@ const DrawerFooter = styled("div", {
 `;
 
 /**
- * A panel that slides in from the edge of the screen to display supplementary
- * content or actions without navigating away from the current page.
+ * A panel that slides in from the edge of the screen to display supplementary content or actions without navigating away from the current page.
  */
 const Drawer = ({
   ariaLabel,

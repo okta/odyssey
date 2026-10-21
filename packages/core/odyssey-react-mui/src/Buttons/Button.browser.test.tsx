@@ -62,10 +62,7 @@ describe(Button.displayName!, () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  // The control for the two inert-link tests below: it establishes that Enter on
-  // a link button really does navigate in this harness, so their assertion that
-  // the hash stays put is evidence of suppression rather than of Enter doing
-  // nothing here.
+  // The control for the two inert-link tests below: it establishes that Enter on a link button really does navigate in this harness, so their assertion that the hash stays put is evidence of suppression rather than of Enter doing nothing here.
   test("link button navigates on Enter", async () => {
     await renderWithOdysseyProvider(
       <Button href="#navigated" label="Button label" variant="primary" />,
@@ -144,8 +141,7 @@ describe(Button.displayName!, () => {
       await expect.element(button).toHaveAttribute("aria-disabled", "true");
       await expect.element(button).not.toHaveAttribute("disabled");
 
-      // The spinner is decorative: aria-busy on the button carries the state,
-      // so the progressbar is hidden rather than named and announced twice.
+      // The spinner is decorative: aria-busy on the button carries the state, so the progressbar is hidden rather than named and announced twice.
       expect(
         button.element().querySelector(".MuiCircularProgress-root"),
       ).toHaveAttribute("aria-hidden", "true");
