@@ -289,8 +289,7 @@ describe("DataFilters", () => {
     const filterMenu = page.getByRole("menu");
     await expect.element(filterMenu).toBeVisible();
     // TODO: fix — pre-existing color-contrast issue on the filter's
-    // "Any <label>" Subordinate subtitle once the menu item regains focus
-    // (4.35:1, needs 4.5:1). Unrelated to focus management; needs a token fix.
+    // "Any <label>" Subordinate subtitle once the menu item regains focus (4.35:1, needs 4.5:1). Unrelated to focus management; needs a token fix.
     await expect
       .element(filterMenu)
       .toBeAccessible({ disabledRules: ["color-contrast"] });
@@ -331,8 +330,7 @@ describe("DataFilters", () => {
     await userEvent.keyboard("{Escape}");
     await expect.element(filterMenu).toBeVisible();
     // TODO: fix — pre-existing color-contrast issue on the filter's
-    // "Any <label>" Subordinate subtitle once the menu item regains focus
-    // (4.35:1, needs 4.5:1). Unrelated to focus management; needs a token fix.
+    // "Any <label>" Subordinate subtitle once the menu item regains focus (4.35:1, needs 4.5:1). Unrelated to focus management; needs a token fix.
     await expect
       .element(filterMenu)
       .toBeAccessible({ disabledRules: ["color-contrast"] });

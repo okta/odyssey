@@ -25,8 +25,7 @@ export type TagListProps = {
 } & Pick<HtmlProps, "ariaLabel" | "testId">;
 
 /**
- * A horizontal, wrapping list of Tag elements rendered as a semantic `<ul>`. Use to
- * display a collection of tags associated with an item or entity.
+ * A horizontal, wrapping list of Tag elements rendered as a semantic `<ul>`. Use to display a collection of tags associated with an item or entity.
  */
 const TagList = ({ ariaLabel, children, testId }: TagListProps) => {
   const providerValue = useMemo<{

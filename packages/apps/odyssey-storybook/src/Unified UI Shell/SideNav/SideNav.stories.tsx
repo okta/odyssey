@@ -60,8 +60,7 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
-  // SideNav has a manual SideNav.mdx docs page, so it opts out of autodocs
-  // (matching the repo's other MDX-paired stories) to avoid the indexer conflict.
+  // SideNav has a manual SideNav.mdx docs page, so it opts out of autodocs (matching the repo's other MDX-paired stories) to avoid the indexer conflict.
   tags: ["!autodocs"],
   argTypes: {
     appName: {
@@ -376,17 +375,13 @@ export const Default: Story = {
     const scrollableRegion = canvas.getByTestId("scrollable-region");
 
     /**
-     * The scroll behavior in SideNav is such that if an item has isSelected and the item
-     * is not on screen initially, it will scroll to make that item be visible on the screen.
-     * So, we should expect that the scrollable container (found by data-se="scrollable-region")
-     * should have a non-zero scrollTop once this operation has completed.
+     * The scroll behavior in SideNav is such that if an item has isSelected and the item is not on screen initially, it will scroll to make that item be visible on the screen. So, we should expect that the scrollable container (found by data-se="scrollable-region") should have a non-zero scrollTop once this operation has completed.
      */
     await step("Side Nav Should be scrolled as expected", async () => {
       // Add a small delay to allow initial rendering and scrolling
       await new Promise((resolve) => setTimeout(resolve, 100));
 
-      // On initial load, scrollTop will be zero. Then, once the scroll operation completes,
-      // it should be non-zero.
+      // On initial load, scrollTop will be zero. Then, once the scroll operation completes, it should be non-zero.
       if (scrollableRegion.scrollTop !== 0) {
         expect(scrollableRegion.scrollTop).not.toBe(0);
       } else {

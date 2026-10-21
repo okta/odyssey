@@ -60,8 +60,7 @@ export type UiShellContentProps = {
    *
    * UI Shell will position this element appropriately to match the content area inside the Shadow DOM.
    *
-   * A major benefit to having this element separate from UI Shell is related to encapsulation. UI Shell has the capability of rendering inside a web component, but in doing so, the app would be subject to the styles in the web component and not the page itself.
-   * The app should either be in its own web component or use the global styles, and having this separate element allows us to accomplish that goal.
+   * A major benefit to having this element separate from UI Shell is related to encapsulation. UI Shell has the capability of rendering inside a web component, but in doing so, the app would be subject to the styles in the web component and not the page itself. The app should either be in its own web component or use the global styles, and having this separate element allows us to accomplish that goal.
    */
   appElement: HTMLDivElement;
   /**

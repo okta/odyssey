@@ -14,9 +14,7 @@ import { createOdysseyStyledComponent } from "../../createOdysseyStyledComponent
 import { chartTokens } from "../utils/chartTokens.js";
 
 /**
- * A full-height container for a Highcharts React chart. The container also
- * corrects the optical alignment of rectangular legend symbols. Highcharts
- * positions line and marker symbols with a separate rule.
+ * A full-height container for a Highcharts React chart. The container also corrects the optical alignment of rectangular legend symbols. Highcharts positions line and marker symbols with a separate rule.
  */
 export const ChartContainer = createOdysseyStyledComponent({ tag: "div" })({
   height: "100%",

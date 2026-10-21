@@ -39,9 +39,7 @@ type OdysseyStyleFunction<
 ) => CSSObject;
 
 /**
- * Creates a styled component that automatically receives Odyssey design tokens
- * from context, eliminating the need to pass `odysseyDesignTokens` as a prop at
- * every call site.
+ * Creates a styled component that automatically receives Odyssey design tokens from context, eliminating the need to pass `odysseyDesignTokens` as a prop at every call site.
  *
  * @example Basic usage
  * ```tsx
@@ -87,27 +85,20 @@ export const createOdysseyStyledComponent =
     type InternalProps = ComponentPropsWithoutRef<Tag> &
       StyleProps & { odysseyDesignTokens: DesignTokens };
 
-    // Cast to ComponentType<InternalProps> so emotion's overload resolver sees
-    // a concrete component type — ElementType is too broad for styled() to pick
-    // the correct overload signature.
+    // Cast to ComponentType<InternalProps> so emotion's overload resolver sees a concrete component type — ElementType is too broad for styled() to pick the correct overload signature.
     const InternalStyled = styled(tag as ComponentType<InternalProps>, {
       shouldForwardProp: (prop) =>
         prop !== "odysseyDesignTokens" && (shouldForwardProp?.(prop) ?? true),
     })(typeof styleArg === "function" ? styleArg : () => styleArg);
 
-    // LibraryManagedAttributes wraps StyledComponent and cannot be satisfied
-    // with a generic Tag. Cast to ComponentType<any> for the render site;
+    // LibraryManagedAttributes wraps StyledComponent and cannot be satisfied with a generic Tag. Cast to ComponentType<any> for the render site;
     // the public API is typed by the outer curried function.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const InternalComponent = InternalStyled as unknown as ComponentType<any>;
 
     type PublicProps = ComponentPropsWithoutRef<Tag> & StyleProps;
 
-    // forwardRef, not a plain function component: emotion's styled(tag) already
-    // forwards a ref to the underlying DOM node, so without this wrapper passing
-    // one through, the ref is dropped and the DOM node is unreachable. MUI
-    // clones a Tooltip/Popper child with an injected ref to anchor the popper
-    // (childNode/anchorEl in @mui/material/Tooltip/Tooltip.js), so a component
+    // forwardRef, not a plain function component: emotion's styled(tag) already forwards a ref to the underlying DOM node, so without this wrapper passing one through, the ref is dropped and the DOM node is unreachable. MUI clones a Tooltip/Popper child with an injected ref to anchor the popper (childNode/anchorEl in @mui/material/Tooltip/Tooltip.js), so a component
     // that cannot carry a ref silently fails to open on hover.
     return memo(
       forwardRef<ComponentRef<Tag>, PublicProps>(

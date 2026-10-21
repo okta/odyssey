@@ -476,9 +476,7 @@ const SideNav = ({
   const odysseyDesignTokens: DesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
 
-  // At compact viewport heights the persistent (pinned) custom footer eats into
-  // the already-limited vertical space, so move it into the scrollable region
-  // instead of pinning it to the bottom.
+  // At compact viewport heights the persistent (pinned) custom footer eats into the already-limited vertical space, so move it into the scrollable region instead of pinning it to the bottom.
   const { isWithinCompactHeight } = useCompactViewportMatches();
 
   const scrollableContentRef = useRef<HTMLUListElement>(null);
@@ -495,9 +493,7 @@ const SideNav = ({
 
   const blankElement = useMemo(() => <div />, []);
 
-  // The default value (sideNavItems) passed to useState is ONLY used by the useState hook for
-  // the very first value. Subsequent updates to the prop (sideNavItems) need to cause the state
-  // to update!
+  // The default value (sideNavItems) passed to useState is ONLY used by the useState hook for the very first value. Subsequent updates to the prop (sideNavItems) need to cause the state to update!
   useEffect(() => updateSideNavItemsList(sideNavItems || []), [sideNavItems]);
 
   // In the case that you can't control the side nav, then it should use whatever state was passed (app control) rather than what's stored in session storage (user control).
@@ -529,8 +525,7 @@ const SideNav = ({
       }
     };
 
-    // If the window is resized, we may need to re-determine if the scrollable container has overflow
-    // Setup a ResizeObserver to know if the size of the scrollableContent changes
+    // If the window is resized, we may need to re-determine if the scrollable container has overflow Setup a ResizeObserver to know if the size of the scrollableContent changes
     let resizeObserverDebounceTimer: ReturnType<typeof requestAnimationFrame>;
     if (!resizeObserverRef.current) {
       resizeObserverRef.current = new ResizeObserver(() => {
@@ -555,8 +550,7 @@ const SideNav = ({
     // Determine if the scrollable container has overflow or not on load
     updateIsContentScrollable();
 
-    // Finally, we only want to have the border on the bottom of the header iff the user has scrolled
-    // the scrollable container
+    // Finally, we only want to have the border on the bottom of the header iff the user has scrolled the scrollable container
     if (!intersectionObserverRef.current && scrollableContentRef.current) {
       intersectionObserverRef.current = new IntersectionObserver(
         (entries) => {
@@ -601,9 +595,7 @@ const SideNav = ({
 
   const scrollIntoViewRef = useRef<HTMLLIElement>(null);
   /**
-   * Look through the sideNavItems and determine which is the first node
-   * with isSelected. This should be the node we set a ref on in order to
-   * call scrollIntoView in the effect
+   * Look through the sideNavItems and determine which is the first node with isSelected. This should be the node we set a ref on in order to call scrollIntoView in the effect
    */
   const firstSideNavItemIdWithIsSelected = useMemo(() => {
     const flattenedItems = flattenNestedItems(sideNavItemsList);
@@ -613,9 +605,7 @@ const SideNav = ({
     return firstItemWithIsSelected?.id;
   }, [sideNavItemsList]);
   /**
-   * Once we've rendered and if we have an item to scroll to, do the scroll action.
-   * This must rely on checking firstSideNavItemIdWithIsSelected or it will not run
-   * once the actual ref is populated.
+   * Once we've rendered and if we have an item to scroll to, do the scroll action. This must rely on checking firstSideNavItemIdWithIsSelected or it will not run once the actual ref is populated.
    */
   useEffect(() => {
     if (firstSideNavItemIdWithIsSelected && scrollIntoViewRef.current) {
@@ -624,9 +614,7 @@ const SideNav = ({
   }, [firstSideNavItemIdWithIsSelected]);
 
   /**
-   * We only want to put a ref on a node iff it is the first selected node.
-   * This function returns the ref only if the ID provided matches the first
-   * selected node, otherwise returns undefined (so that the node has no ref)
+   * We only want to put a ref on a node iff it is the first selected node. This function returns the ref only if the ID provided matches the first selected node, otherwise returns undefined (so that the node has no ref)
    */
   const getRefIfThisIsFirstNodeWithIsSelected = useCallback(
     (itemId: string) =>
@@ -730,8 +718,7 @@ const SideNav = ({
     } else if (nestedNavItems && nestedNavItems.length > 0) {
       // Recursive case: item has nested children - ALWAYS render as accordion
       const nestedChildren = (
-        // Name the nested list after its parent item so screen readers announce
-        // e.g. "Settings, list, 5 items" instead of an unnamed nested list.
+        // Name the nested list after its parent item so screen readers announce e.g. "Settings, list, 5 items" instead of an unnamed nested list.
         <StyledSideNavListContainer aria-label={label}>
           {isSortable ? (
             <SideNavSortableList
@@ -946,13 +933,7 @@ const SideNav = ({
           data-se="collapsible-region"
           isSideNavCollapsed={isSideNavCollapsed}
           odysseyDesignTokens={odysseyDesignTokens}
-          // When collapsed, the region is only hidden visually (opacity/width), so
-          // its links stayed in the accessibility tree and keyboard tab order.
-          // `inert` removes the whole subtree from both, immediately, without
-          // disturbing the fade animation. Spreading conditionally omits the
-          // attribute entirely when expanded — a present `inert`, even `inert=""`
-          // or `inert="false"`, keeps the region inert — while the empty string
-          // renders as a bare, active `inert` attribute when collapsed.
+          // When collapsed, the region is only hidden visually (opacity/width), so its links stayed in the accessibility tree and keyboard tab order. `inert` removes the whole subtree from both, immediately, without disturbing the fade animation. Spreading conditionally omits the attribute entirely when expanded — a present `inert`, even `inert=""` or `inert="false"`, keeps the region inert — while the empty string renders as a bare, active `inert` attribute when collapsed.
           {...(isSideNavCollapsed ? { inert: "" } : {})}
         >
           <StyledOpacityTransitionContainer

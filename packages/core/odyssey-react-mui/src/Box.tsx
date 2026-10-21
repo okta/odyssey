@@ -29,9 +29,7 @@ export type BoxProps = {
 } & Pick<HtmlProps, "testId" | "translate">;
 
 /**
- * A generic layout primitive that renders as a `<div>` by default and supports MUI system styles
- * via the `sx` prop. Use it as a flexible building block for spacing, alignment, and structural
- * composition.
+ * A generic layout primitive that renders as a `<div>` by default and supports MUI system styles via the `sx` prop. Use it as a flexible building block for spacing, alignment, and structural composition.
  */
 const Box = forwardRef<HTMLElement, BoxProps>(
   ({ children, component, id, role, sx, testId, translate }, ref) => (

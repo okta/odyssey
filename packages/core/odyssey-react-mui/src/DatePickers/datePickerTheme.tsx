@@ -16,8 +16,6 @@ import * as odysseyTokens from "@okta/odyssey-design-tokens";
 
 import { createOdysseyMuiTheme } from "../theme/theme.js";
 
-const popupSpacingValue = 5;
-
 const odysseyTheme = createOdysseyMuiTheme({ odysseyTokens });
 
 type ThemeStyles = ({
@@ -28,8 +26,7 @@ type ThemeStyles = ({
 
 type StateStyles = Record<string, ThemeStyles>;
 
-// Minimal shape of the Popper.js modifier argument we read/write to size the
-// calendar popup to its anchor field. Typed locally to avoid importing the full
+// Minimal shape of the Popper.js modifier argument we read/write to size the calendar popup to its anchor field. Typed locally to avoid importing the full
 // @popperjs/core types into the theme.
 type PopperWidthModifierArguments = {
   state: {
@@ -145,6 +142,8 @@ export const datePickerTheme: ThemeOptions = {
     MuiDateCalendar: {
       styleOverrides: {
         root: () => ({
+          height: "auto",
+          maxHeight: "none",
           width: "100%",
         }),
       },
@@ -153,11 +152,7 @@ export const datePickerTheme: ThemeOptions = {
       styleOverrides: {
         root: ({ theme }) => ({
           display: "block",
-          // Touch renders a near-full-width modal (no Popper), so it keeps the
-          // viewport-based width. On pointer:fine the Popper is sized to the
-          // field's width (see the MuiDatePicker popper modifier, clamped on
-          // MuiPickersPopper), so the layout just fills it instead of forcing a
-          // fixed viewport-wide width that overflows narrow parent containers.
+          // Touch renders a near-full-width modal (no Popper), so it keeps the viewport-based width. On pointer:fine the Popper is sized to the field's width (see the MuiDatePicker popper modifier, clamped on MuiPickersPopper), so the layout just fills it instead of forcing a fixed viewport-wide width that overflows narrow parent containers.
           width: "calc(100vw - 64px)",
           maxWidth: theme.mixins.maxWidth,
 
@@ -167,15 +162,14 @@ export const datePickerTheme: ThemeOptions = {
         }),
         contentWrapper: ({ theme }) => ({
           width: "auto",
-          paddingInline: theme.spacing(3),
+          padding: 0,
 
           "@media (pointer: fine)": {
             borderColor: theme.palette.divider,
             borderStyle: theme.mixins.borderStyle,
             borderWidth: theme.mixins.borderWidth,
             borderRadius: theme.mixins.borderRadius,
-            paddingBlock: theme.spacing(6),
-            paddingInline: theme.spacing(6),
+            overflow: "hidden",
           },
         }),
       },
@@ -194,41 +188,40 @@ export const datePickerTheme: ThemeOptions = {
     },
     MuiDayCalendar: {
       styleOverrides: {
+        root: ({ theme }) => ({
+          paddingBlock: theme.spacing(5),
+          paddingInline: theme.spacing(4),
+        }),
         header: ({ theme }) => ({
           justifyContent: "space-between",
-          marginBlockStart: theme.spacing(5),
-          paddingInline: theme.spacing(1),
-          // Match weekContainer's gap so the in-flow header reaches the same
-          // natural width as the day grid. The grid itself is position:absolute
-          // (for slide animations), so it doesn't contribute to the calendar's
-          // min-content width; the header is what carries that intrinsic width up
-          // to the popup's `min-width: min-content`, keeping all seven columns
-          // visible when the popup shrinks to a narrow field.
+          paddingInline: theme.spacing(2),
+          // Match weekContainer's gap so the in-flow header reaches the same natural width as the day grid. The grid itself is position:absolute (for slide animations), so it doesn't contribute to the calendar's
+          // min-content width; the header is what carries that intrinsic width up to the popup's `min-width: min-content`, keeping all seven columns visible when the popup shrinks to a narrow field.
           gap: theme.spacing(1),
         }),
         monthContainer: ({ theme }) => ({
-          // padding needed to be able to show focus state for calendar days
           paddingBlock: theme.spacing(1),
-          paddingInline: theme.spacing(1),
+          paddingInline: theme.spacing(2),
         }),
         weekContainer: ({ theme }) => ({
           justifyContent: "space-between",
-          marginBottom: theme.spacing(1),
-          marginLeft: 0,
-          marginRight: 0,
+          marginBlockStart: 0,
+          marginBlockEnd: theme.spacing(2),
+          marginInlineStart: 0,
+          marginInlineEnd: 0,
           padding: 0,
           gap: theme.spacing(1),
 
           "&:last-child": {
-            marginBottom: 0,
+            marginBlockEnd: 0,
           },
         }),
         weekDayLabel: ({ theme }) => ({
           color: theme.palette.grey[900],
           flexShrink: 0,
-          marginBottom: theme.spacing(2),
-          marginLeft: 0,
-          marginRight: 0,
+          marginBlockEnd: theme.spacing(1),
+          marginInlineStart: 0,
+          marginInlineEnd: 0,
           width: theme.spacing(6),
           height: "auto",
           fontSize: theme.typography.overline.fontSize,
@@ -239,15 +232,33 @@ export const datePickerTheme: ThemeOptions = {
         }),
       },
     },
+    MuiMonthCalendar: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          width: "auto",
+          paddingBlock: theme.spacing(3),
+          paddingInline: theme.spacing(2),
+        }),
+      },
+    },
+    MuiPickersMonth: {
+      styleOverrides: {
+        monthButton: ({ theme }) => ({
+          marginBlock: 0,
+          paddingBlock: theme.spacing(3),
+          paddingInline: theme.spacing(4),
+          height: "auto",
+          width: "auto",
+        }),
+      },
+    },
     MuiDatePicker: {
       defaultProps: {
         slotProps: {
           popper: {
             popperOptions: {
               placement: "bottom-start",
-              // Size the calendar popup to its anchor field's width so it never
-              // overflows a narrow parent container. MuiPickersPopper clamps this
-              // between the calendar's min-content and the previous default cap.
+              // Size the calendar popup to its anchor field's width so it never overflows a narrow parent container. MuiPickersPopper clamps this between the calendar's min-content and the previous default cap.
               modifiers: [
                 {
                   name: "matchFieldWidth",
@@ -284,16 +295,16 @@ export const datePickerTheme: ThemeOptions = {
           justifyContent: "space-between",
           marginBlockEnd: 0,
           marginBlockStart: 0,
-          maxHeight: theme.spacing(8),
-          minHeight: theme.spacing(8),
-          paddingInline: theme.spacing(1),
-          paddingBlockStart: theme.spacing(1),
-          paddingBlockEnd: theme.spacing(4),
+          flexShrink: 0,
+          minHeight: 0,
+          maxHeight: "none",
+          paddingInline: theme.spacing(5),
+          paddingBlock: theme.spacing(5),
           width: "auto",
           borderBottom: `1px solid ${theme.palette.grey[100]}`,
         }),
         labelContainer: {
-          marginRight: 0,
+          marginInlineEnd: 0,
           overflow: "visible",
         },
         switchViewButton: ({ theme }) => ({
@@ -304,8 +315,8 @@ export const datePickerTheme: ThemeOptions = {
     MuiPickersDay: {
       styleOverrides: {
         dayWithMargin: () => ({
-          marginLeft: 0,
-          marginRight: 0,
+          marginInlineStart: 0,
+          marginInlineEnd: 0,
         }),
         root: ({ theme }) => [
           dateStyles.default({ theme }),
@@ -347,10 +358,7 @@ export const datePickerTheme: ThemeOptions = {
     MuiPickersPopper: {
       styleOverrides: {
         root: ({ theme }) => ({
-          // The MuiDatePicker popper modifier sets this element's width to the
-          // field width; clamp it so the popup never collapses below the
-          // calendar's natural width (min-content, carried by the weekday-header
-          // gap) or grows past the previous default cap.
+          // The MuiDatePicker popper modifier sets this element's width to the field width; clamp it so the popup never collapses below the calendar's natural width (min-content, carried by the weekday-header gap) or grows past the previous default cap.
           minWidth: "min-content",
           maxWidth: theme.mixins.maxWidth,
         }),
@@ -362,7 +370,7 @@ export const datePickerTheme: ThemeOptions = {
           }rem rgba(29, 29, 33, 0.08), 0 ${8 / 14}rem ${
             30 / 14
           }rem rgba(29, 29, 33, 0.1)`,
-          marginTop: theme.spacing(1),
+          marginBlockStart: theme.spacing(1),
         }),
       },
     },
@@ -372,9 +380,9 @@ export const datePickerTheme: ThemeOptions = {
           display: "block",
           width: "auto",
           maxHeight: `${284 / 14}rem`,
-          marginBottom: `-${theme.spacing(popupSpacingValue)}`,
           marginInlineEnd: 0,
-          paddingInline: 0,
+          paddingBlock: theme.spacing(3),
+          paddingInline: theme.spacing(2),
         }),
       },
     },
@@ -392,8 +400,8 @@ export const datePickerTheme: ThemeOptions = {
             alignItems: "center",
             justifyContent: "flex-start",
             width: "100%",
-            marginBottom: 0,
-            marginTop: 0,
+            marginBlockEnd: 0,
+            marginBlockStart: 0,
             paddingBlock: theme.spacing(3),
             paddingInline: theme.spacing(4),
             borderRadius: theme.shape.borderRadius,

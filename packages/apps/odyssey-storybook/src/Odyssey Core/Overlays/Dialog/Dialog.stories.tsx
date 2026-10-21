@@ -118,8 +118,7 @@ const storybookMeta: Meta<typeof Dialog> = {
   args: {
     children:
       "Description text explaining the consequences and any alternatives. Limit to two lines if possible",
-    // Rendered open by default so Applitools captures the open Dialog without a
-    // play function. The "Open dialog" button still opens/closes it in Canvas.
+    // Rendered open by default so Applitools captures the open Dialog without a play function. The "Open dialog" button still opens/closes it in Canvas.
     isOpen: true,
     title: "Dialog title",
     variant: "default",
@@ -369,10 +368,7 @@ export const SmallScreen: StoryObj<DialogProps> = {
       "Confirm permanent deactivation of this scheduled organization shutdown workflow",
   },
   parameters: {
-    // The absolute-minimum viewport is the WCAG 1.4.10 reflow floor, where the
-    // Dialog goes full-screen and scrolls its body. See getReflowEyesParameters
-    // for why layoutBreakpoints is needed to capture the compact layout in
-    // Applitools.
+    // The absolute-minimum viewport is the WCAG 1.4.10 reflow floor, where the Dialog goes full-screen and scrolls its body. See getReflowEyesParameters for why layoutBreakpoints is needed to capture the compact layout in Applitools.
     eyes: getReflowEyesParameters({
       height: ABSOLUTE_MINIMUM_HEIGHT,
       width: ABSOLUTE_MINIMUM_WIDTH,

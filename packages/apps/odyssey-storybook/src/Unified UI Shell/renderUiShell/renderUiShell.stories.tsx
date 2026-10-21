@@ -152,12 +152,7 @@ export const Default: Story = {
   },
 };
 
-// The language stories pass `hasTranslationProvider: false` to the app-content
-// `OdysseyProvider`. This is critical: the shell and the app render in separate
-// React trees that share the same module-level `i18nInstance`. If the inner
-// provider mounted its own `TranslationProvider`, its `useEffect` would call
-// `changeLanguage(...)` with its own `languageCode` (defaulting to
-// `window.navigator.language`) and overwrite the language the shell just set.
+// The language stories pass `hasTranslationProvider: false` to the app-content `OdysseyProvider`. This is critical: the shell and the app render in separate React trees that share the same module-level `i18nInstance`. If the inner provider mounted its own `TranslationProvider`, its `useEffect` would call `changeLanguage(...)` with its own `languageCode` (defaulting to `window.navigator.language`) and overwrite the language the shell just set.
 export const InitialLanguageCodeFrench: Story = {
   render: function C() {
     const rootElementRef = useRef<HTMLDivElement>(null);
@@ -530,11 +525,7 @@ export const OpenedTooltipInSurface: Story = {
     }),
 };
 
-// `renderUiShell` accepts side-nav icons as string names (`startIconName` /
-// `endIconName`) in addition to React elements. Names are resolved lazily
-// through Odyssey's icon dictionary, so consuming apps don't bundle the full
-// icon set. The icon transformation runs inside `setComponentProps`, so items
-// are set there rather than in the initial render args.
+// `renderUiShell` accepts side-nav icons as string names (`startIconName` / `endIconName`) in addition to React elements. Names are resolved lazily through Odyssey's icon dictionary, so consuming apps don't bundle the full icon set. The icon transformation runs inside `setComponentProps`, so items are set there rather than in the initial render args.
 export const SideNavWithStringIcons: Story = {
   render: function C() {
     const rootElementRef = useRef<HTMLDivElement>(null);

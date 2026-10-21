@@ -290,9 +290,7 @@ const MemoizedSwitchLabel = memo(SwitchLabel);
 SwitchLabel.displayName = "SwitchLabel";
 
 /**
- * A toggle control that lets users switch a setting on or off. Use in place of
- * a checkbox when the change takes effect immediately without requiring a form
- * submission.
+ * A toggle control that lets users switch a setting on or off. Use in place of a checkbox when the change takes effect immediately without requiring a form submission.
  */
 const Switch = ({
   hint,

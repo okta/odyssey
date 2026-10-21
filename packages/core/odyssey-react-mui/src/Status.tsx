@@ -45,8 +45,7 @@ export type StatusProps = {
 } & Pick<HtmlProps, "ariaDescribedBy" | "testId" | "translate">;
 
 /**
- * A compact visual indicator that communicates the state or condition of an entity
- * using color and a label.
+ * A compact visual indicator that communicates the state or condition of an entity using color and a label.
  */
 const Status = ({
   ariaDescribedBy,

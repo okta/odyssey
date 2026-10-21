@@ -17,15 +17,13 @@ import type { HtmlProps } from "./HtmlProps.js";
 
 export type CircularProgressProps = {
   /**
-   * The percentage filled the spinner should be, as an integer.
-   * If undefined, the spinner will spin perpetually.
+   * The percentage filled the spinner should be, as an integer. If undefined, the spinner will spin perpetually.
    */
   value?: number;
 } & Pick<HtmlProps, "ariaLabel" | "testId">;
 
 /**
- * A circular spinner used to indicate loading or progress. Supports both
- * indeterminate (perpetual spin) and determinate (percentage-based) modes.
+ * A circular spinner used to indicate loading or progress. Supports both indeterminate (perpetual spin) and determinate (percentage-based) modes.
  */
 const CircularProgress = ({
   ariaLabel,

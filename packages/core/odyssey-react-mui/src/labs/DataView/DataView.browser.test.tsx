@@ -26,6 +26,7 @@ import {
   type TableLayoutProps,
 } from "./componentTypes.js";
 import {
+  type DataGetDataType,
   type DataOnReorderRowsType,
   type DataTableColumn,
 } from "./dataTypes.js";
@@ -1051,8 +1052,7 @@ describe("DataView", { timeout: 10000 }, () => {
       />,
     );
 
-    // Since table density is a purely visible attribute, there's no ARIA
-    // attribute to target here. We're forced to use the className directly.
+    // Since table density is a purely visible attribute, there's no ARIA attribute to target here. We're forced to use the className directly.
     const tBody = page.getByRole("row").elements()[1].parentElement;
     expect(tBody?.className).not.toContain("MuiTableBody-compact");
 
@@ -1162,8 +1162,7 @@ describe("DataView", { timeout: 10000 }, () => {
 
     const tHead = page.getByRole("row").elements()[0].parentElement;
 
-    // Ensure that the resize handle is displayed when
-    // hasColumnResizing is true
+    // Ensure that the resize handle is displayed when hasColumnResizing is true
     const hrElement = tHead!.querySelector("hr");
     expect(tHead).toContainElement(hrElement);
   });
@@ -1382,10 +1381,14 @@ describe("DataView", { timeout: 10000 }, () => {
     });
 
     test("isLoading={false} keeps rows visible when dataQueryParams change triggers a refetch", async () => {
-      const asyncGetData = ({ ...props }) =>
-        new Promise<Person[]>((resolve) =>
-          setTimeout(() => resolve(filterData({ data, ...props })), 50),
-        );
+      // Page 2's fetch stays pending until the test releases it. A fixed delay let the fetch resolve before the assertion below ran on a loaded CI agent, so page 1's rows were already gone.
+      const { promise: pageTwoFetchReleased, resolve: releasePageTwoFetch } =
+        Promise.withResolvers<void>();
+
+      const asyncGetData = ({ ...props }: DataGetDataType) =>
+        (props.page ?? 1) === 1
+          ? Promise.resolve(filterData({ data, ...props }))
+          : pageTwoFetchReleased.then(() => filterData({ data, ...props }));
 
       await renderDataView(
         <DataView
@@ -1406,12 +1409,12 @@ describe("DataView", { timeout: 10000 }, () => {
 
       await userEvent.click(page.getByRole("button", { name: "Next page" }));
 
-      // The async fetch for page 2 has started but not resolved yet (50 ms delay).
-      // With the bug, fetchData calls setIsLoading(true) which causes MRT to replace
-      // the actual rows with skeleton placeholders, making data[0].name disappear.
-      // With the fix, setIsLoading is not passed to fetchData when isLoading is controlled,
-      // so the previous page rows remain visible throughout.
+      // The fetch for page 2 is still pending.
+      // With the bug, fetchData calls setIsLoading(true) which causes MRT to replace the actual rows with skeleton placeholders, making data[0].name disappear.
+      // With the fix, setIsLoading is not passed to fetchData when isLoading is controlled, so the previous page rows remain visible throughout.
       await expect.element(page.getByText(data[0].name)).toBeVisible();
+
+      releasePageTwoFetch();
 
       await expect.element(page.getByText(data[2].name)).toBeVisible();
       await expect
@@ -1435,8 +1438,7 @@ describe("DataView", { timeout: 10000 }, () => {
 
       await userEvent.click(page.getByRole("checkbox").nth(1));
 
-      // The parent never fed the change back into the prop, so the controlled
-      // value stays empty: the row is unchecked and no bulk-actions bar appears.
+      // The parent never fed the change back into the prop, so the controlled value stays empty: the row is unchecked and no bulk-actions bar appears.
       await expect.element(page.getByRole("checkbox").nth(1)).not.toBeChecked();
       await expect
         .element(page.getByRole("button", { name: "More actions" }))

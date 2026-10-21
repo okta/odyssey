@@ -40,14 +40,9 @@ import { hasDuplicateSeries } from "./utils/hasDuplicateSeries.js";
 import { useChartValueFormatter } from "./utils/useChartValueFormatter.js";
 import { useStableValue } from "./utils/useStableValue.js";
 
-// The Highcharts default marker symbols, in the order that Highcharts gives
-// them to the series of a chart. The chart draws these markers itself. This
-// list exists so that the popover can draw the same marker next to the name of
-// a series, and the popover selects one entry by `series.symbolIndex`.
+// The Highcharts default marker symbols, in the order that Highcharts gives them to the series of a chart. The chart draws these markers itself. This list exists so that the popover can draw the same marker next to the name of a series, and the popover selects one entry by `series.symbolIndex`.
 //
-// A change to this order, a Highcharts release that changes its own default
-// list, or a `marker.symbol` set on a series all make the popover show the
-// wrong shape.
+// A change to this order, a Highcharts release that changes its own default list, or a `marker.symbol` set on a series all make the popover show the wrong shape.
 const LINE_SERIES_MARKER_SYMBOLS = [
   "circle",
   "diamond",
@@ -59,9 +54,7 @@ const LINE_SERIES_MARKER_SYMBOLS = [
 /** The props for a line chart. */
 export type LineChartProps = CartesianChartProps & {
   /**
-   * The format for the values on the vertical axis. A line chart shows its
-   * numeric values on that axis. If no preset gives the format that you need,
-   * supply a function.
+   * The format for the values on the vertical axis. A line chart shows its numeric values on that axis. If no preset gives the format that you need, supply a function.
    * @default "compact"
    */
   yAxisFormat?: ChartValueFormat;
@@ -86,23 +79,11 @@ const LineChartContent = ({
 
   const animation = useChartAnimation();
 
-  // This memo builds a click handler and formats the value for each point.
-  // Highcharts registers a new click handler for a point whenever the
-  // identity of that point's data changes. Without this memo, every render
-  // would build new data, so Highcharts would tear down and re-register its
-  // handlers even when nothing changed.
+  // This memo builds a click handler and formats the value for each point. Highcharts registers a new click handler for a point whenever the identity of that point's data changes. Without this memo, every render would build new data, so Highcharts would tear down and re-register its handlers even when nothing changed.
   //
-  // This memo works because LineChart passes its props through
-  // useStableValue. That hook keeps `series` at the same identity across a
-  // render that does not change the data, so this memo does not rerun.
-  // LineChart also passes `onPointClick` through useStableCallback, so an
-  // inline handler from the caller keeps the same identity here.
+  // This memo works because LineChart passes its props through useStableValue. That hook keeps `series` at the same identity across a render that does not change the data, so this memo does not rerun. LineChart also passes `onPointClick` through useStableCallback, so an inline handler from the caller keeps the same identity here.
   //
-  // useStableValue compares a function by identity, not by what the function
-  // does. `pointPopoverValueFormat` accepts a function, and this memo formats
-  // each value at build time. So a caller that supplies a new function on
-  // every render for that property still defeats this memo. Such a caller
-  // needs its own useCallback.
+  // useStableValue compares a function by identity, not by what the function does. `pointPopoverValueFormat` accepts a function, and this memo formats each value at build time. So a caller that supplies a new function on every render for that property still defeats this memo. Such a caller needs its own useCallback.
   const seriesList = useMemo(
     () =>
       series.map((chartSeries) => ({
@@ -130,15 +111,9 @@ const LineChartContent = ({
         spacingTop: chartTokens.chart.topEdgeSpacing,
         style: { fontFamily: chartTokens.chart.fontFamily },
       },
-      // Each series takes the next color from this list. So a change to the
-      // order of `seriesColors`, in `chartTokens.ts`, changes the color of every
-      // series.
+      // Each series takes the next color from this list. So a change to the order of `seriesColors`, in `chartTokens.ts`, changes the color of every series.
       colors: chartTokens.seriesColors,
-      // The chart library ships a default title text of "Chart title". Its
-      // documented way to disable a title is a `text` of undefined, which draws
-      // an empty text element that measures zero and so reserves no height. A
-      // whole `title` of undefined does not work, because the React wrapper
-      // always merges a `title` object over the `options` prop.
+      // The chart library ships a default title text of "Chart title". Its documented way to disable a title is a `text` of undefined, which draws an empty text element that measures zero and so reserves no height. A whole `title` of undefined does not work, because the React wrapper always merges a `title` object over the `options` prop.
       subtitle: { text: undefined },
       title: { text: undefined },
     }),
@@ -301,44 +276,22 @@ const LineChartContent = ({
   );
 };
 
-// `LineChart` passes props that keep the same identity across a render. This
-// memo then stops a render of the caller from reaching the children of
-// `Chart`. A new child identity forces Highcharts to rebuild and redraw the
-// whole chart.
+// `LineChart` passes props that keep the same identity across a render. This memo then stops a render of the caller from reaching the children of `Chart`. A new child identity forces Highcharts to rebuild and redraw the whole chart.
 const MemoizedLineChartContent = memo(LineChartContent);
 
 /**
- * Renders a line chart that gets its theme from Odyssey design tokens. The
- * chart plots each series against the shared `categories` of the chart. Each
- * value in a series lines up by index with a category, so a series and
- * `categories` must have the same length. If a value is `null`, the chart
- * draws a gap at that category, and not a point with a value of zero.
+ * Renders a line chart that gets its theme from Odyssey design tokens. The chart plots each series against the shared `categories` of the chart. Each value in a series lines up by index with a category, so a series and `categories` must have the same length. If a value is `null`, the chart draws a gap at that category, and not a point with a value of zero.
  *
- * The chart also gives a different marker shape to each series. The shape lets
- * a user identify a series without color. The chart library applies its five
- * built-in shapes in series order. A sixth series repeats the first shape.
+ * The chart also gives a different marker shape to each series. The shape lets a user identify a series without color. The chart library applies its five built-in shapes in series order. A sixth series repeats the first shape.
  */
 const LineChart = (props: LineChartProps) => {
-  // Highcharts rebuilds and redraws the whole chart when the identity of any
-  // React child changes. A caller that builds the `series` array inside its
-  // own render creates a new array on every render. That new array would
-  // reach every child below this point.
+  // Highcharts rebuilds and redraws the whole chart when the identity of any React child changes. A caller that builds the `series` array inside its own render creates a new array on every render. That new array would reach every child below this point.
   //
-  // useStableValue holds one chart props object while its contents stay the same,
-  // so `MemoizedLineChartContent` keeps the same children across those
-  // renders.
+  // useStableValue holds one chart props object while its contents stay the same, so `MemoizedLineChartContent` keeps the same children across those renders.
   //
-  // useStableValue cannot hold `onPointClick`, because it compares a function
-  // by identity. An inline handler therefore arrives with a new identity on
-  // each render of the caller, and every memo below misses. useStableCallback
-  // wraps that handler in one callback of its own that keeps the same
-  // identity, and calls the latest handler when a user clicks a point.
+  // useStableValue cannot hold `onPointClick`, because it compares a function by identity. An inline handler therefore arrives with a new identity on each render of the caller, and every memo below misses. useStableCallback wraps that handler in one callback of its own that keeps the same identity, and calls the latest handler when a user clicks a point.
   //
-  // useStableCallback also turns an absent handler into a callback that does
-  // nothing. The chart attaches a click listener to a point as soon as it
-  // finds one, so a chart with no `onPointClick` must pass nothing at all.
-  // The condition below keeps that behavior, and returns the one stable
-  // callback in every other case.
+  // useStableCallback also turns an absent handler into a callback that does nothing. The chart attaches a click listener to a point as soon as it finds one, so a chart with no `onPointClick` must pass nothing at all. The condition below keeps that behavior, and returns the one stable callback in every other case.
   const stableOnPointClick = useStableCallback(props.onPointClick);
   const stableOnRetry = useStableCallback(props.onRetry);
   const { hasError, isLoading, onRetry, subtitle, title, ...chartProps } =

@@ -50,8 +50,7 @@ export type OdysseyProviderProps<
     /** The content to render within the Odyssey context providers. */
     children: ReactNode;
     /**
-     * If `true`, Odyssey components may animate unless the user prefers
-     * reduced motion.
+     * If `true`, Odyssey components may animate unless the user prefers reduced motion.
      * @default true
      */
     hasAnimations?: boolean;
@@ -73,9 +72,7 @@ export type OdysseyProviderProps<
   };
 
 /**
- * Root provider for Odyssey. Composes theme, cache, translation, and full-screen overlay
- * contexts in a single wrapper. Every application using Odyssey must render this provider
- * at or near the tree root.
+ * Root provider for Odyssey. Composes theme, cache, translation, and full-screen overlay contexts in a single wrapper. Every application using Odyssey must render this provider at or near the tree root.
  */
 const OdysseyProvider = <SupportedLanguages extends string>({
   children,

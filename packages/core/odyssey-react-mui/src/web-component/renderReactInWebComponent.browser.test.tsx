@@ -21,8 +21,7 @@ describe(renderReactInWebComponent.name, () => {
   test("returns web component element", async () => {
     const nonce = "test-nonce";
     globalThis.cspNonce = nonce;
-    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run.
-    // Tagged via `appendToSandbox` so the global afterEach removes it.
+    // If this isn't appended to the DOM, the React app won't exist because of how Web Components run. Tagged via `appendToSandbox` so the global afterEach removes it.
     const rootElement = appendToSandbox(document.createElement("div"));
     const testElementText = "I'm a test component!";
 

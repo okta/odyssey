@@ -45,8 +45,7 @@ export type SearchFieldProps = {
   /**
    * This prop helps users to fill forms faster, especially on mobile devices.
    * The name can be confusing, as it's more like an autofill.
-   * You can learn more about it
-   * [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
+   * You can learn more about it [following the specification](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill).
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
   /**
@@ -111,9 +110,7 @@ type FieldRenderProps = Partial<Pick<HtmlProps, "ariaDescribedBy">> &
   Pick<FieldComponentRenderProps, "id">;
 
 /**
- * A search input field with a built-in search icon and a clear button. Supports
- * both controlled and uncontrolled usage, and renders an accessible label
- * visually hidden by default.
+ * A search input field with a built-in search icon and a clear button. Supports both controlled and uncontrolled usage, and renders an accessible label visually hidden by default.
  */
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (

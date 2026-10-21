@@ -54,8 +54,7 @@ export type TabItemProps = {
   value?: string;
 } & {
   /**
-   * The count to display in the notification badge on the tab. Badge is hidden when the
-   * value is 0 or undefined.
+   * The count to display in the notification badge on the tab. Badge is hidden when the value is 0 or undefined.
    */
   notificationCount?: BadgeProps["badgeContent"];
   /**
@@ -121,9 +120,7 @@ const TabLabel = ({
 };
 
 /**
- * A tabbed navigation component that renders a list of tabs and their associated content
- * panels. Supports controlled and uncontrolled selection, notification badges, icons,
- * and scrollable overflow.
+ * A tabbed navigation component that renders a list of tabs and their associated content panels. Supports controlled and uncontrolled selection, notification badges, icons, and scrollable overflow.
  */
 const Tabs = ({
   ariaLabel,
@@ -169,9 +166,7 @@ const Tabs = ({
       document.removeEventListener("visibilitychange", refreshScrollButtons);
     };
 
-    // Reset the scroll buttons override when the document becomes visible.
-    // If called, then the document is hidden because the event listener
-    // is only registered if the document is hidden
+    // Reset the scroll buttons override when the document becomes visible. If called, then the document is hidden because the event listener is only registered if the document is hidden
     function refreshScrollButtons() {
       animationFrame = requestAnimationFrame(() => {
         cleanup();

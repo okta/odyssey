@@ -48,8 +48,7 @@ export type NativeSelectProps<
   HasMultipleChoices extends boolean,
 > = {
   /**
-   * This prop helps users to fill forms faster, especially on mobile devices.
-   * The name can be confusing, as it's more like an autofill.
+   * This prop helps users to fill forms faster, especially on mobile devices. The name can be confusing, as it's more like an autofill.
    * @see https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill
    */
   autoCompleteType?: InputHTMLAttributes<HTMLInputElement>["autoComplete"];
@@ -116,8 +115,7 @@ type NativeSelectRenderProps = Partial<
   Pick<FieldComponentRenderProps, "labelElementId">;
 
 /**
- * A native HTML `<select>` element wrapped in an Odyssey field. Use when a
- * lightweight, OS-rendered dropdown is preferred over the custom Select component.
+ * A native HTML `<select>` element wrapped in an Odyssey field. Use when a lightweight, OS-rendered dropdown is preferred over the custom Select component.
  */
 const NativeSelect = forwardRef(
   <

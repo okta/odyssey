@@ -27,8 +27,7 @@ import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThem
 const meta = {
   component: Link,
   decorators: [OdysseyStorybookThemeDecorator],
-  // Link has a manual Link.mdx docs page, so it opts out of autodocs (matching
-  // the repo's other MDX-paired stories) to avoid the indexer conflict.
+  // Link has a manual Link.mdx docs page, so it opts out of autodocs (matching the repo's other MDX-paired stories) to avoid the indexer conflict.
   tags: ["!autodocs"],
   argTypes: {
     children: {

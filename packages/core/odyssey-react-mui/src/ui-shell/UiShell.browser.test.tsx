@@ -10,12 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { type ReactElement } from "react";
+import { memo, type ReactElement, useEffect } from "react";
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 
+import { Button } from "../Buttons/Button.js";
 import { i18n, translate as odysseyTranslate } from "../i18n.generated/i18n.js";
 import { AddCircleIcon } from "../icons.generated/AddCircle.js";
+import { createFullscreenModeMessageBus } from "../message-bus/index.js";
 import { appendToSandbox } from "../test-utils/appendToSandbox.js";
 import { defaultComponentProps, UiShell, UiShellProps } from "./UiShell.js";
 import { defaultUiShellBreakpointConfig } from "./useUiShellBreakpoints.js";
@@ -68,8 +70,7 @@ describe("UiShell", () => {
         keyof Required<UiShellProps>["optionalComponents"]
       > = ["banners", "topNavLeftSide", "topNavRightSide"];
 
-      // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props.
-      // TopNav won't render unless we pass something into it.
+      // This is the subscription we give the component, and then once subscribed, we're going to immediately call it with new props. TopNav won't render unless we pass something into it.
       const subscribeToPropChanges: UiShellProps["subscribeToPropChanges"] = (
         subscriber,
       ) => {
@@ -663,8 +664,7 @@ describe("UiShell", () => {
       );
     });
 
-    // WCAG 1.3.2: focus must move into the revealed navigation on open, and
-    // return to the toggle on close, so it is announced in reading order.
+    // WCAG 1.3.2: focus must move into the revealed navigation on open, and return to the toggle on close, so it is announced in reading order.
     test("focus moves into the left navigation on open and back on close", async () => {
       await page.viewport(
         defaultUiShellBreakpointConfig.medium - 1,
@@ -689,6 +689,72 @@ describe("UiShell", () => {
       await userEvent.keyboard("{Escape}");
 
       expect(document.activeElement).toBe(hamburger.element());
+    });
+  });
+
+  describe("Narrow shell in fullscreen", () => {
+    const PAGE_HEIGHT = 1000;
+
+    // Counts mounts, so the test can tell the top nav content was hidden and shown rather than unmounted and remounted.
+    const onTopNavContentMount = vi.fn();
+
+    const TopNavContent = memo(() => {
+      useEffect(() => {
+        onTopNavContentMount();
+      }, []);
+
+      return <Button label="Top nav action" variant="secondary" />;
+    });
+    TopNavContent.displayName = "TopNavContent";
+
+    test("top nav content through entering and exiting fullscreen", async () => {
+      await page.viewport(
+        defaultUiShellBreakpointConfig.medium - 1,
+        PAGE_HEIGHT,
+      );
+
+      const { appElement, uiShellAppElement, uiShellStylesElement } =
+        getTestDomElements();
+      const pageFullscreenModeMessageBus = createFullscreenModeMessageBus();
+      const appFullscreen = { fullscreenId: "narrow-shell-app-id" };
+
+      await render(
+        <UiShell
+          appElement={appElement}
+          appElementScrollingMode="none"
+          onSubscriptionCreated={() => {}}
+          optionalComponents={{ topNavLeftSide: <TopNavContent /> }}
+          subscribeToPropChanges={(subscriber) => {
+            subscriber({
+              ...defaultComponentProps,
+              topNavProps: {},
+            });
+
+            return () => {};
+          }}
+          uiShellAppElement={uiShellAppElement}
+          uiShellStylesElement={uiShellStylesElement}
+        />,
+      );
+
+      await expect
+        .element(page.getByRole("button", { name: "Top nav action" }))
+        .toBeVisible();
+
+      pageFullscreenModeMessageBus.enterFullscreen(appFullscreen);
+
+      await expect
+        .element(page.getByRole("button", { name: "Top nav action" }))
+        .not.toBeInTheDocument();
+
+      pageFullscreenModeMessageBus.exitFullscreen(appFullscreen);
+
+      await expect
+        .element(page.getByRole("button", { name: "Top nav action" }))
+        .toBeVisible();
+      expect(onTopNavContentMount).toHaveBeenCalledTimes(1);
+
+      pageFullscreenModeMessageBus.destroy();
     });
   });
 });

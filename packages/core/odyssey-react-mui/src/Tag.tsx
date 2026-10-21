@@ -268,8 +268,7 @@ const StyledTag = styled(MuiChip, {
 });
 
 /**
- * A compact label used to categorize or annotate content. Supports optional click and
- * remove interactions, color variants, and icons.
+ * A compact label used to categorize or annotate content. Supports optional click and remove interactions, color variants, and icons.
  */
 const Tag = ({
   colorVariant = "default",

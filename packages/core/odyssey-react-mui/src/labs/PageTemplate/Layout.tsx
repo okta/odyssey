@@ -35,8 +35,7 @@ export type LayoutProps = {
    */
   children?: ReactNode;
   /**
-   * The supported region ratios for the Grid. Each number is a fractional unit that is mapped to the 'fr' CSS unit.
-   * e.g. [2, 1] defines a 2/3, 1/3 layout and [1, 1, 1] defines a 1/3, 1/3, 1/3 layout
+   * The supported region ratios for the Grid. Each number is a fractional unit that is mapped to the 'fr' CSS unit. e.g. [2, 1] defines a 2/3, 1/3 layout and [1, 1, 1] defines a 1/3, 1/3, 1/3 layout
    * @see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Basic_concepts_of_grid_layout#the_fr_unit
    */
   regions: SupportedRegionRatios;

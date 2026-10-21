@@ -11,7 +11,7 @@
  */
 
 import { MRT_RowData } from "material-react-table";
-import { memo, useMemo } from "react";
+import { type JSX, memo, useMemo } from "react";
 
 import { TableLayoutProps, UniversalProps } from "./componentTypes.js";
 import { DataView } from "./DataView.js";

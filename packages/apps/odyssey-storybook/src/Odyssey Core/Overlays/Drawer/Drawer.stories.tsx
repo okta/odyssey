@@ -257,8 +257,7 @@ type Story = StoryObj<typeof meta>;
 const DefaultTemplate: Story = {
   args: {} as DrawerProps, // This is a hack
   render: function C(props) {
-    // Open by default so Applitools captures the open Drawer without a play
-    // function. The button still toggles it in Canvas.
+    // Open by default so Applitools captures the open Drawer without a play function. The button still toggles it in Canvas.
     const [isVisible, setIsVisible] = useState(true);
     const onOpen = useCallback(() => {
       setIsVisible(true);
@@ -444,8 +443,7 @@ export const ShowDividers: Story = {
 
 export const NoFooter: Story = {
   render: function C(props) {
-    // Open by default so Applitools captures the open Drawer without a play
-    // function. The button still toggles it in Canvas.
+    // Open by default so Applitools captures the open Drawer without a play function. The button still toggles it in Canvas.
     const [isVisible, setIsVisible] = useState(true);
 
     const onOpen = useCallback(() => {

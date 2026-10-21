@@ -43,8 +43,7 @@ export type OdysseyThemeProviderProps = OdysseyThemeProviderContextProps & {
   /** The content to render inside the Odyssey theme context. */
   children: ReactNode;
   /**
-   * Overrides the contrast mode for child components, enabling high-contrast or low-contrast
-   * rendering within this subtree.
+   * Overrides the contrast mode for child components, enabling high-contrast or low-contrast rendering within this subtree.
    */
   contrastMode?: ContrastMode;
   /**
@@ -58,11 +57,9 @@ export type OdysseyThemeProviderProps = OdysseyThemeProviderContextProps & {
 };
 
 /**
- * This function doesn't include the Emotion Cache or Translations. You should probably
- * be using `OdysseyProvider`.
+ * This function doesn't include the Emotion Cache or Translations. You should probably be using `OdysseyProvider`.
  *
- * Some teams have a need to wrap separately (SIW), but most teams will never need to use
- * this explicitly.
+ * Some teams have a need to wrap separately (SIW), but most teams will never need to use this explicitly.
  */
 const OdysseyThemeProvider = ({
   children,

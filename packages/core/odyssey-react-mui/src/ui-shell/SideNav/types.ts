@@ -20,8 +20,7 @@ import type { statusSeverityValues } from "../../Status.js";
 import type { UiShellLogoProps } from "../UiShellLogo.js";
 
 /**
- * Type representing spacing values from the design tokens.
- * odysseyDesignTokens.Spacing0, odysseyDesignTokens.Spacing1, etc.
+ * Type representing spacing values from the design tokens. odysseyDesignTokens.Spacing0, odysseyDesignTokens.Spacing1, etc.
  */
 export type OdysseySpacingValue = DesignTokens[keyof Pick<
   DesignTokens,
@@ -132,8 +131,7 @@ export type SideNavItem = {
   endIcon?: ReactElement;
   id: string;
   /**
-   * Whether the item is disabled. When set to true the nav item is set to Disabled color,
-   * the link/item is not clickable, and item with nestedNavItems is not expandable.
+   * Whether the item is disabled. When set to true the nav item is set to Disabled color, the link/item is not clickable, and item with nestedNavItems is not expandable.
    */
   isDisabled?: boolean;
   /**
@@ -183,16 +181,13 @@ export type SideNavItem = {
     }
   | {
       /**
-       * The `id` of the element this button controls. Use alongside
-       * `isExpanded` to wire up `aria-controls` for assistive technology.
+       * The `id` of the element this button controls. Use alongside `isExpanded` to wire up `aria-controls` for assistive technology.
        */
       ariaControls?: string;
       href?: never;
       isDefaultExpanded?: never;
       /**
-       * If `true`, communicates to assistive technology that this button
-       * controls an expanded panel. Use when this item opens a panel or
-       * drawer rather than navigating.
+       * If `true`, communicates to assistive technology that this button controls an expanded panel. Use when this item opens a panel or drawer rather than navigating.
        */
       isExpanded?: boolean;
       isSectionHeader?: never;
@@ -201,8 +196,7 @@ export type SideNavItem = {
   | {
       ariaControls?: never;
       /**
-       * link added to the nav item. if it is undefined, static text will be
-       * displayed. fires onClick event when it is passed
+       * link added to the nav item. if it is undefined, static text will be displayed. fires onClick event when it is passed
        */
       href: string;
       isDefaultExpanded?: never;
@@ -218,8 +212,7 @@ export type SideNavItem = {
        */
       isDefaultExpanded?: boolean;
       /**
-       * If true, expands the accordion, otherwise collapse it.
-       * Setting this prop enables control over the accordion.
+       * If true, expands the accordion, otherwise collapse it. Setting this prop enables control over the accordion.
        */
       isExpanded?: boolean;
       /**

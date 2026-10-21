@@ -29,9 +29,7 @@ const storybookMeta: Meta = {
 
 export default storybookMeta;
 
-// `keyof typeof iconDictionary` may include non-component values when resolved
-// against a stale dist; exclude them so computed indexing always yields a
-// React component with a valid `displayName`.
+// `keyof typeof iconDictionary` may include non-component values when resolved against a stale dist; exclude them so computed indexing always yields a React component with a valid `displayName`.
 type IconComponentName = Exclude<keyof typeof iconDictionary, "iconNames">;
 
 type IconData = {
@@ -89,6 +87,8 @@ const icons: IconData[] = [
   { name: "ExternalLinkIcon", use: "UI indicator - external link" },
   { name: "FilterIcon", use: "To filter results" },
   { name: "FolderIcon", use: "" },
+  { name: "FullscreenEnterIcon", use: "To enter fullscreen mode" },
+  { name: "FullscreenExitIcon", use: "To exit fullscreen mode" },
   { name: "GlobeIcon", use: "" },
   { name: "GridIcon", use: "" },
   { name: "GroupIcon", use: "" },

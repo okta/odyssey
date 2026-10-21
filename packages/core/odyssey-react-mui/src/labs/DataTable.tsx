@@ -69,16 +69,14 @@ export type {
   MRT_ColumnDef as TableColumn,
 } from "material-react-table";
 
-// The shape of the table columns,
-// with props named to match their MRT_ColumnDef counterparts
+// The shape of the table columns, with props named to match their MRT_ColumnDef counterparts
 export type DataTableColumn<TData extends MRT_RowData> = {
   /**
    * The unique ID of the column
    */
   accessorKey: string;
   /**
-   * Customize the way each cell in the column is
-   * displayed via a custom React component.
+   * Customize the way each cell in the column is displayed via a custom React component.
    */
   Cell?: MRT_ColumnDef<TData>["Cell"];
   /**
@@ -102,13 +100,11 @@ export type DataTableColumn<TData extends MRT_RowData> = {
    */
   enableSorting?: boolean;
   /**
-   * If the filter control has preset options (such as a select or multi-select),
-   * these are the options provided.
+   * If the filter control has preset options (such as a select or multi-select), these are the options provided.
    */
   filterSelectOptions?: Array<{ label: string; value: string }>;
   /**
-   * The UI control that will be used to filter the column.
-   * Defaults to a standard text input.
+   * The UI control that will be used to filter the column. Defaults to a standard text input.
    */
   filterVariant?: MRT_ColumnDef<TData>["filterVariant"];
   /**
@@ -135,13 +131,11 @@ export type DataTableProps<TData extends MRT_RowData> = {
    */
   columns: DataTableColumn<TData>[];
   /**
-   * The data that goes into the table, which will be displayed
-   * as the table rows
+   * The data that goes into the table, which will be displayed as the table rows
    */
   data: MRT_TableOptions<TData>["data"];
   /**
-   * Callback that fires whenever the table needs to fetch new data, due to changes in
-   * page, results per page, search input, filters, or sorting
+   * Callback that fires whenever the table needs to fetch new data, due to changes in page, results per page, search input, filters, or sorting
    */
   fetchDataFn: ({
     page,
@@ -203,8 +197,7 @@ export type DataTableProps<TData extends MRT_RowData> = {
    */
   hasSorting?: boolean;
   /**
-   * The initial density of the table. This is available even if the table density
-   * isn't changeable.
+   * The initial density of the table. This is available even if the table density isn't changeable.
    */
   initialDensity?: (typeof densityValues)[number];
   /**
@@ -216,13 +209,11 @@ export type DataTableProps<TData extends MRT_RowData> = {
    */
   page?: number;
   /**
-   * The type of pagination controls shown. Defaults to next/prev buttons, but can be
-   * set to a simple "Load more" button by setting to "loadMore".
+   * The type of pagination controls shown. Defaults to next/prev buttons, but can be set to a simple "Load more" button by setting to "loadMore".
    */
   paginationType?: (typeof paginationTypeValues)[number];
   /**
-   * Callback that fires when the user reorders rows within the table. Can be used
-   * to propagate order change to the backend.
+   * Callback that fires when the user reorders rows within the table. Can be used to propagate order change to the backend.
    */
   reorderDataFn?: ({
     rowId,
@@ -248,14 +239,11 @@ export type DataTableProps<TData extends MRT_RowData> = {
     row: TData,
   ) => ReactElement<typeof MenuItem | typeof Fragment>;
   /**
-   * The debounce time, in milliseconds, for the search input firing
-   * `onChangeSearch` when changed. If `hasSearchSubmitButton` is true,
-   * this doesn't do anything.
+   * The debounce time, in milliseconds, for the search input firing `onChangeSearch` when changed. If `hasSearchSubmitButton` is true, this doesn't do anything.
    */
   searchDelayTime?: number;
   /**
-   * The total number of rows in the table. Optional, because it's sometimes impossible
-   * to calculate. Used in table pagination to know when to disable the "next"/"more" button.
+   * The total number of rows in the table. Optional, because it's sometimes impossible to calculate. Used in table pagination to know when to disable the "next"/"more" button.
    */
   totalRows?: number;
 };

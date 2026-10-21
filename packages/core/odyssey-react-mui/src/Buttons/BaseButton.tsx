@@ -57,8 +57,7 @@ export type BaseButtonProps = {
    */
   buttonRef?: RefObject<FocusHandle>;
   /**
-   * The contents of the button. Only available internal to Odyssey here in BaseButton. If set,
-   * label is ignored.
+   * The contents of the button. Only available internal to Odyssey here in BaseButton. If set, label is ignored.
    */
   children?: ReactNode;
   /**
@@ -82,10 +81,7 @@ export type BaseButtonProps = {
    */
   isFullWidth?: boolean;
   /**
-   * If `true`, the button shows a progress spinner in place of its start icon
-   * and stops responding to clicks, while keeping the background and border of
-   * its default state. To reword the button while it works (for example
-   * `"Saving…"`), swap `label` alongside this.
+   * If `true`, the button shows a progress spinner in place of its start icon and stops responding to clicks, while keeping the background and border of its default state. To reword the button while it works (for example `"Saving…"`), swap `label` alongside this.
    */
   isLoading?: boolean;
   /**
@@ -133,9 +129,7 @@ export type BaseButtonProps = {
   variant: (typeof buttonVariantValues)[number] | "tertiary";
 };
 
-// These are split and exported separately from the above because wrappers of this (e.g. Button) will
-// want to omit children, which they cannot do from the combined union type. Instead, they should
-// omit from BaseButtonProps, then union with the AdditionalBaseButtonProps (as seen in Button)
+// These are split and exported separately from the above because wrappers of this (e.g. Button) will want to omit children, which they cannot do from the combined union type. Instead, they should omit from BaseButtonProps, then union with the AdditionalBaseButtonProps (as seen in Button)
 export type AdditionalBaseButtonProps = Pick<
   HtmlProps,
   | "ariaControls"
@@ -144,14 +138,14 @@ export type AdditionalBaseButtonProps = Pick<
   | "ariaHasPopup"
   | "ariaLabel"
   | "ariaLabelledBy"
+  | "ariaPressed"
   | "tabIndex"
   | "testId"
   | "translate"
 >;
 
 /**
- * The internal base button primitive used by all Odyssey button variants. Handles icon placement,
- * full-width layout, tooltip wrapping, focus handle forwarding, and MUI prop context integration.
+ * The internal base button primitive used by all Odyssey button variants. Handles icon placement, full-width layout, tooltip wrapping, focus handle forwarding, and MUI prop context integration.
  */
 const BaseButton = ({
   ariaControls,
@@ -160,6 +154,7 @@ const BaseButton = ({
   ariaHasPopup,
   ariaLabel,
   ariaLabelledBy,
+  ariaPressed,
   buttonRef,
   children,
   endIcon,
@@ -181,8 +176,7 @@ const BaseButton = ({
 }: BaseButtonProps & AdditionalBaseButtonProps) => {
   const muiProps = useMuiProps();
 
-  // We're deprecating the "tertiary" variant, so map it to
-  // "secondary" in lieu of making a breaking change
+  // We're deprecating the "tertiary" variant, so map it to "secondary" in lieu of making a breaking change
   const variant = variantProp === "tertiary" ? "secondary" : variantProp;
   const localButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const buttonContext = useButton();
@@ -197,13 +191,7 @@ const BaseButton = ({
 
   const loadingIndicator = useMemo(
     () => (
-      // Design specifies each variant's spinner color as that variant's own
-      // label color, so `color="inherit"` keeps the two in step instead of
-      // restating the palette per variant. MUI's CircularProgress is used
-      // directly because Odyssey's wrapper deliberately exposes neither a size
-      // nor a color prop, and design asked for the 16px sizing to stay internal
-      // to Button. Stroke weight comes from the shared theme default, which
-      // holds a 1:12 stroke-to-diameter ratio at any size.
+      // Design specifies each variant's spinner color as that variant's own label color, so `color="inherit"` keeps the two in step instead of restating the palette per variant. MUI's CircularProgress is used directly because Odyssey's wrapper deliberately exposes neither a size nor a color prop, and design asked for the 16px sizing to stay internal to Button. Stroke weight comes from the shared theme default, which holds a 1:12 stroke-to-diameter ratio at any size.
       <MuiCircularProgress
         aria-hidden
         color="inherit"
@@ -213,12 +201,7 @@ const BaseButton = ({
     [odysseyDesignTokens],
   );
 
-  // An inert button keeps its `href` so it stays focusable and keeps its link
-  // role, which leaves the browser's own activation as the thing to stop:
-  // `pointer-events: none` from the theme only blocks the mouse, and because
-  // `aria-disabled` is advisory, Enter still dispatches a click that would
-  // follow the link or submit the form. Preventing the default on that click
-  // covers every input method without swapping the element out.
+  // An inert button keeps its `href` so it stays focusable and keeps its link role, which leaves the browser's own activation as the thing to stop: `pointer-events: none` from the theme only blocks the mouse, and because `aria-disabled` is advisory, Enter still dispatches a click that would follow the link or submit the form. Preventing the default on that click covers every input method without swapping the element out.
   const handleClick = useCallback<NonNullable<MuiButtonProps["onClick"]>>(
     (event) => {
       if (isLoading || isDisabled) {
@@ -254,6 +237,7 @@ const BaseButton = ({
           aria-haspopup={ariaHasPopup}
           aria-label={ariaLabel}
           aria-labelledby={ariaLabelledBy}
+          aria-pressed={ariaPressed}
           data-se={testId}
           endIcon={endIcon}
           fullWidth={isFullWidth}
@@ -289,6 +273,7 @@ const BaseButton = ({
       ariaHasPopup,
       ariaLabel,
       ariaLabelledBy,
+      ariaPressed,
       buttonContent,
       endIcon,
       handleClick,

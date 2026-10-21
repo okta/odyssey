@@ -18,10 +18,7 @@ import { translate as odysseyTranslate } from "../i18n.generated/i18n.js";
 import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import { DatePicker } from "./DatePicker.js";
 
-// Every prop but `value` is memoized so `value` is the only one whose identity
-// changes between renders. `DatePicker` is a `React.memo` wrapper, so this is
-// the render path a memoizing consumer actually takes, and it is the path where
-// a picker that stopped following `value` would go unnoticed.
+// Every prop but `value` is memoized so `value` is the only one whose identity changes between renders. `DatePicker` is a `React.memo` wrapper, so this is the render path a memoizing consumer actually takes, and it is the path where a picker that stopped following `value` would go unnoticed.
 const DatePickerWithOutsideWrites = ({
   initialValue,
   nextValue,
@@ -160,8 +157,7 @@ describe(DatePicker.displayName!, () => {
     await expect.element(page.getByRole("dialog")).not.toBeInTheDocument();
   });
 
-  // The calendar popup used to render at a hardcoded viewport-wide width and
-  // overflow narrow parents, clipping the last (Saturday) column.
+  // The calendar popup used to render at a hardcoded viewport-wide width and overflow narrow parents, clipping the last (Saturday) column.
   test("calendar popup in a narrow container shows every column", async () => {
     const { container } = await renderWithOdysseyProvider(
       <div style={{ width: "320px" }}>
@@ -180,8 +176,7 @@ describe(DatePicker.displayName!, () => {
     const dialog = page.getByRole("dialog");
     await expect.element(dialog).toBeVisible();
 
-    // No accessible query distinguishes the day-grid row container, so reach for
-    // the MUI class to assert the seven columns are not horizontally clipped.
+    // No accessible query distinguishes the day-grid row container, so reach for the MUI class to assert the seven columns are not horizontally clipped.
     const weekRow = dialog
       .element()
       .querySelector(".MuiDayCalendar-weekContainer")!;

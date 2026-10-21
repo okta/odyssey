@@ -68,9 +68,7 @@ export type UniversalProps<TData extends MRT_RowData> = {
   hasSearch?: boolean;
   hasSearchSubmitButton?: boolean;
   /**
-   * Seeds the selected rows on initial mount (uncontrolled). Keys must match the
-   * ids produced by `getRowId`. Ignored once the user changes the selection, and
-   * ignored entirely when the controlled `rowSelection` prop is provided.
+   * Seeds the selected rows on initial mount (uncontrolled). Keys must match the ids produced by `getRowId`. Ignored once the user changes the selection, and ignored entirely when the controlled `rowSelection` prop is provided.
    */
   initialRowSelection?: DataRowSelectionState;
   isEmpty?: boolean;
@@ -79,10 +77,7 @@ export type UniversalProps<TData extends MRT_RowData> = {
   isPaginationMoreDisabled?: boolean;
   isRowReorderingDisabled?: boolean;
   /**
-   * Returns `true` for any row whose selection should be disabled. The row
-   * still renders, but its selection checkbox is non-interactive and the bulk
-   * "Select all" action skips it. Only applies when `hasRowSelection` is
-   * `true`.
+   * Returns `true` for any row whose selection should be disabled. The row still renders, but its selection checkbox is non-interactive and the bulk "Select all" action skips it. Only applies when `hasRowSelection` is `true`.
    */
   isRowSelectionDisabled?: (row: TData) => boolean;
   maxPages?: number;
@@ -108,9 +103,7 @@ export type UniversalProps<TData extends MRT_RowData> = {
   paginationType?: (typeof paginationTypeValues)[number];
   resultsPerPage?: number;
   /**
-   * Controlled selected-rows state. When provided, DataView no longer owns the
-   * selection — pair with `onRowSelectionChange` to update it. Keys must match
-   * the ids produced by `getRowId`.
+   * Controlled selected-rows state. When provided, DataView no longer owns the selection — pair with `onRowSelectionChange` to update it. Keys must match the ids produced by `getRowId`.
    */
   rowSelection?: DataRowSelectionState;
   searchDelayTime?: number;
@@ -130,9 +123,7 @@ export type TableLayoutProps<TData extends MRT_RowData> = {
   initialColumnVisibility?: DataColumnVisibilityState;
   initialDensity?: MRT_DensityState;
   /**
-   * Seeds the sort order on initial mount (uncontrolled). Each entry is a
-   * column id and a direction. Ignored once the user changes the sort, and
-   * only meaningful when `hasSorting` is `true`.
+   * Seeds the sort order on initial mount (uncontrolled). Each entry is a column id and a direction. Ignored once the user changes the sort, and only meaningful when `hasSorting` is `true`.
    * @default []
    */
   initialSorting?: MRT_SortingState;

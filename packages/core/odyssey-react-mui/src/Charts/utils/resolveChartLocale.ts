@@ -13,19 +13,11 @@
 const FALLBACK_LOCALE = "en-US";
 
 /**
- * The function converts a language code from the Odyssey translation
- * context to a BCP 47 locale tag. `Intl` constructors accept this tag.
+ * The function converts a language code from the Odyssey translation context to a BCP 47 locale tag. `Intl` constructors accept this tag.
  *
- * Okta's translation codes use an underscore to separate the region
- * subtag, for example `pt_BR`, `zh_CN`, and `nl_NL`. Every `Intl`
- * constructor rejects these codes with a `RangeError`. The Applitools test
- * environment reports the code `en-us@posix`. This code has no BCP 47
- * equivalent. As a result, six of the codes in `SupportedLanguages` crash
- * an unguarded `Intl` call.
+ * Okta's translation codes use an underscore to separate the region subtag, for example `pt_BR`, `zh_CN`, and `nl_NL`. Every `Intl` constructor rejects these codes with a `RangeError`. The Applitools test environment reports the code `en-us@posix`. This code has no BCP 47 equivalent. As a result, six of the codes in `SupportedLanguages` crash an unguarded `Intl` call.
  *
- * If a code has no valid equivalent, the function returns `en-US` instead
- * of raising an error. A chart with the wrong thousands separator is still
- * better than a chart that fails to render.
+ * If a code has no valid equivalent, the function returns `en-US` instead of raising an error. A chart with the wrong thousands separator is still better than a chart that fails to render.
  */
 export const resolveChartLocale = (languageCode: string): string => {
   try {

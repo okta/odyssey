@@ -22,8 +22,7 @@ export type UseContainerQueryProps = {
   /** Inclusive lower bound on the target's inline-size (px). */
   minWidth?: number;
   /**
-   * Element to observe, passed as a ref or a raw element. The hook returns
-   * `false` until an element is present.
+   * Element to observe, passed as a ref or a raw element. The hook returns `false` until an element is present.
    */
   target: RefObject<HTMLElement | null> | HTMLElement | null;
 };
@@ -32,9 +31,7 @@ const resolveTargetElement = (target: UseContainerQueryProps["target"]) =>
   target && "current" in target ? target.current : target;
 
 /**
- * `borderBoxSize` is typed as an array but is absent in older browsers and a
- * single object in some, so it is narrowed through a predicate that keeps the
- * element type intact (`Array.isArray` alone widens a readonly array to `any[]`).
+ * `borderBoxSize` is typed as an array but is absent in older browsers and a single object in some, so it is narrowed through a predicate that keeps the element type intact (`Array.isArray` alone widens a readonly array to `any[]`).
  */
 const isResizeObserverSizeList = (
   borderBoxSize: ResizeObserverSize | readonly ResizeObserverSize[] | undefined,
@@ -63,12 +60,7 @@ const doesSizeMatchQuery = ({
   (maxHeight === undefined || blockSize <= maxHeight);
 
 /**
- * Reports whether an element's size satisfies a container query, mirroring
- * `useMediaQuery` but observing an element with `ResizeObserver` instead of the
- * viewport. Bounds are matched against the target's `inline-size` (width) and
- * `block-size` (height); an omitted bound is always satisfied. Returns `false`
- * until the target element exists (and when `ResizeObserver` is unavailable,
- * e.g. during server rendering).
+ * Reports whether an element's size satisfies a container query, mirroring `useMediaQuery` but observing an element with `ResizeObserver` instead of the viewport. Bounds are matched against the target's `inline-size` (width) and `block-size` (height); an omitted bound is always satisfied. Returns `false` until the target element exists (and when `ResizeObserver` is unavailable, e.g. during server rendering).
  */
 export const useContainerQuery = ({
   target,
@@ -99,9 +91,7 @@ export const useContainerQuery = ({
   const animationFrameIdRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Resolve the element inside the effect: a `RefObject`'s `current` is `null`
-    // during render and only populated after commit, so resolving here (rather
-    // than during render) is what lets a ref target attach the observer.
+    // Resolve the element inside the effect: a `RefObject`'s `current` is `null` during render and only populated after commit, so resolving here (rather than during render) is what lets a ref target attach the observer.
     const targetElement = resolveTargetElement(target);
 
     if (typeof ResizeObserver === "undefined" || !targetElement) {

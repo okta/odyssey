@@ -188,11 +188,8 @@ export const WithTimeZonePicker: Story = {
   },
 };
 
-// `value` and `defaultValue` are mutually exclusive, so a controlled story has
-// no `defaultValue` arg to forward.
-// The only story that pins `timeZone`, so it is also the only one whose seed keeps
-// its UTC offset: the rendering zone is fixed, so the seed has to name an instant
-// rather than a wall-clock time the machine's zone would reinterpret.
+// `value` and `defaultValue` are mutually exclusive, so a controlled story has no `defaultValue` arg to forward.
+// The only story that pins `timeZone`, so it is also the only one whose seed keeps its UTC offset: the rendering zone is fixed, so the seed has to name an instant rather than a wall-clock time the machine's zone would reinterpret.
 export const Controlled: StoryObj<Omit<DateTimePickerProps, "defaultValue">> = {
   args: {
     timeZonePickerLabel: "Time zone picker label",
@@ -218,9 +215,7 @@ export const Controlled: StoryObj<Omit<DateTimePickerProps, "defaultValue">> = {
   render: function C({ ...props }) {
     const [value, setValue] = useState<string>("2024-07-11T03:00:00.000Z");
 
-    // Annotated `Omit<…, "defaultValue">` rather than `DateTimePickerProps`: a
-    // controlled field cannot carry a seed now that the two props are an
-    // exclusive union, so the full props type no longer describes this object.
+    // Annotated `Omit<…, "defaultValue">` rather than `DateTimePickerProps`: a controlled field cannot carry a seed now that the two props are an exclusive union, so the full props type no longer describes this object.
     const dateTimePickerProps: Omit<DateTimePickerProps, "defaultValue"> =
       useMemo(
         () => ({

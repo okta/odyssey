@@ -26,11 +26,7 @@ import { hexToRgb } from "./hexToRgb.js";
 export type ContrastMode = "lowContrast" | "highContrast";
 export type ContrastModeContextType = {
   /**
-   * Odyssey's app wrapper element: the contrast and height container
-   * `OdysseyThemeProvider` renders. `useAppElementContainerQuery` observes it so
-   * container queries track the space Odyssey actually occupies. Absent outside
-   * a provider, and `current` stays `null` when the provider renders with
-   * `hasWrapperElement={false}`.
+   * Odyssey's app wrapper element: the contrast and height container `OdysseyThemeProvider` renders. `useAppElementContainerQuery` observes it so container queries track the space Odyssey actually occupies. Absent outside a provider, and `current` stays `null` when the provider renders with `hasWrapperElement={false}`.
    */
   contrastContainerRef?: RefObject<HTMLDivElement>;
   contrastMode: ContrastMode;
@@ -71,10 +67,7 @@ export const normalizeBackgroundColor = (bgColor: string): string => {
 export const defaultParentBackgroundColor = Tokens.HueNeutral50;
 
 /**
- * Returns the parent element, crossing shadow DOM boundaries when necessary.
- * When `parentElement` is null (e.g., at a shadow root), this checks if the
- * element is inside a ShadowRoot and jumps to the host element to continue
- * traversal.
+ * Returns the parent element, crossing shadow DOM boundaries when necessary. When `parentElement` is null (e.g., at a shadow root), this checks if the element is inside a ShadowRoot and jumps to the host element to continue traversal.
  */
 const getParentElement = (element: HTMLElement): HTMLElement | null => {
   if (element.parentElement) {
@@ -98,8 +91,7 @@ const getParentElement = (element: HTMLElement): HTMLElement | null => {
  * Note:
  * - Low contrast mode is used for white background (HueNeutralWhite).
  * - High contrast mode is used for gray background (defaultParentBackgroundColor = HueNeutral50).
- * - Crosses shadow DOM boundaries via `getRootNode().host` to detect backgrounds
- *   set outside of shadow roots.
+ * - Crosses shadow DOM boundaries via `getRootNode().host` to detect backgrounds set outside of shadow roots.
  */
 export const getBackgroundColor = (element: HTMLElement | null): string => {
   while (element) {
@@ -144,9 +136,7 @@ export const useContrastMode = ({
 
     const observer = new MutationObserver(updateBackgroundColor);
 
-    // In shadow DOM contexts, document.documentElement and
-    // document.head may not be accessible. Guard against null to
-    // prevent observer.observe(null) from throwing.
+    // In shadow DOM contexts, document.documentElement and document.head may not be accessible. Guard against null to prevent observer.observe(null) from throwing.
     const htmlElement = document.documentElement;
     if (htmlElement) {
       observer.observe(htmlElement, {
@@ -171,8 +161,7 @@ export const useContrastMode = ({
       }
     };
 
-    // Attach the transitionend listener to the element's root node so it
-    // works inside shadow DOM (where events don't bubble to `document`).
+    // Attach the transitionend listener to the element's root node so it works inside shadow DOM (where events don't bubble to `document`).
     const eventRoot = contrastContainerRef.current?.getRootNode() ?? document;
     eventRoot.addEventListener("transitionend", onTransitionEnd);
     updateBackgroundColor();

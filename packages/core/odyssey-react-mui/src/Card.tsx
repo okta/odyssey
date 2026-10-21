@@ -314,8 +314,7 @@ const getNumberOfDefinedReactNodes = (props: Array<ReactNode>) =>
   Children.toArray(props).length;
 
 /**
- * A surface component for displaying structured content with an optional image, title,
- * description, and actions. Supports tile, stack, and compact layout variants.
+ * A surface component for displaying structured content with an optional image, title, description, and actions. Supports tile, stack, and compact layout variants.
  */
 const Card = ({
   children,

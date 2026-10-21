@@ -23,8 +23,7 @@ export type TimeZonePickerProps = {
   /** Accessible label for the time zone autocomplete input. */
   label: string;
   /**
-   * Called when the selected time zone changes. Receives the `value` string of
-   * the selected option, or `undefined` when the selection is cleared.
+   * Called when the selected time zone changes. Receives the `value` string of the selected option, or `undefined` when the selection is cleared.
    */
   onTimeZoneChange?: (timeZone: string | undefined) => void;
   /** Array of time zone options available for selection.

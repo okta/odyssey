@@ -61,8 +61,7 @@ const badgeTypeColors = (odysseyTokens: DesignTokens) => ({
 });
 
 /**
- * A small numeric indicator that overlays or accompanies another element to convey a count or
- * status. Renders nothing when the count is zero.
+ * A small numeric indicator that overlays or accompanies another element to convey a count or status. Renders nothing when the count is zero.
  */
 const Badge = ({
   badgeContent,

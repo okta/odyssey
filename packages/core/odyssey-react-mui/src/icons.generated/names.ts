@@ -62,6 +62,8 @@ export const iconNames = [
   "ExternalLink",
   "Filter",
   "Folder",
+  "FullscreenEnter",
+  "FullscreenExit",
   "Globe",
   "Grid",
   "Group",

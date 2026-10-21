@@ -15,8 +15,7 @@ import { type Meta, type StoryObj } from "@storybook/react-vite";
 
 import { OdysseyStorybookThemeDecorator } from "../../tools/OdysseyStorybookThemeDecorator.js";
 
-// Styled components must be defined at module scope — defining them inside render
-// functions causes React to unmount and remount the element on every render.
+// Styled components must be defined at module scope — defining them inside render functions causes React to unmount and remount the element on every render.
 const StyledCard = createOdysseyStyledComponent({ tag: "div" })(
   ({ odysseyDesignTokens }) => ({
     padding: odysseyDesignTokens.Spacing4,

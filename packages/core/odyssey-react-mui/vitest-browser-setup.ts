@@ -15,26 +15,17 @@ import { userEvent } from "vitest/browser";
 
 import { sandboxAttribute } from "./src/test-utils/appendToSandbox.js";
 
-// Park Playwright's cursor outside any rendered content before each test.
-// Playwright's cursor persists across tests within a file.
-// Unhovering document.body moves the cursor outside the
-// viewport, eliminating that interference for every test.
+// Park Playwright's cursor outside any rendered content before each test. Playwright's cursor persists across tests within a file.
+// Unhovering document.body moves the cursor outside the viewport, eliminating that interference for every test.
 beforeEach(async () => {
   await userEvent.unhover(document.body);
 });
 
 // Cleanup between tests:
 //
-// 1. Remove sandbox-tagged nodes. Tests that build DOM imperatively (outside
-//    React) append via `appendToSandbox(element)`, which marks the element
-//    with `[data-sandbox-root]`. We remove only those nodes — NOT
-//    `document.body.innerHTML = ""` — because MUI portals (Dialog, Select,
-//    Tooltip, DatePicker, Autocomplete, etc.) mount into body and must be
-//    cleaned up by React's own unmount path; wiping body races that unmount
-//    and throws `NotFoundError: Failed to execute 'removeChild'`.
+// 1. Remove sandbox-tagged nodes. Tests that build DOM imperatively (outside React) append via `appendToSandbox(element)`, which marks the element with `[data-sandbox-root]`. We remove only those nodes — NOT `document.body.innerHTML = ""` — because MUI portals (Dialog, Select, Tooltip, DatePicker, Autocomplete, etc.) mount into body and must be cleaned up by React's own unmount path; wiping body races that unmount and throws `NotFoundError: Failed to execute 'removeChild'`.
 //
-// 2. Clear session storage so values written by one test (e.g. the
-//    `useSessionStorageState` hook) cannot leak into another.
+// 2. Clear session storage so values written by one test (e.g. the `useSessionStorageState` hook) cannot leak into another.
 afterEach(() => {
   document
     .querySelectorAll(`[${sandboxAttribute}]`)
@@ -68,8 +59,7 @@ const buildAxeViolationSummary = async (
     ),
   });
 
-  // axe returns "incomplete" when it can't definitively determine the outcome
-  // (e.g. color-contrast when background traversal is ambiguous). Log these
+  // axe returns "incomplete" when it can't definitively determine the outcome (e.g. color-contrast when background traversal is ambiguous). Log these
   // as warnings so they surface for manual review without failing the test.
   if (results.incomplete.length > 0) {
     console.warn(
@@ -92,8 +82,7 @@ const buildAxeViolationSummary = async (
 
 /**
  * Asserts that a DOM element passes axe-core accessibility checks.
- * Rules listed in `disabledRules` are skipped (logged as warnings) rather
- * than causing the test to fail.
+ * Rules listed in `disabledRules` are skipped (logged as warnings) rather than causing the test to fail.
  *
  * Usage: `await expect(element).toBeAccessible()`
  *        `await expect.element(getByRole("button")).toBeAccessible({ disabledRules: ["button-name"] })`

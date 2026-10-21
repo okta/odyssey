@@ -41,8 +41,7 @@ export type DataCardProps = {
    */
   isSelected?: boolean;
   /**
-   * If `true`, the selection checkbox is disabled and the card cannot be
-   * selected or deselected.
+   * If `true`, the selection checkbox is disabled and the card cannot be selected or deselected.
    */
   isSelectionDisabled?: boolean;
   menuButtonChildren?: CardProps["menuButtonChildren"];

@@ -18,10 +18,7 @@ import {
   toCompactMediaQuery,
 } from "./useMediaQuery.js";
 
-// Each test compares against a written-out string, not against a string that is
-// built from the same constants. A test that builds its expected value from the
-// constants is always true, and it lets a change to an activation buffer pass
-// without notice.
+// Each test compares against a written-out string, not against a string that is built from the same constants. A test that builds its expected value from the constants is always true, and it lets a change to an activation buffer pass without notice.
 describe("compact viewport thresholds", () => {
   test("thresholds stay above the absolute minimum floors", () => {
     expect(COMPACT_MAX_WIDTH).toBeGreaterThan(ABSOLUTE_MINIMUM_WIDTH);

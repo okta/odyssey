@@ -49,15 +49,7 @@ describe(CircularProgress.displayName!, () => {
       throw new Error("CircularProgress rendered without an SVG circle");
     }
 
-    // MUI draws the ring in a fixed 44-unit viewBox and passes `thickness`
-    // through as the circle's stroke-width attribute, so that attribute divided
-    // by the viewBox is the stroke-to-diameter ratio at every rendered size.
-    // Design specifies 1:12, which is 2px at the default 24px diameter and
-    // 1.33px at the 16px Button renders. The ratio is asserted rather than a
-    // pixel width because rem-based sizing resolves against whatever root font
-    // size the host page sets. The attribute is read instead of the computed
-    // style because computed style resolves to a CSS length, which is a
-    // different unit space than the viewBox the ratio is expressed in.
+    // MUI draws the ring in a fixed 44-unit viewBox and passes `thickness` through as the circle's stroke-width attribute, so that attribute divided by the viewBox is the stroke-to-diameter ratio at every rendered size. Design specifies 1:12, which is 2px at the default 24px diameter and 1.33px at the 16px Button renders. The ratio is asserted rather than a pixel width because rem-based sizing resolves against whatever root font size the host page sets. The attribute is read instead of the computed style because computed style resolves to a CSS length, which is a different unit space than the viewBox the ratio is expressed in.
     const viewBoxWidth = 44;
     const strokeWidthInViewBoxUnits = circle.getAttribute("stroke-width");
 

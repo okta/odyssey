@@ -41,11 +41,8 @@ const renderChartPopoverContent = () =>
     />,
   );
 
-// The helper renders a minimal line chart. Each series has one point in the
-// same category. The helper hovers that category.
-// React never mounts `ChartPopoverContent` directly. Its serialization
-// through `@highcharts/react` needs a real chart. Its `isShared` each-block
-// also needs a real chart.
+// The helper renders a minimal line chart. Each series has one point in the same category. The helper hovers that category.
+// React never mounts `ChartPopoverContent` directly. Its serialization through `@highcharts/react` needs a real chart. Its `isShared` each-block also needs a real chart.
 const renderChartPopoverInChart = async ({
   isPopoverShared,
   seriesList,
@@ -84,9 +81,7 @@ const renderChartPopoverInChart = async ({
   return renderResult;
 };
 
-// The chart hover tests in this directory cover serialization through
-// `@highcharts/react`. They also cover the escape of substituted values.
-// Both cases need a real chart.
+// The chart hover tests in this directory cover serialization through `@highcharts/react`. They also cover the escape of substituted values. Both cases need a real chart.
 describe(ChartPopoverContent.displayName, () => {
   test("the label separator disables browser translation", async () => {
     const { container } = await renderChartPopoverContent();

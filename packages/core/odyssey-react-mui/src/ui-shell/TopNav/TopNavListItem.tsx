@@ -101,8 +101,7 @@ const StyledNavItemContentClickContainer = styled("div", {
 
 export type TopNavListItemProps = {
   /**
-   * Without a hyperlink reference, `onClick` functionality will not function.
-   * If `undefined`, static text will be displayed.
+   * Without a hyperlink reference, `onClick` functionality will not function. If `undefined`, static text will be displayed.
    */
   href?: string;
   /**

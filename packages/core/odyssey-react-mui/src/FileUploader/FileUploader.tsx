@@ -131,14 +131,12 @@ export type FileUploaderProps = {
    */
   type?: (typeof fileUploadTypes)[number];
   /**
-   * The file list for controlled usage. When provided, the consumer is
-   * responsible for updating it via `onChange`.
+   * The file list for controlled usage. When provided, the consumer is responsible for updating it via `onChange`.
    */
   value?: File[];
   /**
    * The visual interaction style. `"button"` renders a compact upload button;
-   * `"dragAndDrop"` renders a drop zone; `"dragAndDropWithIcon"` adds an illustration
-   * to the drop zone.
+   * `"dragAndDrop"` renders a drop zone; `"dragAndDropWithIcon"` adds an illustration to the drop zone.
    */
   variant: (typeof fileUploadVariants)[number];
 } & Pick<
@@ -152,8 +150,7 @@ export type FileUploaderProps = {
 >;
 
 /**
- * A form field that allows users to select and upload one or more files,
- * supporting button, drag-and-drop, and drag-and-drop-with-icon interaction variants.
+ * A form field that allows users to select and upload one or more files, supporting button, drag-and-drop, and drag-and-drop-with-icon interaction variants.
  */
 const FileUploader = ({
   acceptedFileTypes,

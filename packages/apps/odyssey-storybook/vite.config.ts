@@ -25,10 +25,7 @@ export default defineConfig(async () => {
     return { plugins: [react()] };
   }
 
-  // In dev mode, alias @okta/odyssey-react-mui to its TypeScript source so Vite
-  // processes it directly (fixes styled_default errors). This does not require
-  // core/odyssey-react-mui to be rebuilt on changes — they are picked up automatically.
-  // The displayName version plugin stamps the Odyssey version into every displayName.
+  // In dev mode, alias @okta/odyssey-react-mui to its TypeScript source so Vite processes it directly (fixes styled_default errors). This does not require core/odyssey-react-mui to be rebuilt on changes — they are picked up automatically. The displayName version plugin stamps the Odyssey version into every displayName.
   return {
     resolve: {
       alias: await getOdysseyReactMuiAliases(),

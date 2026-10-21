@@ -186,6 +186,21 @@ export {
   formMethodValues,
   type FormProps,
 } from "./Form.js";
+export {
+  FullscreenButton,
+  type FullscreenButtonProps,
+} from "./fullscreen/FullscreenButton.js";
+export {
+  FullscreenRegion,
+  type FullscreenRegionProps,
+} from "./fullscreen/FullscreenRegion.js";
+export {
+  useFullscreen,
+  type UseFullscreenArgs,
+  type UseFullscreenResult,
+  useHasActiveFullscreen,
+} from "./fullscreen/useFullscreen.js";
+export { useFullscreenId } from "./fullscreen/useFullscreenId.js";
 export { HintLink } from "./HintLink.js";
 export { type HtmlProps } from "./HtmlProps.js";
 export {
@@ -193,6 +208,12 @@ export {
   type IconWithTooltipProps,
 } from "./IconWithTooltip.js";
 export { Link, type LinkProps, linkVariantValues } from "./Link.js";
+// For an app that renders without Unified UI Shell, which runs the host itself. The rest of the bus is on the `@okta/odyssey-react-mui/message-bus` subpath.
+export {
+  createFullscreenModeHost,
+  type FullscreenModeHost,
+  getFullscreenElementId,
+} from "./message-bus/index.js";
 export {
   NativeSelect,
   type NativeSelectOption,

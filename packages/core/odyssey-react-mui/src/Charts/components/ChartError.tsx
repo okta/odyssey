@@ -21,16 +21,12 @@ import { Heading5, Paragraph } from "../../Typography.js";
 /** The props for a chart error state. */
 export type ChartErrorProps = {
   /**
-   * The chart calls this function when a user clicks the retry button in the
-   * error state. The error state shows no retry button when the caller
-   * omits this property.
+   * The chart calls this function when a user clicks the retry button in the error state. The error state shows no retry button when the caller omits this property.
    */
   onRetry?: () => void;
 };
 
-// The parent is a single-row grid that stretches this component to the
-// chart's full height. Centering here, rather than in the parent, keeps the
-// centering rule next to the content it centers.
+// The parent is a single-row grid that stretches this component to the chart's full height. Centering here, rather than in the parent, keeps the centering rule next to the content it centers.
 const OuterContainer = createOdysseyStyledComponent({ tag: "div" })(
   ({ odysseyDesignTokens }) => ({
     alignItems: "center",
@@ -43,10 +39,7 @@ const OuterContainer = createOdysseyStyledComponent({ tag: "div" })(
   }),
 );
 
-// `Heading4` renders an `h4` and `Paragraph` renders a `p`, and each carries
-// its own block margins. Those margins would add to the gap below and throw
-// off the measured spacing, so this resets them. The selector names both
-// elements rather than every child, so a later child keeps its own margins.
+// `Heading4` renders an `h4` and `Paragraph` renders a `p`, and each carries its own block margins. Those margins would add to the gap below and throw off the measured spacing, so this resets them. The selector names both elements rather than every child, so a later child keeps its own margins.
 const TextGroup = createOdysseyStyledComponent({ tag: "div" })(
   ({ odysseyDesignTokens }) => ({
     display: "flex",
@@ -61,8 +54,7 @@ const TextGroup = createOdysseyStyledComponent({ tag: "div" })(
 );
 
 /**
- * Renders the error state for a chart. A chart shows this component in
- * place of its plot when the chart fails to load its data.
+ * Renders the error state for a chart. A chart shows this component in place of its plot when the chart fails to load its data.
  */
 const ChartError = ({ onRetry }: ChartErrorProps) => {
   const { t } = useTranslation();

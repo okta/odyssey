@@ -13,9 +13,11 @@
 import { type SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
+import { type FullscreenModeMessageBus } from "../message-bus/index.js";
 import { bufferLatest } from "../tools/bufferLatest.js";
 import { createMessageBus, PublishMessage } from "../tools/createMessageBus.js";
 import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
+import { createUiShellFullscreenState } from "./createUiShellFullscreenState.js";
 import {
   UiShell,
   UiShellProps,
@@ -43,24 +45,41 @@ export type SlottedElements = Record<
 export type RenderedUiShell = {
   closeRightSideMenu: PublishMessage<void>;
   closeSideNavMenu: PublishMessage<void>;
+  /**
+   * Put the whole app area in fullscreen. UI Shell hides its top nav, side nav, and banners so the app fills the page.
+   *
+   * Use this when your app isn't built with Odyssey's `FullscreenButton`, for example a non-React app.
+   *
+   * The app area is one more entry in the page's fullscreen stack, so a `FullscreenRegion` can enter on top of it, and Escape goes back one step at a time. Removing `uiShellElement` from the page clears the stack.
+   */
+  enterAppFullscreen: () => void;
+  /**
+   * Take the app area out of fullscreen. A `FullscreenRegion` that entered on top of it stays in fullscreen.
+   */
+  exitAppFullscreen: () => void;
+  /**
+   * The page's current fullscreen state.
+   */
+  getFullscreenState: FullscreenModeMessageBus["getFullscreenState"];
   setComponentProps: ReturnType<
     typeof bufferLatest<SetStateAction<UiShellNavComponentProps>>
   >;
   /**
    * Update the shell's translation settings (`languageCode`, `translationOverrides`) at runtime.
    *
-   * Call this after the consumer's locale changes to re-localize shell-rendered chrome
-   * (skip-to-content link, top nav icons, side nav toggle) without re-rendering UI Shell.
+   * Call this after the consumer's locale changes to re-localize shell-rendered chrome (skip-to-content link, top nav icons, side nav toggle) without re-rendering UI Shell.
    *
-   * Accepts a React `SetStateAction`: passing a plain object **replaces** the entire
-   * settings value (so omitting `translationOverrides` clears it). Pass an updater
-   * function — `(previous) => ({ ...previous, languageCode: "es" })` — to merge with
+   * Accepts a React `SetStateAction`: passing a plain object **replaces** the entire settings value (so omitting `translationOverrides` clears it). Pass an updater function — `(previous) => ({ ...previous, languageCode: "es" })` — to merge with
    * the previous value.
    */
   setTranslationSettings: ReturnType<
     typeof bufferLatest<SetStateAction<UiShellTranslationSettings>>
   >;
   slottedElements: SlottedElements;
+  /**
+   * Listen for fullscreen changes anywhere on the page, including ones from other apps. Returns a function that stops listening.
+   */
+  subscribeToFullscreenState: FullscreenModeMessageBus["subscribeToFullscreenState"];
   uiShellElement: ReturnType<typeof renderReactInWebComponent>;
 } & Partial<Pick<UiShellProps, "appElement">>;
 
@@ -162,6 +181,26 @@ export const renderUiShell = ({
   const { publish: closeSideNavMenu, subscribe: subscribeToCloseSideNavMenu } =
     createMessageBus();
 
+  const {
+    connect: connectFullscreenState,
+    enterAppFullscreen: enterAppFullscreenNow,
+    exitAppFullscreen: exitAppFullscreenNow,
+    getFullscreenState,
+    subscribeToFullscreenState,
+  } = createUiShellFullscreenState();
+
+  // The page's fullscreen host starts when UI Shell's React tree renders, so a request made before then would reach no one. Like props, only the latest request is kept, so an enter followed by an exit leaves the app where it was.
+  const requestAfterReactAppReady = bufferLatest<() => void>({
+    publish: (sendFullscreenRequest) => sendFullscreenRequest(),
+    subscribe: subscribeToReactAppSubscribed,
+  });
+
+  const enterAppFullscreen = () =>
+    requestAfterReactAppReady(enterAppFullscreenNow);
+
+  const exitAppFullscreen = () =>
+    requestAfterReactAppReady(exitAppFullscreenNow);
+
   const slottedElements = Object.fromEntries(
     Object.entries(optionalComponentSlotNames).map(
       ([optionalComponentKey, slotName]) => {
@@ -186,6 +225,7 @@ export const renderUiShell = ({
           appElementScrollingMode={appElementScrollingMode}
           breakpointConfig={breakpointConfig}
           closeSideNavMenu={closeSideNavMenu}
+          connectFullscreenState={connectFullscreenState}
           hasStandardAppContentPadding={hasStandardAppContentPadding}
           initialVisibleSections={initialVisibleSections}
           onError={onError}
@@ -224,9 +264,13 @@ export const renderUiShell = ({
         appElement,
         closeRightSideMenu,
         closeSideNavMenu,
+        enterAppFullscreen,
+        exitAppFullscreen,
+        getFullscreenState,
         setComponentProps: publishAfterReactAppReadyForProps,
         setTranslationSettings: publishAfterReactAppReadyForTranslationSettings,
         slottedElements,
+        subscribeToFullscreenState,
         uiShellElement,
       });
     },
@@ -238,9 +282,13 @@ export const renderUiShell = ({
     appElement,
     closeRightSideMenu,
     closeSideNavMenu,
+    enterAppFullscreen,
+    exitAppFullscreen,
+    getFullscreenState,
     setComponentProps: publishAfterReactAppReadyForProps,
     setTranslationSettings: publishAfterReactAppReadyForTranslationSettings,
     slottedElements,
+    subscribeToFullscreenState,
     uiShellElement,
-  };
+  } satisfies RenderedUiShell;
 };

@@ -30,8 +30,7 @@ export const toastSeverityValues = [
 
 export type ToastProps = {
   /**
-   * How long the Toast should appear before automatically disappearing, in milliseconds.
-   * Only takes effect when the Toast is not dismissible.
+   * How long the Toast should appear before automatically disappearing, in milliseconds. Only takes effect when the Toast is not dismissible.
    * @default 6000
    */
   autoHideDuration?: number;
@@ -44,8 +43,7 @@ export type ToastProps = {
    */
   isVisible?: boolean;
   /**
-   * The visible label for the link rendered when `linkUrl` is provided. Has no effect
-   * without `linkUrl`.
+   * The visible label for the link rendered when `linkUrl` is provided. Has no effect without `linkUrl`.
    * @default "Learn more"
    */
   linkText?: string;
@@ -76,9 +74,7 @@ export type ToastProps = {
 const ClickAwayListenerProps = { onClickAway: () => false };
 
 /**
- * A brief, auto-dismissing notification used to communicate non-critical feedback such
- * as confirmations, warnings, or errors. Renders as a Snackbar overlay with optional
- * dismiss and link actions.
+ * A brief, auto-dismissing notification used to communicate non-critical feedback such as confirmations, warnings, or errors. Renders as a Snackbar overlay with optional dismiss and link actions.
  */
 const Toast = ({
   autoHideDuration = 6000,

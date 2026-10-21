@@ -39,15 +39,13 @@ export type BreadcrumbProps = {
   /** The visible label text for the breadcrumb item. */
   children?: string;
   /**
-   * The URL the breadcrumb navigates to. When omitted, the item renders as plain text
-   * (e.g., the current page).
+   * The URL the breadcrumb navigates to. When omitted, the item renders as plain text (e.g., the current page).
    */
   href?: string;
   /** An optional icon displayed before the label text. */
   iconName?: "user" | "group";
   /**
-   * Click handler invoked when the breadcrumb is activated. Prevents default navigation when
-   * provided.
+   * Click handler invoked when the breadcrumb is activated. Prevents default navigation when provided.
    */
   onClick?: MouseEventHandler;
 };
@@ -58,8 +56,7 @@ export type BreadcrumbsProps = {
   /** When provided, prepends a home icon link pointing to this URL as the first breadcrumb. */
   homeHref?: string;
   /**
-   * Maximum number of breadcrumb items to show before collapsing the middle items into an
-   * overflow menu.
+   * Maximum number of breadcrumb items to show before collapsing the middle items into an overflow menu.
    * @default 5
    */
   maxVisibleItems?: number;
@@ -81,8 +78,7 @@ const BreadcrumbContent = styled.span`
 `;
 
 /**
- * A single item in a Breadcrumbs trail. Renders as a link, a menu item, or plain text depending
- * on its position and context.
+ * A single item in a Breadcrumbs trail. Renders as a link, a menu item, or plain text depending on its position and context.
  */
 export const Breadcrumb = ({
   children,
@@ -135,8 +131,7 @@ export const Breadcrumb = ({
   }
 
   // breadcrumbType === "listItem" is the default
-  // Provided here without a conditional to get TS to be quiet
-  // about potential undefined returns
+  // Provided here without a conditional to get TS to be quiet about potential undefined returns
   return (
     <ButtonBase href={href} onClick={onClickHandler}>
       {breadcrumbContent}
@@ -162,9 +157,7 @@ const breadcrumbProviderValue: Record<
 const defaultTruncationValue = 5;
 
 /**
- * A navigational breadcrumb trail that displays the user's location within a hierarchy.
- * Automatically collapses middle items into an overflow menu when the number of items exceeds
- * `maxVisibleItems`.
+ * A navigational breadcrumb trail that displays the user's location within a hierarchy. Automatically collapses middle items into an overflow menu when the number of items exceeds `maxVisibleItems`.
  */
 const BreadcrumbList = ({
   children,

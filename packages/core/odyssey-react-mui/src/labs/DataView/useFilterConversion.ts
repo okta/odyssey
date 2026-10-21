@@ -35,8 +35,7 @@ export const useFilterConversion = <TData extends MRT_RowData>({
               value: option,
             }
           : {
-              // If the option isn't a string, it must have value and/or option defined
-              // If either is undefined, use the other
+              // If the option isn't a string, it must have value and/or option defined. If either is undefined, use the other
               label: (option.label ?? option.value) as string,
               value: (option.value ?? option.label) as string,
             },

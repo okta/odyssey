@@ -16,8 +16,7 @@ import {
 } from "@mui/material";
 
 /**
- * Applies MUI's CSS baseline reset to normalize browser styles and establish a
- * consistent typographic foundation across the application.
+ * Applies MUI's CSS baseline reset to normalize browser styles and establish a consistent typographic foundation across the application.
  */
 export const CssBaseline = (props: MuiCssBaselineProps) => (
   <MuiCssBaseline {...props} />

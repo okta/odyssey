@@ -14,6 +14,7 @@ import styled from "@emotion/styled";
 import { memo, useRef } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
+import { useHasActiveFullscreen } from "../fullscreen/useFullscreen.js";
 import {
   type DesignTokens,
   useOdysseyDesignTokens,
@@ -31,6 +32,7 @@ import {
 } from "./uiShellContentTypes.js";
 import { UiShellColors, useUiShellContext } from "./UiShellProvider.js";
 import { emptySideNavItems } from "./uiShellSharedConstants.js";
+import { useFullscreenChromeCollapse } from "./useFullscreenChromeCollapse.js";
 import { useMatchAppElementToUiShellAppArea } from "./useMatchAppElementToUiShellAppArea.js";
 import { useScrollState } from "./useScrollState.js";
 
@@ -106,12 +108,39 @@ const WideUiShellContent = ({
 }: WideUiShellContentProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const uiShellContext = useUiShellContext();
+  const hasActiveFullscreen = useHasActiveFullscreen();
 
   const { isContentScrolled } = useScrollState(appElement);
 
+  const appSwitcherContainerRef = useRef<HTMLDivElement>(null);
+  const bannersContainerRef = useRef<HTMLDivElement>(null);
   const sideNavContainerRef = useRef<HTMLDivElement>(null);
   const topNavContainerRef = useRef<HTMLDivElement>(null);
   const uiShellAppAreaRef = useRef<HTMLDivElement>(null);
+
+  const { isChromeHidden: isAppSwitcherHidden } = useFullscreenChromeCollapse({
+    chromeElementRef: appSwitcherContainerRef,
+    collapsedDimension: "width",
+    isCollapsed: hasActiveFullscreen,
+  });
+
+  const { isChromeHidden: isBannersHidden } = useFullscreenChromeCollapse({
+    chromeElementRef: bannersContainerRef,
+    collapsedDimension: "height",
+    isCollapsed: hasActiveFullscreen,
+  });
+
+  const { isChromeHidden: isSideNavHidden } = useFullscreenChromeCollapse({
+    chromeElementRef: sideNavContainerRef,
+    collapsedDimension: "width",
+    isCollapsed: hasActiveFullscreen,
+  });
+
+  const { isChromeHidden: isTopNavHidden } = useFullscreenChromeCollapse({
+    chromeElementRef: topNavContainerRef,
+    collapsedDimension: "height",
+    isCollapsed: hasActiveFullscreen,
+  });
 
   const { parentContainerRef } = useMatchAppElementToUiShellAppArea({
     appElement,
@@ -132,11 +161,17 @@ const WideUiShellContent = ({
     >
       <SkipToContent appElement={appElement} />
 
-      <StyledBannersContainer>
+      <StyledBannersContainer
+        hidden={isBannersHidden}
+        ref={bannersContainerRef}
+      >
         {optionalComponents?.banners}
       </StyledBannersContainer>
 
-      <StyledAppSwitcherContainer>
+      <StyledAppSwitcherContainer
+        hidden={isAppSwitcherHidden}
+        ref={appSwitcherContainerRef}
+      >
         {
           /* If AppSwitcher should be initially visible and we have not yet received props, render AppSwitcher in the loading state */
           initialVisibleSections?.includes("AppSwitcher") &&
@@ -158,7 +193,10 @@ const WideUiShellContent = ({
         )}
       </StyledAppSwitcherContainer>
 
-      <StyledSideNavContainer ref={sideNavContainerRef}>
+      <StyledSideNavContainer
+        hidden={isSideNavHidden}
+        ref={sideNavContainerRef}
+      >
         {
           /* If SideNav should be initially visible and we have not yet received props, render SideNav with minimal inputs */
           initialVisibleSections?.includes("SideNav") && !hasSideNavProps && (
@@ -190,7 +228,7 @@ const WideUiShellContent = ({
         )}
       </StyledSideNavContainer>
 
-      <StyledTopNavContainer ref={topNavContainerRef}>
+      <StyledTopNavContainer hidden={isTopNavHidden} ref={topNavContainerRef}>
         {
           /* If TopNav should be initially visible and we have not yet received props, render Topnav with minimal inputs */
           initialVisibleSections?.includes("TopNav") &&

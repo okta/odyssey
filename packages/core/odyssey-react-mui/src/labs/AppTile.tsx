@@ -66,8 +66,7 @@ export type AppTileProps = {
   | {
       // The ID of the element which the button controls (for instance, a drawer or dialog), if any.
       actionAriaControls?: HTMLAttributes<HTMLElement>["aria-controls"];
-      // Should be true if the button controls a popup element that is currently expanded. Should be synced to
-      // the state of the popup element
+      // Should be true if the button controls a popup element that is currently expanded. Should be synced to the state of the popup element
       actionAriaExpanded?: HTMLAttributes<HTMLElement>["aria-expanded"];
       // Should be filled if the button controls a popup element such as a Drawer or Dialog
       actionAriaHasPopup?: HTMLAttributes<HTMLElement>["aria-haspopup"];
@@ -75,8 +74,7 @@ export type AppTileProps = {
       actionIcon: ReactElement;
       // The label for the button, used as the aria-label and tooltip
       actionLabel: string;
-      // Event that fires when the user clicks the action button in the upper-right corner
-      // If this isn't set, the other action props can't be set either
+      // Event that fires when the user clicks the action button in the upper-right corner. If this isn't set, the other action props can't be set either
       onActionClick: MouseEventHandler;
     }
   | {

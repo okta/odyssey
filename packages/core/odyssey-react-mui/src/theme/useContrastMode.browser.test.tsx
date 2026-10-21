@@ -98,8 +98,7 @@ describe("useContrastMode and related functions", () => {
 
       const testContainer = renderResult.getByTestId("container").element();
 
-      // Create and dispatch a transitionend event to simulate CSS transition completion
-      // Storybook and certain elements use transitions which could interfere with tests
+      // Create and dispatch a transitionend event to simulate CSS transition completion Storybook and certain elements use transitions which could interfere with tests
       testContainer.style.backgroundColor = Tokens.HueNeutral50;
 
       const transitionEvent = new Event("transitionend");
@@ -339,11 +338,7 @@ describe("useContrastMode and related functions", () => {
   });
 
   describe("Shadow DOM safety", () => {
-    // Without the null-safety guard in useContrastMode, calling
-    // `getComputedStyle(document.documentElement)` would throw when
-    // `documentElement` is null (possible in some shadow DOM / SSR contexts).
-    // This test overrides `document.documentElement` to null to verify we
-    // handle that gracefully.
+    // Without the null-safety guard in useContrastMode, calling `getComputedStyle(document.documentElement)` would throw when `documentElement` is null (possible in some shadow DOM / SSR contexts). This test overrides `document.documentElement` to null to verify we handle that gracefully.
     test("handles null document.documentElement gracefully", async () => {
       const originalDocumentElement =
         Object.getOwnPropertyDescriptor(document, "documentElement") ??

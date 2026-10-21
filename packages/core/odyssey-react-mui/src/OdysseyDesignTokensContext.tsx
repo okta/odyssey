@@ -14,9 +14,7 @@ import * as odysseyDesignTokens from "@okta/odyssey-design-tokens";
 import { createContext, useContext } from "react";
 
 export type DesignTokens = typeof odysseyDesignTokens;
-// Spread into a plain object because `import * as X` creates a module namespace
-// exotic object with a null prototype. Without toString/valueOf, it crashes
-// Storybook's source display and any other code that coerces it to a primitive.
+// Spread into a plain object because `import * as X` creates a module namespace exotic object with a null prototype. Without toString/valueOf, it crashes Storybook's source display and any other code that coerces it to a primitive.
 export const defaultOdysseyDesignTokensContextValue = {
   ...odysseyDesignTokens,
 };

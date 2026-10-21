@@ -65,10 +65,7 @@ export const buttonComponents = ({
             outlineOffset: "1px",
           },
 
-          // A loading button is inert too, so it also carries aria-disabled and
-          // picks up this rule. Design does want it to keep the background and
-          // border of its default state though, which is why every variant
-          // below narrows its disabled colors with :not([aria-busy='true']).
+          // A loading button is inert too, so it also carries aria-disabled and picks up this rule. Design does want it to keep the background and border of its default state though, which is why every variant below narrows its disabled colors with :not([aria-busy='true']).
           "&&[aria-disabled='true']": {
             pointerEvents: "none",
             cursor: "default",

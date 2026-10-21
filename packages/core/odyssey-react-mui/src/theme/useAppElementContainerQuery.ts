@@ -22,13 +22,7 @@ export type UseAppElementContainerQueryProps = Omit<
 >;
 
 /**
- * Reports whether Odyssey's app wrapper element satisfies a container query.
- * This is the app-scoped analog of `useMediaQuery`: bounds are matched against
- * the wrapper's `inline-size` (width) and `block-size` (height) rather than the
- * viewport, so responsiveness tracks the space Odyssey actually occupies (which
- * shrinks as surrounding chrome such as a side nav expands). Returns `false`
- * until the wrapper element exists, including when `OdysseyProvider` renders
- * with `hasWrapperElement={false}` and when called outside a provider.
+ * Reports whether Odyssey's app wrapper element satisfies a container query. This is the app-scoped analog of `useMediaQuery`: bounds are matched against the wrapper's `inline-size` (width) and `block-size` (height) rather than the viewport, so responsiveness tracks the space Odyssey actually occupies (which shrinks as surrounding chrome such as a side nav expands). Returns `false` until the wrapper element exists, including when `OdysseyProvider` renders with `hasWrapperElement={false}` and when called outside a provider.
  */
 export const useAppElementContainerQuery = ({
   maxHeight,

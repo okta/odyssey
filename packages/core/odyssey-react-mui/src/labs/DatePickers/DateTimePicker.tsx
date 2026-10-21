@@ -42,7 +42,7 @@ import { DateTimeField, DateTimeFieldProps } from "./DateTimeField.js";
 import { dateTimePickerTheme } from "./dateTimePickerTheme.js";
 
 export const DateTimePickerSize = {
-  maxWidth: `${pxToRem(486)}rem`,
+  maxWidth: `${pxToRem(534)}rem`,
 };
 
 const DatePickerContainer = styled.div({

@@ -75,8 +75,7 @@ export type AccordionProps = {
   Pick<HtmlProps, "testId" | "translate">;
 
 /**
- * A collapsible content section with a clickable header. Use to progressively
- * disclose information and reduce visual complexity on content-heavy pages.
+ * A collapsible content section with a clickable header. Use to progressively disclose information and reduce visual complexity on content-heavy pages.
  */
 const Accordion = ({
   children,

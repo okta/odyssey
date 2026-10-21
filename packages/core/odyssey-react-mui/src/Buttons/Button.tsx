@@ -22,8 +22,7 @@ export type ButtonProps = Omit<BaseButtonProps, "children"> &
   AdditionalBaseButtonProps;
 
 /**
- * A clickable button used to trigger actions or submit forms. Supports multiple visual variants,
- * sizes, icons, and an optional tooltip for icon-only usage.
+ * A clickable button used to trigger actions or submit forms. Supports multiple visual variants, sizes, icons, and an optional tooltip for icon-only usage.
  */
 const Button = (props: ButtonProps) => {
   return <BaseButton {...props} />;

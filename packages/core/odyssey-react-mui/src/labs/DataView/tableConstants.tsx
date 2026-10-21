@@ -59,8 +59,7 @@ export const displayColumnDefOptions = {
         width: "auto",
       },
       children: (
-        // Add a spacer to simulate the width of the drag handle in the column.
-        // Without this, the head cells are offset from their body cell counterparts
+        // Add a spacer to simulate the width of the drag handle in the column. Without this, the head cells are offset from their body cell counterparts
         <Box sx={{ marginInline: "-0.1rem" }}>
           <DragIndicatorIcon sx={{ marginInline: 1, opacity: 0 }} />
         </Box>

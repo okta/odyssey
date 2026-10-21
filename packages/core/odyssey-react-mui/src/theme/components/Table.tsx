@@ -151,11 +151,9 @@ export const tableComponents = ({
         [`.${tableHeadClasses.root} .ods-actions-cell + &:last-of-type, .${tableBodyClasses.root} .ods-actions-cell + &:last-of-type`]:
           {
             flexGrow: 0,
-            // When a table has an actions column, we need to 0 the padding on the final (spacing-related) column otherwise
-            // the last column is too wide
+            // When a table has an actions column, we need to 0 the padding on the final (spacing-related) column otherwise the last column is too wide
             padding: "0 !important",
-            // The last column needs to be the same width as the border-radius of the thead row to ensure the border-radius isn't
-            // cut off
+            // The last column needs to be the same width as the border-radius of the thead row to ensure the border-radius isn't cut off
             width: odysseyTokens.Spacing2,
           },
         [`.ods-hide-spacer-column .${tableHeadClasses.root} &:last-of-type, .ods-hide-spacer-column .${tableBodyClasses.root} &:last-of-type:not(.Mui-TableBodyCell-DetailPanel)`]:

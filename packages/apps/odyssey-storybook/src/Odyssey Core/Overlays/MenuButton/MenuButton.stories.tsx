@@ -286,10 +286,7 @@ export const Groupings: Story = {
     a11y: {
       config: {
         rules: [
-          // MUI renders ListSubheader as <li> inside role="menu", which axe flags
-          // because menuitem roles are required children. This is an established
-          // MUI pattern for grouping menu items and cannot be changed without a
-          // MUI-level fix.
+          // MUI renders ListSubheader as <li> inside role="menu", which axe flags because menuitem roles are required children. This is an established MUI pattern for grouping menu items and cannot be changed without a MUI-level fix.
           { id: "aria-required-children", enabled: false },
           { id: "listitem", enabled: false },
         ],

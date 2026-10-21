@@ -50,10 +50,7 @@ export const drawerComponents = ({
         }),
         ...(ownerState.variant === "temporary" && {
           boxShadow: odysseyTokens.ShadowScale1,
-          // A fixed-width overlay wider than the viewport clips its content and
-          // makes the page scroll horizontally at the WCAG 1.4.10 reflow floor.
-          // Not 100vw: that counts the scrollbar gutter and keeps the
-          // horizontal scrollbar.
+          // A fixed-width overlay wider than the viewport clips its content and makes the page scroll horizontally at the WCAG 1.4.10 reflow floor. Not 100vw: that counts the scrollbar gutter and keeps the horizontal scrollbar.
           [toCompactMediaQuery("width")]: {
             width: "100%",
           },

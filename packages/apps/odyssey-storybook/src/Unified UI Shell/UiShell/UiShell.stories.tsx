@@ -15,10 +15,13 @@ import {
   Banner,
   Box,
   Button,
+  FullscreenButton,
+  FullscreenRegion,
   OdysseyProvider,
   Paragraph,
   SearchField,
   Surface,
+  useFullscreenId,
 } from "@okta/odyssey-react-mui";
 import {
   BaseButton,
@@ -626,16 +629,9 @@ export const WithCustomSideNavFooter: Story = {
     viewport: { value: "compactHeight", isRotated: false },
   },
   parameters: {
-    // This story proves the custom SideNav footer scrolls when the viewport is
-    // short. That behavior keys off compact *height* (max-height 500px), a
-    // separate axis from the narrow shell (which triggers below 600px width and
-    // tucks the SideNav into a closed off-canvas drawer). It selects the global
-    // compactHeight viewport (1024×256): width stays wide (1024px) so the
-    // SideNav stays persistent and its footer is visible, and short height
-    // (256px) triggers the scroll.
+    // This story proves the custom SideNav footer scrolls when the viewport is short. That behavior keys off compact *height* (max-height 500px), a separate axis from the narrow shell (which triggers below 600px width and tucks the SideNav into a closed off-canvas drawer). It selects the global compactHeight viewport (1024×256): width stays wide (1024px) so the SideNav stays persistent and its footer is visible, and short height (256px) triggers the scroll.
     //
-    // See getReflowEyesParameters for why layoutBreakpoints is needed to
-    // capture the compact-height layout in Applitools.
+    // See getReflowEyesParameters for why layoutBreakpoints is needed to capture the compact-height layout in Applitools.
     eyes: getReflowEyesParameters({
       height: ABSOLUTE_MINIMUM_HEIGHT,
       width: STANDARD_APPLITOOLS_WIDTH,
@@ -1019,6 +1015,83 @@ export const WithOdysseyAppContent: Story = {
                   </Surface>
                 </Layout>
               </PageTemplate>
+            </OdysseyProvider>
+          )}
+        </div>
+
+        <UiShell
+          {...props}
+          appElement={appElementRef.current!}
+          onSubscriptionCreated={onSubscriptionCreated}
+        />
+      </>
+    );
+  },
+};
+
+export const WithFullscreenAppContent: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
+  args: {
+    optionalComponents: {
+      ...sharedOptionalComponents,
+      banners: <Banner severity="info" text="Banners hide in fullscreen." />,
+    },
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        appSwitcherProps: sharedAppSwitcherProps,
+        sideNavProps: sharedSideNavProps,
+        topNavProps: sharedTopNavProps,
+      });
+
+      return () => {};
+    },
+  },
+  render: function C(props) {
+    const appElementRef = useRefWithRerenderHack();
+    const reportFullscreenId = useFullscreenId();
+    const appFullscreenId = useFullscreenId();
+
+    const [isReady, setIsReady] = useState(false);
+
+    const onSubscriptionCreated = useCallback(() => {
+      setIsReady(true);
+    }, []);
+
+    return (
+      <>
+        <div ref={appElementRef}>
+          {/* This is normally rendered by `renderUiShell`, but we're rendering `UiShell` outside of a web component, so we need to add this data attribute ourselves. */}
+          <div {...{ [uiShellDataAttribute]: "" }} />
+
+          {isReady && (
+            <OdysseyProvider>
+              <FullscreenRegion fullscreenId={appFullscreenId}>
+                <PageTemplate
+                  description="The report's button sits in the page header, outside the report it controls. The report has its own button too."
+                  primaryCallToActionComponent={
+                    <FullscreenButton
+                      ariaLabel="Enable fullscreen for the campaign report"
+                      fullscreenId={appFullscreenId}
+                    />
+                  }
+                  title="Access Certification"
+                >
+                  <Layout regions={[1]}>
+                    <Surface>
+                      <FullscreenRegion fullscreenId={reportFullscreenId}>
+                        <FullscreenButton fullscreenId={reportFullscreenId} />
+                        <Paragraph>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit. Mauris lacinia leo quis sodales scelerisque.
+                          Maecenas tempor eget nunc sit amet ultrices. Maecenas
+                          et varius ante. Nulla eu quam sit amet orci fermentum
+                          dictum sit amet scelerisque libero.
+                        </Paragraph>
+                      </FullscreenRegion>
+                    </Surface>
+                  </Layout>
+                </PageTemplate>
+              </FullscreenRegion>
             </OdysseyProvider>
           )}
         </div>

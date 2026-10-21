@@ -12,8 +12,14 @@
 
 import type { TranslationOverrides } from "@okta/odyssey-contribution-tooling";
 
+import { page } from "vitest/browser";
+
 import { i18n } from "../i18n.generated/i18n.js";
 import { type SupportedLanguages } from "../i18n.generated/i18n.types.js";
+import {
+  createFullscreenModeHost,
+  createFullscreenModeMessageBus,
+} from "../message-bus/index.js";
 import { appendToSandbox } from "../test-utils/appendToSandbox.js";
 import { appRootElementId } from "../web-component/createReactRootElements.js";
 import {
@@ -21,12 +27,11 @@ import {
   webComponentDataAttributeName,
 } from "../web-component/renderReactInWebComponent.js";
 import { renderUiShell } from "./renderUiShell.js";
+import { defaultUiShellBreakpointConfig } from "./useUiShellBreakpoints.js";
 
 const webComponentSelector = `[${webComponentDataAttributeName}]`;
 
-// `TranslationOverrides` is `Record<all-locales, Partial<bundle>>`; a literal
-// with only the locale we override does not satisfy that record under strict
-// type checking. Stub every other locale with an empty bundle so the cast is
+// `TranslationOverrides` is `Record<all-locales, Partial<bundle>>`; a literal with only the locale we override does not satisfy that record under strict type checking. Stub every other locale with an empty bundle so the cast is
 // safe (`as TranslationOverrides`) without resorting to `as unknown as ...`.
 const allSupportedLanguages: readonly SupportedLanguages[] = [
   "cs",
@@ -66,8 +71,7 @@ const emptyTranslationOverrides = Object.fromEntries(
   allSupportedLanguages.map((language) => [language, {}]),
 ) as TranslationOverrides;
 
-// `parentElement` in every test is tagged via `appendToSandbox` so the global
-// afterEach in `vitest-browser-setup.ts` removes it.
+// `parentElement` in every test is tagged via `appendToSandbox` so the global afterEach in `vitest-browser-setup.ts` removes it.
 describe(renderUiShell.name, () => {
   test("`UiShell` renders after `onRender`", async () => {
     const nonce = "test-nonce";
@@ -125,18 +129,26 @@ describe(renderUiShell.name, () => {
       appElement,
       closeRightSideMenu,
       closeSideNavMenu,
+      enterAppFullscreen,
+      exitAppFullscreen,
+      getFullscreenState,
       setComponentProps,
       setTranslationSettings,
       slottedElements,
+      subscribeToFullscreenState,
       uiShellElement: returnedUiShellElement,
     } = onRender.mock.calls[0][0];
 
     expect(appElement).toBeInstanceOf(HTMLDivElement);
     expect(closeRightSideMenu).toBeInstanceOf(Function);
     expect(closeSideNavMenu).toBeInstanceOf(Function);
+    expect(enterAppFullscreen).toBeInstanceOf(Function);
+    expect(exitAppFullscreen).toBeInstanceOf(Function);
+    expect(getFullscreenState).toBeInstanceOf(Function);
     expect(setComponentProps).toBeInstanceOf(Function);
     expect(setTranslationSettings).toBeInstanceOf(Function);
     expect(slottedElements).toBeInstanceOf(Object);
+    expect(subscribeToFullscreenState).toBeInstanceOf(Function);
     expect(returnedUiShellElement).toHaveAttribute(
       webComponentDataAttributeName,
     );
@@ -331,6 +343,233 @@ describe(renderUiShell.name, () => {
           .shadowRoot?.getElementById(appRootElementId),
       ).toHaveTextContent(customSkipLink);
     });
+  });
+
+  test("app enters and exits fullscreen", async () => {
+    const parentElement = appendToSandbox(document.createElement("div"));
+    const fullscreenStateListener = vi.fn();
+
+    const {
+      enterAppFullscreen,
+      exitAppFullscreen,
+      getFullscreenState,
+      subscribeToFullscreenState,
+    } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
+    });
+
+    const unsubscribeFromFullscreenState = subscribeToFullscreenState(
+      fullscreenStateListener,
+    );
+
+    expect(getFullscreenState()).toStrictEqual({ fullscreenStack: [] });
+
+    // UI Shell's host starts when React renders it, so an enter sent before then has no one to answer it.
+    await vi.waitFor(() => {
+      enterAppFullscreen();
+      expect(getFullscreenState().fullscreenStack).toHaveLength(1);
+    });
+
+    const [appFullscreenId] = getFullscreenState().fullscreenStack;
+
+    exitAppFullscreen();
+
+    await vi.waitFor(() => {
+      expect(getFullscreenState()).toStrictEqual({ fullscreenStack: [] });
+    });
+
+    expect(fullscreenStateListener.mock.calls).toStrictEqual([
+      [{ fullscreenStack: [appFullscreenId] }],
+      [{ fullscreenStack: [] }],
+    ]);
+
+    unsubscribeFromFullscreenState();
+  });
+
+  test("app enters fullscreen before UI Shell is on the page", async () => {
+    // Not on the page yet, so the shell's React tree, and the host it starts, doesn't render until it is appended.
+    const parentElement = document.createElement("div");
+
+    const { enterAppFullscreen, getFullscreenState } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
+    });
+
+    enterAppFullscreen();
+    appendToSandbox(parentElement);
+
+    await vi.waitFor(() => {
+      expect(getFullscreenState().fullscreenStack).toHaveLength(1);
+    });
+  });
+
+  test("a region entering on top of the app's fullscreen", async () => {
+    const parentElement = appendToSandbox(document.createElement("div"));
+    const regionFullscreenModeMessageBus = createFullscreenModeMessageBus();
+
+    const { enterAppFullscreen, exitAppFullscreen, getFullscreenState } =
+      renderUiShell({
+        appElementScrollingMode: "vertical",
+        parentElement,
+      });
+
+    await vi.waitFor(() => {
+      enterAppFullscreen();
+      expect(getFullscreenState().fullscreenStack).toHaveLength(1);
+    });
+
+    const [appFullscreenId] = getFullscreenState().fullscreenStack;
+
+    regionFullscreenModeMessageBus.enterFullscreen({
+      fullscreenId: "region-on-top",
+    });
+
+    await vi.waitFor(() => {
+      expect(getFullscreenState()).toStrictEqual({
+        fullscreenStack: [appFullscreenId, "region-on-top"],
+      });
+    });
+
+    exitAppFullscreen();
+
+    await vi.waitFor(() => {
+      expect(getFullscreenState()).toStrictEqual({
+        fullscreenStack: ["region-on-top"],
+      });
+    });
+
+    regionFullscreenModeMessageBus.exitFullscreen({
+      fullscreenId: "region-on-top",
+    });
+    regionFullscreenModeMessageBus.destroy();
+  });
+
+  test("UI Shell removed while the app is in fullscreen", async () => {
+    const parentElement = appendToSandbox(document.createElement("div"));
+    const pageFullscreenModeMessageBus = createFullscreenModeMessageBus();
+
+    const { enterAppFullscreen, getFullscreenState, uiShellElement } =
+      renderUiShell({
+        appElementScrollingMode: "vertical",
+        parentElement,
+      });
+
+    await vi.waitFor(() => {
+      enterAppFullscreen();
+      expect(
+        pageFullscreenModeMessageBus.getFullscreenState().fullscreenStack,
+      ).toHaveLength(1);
+    });
+
+    uiShellElement.remove();
+
+    // The shell's host clears the stack as it goes, so nothing is left hiding navigation that no longer exists.
+    await vi.waitFor(() => {
+      expect(pageFullscreenModeMessageBus.getFullscreenState()).toStrictEqual({
+        fullscreenStack: [],
+      });
+    });
+
+    expect(getFullscreenState()).toStrictEqual({ fullscreenStack: [] });
+
+    parentElement.appendChild(uiShellElement);
+
+    await vi.waitFor(() => {
+      enterAppFullscreen();
+      expect(
+        pageFullscreenModeMessageBus.getFullscreenState().fullscreenStack,
+      ).toHaveLength(1);
+    });
+
+    uiShellElement.remove();
+
+    await vi.waitFor(() => {
+      expect(pageFullscreenModeMessageBus.getFullscreenState()).toStrictEqual({
+        fullscreenStack: [],
+      });
+    });
+
+    pageFullscreenModeMessageBus.destroy();
+  });
+
+  test("page changes after UI Shell is removed", async () => {
+    const parentElement = appendToSandbox(document.createElement("div"));
+    const pageFullscreenModeMessageBus = createFullscreenModeMessageBus();
+    const fullscreenStateListener = vi.fn();
+
+    const {
+      enterAppFullscreen,
+      exitAppFullscreen,
+      getFullscreenState,
+      subscribeToFullscreenState,
+      uiShellElement,
+    } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      parentElement,
+    });
+
+    await vi.waitFor(() => {
+      enterAppFullscreen();
+      expect(getFullscreenState().fullscreenStack).toHaveLength(1);
+    });
+
+    exitAppFullscreen();
+
+    await vi.waitFor(() => {
+      expect(getFullscreenState()).toStrictEqual({ fullscreenStack: [] });
+    });
+
+    subscribeToFullscreenState(fullscreenStateListener);
+    uiShellElement.remove();
+
+    // The removed shell's host is gone too, so this one stands in for another shell still on the page.
+    const pageFullscreenModeHost = createFullscreenModeHost();
+
+    pageFullscreenModeMessageBus.enterFullscreen({ fullscreenId: "region" });
+
+    await vi.waitFor(() => {
+      expect(pageFullscreenModeMessageBus.getFullscreenState()).toStrictEqual({
+        fullscreenStack: ["region"],
+      });
+    });
+
+    expect(getFullscreenState()).toStrictEqual({ fullscreenStack: [] });
+    expect(fullscreenStateListener).not.toHaveBeenCalled();
+
+    pageFullscreenModeHost.destroy();
+    pageFullscreenModeMessageBus.destroy();
+  });
+
+  test("app fullscreen hides the navigation", async () => {
+    await page.viewport(defaultUiShellBreakpointConfig.wide, 1000);
+
+    const parentElement = appendToSandbox(document.createElement("div"));
+    const appName = "Fullscreen App";
+
+    const { enterAppFullscreen, exitAppFullscreen, setComponentProps } =
+      renderUiShell({
+        appElementScrollingMode: "vertical",
+        parentElement,
+      });
+
+    setComponentProps({
+      sideNavProps: {
+        appName,
+        sideNavItems: [],
+      },
+      topNavProps: {},
+    });
+
+    await expect.element(page.getByText(appName)).toBeVisible();
+
+    enterAppFullscreen();
+
+    await expect.element(page.getByText(appName)).not.toBeVisible();
+
+    exitAppFullscreen();
+
+    await expect.element(page.getByText(appName)).toBeVisible();
   });
 
   test("renders `<div>` in the event of an error", async () => {

@@ -75,9 +75,7 @@ export type LinkProps = {
 } & Pick<HtmlProps, "ariaLabel" | "id" | "testId" | "translate">;
 
 /**
- * A navigational element that renders an anchor tag. Supports internal and external links,
- * an optional leading icon, and automatically appends an external link indicator when
- * opening in a new tab.
+ * A navigational element that renders an anchor tag. Supports internal and external links, an optional leading icon, and automatically appends an external link indicator when opening in a new tab.
  */
 const Link = ({
   ariaLabel,

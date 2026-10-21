@@ -15,19 +15,11 @@ import { unstable_useEventCallback } from "@mui/utils";
 const noop = () => undefined;
 
 /**
- * Returns a callback with a permanent identity that always invokes the most
- * recent version of `callback`.
+ * Returns a callback with a permanent identity that always invokes the most recent version of `callback`.
  *
- * Use this for any consumer-supplied callback a component notifies from a
- * `useEffect`. Consumers routinely pass an inline arrow function, which has a
- * new identity on every render. Listing that identity in an effect's dependency
- * array makes the effect run on renders where nothing it reports actually
- * changed, and it then reports values captured before the latest commit. When
- * the consumer feeds a reported value back in as a prop, the prop and the
- * component's internal state can swap values on every commit and never settle.
+ * Use this for any consumer-supplied callback a component notifies from a `useEffect`. Consumers routinely pass an inline arrow function, which has a new identity on every render. Listing that identity in an effect's dependency array makes the effect run on renders where nothing it reports actually changed, and it then reports values captured before the latest commit. When the consumer feeds a reported value back in as a prop, the prop and the component's internal state can swap values on every commit and never settle.
  *
- * The returned callback is safe to omit from dependency arrays, so the effect
- * can depend only on the state it reports:
+ * The returned callback is safe to omit from dependency arrays, so the effect can depend only on the state it reports:
  *
  * ```tsx
  * const stableOnPaginationChange = useStableCallback(onPaginationChange);
@@ -37,12 +29,9 @@ const noop = () => undefined;
  * }, [pagination, stableOnPaginationChange]);
  * ```
  *
- * The latest `callback` is captured in a layout effect, so the returned
- * callback must not be invoked during render. Invoke it from an effect or an
- * event handler.
+ * The latest `callback` is captured in a layout effect, so the returned callback must not be invoked during render. Invoke it from an effect or an event handler.
  *
- * Passing `undefined` is supported and yields a callback that does nothing,
- * which removes the need for optional-call syntax at every call site.
+ * Passing `undefined` is supported and yields a callback that does nothing, which removes the need for optional-call syntax at every call site.
  *
  * @param callback The callback to stabilize, typically a component prop.
  */

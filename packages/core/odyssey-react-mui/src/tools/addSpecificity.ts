@@ -11,8 +11,7 @@
  */
 
 /**
- * Adds CSS specificity to class selectors by prepending a specified number of ampersands.
- * This function helps override MUI component styles by increasing selector specificity.
+ * Adds CSS specificity to class selectors by prepending a specified number of ampersands. This function helps override MUI component styles by increasing selector specificity.
  *
  * @param {number} specificityCount - Number of ampersands to prepend (e.g., 2 results in "&&")
  * @param {string} selector - The selector string to add specificity to.

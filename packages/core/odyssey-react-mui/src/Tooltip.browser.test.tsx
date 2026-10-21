@@ -13,9 +13,7 @@
 import { memo } from "react";
 import { page, userEvent } from "vitest/browser";
 
-// useMuiProps comes through the __internal barrel, not MuiPropsContext.js, so
-// this test fails if that re-export is dropped. Out-of-package callers have no
-// other way in, and nothing else covers the barrel's contents.
+// useMuiProps comes through the __internal barrel, not MuiPropsContext.js, so this test fails if that re-export is dropped. Out-of-package callers have no other way in, and nothing else covers the barrel's contents.
 import { useMuiProps } from "./__internal.js";
 import { Button } from "./Buttons/Button.js";
 import { createOdysseyStyledComponent } from "./createOdysseyStyledComponent.js";
@@ -28,9 +26,7 @@ const StyledTrigger = createOdysseyStyledComponent({ tag: "button" })(
   }),
 );
 
-// Stands in for a trigger defined outside odyssey-react-mui, which reaches the
-// injected hover/focus props and ref through useMuiProps rather than receiving
-// them as cloned props.
+// Stands in for a trigger defined outside odyssey-react-mui, which reaches the injected hover/focus props and ref through useMuiProps rather than receiving them as cloned props.
 const CustomTrigger = memo(() => {
   const muiProps = useMuiProps();
 

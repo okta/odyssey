@@ -102,12 +102,9 @@ export type TypographyProps = {
   isPresentational?: boolean;
   /**
    * Controls where the text may break to avoid overflowing its container.
-   * - If `'normal'`, breaks only at normal word-break points, so a long unbroken
-   *   string such as an ID or URL overflows.
-   * - If `'break-word'`, breaks inside a word only when the word cannot fit on a
-   *   line of its own.
-   * - If `'anywhere'`, breaks inside a word as soon as it reaches the container
-   *   edge, and the broken word counts toward the container's `min-content` size.
+   * - If `'normal'`, breaks only at normal word-break points, so a long unbroken string such as an ID or URL overflows.
+   * - If `'break-word'`, breaks inside a word only when the word cannot fit on a line of its own.
+   * - If `'anywhere'`, breaks inside a word as soon as it reaches the container edge, and the broken word counts toward the container's `min-content` size.
    * @default "normal"
    * @see https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap
    */
@@ -132,9 +129,7 @@ export type TypographyProps = {
 >;
 
 /**
- * Low-level typography primitive that renders styled text using the Odyssey design
- * system. Prefer the semantic variants (Heading1–Heading6, Paragraph, etc.) over this
- * component for most use cases.
+ * Low-level typography primitive that renders styled text using the Odyssey design system. Prefer the semantic variants (Heading1–Heading6, Paragraph, etc.) over this component for most use cases.
  */
 const Typography = ({
   ariaCurrent,
@@ -202,8 +197,7 @@ const MemoizedTypography = memo(Typography);
 MemoizedTypography.displayName = "Typography";
 
 /**
- * Top-level page heading rendered as an `<h1>` element. Use once per page to mark the
- * primary title.
+ * Top-level page heading rendered as an `<h1>` element. Use once per page to mark the primary title.
  */
 const Heading1 = ({
   ariaCurrent,
@@ -450,8 +444,7 @@ const MemoizedParagraph = memo(Paragraph);
 MemoizedParagraph.displayName = "Paragraph";
 
 /**
- * Subordinate text rendered as a `<p>` element with a reduced visual weight. Use for
- * secondary or supporting information that follows primary body copy.
+ * Subordinate text rendered as a `<p>` element with a reduced visual weight. Use for secondary or supporting information that follows primary body copy.
  */
 const Subordinate = ({
   ariaCurrent,
@@ -486,8 +479,7 @@ const MemoizedSubordinate = memo(Subordinate);
 MemoizedSubordinate.displayName = "Subordinate";
 
 /**
- * Support text rendered as a `<p>` element at the smallest body scale. Use for helper
- * text, captions, or fine print.
+ * Support text rendered as a `<p>` element at the smallest body scale. Use for helper text, captions, or fine print.
  */
 const Support = ({
   ariaCurrent,
@@ -555,8 +547,7 @@ const MemoizedLegend = memo(Legend);
 MemoizedLegend.displayName = "Legend";
 
 /**
- * Overline text rendered as a `<p>` element in an uppercase, small-caps style. Use to
- * label a section or group before a heading.
+ * Overline text rendered as a `<p>` element in an uppercase, small-caps style. Use to label a section or group before a heading.
  */
 const Overline = ({
   ariaDescribedBy,

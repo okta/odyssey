@@ -17,6 +17,7 @@ import {
   type TranslationOverrides,
   type TranslationProviderProps,
 } from "../i18n.generated/i18n.js";
+import { createFullscreenModeHost } from "../message-bus/index.js";
 import { OdysseyProvider } from "../OdysseyProvider.js";
 import { MessageBus } from "../tools/createMessageBus.js";
 import { type ReactRootElements } from "../web-component/createReactRootElements.js";
@@ -40,8 +41,7 @@ export const defaultComponentProps: UiShellNavComponentProps = {
 /**
  * Runtime-updatable translation settings forwarded to UI Shell's internal `OdysseyProvider`.
  *
- * Consumers pass these as initial props to `renderUiShell({...})` and can update them later
- * by calling `setTranslationSettings(...)` on the returned object.
+ * Consumers pass these as initial props to `renderUiShell({...})` and can update them later by calling `setTranslationSettings(...)` on the returned object.
  */
 export type UiShellTranslationSettings = Pick<
   TranslationProviderProps,
@@ -62,14 +62,19 @@ export type UiShellProps = {
    */
   breakpointConfig?: UiShellBreakpointConfig;
   /**
+   * Called once the shell's fullscreen mode host is running. The function it returns is called when the shell unmounts, before the host stops.
+   *
+   * `renderUiShell` passes this so the fullscreen state it returns only listens to the page while the shell is on it.
+   */
+  connectFullscreenState?: () => () => void;
+  /**
    * Notifies when subscribed to prop changes.
    *
    * UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.
    */
   onSubscriptionCreated: () => void;
   /**
-   * This is a callback that provides a subscriber callback to listen for changes to state.
-   * It allows UI Shell to listen for state changes.
+   * This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes.
    *
    * The props coming in this callback go directly to a React state; therefore, it shares the same signature and provides a previous state.
    */
@@ -79,11 +84,9 @@ export type UiShellProps = {
   /**
    * Subscriber for runtime-updatable translation settings (`languageCode`, `translationOverrides`).
    *
-   * These are forwarded to the shell's internal `OdysseyProvider` so consumers can drive shell
-   * localization from their own i18n source instead of the browser's `navigator.language`.
+   * These are forwarded to the shell's internal `OdysseyProvider` so consumers can drive shell localization from their own i18n source instead of the browser's `navigator.language`.
    *
-   * Optional for backward compatibility — when omitted, the shell falls back to
-   * `window.navigator.language` (its prior behavior).
+   * Optional for backward compatibility — when omitted, the shell falls back to `window.navigator.language` (its prior behavior).
    */
   subscribeToTranslationSettings?: MessageBus<
     SetStateAction<UiShellTranslationSettings>
@@ -121,6 +124,7 @@ const UiShell = ({
   appElementScrollingMode,
   breakpointConfig,
   closeSideNavMenu,
+  connectFullscreenState,
   hasStandardAppContentPadding,
   initialVisibleSections,
   onError = console.error,
@@ -148,6 +152,17 @@ const UiShell = ({
     );
   }
 
+  // Only one UI Shell renders on a page, while any number of apps can, so the shell is where the page's fullscreen stack lives. Destroying it on unmount clears the stack, so the app never stays in fullscreen with no shell to bring the navigation back.
+  useEffect(() => {
+    const fullscreenModeHost = createFullscreenModeHost();
+    const disconnectFullscreenState = connectFullscreenState?.();
+
+    return () => {
+      disconnectFullscreenState?.();
+      fullscreenModeHost.destroy();
+    };
+  }, [connectFullscreenState]);
+
   useEffect(() => {
     const unsubscribeFromPropChanges = subscribeToPropChanges(
       (componentProps) => {
@@ -156,10 +171,7 @@ const UiShell = ({
       },
     );
 
-    // Both subscribers must be wired BEFORE `onSubscriptionCreated()` fires.
-    // `renderUiShell` uses `bufferLatest` to queue the initial translation settings
-    // until the React app subscribes; if we called `onSubscriptionCreated()` first,
-    // the buffered emission would fire before this subscriber exists and be lost.
+    // Both subscribers must be wired BEFORE `onSubscriptionCreated()` fires. `renderUiShell` uses `bufferLatest` to queue the initial translation settings until the React app subscribes; if we called `onSubscriptionCreated()` first, the buffered emission would fire before this subscriber exists and be lost.
     const unsubscribeFromTranslationSettings = subscribeToTranslationSettings?.(
       (nextSettings) => {
         setTranslationSettings(nextSettings || defaultTranslationSettings);

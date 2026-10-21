@@ -66,9 +66,7 @@ export type IconName = (typeof iconNames)[number];
 `;
 };
 
-// Each entry's `import("./<Name>.js")` is a static path so Vite/Rollup/Webpack
-// emit one chunk per icon file. Consumers look the lazy component up by
-// `IconName`, and only the rendered icon's chunk is fetched at runtime.
+// Each entry's `import("./<Name>.js")` is a static path so Vite/Rollup/Webpack emit one chunk per icon file. Consumers look the lazy component up by `IconName`, and only the rendered icon's chunk is fetched at runtime.
 const formatLazyIconDictionaryModule = (iconNames: readonly string[]) => {
   const recordEntries = iconNames
     .map(

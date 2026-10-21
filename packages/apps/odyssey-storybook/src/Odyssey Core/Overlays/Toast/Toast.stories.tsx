@@ -145,8 +145,7 @@ const meta = {
     },
   },
   args: {
-    // Rendered visible by default so Applitools captures the Toast without a play
-    // function. The "Open toast" button still shows/hides it in Canvas.
+    // Rendered visible by default so Applitools captures the Toast without a play function. The "Open toast" button still shows/hides it in Canvas.
     isVisible: true,
     severity: "info",
     role: "status",
@@ -215,8 +214,7 @@ export const AllVariants: Story = {
       <ToastStack>
         {toastSeverityValues.flatMap((severity) =>
           [false, true].map((isDismissable) => (
-            // autoHideDuration={0} disables auto-hide so every severity stays on
-            // screen for the Applitools capture instead of dismissing after 6s.
+            // autoHideDuration={0} disables auto-hide so every severity stays on screen for the Applitools capture instead of dismissing after 6s.
             <Toast
               autoHideDuration={0}
               isDismissable={isDismissable}
@@ -292,8 +290,7 @@ export const MultipleToasts: Story = {
       [],
     );
 
-    // Seeded with three toasts so Applitools captures the stacked state without a
-    // play function. The "Open another Toast" button still appends more in Canvas.
+    // Seeded with three toasts so Applitools captures the stacked state without a play function. The "Open another Toast" button still appends more in Canvas.
     const [toasts, setToasts] = useState<ToastWithId[]>(() =>
       toastData
         .slice(0, 3)

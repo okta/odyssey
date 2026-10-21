@@ -29,15 +29,9 @@ const StyledContainer = styled("div", {
   position: "fixed",
   top: odysseyDesignTokens.Spacing3,
   zIndex: SKIP_LINKS_Z_INDEX,
-  // Visually hidden when not focused — the "sr-only" pattern.
-  // https://www.a11yproject.com/posts/how-to-hide-content/
+  // Visually hidden when not focused — the "sr-only" pattern. https://www.a11yproject.com/posts/how-to-hide-content/
   //
-  // We found this method via the A11y Project. It fixes axe color-contrast
-  // violations that `opacity: 0` triggers (axe still evaluates contrast on
-  // opacity-0 elements because they occupy space in the layout). The sr-only
-  // pattern collapses the element to 1×1 px and clips it, which axe — and
-  // every modern screen reader — treats as fully hidden. Unlike a large
-  // negative `left` offset, it also avoids any risk of a phantom scrollbar.
+  // We found this method via the A11y Project. It fixes axe color-contrast violations that `opacity: 0` triggers (axe still evaluates contrast on opacity-0 elements because they occupy space in the layout). The sr-only pattern collapses the element to 1×1 px and clips it, which axe — and every modern screen reader — treats as fully hidden. Unlike a large negative `left` offset, it also avoids any risk of a phantom scrollbar.
   "&:not(:focus-within)": {
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",

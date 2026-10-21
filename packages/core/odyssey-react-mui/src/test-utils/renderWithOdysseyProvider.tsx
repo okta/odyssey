@@ -21,14 +21,9 @@ import {
 import { OdysseyProvider } from "../OdysseyProvider.js";
 
 // Kill transitions so axe never samples a mid-transition state.
-// `create` covers CSS transition strings; `duration` zeroes JS timeouts that
-// MUI transition components (Fade, Slide, Collapse) use to decide when to
-// unmount.
+// `create` covers CSS transition strings; `duration` zeroes JS timeouts that MUI transition components (Fade, Slide, Collapse) use to decide when to unmount.
 //
-// Passed as `themeOverride` (plain `ThemeOptions`), not a resolved `createTheme`
-// result: the provider deep-merges this into the Odyssey theme and re-runs
-// `createTheme` so the override composes correctly. A resolved theme here would
-// instead be merged as an already-built theme and clobber Odyssey's own values.
+// Passed as `themeOverride` (plain `ThemeOptions`), not a resolved `createTheme` result: the provider deep-merges this into the Odyssey theme and re-runs `createTheme` so the override composes correctly. A resolved theme here would instead be merged as an already-built theme and clobber Odyssey's own values.
 export const noTransitionsTheme = {
   transitions: {
     create: () => "none",

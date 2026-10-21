@@ -52,11 +52,9 @@ export type GetBundleWithRestoredOverridesArgs = {
 };
 
 /**
- * Applies a restore plan to the bundle currently in the store, returning the
- * bundle that should replace it.
+ * Applies a restore plan to the bundle currently in the store, returning the bundle that should replace it.
  *
- * Entries the plan does not name are carried through untouched, so a bundle a
- * consumer added after `getTranslationServices` ran survives the swap.
+ * Entries the plan does not name are carried through untouched, so a bundle a consumer added after `getTranslationServices` ran survives the swap.
  */
 export const getBundleWithRestoredOverrides = ({
   overriddenBundle,

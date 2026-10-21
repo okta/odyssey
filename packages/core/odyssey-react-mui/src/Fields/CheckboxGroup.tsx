@@ -57,8 +57,7 @@ type CheckboxGroupRenderProps = Pick<
   >;
 
 /**
- * A labeled group of Checkbox controls. Wraps one or more Checkbox elements
- * with a shared label, optional hint, and unified error messaging.
+ * A labeled group of Checkbox controls. Wraps one or more Checkbox elements with a shared label, optional hint, and unified error messaging.
  */
 const CheckboxGroup = ({
   ariaDescribedBy,

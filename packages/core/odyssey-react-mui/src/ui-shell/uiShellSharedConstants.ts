@@ -12,8 +12,7 @@
 
 import { SideNavProps } from "./SideNav/types.js";
 
-// It's important to bring all our constant values together, so we can change them in one location and ensure the values are all correct relative to each other.
-// This also lends us the capability of swapping these out for a more robust solution in the future.
+// It's important to bring all our constant values together, so we can change them in one location and ensure the values are all correct relative to each other. This also lends us the capability of swapping these out for a more robust solution in the future.
 
 /* The side nav collapse icon is placed absolutely from the top (Logo container + nav header height) to align it in the middle of the nav header text */
 export const SIDE_NAV_VISIBILITY_TOGGLE_ICON_POSITION = "77px";
