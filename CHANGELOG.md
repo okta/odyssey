@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.72.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.71.1...v1.72.0) (2026-10-28)
+
+### Bug Fixes
+
+* drop --with-deps from Permiso and Spera playwright-install ([#1033](https://github.com/atko-eng/odyssey-design-system/issues/1033)) ([a86051c](https://github.com/atko-eng/odyssey-design-system/commit/a86051cac7d30a9e000aa67e9a1facf241f1e555)), closes [#895](https://github.com/atko-eng/odyssey-design-system/issues/895)
+* hide scrollbars while fullscreen animates ([#1010](https://github.com/atko-eng/odyssey-design-system/issues/1010)) ([5f04df0](https://github.com/atko-eng/odyssey-design-system/commit/5f04df0538e04b7fd9f0d2afcb5780f54a794871))
+* **odyssey-react-mui:** keep dialogs usable in fullscreen ([#1008](https://github.com/atko-eng/odyssey-design-system/issues/1008)) ([e854c4e](https://github.com/atko-eng/odyssey-design-system/commit/e854c4e906ffe66ae1929cb84017188c2674e14d))
+* **odyssey-react-mui:** use one overlay container per app ([#1014](https://github.com/atko-eng/odyssey-design-system/issues/1014)) ([ce377e6](https://github.com/atko-eng/odyssey-design-system/commit/ce377e69d03f307381467e21a52282ae7267609a))
+* paint only the top overlay backdrop ([#1013](https://github.com/atko-eng/odyssey-design-system/issues/1013)) ([849e874](https://github.com/atko-eng/odyssey-design-system/commit/849e87418534a97aee5c0f1bd3c0df73e714e4c9))
+* publish packages from one Bacon suite ([#964](https://github.com/atko-eng/odyssey-design-system/issues/964)) ([cc63c5c](https://github.com/atko-eng/odyssey-design-system/commit/cc63c5cd93aaa3c37f25c7f90606d3d818ec2acf))
+* ship translation files in npm package ([#966](https://github.com/atko-eng/odyssey-design-system/issues/966)) ([96a8c62](https://github.com/atko-eng/odyssey-design-system/commit/96a8c62e10b99c5fc255b29bdd98516734f6e40d))
+* upgrade Node to 24.22.1 ([#1004](https://github.com/atko-eng/odyssey-design-system/issues/1004)) ([91e5068](https://github.com/atko-eng/odyssey-design-system/commit/91e50686d5b79fb98faf7bd0f4be801f17d485ab))
+* use odyssey-react-mui 1.71.1 in ui shell ([#1003](https://github.com/atko-eng/odyssey-design-system/issues/1003)) ([dc8a578](https://github.com/atko-eng/odyssey-design-system/commit/dc8a5784278b71cf3f26ed4c9d62f5c28c90df77))
+* use odyssey-react-mui 1.71.2 in ui shell ([#1015](https://github.com/atko-eng/odyssey-design-system/issues/1015)) ([dc70d79](https://github.com/atko-eng/odyssey-design-system/commit/dc70d79665f3b8edaaf3df8ca6f06d668ce72c1a)), closes [#1008](https://github.com/atko-eng/odyssey-design-system/issues/1008)
+* **wp-components:** caps graph fit zoom ([#965](https://github.com/atko-eng/odyssey-design-system/issues/965)) ([d7dd604](https://github.com/atko-eng/odyssey-design-system/commit/d7dd604aefe7f44cdbda4da37b6480d9d7fe284e))
+* **wp-components:** centers children on parent ([#978](https://github.com/atko-eng/odyssey-design-system/issues/978)) ([c21a90c](https://github.com/atko-eng/odyssey-design-system/commit/c21a90c8ac64ab3b76832f946e8313da4fe9b93c))
+* **wp-components:** closes the fullscreen button's tooltip on click ([#1007](https://github.com/atko-eng/odyssey-design-system/issues/1007)) ([6cfc003](https://github.com/atko-eng/odyssey-design-system/commit/6cfc003e00b1d82cc9749bd8f1ab703718ee3d95))
+* **wp-components:** collapses cut-off nodes ([#1011](https://github.com/atko-eng/odyssey-design-system/issues/1011)) ([f0b1370](https://github.com/atko-eng/odyssey-design-system/commit/f0b13708fe2c4e816bf227adeb716de18f5abd88))
+* **wp-components:** fans parallel edges in oval ([#974](https://github.com/atko-eng/odyssey-design-system/issues/974)) ([5c5bacd](https://github.com/atko-eng/odyssey-design-system/commit/5c5bacd1d3ca898bb5bb090e662adc77c4269425))
+* **wp-components:** gates hint banner on load ([#972](https://github.com/atko-eng/odyssey-design-system/issues/972)) ([ef1e34f](https://github.com/atko-eng/odyssey-design-system/commit/ef1e34f555a6d152442ae6c4f64f15823a4626d6))
+* **wp-components:** rename reload button to Reload graph ([#999](https://github.com/atko-eng/odyssey-design-system/issues/999)) ([e412ef0](https://github.com/atko-eng/odyssey-design-system/commit/e412ef032c5b3e5c14dd18ee032cc41c1cb571e1))
+* **wp-components:** reorders to avoid overlaps ([#985](https://github.com/atko-eng/odyssey-design-system/issues/985)) ([d0bcd5a](https://github.com/atko-eng/odyssey-design-system/commit/d0bcd5a6cfa97250d523c2ba23112ecb96005ed8))
+* **wp-components:** restyles inactive edge label ([#992](https://github.com/atko-eng/odyssey-design-system/issues/992)) ([abbfd9d](https://github.com/atko-eng/odyssey-design-system/commit/abbfd9d3d315796e4c7e7d809112f13f602cb0ce))
+* **wp-components:** routes edges around nodes ([#993](https://github.com/atko-eng/odyssey-design-system/issues/993)) ([2734916](https://github.com/atko-eng/odyssey-design-system/commit/27349169d5f5d78841b969d1bcb83d31133acde8))
+* **wp-components:** tokenizes graph background dots ([#975](https://github.com/atko-eng/odyssey-design-system/issues/975)) ([c96823d](https://github.com/atko-eng/odyssey-design-system/commit/c96823d5960c8798c7fa1d94a54c174d705c1ec4))
+* **wp-components:** trims graph exports ([#971](https://github.com/atko-eng/odyssey-design-system/issues/971)) ([c484876](https://github.com/atko-eng/odyssey-design-system/commit/c484876649f057f45c21f7438885c2bbf0898f24))
+
+### Features
+
+* add formId prop to Button ([#1040](https://github.com/atko-eng/odyssey-design-system/issues/1040)) ([2654157](https://github.com/atko-eng/odyssey-design-system/commit/2654157f6fbf4496a6984f00521ce9ea91a1fe27))
+* add fullscreen mode to ui shell ([#914](https://github.com/atko-eng/odyssey-design-system/issues/914)) ([41d823b](https://github.com/atko-eng/odyssey-design-system/commit/41d823baa74de31430cbe8d7d3c7935fafe31f99))
+* add Permiso components contribution ([#969](https://github.com/atko-eng/odyssey-design-system/issues/969)) ([e59b08c](https://github.com/atko-eng/odyssey-design-system/commit/e59b08c22bcffeb901e55b230c4be0e126a863a5))
+* add Spera components contribution ([#968](https://github.com/atko-eng/odyssey-design-system/issues/968)) ([79574d5](https://github.com/atko-eng/odyssey-design-system/commit/79574d5586e4738d8850479421210c481a42b4a2))
+* add thin file-level test selector ([#901](https://github.com/atko-eng/odyssey-design-system/issues/901)) ([a815469](https://github.com/atko-eng/odyssey-design-system/commit/a81546970ebb725c646b17593521e8c84580edcc))
+* agent upgrade prompt, raise peers and pins ([#1001](https://github.com/atko-eng/odyssey-design-system/issues/1001)) ([665e6bd](https://github.com/atko-eng/odyssey-design-system/commit/665e6bd8d071329fc8d540c02f6f890ff72ff41d))
+* **cartographer:** establish what a scenario needs ([#981](https://github.com/atko-eng/odyssey-design-system/issues/981)) ([22e3787](https://github.com/atko-eng/odyssey-design-system/commit/22e37870ccd66924bcc3ff2fb7c81a9216b4cc52)), closes [#942](https://github.com/atko-eng/odyssey-design-system/issues/942)
+* **iga-components:** add Actions header and optional hidden reorder menu items to DataView ([#1006](https://github.com/atko-eng/odyssey-design-system/issues/1006)) ([aff7b5d](https://github.com/atko-eng/odyssey-design-system/commit/aff7b5d909af3e99f334e883422f1335017f865e))
+* **opa-components:** add TruncatedTextWithTooltip ([#1021](https://github.com/atko-eng/odyssey-design-system/issues/1021)) ([f1cce7f](https://github.com/atko-eng/odyssey-design-system/commit/f1cce7f5e2ad486bcaaea6af30ad4e3e01ae8f9f))
+* **policy-rules-components:** add description slot to RuleEditor.Actions ([#984](https://github.com/atko-eng/odyssey-design-system/issues/984)) ([44589a3](https://github.com/atko-eng/odyssey-design-system/commit/44589a3874669de7ab1cdd8aa09260b31d8bcfb0))
+* select and run upgrade codemods ([#995](https://github.com/atko-eng/odyssey-design-system/issues/995)) ([d1d453c](https://github.com/atko-eng/odyssey-design-system/commit/d1d453c6178d2adf7eb2fe6ae22c23809ea8a052)), closes [#934](https://github.com/atko-eng/odyssey-design-system/issues/934) [#935](https://github.com/atko-eng/odyssey-design-system/issues/935) [#946](https://github.com/atko-eng/odyssey-design-system/issues/946) [#950](https://github.com/atko-eng/odyssey-design-system/issues/950) [#954](https://github.com/atko-eng/odyssey-design-system/issues/954) [#952](https://github.com/atko-eng/odyssey-design-system/issues/952) [#973](https://github.com/atko-eng/odyssey-design-system/issues/973) [#982](https://github.com/atko-eng/odyssey-design-system/issues/982) [#983](https://github.com/atko-eng/odyssey-design-system/issues/983) [#987](https://github.com/atko-eng/odyssey-design-system/issues/987) [#988](https://github.com/atko-eng/odyssey-design-system/issues/988) [#989](https://github.com/atko-eng/odyssey-design-system/issues/989) [#990](https://github.com/atko-eng/odyssey-design-system/issues/990)
+* Translations for odyssey-design-system:enduser ([#1035](https://github.com/atko-eng/odyssey-design-system/issues/1035)) ([edab9f3](https://github.com/atko-eng/odyssey-design-system/commit/edab9f38cdf1cec8bfb22f275942aa16e5720484))
+* Translations for odyssey-design-system:enduser ([#996](https://github.com/atko-eng/odyssey-design-system/issues/996)) ([9b48a3a](https://github.com/atko-eng/odyssey-design-system/commit/9b48a3a6cae41ee0a7cc2424dabc612f7a569762))
+* walk 1.70 to 1.71.0, add upgrade checks ([#1024](https://github.com/atko-eng/odyssey-design-system/issues/1024)) ([1d22702](https://github.com/atko-eng/odyssey-design-system/commit/1d227029790c716e6465016fca4d52b7b4edc9da)), closes [#1033](https://github.com/atko-eng/odyssey-design-system/issues/1033)
+* **wp-components:** adds GraphCanvas error banner ([#998](https://github.com/atko-eng/odyssey-design-system/issues/998)) ([2462163](https://github.com/atko-eng/odyssey-design-system/commit/2462163c3ed743d1496de32c3195e637b2278bea))
+* **wp-components:** canvas owns node expansion ([#976](https://github.com/atko-eng/odyssey-design-system/issues/976)) ([3e4781f](https://github.com/atko-eng/odyssey-design-system/commit/3e4781fad7f42026f28b0623c027a9e6512a097d))
+* **wp-components:** shows full text in tooltips ([#994](https://github.com/atko-eng/odyssey-design-system/issues/994)) ([c62d459](https://github.com/atko-eng/odyssey-design-system/commit/c62d4593c31fafb6c11542bdb1a46d22c7ea2226))
+* **wp-components:** takes isFullScreen prop ([#1000](https://github.com/atko-eng/odyssey-design-system/issues/1000)) ([f6e9d16](https://github.com/atko-eng/odyssey-design-system/commit/f6e9d16715492a5a7bfc6690c5bc67b69f5daa54))
+
+
 # [1.71.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.70.1...v1.71.0) (2026-10-14)
 
 ### Bug Fixes

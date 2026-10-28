@@ -11,7 +11,6 @@
  */
 
 import styled from "@emotion/styled";
-import isEqual from "lodash.isequal";
 import {
   MRT_Row,
   MRT_RowData,
@@ -35,6 +34,7 @@ import { useRowReordering } from "../../DataTable/useRowReordering.js";
 import { EmptyState } from "../../EmptyState.js";
 import { useTranslation } from "../../i18n.generated/i18n.js";
 import { MoreIcon } from "../../icons.generated/index.js";
+import { isDeepEqual } from "../../isDeepEqual.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -238,7 +238,11 @@ const DataView = <TData extends MRT_RowData>({
 
   const isEmpty = useMemo(() => {
     const hasEmptyOrInitialFilters =
-      !hasFilters || isEqual(filters, initialAvailableFilters);
+      !hasFilters ||
+      isDeepEqual({
+        firstValue: filters,
+        secondValue: initialAvailableFilters,
+      });
 
     const calculatedIsEmpty =
       pagination.pageIndex === currentPage &&

@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-storybook",
-  "version": "1.71.1",
+  "version": "1.72.0",
   "description": "Documentation for Odyssey, Okta's design system",
   "nx": {
     "tags": [
@@ -62,8 +62,10 @@
     "@okta/odyssey-contributions-opa-components": "workspace:*",
     "@okta/odyssey-contributions-orpheus-components": "workspace:*",
     "@okta/odyssey-contributions-passwordless-components": "workspace:*",
+    "@okta/odyssey-contributions-permiso-components": "workspace:*",
     "@okta/odyssey-contributions-policy-rules-components": "workspace:*",
     "@okta/odyssey-contributions-resource-access-policy-components": "workspace:*",
+    "@okta/odyssey-contributions-spera-components": "workspace:*",
     "@okta/odyssey-contributions-ud-components": "workspace:*",
     "@okta/odyssey-contributions-ui-component-identifier": "workspace:*",
     "@okta/odyssey-contributions-workflows-components": "workspace:*",
@@ -107,7 +109,7 @@
     "dev:storybook": "storybook dev -p 6006",
     "dev:types": "tsc --build --noEmit --watch",
     "dev:visual-regression": "yarn build && yarn concurrently --kill-others --success first --names \"STORYBOOK-SERVER,VISUAL-REGRESSION-TEST\" --prefix-colors \"magenta,green\" npm:ci:server \"wait-on tcp:127.0.0.1:6006 && yarn eyes-storybook --conf ./applitools.config.cjs -u http://127.0.0.1:6006\"",
-    "playwright-install": "yarn playwright install --with-deps chromium",
+    "playwright-install": "yarn playwright install chromium",
     "prepack": "yarn run -T nx build @okta/odyssey-storybook",
     "start": "storybook dev -p 6006",
     "typecheck": "tsc --noEmit"

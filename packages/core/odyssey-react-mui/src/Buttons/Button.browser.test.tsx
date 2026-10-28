@@ -10,10 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import type { FormEvent } from "react";
+
 import { page, userEvent } from "vitest/browser";
 
 import { AddIcon } from "../icons.generated/Add.js";
 import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
+import { TextField } from "../TextField.js";
 import { Button } from "./Button.js";
 
 const variants = ["primary", "secondary", "danger", "floating"] as const;
@@ -75,6 +78,63 @@ describe(Button.displayName!, () => {
     expect(window.location.hash).toBe("#navigated");
 
     window.location.hash = "";
+  });
+
+  describe("form association", () => {
+    test("submit button outside its form clicked", async () => {
+      const onSubmit = vi.fn((event: FormEvent<HTMLFormElement>) =>
+        event.preventDefault(),
+      );
+
+      const { container } = await renderWithOdysseyProvider(
+        <>
+          <form id="outside-form" noValidate onSubmit={onSubmit}>
+            <TextField label="Name" />
+          </form>
+          <Button
+            formId="outside-form"
+            label="Save"
+            type="submit"
+            variant="primary"
+          />
+        </>,
+      );
+
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("button", { name: "Save" }));
+
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+    });
+
+    // A form with more than one text field submits on Enter only when it has a submit button, so this covers the multi-field case that a lone field would hide.
+    test("Enter pressed in a multi-field form whose submit button is outside it", async () => {
+      const onSubmit = vi.fn((event: FormEvent<HTMLFormElement>) =>
+        event.preventDefault(),
+      );
+
+      const { container } = await renderWithOdysseyProvider(
+        <>
+          <form id="outside-form" noValidate onSubmit={onSubmit}>
+            <TextField label="Name" />
+            <TextField label="Address" />
+          </form>
+          <Button
+            formId="outside-form"
+            label="Save"
+            type="submit"
+            variant="primary"
+          />
+        </>,
+      );
+
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("textbox", { name: "Name" }));
+      await userEvent.keyboard("{Enter}");
+
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe("disabled state", () => {

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.72.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.71.1...v1.72.0) (2026-10-28)
+
+### Features
+
+* add formId prop to Button ([#1040](https://github.com/atko-eng/odyssey-design-system/issues/1040)) ([2654157](https://github.com/atko-eng/odyssey-design-system/commit/2654157f6fbf4496a6984f00521ce9ea91a1fe27))
+* add Permiso components contribution ([#969](https://github.com/atko-eng/odyssey-design-system/issues/969)) ([e59b08c](https://github.com/atko-eng/odyssey-design-system/commit/e59b08c22bcffeb901e55b230c4be0e126a863a5))
+* add Spera components contribution ([#968](https://github.com/atko-eng/odyssey-design-system/issues/968)) ([79574d5](https://github.com/atko-eng/odyssey-design-system/commit/79574d5586e4738d8850479421210c481a42b4a2))
+
+
 # [1.71.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.70.1...v1.71.0) (2026-10-14)
 
 **Note:** Version bump only for package @okta/odyssey-storybook

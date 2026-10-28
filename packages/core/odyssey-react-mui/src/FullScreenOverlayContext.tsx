@@ -19,9 +19,14 @@ import {
   useMemo,
 } from "react";
 
+import { useHasActiveFullscreen } from "./fullscreen/useFullscreen.js";
 import { createShadowDomElements } from "./web-component/createShadowDomElements.js";
 
 export type FullScreenOverlayContextType = {
+  /**
+   * If `true`, the component is already rendering inside an overlay's container, so an overlay opened from it renders into that same container.
+   */
+  isWithinOverlay?: boolean;
   overlayEmotionRootElement?: HTMLDivElement | HTMLElement;
   overlayShadowRootElement?: HTMLDivElement | HTMLElement;
 };
@@ -57,6 +62,7 @@ export type FullScreenOverlayProviderProps = {
   /**
    * Type of overlay being rendered. This controls the data attribute set on the overlay parent element.
    * @default "default"
+   * @deprecated Overlays no longer create containers of their own, so the app's one container only needs `data-odyssey-react-overlay-component`. Select overlays by that attribute and the app's `fullScreenOverlayId`.
    */
   overlayType?: OverlayType;
 };
@@ -112,6 +118,30 @@ const FullScreenOverlayProvider = ({
       overlayParentElement.remove();
     };
   }, [fullScreenOverlayId, overlayParentElement, overlayType]);
+
+  const hasActiveFullscreen = useHasActiveFullscreen();
+
+  // The container sits on `<body>` from the moment the app mounts, so a fullscreen region, possibly from another bundle or an older Odyssey, makes it inert along with the rest of the page. An overlay in an inert container is visible but ignores every click and keypress, so the container refuses `inert` while anything is in fullscreen. Outside fullscreen it leaves `inert` alone, because then a host page's own modal may be isolating it on purpose.
+  useEffect(() => {
+    if (!hasActiveFullscreen) {
+      return;
+    }
+
+    const removeInert = () => {
+      if (overlayParentElement.hasAttribute("inert")) {
+        overlayParentElement.removeAttribute("inert");
+      }
+    };
+
+    removeInert();
+
+    const mutationObserver = new MutationObserver(removeInert);
+    mutationObserver.observe(overlayParentElement, {
+      attributeFilter: ["inert"],
+    });
+
+    return () => mutationObserver.disconnect();
+  }, [hasActiveFullscreen, overlayParentElement]);
 
   const providerValue = useMemo(
     () => ({

@@ -13,34 +13,46 @@
 import { memo, type ReactNode } from "react";
 
 import {
+  FullScreenOverlayContext,
+  type FullScreenOverlayContextType,
   type OverlayType,
   useFullScreenOverlayContext,
 } from "./FullScreenOverlayContext.js";
-import { OdysseyProvider } from "./OdysseyProvider.js";
+import { OdysseyCacheProvider } from "./OdysseyCacheProvider.js";
+import { OdysseyThemeProvider } from "./OdysseyThemeProvider.js";
 
 export type FullScreenOverlayProps = {
   children: ReactNode;
+  /**
+   * @deprecated Every overlay renders into the app's one overlay container, which is always labeled `data-odyssey-react-overlay-component`, so this no longer has any effect.
+   */
   overlayType?: OverlayType;
 };
 
-const FullScreenOverlay = ({
-  children,
-  overlayType,
-}: FullScreenOverlayProps) => {
-  const { overlayEmotionRootElement, overlayShadowRootElement } =
-    useFullScreenOverlayContext();
+// Marks everything inside an overlay, so a dialog opened from a drawer renders into the app's overlay container next to the drawer, not into a container of the drawer's own. One container per app is what Selenium selectors and `fullScreenOverlayId` expect.
+const withinOverlayContextValue: FullScreenOverlayContextType = {
+  isWithinOverlay: true,
+};
 
-  return overlayShadowRootElement ? (
-    <OdysseyProvider
-      emotionRootElement={overlayEmotionRootElement}
-      hasScopedCssBaseline={false}
-      hasTranslationProvider={false}
-      hasWrapperElement={false}
-      overlayType={overlayType}
-      shadowRootElement={overlayShadowRootElement}
-    >
-      {children}
-    </OdysseyProvider>
+const FullScreenOverlay = ({ children }: FullScreenOverlayProps) => {
+  const {
+    isWithinOverlay,
+    overlayEmotionRootElement,
+    overlayShadowRootElement,
+  } = useFullScreenOverlayContext();
+
+  // Only the style cache and theme move into the overlay container. A whole `OdysseyProvider` here would append another container to `<body>` for every overlay on the page, open or closed, and reset the app's animation setting.
+  return overlayShadowRootElement && !isWithinOverlay ? (
+    <OdysseyCacheProvider emotionRootElement={overlayEmotionRootElement}>
+      <OdysseyThemeProvider
+        hasWrapperElement={false}
+        shadowRootElement={overlayShadowRootElement}
+      >
+        <FullScreenOverlayContext.Provider value={withinOverlayContextValue}>
+          {children}
+        </FullScreenOverlayContext.Provider>
+      </OdysseyThemeProvider>
+    </OdysseyCacheProvider>
   ) : (
     <>{children}</>
   );

@@ -16,6 +16,10 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [react()],
   test: {
+    coverage: {
+      include: ["src/**/*.{ts,tsx}"],
+      reporter: ["text", "json-summary"],
+    },
     environment: "jsdom",
     globals: true,
     setupFiles: ["./vitest-jsdom-setup.ts"],

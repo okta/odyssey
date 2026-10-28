@@ -16,6 +16,7 @@ import {
   DrawerProps as MuiDrawerProps,
 } from "@mui/material";
 import { buttonClasses } from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
 import { typographyClasses } from "@mui/material/Typography";
 import {
   memo,
@@ -39,6 +40,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext.js";
 import { Heading5 } from "./Typography.js";
+import { useStackedBackdropProps } from "./useStackedBackdropProps.js";
 
 type MuiOnCloseEvent = Parameters<Required<MuiDrawerProps>["onClose"]>[0];
 type MuiOnCloseReason = Parameters<Required<MuiDrawerProps>["onClose"]>[1];
@@ -269,6 +271,18 @@ const Drawer = ({
     NonNullable<ButtonProps["onClick"]>
   >((event) => onClose(event, "closeButtonClick"), [onClose]);
 
+  const muiTheme = useTheme();
+
+  const stackedBackdropProps = useStackedBackdropProps({
+    isOpen: Boolean(isOpen) && variant === "temporary",
+    layer: muiTheme.zIndex.drawer,
+  });
+
+  const slotProps = useMemo<MuiDrawerProps["slotProps"]>(
+    () => ({ backdrop: stackedBackdropProps }),
+    [stackedBackdropProps],
+  );
+
   const muiDrawerComponent = useMemo(
     () => (
       <MuiDrawer
@@ -276,6 +290,7 @@ const Drawer = ({
         data-se={testId}
         onClose={onClose}
         open={isOpen}
+        slotProps={slotProps}
         sx={{
           //Overrides default MUI inline style
           ...(variant === "persistent" && {
@@ -338,6 +353,7 @@ const Drawer = ({
       onClose,
       primaryCallToActionComponent,
       secondaryCallToActionComponent,
+      slotProps,
       t,
       tertiaryCallToActionComponent,
       testId,
@@ -348,9 +364,7 @@ const Drawer = ({
   );
 
   return variant === "temporary" ? (
-    <FullScreenOverlay overlayType="drawer">
-      {muiDrawerComponent}
-    </FullScreenOverlay>
+    <FullScreenOverlay>{muiDrawerComponent}</FullScreenOverlay>
   ) : (
     muiDrawerComponent
   );

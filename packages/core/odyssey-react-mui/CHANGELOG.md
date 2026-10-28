@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.72.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.71.1...v1.72.0) (2026-10-28)
+
+### Bug Fixes
+
+* hide scrollbars while fullscreen animates ([#1010](https://github.com/atko-eng/odyssey-design-system/issues/1010)) ([5f04df0](https://github.com/atko-eng/odyssey-design-system/commit/5f04df0538e04b7fd9f0d2afcb5780f54a794871))
+* **odyssey-react-mui:** keep dialogs usable in fullscreen ([#1008](https://github.com/atko-eng/odyssey-design-system/issues/1008)) ([e854c4e](https://github.com/atko-eng/odyssey-design-system/commit/e854c4e906ffe66ae1929cb84017188c2674e14d))
+* **odyssey-react-mui:** use one overlay container per app ([#1014](https://github.com/atko-eng/odyssey-design-system/issues/1014)) ([ce377e6](https://github.com/atko-eng/odyssey-design-system/commit/ce377e69d03f307381467e21a52282ae7267609a))
+* paint only the top overlay backdrop ([#1013](https://github.com/atko-eng/odyssey-design-system/issues/1013)) ([849e874](https://github.com/atko-eng/odyssey-design-system/commit/849e87418534a97aee5c0f1bd3c0df73e714e4c9))
+* ship translation files in npm package ([#966](https://github.com/atko-eng/odyssey-design-system/issues/966)) ([96a8c62](https://github.com/atko-eng/odyssey-design-system/commit/96a8c62e10b99c5fc255b29bdd98516734f6e40d))
+
+### Features
+
+* add formId prop to Button ([#1040](https://github.com/atko-eng/odyssey-design-system/issues/1040)) ([2654157](https://github.com/atko-eng/odyssey-design-system/commit/2654157f6fbf4496a6984f00521ce9ea91a1fe27))
+* agent upgrade prompt, raise peers and pins ([#1001](https://github.com/atko-eng/odyssey-design-system/issues/1001)) ([665e6bd](https://github.com/atko-eng/odyssey-design-system/commit/665e6bd8d071329fc8d540c02f6f890ff72ff41d))
+* Translations for odyssey-design-system:enduser ([#1035](https://github.com/atko-eng/odyssey-design-system/issues/1035)) ([edab9f3](https://github.com/atko-eng/odyssey-design-system/commit/edab9f38cdf1cec8bfb22f275942aa16e5720484))
+
+
 # [1.71.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.70.1...v1.71.0) (2026-10-14)
 
 ### Bug Fixes

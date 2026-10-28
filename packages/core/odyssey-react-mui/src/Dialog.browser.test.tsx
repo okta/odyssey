@@ -10,18 +10,30 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { backdropClasses } from "@mui/material/Backdrop";
 import { dialogClasses } from "@mui/material/Dialog";
+import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 
 import { Button } from "./Buttons/Button.js";
 import { Dialog } from "./Dialog.js";
+import { Drawer } from "./Drawer.js";
 import { translate as odysseyTranslate } from "./i18n.generated/i18n.js";
+import { OdysseyProvider } from "./OdysseyProvider.js";
 import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 import { ROOMY_HEIGHT, ROOMY_WIDTH } from "./test-utils/viewportTestSizes.js";
 import {
   COMPACT_MAX_HEIGHT,
   COMPACT_MAX_WIDTH,
 } from "./theme/useMediaQuery.js";
+
+const TRANSPARENT_COLOR = "rgba(0, 0, 0, 0)";
+
+// No backdrop has a role or a name, and the double darkening is only visible in its paint, so this reads the painted color of each one.
+const getBackdropColors = () =>
+  Array.from(document.querySelectorAll(`.${backdropClasses.root}`)).map(
+    (backdropElement) => getComputedStyle(backdropElement).backgroundColor,
+  );
 
 describe(Dialog.displayName!, () => {
   test("open dialog with heading and content", async () => {
@@ -201,5 +213,168 @@ describe(Dialog.displayName!, () => {
     expect(container?.classList.contains(dialogClasses.scrollPaper)).toBe(true);
 
     await expect.element(dialog).toBeAccessible();
+  });
+
+  test("dialog opened over a drawer", async () => {
+    const onClose = vi.fn();
+
+    const { rerender } = await renderWithOdysseyProvider(
+      <>
+        <Drawer
+          hasDividers={false}
+          isOpen
+          onClose={onClose}
+          title="Drawer title"
+        >
+          Drawer content.
+        </Drawer>
+        <Dialog isOpen={false} onClose={onClose} title="Dialog title">
+          Dialog content.
+        </Dialog>
+      </>,
+    );
+
+    await expect
+      .element(page.getByRole("heading", { name: "Drawer title" }))
+      .toBeVisible();
+    const drawerBackdropColor = getBackdropColors()[0];
+    expect(drawerBackdropColor).not.toBe(TRANSPARENT_COLOR);
+
+    await rerender(
+      <>
+        <Drawer
+          hasDividers={false}
+          isOpen
+          onClose={onClose}
+          title="Drawer title"
+        >
+          Drawer content.
+        </Drawer>
+        <Dialog isOpen onClose={onClose} title="Dialog title">
+          Dialog content.
+        </Dialog>
+      </>,
+    );
+
+    await expect.element(page.getByRole("dialog")).toBeVisible();
+    await expect
+      .poll(getBackdropColors)
+      .toStrictEqual([TRANSPARENT_COLOR, drawerBackdropColor]);
+    await expect.element(page.getByRole("dialog")).toBeAccessible();
+
+    await rerender(
+      <>
+        <Drawer
+          hasDividers={false}
+          isOpen
+          onClose={onClose}
+          title="Drawer title"
+        >
+          Drawer content.
+        </Drawer>
+        <Dialog isOpen={false} onClose={onClose} title="Dialog title">
+          Dialog content.
+        </Dialog>
+      </>,
+    );
+
+    await expect.element(page.getByRole("dialog")).not.toBeInTheDocument();
+    await expect.poll(getBackdropColors).toStrictEqual([drawerBackdropColor]);
+  });
+
+  test("drawer opened while a dialog is open", async () => {
+    const onClose = vi.fn();
+
+    const { rerender } = await renderWithOdysseyProvider(
+      <>
+        <Dialog isOpen onClose={onClose} title="Dialog title">
+          Dialog content.
+        </Dialog>
+        <Drawer
+          hasDividers={false}
+          isOpen={false}
+          onClose={onClose}
+          title="Drawer title"
+        >
+          Drawer content.
+        </Drawer>
+      </>,
+    );
+
+    await expect.element(page.getByRole("dialog")).toBeVisible();
+    const dialogBackdropColor = getBackdropColors()[0];
+    expect(dialogBackdropColor).not.toBe(TRANSPARENT_COLOR);
+
+    await rerender(
+      <>
+        <Dialog isOpen onClose={onClose} title="Dialog title">
+          Dialog content.
+        </Dialog>
+        <Drawer
+          hasDividers={false}
+          isOpen
+          onClose={onClose}
+          title="Drawer title"
+        >
+          Drawer content.
+        </Drawer>
+      </>,
+    );
+
+    await expect
+      .element(page.getByRole("heading", { name: "Drawer title" }))
+      .toBeInTheDocument();
+    await expect
+      .poll(getBackdropColors)
+      .toStrictEqual([dialogBackdropColor, TRANSPARENT_COLOR]);
+  });
+
+  test("dialog opened while a drawer fades out", async () => {
+    const onClose = vi.fn();
+
+    // Transitions stay on here, because the drawer's backdrop is only stale while its fade-out runs.
+    const { rerender } = await render(
+      <OdysseyProvider>
+        <Drawer
+          hasDividers={false}
+          isOpen
+          onClose={onClose}
+          title="Drawer title"
+        >
+          Drawer content.
+        </Drawer>
+        <Dialog isOpen={false} onClose={onClose} title="Dialog title">
+          Dialog content.
+        </Dialog>
+      </OdysseyProvider>,
+    );
+
+    await expect
+      .element(page.getByRole("heading", { name: "Drawer title" }))
+      .toBeVisible();
+    const drawerBackdropColor = getBackdropColors()[0];
+    expect(drawerBackdropColor).not.toBe(TRANSPARENT_COLOR);
+
+    await rerender(
+      <OdysseyProvider>
+        <Drawer
+          hasDividers={false}
+          isOpen={false}
+          onClose={onClose}
+          title="Drawer title"
+        >
+          Drawer content.
+        </Drawer>
+        <Dialog isOpen onClose={onClose} title="Dialog title">
+          Dialog content.
+        </Dialog>
+      </OdysseyProvider>,
+    );
+
+    expect(getBackdropColors()).toStrictEqual([
+      TRANSPARENT_COLOR,
+      drawerBackdropColor,
+    ]);
+    await expect.element(page.getByRole("dialog")).toBeVisible();
   });
 });
