@@ -65,6 +65,10 @@ export type BaseButtonProps = {
    */
   endIcon?: ReactElement;
   /**
+   * The ID of the form the Button belongs to. Use it to submit or reset a form from a Button outside that form, such as a `Dialog` footer action. Has no effect when `href` is set.
+   */
+  formId?: string;
+  /**
    * Optional href to render the button as a link
    */
   href?: string;
@@ -158,6 +162,7 @@ const BaseButton = ({
   buttonRef,
   children,
   endIcon,
+  formId,
   href,
   id,
   isDisabled,
@@ -240,6 +245,7 @@ const BaseButton = ({
           aria-pressed={ariaPressed}
           data-se={testId}
           endIcon={endIcon}
+          form={formId}
           fullWidth={isFullWidth}
           href={href}
           id={id}
@@ -276,6 +282,7 @@ const BaseButton = ({
       ariaPressed,
       buttonContent,
       endIcon,
+      formId,
       handleClick,
       href,
       id,

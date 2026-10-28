@@ -25,6 +25,7 @@ export default defineConfig({
         "**/types.ts",
       ],
       include: ["src/**/*.{ts,tsx}"],
+      reporter: ["text", "json-summary"],
       // branches reset to 57 after vitest 3→4 upgrade: Playwright CDP collects real branch data from Chromium, replacing the inflated Node V8 numbers that counted untested imported modules as 100% covered.
       thresholds: {
         branches: 57,

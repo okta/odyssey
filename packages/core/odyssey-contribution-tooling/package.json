@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-contribution-tooling",
-  "version": "1.71.1",
+  "version": "1.72.0",
   "nx": {
     "tags": [
       "scope:core"
@@ -27,7 +27,8 @@
     "dev:source": "yarn vite build --watch",
     "dev:types": "tsc --project tsconfig.production.json --watch",
     "dev": "yarn concurrently npm:dev:types npm:dev:source",
-    "playwright-install": "yarn playwright install --with-deps chromium",
+    "playwright-install": "yarn playwright install chromium",
+    "coverage": "NODE_ENV=test vitest run --coverage --reporter=default",
     "test": "NODE_ENV=test vitest run --reporter=default",
     "typecheck": "tsc --project src/tsconfig.json --noEmit"
   },

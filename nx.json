@@ -87,6 +87,20 @@
       ],
       "cache": true
     },
+    "coverage": {
+      "dependsOn": [
+        "^build",
+        "build"
+      ],
+      "inputs": [
+        "default",
+        "^production"
+      ],
+      "outputs": [
+        "{projectRoot}/coverage"
+      ],
+      "cache": true
+    },
     "eslint": {
       "dependsOn": [
         "^build"

@@ -17,12 +17,15 @@ import {
   Dialog,
   DialogContentText,
   DialogProps,
+  TextField,
 } from "@okta/odyssey-react-mui";
 import {
   getReflowEyesParameters,
   useStoryArgOrLocalState,
 } from "@okta/odyssey-storybook-preset/story-helpers";
 import { Meta, StoryObj } from "@storybook/react-vite";
+import { FormEvent } from "react";
+import { action } from "storybook/actions";
 import { useCallback } from "storybook/preview-api";
 
 import { OdysseyStorybookThemeDecorator } from "../../../tools/OdysseyStorybookThemeDecorator.js";
@@ -403,6 +406,72 @@ export const NoButtons: StoryObj<DialogProps> = {
       <>
         <Button label="Open dialog" onClick={handleOpen} variant="primary" />
         <Dialog {...args} isOpen={value} onClose={handleClose} />
+      </>
+    );
+  },
+};
+
+export const WithForm: StoryObj<DialogProps> = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The footer button sets `type="submit"` and `formId` to point at the form in the body. Enter in any field and a click on the button both submit the form through one `onSubmit` handler.',
+      },
+    },
+  },
+  render: function C(args, context) {
+    const { value, setValue } = useStoryArgOrLocalState<DialogProps, "isOpen">({
+      args,
+      context,
+      argKey: "isOpen",
+      defaultValue: args.isOpen ?? false,
+    });
+
+    const handleOpen = useCallback(() => {
+      setValue(true);
+    }, [setValue]);
+
+    const handleClose = useCallback(() => {
+      setValue(false);
+    }, [setValue]);
+
+    const handleSubmit = useCallback(
+      (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        action("onSubmit")(
+          Object.fromEntries(new FormData(event.currentTarget)),
+        );
+        setValue(false);
+      },
+      [setValue],
+    );
+
+    return (
+      <>
+        <Button label="Open dialog" onClick={handleOpen} variant="primary" />
+        <Dialog
+          {...args}
+          isOpen={value}
+          onClose={handleClose}
+          primaryCallToActionComponent={
+            <Button
+              formId="trust-domain-form"
+              label="Add trust domain"
+              type="submit"
+              variant="primary"
+            />
+          }
+          secondaryCallToActionComponent={
+            <Button label="Cancel" onClick={handleClose} variant="secondary" />
+          }
+          title="Add trust domain"
+        >
+          <form id="trust-domain-form" noValidate onSubmit={handleSubmit}>
+            <TextField label="Trust domain" name="trustDomain" />
+            <TextField label="Bundle URL" name="bundleUrl" />
+          </form>
+        </Dialog>
       </>
     );
   },
