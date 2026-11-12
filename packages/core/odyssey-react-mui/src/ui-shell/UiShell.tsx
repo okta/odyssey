@@ -20,6 +20,7 @@ import {
 import { createFullscreenModeHost } from "../message-bus/index.js";
 import { OdysseyProvider } from "../OdysseyProvider.js";
 import { MessageBus } from "../tools/createMessageBus.js";
+import { type ColorScheme } from "../useColorScheme.js";
 import { type ReactRootElements } from "../web-component/createReactRootElements.js";
 import { NarrowUiShellContent } from "./NarrowUiShellContent.js";
 import {
@@ -73,6 +74,12 @@ export type UiShellProps = {
    * UI Shell listens to prop updates, and it won't subscribe synchronously. Because of that, this callback notifies when that subscription is ready.
    */
   onSubscriptionCreated: () => void;
+  /**
+   * Subscriber for runtime color scheme changes, forwarded to the shell's internal `OdysseyProvider`.
+   *
+   * Optional for backward compatibility. When omitted, the shell renders `light`.
+   */
+  subscribeToColorScheme?: MessageBus<ColorScheme>["subscribe"];
   /**
    * This is a callback that provides a subscriber callback to listen for changes to state. It allows UI Shell to listen for state changes.
    *
@@ -134,6 +141,7 @@ const UiShell = ({
   sideNavBackgroundContrastColor,
   subscribeToCloseRightSideMenu,
   subscribeToCloseSideNavMenu,
+  subscribeToColorScheme,
   subscribeToPropChanges,
   subscribeToTranslationSettings,
   topNavBackgroundColor,
@@ -143,6 +151,7 @@ const UiShell = ({
   const [componentProps, setComponentProps] = useState(defaultComponentProps);
   const [translationSettings, setTranslationSettings] =
     useState<UiShellTranslationSettings>(defaultTranslationSettings);
+  const [colorScheme, setColorScheme] = useState<ColorScheme>();
 
   const activeBreakpoint = useUiShellBreakpoints(breakpointConfig);
 
@@ -171,21 +180,25 @@ const UiShell = ({
       },
     );
 
-    // Both subscribers must be wired BEFORE `onSubscriptionCreated()` fires. `renderUiShell` uses `bufferLatest` to queue the initial translation settings until the React app subscribes; if we called `onSubscriptionCreated()` first, the buffered emission would fire before this subscriber exists and be lost.
+    // Every subscriber must be wired BEFORE `onSubscriptionCreated()` fires. `renderUiShell` uses `bufferLatest` to queue the initial translation settings until the React app subscribes; if we called `onSubscriptionCreated()` first, the buffered emission would fire before this subscriber exists and be lost.
     const unsubscribeFromTranslationSettings = subscribeToTranslationSettings?.(
       (nextSettings) => {
         setTranslationSettings(nextSettings || defaultTranslationSettings);
       },
     );
 
+    const unsubscribeFromColorScheme = subscribeToColorScheme?.(setColorScheme);
+
     onSubscriptionCreated();
 
     return () => {
       unsubscribeFromPropChanges();
       unsubscribeFromTranslationSettings?.();
+      unsubscribeFromColorScheme?.();
     };
   }, [
     onSubscriptionCreated,
+    subscribeToColorScheme,
     subscribeToPropChanges,
     subscribeToTranslationSettings,
   ]);
@@ -193,6 +206,7 @@ const UiShell = ({
   return activeBreakpoint === "none" ? null : (
     <ErrorBoundary fallback={errorComponent} onError={onError}>
       <OdysseyProvider
+        colorScheme={colorScheme}
         emotionRootElement={uiShellStylesElement}
         fullScreenOverlayId="odyssey-react-overlay-component-render-ui-shell"
         hasCssBaseline

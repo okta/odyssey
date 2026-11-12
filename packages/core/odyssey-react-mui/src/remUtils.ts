@@ -20,8 +20,3 @@ export const stripRem = (remValue: string) =>
  * takes a pixel value as an argument and converts that to rem value based on a 14px font size
  */
 export const toRem = (pixelValue: number) => pixelValue / 14;
-
-/**
- * takes a rem value based on a 14px font size as an argument and returns a pixel value
- */
-export const fromRem = (remValue: number) => remValue * 14;

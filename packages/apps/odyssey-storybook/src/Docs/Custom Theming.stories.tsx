@@ -55,7 +55,10 @@ export const ButtonStory: StoryObj = {
 
       return (
         <OdysseyProvider
-          designTokensOverride={odysseyDesignTokensOverrides}
+          designTokensOverride={{
+            dark: odysseyDesignTokensOverrides,
+            light: odysseyDesignTokensOverrides,
+          }}
           hasCssBaseline
           shadowRootElement={shadowRootElement}
         >
@@ -84,7 +87,10 @@ export const TextFieldStory: StoryObj = {
         context.canvasElement.parentElement ?? undefined;
       return (
         <OdysseyProvider
-          designTokensOverride={odysseyDesignTokensOverrides}
+          designTokensOverride={{
+            dark: odysseyDesignTokensOverrides,
+            light: odysseyDesignTokensOverrides,
+          }}
           hasCssBaseline
           shadowRootElement={shadowRootElement}
         >
@@ -114,7 +120,10 @@ export const RadioGroupStory: StoryObj = {
         context.canvasElement.parentElement ?? undefined;
       return (
         <OdysseyProvider
-          designTokensOverride={odysseyDesignTokensOverrides}
+          designTokensOverride={{
+            dark: odysseyDesignTokensOverrides,
+            light: odysseyDesignTokensOverrides,
+          }}
           hasCssBaseline
           shadowRootElement={shadowRootElement}
         >

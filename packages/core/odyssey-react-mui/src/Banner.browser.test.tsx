@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
 import { Banner } from "./Banner.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 describe(Banner.displayName!, () => {
   test("linked banner with anchor href", async () => {
@@ -45,5 +45,22 @@ describe(Banner.displayName!, () => {
     const closeButton = page.getByTitle("Close");
     await userEvent.click(closeButton);
     expect(onClose).toHaveBeenCalled();
+  });
+
+  test("linked banner without a url", async () => {
+    const onLinkClick = vi.fn();
+
+    await renderWithOdysseyProvider(
+      <Banner
+        linkText="View report"
+        onLinkClick={onLinkClick}
+        severity="warning"
+        text="Banner text."
+      />,
+    );
+
+    await userEvent.click(page.getByRole("link", { name: "View report" }));
+
+    expect(onLinkClick).toHaveBeenCalledTimes(1);
   });
 });

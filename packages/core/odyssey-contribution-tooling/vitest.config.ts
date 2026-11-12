@@ -10,14 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import {
+  createCoverage,
+  createVitestProject,
+} from "@okta/odyssey-test-tooling";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [react()],
   test: {
-    environment: "jsdom",
-    globals: true,
-    setupFiles: ["./vitest-jsdom-setup.ts"],
+    coverage: createCoverage(),
+    projects: [
+      createVitestProject({ type: "node" }),
+      createVitestProject({ type: "browser" }),
+    ],
   },
 });

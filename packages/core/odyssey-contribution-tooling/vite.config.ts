@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { defineConfig } from "vite";
+import { defineConfig, esmExternalRequirePlugin } from "vite";
 
 import packageJson from "./package.json" with { type: "json" };
 
@@ -33,21 +33,19 @@ export default defineConfig(({ command }) => ({
   build: {
     emptyOutDir: false,
     lib: {
-      entry: `${__dirname}/src/index.ts`,
+      entry: `${import.meta.dirname}/src/index.ts`,
       fileName: (format) =>
         `index.${format}.${format === "umd" ? "cjs" : "js"}`,
       formats: ["es", "iife", "umd"],
       name: umdName,
     },
+    // Matches the syntax Vite 7 emitted. Vite 8's minifier writes ES2021 `||=` and `??=` for the default browser target, which older consumer toolchains (webpack 4) cannot parse.
+    target: "es2020",
     sourcemap: true,
-    rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "react/jsx-runtime",
-        "react/jsx-dev-runtime",
-      ],
+    rolldownOptions: {
       output: {
+        // Rollup always emitted "use strict" in UMD and IIFE output. Rolldown only does when the source has it.
+        strict: true,
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
@@ -57,4 +55,16 @@ export default defineConfig(({ command }) => ({
       },
     },
   },
+
+  plugins: [
+    // Keeps React external, and turns bundled CommonJS `require("react")` calls into imports so the ES build loads in a browser. Rolldown skips any package also in `rolldownOptions.external`, so React must not be listed there.
+    esmExternalRequirePlugin({
+      external: [
+        "react",
+        "react-dom",
+        "react/jsx-runtime",
+        "react/jsx-dev-runtime",
+      ],
+    }),
+  ],
 }));

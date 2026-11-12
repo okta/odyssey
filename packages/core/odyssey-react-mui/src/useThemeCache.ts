@@ -14,58 +14,89 @@ import { Theme } from "@mui/material/styles";
 import { createContext, useCallback, useContext, useMemo } from "react";
 
 import { createOdysseyMuiTheme, DesignTokens } from "./theme/theme.js";
+import { type ResolvedColorScheme } from "./useColorScheme.js";
 import { ContrastMode } from "./useContrastMode.js";
 
 export type ThemeCache = {
+  colorScheme: ResolvedColorScheme;
   get: (contrastMode: ContrastMode) => Theme;
   odysseyTokens: DesignTokens;
-  shadowRootElement: HTMLElement | undefined;
+  shadowRootElement?: HTMLElement;
 };
 
 export const ThemeCacheContext = createContext<ThemeCache | null>(null);
 
 export const useThemeCache = ({
+  colorScheme,
+  isEnabled = true,
   odysseyTokens,
   shadowRootElement,
-}: {
-  odysseyTokens: DesignTokens;
-  shadowRootElement: HTMLElement | undefined;
-}) => {
+}: UseThemeCacheArgs) => {
   const existingCache = useContext(ThemeCacheContext);
+  const hasMatchingParentCache = Boolean(
+    existingCache &&
+      existingCache.colorScheme === colorScheme &&
+      existingCache.odysseyTokens === odysseyTokens &&
+      existingCache.shadowRootElement === shadowRootElement,
+  );
 
   const localCache = useMemo(
-    () => new Map<ContrastMode, Theme>(),
-    // Reset the cache when tokens or shadow root change so stale Themes can't be returned for a different DesignTokens/shadowRootElement pair.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [odysseyTokens, shadowRootElement],
+    () =>
+      hasMatchingParentCache || !isEnabled
+        ? undefined
+        : {
+            highContrast: createOdysseyMuiTheme({
+              colorScheme,
+              contrastMode: "highContrast",
+              odysseyTokens,
+              shadowRootElement,
+            }),
+            lowContrast: createOdysseyMuiTheme({
+              colorScheme,
+              contrastMode: "lowContrast",
+              odysseyTokens,
+              shadowRootElement,
+            }),
+          },
+    [
+      colorScheme,
+      hasMatchingParentCache,
+      isEnabled,
+      odysseyTokens,
+      shadowRootElement,
+    ],
   );
 
   const getOrCreateTheme = useCallback(
-    (mode: ContrastMode) => {
-      if (
-        existingCache &&
-        existingCache.odysseyTokens === odysseyTokens &&
-        existingCache.shadowRootElement === shadowRootElement
-      ) {
-        return existingCache.get(mode);
-      }
-      const cached = localCache.get(mode);
-      if (cached) return cached;
-      const theme = createOdysseyMuiTheme({
-        contrastMode: mode,
-        odysseyTokens,
-        shadowRootElement,
-      });
-      localCache.set(mode, theme);
-      return theme;
+    (contrastMode: ContrastMode) => {
+      if (hasMatchingParentCache && existingCache)
+        return existingCache.get(contrastMode);
+      if (localCache) return localCache[contrastMode];
+      throw new Error("Odyssey theme cache is unavailable");
     },
-    [existingCache, localCache, odysseyTokens, shadowRootElement],
+    [existingCache, hasMatchingParentCache, localCache],
   );
 
   const themeCache = useMemo<ThemeCache>(
-    () => ({ get: getOrCreateTheme, odysseyTokens, shadowRootElement }),
-    [getOrCreateTheme, odysseyTokens, shadowRootElement],
+    () => ({
+      colorScheme,
+      get: getOrCreateTheme,
+      odysseyTokens,
+      shadowRootElement,
+    }),
+    [colorScheme, getOrCreateTheme, odysseyTokens, shadowRootElement],
   );
 
   return { getOrCreateTheme, themeCache };
+};
+
+export type UseThemeCacheArgs = {
+  colorScheme: ResolvedColorScheme;
+  /**
+   * If `false`, builds no themes. A provider passes `false` for a scheme it is not rendering when it cannot switch to that scheme on its own, so it never builds themes nothing reads.
+   * @default true
+   */
+  isEnabled?: boolean;
+  odysseyTokens: DesignTokens;
+  shadowRootElement?: HTMLElement;
 };

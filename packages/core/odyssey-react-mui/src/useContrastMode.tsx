@@ -63,7 +63,7 @@ export const normalizeBackgroundColor = (bgColor: string): string => {
   return bgColor === hueNeutral50Rgb ? Tokens.HueNeutral50 : bgColor;
 };
 
-/** Default background color when none is detected: HueNeutral50 (gray = highContrast). */
+/** Background color assumed when none is detected: the HueNeutral50 page color, which means `highContrast`. */
 export const defaultParentBackgroundColor = Tokens.HueNeutral50;
 
 /**
@@ -89,8 +89,8 @@ const getParentElement = (element: HTMLElement): HTMLElement | null => {
  * @returns The effective background color. Returns  defaultParentBackgroundColor if no non-transparent background is found.
  *
  * Note:
- * - Low contrast mode is used for white background (HueNeutralWhite).
- * - High contrast mode is used for gray background (defaultParentBackgroundColor = HueNeutral50).
+ * - Low contrast mode is used on the PaletteNeutralSurface surface.
+ * - High contrast mode is used on the HueNeutral50 page color (defaultParentBackgroundColor).
  * - Crosses shadow DOM boundaries via `getRootNode().host` to detect backgrounds set outside of shadow roots.
  */
 export const getBackgroundColor = (element: HTMLElement | null): string => {
@@ -101,18 +101,37 @@ export const getBackgroundColor = (element: HTMLElement | null): string => {
     }
     element = getParentElement(element);
   }
-  return defaultParentBackgroundColor; // Default to gray/high contrast if no background color is found
+  return defaultParentBackgroundColor; // No background found, so assume the HueNeutral50 page and high contrast
 };
 
-export const deriveContrastMode = (bgColor: string): ContrastMode =>
-  bgColor === Tokens.HueNeutral50 ? "highContrast" : "lowContrast";
+/**
+ * The HueNeutral50 page color means `highContrast`. It is read from the active
+ * tokens, so dark mode's page color counts too, not only light mode's
+ * `HueNeutral50`.
+ */
+export const deriveContrastMode = (
+  bgColor: string,
+  highContrastBackgroundColor: string = Tokens.HueNeutral50,
+): ContrastMode =>
+  bgColor === Tokens.HueNeutral50 ||
+  bgColor === highContrastBackgroundColor ||
+  bgColor === hexToRgb(highContrastBackgroundColor).asFormattedString
+    ? "highContrast"
+    : "lowContrast";
 
 type UseContrastModeProps = {
   contrastMode?: ContrastMode;
+  /**
+   * The page color of the active color scheme, `HueNeutral50` from the active
+   * tokens.
+   * @default Tokens.HueNeutral50
+   */
+  highContrastBackgroundColor?: string;
 };
 
 export const useContrastMode = ({
   contrastMode: explicitContrastMode,
+  highContrastBackgroundColor = Tokens.HueNeutral50,
 }: UseContrastModeProps) => {
   const contrastContainerRef = useRef<HTMLDivElement>(null);
   const { contrastMode: existingContrastMode } = useContrastModeContext();
@@ -128,8 +147,10 @@ export const useContrastMode = ({
   const updateBackgroundColor = useCallback(() => {
     const newBgColor = getBackgroundColor(contrastContainerRef.current);
     setParentBackgroundColor(newBgColor);
-    setDetectedContrastMode(deriveContrastMode(newBgColor));
-  }, []);
+    setDetectedContrastMode(
+      deriveContrastMode(newBgColor, highContrastBackgroundColor),
+    );
+  }, [highContrastBackgroundColor]);
 
   useLayoutEffect(() => {
     if (explicitContrastMode) return;

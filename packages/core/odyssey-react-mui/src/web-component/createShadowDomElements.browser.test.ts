@@ -10,9 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { createShadowDomElements } from "./createShadowDomElements.js";
+import {
+  createShadowDomElements,
+  createShadowRootElement,
+} from "./createShadowDomElements.js";
 
-describe("createShadowDomElements", () => {
+describe(createShadowDomElements.name, () => {
   test("returns two elements attached to a Shadow DOM", () => {
     const { emotionRootElement, shadowRootElement } = createShadowDomElements(
       document.createElement("div"),
@@ -20,5 +23,25 @@ describe("createShadowDomElements", () => {
 
     expect(emotionRootElement.parentNode).toBeInstanceOf(ShadowRoot);
     expect(shadowRootElement.parentNode).toBeInstanceOf(ShadowRoot);
+  });
+});
+
+describe(createShadowRootElement.name, () => {
+  test("returns the style and app elements attached to a Shadow DOM", () => {
+    const previousNonce = window.cspNonce;
+    window.cspNonce = "test-nonce";
+    onTestFinished(() => {
+      window.cspNonce = previousNonce;
+    });
+    const containerElement = document.createElement("div");
+
+    const [emotionRootElement, shadowRootElement] =
+      createShadowRootElement(containerElement);
+
+    expect(emotionRootElement.getAttribute("id")).toBe("style-root");
+    expect(emotionRootElement.getAttribute("nonce")).toBe("test-nonce");
+    expect(shadowRootElement.getAttribute("id")).toBe("shadow-root");
+    expect(emotionRootElement.parentNode).toBe(containerElement.shadowRoot);
+    expect(shadowRootElement.parentNode).toBe(containerElement.shadowRoot);
   });
 });

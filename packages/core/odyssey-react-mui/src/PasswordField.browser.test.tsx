@@ -10,11 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
+import { createRef } from "react";
 import { page, userEvent } from "vitest/browser";
+
+import type { FocusHandle } from "./inputUtils.js";
 
 import { translate as odysseyTranslate } from "./i18n.generated/i18n.js";
 import { PasswordField } from "./PasswordField.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 describe(PasswordField.displayName!, () => {
   test("password visibility toggled on and off", async () => {
@@ -97,5 +100,18 @@ describe(PasswordField.displayName!, () => {
     await expect.element(firstToggle).toHaveAttribute("aria-pressed", "true");
     await expect.element(secondToggle).toHaveAttribute("aria-pressed", "false");
     await expect(container).toBeAccessible();
+  });
+
+  test("focus handle", async () => {
+    const inputRef = createRef<FocusHandle>();
+    await renderWithOdysseyProvider(
+      <PasswordField inputRef={inputRef} label="Password" />,
+    );
+
+    inputRef.current?.focus();
+
+    await expect
+      .element(page.getByRole("textbox", { name: "Password" }))
+      .toHaveFocus();
   });
 });

@@ -14,14 +14,19 @@ declare global {
   var cspNonce: string; // Adding types to `globalThis` requires we use `var`.
 }
 
-import createCache, { StylisPlugin } from "@emotion/cache";
+import createCache, { type EmotionCache, StylisPlugin } from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
-import { memo, ReactNode, useMemo } from "react";
+import { memo, ReactNode, useLayoutEffect, useMemo, useRef } from "react";
 
+import { type ResolvedColorScheme } from "./useColorScheme.js";
 import { useUniqueAlphabeticalId } from "./useUniqueAlphabeticalId.js";
 
 export type OdysseyCacheProviderProps = {
   children: ReactNode;
+  /**
+   * The color scheme rendered inside this cache. Changing it replaces the cache, so the new scheme's styles are inserted in the same order as a first render.
+   */
+  colorScheme?: ResolvedColorScheme;
   /**
    * @deprecated Use `EmotionRootElement` instead. This was incorrectly configured as an `HTMLStyleElement`, but then we're rendering `<style>` inside `<style>`. We need this to be a `<div>` instead.
    *
@@ -59,6 +64,7 @@ export type OdysseyCacheProviderProps = {
  */
 const OdysseyCacheProvider = ({
   children,
+  colorScheme,
   emotionRoot,
   emotionRootElement,
   nonce,
@@ -66,6 +72,7 @@ const OdysseyCacheProvider = ({
 }: OdysseyCacheProviderProps) => {
   const uniqueAlphabeticalId = useUniqueAlphabeticalId();
 
+  // Emotion resolves equal-specificity rules by insertion order. Switching the color scheme regenerates every class built from color tokens and appends it after the classes that did not change, so an ancestor's rule can start beating a descendant's override that won on the first render. A fresh cache per scheme keeps first-render order.
   const emotionCache = useMemo(
     () =>
       createCache({
@@ -78,7 +85,10 @@ const OdysseyCacheProvider = ({
         speedy: true,
         ...(stylisPlugins && { stylisPlugins }),
       }),
+    // `colorScheme` is not read in the factory. It is a dependency so a scheme change builds a new cache.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
+      colorScheme,
       emotionRoot,
       emotionRootElement,
       nonce,
@@ -86,6 +96,19 @@ const OdysseyCacheProvider = ({
       uniqueAlphabeticalId,
     ],
   );
+
+  const previousEmotionCacheRef = useRef<EmotionCache>(undefined);
+
+  // The replaced cache's `<style>` tags stay in the DOM until flushed. This runs before paint so the old rules never apply alongside the new ones, and it compares against the previous cache rather than flushing on cleanup, because Strict Mode's simulated unmount would otherwise flush the cache still in use.
+  useLayoutEffect(() => {
+    const previousEmotionCache = previousEmotionCacheRef.current;
+
+    previousEmotionCacheRef.current = emotionCache;
+
+    if (previousEmotionCache && previousEmotionCache !== emotionCache) {
+      previousEmotionCache.sheet.flush();
+    }
+  }, [emotionCache]);
 
   return <CacheProvider value={emotionCache}>{children}</CacheProvider>;
 };

@@ -12,6 +12,7 @@
 
 import type { RenderResult } from "vitest-browser-react";
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { MRT_RowSelectionState } from "material-react-table";
 import { type ReactElement, useState } from "react";
 import { page, userEvent } from "vitest/browser";
@@ -20,11 +21,11 @@ import { Button } from "../../Buttons/Button.js";
 import { MenuItem } from "../../Buttons/MenuItem.js";
 import { EmptyState } from "../../EmptyState.js";
 import { DataTableRowData } from "../../index.js";
-import { renderWithOdysseyProvider } from "../../test-utils/renderWithOdysseyProvider.js";
 import {
   type CardLayoutProps,
   type TableLayoutProps,
 } from "./componentTypes.js";
+import { DataTable } from "./DataTable.js";
 import {
   type DataGetDataType,
   type DataOnReorderRowsType,
@@ -786,11 +787,21 @@ describe("DataView", { timeout: 10000 }, () => {
 
       // Confirm that the first two rows have swapped
       await expect
-        .element(page.getByRole("row").nth(1))
-        .toHaveTextContent(data[1].name);
+        .element(
+          page
+            .getByRole("row")
+            .nth(1)
+            .getByRole("cell", { name: data[1].name, exact: true }),
+        )
+        .toBeVisible();
       await expect
-        .element(page.getByRole("row").nth(2))
-        .toHaveTextContent(data[0].name);
+        .element(
+          page
+            .getByRole("row")
+            .nth(2)
+            .getByRole("cell", { name: data[0].name, exact: true }),
+        )
+        .toBeVisible();
     });
 
     test("can reorder to front", async () => {
@@ -833,11 +844,21 @@ describe("DataView", { timeout: 10000 }, () => {
 
       // Confirm that the first two rows have swapped
       await expect
-        .element(page.getByRole("row").nth(1))
-        .toHaveTextContent(data[5].name);
+        .element(
+          page
+            .getByRole("row")
+            .nth(1)
+            .getByRole("cell", { name: data[5].name, exact: true }),
+        )
+        .toBeVisible();
       await expect
-        .element(page.getByRole("row").nth(2))
-        .toHaveTextContent(data[0].name);
+        .element(
+          page
+            .getByRole("row")
+            .nth(2)
+            .getByRole("cell", { name: data[0].name, exact: true }),
+        )
+        .toBeVisible();
     });
 
     test("can reorder to back", async () => {
@@ -878,11 +899,21 @@ describe("DataView", { timeout: 10000 }, () => {
       );
 
       await expect
-        .element(page.getByRole("row").nth(6))
-        .toHaveTextContent(data[0].name);
+        .element(
+          page
+            .getByRole("row")
+            .nth(6)
+            .getByRole("cell", { name: data[0].name, exact: true }),
+        )
+        .toBeVisible();
       await expect
-        .element(page.getByRole("row").nth(5))
-        .toHaveTextContent(data[5].name);
+        .element(
+          page
+            .getByRole("row")
+            .nth(5)
+            .getByRole("cell", { name: data[5].name, exact: true }),
+        )
+        .toBeVisible();
     });
 
     test("can expand table rows", async () => {
@@ -1016,8 +1047,13 @@ describe("DataView", { timeout: 10000 }, () => {
     await expect.element(page.getByText(data[0].name)).toBeVisible();
 
     await expect
-      .element(page.getByRole("row").nth(6))
-      .toHaveTextContent(data[0].name);
+      .element(
+        page
+          .getByRole("row")
+          .nth(6)
+          .getByRole("cell", { name: data[0].name, exact: true }),
+      )
+      .toBeVisible();
   });
 
   test("initialSorting seeds column sort on first render", async () => {
@@ -1488,5 +1524,249 @@ describe("DataView", { timeout: 10000 }, () => {
         .element(page.getByRole("button", { name: "More actions" }))
         .toHaveTextContent("1 selected");
     });
+  });
+
+  describe("Data loading", () => {
+    test("a rejected request shows the translated error", async () => {
+      await renderWithOdysseyProvider(
+        <DataView
+          availableLayouts={["table"]}
+          getData={() => Promise.reject(new Error("nope"))}
+          tableLayoutOptions={{ columns }}
+        />,
+      );
+
+      await expect.element(page.getByText("Error loading data.")).toBeVisible();
+    });
+
+    test("a rejected request with a string message shows that message", async () => {
+      await renderWithOdysseyProvider(
+        <DataView
+          availableLayouts={["table"]}
+          // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+          getData={() => Promise.reject("The service is down")}
+          tableLayoutOptions={{ columns }}
+        />,
+      );
+
+      await expect.element(page.getByText("The service is down")).toBeVisible();
+    });
+  });
+
+  describe("Filters from columns", () => {
+    test("filters given as column keys, column objects, and custom filters", async () => {
+      await renderWithOdysseyProvider(
+        <DataView
+          availableLayouts={["table"]}
+          filters={[
+            "name",
+            "missing",
+            columns[2],
+            { id: "custom", label: "Custom filter", variant: "text" },
+            {
+              accessorKey: "state",
+              enableColumnFilter: false,
+              header: "State",
+            },
+          ]}
+          getData={getData}
+          hasFilters
+          tableLayoutOptions={{ columns }}
+        />,
+      );
+
+      await userEvent.click(page.getByLabelText("Filters", { exact: true }));
+
+      await expect
+        .element(page.getByRole("menuitem", { name: /Name/ }))
+        .toBeVisible();
+      await expect
+        .element(page.getByRole("menuitem", { name: /City/ }))
+        .toBeVisible();
+      await expect
+        .element(page.getByRole("menuitem", { name: /Custom filter/ }))
+        .toBeVisible();
+      await expect
+        .element(page.getByRole("menuitem", { name: /State/ }))
+        .not.toBeInTheDocument();
+    });
+
+    test("filters inferred from columns convert their select options", async () => {
+      await renderWithOdysseyProvider(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasFilters
+          tableLayoutOptions={{
+            columns: [
+              {
+                accessorKey: "plain",
+                filterSelectOptions: [
+                  "one",
+                  { label: "Two", value: undefined },
+                  { value: "three" },
+                ],
+                filterVariant: "select",
+                header: "Plain",
+              },
+            ],
+          }}
+        />,
+      );
+
+      await userEvent.click(page.getByLabelText("Filters", { exact: true }));
+      await userEvent.click(page.getByRole("menuitem", { name: /Plain/ }));
+
+      await expect
+        .element(page.getByRole("radio", { name: "one" }))
+        .toBeVisible();
+      await expect
+        .element(page.getByRole("radio", { name: "Two" }))
+        .toBeVisible();
+      await expect
+        .element(page.getByRole("radio", { name: "three" }))
+        .toBeVisible();
+    });
+  });
+
+  describe("Layout switching", () => {
+    test("switching from table to grid shows cards", async () => {
+      await renderWithOdysseyProvider(
+        <DataView
+          availableLayouts={["table", "grid", "list"]}
+          cardLayoutOptions={{
+            itemProps: (row: Person) => ({ title: row.name }),
+          }}
+          getData={getData}
+          tableLayoutOptions={{ columns }}
+        />,
+      );
+
+      await expect.element(page.getByRole("table")).toBeVisible();
+
+      await userEvent.click(page.getByRole("button", { name: "Layout" }));
+      await userEvent.click(page.getByRole("menuitem", { name: "Grid" }));
+      await userEvent.keyboard("{Escape}");
+
+      await expect.element(page.getByRole("table")).not.toBeInTheDocument();
+      await expect.element(page.getByRole("list")).toBeVisible();
+    });
+  });
+
+  describe("Card row actions", () => {
+    test("bring forward moves the card up one", async () => {
+      const onReorderRows = vi.fn();
+
+      await renderWithOdysseyProvider(
+        <DataView
+          availableLayouts={["list"]}
+          cardLayoutOptions={{
+            itemProps: (row: Person) => ({ title: row.name }),
+            rowActionMenuItems: (row: Person) => (
+              <MenuItem>Archive {row.name}</MenuItem>
+            ),
+          }}
+          getData={getData}
+          hasRowReordering
+          onReorderRows={onReorderRows}
+          totalRows={data.length}
+        />,
+      );
+
+      await expect.element(page.getByText(data[1].name)).toBeVisible();
+
+      await userEvent.click(
+        page.getByRole("button", { name: "More actions" }).nth(1),
+      );
+      await userEvent.click(
+        page.getByRole("menuitem", { name: "Bring forward" }),
+      );
+
+      expect(onReorderRows).toHaveBeenCalledWith({
+        newRowIndex: 0,
+        rowId: data[1].id,
+      });
+    });
+
+    test("reordering menu items are disabled while reordering is disabled", async () => {
+      await renderWithOdysseyProvider(
+        <DataView
+          availableLayouts={["list"]}
+          cardLayoutOptions={{
+            itemProps: (row: Person) => ({ title: row.name }),
+          }}
+          getData={getData}
+          hasRowReordering
+          isRowReorderingDisabled
+          onReorderRows={vi.fn()}
+        />,
+      );
+
+      await expect.element(page.getByText(data[1].name)).toBeVisible();
+
+      await userEvent.click(
+        page.getByRole("button", { name: "More actions" }).nth(1),
+      );
+
+      await expect
+        .element(page.getByRole("menuitem", { name: "Bring forward" }))
+        .toHaveAttribute("aria-disabled", "true");
+    });
+
+    test("table row menu without a total hides the send to back item", async () => {
+      await renderWithOdysseyProvider(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowReordering
+          onReorderRows={vi.fn()}
+          tableLayoutOptions={{
+            columns,
+            rowActionMenuItems: (row: Person) => (
+              <MenuItem>Archive {row.name}</MenuItem>
+            ),
+          }}
+        />,
+      );
+
+      await expect.element(page.getByText(data[1].name)).toBeVisible();
+
+      await userEvent.click(
+        page.getByRole("button", { name: "More actions" }).nth(1),
+      );
+
+      await expect
+        .element(page.getByRole("menuitem", { name: "Send backward" }))
+        .toBeVisible();
+      await expect
+        .element(page.getByRole("menuitem", { name: "Send to back" }))
+        .not.toBeInTheDocument();
+    });
+  });
+});
+
+describe(DataTable.displayName!, () => {
+  test("passes the table options through to the table layout", async () => {
+    await renderWithOdysseyProvider(
+      <DataTable
+        columns={columns}
+        getData={getData}
+        hasChangeableDensity
+        hasColumnVisibility
+        hasSorting
+        rowActionMenuItems={() => <></>}
+      />,
+    );
+
+    await expect.element(page.getByText("Luke Skywalker")).toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: "Table density" }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: "Show/hide columns" }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: "More actions" }).first())
+      .toBeVisible();
   });
 });

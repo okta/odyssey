@@ -29,6 +29,7 @@ import {
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext.js";
 import { TagListContext } from "./TagListContext.js";
+import { useColorScheme } from "./useColorScheme.js";
 import { ContrastMode, useContrastModeContext } from "./useContrastMode.js";
 
 export const tagSizeValues = ["medium", "small"] as const;
@@ -74,20 +75,30 @@ export type TagProps = {
   size?: TagSize;
 } & Pick<HtmlProps, "id" | "testId" | "translate">;
 
+// The dark hue ramp runs the other way, so the page fill (`.200`) is the lighter
+// of the two fills in dark mode. On it, label text and the remove icon move one
+// step lighter to keep 4.5:1 and 3:1. Light mode and the card fill keep their
+// steps.
 const getChipColors = ({
   colorVariant,
   contrastMode,
+  isDarkMode,
   odysseyDesignTokens,
 }: {
   colorVariant: TagColorVariant;
   contrastMode: ContrastMode;
+  isDarkMode: boolean;
   odysseyDesignTokens: DesignTokens;
 }) => {
+  const isDarkPage = isDarkMode && contrastMode === "highContrast";
+
   const colors = {
     default: {
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueNeutral200,
-        text: odysseyDesignTokens.HueNeutral700,
+        text: isDarkPage
+          ? odysseyDesignTokens.HueNeutral800
+          : odysseyDesignTokens.HueNeutral700,
         textDisabled: odysseyDesignTokens.HueNeutral400,
       }),
       ...(contrastMode === "lowContrast" && {
@@ -98,7 +109,9 @@ const getChipColors = ({
       hover: odysseyDesignTokens.HueNeutral200,
       active: odysseyDesignTokens.HueNeutral300,
       border: odysseyDesignTokens.HueNeutral200,
-      deleteIcon: odysseyDesignTokens.HueNeutral500,
+      deleteIcon: isDarkPage
+        ? odysseyDesignTokens.HueNeutral600
+        : odysseyDesignTokens.HueNeutral500,
       deleteIconHover: odysseyDesignTokens.HueNeutral700,
       icon: odysseyDesignTokens.HueNeutral700,
       iconDisabled: odysseyDesignTokens.HueNeutral300,
@@ -106,7 +119,9 @@ const getChipColors = ({
     info: {
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueBlue200,
-        text: odysseyDesignTokens.HueBlue700,
+        text: isDarkPage
+          ? odysseyDesignTokens.HueBlue800
+          : odysseyDesignTokens.HueBlue700,
         textDisabled: odysseyDesignTokens.HueBlue400,
       }),
       ...(contrastMode === "lowContrast" && {
@@ -117,7 +132,9 @@ const getChipColors = ({
       hover: odysseyDesignTokens.HueBlue200,
       active: odysseyDesignTokens.HueBlue300,
       border: odysseyDesignTokens.HueBlue200,
-      deleteIcon: odysseyDesignTokens.HueBlue500,
+      deleteIcon: isDarkPage
+        ? odysseyDesignTokens.HueBlue600
+        : odysseyDesignTokens.HueBlue500,
       deleteIconHover: odysseyDesignTokens.HueBlue700,
       icon: odysseyDesignTokens.HueBlue700,
       iconDisabled: odysseyDesignTokens.HueBlue300,
@@ -125,7 +142,9 @@ const getChipColors = ({
     accentOne: {
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentOne200,
-        text: odysseyDesignTokens.HueAccentOne700,
+        text: isDarkPage
+          ? odysseyDesignTokens.HueAccentOne800
+          : odysseyDesignTokens.HueAccentOne700,
         textDisabled: odysseyDesignTokens.HueAccentOne400,
       }),
       ...(contrastMode === "lowContrast" && {
@@ -136,7 +155,9 @@ const getChipColors = ({
       hover: odysseyDesignTokens.HueAccentOne200,
       active: odysseyDesignTokens.HueAccentOne300,
       border: odysseyDesignTokens.HueAccentOne200,
-      deleteIcon: odysseyDesignTokens.HueAccentOne500,
+      deleteIcon: isDarkPage
+        ? odysseyDesignTokens.HueAccentOne600
+        : odysseyDesignTokens.HueAccentOne500,
       deleteIconHover: odysseyDesignTokens.HueAccentOne700,
       icon: odysseyDesignTokens.HueAccentOne700,
       iconDisabled: odysseyDesignTokens.HueAccentOne300,
@@ -155,7 +176,9 @@ const getChipColors = ({
       hover: odysseyDesignTokens.HueAccentTwo200,
       active: odysseyDesignTokens.HueAccentTwo300,
       border: odysseyDesignTokens.HueAccentTwo200,
-      deleteIcon: odysseyDesignTokens.HueAccentTwo500,
+      deleteIcon: isDarkPage
+        ? odysseyDesignTokens.HueAccentTwo600
+        : odysseyDesignTokens.HueAccentTwo500,
       deleteIconHover: odysseyDesignTokens.HueAccentTwo700,
       icon: odysseyDesignTokens.HueAccentTwo700,
       iconDisabled: odysseyDesignTokens.HueAccentTwo300,
@@ -163,7 +186,9 @@ const getChipColors = ({
     accentThree: {
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentThree200,
-        text: odysseyDesignTokens.HueAccentThree700,
+        text: isDarkPage
+          ? odysseyDesignTokens.HueAccentThree800
+          : odysseyDesignTokens.HueAccentThree700,
         textDisabled: odysseyDesignTokens.HueAccentThree400,
       }),
       ...(contrastMode === "lowContrast" && {
@@ -174,7 +199,9 @@ const getChipColors = ({
       hover: odysseyDesignTokens.HueAccentThree200,
       active: odysseyDesignTokens.HueAccentThree300,
       border: odysseyDesignTokens.HueAccentThree200,
-      deleteIcon: odysseyDesignTokens.HueAccentThree500,
+      deleteIcon: isDarkPage
+        ? odysseyDesignTokens.HueAccentThree600
+        : odysseyDesignTokens.HueAccentThree500,
       deleteIconHover: odysseyDesignTokens.HueAccentThree700,
       icon: odysseyDesignTokens.HueAccentThree700,
       iconDisabled: odysseyDesignTokens.HueAccentThree300,
@@ -182,7 +209,9 @@ const getChipColors = ({
     accentFour: {
       ...(contrastMode === "highContrast" && {
         background: odysseyDesignTokens.HueAccentFour200,
-        text: odysseyDesignTokens.HueAccentFour700,
+        text: isDarkPage
+          ? odysseyDesignTokens.HueAccentFour800
+          : odysseyDesignTokens.HueAccentFour700,
         textDisabled: odysseyDesignTokens.HueAccentFour400,
       }),
       ...(contrastMode === "lowContrast" && {
@@ -193,7 +222,9 @@ const getChipColors = ({
       hover: odysseyDesignTokens.HueAccentFour200,
       active: odysseyDesignTokens.HueAccentFour300,
       border: odysseyDesignTokens.HueAccentFour200,
-      deleteIcon: odysseyDesignTokens.HueAccentFour500,
+      deleteIcon: isDarkPage
+        ? odysseyDesignTokens.HueAccentFour600
+        : odysseyDesignTokens.HueAccentFour500,
       deleteIconHover: odysseyDesignTokens.HueAccentFour700,
       icon: odysseyDesignTokens.HueAccentFour700,
       iconDisabled: odysseyDesignTokens.HueAccentFour300,
@@ -205,21 +236,35 @@ const getChipColors = ({
 
 const StyledTag = styled(MuiChip, {
   shouldForwardProp: (prop) =>
-    !["colorVariant", "contrastMode", "odysseyDesignTokens", "size"].includes(
-      prop,
-    ),
+    ![
+      "colorVariant",
+      "contrastMode",
+      "isDarkMode",
+      "odysseyDesignTokens",
+      "size",
+    ].includes(prop),
 })<{
   clickable?: boolean;
   colorVariant: TagColorVariant;
   component?: ElementType;
   contrastMode: ContrastMode;
+  isDarkMode: boolean;
   odysseyDesignTokens: DesignTokens;
   size?: TagSize;
-}>(({ colorVariant, contrastMode, odysseyDesignTokens, clickable, size }) => {
+}>((tagStyleProps) => {
+  const {
+    clickable,
+    colorVariant,
+    contrastMode,
+    isDarkMode,
+    odysseyDesignTokens,
+    size,
+  } = tagStyleProps;
   const colors = getChipColors({
     colorVariant,
-    odysseyDesignTokens,
     contrastMode,
+    isDarkMode,
+    odysseyDesignTokens,
   });
 
   return {
@@ -286,6 +331,7 @@ const Tag = ({
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { chipElementType } = useContext(TagListContext);
   const { contrastMode } = useContrastModeContext();
+  const isDarkMode = useColorScheme() === "dark";
 
   const renderTag = useCallback(
     (muiProps: MuiPropsContextType) => (
@@ -304,6 +350,7 @@ const Tag = ({
         disabled={isDisabled}
         icon={icon}
         id={id}
+        isDarkMode={isDarkMode}
         label={label}
         odysseyDesignTokens={odysseyDesignTokens}
         onClick={onClick}
@@ -319,6 +366,7 @@ const Tag = ({
       contrastMode,
       icon,
       id,
+      isDarkMode,
       isDisabled,
       label,
       odysseyDesignTokens,

@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
 import { IconWithTooltip } from "./IconWithTooltip.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 describe(IconWithTooltip.displayName!, () => {
   test("tooltip visible on icon hover", async () => {

@@ -3,7 +3,7 @@
   "author": "Okta, Inc.",
   "license": "Apache-2.0",
   "private": true,
-  "packageManager": "yarn@4.9.1",
+  "packageManager": "yarn@4.18.1",
   "workspaces": [
     "packages/**/*"
   ],
@@ -46,8 +46,8 @@
     "start:storybook": "yarn workspace @okta/odyssey-storybook start",
     "start": "yarn install && yarn build && yarn concurrently npm:start:dev npm:start:storybook",
     "test:release-scripts": "bash scripts/release/release-scripts.test.sh",
-    "test:ci-scripts": "bash scripts/docs-only-ci.test.sh",
-    "test": "nx run-many -t test --exclude=@okta/ui-stacks-component-libraries-odyssey-contributions",
+    "test:ci-scripts": "bash scripts/docs-only-ci.test.sh && bash scripts/browser-dependencies.test.sh && bash scripts/node-modules-cache.test.sh",
+    "test": "nx run-many -t test",
     "topic": "OKTA_NPM_REGISTRY_SERVER=https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-all yarn",
     "typecheck": "nx run-many -t typecheck",
     "provision:contributions": "yarn workspaces foreach --all --interlaced run provision"

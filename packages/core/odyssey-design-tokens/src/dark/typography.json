@@ -1,0 +1,14 @@
+{
+  "typography": {
+    "color": {
+      "inverse": {
+        "comment": "Labels on filled primary, danger, and success controls stay white in dark mode because those fills stay saturated.",
+        "value": "#ffffff"
+      },
+      "disabled": {
+        "comment": "One step darker than light mode's neutral.400 so disabled reads as clearly dimmer than resting neutral.600 on dark surfaces. Disabled text is exempt from contrast minimums.",
+        "value": "{hue.neutral.300.value}"
+      }
+    }
+  }
+}

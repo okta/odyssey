@@ -27,6 +27,20 @@ export default defineConfig(async () => {
 
   // In dev mode, alias @okta/odyssey-react-mui to its TypeScript source so Vite processes it directly (fixes styled_default errors). This does not require core/odyssey-react-mui to be rebuilt on changes — they are picked up automatically. The displayName version plugin stamps the Odyssey version into every displayName.
   return {
+    // Vite finds these only when a chart story first loads, then re-bundles its
+    // dependencies and reloads. A Docs page already open keeps the old React
+    // chunk beside the new one, and hooks fail with "reading 'useContext'".
+    // Listing them here bundles them at startup instead.
+    optimizeDeps: {
+      include: [
+        // Only the dev JSX transform imports this, so the startup scan misses it.
+        "@emotion/react/jsx-dev-runtime",
+        "@highcharts/react",
+        "@highcharts/react/modules/Accessibility.js",
+        "@highcharts/react/series/Bar.js",
+        "@highcharts/react/series/Line.js",
+      ],
+    },
     resolve: {
       alias: await getOdysseyReactMuiAliases(),
     },

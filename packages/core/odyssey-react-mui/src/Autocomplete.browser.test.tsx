@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
 import { Autocomplete } from "./Autocomplete.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 type Option = { label: string };
 const options: Option[] = [
@@ -80,5 +80,34 @@ describe(Autocomplete.displayName!, () => {
     const clearButton = page.getByTitle("Clear");
     await userEvent.click(clearButton);
     await expect.element(combobox).toHaveValue("");
+  });
+
+  test("default single value", async () => {
+    await renderWithOdysseyProvider(
+      <Autocomplete
+        defaultValue={options[1]}
+        label="Default"
+        options={options}
+      />,
+    );
+
+    await expect
+      .element(page.getByRole("combobox", { name: "Default" }))
+      .toHaveValue("Option 2");
+  });
+
+  test("controlled input value", async () => {
+    await renderWithOdysseyProvider(
+      <Autocomplete
+        inputValue="Opt"
+        label="Destination"
+        options={options}
+        value={null}
+      />,
+    );
+
+    await expect
+      .element(page.getByRole("combobox", { name: "Destination" }))
+      .toHaveValue("Opt");
   });
 });

@@ -65,6 +65,29 @@ const PaginationButtonContainer = styled("div")({
   },
 });
 
+type PaginationState = {
+  pageIndex: number;
+  pageSize: number;
+};
+
+const getClampedPagination = ({
+  pageIndex,
+  pageSize,
+  totalRows,
+}: PaginationState & { totalRows?: number }): PaginationState => {
+  if (!totalRows) {
+    return { pageIndex, pageSize };
+  }
+
+  const clampedPageSize = Math.min(pageSize, totalRows);
+  const lastPageIndex = Math.ceil(totalRows / clampedPageSize);
+
+  return {
+    pageIndex: Math.min(Math.max(pageIndex, 1), lastPageIndex),
+    pageSize: clampedPageSize,
+  };
+};
+
 export type PaginationProps = {
   /**
    * The labeled rendered for the current page index
@@ -209,62 +232,44 @@ const Pagination = ({
     totalRows,
   });
 
+  // Blur and Enter both commit through here so the two paths can't apply different limits.
   const handlePaginationChange = useCallback(() => {
-    let updatedPage = page;
-    let updatedRowsPerPage = rowsPerPage;
-
-    if (totalRows) {
-      const maxPageIndex = Math.ceil(totalRows / updatedRowsPerPage);
-
-      // Ensure rowsPerPage does not exceed totalRows
-      if (updatedRowsPerPage > totalRows) {
-        updatedRowsPerPage = totalRows;
-      }
-
-      // Ensure page is within valid range
-      if (updatedPage > maxPageIndex) {
-        updatedPage = maxPageIndex;
-      } else if (updatedPage < 1) {
-        updatedPage = 1;
-      }
-    }
-
-    onPaginationChange({
-      pageIndex: updatedPage,
-      pageSize: updatedRowsPerPage,
+    const clampedPagination = getClampedPagination({
+      pageIndex: page,
+      pageSize: rowsPerPage,
+      totalRows,
     });
-  }, [page, rowsPerPage, onPaginationChange, totalRows]);
 
-  // The following handlers use React.KeyboardEvent (rather than just KeyboardEvent) because React.KeyboardEvent is generic, while plain KeyboardEvent is not. We need this generic so we can specify the HTMLInputElement, which allows us to use currentTarget.value
-  const handlePageSubmit = useCallback(
-    (event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    // The sync effect only fires when the props change, so a clamped value that
+    // equals the current props would otherwise leave the input showing the unclamped one.
+    setPage(clampedPagination.pageIndex);
+    setRowsPerPage(clampedPagination.pageSize);
+
+    // Enter followed by blur commits twice, and DataView re-fires its own onPaginationChange for every new object, so an unchanged commit is dropped here.
+    if (
+      clampedPagination.pageIndex !== pageIndex ||
+      clampedPagination.pageSize !== pageSize
+    ) {
+      onPaginationChange(clampedPagination);
+    }
+  }, [page, rowsPerPage, onPaginationChange, pageIndex, pageSize, totalRows]);
+
+  const handleInputSubmit = useCallback(
+    (event: React.KeyboardEvent) => {
       if (event.key === "Enter") {
-        onPaginationChange({
-          pageIndex: Number(event.currentTarget.value),
-          pageSize: rowsPerPage,
-        });
+        handlePaginationChange();
       }
     },
-    [rowsPerPage, onPaginationChange],
-  );
-
-  const handleRowsPerPageSubmit = useCallback(
-    (event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      if (event.key === "Enter") {
-        onPaginationChange({
-          pageIndex: page,
-          pageSize: Number(event.currentTarget.value),
-        });
-      }
-    },
-    [page, onPaginationChange],
+    [handlePaginationChange],
   );
 
   const setPageFromEvent = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      // A number input still accepts a typed or pasted decimal, so it is truncated before it can become a fractional page.
+      const wholeValue = Math.trunc(Number(event.target.value));
       const value = maxPageIndex
-        ? Math.min(Number(event.target.value), maxPageIndex)
-        : Number(event.target.value);
+        ? Math.min(wholeValue, maxPageIndex)
+        : wholeValue;
 
       // Ensure the value can't be less than 1
       setPage(Math.max(1, value));
@@ -274,9 +279,11 @@ const Pagination = ({
 
   const setRowsPerPageFromEvent = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
+      // A number input still accepts a typed or pasted decimal, so it is truncated before it can become a fractional page size.
+      const wholeValue = Math.trunc(Number(event.target.value));
       const value = maxPageSize
-        ? Math.min(Number(event.target.value), maxPageSize)
-        : Number(event.target.value);
+        ? Math.min(wholeValue, maxPageSize)
+        : wholeValue;
 
       // Ensure the value can't be less than 1
       setRowsPerPage(Math.max(1, value));
@@ -346,7 +353,7 @@ const Pagination = ({
               odysseyDesignTokens={odysseyDesignTokens}
               onBlur={handlePaginationChange}
               onChange={setRowsPerPageFromEvent}
-              onKeyDown={handleRowsPerPageSubmit}
+              onKeyDown={handleInputSubmit}
               type="number"
               value={rowsPerPage}
             />
@@ -371,7 +378,7 @@ const Pagination = ({
               odysseyDesignTokens={odysseyDesignTokens}
               onBlur={handlePaginationChange}
               onChange={setPageFromEvent}
-              onKeyDown={handlePageSubmit}
+              onKeyDown={handleInputSubmit}
               type="number"
               value={page}
             />

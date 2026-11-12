@@ -14,6 +14,7 @@ import {
   Autocomplete,
   Box,
   Button,
+  type ColorScheme,
   CssBaseline,
   DatePicker,
   Dialog,
@@ -21,6 +22,7 @@ import {
   MenuButton,
   MenuItem,
   OdysseyProvider,
+  OdysseyThemeProvider,
   Paragraph,
   Select,
   Stack,
@@ -31,10 +33,13 @@ import {
   Toast,
   ToastStack,
   Tooltip,
+  useColorScheme,
 } from "@okta/odyssey-react-mui";
 import { appRootElementId } from "@okta/odyssey-react-mui/__internal";
 import { DownloadIcon } from "@okta/odyssey-react-mui/icons";
 import { Layout, PageTemplate } from "@okta/odyssey-react-mui/labs";
+// `@okta/unified-ui-shell` bundles the published `odyssey-react-mui` it pins, which predates `colorScheme`, so these stories render core's `renderUiShell` to follow the toolbar's scheme. The string-icon story stays on the wrapper because the icon names are the wrapper's feature.
+import { renderUiShell as coreRenderUiShell } from "@okta/odyssey-react-mui/ui-shell";
 import {
   renderReactInWebComponent,
   webComponentDataAttributeName,
@@ -47,6 +52,18 @@ import { expect, userEvent, waitFor, within } from "storybook/test";
 
 const meta = {
   component: () => null,
+  decorators: [
+    // UI Shell and the app inside it are separate React roots, so the toolbar's scheme cannot reach them through context. This provider only lets each story read it with `useColorScheme` and pass it in, and the key remounts the shell when it changes because the app root renders once.
+    (Story, context) => (
+      <OdysseyThemeProvider
+        colorScheme={(context.globals.colorScheme as ColorScheme) ?? "light"}
+        hasWrapperElement={false}
+        key={context.globals.colorScheme as string}
+      >
+        <Story />
+      </OdysseyThemeProvider>
+    ),
+  ],
   parameters: {
     a11y: {
       disable: true, // As these are only visual tests, we don't need to worry about Axe. It has a lot of issues because of the Shadow DOM and throws a bunch of random errors because of those issues.
@@ -92,19 +109,28 @@ type SlotProps = {
 };
 
 type CreateOnRenderProps = SlotProps & {
+  colorScheme: ColorScheme;
   hasTranslationProvider?: boolean;
 };
 
 const createOnRender: ({
+  colorScheme,
   hasTranslationProvider,
   outerSlot,
   surfaceSlot,
-}: CreateOnRenderProps) => Parameters<typeof renderUiShell>[0]["onRender"] =
-  ({ hasTranslationProvider = true, outerSlot, surfaceSlot }) =>
-  (uiShellReturnValues) => {
+}: CreateOnRenderProps) => (uiShellReturnValues: {
+  appElement?: HTMLElement;
+}) => void =
+  ({ colorScheme, hasTranslationProvider = true, outerSlot, surfaceSlot }) =>
+  ({ appElement }) => {
+    if (!appElement) {
+      return;
+    }
+
     renderReactInWebComponent({
       getReactComponent: (reactRootElements) => (
         <OdysseyProvider
+          colorScheme={colorScheme}
           emotionRootElement={reactRootElements.stylesRootElement}
           hasTranslationProvider={hasTranslationProvider}
           shadowRootElement={reactRootElements.appRootElement}
@@ -123,25 +149,28 @@ const createOnRender: ({
           {outerSlot}
         </OdysseyProvider>
       ),
-      webComponentParentElement: uiShellReturnValues.appElement,
+      webComponentParentElement: appElement,
     });
   };
 
 const UiShellWrapper = ({ outerSlot, surfaceSlot }: SlotProps) => {
   const rootElementRef = useRef<HTMLDivElement>(null);
+  const colorScheme = useColorScheme();
 
   useEffect(() => {
     if (rootElementRef.current) {
-      renderUiShell({
+      coreRenderUiShell({
         appElementScrollingMode: "vertical",
+        colorScheme,
         parentElement: rootElementRef.current,
         onRender: createOnRender({
+          colorScheme,
           outerSlot,
           surfaceSlot,
         }),
       });
     }
-  }, [outerSlot, surfaceSlot]);
+  }, [colorScheme, outerSlot, surfaceSlot]);
 
   return <div ref={rootElementRef} />;
 };
@@ -156,20 +185,23 @@ export const Default: Story = {
 export const InitialLanguageCodeFrench: Story = {
   render: function C() {
     const rootElementRef = useRef<HTMLDivElement>(null);
+    const colorScheme = useColorScheme();
 
     useEffect(() => {
       if (rootElementRef.current) {
-        renderUiShell({
+        coreRenderUiShell({
           appElementScrollingMode: "vertical",
+          colorScheme,
           languageCode: "fr",
           parentElement: rootElementRef.current,
           onRender: createOnRender({
+            colorScheme,
             hasTranslationProvider: false,
             surfaceSlot: <Paragraph>This is the surface content.</Paragraph>,
           }),
         });
       }
-    }, []);
+    }, [colorScheme]);
 
     return <div ref={rootElementRef} />;
   },
@@ -178,14 +210,17 @@ export const InitialLanguageCodeFrench: Story = {
 export const RuntimeLanguageSwitchToSpanish: Story = {
   render: function C() {
     const rootElementRef = useRef<HTMLDivElement>(null);
+    const colorScheme = useColorScheme();
 
     useEffect(() => {
       if (rootElementRef.current) {
-        const { setTranslationSettings } = renderUiShell({
+        const { setTranslationSettings } = coreRenderUiShell({
           appElementScrollingMode: "vertical",
+          colorScheme,
           languageCode: "fr",
           parentElement: rootElementRef.current,
           onRender: createOnRender({
+            colorScheme,
             hasTranslationProvider: false,
             surfaceSlot: <Paragraph>This is the surface content.</Paragraph>,
           }),
@@ -193,7 +228,7 @@ export const RuntimeLanguageSwitchToSpanish: Story = {
 
         setTranslationSettings({ languageCode: "es" });
       }
-    }, []);
+    }, [colorScheme]);
 
     return <div ref={rootElementRef} />;
   },
@@ -529,6 +564,7 @@ export const OpenedTooltipInSurface: Story = {
 export const SideNavWithStringIcons: Story = {
   render: function C() {
     const rootElementRef = useRef<HTMLDivElement>(null);
+    const colorScheme = useColorScheme();
 
     useEffect(() => {
       if (rootElementRef.current) {
@@ -536,6 +572,7 @@ export const SideNavWithStringIcons: Story = {
           appElementScrollingMode: "vertical",
           parentElement: rootElementRef.current,
           onRender: createOnRender({
+            colorScheme,
             surfaceSlot: (
               <Paragraph>
                 The side nav icons are resolved from string names via Odyssey's
@@ -577,7 +614,7 @@ export const SideNavWithStringIcons: Story = {
           },
         });
       }
-    }, []);
+    }, [colorScheme]);
 
     return <div ref={rootElementRef} />;
   },

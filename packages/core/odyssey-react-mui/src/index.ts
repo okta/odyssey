@@ -201,6 +201,22 @@ export {
   useHasActiveFullscreen,
 } from "./fullscreen/useFullscreen.js";
 export { useFullscreenId } from "./fullscreen/useFullscreenId.js";
+export {
+  getActionTintChannel,
+  type GetActionTintChannelArgs,
+} from "./getActionTintChannel.js";
+export {
+  type ColorSchemeAwareDesignTokensOverride,
+  type ColorSchemeDesignTokensOverride,
+  type FlatDesignTokensOverride,
+  getColorSchemeDesignTokensOverride,
+  type GetColorSchemeDesignTokensOverrideArgs,
+  isColorSchemeDesignTokensOverride,
+} from "./getColorSchemeDesignTokensOverride.js";
+export {
+  getDropShadowFilter,
+  type GetDropShadowFilterArgs,
+} from "./getDropShadowFilter.js";
 export { HintLink } from "./HintLink.js";
 export { type HtmlProps } from "./HtmlProps.js";
 export {
@@ -318,6 +334,13 @@ export {
   typographyVariantMapping,
   type TypographyVariantValue,
 } from "./Typography.js";
+export {
+  type ColorScheme,
+  colorSchemeValues,
+  type ResolvedColorScheme,
+  resolvedColorSchemeValues,
+  useColorScheme,
+} from "./useColorScheme.js";
 export type { ContrastMode } from "./useContrastMode.js";
 export { useMountLifecycleEffect } from "./useMountLifecycleEffect.js";
 export { useStableCallback } from "./useStableCallback.js";

@@ -10,11 +10,20 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
+import { createRef } from "react";
 import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
 
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
-import { Heading1, Typography } from "./Typography.js";
+import type { FocusHandle } from "./inputUtils.js";
+
+import {
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading6,
+  Typography,
+} from "./Typography.js";
 
 describe("Typography", () => {
   test("renders Overline", async () => {
@@ -76,6 +85,39 @@ describe("Typography", () => {
       const element = page.getByLabelText("heading");
       await expect.element(element).toBeVisible();
       await expect.element(element).not.toHaveAttribute("role");
+    });
+  });
+
+  describe("typography components", () => {
+    test("each heading level", async () => {
+      await render(
+        <>
+          <Heading2>Heading two</Heading2>
+          <Heading3>Heading three</Heading3>
+          <Heading6>Heading six</Heading6>
+        </>,
+      );
+
+      await expect
+        .element(page.getByRole("heading", { name: "Heading two", level: 2 }))
+        .toBeVisible();
+      await expect
+        .element(page.getByRole("heading", { name: "Heading three", level: 3 }))
+        .toBeVisible();
+      await expect
+        .element(page.getByRole("heading", { name: "Heading six", level: 6 }))
+        .toBeVisible();
+    });
+
+    test("focus handle", async () => {
+      const typographyRef = createRef<FocusHandle>();
+      await render(
+        <Typography typographyRef={typographyRef}>Focus me</Typography>,
+      );
+
+      typographyRef.current?.focus();
+
+      await expect.element(page.getByText("Focus me")).toHaveFocus();
     });
   });
 });

@@ -10,13 +10,34 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import type { Mock } from "vitest";
+
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
 import { Button } from "../Buttons/Button.js";
-import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
-import { DataFilters } from "./DataFilters.js";
+import { type DataFilter, DataFilters } from "./DataFilters.js";
 
-describe("DataFilters", () => {
+type OnChangeFilters = (filters: DataFilter[]) => void;
+
+const priorityOptions = [
+  { label: "Low", value: "low" },
+  { label: "High", value: "high" },
+];
+
+const openFilter = async (name: RegExp) => {
+  await userEvent.click(page.getByLabelText("Filters", { exact: true }));
+  await userEvent.click(page.getByRole("menuitem", { name }));
+};
+
+// Each reported filter echoes back its whole config (label, options, variant), which the test passed in itself. Only `id` and `value` change with user input, so those are the fields worth asserting.
+const lastFilters = (onChangeFilters: Mock<OnChangeFilters>) =>
+  onChangeFilters.mock.lastCall?.[0].map((filter) => ({
+    id: filter.id,
+    value: filter.value,
+  }));
+
+describe(DataFilters.displayName!, () => {
   test("renders filter tags using option labels for option object values", async () => {
     const { container } = await renderWithOdysseyProvider(
       <DataFilters
@@ -339,5 +360,287 @@ describe("DataFilters", () => {
     await expect.element(filterMenu).not.toBeInTheDocument();
     await expect.element(filtersButton).toHaveFocus();
     await expect(container).toBeAccessible();
+  });
+
+  test("text filter is applied on submit and cleared from the field", async () => {
+    const onChangeFilters = vi.fn<OnChangeFilters>();
+
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[{ id: "name", label: "Name", variant: "text" }]}
+        onChangeFilters={onChangeFilters}
+      />,
+    );
+
+    await openFilter(/Name/);
+    await userEvent.fill(page.getByRole("textbox", { name: "Name" }), "Ada");
+    await userEvent.click(page.getByRole("button", { name: "Submit" }));
+
+    await expect
+      .poll(() => lastFilters(onChangeFilters))
+      .toStrictEqual([{ id: "name", value: "Ada" }]);
+
+    await expect
+      .element(page.getByRole("button", { name: "Name: Ada Remove tag" }))
+      .toBeVisible();
+
+    await userEvent.click(page.getByRole("button", { name: "Clear filters" }));
+    await expect
+      .poll(() => lastFilters(onChangeFilters))
+      .toStrictEqual([{ id: "name", value: undefined }]);
+  });
+
+  test("clear button inside the text field removes the value", async () => {
+    const onChangeFilters = vi.fn<OnChangeFilters>();
+
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[{ id: "age", label: "Age", value: "30", variant: "range" }]}
+        onChangeFilters={onChangeFilters}
+      />,
+    );
+
+    await openFilter(/Age/);
+    await userEvent.click(page.getByRole("button", { name: "Clear filter" }));
+
+    await expect
+      .poll(() => lastFilters(onChangeFilters))
+      .toStrictEqual([{ id: "age", value: undefined }]);
+  });
+
+  test("multi-select checkboxes add and remove values", async () => {
+    const onChangeFilters = vi.fn<OnChangeFilters>();
+
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[
+          {
+            id: "priority",
+            label: "Priority",
+            options: priorityOptions,
+            variant: "multi-select",
+          },
+        ]}
+        onChangeFilters={onChangeFilters}
+      />,
+    );
+
+    await openFilter(/Priority/);
+    await userEvent.click(page.getByRole("checkbox", { name: "Low" }));
+    await userEvent.click(page.getByRole("checkbox", { name: "High" }));
+
+    await expect
+      .poll(() => lastFilters(onChangeFilters))
+      .toStrictEqual([{ id: "priority", value: priorityOptions }]);
+
+    await userEvent.click(page.getByRole("checkbox", { name: "Low" }));
+    await userEvent.click(page.getByRole("checkbox", { name: "High" }));
+
+    await expect
+      .poll(() => lastFilters(onChangeFilters))
+      .toStrictEqual([{ id: "priority", value: undefined }]);
+  });
+
+  test("removing one tag of a multi-select keeps the others", async () => {
+    const onChangeFilters = vi.fn<OnChangeFilters>();
+
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[
+          {
+            id: "priority",
+            label: "Priority",
+            options: priorityOptions,
+            value: priorityOptions,
+            variant: "multi-select",
+          },
+        ]}
+        onChangeFilters={onChangeFilters}
+      />,
+    );
+
+    await userEvent.click(
+      page.getByRole("button", { name: "Remove tag" }).first(),
+    );
+
+    await expect
+      .poll(() => lastFilters(onChangeFilters))
+      .toStrictEqual([
+        { id: "priority", value: [{ label: "High", value: "high" }] },
+      ]);
+
+    await userEvent.click(
+      page.getByRole("button", { name: "Remove tag" }).first(),
+    );
+
+    await expect
+      .poll(() => lastFilters(onChangeFilters))
+      .toStrictEqual([{ id: "priority", value: undefined }]);
+  });
+
+  test("radio select filter applies immediately and any resets it", async () => {
+    const onChangeFilters = vi.fn<OnChangeFilters>();
+
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[
+          {
+            id: "status",
+            label: "Status",
+            options: priorityOptions,
+            variant: "select",
+          },
+        ]}
+        onChangeFilters={onChangeFilters}
+      />,
+    );
+
+    await openFilter(/Status/);
+    await userEvent.click(page.getByRole("radio", { name: "High" }));
+
+    await expect
+      .poll(() => lastFilters(onChangeFilters))
+      .toStrictEqual([{ id: "status", value: "high" }]);
+
+    // The first Escape applies and closes the popover, the second closes the menu that hides the tags.
+    await userEvent.keyboard("{Escape}");
+    await userEvent.keyboard("{Escape}");
+    await userEvent.click(
+      page.getByRole("button", { name: "Remove tag" }).first(),
+    );
+
+    await expect
+      .poll(() => lastFilters(onChangeFilters))
+      .toStrictEqual([{ id: "status", value: undefined }]);
+  });
+
+  test("autocomplete filter commits chosen options on submit", async () => {
+    const onChangeFilters = vi.fn<OnChangeFilters>();
+
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[
+          {
+            id: "owner",
+            label: "Owner",
+            options: priorityOptions,
+            variant: "autocomplete",
+          },
+        ]}
+        onChangeFilters={onChangeFilters}
+      />,
+    );
+
+    await openFilter(/Owner/);
+    await userEvent.click(page.getByRole("combobox", { name: "Owner" }));
+    await userEvent.click(page.getByRole("option", { name: "Low" }));
+    await userEvent.click(page.getByRole("button", { name: "Submit" }));
+
+    await expect
+      .poll(() => lastFilters(onChangeFilters))
+      .toStrictEqual([
+        { id: "owner", value: [{ label: "Low", value: "low" }] },
+      ]);
+  });
+
+  test("custom render filter receives the update callback", async () => {
+    const onChangeFilters = vi.fn<OnChangeFilters>();
+
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[
+          {
+            id: "custom",
+            label: "Custom",
+            render: (updateFilters) => (
+              <button
+                onClick={() =>
+                  updateFilters({ filterId: "custom", value: "picked" })
+                }
+                type="button"
+              >
+                Pick one
+              </button>
+            ),
+          },
+        ]}
+        onChangeFilters={onChangeFilters}
+      />,
+    );
+
+    await openFilter(/Custom/);
+    await userEvent.click(page.getByRole("button", { name: "Pick one" }));
+
+    await expect
+      .poll(() => lastFilters(onChangeFilters))
+      .toStrictEqual([{ id: "custom", value: "picked" }]);
+  });
+
+  test("clicking outside the menu closes the popover and the menu", async () => {
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[{ id: "name", label: "Name", variant: "text" }]}
+        onChangeFilters={vi.fn()}
+      />,
+    );
+
+    await openFilter(/Name/);
+    const textbox = page.getByRole("textbox", { name: "Name" });
+    await expect.element(textbox).toBeVisible();
+
+    // A real outside click lands on the popover's invisible backdrop, which covers the whole page.
+    await userEvent.click(page.elementLocator(document.body));
+
+    await expect.element(textbox).not.toBeInTheDocument();
+  });
+
+  test("submitting the filter form with Enter closes the popover", async () => {
+    await renderWithOdysseyProvider(
+      <DataFilters
+        filters={[{ id: "name", label: "Name", variant: "text" }]}
+        onChangeFilters={vi.fn()}
+      />,
+    );
+
+    await openFilter(/Name/);
+    await userEvent.fill(page.getByRole("textbox", { name: "Name" }), "Ada");
+    await userEvent.keyboard("{Enter}");
+
+    await expect
+      .element(page.getByRole("textbox", { name: "Name" }))
+      .not.toBeInTheDocument();
+  });
+
+  test("search submits on button click and clears through the clear button", async () => {
+    const onChangeSearch = vi.fn();
+
+    await renderWithOdysseyProvider(
+      <DataFilters hasSearchSubmitButton onChangeSearch={onChangeSearch} />,
+    );
+
+    await userEvent.fill(page.getByRole("searchbox"), "ada");
+    await userEvent.click(page.getByRole("button", { name: "Search" }));
+    expect(onChangeSearch).toHaveBeenLastCalledWith("ada");
+
+    await userEvent.keyboard("{Enter}");
+    expect(onChangeSearch).toHaveBeenLastCalledWith("ada");
+    expect(onChangeSearch).toHaveBeenCalledTimes(2);
+
+    await userEvent.click(page.getByRole("button", { name: "Clear" }));
+    expect(onChangeSearch).toHaveBeenLastCalledWith("");
+  });
+
+  test("search without a submit button reports the typed value", async () => {
+    const onChangeSearch = vi.fn();
+
+    await renderWithOdysseyProvider(
+      <DataFilters onChangeSearch={onChangeSearch} searchDelayTime={20} />,
+    );
+
+    await userEvent.fill(page.getByRole("searchbox"), "ada");
+
+    await expect
+      .poll(() => onChangeSearch.mock.lastCall)
+      .toStrictEqual(["ada"]);
   });
 });

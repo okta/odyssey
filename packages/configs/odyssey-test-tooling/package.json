@@ -1,0 +1,65 @@
+{
+  "name": "@okta/odyssey-test-tooling",
+  "author": "Okta, Inc.",
+  "license": "Apache-2.0",
+  "private": true,
+  "version": "1.73.0",
+  "nx": {
+    "tags": [
+      "scope:tools"
+    ],
+    "implicitDependencies": [
+      "!@okta/odyssey-react-mui"
+    ]
+  },
+  "description": "Shared Vitest config, browser test setup, and Odyssey render helpers for packages in this monorepo",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./browser": {
+      "types": "./dist/browser.d.ts",
+      "import": "./dist/browser.js",
+      "default": "./dist/browser.js"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "build:clean": "rimraf dist",
+    "build": "yarn build:clean && tsc --project tsconfig.production.json",
+    "playwright-install": "yarn playwright install chromium",
+    "test": "NODE_ENV=test vitest run --reporter=default",
+    "typecheck": "tsc --noEmit",
+    "coverage": "NODE_ENV=test vitest run --coverage --reporter=default"
+  },
+  "dependencies": {
+    "axe-core": "^4.11.3"
+  },
+  "peerDependencies": {
+    "@okta/odyssey-react-mui": "*",
+    "@vitest/browser-playwright": "^5.0.5",
+    "react": "^18.3.1 || ^19.0.0",
+    "vitest": "^5.0.5",
+    "vitest-browser-react": "^2.3.0"
+  },
+  "devDependencies": {
+    "@okta/odyssey-react-mui": "1.71.2",
+    "@okta/odyssey-typescript": "workspace:*",
+    "@types/node": "^24.1.0",
+    "@types/react": "18.x",
+    "@vitest/browser-playwright": "^5.0.5",
+    "@vitest/coverage-v8": "^5.0.5",
+    "playwright": "^1.62.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.2",
+    "vitest": "^5.0.5",
+    "vitest-browser-react": "^2.3.0"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

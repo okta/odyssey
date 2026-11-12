@@ -10,11 +10,14 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { page } from "vitest/browser";
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
+import { createRef } from "react";
+import { page, userEvent } from "vitest/browser";
+
+import type { FocusHandle } from "./inputUtils.js";
 
 import { translate } from "./i18n.generated/i18n.js";
-import { Link } from "./Link.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
+import { Link, type LinkProps } from "./Link.js";
 
 describe(Link.displayName!, () => {
   test("renders with accessible role", async () => {
@@ -62,5 +65,44 @@ describe(Link.displayName!, () => {
       name: `Okta ${externalLinkLabel}`,
     });
     await expect.element(link).toBeVisible();
+  });
+
+  test("focus handle and click handler on a placeholder href", async () => {
+    const linkRef = createRef<FocusHandle>();
+    const onClick = vi.fn<NonNullable<LinkProps["onClick"]>>(
+      (event) => event.defaultPrevented,
+    );
+    await renderWithOdysseyProvider(
+      <Link href="#" linkRef={linkRef} onClick={onClick}>
+        Link text
+      </Link>,
+    );
+
+    linkRef.current?.focus();
+    await expect
+      .element(page.getByRole("link", { name: "Link text" }))
+      .toHaveFocus();
+
+    await userEvent.click(page.getByRole("link", { name: "Link text" }));
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(onClick).toHaveReturnedWith(true);
+  });
+
+  test("click handler on a real href", async () => {
+    const onClick = vi.fn<NonNullable<LinkProps["onClick"]>>((event) => {
+      const isDefaultPrevented = event.defaultPrevented;
+      // Stops the real navigation so the test page stays loaded.
+      event.preventDefault();
+      return isDefaultPrevented;
+    });
+    await renderWithOdysseyProvider(
+      <Link href="#real" onClick={onClick}>
+        Link text
+      </Link>,
+    );
+
+    await userEvent.click(page.getByRole("link", { name: "Link text" }));
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(onClick).toHaveReturnedWith(false);
   });
 });

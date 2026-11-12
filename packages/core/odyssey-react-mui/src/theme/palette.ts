@@ -12,15 +12,22 @@
 
 import type { ThemeOptions } from "@mui/material";
 
+import type { ResolvedColorScheme } from "../useColorScheme.js";
+
+import { getActionTintChannel } from "../getActionTintChannel.js";
 import { DesignTokens } from "./theme.js";
 
 export const palette = ({
+  colorScheme = "light",
   odysseyTokens,
 }: {
+  colorScheme?: ResolvedColorScheme;
   odysseyTokens: DesignTokens;
 }): ThemeOptions["palette"] => {
+  const actionTintChannel = getActionTintChannel({ colorScheme });
+
   return {
-    mode: "light",
+    mode: colorScheme,
     common: {
       black: odysseyTokens.HueNeutral900,
       white: odysseyTokens.HueNeutralWhite,
@@ -34,9 +41,13 @@ export const palette = ({
       contrastText: odysseyTokens.TypographyColorInverse,
     },
     secondary: {
-      light: "#80c7ca",
-      main: "#096256",
-      dark: "#004650",
+      // These light values predate tokens and remain part of the consumer theme contract.
+      light:
+        colorScheme === "dark" ? odysseyTokens.HueAccentThree300 : "#80c7ca",
+      main:
+        colorScheme === "dark" ? odysseyTokens.HueAccentThree600 : "#096256",
+      dark:
+        colorScheme === "dark" ? odysseyTokens.HueAccentThree700 : "#004650",
       contrastText: odysseyTokens.TypographyColorInverse,
     },
     error: {
@@ -96,15 +107,15 @@ export const palette = ({
     },
     action: {
       // We have no equivalents here. It's likely we will update these as their uses are discovered.
-      active: "rgba(0, 0, 0, 0.54)",
-      hover: "rgba(0, 0, 0, 0.04)",
+      active: `rgba(${actionTintChannel}, 0.54)`,
+      hover: `rgba(${actionTintChannel}, 0.04)`,
       hoverOpacity: 0.04,
-      selected: "rgba(0, 0, 0, 0.08)",
+      selected: `rgba(${actionTintChannel}, 0.08)`,
       selectedOpacity: 0.08,
       disabled: odysseyTokens.HueNeutral200,
-      disabledBackground: "rgba(0, 0, 0, 0.12)",
+      disabledBackground: `rgba(${actionTintChannel}, 0.12)`,
       disabledOpacity: 0.38,
-      focus: "rgba(0, 0, 0, 0.12)",
+      focus: `rgba(${actionTintChannel}, 0.12)`,
       focusOpacity: 0.12,
       activatedOpacity: 0.12,
     },

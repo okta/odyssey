@@ -441,6 +441,23 @@ export const ShowDividers: Story = {
   } as DrawerProps, // This is a hack
 };
 
+export const LongUnbrokenTitle: Story = {
+  ...DefaultTemplate,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "If the `title` is a long string with no spaces, such as a key name or URL, it breaks inside the word, so it stays inside the drawer header.",
+      },
+    },
+  },
+  args: {
+    children: drawerLongText,
+    title:
+      "production_database_service_account_key_rotation_primary_region_us_east_1",
+  } as DrawerProps, // This is a hack
+};
+
 export const NoFooter: Story = {
   render: function C(props) {
     // Open by default so Applitools captures the open Drawer without a play function. The button still toggles it in Canvas.

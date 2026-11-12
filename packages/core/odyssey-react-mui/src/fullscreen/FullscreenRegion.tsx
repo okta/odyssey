@@ -148,6 +148,8 @@ const applyRegionRect = ({
   element.style.setProperty("bottom", "auto");
   element.style.setProperty("height", `${rect.height}px`);
   element.style.setProperty("left", `${rect.left}px`);
+  // Between its start and end sizes, the region's content can be larger than the region. With `overflow: auto`, a scrollbar flashes in for those frames and takes width from the content, which reflows and jumps. The scrollbar comes back once the region reaches the viewport.
+  element.style.setProperty("overflow", "hidden");
   element.style.setProperty("right", "auto");
   element.style.setProperty("top", `${rect.top}px`);
   element.style.setProperty("width", `${rect.width}px`);
@@ -157,6 +159,7 @@ const clearRegionRect = ({ element }: { element: HTMLElement }) => {
   ANIMATED_RECT_PROPERTIES.forEach((propertyName) => {
     element.style.removeProperty(propertyName);
   });
+  element.style.removeProperty("overflow");
 };
 
 // These never render, so making them inert changes nothing and only adds noise to the DOM.
@@ -368,7 +371,7 @@ export type FullscreenRegionProps = {
  *
  * Regions stack. A region that enters fullscreen while another is in fullscreen covers it, and Escape or its own button goes back to the one under it.
  *
- * While it's on top, the rest of the page is `inert`, so keyboard and screen reader users stay inside the region the same way sighted users do. Dialogs, drawers, and menus opened from inside the region still work, because they render after the page around the region was made inert.
+ * While it's on top, the rest of the page is `inert`, so keyboard and screen reader users stay inside the region the same way sighted users do. Dialogs, drawers, menus, and toasts opened from inside the region still work. Without shadow DOM, they render after the page around the region was made inert. With shadow DOM, they render into Odyssey's overlay container on `<body>`, which removes `inert` from itself while anything on the page is in fullscreen.
  *
  * Entering and exiting fullscreen are announced to screen readers. If focus was outside the region when it entered fullscreen, focus moves to the region, which is labelled "Fullscreen mode", and goes back when it exits.
  *

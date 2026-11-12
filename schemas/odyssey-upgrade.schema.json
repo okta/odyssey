@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "cadence": {
+      "default": "monthly",
+      "description": "How often the repository gets a scheduled upgrade pull request. A release run ignores it.",
+      "type": "string",
+      "enum": ["monthly", "quarterly", "weekly"]
+    },
+    "dedupe": {
+      "default": false,
+      "description": "How the upgrade merges extra copies of a package in the lockfile. `false`: no dedupe. `true`: the upgrade runs a dedupe of the whole lockfile after the install. `scoped`: the coding agent prompt in the pull request asks the agent to dedupe `react`, `react-dom`, and the `@mui` and `@emotion` packages by name. Only Yarn 2 and later can dedupe one package. With another package manager, the agent lists the extra copies for a person to check.",
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "const": "scoped"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "description": "The Odyssey upgrade settings of a repository, in .odyssey/upgrade.yaml.",
+  "title": "Odyssey upgrade config"
+}

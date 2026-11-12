@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { useState } from "react";
 import { page, userEvent } from "vitest/browser";
 
 import { Accordion } from "./Accordion.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 const ControlledAccordion = () => {
   const [isExpanded, setIsExpanded] = useState(true);

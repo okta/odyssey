@@ -178,7 +178,7 @@ const SwitchCheckMark = styled(CheckIcon, {
   transition: `opacity ${odysseyDesignTokens.TransitionDurationMain}`,
   opacity: 0,
   path: {
-    fill: odysseyDesignTokens.HueNeutralWhite,
+    fill: odysseyDesignTokens.TypographyColorInverse,
   },
 
   ...(isChecked && {

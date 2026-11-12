@@ -15,6 +15,8 @@ import {
   Banner,
   Box,
   Button,
+  Dialog,
+  Drawer,
   FullscreenButton,
   FullscreenRegion,
   OdysseyProvider,
@@ -1092,6 +1094,176 @@ export const WithFullscreenAppContent: Story = {
                   </Layout>
                 </PageTemplate>
               </FullscreenRegion>
+            </OdysseyProvider>
+          )}
+        </div>
+
+        <UiShell
+          {...props}
+          appElement={appElementRef.current!}
+          onSubscriptionCreated={onSubscriptionCreated}
+        />
+      </>
+    );
+  },
+};
+
+export const WithOdysseyAppContentAndOverlays: Story = {
+  decorators: [OdysseyStorybookThemeDecorator],
+  parameters: {
+    // A manual color check for the Dark Mode Token Review page, which frames it
+    // once per scheme. Its closed state duplicates `WithOdysseyAppContent`,
+    // which Applitools already captures, so it has no baseline of its own.
+    eyes: { include: false },
+  },
+  args: {
+    optionalComponents: {
+      ...sharedOptionalComponents,
+      banners: <Banner severity="success" text="This is an app!" />,
+    },
+    subscribeToPropChanges: (subscriber) => {
+      subscriber({
+        appSwitcherProps: sharedAppSwitcherProps,
+        sideNavProps: sharedSideNavProps,
+        topNavProps: sharedTopNavProps,
+      });
+
+      return () => {};
+    },
+  },
+  render: function C(props) {
+    const appElementRef = useRefWithRerenderHack();
+
+    const [isReady, setIsReady] = useState(false);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+    const onSubscriptionCreated = useCallback(() => {
+      setIsReady(true);
+    }, []);
+
+    const openDialog = useCallback(() => {
+      setIsDialogOpen(true);
+    }, []);
+
+    const closeDialog = useCallback(() => {
+      setIsDialogOpen(false);
+    }, []);
+
+    const openDrawer = useCallback(() => {
+      setIsDrawerOpen(true);
+    }, []);
+
+    const closeDrawer = useCallback(() => {
+      setIsDrawerOpen(false);
+    }, []);
+
+    return (
+      <>
+        <div ref={appElementRef}>
+          {/* This is normally rendered by `renderUiShell`, but we're rendering `UiShell` outside of a web component, so we need to add this data attribute ourselves. */}
+          <div {...{ [uiShellDataAttribute]: "" }} />
+
+          {isReady && (
+            <OdysseyProvider>
+              <PageTemplate
+                description="This is my app."
+                title="Access Certification"
+              >
+                <Layout regions={[1]}>
+                  <Surface>
+                    <div style={{ marginBlockEnd: `${16 / 14}rem` }}>
+                      <Paragraph>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Mauris lacinia leo quis sodales scelerisque. Maecenas
+                        tempor eget nunc sit amet ultrices. Maecenas et varius
+                        ante. Nulla eu quam sit amet orci fermentum dictum sit
+                        amet scelerisque libero. Proin luctus semper elit, ut
+                        pretium massa tristique a. Mauris hendrerit ex eu
+                        commodo egestas. Etiam a lacus aliquet, convallis metus
+                        et, sollicitudin odio. Fusce vehicula purus sed orci
+                        elementum, ut cursus diam sollicitudin. Pellentesque
+                        pulvinar nibh turpis, eu finibus dolor egestas eget.
+                        Duis tellus mauris, pulvinar sit amet ante a, aliquet
+                        laoreet sapien. Ut quis tempus massa. Fusce fringilla
+                        mattis lacinia. Cras at pharetra quam, eu ultrices
+                        ipsum.
+                      </Paragraph>
+                    </div>
+                    <div>
+                      <Button
+                        label="I understand"
+                        onClick={openDialog}
+                        variant="primary"
+                      />
+                    </div>
+                    <div style={{ marginBlockStart: `${16 / 14}rem` }}>
+                      <Button
+                        label="Open drawer"
+                        onClick={openDrawer}
+                        variant="secondary"
+                      />
+                    </div>
+                  </Surface>
+                </Layout>
+              </PageTemplate>
+
+              <Dialog
+                isOpen={isDialogOpen}
+                onClose={closeDialog}
+                primaryCallToActionComponent={
+                  <Button
+                    label="Primary action"
+                    onClick={closeDialog}
+                    variant="primary"
+                  />
+                }
+                secondaryCallToActionComponent={
+                  <Button
+                    label="Secondary action"
+                    onClick={closeDialog}
+                    variant="secondary"
+                  />
+                }
+                tertiaryCallToActionComponent={
+                  <Button
+                    label="Tertiary action"
+                    onClick={closeDialog}
+                    variant="floating"
+                  />
+                }
+                title="Dialog title"
+              >
+                Description text explaining the consequences and any
+                alternatives. Limit to two lines if possible
+              </Dialog>
+
+              <Drawer
+                hasDividers={false}
+                isOpen={isDrawerOpen}
+                onClose={closeDrawer}
+                primaryCallToActionComponent={
+                  <Button
+                    label="Primary"
+                    onClick={closeDrawer}
+                    variant="primary"
+                  />
+                }
+                secondaryCallToActionComponent={
+                  <Button
+                    label="Cancel"
+                    onClick={closeDrawer}
+                    variant="secondary"
+                  />
+                }
+                title="Drawer title"
+              >
+                <Paragraph>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Mauris lacinia leo quis sodales scelerisque. Maecenas tempor
+                  eget nunc sit amet ultrices.
+                </Paragraph>
+              </Drawer>
             </OdysseyProvider>
           )}
         </div>

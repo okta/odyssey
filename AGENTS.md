@@ -33,8 +33,9 @@ Key top-level files:
 Documentation is organized by purpose:
 
 - Start with [docs/handbook/README.md](docs/handbook/README.md) for current cross-package contribution, design, and testing guidance.
-- Use `docs/decisions/` for accepted and superseded rationale, and [its README](docs/decisions/README.md) for the rules and lookup queries. Read relevant decisions before non-trivial work.
+- Use `docs/decisions/` for accepted and superseded rationale, and [its README](docs/decisions/README.md) for the rules and lookup queries. Read relevant decisions before non-trivial work. A contribution keeps its own records in `packages/contributions/<package>/docs/decisions/`; see [Architectural Decision Records](#architectural-decision-records-docsdecisions).
 - Use `docs/runbooks/` for repeatable operational procedures.
+- When writing or editing a Confluence page, follow [the Confluence tables runbook](docs/runbooks/confluence-page-tables.md) before publishing: tables go full width, with columns sized to their text.
 - Use package `README.md` and `docs/` directories for package-owned API, integration, and operational guidance.
 - Load a package-specific `AGENTS.md` when working in a package that has one.
 
@@ -45,7 +46,7 @@ Documentation is organized by purpose:
 ### Language & Style
 
 - Prefer TypeScript over JavaScript where feasible.
-- Prefer functional code over imperative (e.g. use `map`, `filter`, `reduce` and expressions over `for` loops and mutable variables).
+- Write functional, immutable code. This is a rule, not a preference: no `let`, no loops, no mutation. See [Functional, immutable code](#functional-immutable-code).
 - Use descriptive, domain-specific names; avoid generic names like `child`, `children`, `item`, or `data` for props, variables, and types.
 - Prefer expression-bodied functions and method chaining over intermediate variables when the chain is readable.
 - Prefer non-mutating array methods (`.toSorted()`, `.toReversed()`) over their mutating counterparts (`.sort()`, `.reverse()`).
@@ -118,11 +119,27 @@ Documentation is organized by purpose:
     }: CheckAgeArgs) => { ... }
     ```
 
-### Immutability — no array mutation
+### Functional, immutable code
 
-- Never mutate arrays with `.push()`, `.pop()`, `.splice()`, etc. Use spread and functional methods instead.
+These rules apply to every package, including tests and scripts. Hundreds of existing violations predate them, so a nearby `let` is not a convention to follow. Fix any instance in code your PR touches, and add no new ones. Worked examples for each rule are in [docs/agents/functional-immutable-code.md](docs/agents/functional-immutable-code.md); read it before writing a loop, a `let`, a `flatMap`, or an array spread.
+
+- **No `let`.** Every binding is `const`. Use a ternary, a small function with early returns, `reduce`, or recursion.
+  - Wrong: `let notifyProgress = () => undefined; const progressMessage = new Promise((resolve) => { notifyProgress = resolve; });`
+  - Right: `const { promise: progressMessage, resolve: notifyProgress } = Promise.withResolvers<string>();`
+- **No loops.** No `for`, `for...of`, `for...in`, `while`, or `do`. Use `map`, `filter`, `reduce`, `find`, `some`, and `every`. A loop that walks a tree (parent by parent, or call by call) becomes a recursive function.
+- **No mutation.** No `.push()`, `.pop()`, `.shift()`, `.unshift()`, `.splice()`, `.sort()`, `.reverse()`, no `Set.add` or `Map.set` on a collection being built up, and no reassigning an object's properties. Build a new value instead. State a recursive walk needs (results so far, nodes visited) goes in the value a `reduce` returns, not in a closure it changes.
   - Wrong: `const flags = []; flags.push("x");`
-  - Right: `const flags = [...existingFlags, "x"];`
+  - Right: `const flags = existingFlags.concat("x");`
+- **`flatMap` only for one-to-many.** If the callback returns `[]` or `[value]`, it is a filter and a map squeezed together. Write `.filter()` then `.map()`, or `.map()` then a type-guard `.filter()` when the test needs the mapped value. Use `flatMap` when each item really yields a list, and `.flat()` when the arrays are already nested.
+  - Wrong: `apis.flatMap((api) => (api.candidateMethods ? [] : [getEndpointKey(api)]))`
+  - Right: `apis.filter((api) => !api.candidateMethods).map((api) => getEndpointKey(api))`
+- **`Array.from` and `.concat` over array spread.** They say what they do; `[...x]` means something different depending on where it sits. Use `Array.from(iterable)`, not `[...iterable]`, and `list.concat(otherList)` or `list.concat(value)`, not `[...list, ...otherList]`. `.concat` flattens an array argument one level, so append a single tuple as `list.concat([tuple])`. Object spread (`{ ...base, key }`) is unaffected.
+- **Distinct values without spread.** Write `Array.from(new Set(values))`, not `[...new Set(values)]`. Inside Cartographer, call its `getUniqueValues(values)` or `getSortedUniqueValues(values)` from `src/getUniqueValues.ts` instead. It is not a shared package, so other packages do not import it.
+- **A fixed set of strings is one `as const` object.** Gherkin keywords, kinds, statuses: define the set once at module scope, read members from it, and build the type and schema from it (`z.enum(STEP_KEYWORDS)`). An inline `"Then" as const` is the sign this is missing.
+  - Wrong: `keyword: index > 0 ? ("And" as const) : ("Then" as const)`
+  - Right: `keyword: index > 0 ? STEP_KEYWORDS.and : STEP_KEYWORDS.then`
+
+See [decision record](docs/decisions/2026-10-14-functional-immutable-code-is-a-rule.md).
 
 ### Immutability — no Date mutation
 
@@ -185,6 +202,7 @@ Each links to the decision record that explains why and what was rejected.
 - Generated files use the `.generated.js` suffix to match the existing scheme.
 - Filter out invalid entries (e.g. an icon missing its `displayName`) rather than emitting broken ones downstream.
 - Reuse established libraries and existing in-repo patterns (e.g. `yargs` for CLI parsing) instead of hand-rolling infrastructure. See [decision record](docs/decisions/2026-06-22-reuse-libraries-over-hand-rolling.md).
+- Put every generic jscodeshift or ast-types helper for `@okta/odyssey-cli` codemods in `packages/platform/odyssey-cli/src/codemodAst/`, and check that folder before writing AST code. See [.claude/rules/codemod-ast.md](.claude/rules/codemod-ast.md) and the [decision record](docs/decisions/2026-10-19-generic-ast-helpers-live-in-codemod-ast.md).
 - When wrapping a third-party library in a public package, re-export a curated set of functions or require a `peerDependency` — never re-export the library's catch-all namespace. See [decision record](docs/decisions/2026-06-23-scoped-reexport-not-catchall.md).
 - Read the current state of a file immediately before editing it; when reverting, restore only your own most recent changes. See [decision record](docs/decisions/2026-06-25-read-current-state-before-editing.md).
 - Fix the root cause, not the symptom; verify the real cause (e.g. a provider/config setting) before patching component code. See [decision record](docs/decisions/2026-06-30-root-cause-over-symptom-patch.md).
@@ -197,6 +215,9 @@ Each links to the decision record that explains why and what was rejected.
 - Keep a PR's diff scoped to the files the task requires; do not sweep in unrelated packages, components, or stories.
 - Do not reference internal product details (internal system codenames, architecture) in committed content — this repo syncs to a public mirror. See [decision record](docs/decisions/2026-06-12-no-internal-product-details-public-mirror.md).
 - Never make a build a side effect of `yarn install`, and never put one back into `scripts/setup.sh`. The root `postinstall` only installs husky's git hooks and bootstraps `@okta/odyssey-contributions-promotion-check`, and `setup.sh` only installs dependencies. Each Bacon suite provisions the build graph it consumes: through an Nx target whose `dependsOn` declares it, or through an explicit build command in the suite's own script. See [decision records](docs/decisions/2026-09-17-every-suite-provisions-its-own-build.md) for the current rule and [2026-08-10](docs/decisions/2026-08-10-build-in-setup-not-postinstall.md) for the superseded one.
+- Never pass `--with-deps` to `playwright install`. Playwright's dependency table knows Debian-family packages only, and on Amazon Linux it runs `apt-get` and dies, which is why the browser suites used to be pinned to an Ubuntu queue. `install_browser_system_dependencies` in `scripts/util.sh` installs the libraries once per suite, picking `dnf` or Playwright's own installer from `/etc/os-release`. Every Bacon suite runs on an AL2023 queue; do not add a Ubuntu22 queue back to `.bacon.yml`. See [decision record](docs/decisions/2026-09-24-browser-suites-on-al2023.md).
+- Code that runs inside a contribution package (the `@okta/odyssey-storybook-preset` decorators, preview, and story helpers) resolves `@okta/odyssey-react-mui` and `@okta/odyssey-design-tokens` to that package's pinned release, which can be many versions behind the workspace. One named import of an export the oldest pin lacks makes every story show "No Preview". Import such an export from `src/odysseyVersionCompatibility/index.ts`, after adding an entry to the `odysseyVersionFallbacks` registry in that folder, and read context tokens through the folder's `useOdysseyDesignTokens` or `createOdysseyStyledComponent`. Never import it by name anywhere else. The fallbacks are listed in the preset's generated `docs/odysseyVersionCompatibility.generated.md`. `odysseyVersionCompatibility.node.test.ts` fails when the preset imports a name a pinned release lacks. Add a fallback there; the test expects no missing exports, so do not give it an allowlist. See [decision record](docs/decisions/2026-11-05-odyssey-version-compatibility-module.md).
+- Before removing or narrowing an Nx cache input (`sharedGlobals`, a target's `inputs`, a named input), check that a change to it cannot alter a task's pass or fail with the cache key unchanged, including through the machine: Node, browsers, system libraries, env vars. A missed input replays a false pass, and protected branches read the cache too. The check and what stays in the key are in [.claude/rules/nx-cache-inputs.md](.claude/rules/nx-cache-inputs.md). See [decision record](docs/decisions/2026-11-09-cache-inputs-cover-what-changes-a-result.md).
 - Install husky from `postinstall`, not `prepare`. Yarn 4 never runs a root `prepare` script, so the recipe in husky's own docs silently installs nothing and leaves every clone with no pre-commit hook. See [decision record](docs/decisions/2026-08-18-husky-hooks-via-postinstall-not-prepare.md).
 - Check push access to the public mirror with the real push under `--dry-run`, through the credential that will perform it. `gh api repos/okta/odyssey --jq .permissions.push` answers about a different credential and reports `false` for a token that can push, so gating a release on it fails every release on a machine whose push works. See [decision record](docs/decisions/2026-08-19-preflight-probes-the-pushing-credential.md).
 - Key a release checkpoint on the moment the release started, archive a finished checkpoint instead of resuming it, and never patch a recorded checkpoint's inputs with the current invocation's flags. Sharing one path per release type let a new release adopt the previous one's all-succeeded stages, report success, and ship nothing. See [decision record](docs/decisions/2026-08-19-unique-release-checkpoints-never-resume-finished.md).
@@ -360,6 +381,7 @@ Run it after any bulk history rewrite, such as a mass rebase or amend across sev
 ### Monorepo
 
 - Prefer running scripts from root unless package-specific.
+- Run a package's `build`, `test`, or `typecheck` through Nx from the repository root: `yarn nx test <project>`, `yarn nx run-many -t typecheck,test -p <project>`, or `yarn nx affected -t typecheck,test`. Nx builds the target's `dependsOn` first and reads the Nx cache. `yarn workspace <project> test` runs the bare script, so it skips the dependency builds and tests whatever `dist` is on disk. Pass extra arguments after `--`: `yarn nx test <project> -- src/Button.test.tsx`. Use `yarn workspace` only for a script that has no Nx target, such as `migrate-styled`. See [decision record](docs/decisions/2026-10-21-nx-targets-over-yarn-workspace.md).
 - Use Lerna only if existing scripts require it.
 - Never use `npm run` or `npx`; always use `yarn` or `yarn dlx`. When a binary is installed locally (e.g. `eslint`, `tsc`, `vitest`), invoke it directly via `yarn <bin>` (e.g. `yarn eslint`, not `yarn dlx eslint`) — `yarn dlx` is only for packages not installed in the project.
 - Use Yarn v4 (Berry), not Yarn Classic (v1), when executing commands.
@@ -375,7 +397,7 @@ Run it after any bulk history rewrite, such as a mass rebase or amend across sev
 ### Documentation Map
 
 - `docs/handbook/` contains current cross-package guidance for contributors, design, and testing. Start with its [index](docs/handbook/README.md).
-- `docs/decisions/` contains append-only rationale for accepted and superseded decisions. List the records and read the relevant ones before non-trivial work; [its README](docs/decisions/README.md) carries the lookup queries.
+- `docs/decisions/` contains append-only rationale for accepted and superseded decisions made by Odyssey. List the records and read the relevant ones before non-trivial work; [its README](docs/decisions/README.md) carries the lookup queries. A contribution's decisions live in that package's own `docs/decisions/`.
 - `docs/runbooks/` contains repeatable procedures for specific operational tasks.
 - `docs/atlas/` contains the Atlas design package: the normative [`SPEC.md`](docs/atlas/SPEC.md), the authoring tutorial, and the use-case catalog. Read the spec before changing `packages/contributions/odyssey-atlas`; where the package has not caught up to the spec, the gap is recorded in [`FUTURE-WORK.md`](docs/atlas/FUTURE-WORK.md), not edited out of the spec. Atlas's design rationale lives in `docs/decisions/` with the rest, tagged `#atlas`.
 - `packages/*/README.md` and `packages/*/docs/` contain package-owned API, integration, and operational guidance.
@@ -393,8 +415,13 @@ Component source files are the single source of truth for documentation, and JSD
 
 - **Read it first.** At the start of any non-trivial task, list the records with `grep -m1 -H '^# ' docs/decisions/2*.md` and read the ones that look relevant. The "What was rejected" section of each record names exactly what you will naively drift back toward. `docs/decisions/README.md` holds the rules and the other lookup queries; it deliberately holds no index table, so do not add one.
 - **When you make a notable decision** (a point where an alternative was rejected for a reason — especially one that fixes a regression or reverses a prior choice), add a record. Copy `docs/decisions/TEMPLATE.md`, name it `YYYY-MM-DD-kebab-slug.md` (date = when the decision was made), and fill in every section. The record is the only file you add; nothing else needs updating.
-- **Never delete or rewrite** a past record. To reverse a decision, supersede it: set the old record's Status to `Superseded by [...]`, add a `> [!WARNING]` callout at its top linking forward, and add a `Supersedes:` line to the new record. This preserves the backflow trail.
+- **Never delete or rewrite** a past record. To reverse a decision, supersede it: set the old record's Status to `Superseded by [...]`, add a `> [!WARNING]` callout at its top linking forward, and add a `Supersedes:` line to the new record. This preserves the backflow trail. A record that has not yet been merged to the default branch may still be edited in place, or deleted outright (including consolidating several such records into one), since the append-only rule exists to protect reasoning that someone may already have acted on, and no one outside the branch that added it has had the chance to.
 - **A rule in AGENTS.md and its decision record are complementary**: AGENTS.md states the rule tersely; the decision record explains why and what was rejected. When you add a load-bearing rule here, add its decision record too.
+- **The root log is Odyssey's own.** A decision made inside a home-team-owned contribution goes in that package, at `packages/contributions/<package>/docs/decisions/`, using the same template and file naming. Do not add it to the root `docs/decisions/`. When working in a contribution, read both logs: the root records bind the package, and the package records explain its own choices.
+- **A contribution's records do not bind Odyssey Core.** When a component is promoted, its package records are input for the promotion, not rules Core inherits. Core either adopts a decision by writing a root record that links back to the package record, or departs from it. `/contribution-promote` reads them during its delta analysis.
+- **Odyssey-owned contributions are the exception.** `odyssey-atlas` lives under `packages/contributions/` but is owned by Odyssey, so its records stay in the root log, tagged `#atlas`.
+
+See [decision record](docs/decisions/2026-10-14-contribution-decisions-live-in-the-package.md).
 
 ### Storybook Stories & VRT
 
@@ -416,8 +443,36 @@ For VRT, render the visual state Applitools should capture directly; interaction
 - Only use mocks in tests if absolutely required. Prefer real implementations and real localStorage over mocked modules.
 - Avoid `data-testid` queries when testing existing components; prefer accessible queries (`getByRole`, `getByLabelText`, etc.). Using `data-testid` is acceptable when creating test-only elements within the test.
 - Prefer `toBeVisible()` over `toBeInTheDocument()` when asserting that an element is accessible or interactable by the user. `toBeInTheDocument` only checks DOM presence — it passes for hidden, aria-hidden, or zero-size elements. `toBeVisible` asserts the element is actually visible. Reserve `toBeInTheDocument` (and `not.toBeInTheDocument`) for cases where DOM presence or absence is the specific concern, independent of visibility (e.g. confirming an element unmounts from the DOM after a transition).
-- Use `userEvent` from Testing Library for simulating user interactions (keyboard, clicks, typing). Do not use `fireEvent` directly or native DOM events; `userEvent` provides more realistic user behavior simulation. When Playwright's actionability checks block interaction (e.g. `aria-disabled` elements), use `userEvent.click(locator, { force: true })` — not `element().click()`. Do not use `{ force: true }` when the test is validating that an element becomes visible or enabled before interaction — that explicit setup step is the behavior under test (e.g. SkipToContent calls `locator.element().focus()` to reveal the sr-only button, asserts `toBeVisible()`, then clicks normally; collapsing that into a force-click removes the visibility assertion).
-- In browser tests (vitest browser mode), import `userEvent` from `"vitest/browser"` (vitest 4+) or `"@vitest/browser/context"` (vitest 3), not from `@testing-library/user-event`.
+- Use `userEvent` for simulating user interactions (keyboard, clicks, typing). Do not use `fireEvent` directly or native DOM events; `userEvent` provides more realistic user behavior simulation.
+- Use `{ force: true }` only for a target that is `aria-disabled` or natively disabled, where Playwright's actionability check refuses the click. A read-only radio counts, because it carries `aria-disabled`. Write `userEvent.click(locator, { force: true })`, not `element().click()`, and add a comment saying which of the two it is. Do not use `{ force: true }` when the test is validating that an element becomes visible or enabled before interaction, because that explicit setup step is the behavior under test (for example, SkipToContent calls `locator.element().focus()` to reveal the sr-only button, asserts `toBeVisible()`, then clicks normally; collapsing that into a force-click removes the visibility assertion).
+- Await asynchronous render, rerender, and unmount helpers. Do not reach for `act` first: call the handler, store write, or locale change, then await the user-visible result. Use the `act` that `renderHook` returns only for a hook update with nothing in the DOM to wait on. Keep React act warnings and the shared reporter enabled; fix the update that caused the warning.
+- When a test asserts that nothing happens after a delay, fake only the timers the delay uses: `vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout"] })`, advance them with `await vi.advanceTimersByTimeAsync(ms)`, and call `vi.useRealTimers()` in `afterEach`. A raw sleep is the last resort, and it needs a comment saying why. Examples: `packages/contributions/wp-components/src/GraphNodeAttribute/GraphNodeAttribute.browser.test.tsx` and `packages/contributions/iga-components/src/Buttons/Tooltip.browser.test.tsx`.
+
+### Browser tests (Vitest browser mode)
+
+Every package runs its component tests in real Chromium through Vitest 5 browser mode, the Playwright provider, and `vitest-browser-react`. jsdom, Testing Library, jest-dom, and jest-axe are not installed in any package, so do not add them back. See [decision record](docs/decisions/2026-05-04-vitest-4-browser-mode.md).
+
+- Import `page`, `userEvent`, `commands`, and the `Locator` type from `"vitest/browser"`. Import `render` and `renderHook` from `vitest-browser-react`, or use a render helper below. `@vitest/browser/context` is the old path; do not use it.
+- Query with `page.getByRole`, `page.getByLabelText`, `page.getByText`, and the other `page.getBy*` locators, or with the same methods on a render result. Locators match the full accessible name or text exactly by default.
+- Assert on a locator with `await expect.element(locator)`. It retries until the assertion passes or times out, so it replaces Testing Library's `findBy*` and `waitFor`. A plain `expect(locator)` does not retry and does not resolve the locator.
+- Use `await expect.poll(() => value)` for a value with nothing in the DOM to observe, such as a fake's calls or a hook's `result.current`.
+- The DOM matchers come from `@vitest/browser/matchers` (listed in each package's `compilerOptions.types`), not jest-dom: `toBeChecked`, `toBeDisabled`, `toBeEmptyDOMElement`, `toBeEnabled`, `toBeInTheDocument`, `toBeInViewport`, `toBeInvalid`, `toBePartiallyChecked`, `toBeRequired`, `toBeValid`, `toBeVisible`, `toHaveAccessibleDescription`, `toHaveAccessibleErrorMessage`, `toHaveAccessibleName`, `toHaveAttribute`, `toHaveClass`, `toHaveDisplayValue`, `toHaveFocus`, `toHaveFormValues`, `toHaveRole`, `toHaveSelection`, `toHaveStyle`, `toHaveTextContent`, `toHaveValue`.
+- `toBeVisible` fails a zero-size element and does not treat `opacity: 0` as hidden.
+- Check accessibility with `await expect(container).toBeAccessible()`, or `await expect.element(locator).toBeAccessible()` scoped to portal content such as `page.getByRole("dialog")`.
+
+### Test helpers
+
+Reuse these instead of writing a local copy. If a helper you need is missing, add it beside the others in the same folder.
+
+| Helper | Where | Use it for |
+| --- | --- | --- |
+| `createVitestProject({ type: "node" \| "browser" })`, `nodeCoverage` | `@okta/odyssey-test-tooling` (`packages/configs/odyssey-test-tooling`) | Every `vitest.config.ts`. The browser project loads the `/browser` setup before the package's own `setupFiles`, registers `parkPointer`, and prebundles the JSX and React runtimes. |
+| `@okta/odyssey-test-tooling/browser` | same package | The browser setup: `toBeAccessible`, pointer parking, viewport reset, and `sessionStorage` cleanup. The browser project loads it, so a package does not import it. It also exports `noTransitionsTheme` for a render helper you are writing. A stack package's own setup goes in its provisioned `vitest-browser-setup.project.ts`. |
+| `renderWithOdysseyProvider`, `renderHookWithOdysseyProvider` | `@okta/odyssey-test-tooling/browser` | Default render in every package, odyssey-react-mui included. Takes `(element, { providerProps, ...renderOptions })`. It renders the react-mui the package resolves: its pinned version in a contribution, and `src/` in react-mui through a `resolve.alias`. |
+| `renderAtlasForTest`, `renderAtlasesForTest`, `getOutputsProbe`, `expectOutputsProbeText`, `HookOutputsReadout`, `getRenderResultAfterTableResize` | `packages/contributions/odyssey-atlas/src/test/` | Atlas tests. See the [atlas AGENTS.md](packages/contributions/odyssey-atlas/AGENTS.md). |
+| `buildProvidersWrapper` | `packages/contributions/policy-rules-components/src/test-utils/buildProvidersWrapper.tsx` | policy-rules tests that need the Odyssey, React Query, and `PolicyRulesProvider` stack. |
+
+See [decision record](docs/decisions/2026-11-03-browser-test-setup-in-a-shared-package.md).
 
 ### Test style (Node/Vitest)
 

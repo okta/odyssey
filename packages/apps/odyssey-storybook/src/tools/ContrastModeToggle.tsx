@@ -20,7 +20,7 @@ import {
 import { ReactNode, useCallback, useMemo, useState } from "react";
 
 const HIGH_CONTRAST_BG = Tokens.HueNeutral50;
-const LOW_CONTRAST_BG = Tokens.HueNeutralWhite;
+const LOW_CONTRAST_BG = Tokens.PaletteNeutralSurface;
 
 type BackgroundColor = "white" | "gray" | "none";
 
@@ -42,8 +42,8 @@ const getContainerSx = (bgColor: string) =>
   }) as const;
 
 const optionLabels: Record<BackgroundColor, string> = {
-  white: "White (lowContrast)",
-  gray: "Gray (highContrast)",
+  white: "lowContrast (PaletteNeutralSurface)",
+  gray: "highContrast (HueNeutral50 page)",
   none: "None (inherit)",
 };
 

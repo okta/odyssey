@@ -12,11 +12,11 @@
 
 import type { ComponentProps } from "react";
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { useState } from "react";
 import { page, userEvent } from "vitest/browser";
 
 import { Switch } from "./Switch.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 describe("Switch", () => {
   const Template = (props: Partial<ComponentProps<typeof Switch>>) => {

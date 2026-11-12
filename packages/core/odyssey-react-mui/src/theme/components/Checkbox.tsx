@@ -52,7 +52,7 @@ export const checkboxComponents = ({
           ),
 
           [`.${svgIconClasses.root}`]: {
-            color: odysseyTokens.HueNeutralWhite,
+            color: odysseyTokens.TypographyColorInverse,
             transition: theme.transitions.create(["color"], {
               duration: odysseyTokens.TransitionDurationMain,
             }),

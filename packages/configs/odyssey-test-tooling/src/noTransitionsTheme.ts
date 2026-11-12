@@ -1,0 +1,32 @@
+/*!
+ * Copyright (c) 2026-present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
+
+import type { ThemeOptions } from "@okta/odyssey-react-mui";
+
+// Kill transitions so axe never samples a mid-transition state.
+// `create` covers CSS transition strings; `duration` zeroes JS timeouts that MUI transition components (Fade, Slide, Collapse) use to decide when to unmount.
+//
+// Passed as `themeOverride` (plain `ThemeOptions`), not a resolved `createTheme` result: the provider deep-merges this into the Odyssey theme and re-runs `createTheme` so the override composes correctly. A resolved theme here would instead be merged as an already-built theme and clobber Odyssey's own values.
+export const noTransitionsTheme = {
+  transitions: {
+    create: () => "none",
+    duration: {
+      shortest: 0,
+      shorter: 0,
+      short: 0,
+      standard: 0,
+      complex: 0,
+      enteringScreen: 0,
+      leavingScreen: 0,
+    },
+  },
+} satisfies ThemeOptions;

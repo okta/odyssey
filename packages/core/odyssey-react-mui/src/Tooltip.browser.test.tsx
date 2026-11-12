@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { memo } from "react";
 import { page, userEvent } from "vitest/browser";
 
@@ -17,7 +18,6 @@ import { page, userEvent } from "vitest/browser";
 import { useMuiProps } from "./__internal.js";
 import { Button } from "./Buttons/Button.js";
 import { createOdysseyStyledComponent } from "./createOdysseyStyledComponent.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 import { Tooltip } from "./Tooltip.js";
 
 const StyledTrigger = createOdysseyStyledComponent({ tag: "button" })(

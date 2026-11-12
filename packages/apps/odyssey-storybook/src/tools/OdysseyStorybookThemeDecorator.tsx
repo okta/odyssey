@@ -10,34 +10,4 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Decorator } from "@storybook/react-vite";
-
-import * as odysseyTokens from "@okta/odyssey-design-tokens";
-import {
-  createOdysseyMuiTheme,
-  OdysseyProvider,
-} from "@okta/odyssey-react-mui";
-import { ThemeProvider as StorybookThemeProvider } from "storybook/theming";
-
-const styles = {
-  fontFamily:
-    "'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Noto Sans Arabic', sans-serif",
-};
-
-const odysseyTheme = createOdysseyMuiTheme({
-  odysseyTokens,
-});
-
-export const OdysseyStorybookThemeDecorator: Decorator = (Story, context) => (
-  <OdysseyProvider
-    hasAnimations={context.viewMode !== "docs"}
-    hasCssBaseline
-    languageCode={context.globals.locale as string}
-  >
-    <StorybookThemeProvider theme={odysseyTheme}>
-      <div lang={context.globals.locale as string} style={styles}>
-        <Story />
-      </div>
-    </StorybookThemeProvider>
-  </OdysseyProvider>
-);
+export { OdysseyStorybookThemeDecorator } from "@okta/odyssey-storybook-preset/decorators";

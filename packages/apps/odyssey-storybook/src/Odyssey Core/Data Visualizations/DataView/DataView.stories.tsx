@@ -343,6 +343,7 @@ const meta = {
       />
     );
   },
+  tags: ["labs-export"],
 } satisfies Meta<DataViewMetaProps>;
 
 export default meta;

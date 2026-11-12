@@ -11,11 +11,11 @@
  */
 
 import { Tooltip as MuiTooltip } from "@mui/material";
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { createRef } from "react";
 import { page, userEvent } from "vitest/browser";
 
 import { createOdysseyStyledComponent } from "./createOdysseyStyledComponent.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 const StyledButton = createOdysseyStyledComponent({ tag: "button" })(
   ({ odysseyDesignTokens }) => ({

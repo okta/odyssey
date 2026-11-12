@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
 import { translate as odysseyTranslate } from "../../i18n.generated/i18n.js";
-import { renderWithOdysseyProvider } from "../../test-utils/renderWithOdysseyProvider.js";
 import {
   ROOMY_HEIGHT,
   ROOMY_WIDTH,
@@ -476,8 +476,10 @@ describe(SideNav.displayName!, () => {
     );
 
     await expect
-      .element(page.getByRole("link", { name: menuItemText }))
-      .toHaveTextContent(String(badgeCount));
+      .element(
+        page.getByRole("link", { name: `${menuItemText} ${badgeCount}` }),
+      )
+      .toHaveTextContent(`${menuItemText}${badgeCount}`);
   });
 
   describe("button nav item `aria-expanded`", () => {
@@ -875,6 +877,157 @@ describe(SideNav.displayName!, () => {
       expect(listItem?.hasAttribute("aria-disabled")).toBe(false);
 
       await expect(container).toBeAccessible();
+    });
+  });
+
+  test("button item activated by click and Enter key", async () => {
+    const onClick = vi.fn();
+
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Buttons"
+        sideNavItems={[{ id: "action", label: "Action", onClick }]}
+      />,
+    );
+
+    await userEvent.click(page.getByRole("button", { name: "Action" }));
+    expect(onClick).toHaveBeenCalledTimes(1);
+
+    page.getByRole("button", { name: "Action" }).element().focus();
+    await userEvent.keyboard("{Enter}");
+    expect(onClick).toHaveBeenCalledTimes(2);
+
+    await userEvent.keyboard("a");
+    expect(onClick).toHaveBeenCalledTimes(2);
+  });
+
+  test("item with a status label", async () => {
+    await renderWithOdysseyProvider(
+      <SideNav
+        appName="Status"
+        sideNavItems={[
+          {
+            id: "icons",
+            href: "#icons",
+            label: "With icons",
+            severity: "success",
+            statusLabel: "Live",
+          },
+        ]}
+      />,
+    );
+
+    await expect
+      .element(page.getByRole("link", { name: "With icons Live" }))
+      .toBeVisible();
+  });
+
+  describe("sortable items", () => {
+    const sortableNavItems = [
+      {
+        id: "workspaces",
+        label: "Workspaces",
+        isDefaultExpanded: true,
+        isSortable: true,
+        nestedNavItems: [
+          { id: "work", href: "#work", label: "Work" },
+          { id: "test", href: "#test", label: "Test" },
+          { id: "play", href: "#play", label: "Play" },
+        ],
+      },
+    ];
+
+    const getDragHandle = (label: string) =>
+      page.getByRole("button", {
+        name: odysseyTranslate("navigation.drag.handle.label", { label }),
+      });
+
+    test("sortable item moved down with the keyboard", async () => {
+      const onSort = vi.fn();
+
+      await renderWithOdysseyProvider(
+        <SideNav
+          appName="Header text"
+          onSort={onSort}
+          sideNavItems={sortableNavItems}
+        />,
+      );
+
+      getDragHandle("Work").element().focus();
+      await userEvent.keyboard(" ");
+      await userEvent.keyboard("{ArrowDown}");
+      await userEvent.keyboard(" ");
+
+      await vi.waitFor(() => {
+        expect(onSort).toHaveBeenCalledTimes(1);
+      });
+      expect(onSort).toHaveBeenCalledWith(
+        [
+          {
+            id: "workspaces",
+            label: "Workspaces",
+            isDefaultExpanded: true,
+            isSortable: true,
+            nestedNavItems: [
+              { id: "test", href: "#test", label: "Test" },
+              { id: "work", href: "#work", label: "Work" },
+              { id: "play", href: "#play", label: "Play" },
+            ],
+          },
+        ],
+        "workspaces",
+        "work",
+        0,
+        1,
+      );
+    });
+
+    test("sortable item dropped on a non-sortable item", async () => {
+      const onSort = vi.fn();
+
+      await renderWithOdysseyProvider(
+        <SideNav
+          appName="Header text"
+          onSort={onSort}
+          sideNavItems={[
+            {
+              id: "workspaces",
+              label: "Workspaces",
+              isDefaultExpanded: true,
+              isSortable: true,
+              nestedNavItems: [
+                { id: "work", href: "#work", label: "Work" },
+                { id: "test", href: "#test", isSortable: false, label: "Test" },
+              ],
+            },
+          ]}
+        />,
+      );
+
+      getDragHandle("Work").element().focus();
+      await userEvent.keyboard(" ");
+      await userEvent.keyboard("{ArrowDown}");
+      await userEvent.keyboard(" ");
+
+      expect(onSort).not.toHaveBeenCalled();
+    });
+
+    test("sortable item dropped back on its own position", async () => {
+      const onSort = vi.fn();
+
+      await renderWithOdysseyProvider(
+        <SideNav
+          appName="Header text"
+          onSort={onSort}
+          sideNavItems={sortableNavItems}
+        />,
+      );
+
+      getDragHandle("Work").element().focus();
+      await userEvent.keyboard(" ");
+      await userEvent.keyboard(" ");
+
+      expect(onSort).not.toHaveBeenCalled();
     });
   });
 });

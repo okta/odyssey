@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { useCallback } from "react";
 import { page, userEvent } from "vitest/browser";
 
 import { type DataTableRowData } from "../index.js";
-import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import {
   DataTable,
   type DataTableColumn,

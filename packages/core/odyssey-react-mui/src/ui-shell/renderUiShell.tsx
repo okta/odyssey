@@ -16,6 +16,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { type FullscreenModeMessageBus } from "../message-bus/index.js";
 import { bufferLatest } from "../tools/bufferLatest.js";
 import { createMessageBus, PublishMessage } from "../tools/createMessageBus.js";
+import { type ColorScheme } from "../useColorScheme.js";
 import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
 import { createUiShellFullscreenState } from "./createUiShellFullscreenState.js";
 import {
@@ -61,6 +62,10 @@ export type RenderedUiShell = {
    * The page's current fullscreen state.
    */
   getFullscreenState: FullscreenModeMessageBus["getFullscreenState"];
+  /**
+   * Update the shell's color scheme at runtime, for example when the app's own dark mode toggle changes. `system` follows the operating system setting.
+   */
+  setColorScheme: ReturnType<typeof bufferLatest<ColorScheme>>;
   setComponentProps: ReturnType<
     typeof bufferLatest<SetStateAction<UiShellNavComponentProps>>
   >;
@@ -98,6 +103,7 @@ export const renderUiShell = ({
   appElement: providedAppElement,
   appElementScrollingMode,
   breakpointConfig,
+  colorScheme,
   hasStandardAppContentPadding,
   initialVisibleSections,
   languageCode,
@@ -110,6 +116,11 @@ export const renderUiShell = ({
   translationOverrides,
   nonce = window.cspNonce,
 }: {
+  /**
+   * The color scheme the shell renders. `system` follows the operating system setting. Change it later with `setColorScheme`.
+   * @default "light"
+   */
+  colorScheme?: ColorScheme;
   /**
    * Optional nonce for CSP compliance.
    */
@@ -172,6 +183,18 @@ export const renderUiShell = ({
     languageCode,
     translationOverrides,
   });
+
+  const { publish: publishColorScheme, subscribe: subscribeToColorScheme } =
+    createMessageBus<ColorScheme>();
+
+  const publishAfterReactAppReadyForColorScheme = bufferLatest({
+    publish: publishColorScheme,
+    subscribe: subscribeToReactAppSubscribed,
+  });
+
+  if (colorScheme) {
+    publishAfterReactAppReadyForColorScheme(colorScheme);
+  }
 
   const {
     publish: closeRightSideMenu,
@@ -243,6 +266,7 @@ export const renderUiShell = ({
           sideNavBackgroundContrastColor={sideNavBackgroundContrastColor}
           subscribeToCloseRightSideMenu={subscribeToCloseRightSideMenu}
           subscribeToCloseSideNavMenu={subscribeToCloseSideNavMenu}
+          subscribeToColorScheme={subscribeToColorScheme}
           subscribeToPropChanges={subscribeToPropChanges}
           subscribeToTranslationSettings={subscribeToTranslationSettings}
           topNavBackgroundColor={topNavBackgroundColor}
@@ -267,6 +291,7 @@ export const renderUiShell = ({
         enterAppFullscreen,
         exitAppFullscreen,
         getFullscreenState,
+        setColorScheme: publishAfterReactAppReadyForColorScheme,
         setComponentProps: publishAfterReactAppReadyForProps,
         setTranslationSettings: publishAfterReactAppReadyForTranslationSettings,
         slottedElements,
@@ -285,6 +310,7 @@ export const renderUiShell = ({
     enterAppFullscreen,
     exitAppFullscreen,
     getFullscreenState,
+    setColorScheme: publishAfterReactAppReadyForColorScheme,
     setComponentProps: publishAfterReactAppReadyForProps,
     setTranslationSettings: publishAfterReactAppReadyForTranslationSettings,
     slottedElements,

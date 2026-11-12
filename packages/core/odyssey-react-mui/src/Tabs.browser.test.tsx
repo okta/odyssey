@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { useState } from "react";
 import { page, userEvent } from "vitest/browser";
 
 import { Button } from "./Buttons/Button.js";
 import { Tabs } from "./Tabs.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 describe(Tabs.displayName!, () => {
   const tabItems = [
@@ -76,5 +76,30 @@ describe(Tabs.displayName!, () => {
     await userEvent.click(tab3);
     await userEvent.tab();
     await expect.element(page.getByText("Tab 3 content")).toBeVisible();
+  });
+
+  test("tabs without values", async () => {
+    const onChange = vi.fn();
+    const { container } = await renderWithOdysseyProvider(
+      <Tabs
+        ariaLabel="Tab group"
+        initialValue="1"
+        onChange={onChange}
+        tabs={[
+          { label: "First", children: "First content" },
+          { label: "Second", children: "Second content" },
+        ]}
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+    await expect.element(page.getByText("Second content")).toBeVisible();
+
+    await userEvent.click(
+      page.getByRole("tab", { name: "First", exact: true }),
+    );
+    await expect.element(page.getByText("First content")).toBeVisible();
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][1]).toBe("0");
   });
 });

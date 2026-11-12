@@ -7,9 +7,17 @@
     "jsxImportSource": "@emotion/react",
     "noEmit": false,
     "outDir": "dist/types",
+    // Matches the `resolve.alias` in vitest.config.ts. `@okta/odyssey-test-tooling` imports `@okta/odyssey-react-mui`, and without this TypeScript resolves the published copy, whose theme augmentation types the tokens from a published `@okta/odyssey-design-tokens`.
+    "paths": {
+      "@okta/odyssey-react-mui": ["./src/index.ts"]
+    },
     "rootDir": "src",
     "sourceMap": true,
-    "types": ["@vitest/browser/matchers", "vitest/globals"]
+    "types": [
+      "@okta/odyssey-test-tooling/browser",
+      "@vitest/browser/matchers",
+      "vitest/globals"
+    ]
   },
   "include": [
     "*",

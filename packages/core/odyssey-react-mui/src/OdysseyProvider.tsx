@@ -36,6 +36,7 @@ import {
   OdysseyThemeProvider,
   OdysseyThemeProviderProps,
 } from "./OdysseyThemeProvider.js";
+import { useResolvedColorScheme } from "./useColorScheme.js";
 
 const scopedCssBaselineStyles = {
   height: "inherit",
@@ -43,7 +44,7 @@ const scopedCssBaselineStyles = {
 
 export type OdysseyProviderProps<
   SupportedLanguages extends string = DefaultSupportedLanguages,
-> = Omit<OdysseyCacheProviderProps, "hasShadowDom"> &
+> = Omit<OdysseyCacheProviderProps, "colorScheme" | "hasShadowDom"> &
   FullScreenOverlayProviderProps &
   OdysseyThemeProviderProps &
   OdysseyTranslationProviderProps<SupportedLanguages> & {
@@ -76,6 +77,7 @@ export type OdysseyProviderProps<
  */
 const OdysseyProvider = <SupportedLanguages extends string>({
   children,
+  colorScheme,
   contrastMode,
   designTokensOverride,
   emotionRoot,
@@ -108,13 +110,17 @@ const OdysseyProvider = <SupportedLanguages extends string>({
     [languageCode, translationOverrides],
   );
 
+  const resolvedColorScheme = useResolvedColorScheme({ colorScheme });
+
   return (
     <OdysseyCacheProvider
+      colorScheme={resolvedColorScheme}
       emotionRootElement={emotionRootElement || emotionRoot}
       nonce={nonce}
       stylisPlugins={stylisPlugins}
     >
       <OdysseyThemeProvider
+        colorScheme={colorScheme}
         contrastMode={contrastMode}
         designTokensOverride={designTokensOverride}
         hasWrapperElement={hasWrapperElement}

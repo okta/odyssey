@@ -219,7 +219,7 @@ export const Contrast: Story = {
   parameters: staticBoardParameters,
   render: function C() {
     return (
-      <StorySection title="SearchField drops its border on a gray (highContrast) surface.">
+      <StorySection title="SearchField drops its border on the HueNeutral50 page (highContrast).">
         <StoryContrastBoard>
           <SearchField label="Search" placeholder="Search planets" />
         </StoryContrastBoard>

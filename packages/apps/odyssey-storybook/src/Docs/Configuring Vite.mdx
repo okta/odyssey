@@ -8,15 +8,17 @@ Odyssey depends on React and ReactDOM as true singletons — multiple instances 
 
 | Situation                                                         | Fix                                                                  |
 | ----------------------------------------------------------------- | -------------------------------------------------------------------- |
-| App on an older Odyssey rendering via `renderReactInWebComponent` | `output.manualChunks` — keep React in one chunk (older Odyssey only) |
+| App on an older Odyssey rendering via `renderReactInWebComponent` | `output.codeSplitting` group: keep React in one chunk (older Odyssey only) |
 | App with duplicate copies pulled in from libraries                | `resolve.dedupe`                                                     |
-| Library or contributions package you publish                      | `rollupOptions.external` + `output.globals`                          |
+| Library or contributions package you publish                      | `rolldownOptions.external` + `output.globals`                        |
+
+The examples use Vite 8 option names. On Vite 7, `build.rolldownOptions` is `build.rollupOptions`, and a chunk group is written as `output.manualChunks`.
 
 These are not mutually exclusive. A contributions package externalizes its dependencies, and the consuming app dedupes or chunks React on top of that.
 
 ---
 
-## Web-component app: `output.manualChunks` (older Odyssey only)
+## Web-component app: one React chunk (older Odyssey only)
 
 As of the Odyssey release that makes `renderReactInWebComponent` import `react-dom/client` statically, this workaround is **no longer required** — the web-component entry no longer produces a self-referencing dynamic-import chunk.
 
@@ -28,10 +30,16 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks: {
-          "react-vendor": ["react", "react-dom", "react-dom/client"],
+        codeSplitting: {
+          groups: [
+            {
+              name: "react-vendor",
+              // Matches react, react-dom, and react-dom/client, but not other packages whose names start with "react".
+              test: /node_modules[\\/]react(-dom)?[\\/]/,
+            },
+          ],
         },
       },
     },
@@ -65,7 +73,7 @@ export default defineConfig({
 });
 ```
 
-`dedupe` works at module-resolution time; `manualChunks` works at chunk-splitting time. They solve different layers of the same class of problem.
+`dedupe` works at module-resolution time; a chunk group works at chunk-splitting time. They solve different layers of the same class of problem.
 
 ---
 
@@ -79,7 +87,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       external: [
         "react",
         "react-dom",
@@ -111,4 +119,4 @@ Contributions packages in this repo use this pattern via the stack-provided `vit
 
 ## Verifying a single React instance
 
-After building, duplicate React instances often surface at runtime as **"Invalid hook call"** errors in the console. Inspect the build output to confirm `react`, `react-dom`, and `react-dom/client` resolve to a single copy — for example, all landing in one `react-vendor` chunk when you apply `manualChunks`. No such errors should appear.
+After building, duplicate React instances often surface at runtime as **"Invalid hook call"** errors in the console. Inspect the build output to confirm `react`, `react-dom`, and `react-dom/client` resolve to a single copy — for example, all landing in one `react-vendor` chunk when you apply the chunk group. No such errors should appear.

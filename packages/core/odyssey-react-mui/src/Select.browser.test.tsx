@@ -12,11 +12,13 @@
 
 import type { ComponentProps } from "react";
 
-import { useState } from "react";
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
+import { createRef, useState } from "react";
 import { page, userEvent } from "vitest/browser";
 
+import type { FocusHandle } from "./inputUtils.js";
+
 import { Select } from "./Select.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 type SelectProps = ComponentProps<typeof Select>;
 type SelectValue = SelectProps["value"];
@@ -166,5 +168,97 @@ describe(Select.displayName!, () => {
     );
 
     await expect.element(page.getByRole("combobox")).toBeDisabled();
+  });
+
+  test("uncontrolled multi-select adds a picked option to the chips", async () => {
+    await renderWithOdysseyProvider(
+      <Select
+        defaultValue={["Option A", "Option B"]}
+        hasMultipleChoices
+        label="Label"
+        options={defaultOptions}
+      />,
+    );
+
+    const selectedOptions = page.getByRole("list", {
+      name: /selected options/i,
+    });
+    await expect.element(selectedOptions.getByText("Option A")).toBeVisible();
+    await expect.element(selectedOptions.getByText("Option B")).toBeVisible();
+
+    await userEvent.click(page.getByRole("combobox"));
+    await userEvent.click(
+      page.getByRole("option", { name: "Option C", exact: true }),
+    );
+
+    await userEvent.keyboard("{Escape}");
+
+    await expect.element(selectedOptions.getByText("Option C")).toBeVisible();
+  });
+
+  test("controlled multi-select deletes a chip", async () => {
+    const onChange = vi.fn<NonNullable<SelectProps["onChange"]>>();
+    await renderWithOdysseyProvider(
+      <Select
+        hasMultipleChoices
+        label="Label"
+        onChange={onChange}
+        options={defaultOptions}
+        value={["Option A", "Option B"]}
+      />,
+    );
+
+    const selectedOptions = page.getByRole("list", {
+      name: /selected options/i,
+    });
+    const deleteIcon = selectedOptions
+      .getByRole("listitem")
+      .first()
+      .element()
+      .querySelector("svg");
+    if (!deleteIcon) {
+      throw new Error("The first chip has no delete icon.");
+    }
+    await userEvent.click(page.elementLocator(deleteIcon));
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0].target.value).toStrictEqual(["Option B"]);
+  });
+
+  test("object option without a value uses its text", async () => {
+    const onChange = vi.fn<NonNullable<SelectProps["onChange"]>>();
+    await renderWithOdysseyProvider(
+      <Select
+        label="Label"
+        onChange={onChange}
+        options={[
+          { text: "", value: "" },
+          { text: "Labelled", value: "labelled" },
+          { text: "Text only" },
+        ]}
+      />,
+    );
+
+    await userEvent.click(page.getByRole("combobox"));
+    await userEvent.click(page.getByRole("option", { name: "Text only" }));
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0].target.value).toBe("Text only");
+  });
+
+  test("focus handle", async () => {
+    const inputRef = createRef<FocusHandle>();
+    await renderWithOdysseyProvider(
+      <Select
+        inputRef={inputRef}
+        label="Label"
+        options={defaultOptions}
+        value="Option A"
+      />,
+    );
+
+    inputRef.current?.focus();
+
+    await expect.element(page.getByRole("combobox")).toHaveFocus();
   });
 });

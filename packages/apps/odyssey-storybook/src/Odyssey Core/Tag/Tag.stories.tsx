@@ -200,7 +200,7 @@ export const Contrast: Story = {
   parameters: staticBoardParameters,
   render: function C() {
     return (
-      <StorySection title="Tag shifts its background shade with the surface contrast (white vs gray).">
+      <StorySection title="Tag shifts its background shade between the PaletteNeutralSurface surface and the HueNeutral50 page.">
         <StoryContrastBoard>
           <TagList>
             <Tag label="Default" />

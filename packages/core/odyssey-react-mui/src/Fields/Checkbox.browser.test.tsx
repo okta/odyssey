@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
-import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import { Checkbox } from "./Checkbox.js";
 
 describe(Checkbox.displayName!, () => {
@@ -44,5 +44,28 @@ describe(Checkbox.displayName!, () => {
     );
 
     await expect(container).toBeAccessible();
+  });
+
+  test("read-only checkbox with hint ignores clicks", async () => {
+    const onChange = vi.fn();
+    const { container } = await renderWithOdysseyProvider(
+      <Checkbox
+        hint="Locked in"
+        isDefaultChecked
+        isReadOnly
+        label="Read only"
+        onChange={onChange}
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    const checkbox = page.getByRole("checkbox", { name: "Read only" });
+    await expect.element(checkbox).toHaveAccessibleDescription("Locked in");
+
+    await userEvent.click(checkbox);
+
+    await expect.element(checkbox).toBeChecked();
+    expect(onChange).not.toHaveBeenCalled();
   });
 });

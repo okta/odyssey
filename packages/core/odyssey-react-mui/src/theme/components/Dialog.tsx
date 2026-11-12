@@ -14,6 +14,7 @@ import type { ThemeOptions } from "@mui/material";
 
 import type { GetComponentsProps } from "./types.js";
 
+import { getDropShadowFilter } from "../../getDropShadowFilter.js";
 import { toCompactMediaQuery } from "../useMediaQuery.js";
 
 export const dialogComponents = ({
@@ -37,8 +38,8 @@ export const dialogComponents = ({
       paper: {
         maxWidth: `calc(${odysseyTokens.TypographyLineLengthMax} + (${odysseyTokens.Spacing6} * 2))`,
         boxShadow: "none",
-        filter:
-          "drop-shadow(0px 1px 4px rgba(29, 29, 33, 0.08)) drop-shadow(0px 4px 10px rgba(29, 29, 33, 0.08)) drop-shadow(0px 8px 30px rgba(29, 29, 33, 0.1))",
+        // `drop-shadow()` follows the paper's rounded corners, unlike `box-shadow`.
+        filter: getDropShadowFilter({ boxShadow: odysseyTokens.ShadowScale1 }),
         borderRadius: odysseyTokens.BorderRadiusOuter,
         // Full-screen at compact viewports has no rounded corners.
         [toCompactMediaQuery("width", "height")]: {
@@ -98,6 +99,8 @@ export const dialogComponents = ({
         padding: 0,
         minWidth: 0,
         flex: "1 1 auto",
+        // A title such as a key name or URL has no break points, so it would overflow the header.
+        overflowWrap: "anywhere",
       },
     },
   },

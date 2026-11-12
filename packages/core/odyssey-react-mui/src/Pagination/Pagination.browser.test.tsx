@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
-import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import { Pagination } from "./Pagination.js";
 
 describe(Pagination.displayName!, () => {
@@ -49,7 +49,7 @@ describe(Pagination.displayName!, () => {
       .toBeInTheDocument();
     await expect.element(page.getByLabelText("Next page")).toBeInTheDocument();
 
-    await expect.element(page.getByText("1-10 of 100")).toBeInTheDocument();
+    await expect.element(page.getByText("1-10 of 100 rows")).toBeVisible();
   });
 
   test("calls onPaginationChange with correct pageIndex when clicking next", async () => {
@@ -265,6 +265,311 @@ describe(Pagination.displayName!, () => {
     expect(onPaginationChange).toHaveBeenCalledWith({
       pageIndex: 1,
       pageSize: 20,
+    });
+  });
+
+  test("rows per page raised past the current page, committed with Enter", async () => {
+    const onPaginationChange = vi.fn();
+
+    const { container } = await renderWithOdysseyProvider(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={30}
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={3}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={45}
+        variant="paged"
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    await userEvent.tripleClick(page.getByLabelText("Rows per page"));
+    await userEvent.keyboard("40{Enter}");
+    await expect(container).toBeAccessible();
+
+    expect(onPaginationChange).toHaveBeenCalledTimes(1);
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 2,
+      pageSize: 40,
+    });
+  });
+
+  test("rows per page raised past the current page, committed on blur", async () => {
+    const onPaginationChange = vi.fn();
+
+    const { container } = await renderWithOdysseyProvider(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={30}
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={3}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={45}
+        variant="paged"
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    await userEvent.tripleClick(page.getByLabelText("Rows per page"));
+    await userEvent.keyboard("40");
+    await userEvent.click(page.getByRole("document"));
+    await expect(container).toBeAccessible();
+
+    expect(onPaginationChange).toHaveBeenCalledTimes(1);
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 2,
+      pageSize: 40,
+    });
+  });
+
+  test("rows per page above total rows, committed with Enter", async () => {
+    const onPaginationChange = vi.fn();
+
+    const { container } = await renderWithOdysseyProvider(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={30}
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={3}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={45}
+        variant="paged"
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    await userEvent.tripleClick(page.getByLabelText("Rows per page"));
+    await userEvent.keyboard("999{Enter}");
+    await expect(container).toBeAccessible();
+
+    expect(onPaginationChange).toHaveBeenCalledTimes(1);
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 1,
+      pageSize: 45,
+    });
+  });
+
+  test("page number past the last page, committed with Enter", async () => {
+    const onPaginationChange = vi.fn();
+
+    const { container } = await renderWithOdysseyProvider(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={10}
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={1}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={45}
+        variant="paged"
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    await userEvent.tripleClick(page.getByLabelText("Page", { exact: true }));
+    await userEvent.keyboard("9{Enter}");
+    await expect(container).toBeAccessible();
+
+    expect(onPaginationChange).toHaveBeenCalledTimes(1);
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 5,
+      pageSize: 10,
+    });
+  });
+
+  test("page number past the last page when the parent keeps the same props, then previous", async () => {
+    const onPaginationChange = vi.fn();
+
+    const { container } = await renderWithOdysseyProvider(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={45}
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={5}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={45}
+        variant="paged"
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    await userEvent.tripleClick(page.getByLabelText("Page", { exact: true }));
+    await userEvent.keyboard("9{Enter}");
+
+    await expect
+      .element(page.getByLabelText("Page", { exact: true }))
+      .toHaveValue(5);
+    await expect(container).toBeAccessible();
+
+    await userEvent.click(page.getByLabelText("Previous page"));
+
+    expect(onPaginationChange).toHaveBeenCalledTimes(1);
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 4,
+      pageSize: 10,
+    });
+  });
+
+  test("page number committed with Enter, then the input loses focus", async () => {
+    const onPaginationChange = vi.fn();
+
+    const { container, rerender } = await renderWithOdysseyProvider(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={10}
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={1}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={45}
+        variant="paged"
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    await userEvent.tripleClick(page.getByLabelText("Page", { exact: true }));
+    await userEvent.keyboard("3{Enter}");
+
+    await rerender(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={30}
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={3}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={45}
+        variant="paged"
+      />,
+    );
+
+    await userEvent.click(page.getByRole("document"));
+    await expect(container).toBeAccessible();
+
+    expect(onPaginationChange).toHaveBeenCalledTimes(1);
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 3,
+      pageSize: 10,
+    });
+  });
+
+  test("page number left unchanged, committed with Enter", async () => {
+    const onPaginationChange = vi.fn();
+
+    const { container } = await renderWithOdysseyProvider(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={20}
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={2}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={45}
+        variant="paged"
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    await userEvent.click(page.getByLabelText("Page", { exact: true }));
+    await userEvent.keyboard("{Enter}");
+    await expect(container).toBeAccessible();
+
+    expect(onPaginationChange).not.toHaveBeenCalled();
+  });
+
+  test("decimal page number, committed with Enter", async () => {
+    const onPaginationChange = vi.fn();
+
+    const { container } = await renderWithOdysseyProvider(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={10}
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={1}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={45}
+        variant="paged"
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    await userEvent.fill(page.getByLabelText("Page", { exact: true }), "2.5");
+    await userEvent.keyboard("{Enter}");
+
+    await expect
+      .element(page.getByLabelText("Page", { exact: true }))
+      .toHaveValue(2);
+    await expect(container).toBeAccessible();
+
+    expect(onPaginationChange).toHaveBeenCalledTimes(1);
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 2,
+      pageSize: 10,
+    });
+  });
+
+  test("decimal rows per page, committed with Enter", async () => {
+    const onPaginationChange = vi.fn();
+
+    const { container } = await renderWithOdysseyProvider(
+      <Pagination
+        currentPageLabel="Page"
+        lastRow={10}
+        nextLabel="Next page"
+        onPaginationChange={onPaginationChange}
+        pageIndex={1}
+        pageSize={10}
+        previousLabel="Previous page"
+        rowsPerPageLabel="Rows per page"
+        totalRows={45}
+        variant="paged"
+      />,
+    );
+
+    await expect(container).toBeAccessible();
+
+    await userEvent.fill(page.getByLabelText("Rows per page"), "12.5");
+    await userEvent.keyboard("{Enter}");
+
+    await expect.element(page.getByLabelText("Rows per page")).toHaveValue(12);
+    await expect(container).toBeAccessible();
+
+    expect(onPaginationChange).toHaveBeenCalledTimes(1);
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      pageIndex: 1,
+      pageSize: 12,
     });
   });
 

@@ -201,4 +201,26 @@ describe(useContainerQuery.name, () => {
 
     targetElement.remove();
   });
+
+  test("target taller than maxHeight", async () => {
+    const targetElement = createTargetElement({ height: 300, width: 100 });
+
+    const { result } = await renderHook(() =>
+      useContainerQuery({
+        target: targetElement,
+        minHeight: 200,
+        maxHeight: 400,
+      }),
+    );
+
+    expect(result.current).toBe(true);
+
+    targetElement.style.setProperty("height", "500px");
+
+    await vi.waitFor(() => {
+      expect(result.current).toBe(false);
+    });
+
+    targetElement.remove();
+  });
 });

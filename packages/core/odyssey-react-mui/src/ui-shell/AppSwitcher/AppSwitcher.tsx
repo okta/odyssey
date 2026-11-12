@@ -13,10 +13,12 @@
 import styled from "@emotion/styled";
 import { memo } from "react";
 
+import { useTranslation } from "../../i18n.generated/i18n.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "../../OdysseyDesignTokensContext.js";
+import { ScreenReaderText } from "../../ScreenReaderText.js";
 import { TOP_NAV_HEIGHT } from "../uiShellSharedConstants.js";
 import {
   AppSwitcherApp,
@@ -66,15 +68,28 @@ const AppSwitcher = ({
   selectedAppName,
 }: AppSwitcherProps) => {
   const odysseyDesignTokens = useOdysseyDesignTokens();
+  const { t } = useTranslation();
 
   return (
-    <AppSwitcherWrapperComponent odysseyDesignTokens={odysseyDesignTokens}>
+    <AppSwitcherWrapperComponent
+      aria-label={t("appswitcher.navigation.label")}
+      odysseyDesignTokens={odysseyDesignTokens}
+    >
       <AppSwitcherOktaAuraWrapperComponent
         odysseyDesignTokens={odysseyDesignTokens}
       >
         <OktaAura />
       </AppSwitcherOktaAuraWrapperComponent>
-      <AppSwitcherAppIconULComponent odysseyDesignTokens={odysseyDesignTokens}>
+      {/*
+       * Not a live region: the shell mounts in this state on every first paint, so announcing it would interrupt every page load. Users reach it by moving to the landmark instead.
+       */}
+      {isLoading && (
+        <ScreenReaderText>{t("appswitcher.loading.text")}</ScreenReaderText>
+      )}
+      <AppSwitcherAppIconULComponent
+        aria-busy={isLoading}
+        odysseyDesignTokens={odysseyDesignTokens}
+      >
         {isLoading
           ? [0, 1, 2].map((key) => <AppSwitcherAppSkeleton key={key} />)
           : appIcons?.map((appIcon) => (

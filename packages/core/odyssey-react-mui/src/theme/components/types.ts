@@ -10,10 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import type { ResolvedColorScheme } from "../../useColorScheme.js";
 import type { ContrastMode } from "../../useContrastMode.js";
 import type { DesignTokens } from "../theme.js";
 
 export type GetComponentsProps = {
+  /**
+   * The color scheme these overrides render. Read it for a style that differs by scheme but has no token of its own, rather than MUI's `theme.palette.mode`, so Odyssey's scheme stays the one source.
+   */
+  colorScheme: ResolvedColorScheme;
   contrastMode: ContrastMode;
   odysseyTokens: DesignTokens;
   /** @deprecated use shadowRootElement */

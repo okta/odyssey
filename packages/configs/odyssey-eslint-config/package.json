@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-eslint-config",
-  "version": "1.71.1",
+  "version": "1.73.0",
   "nx": {
     "tags": [
       "scope:tools"

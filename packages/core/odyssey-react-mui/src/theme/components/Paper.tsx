@@ -22,6 +22,13 @@ export const paperComponents = ({
 > => ({
   MuiPaper: {
     styleOverrides: {
+      // MUI lightens raised Paper in dark mode with a white gradient overlay.
+      // Odyssey's surfaces come from tokens, so the overlay would make a Dialog
+      // or Menu a different gray than the token says. Light mode has no overlay.
+      root: {
+        backgroundImage: "none",
+      },
+
       // depth/low
       elevation1: {
         boxShadow: odysseyTokens.DepthLow,

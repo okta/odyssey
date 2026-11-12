@@ -19,6 +19,7 @@ import {
   DialogTitle as MuiDialogTitle,
 } from "@mui/material";
 import { buttonClasses } from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
 import {
   cloneElement,
   memo,
@@ -39,6 +40,7 @@ import { FullScreenOverlay } from "./FullScreenOverlay.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
 import { CloseIcon } from "./icons.generated/index.js";
 import { useCompactViewportMatches } from "./theme/useMediaQuery.js";
+import { useStackedBackdropProps } from "./useStackedBackdropProps.js";
 import { useUniqueId } from "./useUniqueId.js";
 
 type MuiOnCloseEvent = Parameters<Required<MuiDialogProps>["onClose"]>[0];
@@ -189,17 +191,24 @@ const Dialog = ({
     NonNullable<ButtonProps["onClick"]>
   >((event) => onClose(event, "closeButtonClick"), [onClose]);
 
+  const muiTheme = useTheme();
+
+  const stackedBackdropProps = useStackedBackdropProps({
+    isOpen,
+    layer: muiTheme.zIndex.modal,
+  });
+
   const slotProps = useMemo<MuiDialogProps["slotProps"]>(
     () => ({
-      backdrop: { variant: variant },
+      backdrop: { ...stackedBackdropProps, variant: variant },
     }),
-    [variant],
+    [stackedBackdropProps, variant],
   );
 
   const { isWithinCompactWidthOrHeight } = useCompactViewportMatches();
 
   return (
-    <FullScreenOverlay overlayType="dialog">
+    <FullScreenOverlay>
       <MuiDialog
         aria-labelledby={dialogLabelId}
         data-se={testId}

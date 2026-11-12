@@ -1,0 +1,13 @@
+{
+  "depth": {
+    "low": {
+      "value": "0px 1px 2px 0px rgba(0, 0, 0, 0.40)"
+    },
+    "medium": {
+      "value": "0px 1px 4px 0px rgba(0, 0, 0, 0.40), 0px 4px 6px 0px rgba(0, 0, 0, 0.20), 0px 5px 15px 0px rgba(0, 0, 0, 0.30)"
+    },
+    "high": {
+      "value": "0px 1px 4px 0px rgba(0, 0, 0, 0.40), 0px 4px 10px 0px rgba(0, 0, 0, 0.40), 0px 8px 30px 0px rgba(0, 0, 0, 0.50)"
+    }
+  }
+}
