@@ -11,6 +11,7 @@
  */
 
 import styled from "@emotion/styled";
+import * as lightModeDesignTokens from "@okta/odyssey-design-tokens";
 import {
   memo,
   type MouseEventHandler,
@@ -18,6 +19,8 @@ import {
   useMemo,
 } from "react";
 
+import { createOdysseyStyledComponent } from "../createOdysseyStyledComponent.js";
+import { useColorScheme } from "../useColorScheme.js";
 import { OktaLogo } from "./SideNav/OktaLogo.js";
 
 const StyledLogoContainer = styled("div", {
@@ -39,6 +42,20 @@ const StyledLogoLink = styled("a")(() => ({
   display: "flex",
   height: "100%",
 }));
+
+// Brand logos are drawn for a light background and are often dark or low-contrast on a dark one, so dark mode sets them on a light-mode surface rather than recoloring artwork the shell does not own.
+const StyledDarkModeLogoPlate = createOdysseyStyledComponent({ tag: "span" })(
+  ({ odysseyDesignTokens }) => ({
+    alignItems: "center",
+    backgroundColor: lightModeDesignTokens.PaletteNeutralSurface,
+    borderRadius: odysseyDesignTokens.BorderRadiusTight,
+    boxSizing: "border-box",
+    display: "flex",
+    height: "100%",
+    paddingBlock: odysseyDesignTokens.Spacing1,
+    paddingInline: odysseyDesignTokens.Spacing2,
+  }),
+);
 
 export type UiShellLogoProps = {
   isSameBackgroundAsMain?: boolean;
@@ -95,7 +112,9 @@ const UiShellLogo = ({
   logoComponent,
   ...optionalProps
 }: UiShellLogoProps) => {
-  const logo = useMemo(() => {
+  const colorScheme = useColorScheme();
+
+  const logoArtwork = useMemo(() => {
     if (logoComponent) {
       return logoComponent;
     }
@@ -106,6 +125,13 @@ const UiShellLogo = ({
 
     return <OktaLogo />;
   }, [imageAltText, logoComponent, imageUrl]);
+
+  const logo =
+    colorScheme === "dark" ? (
+      <StyledDarkModeLogoPlate>{logoArtwork}</StyledDarkModeLogoPlate>
+    ) : (
+      logoArtwork
+    );
 
   return "href" in optionalProps && "ariaLabel" in optionalProps ? (
     <StyledLogoLink

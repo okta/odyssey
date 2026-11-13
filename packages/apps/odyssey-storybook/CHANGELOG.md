@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.73.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.72.0...v1.73.0) (2026-11-12)
+
+### Bug Fixes
+
+* **storybook-preset:** support older pinned exports ([#1115](https://github.com/atko-eng/odyssey-design-system/issues/1115)) ([a8bc1b2](https://github.com/atko-eng/odyssey-design-system/commit/a8bc1b231a501cc7b509d9a76c8ccea7ccd06dc2))
+* wrap long Drawer and Dialog titles ([#1080](https://github.com/atko-eng/odyssey-design-system/issues/1080)) ([b74d1b2](https://github.com/atko-eng/odyssey-design-system/commit/b74d1b2b3362c0286a51ee89545d8dc42b7faf44))
+
+### Features
+
+* **odyssey-react-mui:** add colorScheme for dark mode ([#959](https://github.com/atko-eng/odyssey-design-system/issues/959)) ([0c120c0](https://github.com/atko-eng/odyssey-design-system/commit/0c120c0ca8b17fde548c99be7a0640c49e5550a0)), closes [#storybook-root](https://github.com/atko-eng/odyssey-design-system/issues/storybook-root) [high-contrast](https://github.com/hi/issues/contrast)
+
+
+# [1.72.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.71.1...v1.72.0) (2026-10-28)
+
+### Features
+
+* add formId prop to Button ([#1040](https://github.com/atko-eng/odyssey-design-system/issues/1040)) ([2654157](https://github.com/atko-eng/odyssey-design-system/commit/2654157f6fbf4496a6984f00521ce9ea91a1fe27))
+* add Permiso components contribution ([#969](https://github.com/atko-eng/odyssey-design-system/issues/969)) ([e59b08c](https://github.com/atko-eng/odyssey-design-system/commit/e59b08c22bcffeb901e55b230c4be0e126a863a5))
+* add Spera components contribution ([#968](https://github.com/atko-eng/odyssey-design-system/issues/968)) ([79574d5](https://github.com/atko-eng/odyssey-design-system/commit/79574d5586e4738d8850479421210c481a42b4a2))
+
+
 # [1.71.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.70.1...v1.71.0) (2026-10-14)
 
 **Note:** Version bump only for package @okta/odyssey-storybook

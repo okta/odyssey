@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
-import { renderWithOdysseyProvider } from "../../test-utils/renderWithOdysseyProvider.js";
 import {
   type BaseRenderOptionProps,
   ComposablePicker,

@@ -108,9 +108,9 @@ Biome's 80-character line width applies to formatted source code, not prose or c
 
 ### Browser Test Specifics
 
-This package is the only one currently running **vitest 4 browser mode** with the Playwright provider. It has a custom matcher registered in `vitest-browser-setup.ts` that covers a gap in the built-in assertion set.
+Tests run in **Vitest 5 browser mode** with the Playwright provider and `vitest-browser-react`, like every other package. `createVitestProject` loads `@okta/odyssey-test-tooling/browser`, which registers the `toBeAccessible` matcher and the shared pointer, viewport, and `sessionStorage` hooks, then this package's `vitest-browser-setup.ts`. Add this package's own setup to `vitest-browser-setup.ts`, and anything every package needs to the shared package. See the [Test helpers](../../../AGENTS.md#test-helpers) list in the root AGENTS.md.
 
-Use `renderWithOdysseyProvider` from `./test-utils/renderWithOdysseyProvider.js` as the default render wrapper — it provides an `OdysseyProvider` context and disables MUI transitions for deterministic tests. Using `render` directly with `OdysseyProvider` is acceptable when `renderWithOdysseyProvider` is not a good fit, but this should be the exception.
+Use `renderWithOdysseyProvider` from `@okta/odyssey-test-tooling/browser` as the default render wrapper. `vitest.config.ts` aliases `@okta/odyssey-react-mui` to `src/`, so the helper wraps tests in this package's source `OdysseyProvider` — it provides an `OdysseyProvider` context and disables MUI transitions for deterministic tests. Using `render` directly with `OdysseyProvider` is acceptable when `renderWithOdysseyProvider` is not a good fit, but this should be the exception.
 
 #### `toBeAccessible`
 
@@ -154,4 +154,4 @@ test("menu opened via keyboard", async () => {
 
 #### Import note
 
-Use `"vitest/browser"` for all vitest browser imports — `Locator`, `utils`, `page`, `userEvent`, etc. The older `"@vitest/browser/context"` package is deprecated and will stop working in the next major version.
+Use `"vitest/browser"` for all vitest browser imports: `Locator`, `utils`, `page`, `userEvent`, `commands`. Do not use `"@vitest/browser/context"`. Import `render` and `renderHook` from `vitest-browser-react` only when `renderWithOdysseyProvider` does not fit.

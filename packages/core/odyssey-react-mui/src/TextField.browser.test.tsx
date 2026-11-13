@@ -12,10 +12,12 @@
 
 import type { ComponentProps } from "react";
 
-import { useState } from "react";
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
+import { createRef, useState } from "react";
 import { page, userEvent } from "vitest/browser";
 
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
+import type { FocusHandle } from "./inputUtils.js";
+
 import { TextField } from "./TextField.js";
 
 describe("TextField", () => {
@@ -68,5 +70,18 @@ describe("TextField", () => {
     await expect.element(input).toHaveAttribute("min", "0");
     await expect.element(input).toHaveAttribute("max", "100");
     await expect.element(input).toHaveAttribute("step", "5");
+  });
+
+  test("focus handle", async () => {
+    const inputRef = createRef<FocusHandle>();
+    await renderWithOdysseyProvider(
+      <TextField defaultValue="" inputRef={inputRef} label="Label" />,
+    );
+
+    inputRef.current?.focus();
+
+    await expect
+      .element(page.getByRole("textbox", { name: "Label" }))
+      .toHaveFocus();
   });
 });

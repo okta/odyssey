@@ -8,6 +8,11 @@
       }
     }
   ],
+  "pluginsConfig": {
+    "@nx/js": {
+      "projectsAffectedByDependencyUpdates": "auto"
+    }
+  },
   "namedInputs": {
     "default": [
       "{projectRoot}/**/*",
@@ -34,27 +39,11 @@
       "sharedGlobals"
     ],
     "sharedGlobals": [
-      "{workspaceRoot}/.bacon.yml",
       "{workspaceRoot}/scripts/setup.sh",
       "{workspaceRoot}/scripts/util.sh",
-      "{workspaceRoot}/yarn.lock",
-      "{workspaceRoot}/.yarnrc.yml",
       "{workspaceRoot}/.nvmrc",
-      "{workspaceRoot}/tsconfig.json",
-      "{workspaceRoot}/babel.config.*",
-      "{workspaceRoot}/.browserslistrc",
-      "{workspaceRoot}/package.json",
       {
         "env": "NODE_ENV"
-      },
-      {
-        "env": "BROWSERSLIST_ENV"
-      },
-      {
-        "env": "ODYSSEY_BUILD_MODE"
-      },
-      {
-        "env": "ODYSSEY_ICONS_TYPE"
       }
     ]
   },
@@ -87,9 +76,39 @@
       ],
       "cache": true
     },
+    "coverage": {
+      "dependsOn": [
+        "^build",
+        "build"
+      ],
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/scripts/unit-test.sh",
+        "{workspaceRoot}/scripts/test-selection-shadow.sh",
+        "{workspaceRoot}/scripts/odyssey-code-coverage.sh"
+      ],
+      "outputs": [
+        "{projectRoot}/coverage"
+      ],
+      "cache": true
+    },
     "eslint": {
       "dependsOn": [
         "^build"
+      ],
+      "inputs": [
+        "...",
+        "{workspaceRoot}/packages/configs/odyssey-eslint-config/src/**/*",
+        {
+          "env": "IS_CI"
+        },
+        {
+          "env": "IS_COMMITTING"
+        },
+        {
+          "env": "HAS_SORTING"
+        }
       ]
     },
     "generate:i18n": {
@@ -140,7 +159,10 @@
       ],
       "inputs": [
         "default",
-        "^production"
+        "^production",
+        "{workspaceRoot}/scripts/unit-test.sh",
+        "{workspaceRoot}/scripts/test-selection-shadow.sh",
+        "{workspaceRoot}/scripts/odyssey-code-coverage.sh"
       ],
       "cache": true
     }

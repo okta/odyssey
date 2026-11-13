@@ -11,6 +11,6 @@
  */
 
 /**
- * @deprecated Use `getControlledElement` from `test-utils/getControlledElement.ts` instead.
+ * @deprecated Will be removed in a future Odyssey version.
  */
 export * from "./linkedHtmlSelectors.js";

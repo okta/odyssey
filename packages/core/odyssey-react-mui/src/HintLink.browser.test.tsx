@@ -10,10 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page } from "vitest/browser";
 
 import { HintLink } from "./HintLink.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
+import { translate } from "./i18n.generated/i18n.js";
 
 describe(HintLink.displayName!, () => {
   test("renders with accessible role", async () => {
@@ -36,7 +37,9 @@ describe(HintLink.displayName!, () => {
 
     await expect(container).toBeAccessible();
 
-    const link = page.getByRole("link", { name: "Read documentation" });
+    const link = page.getByRole("link", {
+      name: `Read documentation ${translate("link.external.newwindow")}`,
+    });
     await expect.element(link).toHaveAttribute("href", "https://www.okta.com");
     await expect.element(link).toHaveAttribute("target", "_blank");
     await expect.element(link).toHaveAttribute("rel", "noopener");

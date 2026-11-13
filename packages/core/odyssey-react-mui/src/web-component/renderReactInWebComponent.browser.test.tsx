@@ -10,6 +10,8 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { page } from "vitest/browser";
+
 import { appendToSandbox } from "../test-utils/appendToSandbox.js";
 import {
   renderReactInWebComponent,
@@ -52,12 +54,10 @@ describe(renderReactInWebComponent.name, () => {
       nonce,
     });
 
-    await vi.waitFor(() => {
-      expect(reactInWebComponentElement.shadowRoot).toHaveTextContent(
-        testElementText,
-      );
-      expect(reactInWebComponentElement).toHaveAttribute("nonce", nonce);
-    });
+    await expect
+      .element(page.getByText(testElementText, { exact: true }))
+      .toBeVisible();
+    expect(reactInWebComponentElement).toHaveAttribute("nonce", nonce);
   });
 
   test("renders 2 React apps without erroring", () => {
@@ -161,5 +161,24 @@ describe(renderReactInWebComponent.name, () => {
       reactInWebComponentElement.disconnectedCallback();
       expect(() => reactInWebComponentElement.disconnectedCallback()).toThrow();
     });
+  });
+
+  test("component swapped after mount", async () => {
+    const rootElement = appendToSandbox(document.createElement("div"));
+
+    const reactInWebComponentElement = renderReactInWebComponent({
+      getReactComponent: () => <div>First render</div>,
+      webComponentParentElement: rootElement,
+    });
+    await expect.element(page.getByText("First render")).toBeVisible();
+
+    reactInWebComponentElement.setGetReactComponent(() => (
+      <div>Second render</div>
+    ));
+
+    await expect.element(page.getByText("Second render")).toBeVisible();
+    await expect
+      .element(page.getByText("First render"))
+      .not.toBeInTheDocument();
   });
 });

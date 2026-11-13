@@ -1,0 +1,108 @@
+{
+  "palette": {
+    "primary": {
+      "lighter": {
+        "value": "#212947"
+      },
+      "light": {
+        "value": "#44559a"
+      },
+      "main": {
+        "value": "#536adf"
+      },
+      "dark": {
+        "value": "#556ce1"
+      },
+      "darker": {
+        "value": "#556ce1"
+      },
+      "text": {
+        "value": "#a2b7fe"
+      },
+      "heading": {
+        "value": "#d7e0fe"
+      },
+      "highlight": {
+        "value": "#2c3762"
+      }
+    },
+    "danger": {
+      "lighter": {
+        "value": "#481c15"
+      },
+      "light": {
+        "value": "#993525"
+      },
+      "main": {
+        "value": "#df2c0f"
+      },
+      "dark": {
+        "value": "#e12e12"
+      },
+      "darker": {
+        "value": "#e33014"
+      },
+      "text": {
+        "value": "#ff9c89"
+      },
+      "heading": {
+        "value": "#fed7cf"
+      },
+      "highlight": {
+        "value": "#61241a"
+      }
+    },
+    "success": {
+      "lighter": {
+        "value": "#1b3122"
+      },
+      "light": {
+        "value": "#336845"
+      },
+      "main": {
+        "value": "#1c8349"
+      },
+      "dark": {
+        "value": "#21864c"
+      },
+      "darker": {
+        "value": "#21864c"
+      },
+      "text": {
+        "value": "#8fcba0"
+      },
+      "heading": {
+        "value": "#cbebd3"
+      },
+      "highlight": {
+        "value": "#23432d"
+      }
+    },
+    "warning": {
+      "lighter": {
+        "value": "#362916"
+      },
+      "light": {
+        "value": "#735529"
+      },
+      "main": {
+        "value": "#9b690e"
+      },
+      "dark": {
+        "value": "#9e6c14"
+      },
+      "darker": {
+        "value": "#9e6c14"
+      },
+      "text": {
+        "value": "#d8b482"
+      },
+      "heading": {
+        "value": "#f2dec3"
+      },
+      "highlight": {
+        "value": "#49371c"
+      }
+    }
+  }
+}

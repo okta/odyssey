@@ -19,10 +19,18 @@ import {
   useMemo,
 } from "react";
 
-import { DesignTokensOverride } from "./theme/theme.js";
+import { type ColorSchemeAwareDesignTokensOverride } from "./getColorSchemeDesignTokensOverride.js";
 
 export type OdysseyThemeProviderContextProps = {
-  designTokensOverride?: DesignTokensOverride;
+  /**
+   * Overrides Odyssey's design tokens. Takes one of two shapes:
+   *
+   * - A flat token override, such as `{ PalettePrimaryMain: "green" }`. It applies in light mode only, so an app that set it before dark mode existed renders exactly as it did, and dark mode never picks up colors chosen for a light surface.
+   * - An override per color scheme, such as `{ light: { PalettePrimaryMain: "green" }, dark: { PalettePrimaryMain: "lime" } }`. Each scheme reads only its own key. A scheme without a key renders Odyssey's tokens for that scheme.
+   *
+   * The two shapes cannot be mixed: an object with a scheme key cannot also name a token.
+   */
+  designTokensOverride?: ColorSchemeAwareDesignTokensOverride;
   shadowRootElement?: HTMLDivElement | HTMLElement;
   themeOverride?: ThemeOptions;
 };

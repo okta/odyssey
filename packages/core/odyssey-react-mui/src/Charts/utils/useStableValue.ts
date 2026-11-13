@@ -10,8 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import isEqual from "lodash.isequal";
 import { useRef } from "react";
+
+import { isDeepEqual } from "../../isDeepEqual.js";
 
 /**
  * Returns the same object for as long as the contents of `value` stay the same. The hook returns the new object after a content change.
@@ -24,7 +25,9 @@ export const useStableValue = <ValueType>(value: ValueType): ValueType => {
   // This hook writes to the ref during the render. The write is safe here because the new value comes only from `value`, so a second render with the same input reaches the same result.
   const stableValueRef = useRef(value);
 
-  if (!isEqual(stableValueRef.current, value)) {
+  if (
+    !isDeepEqual({ firstValue: stableValueRef.current, secondValue: value })
+  ) {
     stableValueRef.current = value;
   }
 

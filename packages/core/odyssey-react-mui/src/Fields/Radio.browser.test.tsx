@@ -10,9 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
+import { createRef } from "react";
 import { page, userEvent } from "vitest/browser";
 
-import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
+import type { FocusHandle } from "../inputUtils.js";
+
 import { Radio } from "./Radio.js";
 import { RadioGroup } from "./RadioGroup.js";
 
@@ -34,5 +37,48 @@ describe(Radio.displayName!, () => {
     await expect.element(radio).toBeChecked();
     await expect(container).toBeAccessible();
     expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  test("read-only radio with hint does not change selection", async () => {
+    const onChange = vi.fn();
+    await renderWithOdysseyProvider(
+      <RadioGroup label="Radio group label">
+        <Radio
+          hint="Locked in"
+          isReadOnly
+          label="Option A"
+          onChange={onChange}
+          value="a"
+        />
+        <Radio label="Option B" value="b" />
+      </RadioGroup>,
+    );
+
+    await expect
+      .element(page.getByRole("radio", { name: "Option A" }))
+      .toHaveAccessibleDescription("Locked in");
+
+    // The read-only radio is natively enabled but must not change.
+    await userEvent.click(page.getByRole("radio", { name: "Option A" }));
+
+    await expect
+      .element(page.getByRole("radio", { name: "Option A" }))
+      .not.toBeChecked();
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  test("focus handle", async () => {
+    const inputRef = createRef<FocusHandle>();
+    await renderWithOdysseyProvider(
+      <RadioGroup label="Radio group label">
+        <Radio inputRef={inputRef} label="Option A" value="a" />
+      </RadioGroup>,
+    );
+
+    inputRef.current?.focus();
+
+    await expect
+      .element(page.getByRole("radio", { name: "Option A" }))
+      .toHaveFocus();
   });
 });

@@ -12,6 +12,8 @@
 
 import type { TranslationOverrides } from "@okta/odyssey-contribution-tooling";
 
+import * as lightModeDesignTokens from "@okta/odyssey-design-tokens";
+import * as darkModeDesignTokens from "@okta/odyssey-design-tokens/dark";
 import { page } from "vitest/browser";
 
 import { i18n } from "../i18n.generated/i18n.js";
@@ -30,6 +32,18 @@ import { renderUiShell } from "./renderUiShell.js";
 import { defaultUiShellBreakpointConfig } from "./useUiShellBreakpoints.js";
 
 const webComponentSelector = `[${webComponentDataAttributeName}]`;
+
+// A six-digit hex color, split into its red, green, and blue byte pairs. Design tokens for text are always opaque six-digit hex, so the shorthand and alpha forms are not accepted.
+const HEX_COLOR =
+  /^#(?<red>[\da-f]{2})(?<green>[\da-f]{2})(?<blue>[\da-f]{2})$/i;
+
+const toRgb = (hexColor: string) => {
+  const channels = HEX_COLOR.exec(hexColor)?.groups;
+
+  return channels
+    ? `rgb(${[channels.red, channels.green, channels.blue].map((channel) => Number.parseInt(channel, 16)).join(", ")})`
+    : hexColor;
+};
 
 // `TranslationOverrides` is `Record<all-locales, Partial<bundle>>`; a literal with only the locale we override does not satisfy that record under strict type checking. Stub every other locale with an empty bundle so the cast is
 // safe (`as TranslationOverrides`) without resorting to `as unknown as ...`.
@@ -132,6 +146,7 @@ describe(renderUiShell.name, () => {
       enterAppFullscreen,
       exitAppFullscreen,
       getFullscreenState,
+      setColorScheme,
       setComponentProps,
       setTranslationSettings,
       slottedElements,
@@ -145,6 +160,7 @@ describe(renderUiShell.name, () => {
     expect(enterAppFullscreen).toBeInstanceOf(Function);
     expect(exitAppFullscreen).toBeInstanceOf(Function);
     expect(getFullscreenState).toBeInstanceOf(Function);
+    expect(setColorScheme).toBeInstanceOf(Function);
     expect(setComponentProps).toBeInstanceOf(Function);
     expect(setTranslationSettings).toBeInstanceOf(Function);
     expect(slottedElements).toBeInstanceOf(Object);
@@ -230,13 +246,9 @@ describe(renderUiShell.name, () => {
       topNavProps: {},
     });
 
-    await vi.waitFor(() => {
-      expect(
-        parentElement
-          .querySelector(webComponentSelector)!
-          .shadowRoot?.getElementById(appRootElementId),
-      ).toHaveTextContent(appName);
-    });
+    await expect
+      .element(page.getByText(appName, { exact: true }))
+      .toBeVisible();
   });
 
   test("renders `UiShell` with immediately updated props", async () => {
@@ -257,12 +269,43 @@ describe(renderUiShell.name, () => {
       topNavProps: {},
     });
 
+    await expect
+      .element(page.getByText(appName, { exact: true }))
+      .toBeVisible();
+  });
+
+  test("initial `colorScheme` dark, then `setColorScheme` light", async () => {
+    const parentElement = appendToSandbox(document.createElement("div"));
+
+    const { setColorScheme } = renderUiShell({
+      appElementScrollingMode: "vertical",
+      colorScheme: "dark",
+      parentElement,
+    });
+
+    // The scoped baseline paints the theme's body text color, so it reads which token set the shell resolved.
+    const getShellTextColor = () => {
+      const scopedCssBaselineElement = parentElement
+        .querySelector(webComponentSelector)
+        ?.shadowRoot?.querySelector(".MuiScopedCssBaseline-root");
+
+      return scopedCssBaselineElement
+        ? getComputedStyle(scopedCssBaselineElement).getPropertyValue("color")
+        : undefined;
+    };
+
     await vi.waitFor(() => {
-      expect(
-        parentElement
-          .querySelector(webComponentSelector)!
-          .shadowRoot?.getElementById(appRootElementId),
-      ).toHaveTextContent(appName);
+      expect(getShellTextColor()).toBe(
+        toRgb(darkModeDesignTokens.TypographyColorBody),
+      );
+    });
+
+    setColorScheme("light");
+
+    await vi.waitFor(() => {
+      expect(getShellTextColor()).toBe(
+        toRgb(lightModeDesignTokens.TypographyColorBody),
+      );
     });
   });
 
@@ -283,13 +326,11 @@ describe(renderUiShell.name, () => {
 
     expect(expectedFrenchSkipLink).toBe("Passer au contenu principal");
 
-    await vi.waitFor(() => {
-      expect(
-        parentElement
-          .querySelector(webComponentSelector)!
-          .shadowRoot?.getElementById(appRootElementId),
-      ).toHaveTextContent(expectedFrenchSkipLink);
-    });
+    await expect
+      .element(
+        page.getByRole("button", { name: expectedFrenchSkipLink, exact: true }),
+      )
+      .toBeVisible();
   });
 
   test("re-localizes shell-rendered chrome via `setTranslationSettings`", async () => {
@@ -313,13 +354,14 @@ describe(renderUiShell.name, () => {
 
     setTranslationSettings({ languageCode: "es" });
 
-    await vi.waitFor(() => {
-      expect(
-        parentElement
-          .querySelector(webComponentSelector)!
-          .shadowRoot?.getElementById(appRootElementId),
-      ).toHaveTextContent(expectedSpanishSkipLink);
-    });
+    await expect
+      .element(
+        page.getByRole("button", {
+          name: expectedSpanishSkipLink,
+          exact: true,
+        }),
+      )
+      .toBeVisible();
   });
 
   test("uses `translationOverrides` for shell-rendered chrome", async () => {
@@ -336,13 +378,9 @@ describe(renderUiShell.name, () => {
       } as TranslationOverrides,
     });
 
-    await vi.waitFor(() => {
-      expect(
-        parentElement
-          .querySelector(webComponentSelector)!
-          .shadowRoot?.getElementById(appRootElementId),
-      ).toHaveTextContent(customSkipLink);
-    });
+    await expect
+      .element(page.getByRole("button", { name: customSkipLink, exact: true }))
+      .toBeVisible();
   });
 
   test("app enters and exits fullscreen", async () => {

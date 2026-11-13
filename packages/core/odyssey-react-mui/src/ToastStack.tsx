@@ -50,7 +50,7 @@ const ToastStackContent = ({ children }: ToastListProps) => {
  */
 const ToastStack = ({ children }: ToastListProps) => {
   return (
-    <FullScreenOverlay overlayType="toastStack">
+    <FullScreenOverlay>
       <ToastStackContent>{children}</ToastStackContent>
     </FullScreenOverlay>
   );

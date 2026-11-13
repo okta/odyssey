@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
-import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import { MenuButton } from "./MenuButton.js";
 import { MenuItem } from "./MenuItem.js";
 
@@ -58,5 +58,15 @@ describe(MenuButton.displayName!, () => {
     await userEvent.click(button, { force: true });
 
     await expect.element(page.getByRole("menu")).not.toBeInTheDocument();
+  });
+
+  test("popover content opened from the trigger", async () => {
+    await renderWithOdysseyProvider(
+      <MenuButton ariaLabel="More" popoverContent={<div>Popover body</div>} />,
+    );
+
+    await userEvent.click(page.getByRole("button", { name: "More" }));
+
+    await expect.element(page.getByText("Popover body")).toBeVisible();
   });
 });

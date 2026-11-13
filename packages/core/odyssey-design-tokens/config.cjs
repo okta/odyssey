@@ -10,37 +10,5 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-module.exports = {
-  source: ["src/**/*.json"],
-  platforms: {
-    js: {
-      transformGroup: "js",
-      buildPath: "dist/",
-      files: [
-        {
-          format: "javascript/es6",
-          destination: "index.mjs",
-        },
-        {
-          format: "javascript/module-flat",
-          destination: "index.cjs",
-        },
-        {
-          format: "typescript/es6-declarations",
-          destination: "index.d.ts",
-        },
-      ],
-    },
-    scss: {
-      transformGroup: "scss",
-      buildPath: "dist/",
-      files: [
-        {
-          format: "scss/map-deep",
-          destination: "index.scss",
-          mapName: "ods-tokens",
-        },
-      ],
-    },
-  },
-};
+// Tools and docs that predate the light and dark split read `config.cjs`, so it stays the light build.
+module.exports = require("./config.light.cjs");

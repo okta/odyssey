@@ -11,11 +11,17 @@
  */
 
 import * as Tokens from "@okta/odyssey-design-tokens";
-import { memo, type ReactNode } from "react";
+import {
+  noTransitionsTheme,
+  renderWithOdysseyProvider,
+} from "@okta/odyssey-test-tooling/browser";
+import { memo, type ReactNode, useState } from "react";
 import { render } from "vitest-browser-react";
 import { page, userEvent } from "vitest/browser";
 
 import { Button } from "../Buttons/Button.js";
+import { Dialog } from "../Dialog.js";
+import { Drawer } from "../Drawer.js";
 import { translate as odysseyTranslate } from "../i18n.generated/i18n.js";
 import {
   createFullscreenModeHost,
@@ -26,9 +32,11 @@ import {
 import { OdysseyProvider } from "../OdysseyProvider.js";
 import { Surface } from "../Surface.js";
 import { appendToSandbox } from "../test-utils/appendToSandbox.js";
-import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
+import { Toast } from "../Toast.js";
+import { ToastStack } from "../ToastStack.js";
 import { renderUiShell } from "../ui-shell/renderUiShell.js";
 import { defaultUiShellBreakpointConfig } from "../ui-shell/useUiShellBreakpoints.js";
+import { renderReactInWebComponent } from "../web-component/renderReactInWebComponent.js";
 import { FullscreenButton } from "./FullscreenButton.js";
 import { FullscreenRegion } from "./FullscreenRegion.js";
 import { useFullscreen } from "./useFullscreen.js";
@@ -78,6 +86,72 @@ RegionWithButton.displayName = "RegionWithButton";
 
 const getRegionElement = ({ fullscreenId }: { fullscreenId: string }) =>
   document.getElementById(getFullscreenElementId({ fullscreenId }));
+
+const closeLabel = odysseyTranslate("close.text");
+
+// Renders the way an app built with `renderReactInWebComponent` does. Under shadow DOM, Odyssey's overlays render into containers on `<body>` that exist before the region enters fullscreen, which a light DOM render never exercises.
+const renderInWebComponent = ({ children }: { children: ReactNode }) =>
+  renderReactInWebComponent({
+    getReactComponent: ({ appRootElement, stylesRootElement }) => (
+      <OdysseyProvider
+        emotionRootElement={stylesRootElement}
+        shadowRootElement={appRootElement}
+        themeOverride={noTransitionsTheme}
+      >
+        {children}
+      </OdysseyProvider>
+    ),
+    webComponentParentElement: appendToSandbox(document.createElement("div")),
+  });
+
+const RegionWithDrawerAndDialog = memo(
+  ({ fullscreenId }: { fullscreenId: string }) => {
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [confirmationCount, setConfirmationCount] = useState(0);
+
+    return (
+      <RegionWithButton fullscreenId={fullscreenId}>
+        <Button
+          label="Open drawer"
+          onClick={() => setIsDrawerOpen(true)}
+          variant="secondary"
+        />
+        <Drawer
+          hasDividers={false}
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          title="Connection"
+        >
+          <Button
+            label="Remove connection"
+            onClick={() => setIsDialogOpen(true)}
+            variant="danger"
+          />
+        </Drawer>
+        <Dialog
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          primaryCallToActionComponent={
+            <Button
+              label={`Confirm removal ${confirmationCount}`}
+              onClick={() =>
+                setConfirmationCount(
+                  (previousConfirmationCount) => previousConfirmationCount + 1,
+                )
+              }
+              variant="danger"
+            />
+          }
+          title="Remove connection?"
+        >
+          This removes the connection from the graph.
+        </Dialog>
+      </RegionWithButton>
+    );
+  },
+);
+RegionWithDrawerAndDialog.displayName = "RegionWithDrawerAndDialog";
 
 // UI Shell runs the host in an app. Each test runs its own and destroys it, which clears the stack, so no test leaks fullscreen into the next.
 const hostState: { host?: FullscreenModeHost } = {};
@@ -618,5 +692,87 @@ describe(FullscreenRegion.displayName!, () => {
     expect(getRegionElement({ fullscreenId: "white" })).toHaveStyle({
       backgroundColor: Tokens.HueNeutralWhite,
     });
+  });
+
+  test("drawer then dialog opened from a region in fullscreen inside a web component", async () => {
+    renderInWebComponent({
+      children: (
+        <>
+          <Button label="Outside region" variant="secondary" />
+          <RegionWithDrawerAndDialog fullscreenId="web-component-overlays" />
+        </>
+      ),
+    });
+
+    await userEvent.click(
+      page.getByRole("button", { name: fullscreenButtonLabel }),
+    );
+    await userEvent.click(page.getByRole("button", { name: "Open drawer" }));
+    await userEvent.click(
+      page.getByRole("button", { name: "Remove connection" }),
+    );
+
+    await expect.element(page.getByRole("dialog")).toBeVisible();
+
+    await userEvent.click(
+      page.getByRole("button", { name: "Confirm removal 0" }),
+    );
+
+    await expect
+      .element(page.getByRole("button", { name: "Confirm removal 1" }))
+      .toBeVisible();
+    // The overlays stay reachable while the page around the region is still isolated.
+    await expect
+      .element(page.getByRole("button", { name: "Outside region" }))
+      .toHaveAttribute("inert");
+    await expect.element(page.getByRole("dialog")).toBeAccessible();
+
+    await userEvent.keyboard("{Escape}");
+
+    await expect.element(page.getByRole("dialog")).not.toBeInTheDocument();
+    await expect
+      .element(page.getByRole("button", { name: closeLabel }))
+      .toBeVisible();
+
+    await userEvent.click(page.getByRole("button", { name: closeLabel }));
+
+    await expect
+      .element(page.getByRole("button", { name: "Remove connection" }))
+      .not.toBeInTheDocument();
+    await expect
+      .element(page.getByRole("region", { name: regionLabel }))
+      .toBeVisible();
+  });
+
+  test("toast shown while a region is in fullscreen inside a web component", async () => {
+    renderInWebComponent({
+      children: (
+        <>
+          <RegionWithButton fullscreenId="web-component-toast" />
+          <ToastStack>
+            <Toast
+              isDismissable
+              isVisible
+              severity="success"
+              text="Connection removed"
+            />
+          </ToastStack>
+        </>
+      ),
+    });
+
+    await userEvent.click(
+      page.getByRole("button", { name: fullscreenButtonLabel }),
+    );
+
+    await expect
+      .element(page.getByRole("region", { name: regionLabel }))
+      .toBeVisible();
+
+    await userEvent.click(page.getByRole("button", { name: closeLabel }));
+
+    await expect
+      .element(page.getByText("Connection removed"))
+      .not.toBeInTheDocument();
   });
 });

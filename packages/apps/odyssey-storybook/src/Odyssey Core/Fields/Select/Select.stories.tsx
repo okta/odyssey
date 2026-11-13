@@ -555,7 +555,7 @@ export const Contrast: Story = {
   parameters: staticBoardParameters,
   render: function C() {
     return (
-      <StorySection title="Selected chips in a multi-select shift shade with the surface contrast (white vs gray).">
+      <StorySection title="Selected chips in a multi-select shift shade between the PaletteNeutralSurface surface and the HueNeutral50 page.">
         <StoryContrastBoard>
           <Select
             defaultValue={["Option A", "Option B", "Option C"]}

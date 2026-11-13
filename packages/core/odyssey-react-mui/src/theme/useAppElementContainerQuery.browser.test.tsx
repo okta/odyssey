@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { renderHook } from "vitest-browser-react";
 import { page } from "vitest/browser";
 
 import { OdysseyProvider } from "../OdysseyProvider.js";
-import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import { useAppElementContainerQuery } from "./useAppElementContainerQuery.js";
 
 const AppElementWidthProbe = ({ minWidth }: { minWidth: number }) => (

@@ -15,17 +15,3 @@
  */
 export const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
-
-/**
- * Checks that a value is a string or `undefined`, for optional message fields.
- */
-export const isOptionalString = (value: unknown): value is string | undefined =>
-  value === undefined || typeof value === "string";
-
-/**
- * Creates a check that a value is one of a fixed list, such as a banner's severity.
- */
-export const createIsOneOf =
-  <Value extends string>(values: readonly Value[]) =>
-  (value: unknown): value is Value =>
-    values.some((allowedValue) => allowedValue === value);

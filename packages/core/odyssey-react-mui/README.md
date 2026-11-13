@@ -117,6 +117,14 @@ const YourAppRoot = ({ children }) => (
 );
 ```
 
+### Theme style helpers
+
+`getActionTintChannel({ colorScheme })` returns comma-separated RGB channels for translucent action states: white in dark mode and black in light mode. Pass the result into `rgba()` with the opacity your state needs.
+
+`getDropShadowFilter({ boxShadow })` converts an Odyssey shadow token such as `ShadowScale1` into a CSS filter that follows the rendered shape. The shadow must omit inset and spread radius, which `drop-shadow()` does not support.
+
+Both helpers and their argument types are named exports from `@okta/odyssey-react-mui`.
+
 ### Generating ok-PL and ok-SK files
 
 Right now we do not have the code to generate these files in Odyssey.
@@ -129,11 +137,13 @@ If you are not an Okta employee, please file an issue request for assistance.
 
 If your app or library uses Vite, you may need to configure it to prevent duplicate React instances. The right fix depends on your situation:
 
-| Situation                                             | Fix                                             |
-| ----------------------------------------------------- | ----------------------------------------------- |
-| App using `renderReactInWebComponent` (older Odyssey) | `output.manualChunks` — keep React in one chunk |
-| App with duplicate copies pulled in from libraries    | `resolve.dedupe`                                |
-| Library or contributions package you publish          | `rollupOptions.external` + `output.globals`     |
+| Situation                                             | Fix                                                        |
+| ----------------------------------------------------- | ---------------------------------------------------------- |
+| App using `renderReactInWebComponent` (older Odyssey) | `output.codeSplitting` group: keep React in one chunk      |
+| App with duplicate copies pulled in from libraries    | `resolve.dedupe`                                           |
+| Library or contributions package you publish          | `build.rolldownOptions.external` + `output.globals`        |
+
+The options above are the Vite 8 names. On Vite 7, use `build.rollupOptions` and `output.manualChunks` instead.
 
 For the full guide with code examples and rationale, see the **Configuring Vite** page in Storybook.
 

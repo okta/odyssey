@@ -21,6 +21,7 @@ import type { GetComponentsProps } from "./types.js";
 import { CloseCircleFilledIcon } from "../../icons.generated/index.js";
 
 export const chipComponents = ({
+  colorScheme,
   odysseyTokens,
   contrastMode,
 }: GetComponentsProps): Pick<
@@ -33,6 +34,8 @@ export const chipComponents = ({
     },
     styleOverrides: {
       root: ({ ownerState }) => {
+        const isDarkMode = colorScheme === "dark";
+
         return {
           height: "auto",
           paddingBlock: `calc(${odysseyTokens.Spacing2} - ${odysseyTokens.BorderWidthMain})`,
@@ -128,7 +131,12 @@ export const chipComponents = ({
             [`&.${chipClasses.colorWarning}`]: {
               "&::before": {
                 border: 0,
-                backgroundColor: odysseyTokens.HueYellow200,
+                // Dark `HueYellow200` is 2.4:1 against the dark surfaces, under
+                // the 3:1 non-text minimum. One step up clears it. Light mode
+                // keeps 200 unchanged.
+                backgroundColor: isDarkMode
+                  ? odysseyTokens.HueYellow300
+                  : odysseyTokens.HueYellow200,
               },
             },
           }),

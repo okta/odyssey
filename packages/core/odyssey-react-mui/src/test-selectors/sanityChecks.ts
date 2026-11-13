@@ -21,33 +21,3 @@ export class ElementError extends Error {
     console.error("ElementError", element);
   }
 }
-
-export const normalizeText = (text: string) => {
-  return text.replace(/\s+/g, " ").trim();
-};
-
-export const getWindow = (htmlElement: HTMLElement) => {
-  if (
-    !htmlElement ||
-    !htmlElement.ownerDocument ||
-    !htmlElement.ownerDocument.defaultView
-  ) {
-    throw new ElementError("Expected element to have a `window`", htmlElement);
-  }
-
-  return htmlElement.ownerDocument.defaultView;
-};
-
-export const validateHtmlElement = (htmlElement: HTMLElement) => {
-  const window = getWindow(htmlElement);
-
-  if (
-    !(htmlElement instanceof window.SVGElement) &&
-    !(htmlElement instanceof window.HTMLElement)
-  ) {
-    throw new ElementError(
-      "Expected element to be an HTMLElement or an SVGElement",
-      htmlElement,
-    );
-  }
-};

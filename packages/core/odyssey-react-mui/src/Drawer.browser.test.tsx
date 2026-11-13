@@ -11,11 +11,11 @@
  */
 
 import { drawerClasses } from "@mui/material/Drawer";
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
 import { Drawer } from "./Drawer.js";
 import { translate as odysseyTranslate } from "./i18n.generated/i18n.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 import { ROOMY_HEIGHT, ROOMY_WIDTH } from "./test-utils/viewportTestSizes.js";
 import {
   ABSOLUTE_MINIMUM_WIDTH,
@@ -142,5 +142,23 @@ describe(Drawer.displayName!, () => {
     expect(paper.getBoundingClientRect().width).toBeLessThan(window.innerWidth);
 
     await expect(paper).toBeAccessible();
+  });
+
+  test("content taller than the drawer becomes keyboard focusable", async () => {
+    await page.viewport(ROOMY_WIDTH, 300);
+
+    await renderWithOdysseyProvider(
+      <Drawer hasDividers={false} isOpen onClose={vi.fn()} title="Drawer title">
+        <div style={{ height: "2000px" }}>Tall content.</div>
+      </Drawer>,
+    );
+
+    page
+      .getByRole("button", { name: odysseyTranslate("close.text") })
+      .element()
+      .focus();
+    await userEvent.tab();
+
+    expect(document.activeElement?.textContent).toBe("Tall content.");
   });
 });

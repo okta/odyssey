@@ -752,5 +752,11 @@ describe(useScrollState.name, () => {
 
       expect(result.current.isContentScrolled).toBe(false);
     });
+
+    test("when no container element", async () => {
+      const { result } = await renderHook(() => useScrollState(null));
+
+      expect(result.current.isContentScrolled).toBe(false);
+    });
   });
 });

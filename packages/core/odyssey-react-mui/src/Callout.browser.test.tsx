@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
 import { Callout } from "./Callout.js";
 import { translate as odysseyTranslate } from "./i18n.generated/i18n.js";
-import { renderWithOdysseyProvider } from "./test-utils/renderWithOdysseyProvider.js";
 
 describe(Callout.displayName!, () => {
   test("callout with link and anchor href", async () => {

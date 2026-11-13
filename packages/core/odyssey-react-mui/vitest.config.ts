@@ -10,67 +10,49 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { playwright } from "@vitest/browser-playwright";
+import {
+  createCoverage,
+  createVitestProject,
+} from "@okta/odyssey-test-tooling";
 import { defineConfig } from "vitest/config";
+
+import { emulateColorScheme } from "./emulateColorScheme.js";
+
+// Matches the bare `@okta/odyssey-react-mui` specifier and nothing after it. A plain string alias also matches every subpath as a prefix, so `@okta/odyssey-react-mui/labs` would resolve to `src/index.ts/labs` and fail.
+const ODYSSEY_REACT_MUI_ROOT_SPECIFIER = /^@okta\/odyssey-react-mui$/;
 
 export default defineConfig({
   test: {
-    coverage: {
-      provider: "v8",
+    coverage: createCoverage({
+      // `test-utils/` and `testSupport*` files are fixtures the tests import, not shipped code. The theme files below only map tokens to MUI style overrides, so VRT is what catches a change in them; a unit test could only restate the values.
       exclude: [
-        "**/@types/**",
-        "**/icons.generated/**",
-        "**/index.ts",
-        "**/properties/**",
-        "**/types.ts",
+        "**/test-utils/**",
+        "**/testSupport*.{ts,tsx}",
+        "src/labs/DatePickers/dateTimePickerTheme.ts",
+        "src/theme/components/**",
+        "src/theme/components.tsx",
+        "src/theme/mixins.ts",
+        "src/theme/shape.ts",
+        "src/theme/spacing.ts",
+        "src/theme/typography.ts",
       ],
-      include: ["src/**/*.{ts,tsx}"],
-      // branches reset to 57 after vitest 3→4 upgrade: Playwright CDP collects real branch data from Chromium, replacing the inflated Node V8 numbers that counted untested imported modules as 100% covered.
-      thresholds: {
-        branches: 57,
-        functions: 56,
-        lines: 57,
-        statements: 57,
-      },
-    },
+    }),
     projects: [
-      {
-        test: {
-          environment: "node",
-          globals: true,
-          include: ["**/*.node.test.{ts,tsx}"],
-          name: "unit",
-          setupFiles: ["./vitest-node-setup.ts"],
+      createVitestProject({ type: "node" }),
+      createVitestProject({
+        type: "browser",
+        commands: { emulateColorScheme },
+        // `@okta/odyssey-test-tooling`'s render helpers import `@okta/odyssey-react-mui`. Pointing that at this package's source, not its `dist`, gives the helper the same OdysseyProvider and theme context the components under test read, and keeps the tests off a stale build.
+        resolve: {
+          alias: [
+            {
+              find: ODYSSEY_REACT_MUI_ROOT_SPECIFIER,
+              replacement: `${import.meta.dirname}/src/index.ts`,
+            },
+          ],
         },
-      },
-      {
-        optimizeDeps: {
-          include: ["@emotion/react/jsx-dev-runtime", "react/jsx-runtime"],
-        },
-        test: {
-          browser: {
-            enabled: true,
-            headless: true,
-            instances: [
-              {
-                browser: "chromium",
-                screenshotDirectory: "__vitest-screenshots",
-                viewport: {
-                  height: 768,
-                  width: 1024,
-                },
-              },
-            ],
-            provider: playwright(),
-          },
-          attachmentsDir: "__vitest-screenshots",
-          clearMocks: true,
-          globals: true,
-          include: ["**/*.browser.test.{ts,tsx}"],
-          name: "browser",
-          setupFiles: ["./vitest-browser-setup.ts"],
-        },
-      },
+        setupFiles: ["./vitest-browser-setup.ts"],
+      }),
     ],
   },
 });

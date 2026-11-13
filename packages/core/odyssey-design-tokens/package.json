@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-design-tokens",
-  "version": "1.71.1",
+  "version": "1.73.0",
   "nx": {
     "tags": [
       "scope:core"
@@ -20,6 +20,11 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
+    "./dark": {
+      "types": "./dist/dark.d.ts",
+      "import": "./dist/dark.mjs",
+      "require": "./dist/dark.cjs"
+    },
     "./scss": "./dist/index.scss"
   },
   "repository": {
@@ -31,7 +36,8 @@
     "style-dictionary": "^3.9.2"
   },
   "scripts": {
-    "prebuild": "style-dictionary clean --config ./config.cjs",
-    "build": "style-dictionary build --config ./config.cjs"
+    "build:check": "node scripts/checkLightAndDarkTokensMatch.mjs",
+    "build:clean": "style-dictionary clean --config ./config.light.cjs && style-dictionary clean --config ./config.dark.cjs",
+    "build": "yarn build:clean && style-dictionary build --config ./config.light.cjs && style-dictionary build --config ./config.dark.cjs && yarn build:check"
   }
 }

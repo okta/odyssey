@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { useState } from "react";
 import { page, userEvent } from "vitest/browser";
 
-import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import { Radio } from "./Radio.js";
 import { RadioGroup } from "./RadioGroup.js";
 

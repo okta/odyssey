@@ -1,4 +1,5 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render } from "vitest-browser-react";
+import { page } from "vitest/browser";
 
 import type { UseTranslation } from "./getTranslationServices.js";
 
@@ -15,77 +16,79 @@ describe(getTranslationServices.name, () => {
     fr,
   } as const;
 
-  let i18nInstance: ReturnType<typeof getTranslationServices>["i18n"];
-  let OdysseyTranslationProvider: ReturnType<
-    typeof getTranslationServices
-  >["TranslationProvider"];
-  let useTranslation: UseTranslation<"test-app", (typeof testResources)["en"]>;
-
-  // create a fresh instance of the translation services before each test
-  beforeEach(() => {
-    const services = getTranslationServices({
+  const renderServices = () =>
+    getTranslationServices({
       namespace: "test-app",
       defaultLanguageCode: "en",
       resources: testResources,
     });
-    i18nInstance = services.i18n;
-    OdysseyTranslationProvider = services.TranslationProvider;
-    useTranslation = services.useTranslation;
-  });
 
-  const TestComponent = () => {
-    const [t, i18n] = useTranslation();
-    return (
-      <div>
-        <h1>{t("greeting", { friends: "FRIENDS" })}</h1>
-        <h2>{t("farewell")}</h2>
-        <p>Current language: {i18n.language}</p>
-      </div>
-    );
-  };
+  const createTestComponent = (
+    useTranslation: UseTranslation<"test-app", (typeof testResources)["en"]>,
+  ) =>
+    function TestComponent() {
+      const [t, i18n] = useTranslation();
+      return (
+        <div>
+          <h1>{t("greeting", { friends: "FRIENDS" })}</h1>
+          <h2>{t("farewell")}</h2>
+          <p>Current language: {i18n.language}</p>
+        </div>
+      );
+    };
 
-  test("renders `children` and uses the default translations", () => {
-    render(
+  test("renders `children` and uses the default translations", async () => {
+    const { TranslationProvider: OdysseyTranslationProvider, useTranslation } =
+      renderServices();
+    const TestComponent = createTestComponent(useTranslation);
+
+    await render(
       <OdysseyTranslationProvider>
         <TestComponent />
       </OdysseyTranslationProvider>,
     );
 
     // check if the English text is rendered by default
-    expect(
-      screen.getByRole("heading", { name: "Hello World FRIENDS" }),
-    ).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("heading", { name: "Hello World FRIENDS" }))
+      .toBeVisible();
   });
 
   test("switches languages when the `languageCode` prop changes", async () => {
-    const { rerender } = render(
+    const { TranslationProvider: OdysseyTranslationProvider, useTranslation } =
+      renderServices();
+    const TestComponent = createTestComponent(useTranslation);
+
+    const { rerender } = await render(
       <OdysseyTranslationProvider languageCode="en">
         <TestComponent />
       </OdysseyTranslationProvider>,
     );
 
-    expect(
-      screen.getByRole("heading", { name: "Hello World FRIENDS" }),
-    ).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("heading", { name: "Hello World FRIENDS" }))
+      .toBeVisible();
 
     // rerender the component with a new language prop
-    rerender(
+    await rerender(
       <OdysseyTranslationProvider languageCode="fr">
         <TestComponent />
       </OdysseyTranslationProvider>,
     );
 
     // wait for the content to update and check for the French text
-    await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { name: "Bonjour le monde FRIENDS" }),
-      ).toBeInTheDocument();
-      expect(screen.getByText("Current language: fr")).toBeInTheDocument();
-    });
+    await expect
+      .element(page.getByRole("heading", { name: "Bonjour le monde FRIENDS" }))
+      .toBeVisible();
+    await expect.element(page.getByText("Current language: fr")).toBeVisible();
   });
 
-  test("applies translation overrides to one of the known languages", () => {
-    render(
+  test("applies translation overrides to one of the known languages", async () => {
+    const { TranslationProvider: OdysseyTranslationProvider, useTranslation } =
+      renderServices();
+    const TestComponent = createTestComponent(useTranslation);
+
+    await render(
       <OdysseyTranslationProvider
         translationOverrides={{ en: { greeting: "Hello Overridden!" } }}
       >
@@ -93,13 +96,17 @@ describe(getTranslationServices.name, () => {
       </OdysseyTranslationProvider>,
     );
 
-    expect(
-      screen.getByRole("heading", { name: "Hello Overridden!" }),
-    ).toBeInTheDocument();
+    await expect
+      .element(page.getByRole("heading", { name: "Hello Overridden!" }))
+      .toBeVisible();
   });
 
   test("a provider without overrides mounted after one with overrides unmounts", async () => {
-    const { unmount } = render(
+    const { TranslationProvider: OdysseyTranslationProvider, useTranslation } =
+      renderServices();
+    const TestComponent = createTestComponent(useTranslation);
+
+    const { unmount } = await render(
       <OdysseyTranslationProvider
         translationOverrides={{ en: { greeting: "Hello Overridden!" } }}
       >
@@ -108,40 +115,45 @@ describe(getTranslationServices.name, () => {
     );
 
     // the override lands in an effect, so the first paint can still be the default
-    expect(
-      await screen.findByRole("heading", { name: "Hello Overridden!" }),
-    ).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Hello Overridden!" }))
+      .toBeVisible();
 
-    unmount();
+    await unmount();
 
-    render(
+    await render(
       <OdysseyTranslationProvider>
         <TestComponent />
       </OdysseyTranslationProvider>,
     );
 
-    await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { name: "Hello World FRIENDS" }),
-      ).toBeVisible();
-    });
+    await expect
+      .element(page.getByRole("heading", { name: "Hello World FRIENDS" }))
+      .toBeVisible();
   });
 
   test("an inner provider with overrides unmounts under an outer provider with its own", async () => {
+    const {
+      i18n: i18nInstance,
+      TranslationProvider: OdysseyTranslationProvider,
+      useTranslation,
+    } = renderServices();
+    const TestComponent = createTestComponent(useTranslation);
+
     const outerOverrides = { en: { greeting: "Outer greeting {{friends}}" } };
     const innerOverrides = { en: { farewell: "Inner farewell" } };
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <OdysseyTranslationProvider translationOverrides={outerOverrides}>
         <TestComponent />
       </OdysseyTranslationProvider>,
     );
 
-    expect(
-      await screen.findByRole("heading", { name: "Outer greeting FRIENDS" }),
-    ).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Outer greeting FRIENDS" }))
+      .toBeVisible();
 
-    rerender(
+    await rerender(
       <OdysseyTranslationProvider translationOverrides={outerOverrides}>
         <OdysseyTranslationProvider translationOverrides={innerOverrides}>
           <TestComponent />
@@ -149,11 +161,11 @@ describe(getTranslationServices.name, () => {
       </OdysseyTranslationProvider>,
     );
 
-    expect(
-      await screen.findByRole("heading", { name: "Inner farewell" }),
-    ).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Inner farewell" }))
+      .toBeVisible();
 
-    rerender(
+    await rerender(
       <OdysseyTranslationProvider translationOverrides={outerOverrides}>
         <TestComponent />
       </OdysseyTranslationProvider>,
@@ -163,12 +175,19 @@ describe(getTranslationServices.name, () => {
       greeting: "Outer greeting {{friends}}",
       farewell: "Goodbye",
     });
-    expect(
-      screen.getByRole("heading", { name: "Outer greeting FRIENDS" }),
-    ).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Outer greeting FRIENDS" }))
+      .toBeVisible();
   });
 
   test("a bundle the consumer added directly outlives an unrelated provider's unmount", async () => {
+    const {
+      i18n: i18nInstance,
+      TranslationProvider: OdysseyTranslationProvider,
+      useTranslation,
+    } = renderServices();
+    const TestComponent = createTestComponent(useTranslation);
+
     i18nInstance.addResourceBundle(
       "en",
       "test-app",
@@ -177,7 +196,7 @@ describe(getTranslationServices.name, () => {
       true,
     );
 
-    const { unmount } = render(
+    const { unmount } = await render(
       <OdysseyTranslationProvider
         translationOverrides={{ en: { greeting: "Provider greeting" } }}
       >
@@ -185,28 +204,35 @@ describe(getTranslationServices.name, () => {
       </OdysseyTranslationProvider>,
     );
 
-    expect(
-      await screen.findByRole("heading", { name: "Provider greeting" }),
-    ).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Provider greeting" }))
+      .toBeVisible();
 
-    unmount();
+    await unmount();
 
-    render(
+    await render(
       <OdysseyTranslationProvider>
         <TestComponent />
       </OdysseyTranslationProvider>,
     );
 
-    expect(
-      await screen.findByRole("heading", { name: "Hello World FRIENDS" }),
-    ).toBeVisible();
-    expect(
-      screen.getByRole("heading", { name: "Consumer farewell" }),
-    ).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Hello World FRIENDS" }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Consumer farewell" }))
+      .toBeVisible();
   });
 
   test("an override for a language the resources do not cover unmounts", async () => {
-    const { unmount } = render(
+    const {
+      i18n: i18nInstance,
+      TranslationProvider: OdysseyTranslationProvider,
+      useTranslation,
+    } = renderServices();
+    const TestComponent = createTestComponent(useTranslation);
+
+    const { unmount } = await render(
       <OdysseyTranslationProvider<"custom">
         translationOverrides={{ custom: { greeting: "Custom greeting" } }}
       >
@@ -214,27 +240,29 @@ describe(getTranslationServices.name, () => {
       </OdysseyTranslationProvider>,
     );
 
-    expect(
-      await screen.findByRole("heading", { name: "Hello World FRIENDS" }),
-    ).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Hello World FRIENDS" }))
+      .toBeVisible();
 
-    unmount();
+    await unmount();
 
     expect(i18nInstance.options.ns).toStrictEqual(["test-app"]);
     expect(
       i18nInstance.getResource("custom", "test-app", "greeting"),
     ).toBeUndefined();
 
-    render(
+    await render(
       <OdysseyTranslationProvider>
         <TestComponent />
       </OdysseyTranslationProvider>,
     );
 
-    expect(
-      await screen.findByRole("heading", { name: "Hello World FRIENDS" }),
-    ).toBeVisible();
-    expect(screen.getByRole("heading", { name: "Goodbye" })).toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Hello World FRIENDS" }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("heading", { name: "Goodbye" }))
+      .toBeVisible();
   });
 
   describe("when components are nested", () => {
@@ -275,18 +303,28 @@ describe(getTranslationServices.name, () => {
       );
     };
 
-    const ComponentWithNestedContributions = () => {
-      const { t } = useTranslation();
-      return (
-        <div>
-          <h1>{t("greeting", { friends: "PARENT" })}</h1>
-          <ContributionsPackageComponent />
-        </div>
-      );
-    };
+    const createComponentWithNestedContributions = (
+      useTranslation: UseTranslation<"test-app", (typeof testResources)["en"]>,
+    ) =>
+      function ComponentWithNestedContributions() {
+        const { t } = useTranslation();
+        return (
+          <div>
+            <h1>{t("greeting", { friends: "PARENT" })}</h1>
+            <ContributionsPackageComponent />
+          </div>
+        );
+      };
 
     test("the appropriate translation bundle is used for each component", async () => {
-      render(
+      const {
+        TranslationProvider: OdysseyTranslationProvider,
+        useTranslation,
+      } = renderServices();
+      const ComponentWithNestedContributions =
+        createComponentWithNestedContributions(useTranslation);
+
+      await render(
         <OdysseyTranslationProvider>
           <ContributionsPackageOdysseyTranslationProvider>
             <ComponentWithNestedContributions />
@@ -294,22 +332,24 @@ describe(getTranslationServices.name, () => {
         </OdysseyTranslationProvider>,
       );
 
-      await waitFor(() => {
-        // we are correctly using top level odyssey translation provider text
-        expect(
-          screen.getByRole("heading", { name: "Hello World PARENT" }),
-        ).toBeInTheDocument();
+      // we are correctly using top level odyssey translation provider text
+      await expect
+        .element(page.getByRole("heading", { name: "Hello World PARENT" }))
+        .toBeVisible();
 
-        // we are correctly using the nested odyssey translation provider text
-        expect(
-          screen.getByRole("heading", { name: "I am the nested greeting" }),
-        ).toBeInTheDocument();
-        expect(
-          screen.getByRole("heading", {
+      // we are correctly using the nested odyssey translation provider text
+      await expect
+        .element(
+          page.getByRole("heading", { name: "I am the nested greeting" }),
+        )
+        .toBeVisible();
+      await expect
+        .element(
+          page.getByRole("heading", {
             name: "I am only available in the nested translations - placeholder text one, placeholder text two",
           }),
-        ).toBeInTheDocument();
-      });
+        )
+        .toBeVisible();
     });
   });
 });

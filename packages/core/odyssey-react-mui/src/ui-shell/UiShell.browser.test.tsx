@@ -209,7 +209,7 @@ describe("UiShell", () => {
         return () => {};
       };
 
-      const { container } = await render(
+      await render(
         <UiShell
           appElement={appElement}
           appElementScrollingMode="vertical"
@@ -220,7 +220,9 @@ describe("UiShell", () => {
         />,
       );
 
-      expect(container).toHaveTextContent(sideNavItemText);
+      await expect
+        .element(page.getByText(sideNavItemText, { exact: true }))
+        .toBeVisible();
     });
 
     test("uses default props if no value passed to subscription", async () => {
@@ -261,7 +263,7 @@ describe("UiShell", () => {
           return () => {};
         };
 
-      const { container } = await render(
+      await render(
         <UiShell
           appElement={appElement}
           appElementScrollingMode="vertical"
@@ -279,7 +281,14 @@ describe("UiShell", () => {
         "skiplinks.main",
       ) as string;
 
-      expect(container).toHaveTextContent(expectedFrenchSkipLink);
+      await expect
+        .element(
+          page.getByRole("button", {
+            name: expectedFrenchSkipLink,
+            exact: true,
+          }),
+        )
+        .toBeVisible();
     });
 
     test("unsubscribes from translation settings when unmounted", async () => {

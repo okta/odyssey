@@ -19,11 +19,11 @@ import {
 } from "@highcharts/react";
 import { Accessibility } from "@highcharts/react/modules/Accessibility.js";
 import { LineSeries } from "@highcharts/react/series/Line.js";
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { type ReactElement } from "react";
 import { page, userEvent } from "vitest/browser";
 
 import { defaultOdysseyDesignTokensContextValue } from "../../OdysseyDesignTokensContext.js";
-import { renderWithOdysseyProvider } from "../../test-utils/renderWithOdysseyProvider.js";
 import { getChartTokens } from "../utils/chartTokens.js";
 import { ChartPopoverContent } from "./ChartPopoverContent.js";
 

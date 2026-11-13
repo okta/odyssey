@@ -40,6 +40,25 @@ Import the SCSS variables:
 
 A nested `$ods-tokens` map covering all tokens is also available from the same import.
 
+## Light and dark tokens
+
+The default export is the light token set. The dark set has the same token names, with values for dark surfaces:
+
+```js
+import * as darkModeTokens from "@okta/odyssey-design-tokens/dark";
+```
+
+Most apps do not import the dark set themselves. Pass `colorScheme` to `OdysseyProvider` from `@okta/odyssey-react-mui` and Odyssey picks the set for you.
+
+| Folder | Config | Builds |
+| --- | --- | --- |
+| `src/light` | `config.light.cjs` (also `config.cjs`) | `dist/index.*` |
+| `src/dark` | `config.dark.cjs` | `dist/dark.*` |
+
+A file in `src/dark` lists only the tokens whose dark value differs. Every other token keeps its light value. After both builds, `yarn build` runs `scripts/checkLightAndDarkTokensMatch.mjs`, which fails unless both exports have exactly the same token names with the same value types, checked in both directions.
+
+For a background, use `PaletteNeutralSurface` rather than `HueNeutralWhite`. They have the same value, white in light mode and the dark surface gray in dark mode, but only the first name says what it is for. `HueNeutralWhite` is not deprecated, and both exports keep it.
+
 ## License
 
 [Apache Version 2.0](https://github.com/atko-eng/odyssey-design-system/blob/master/LICENSE)

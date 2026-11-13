@@ -17,6 +17,7 @@ import { buttonClasses } from "@mui/material/Button";
 import type { GetComponentsProps } from "./types.js";
 
 export const buttonComponents = ({
+  colorScheme,
   odysseyTokens,
 }: GetComponentsProps): Pick<
   NonNullable<ThemeOptions["components"]>,
@@ -60,7 +61,7 @@ export const buttonComponents = ({
           },
 
           "&:focus-visible": {
-            boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${odysseyTokens.PalettePrimaryMain}`,
+            boxShadow: `0 0 0 2px ${odysseyTokens.HueNeutralWhite}, 0 0 0 4px ${colorScheme === "dark" ? odysseyTokens.HueBlue500 : odysseyTokens.PalettePrimaryMain}`,
             outline: "2px solid transparent",
             outlineOffset: "1px",
           },
@@ -101,7 +102,7 @@ export const buttonComponents = ({
           }),
 
           ...(ownerState.variant === "primary" && {
-            color: odysseyTokens.HueNeutralWhite,
+            color: odysseyTokens.TypographyColorInverse,
             backgroundColor: odysseyTokens.PalettePrimaryMain,
 
             "&:hover:not([aria-disabled='true'])": {
@@ -145,7 +146,7 @@ export const buttonComponents = ({
 
           ...(ownerState.variant === "danger" && {
             backgroundColor: odysseyTokens.PaletteDangerMain,
-            color: odysseyTokens.HueNeutralWhite,
+            color: odysseyTokens.TypographyColorInverse,
 
             "&:hover:not([aria-disabled='true'])": {
               backgroundColor: odysseyTokens.PaletteDangerDark,
@@ -165,19 +166,28 @@ export const buttonComponents = ({
           ...(ownerState.variant === "dangerSecondary" && {
             backgroundColor: "transparent",
             borderColor: odysseyTokens.HueNeutral300,
-            color: odysseyTokens.PaletteDangerMain,
+            color:
+              colorScheme === "dark"
+                ? odysseyTokens.TypographyColorDanger
+                : odysseyTokens.PaletteDangerMain,
 
             "&:hover:not([aria-disabled='true'])": {
               backgroundColor: odysseyTokens.HueNeutral200,
               borderColor: odysseyTokens.HueNeutral400,
-              color: odysseyTokens.PaletteDangerMain,
+              color:
+                colorScheme === "dark"
+                  ? odysseyTokens.TypographyColorDanger
+                  : odysseyTokens.PaletteDangerMain,
             },
 
             "&:active:not([aria-disabled='true']), &[aria-expanded='true']:not([aria-disabled='true'])":
               {
                 backgroundColor: "transparent",
                 borderColor: odysseyTokens.PaletteDangerMain,
-                color: odysseyTokens.PaletteDangerMain,
+                color:
+                  colorScheme === "dark"
+                    ? odysseyTokens.TypographyColorDanger
+                    : odysseyTokens.PaletteDangerMain,
               },
 
             "&[aria-disabled='true']:not([aria-busy='true'])": {

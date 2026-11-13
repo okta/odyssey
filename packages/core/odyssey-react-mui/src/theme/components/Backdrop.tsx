@@ -27,6 +27,7 @@ export const backdropComponents = (): Pick<
 
         ...(ownerState.invisible === true && {
           backgroundColor: "transparent",
+          backdropFilter: "none",
         }),
       }),
     },

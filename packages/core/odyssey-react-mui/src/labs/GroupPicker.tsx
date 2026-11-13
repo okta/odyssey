@@ -23,7 +23,7 @@ import {
   Avatar as MuiAvatar,
 } from "@mui/material";
 import { avatarClasses } from "@mui/material/Avatar";
-import { HTMLAttributes, memo, useCallback } from "react";
+import { type FC, HTMLAttributes, memo, useCallback } from "react";
 
 import { AutocompleteProps } from "../Autocomplete.js";
 import { Field } from "../Field.js";
@@ -256,6 +256,8 @@ const GroupPicker = <
   );
 };
 
-const MemoizedGroupPicker = memo(GroupPicker) as typeof GroupPicker;
+const MemoizedGroupPicker = memo(GroupPicker) as typeof GroupPicker &
+  Pick<FC, "displayName">;
+MemoizedGroupPicker.displayName = "GroupPicker";
 
 export { MemoizedGroupPicker as GroupPicker };

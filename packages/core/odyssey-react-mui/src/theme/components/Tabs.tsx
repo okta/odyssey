@@ -18,6 +18,7 @@ import { svgIconClasses } from "@mui/material/SvgIcon";
 import type { GetComponentsProps } from "./types.js";
 
 export const tabsComponents = ({
+  colorScheme,
   odysseyTokens,
 }: GetComponentsProps): Pick<
   NonNullable<ThemeOptions["components"]>,
@@ -69,7 +70,10 @@ export const tabsComponents = ({
           insetInlineStart: `calc(-1 * ${odysseyTokens.Spacing2})`,
           borderWidth: odysseyTokens.BorderWidthMain,
           borderStyle: odysseyTokens.BorderStyleMain,
-          borderColor: odysseyTokens.PalettePrimaryMain,
+          borderColor:
+            colorScheme === "dark"
+              ? odysseyTokens.HueBlue500
+              : odysseyTokens.PalettePrimaryMain,
           borderRadius: odysseyTokens.BorderRadiusMain,
         },
 
@@ -104,12 +108,9 @@ export const tabsComponents = ({
         gap: odysseyTokens.Spacing5,
       },
 
-      scrollButtons: ({ theme }) => ({
+      scrollButtons: {
         zIndex: 1,
-        transition: theme.transitions.create("opacity", {
-          duration: odysseyTokens.TransitionDurationMain,
-          easing: odysseyTokens.TransitionTimingMain,
-        }),
+        transition: `opacity ${odysseyTokens.TransitionDurationMain} ${odysseyTokens.TransitionTimingMain}`,
 
         [`& .${svgIconClasses.root}`]: {
           width: odysseyTokens.Spacing4,
@@ -126,15 +127,13 @@ export const tabsComponents = ({
         },
         "&:first-of-type::after": {
           right: `-${odysseyTokens.Spacing3}`,
-          background:
-            "linear-gradient(90deg, #FFF 0%, #FFF 72.49%, rgba(255, 255, 255, 0.70) 86.5%, rgba(255, 255, 255, 0.00) 100%)",
+          background: `linear-gradient(90deg, ${odysseyTokens.PaletteNeutralSurface} 0%, ${odysseyTokens.PaletteNeutralSurface} 72.49%, color-mix(in srgb, ${odysseyTokens.PaletteNeutralSurface} 70%, transparent) 86.5%, transparent 100%)`,
         },
         "&:last-of-type::after": {
           left: `-${odysseyTokens.Spacing3}`,
-          background:
-            "linear-gradient(-90deg, #FFF 0%, #FFF 72.49%, rgba(255, 255, 255, 0.70) 86.5%, rgba(255, 255, 255, 0.00) 100%)",
+          background: `linear-gradient(-90deg, ${odysseyTokens.PaletteNeutralSurface} 0%, ${odysseyTokens.PaletteNeutralSurface} 72.49%, color-mix(in srgb, ${odysseyTokens.PaletteNeutralSurface} 70%, transparent) 86.5%, transparent 100%)`,
         },
-      }),
+      },
     },
   },
 });

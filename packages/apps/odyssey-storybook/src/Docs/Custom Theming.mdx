@@ -146,6 +146,34 @@ const YourAppRoot = ({ children }) => (
 );
 ```
 
+## Overriding Design Tokens
+
+`OdysseyProvider` and `OdysseyThemeProvider` take a `designTokensOverride` prop in one of two shapes.
+
+A flat override changes tokens in light mode only. Dark mode keeps Odyssey's dark tokens, because colors chosen for a light surface are not reviewed for a dark one:
+
+```tsx
+<OdysseyProvider designTokensOverride={{ PalettePrimaryMain: "green" }}>
+  {children}
+</OdysseyProvider>
+```
+
+An override keyed by color scheme sets each scheme separately. A scheme with no key renders Odyssey's tokens for that scheme:
+
+```tsx
+<OdysseyProvider
+  colorScheme="system"
+  designTokensOverride={{
+    dark: { PalettePrimaryMain: "lime" },
+    light: { PalettePrimaryMain: "green" },
+  }}
+>
+  {children}
+</OdysseyProvider>
+```
+
+The two shapes cannot be mixed. An object with a `light` or `dark` key cannot also name a token.
+
 ## Custom Theme Examples
 
 A way to use a custom theme to override the Odyssey default theme.

@@ -8,6 +8,7 @@ yarn-error.log
 **/coverage/
 **/reports/
 __vitest-screenshots/
+.vitest/
 .pnp.*
 .yarn/*
 !.yarn/patches

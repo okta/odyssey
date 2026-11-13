@@ -10,13 +10,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { useCallback, useState } from "react";
 import { page, userEvent } from "vitest/browser";
 
 import { Button } from "../Buttons/Button.js";
 import { translate as odysseyTranslate } from "../i18n.generated/i18n.js";
-import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import { DatePicker } from "./DatePicker.js";
+
+const timeZoneOptions = [
+  { label: "Eastern Time", value: "America/New_York" },
+  { label: "Tokyo Time", value: "Asia/Tokyo" },
+];
+
+const earlierThanMinimumMessage =
+  "Date entered is earlier than allowed dates. Select a date from the range available in the calendar.";
+const laterThanMaximumMessage =
+  "Date entered is later than the allowed dates. Select a date from the range available in the calendar.";
 
 // Every prop but `value` is memoized so `value` is the only one whose identity changes between renders. `DatePicker` is a `React.memo` wrapper, so this is the render path a memoizing consumer actually takes, and it is the path where a picker that stopped following `value` would go unnoticed.
 const DatePickerWithOutsideWrites = ({
@@ -327,5 +337,173 @@ describe(DatePicker.displayName!, () => {
     await userEvent.type(dateInput, "12252025");
 
     await expect.element(dateInput).toHaveValue("12/25/2025");
+  });
+
+  test("time zone chosen from the time zone picker", async () => {
+    await renderWithOdysseyProvider(
+      <DatePicker
+        label="Date"
+        timeZone="America/New_York"
+        timeZoneOptions={timeZoneOptions}
+        timeZonePickerLabel="Time zone"
+        value="2024-07-21T03:00:00.000Z"
+      />,
+    );
+
+    await expect.element(page.getByLabelText("Date")).toHaveValue("07/20/2024");
+
+    await userEvent.click(page.getByLabelText("Time zone"));
+    await userEvent.click(page.getByRole("option", { name: "Tokyo Time" }));
+
+    await expect.element(page.getByLabelText("Date")).toHaveValue("07/21/2024");
+    await expect
+      .element(page.getByLabelText("Time zone"))
+      .toHaveValue("Tokyo Time");
+  });
+
+  test("calendar selection reports the zone and value", async () => {
+    const onCalendarDateChange = vi.fn();
+    await renderWithOdysseyProvider(
+      <DatePicker
+        defaultValue="2024-07-15T00:00:00.000Z"
+        label="Date"
+        onCalendarDateChange={onCalendarDateChange}
+        timeZone="UTC"
+      />,
+    );
+
+    await userEvent.click(page.getByLabelText("Choose date"));
+    await userEvent.click(page.getByRole("dialog").getByText("26"));
+
+    expect(onCalendarDateChange).toHaveBeenCalledWith({
+      value: "2024-07-26T00:00:00.000Z",
+      timeZone: "UTC",
+    });
+  });
+
+  test("date typed before the minimum date", async () => {
+    const onInputChange = vi.fn();
+    await renderWithOdysseyProvider(
+      <DatePicker
+        label="Date"
+        minDate="2024-07-10"
+        onInputChange={onInputChange}
+        timeZone="UTC"
+      />,
+    );
+
+    await userEvent.type(page.getByLabelText("Date"), "07012024");
+
+    await expect
+      .element(page.getByText(earlierThanMinimumMessage))
+      .toBeVisible();
+    expect(onInputChange).not.toHaveBeenCalled();
+  });
+
+  test("value after the maximum date", async () => {
+    await renderWithOdysseyProvider(
+      <DatePicker
+        label="Date"
+        maxDate="2024-07-10"
+        timeZone="UTC"
+        value="2024-08-15T00:00:00.000Z"
+      />,
+    );
+
+    await expect.element(page.getByText(laterThanMaximumMessage)).toBeVisible();
+  });
+
+  test("read only and disabled fields hide the calendar button", async () => {
+    await renderWithOdysseyProvider(
+      <>
+        <DatePicker isReadOnly label="Read only" />
+        <DatePicker isDisabled label="Disabled" />
+      </>,
+    );
+
+    await expect
+      .element(page.getByLabelText("Choose date"))
+      .not.toBeInTheDocument();
+  });
+
+  test("calendar day disabled by isDateEnabled", async () => {
+    await renderWithOdysseyProvider(
+      <DatePicker
+        defaultValue="2024-07-15T12:00:00.000Z"
+        isDateEnabled={(date) => date.getUTCDate() !== 26}
+        label="Date"
+        timeZone="UTC"
+      />,
+    );
+
+    await userEvent.click(page.getByLabelText("Choose date"));
+
+    await expect
+      .element(page.getByRole("dialog").getByRole("gridcell", { name: "26" }))
+      .toBeDisabled();
+  });
+
+  test("year chosen from the year view", async () => {
+    await renderWithOdysseyProvider(
+      <DatePicker
+        defaultValue="2024-07-15T12:00:00.000Z"
+        isYearEnabled={(date) => date.getUTCFullYear() !== 2026}
+        label="Date"
+        timeZone="UTC"
+      />,
+    );
+
+    await userEvent.click(page.getByLabelText("Choose date"));
+
+    const dialog = page.getByRole("dialog");
+    await userEvent.click(
+      dialog.getByRole("button", {
+        name: "calendar view is open, switch to year view",
+      }),
+    );
+
+    await expect
+      .element(dialog.getByRole("radio", { name: "2026" }))
+      .toBeDisabled();
+
+    await userEvent.click(dialog.getByRole("radio", { name: "2023" }));
+
+    await expect.element(page.getByLabelText("Date")).toHaveValue("07/15/2023");
+  });
+
+  test("touch device opens the calendar with accept and cancel actions", async () => {
+    const realMatchMedia = window.matchMedia.bind(window);
+    // MUI picks the mobile layout from the `pointer: fine` media query, which a desktop test browser can't switch off any other way.
+    const matchMediaSpy = vi
+      .spyOn(window, "matchMedia")
+      .mockImplementation((query) =>
+        realMatchMedia(query.includes("pointer: fine") ? "not all" : query),
+      );
+    onTestFinished(() => matchMediaSpy.mockRestore());
+
+    const onCalendarDateChange = vi.fn();
+    await renderWithOdysseyProvider(
+      <DatePicker
+        defaultValue="2024-07-15T12:00:00.000Z"
+        label="Date"
+        onCalendarDateChange={onCalendarDateChange}
+        timeZone="UTC"
+      />,
+    );
+
+    await userEvent.click(page.getByLabelText("Choose date"));
+
+    const dialog = page.getByRole("dialog");
+    await expect
+      .element(dialog.getByRole("button", { name: "Cancel" }))
+      .toBeVisible();
+
+    await userEvent.click(dialog.getByText("26"));
+    await userEvent.click(dialog.getByRole("button", { name: "Apply" }));
+
+    expect(onCalendarDateChange).toHaveBeenLastCalledWith({
+      value: "2024-07-26T12:00:00.000Z",
+      timeZone: "UTC",
+    });
   });
 });

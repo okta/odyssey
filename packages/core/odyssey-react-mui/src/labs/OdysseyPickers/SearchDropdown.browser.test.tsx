@@ -10,10 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
-import { renderWithOdysseyProvider } from "../../test-utils/renderWithOdysseyProvider.js";
 import { CustomOptionType, SearchDropdown } from "./SearchDropdown.js";
+
+const imageSource =
+  "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAACAkQBADs=";
 
 const options: CustomOptionType[] = [
   { value: "alpha", label: "Alpha Option", adornment: "A" },
@@ -126,5 +129,59 @@ describe("SearchDropdown", () => {
     await expect
       .element(page.getByRole("option", { name: "Alpha Option" }))
       .not.toBeInTheDocument();
+  });
+
+  test("extra content click runs only its own handler", async () => {
+    const optionOnClick = vi.fn();
+    const extraOnClick = vi.fn();
+
+    await renderWithOdysseyProvider(
+      <SearchDropdown
+        label="Search"
+        options={[
+          {
+            adornment: imageSource,
+            description: "Described",
+            extra: { content: "Extra action", onClick: extraOnClick },
+            label: "Alpha Option",
+            metaData: [
+              { detailText: "3 items", icon: <svg aria-hidden="true" /> },
+            ],
+            onClick: optionOnClick,
+            value: "alpha",
+          },
+        ]}
+      />,
+    );
+
+    await userEvent.click(page.getByRole("combobox"));
+
+    await userEvent.click(page.getByText("Extra action"));
+
+    expect(extraOnClick).toHaveBeenCalledTimes(1);
+    expect(optionOnClick).not.toHaveBeenCalled();
+  });
+
+  test("a non-interactive option ignores clicks", async () => {
+    const onClick = vi.fn();
+    const nonInteractiveOptions: CustomOptionType[] = [
+      {
+        adornment: <svg aria-hidden="true" />,
+        isInteractive: false,
+        label: "Gamma Option",
+        onClick,
+        value: "gamma",
+      },
+    ];
+
+    await renderWithOdysseyProvider(
+      <SearchDropdown label="Search" options={nonInteractiveOptions} />,
+    );
+
+    await userEvent.click(page.getByRole("combobox"));
+    // The option is aria-disabled, so the click needs force to reach it.
+    await userEvent.click(page.getByText("Gamma Option"), { force: true });
+
+    expect(onClick).not.toHaveBeenCalled();
   });
 });

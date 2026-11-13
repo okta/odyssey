@@ -13,6 +13,7 @@
 import { createTheme } from "@mui/material/styles";
 import * as Tokens from "@okta/odyssey-design-tokens";
 
+import { type ResolvedColorScheme } from "../useColorScheme.js";
 import { type ContrastMode, defaultContrast } from "../useContrastMode.js";
 import { getComponents } from "./components.js";
 import { mixins } from "./mixins.js";
@@ -29,11 +30,18 @@ export type DesignTokens = typeof Tokens;
 export type DesignTokensOverride = Partial<typeof Tokens>;
 
 export const createOdysseyMuiTheme = ({
+  colorScheme = "light",
   contrastMode = defaultContrast,
   odysseyTokens,
   shadowDomElement,
   shadowRootElement,
 }: {
+  /**
+   * Sets MUI's `palette.mode`, which MUI-internal colors such as hover and
+   * selection tints read. The token set itself comes from `odysseyTokens`.
+   * @default "light"
+   */
+  colorScheme?: ResolvedColorScheme;
   contrastMode?: ContrastMode;
   odysseyTokens: DesignTokens;
   /** @deprecated Use `shadowRootElement` */
@@ -42,12 +50,13 @@ export const createOdysseyMuiTheme = ({
 }) =>
   createTheme({
     components: getComponents({
+      colorScheme,
       contrastMode,
       odysseyTokens,
       shadowRootElement: shadowRootElement || shadowDomElement,
     }),
     mixins: mixins({ odysseyTokens }),
-    palette: palette({ odysseyTokens }),
+    palette: palette({ colorScheme, odysseyTokens }),
     shape: shape({ odysseyTokens }),
     spacing: spacing({ odysseyTokens }),
     typography: typography({ odysseyTokens }),

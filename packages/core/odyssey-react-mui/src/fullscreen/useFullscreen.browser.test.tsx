@@ -10,6 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { memo, useEffect } from "react";
 import { page, userEvent } from "vitest/browser";
 
@@ -18,7 +19,6 @@ import {
   createFullscreenModeHost,
   type FullscreenModeHost,
 } from "../message-bus/index.js";
-import { renderWithOdysseyProvider } from "../test-utils/renderWithOdysseyProvider.js";
 import { useFullscreen, useHasActiveFullscreen } from "./useFullscreen.js";
 
 const FullscreenControls = memo(
