@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.73.0",
+  "version": "1.73.1",
   "nx": {
     "tags": [
       "scope:core"
