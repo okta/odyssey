@@ -1,0 +1,230 @@
+{
+  "src/Accordion.browser.test.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 1
+    }
+  },
+  "src/Breadcrumbs.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 2
+    }
+  },
+  "src/Buttons/BaseButton.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 1
+    }
+  },
+  "src/Buttons/BaseMenuButton.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/DataTable/DataTable.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 7
+    }
+  },
+  "src/DatePickers/DateField.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 2
+    }
+  },
+  "src/DatePickers/DatePicker.browser.test.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 3
+    }
+  },
+  "src/EmptyState.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/Fields/RadioGroup.browser.test.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 1
+    }
+  },
+  "src/FullScreenOverlayContext.browser.test.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 3
+    }
+  },
+  "src/NativeSelect.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/PasswordField.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/SearchField.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/Select.browser.test.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 1
+    }
+  },
+  "src/Select.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 2
+    },
+    "memoized-props/no-new-object-as-prop": {
+      "count": 3
+    }
+  },
+  "src/Switch.browser.test.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 1
+    }
+  },
+  "src/Switch.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/Tabs.browser.test.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 1
+    }
+  },
+  "src/Tabs.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/TextField.browser.test.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 1
+    }
+  },
+  "src/TextField.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/ToastStack.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/Typography.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/fullscreen/FullscreenRegion.browser.test.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 5
+    }
+  },
+  "src/labs/AppTile.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/labs/DataFilters.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 9
+    },
+    "memoized-props/no-new-object-as-prop": {
+      "count": 10
+    }
+  },
+  "src/labs/DataTablePagination.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/labs/DataView/DataTable.tsx": {
+    "memoized-props/no-new-array-as-prop": {
+      "count": 1
+    }
+  },
+  "src/labs/DataView/DataView.browser.test.tsx": {
+    "memoized-props/no-new-array-as-prop": {
+      "count": 1
+    },
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/labs/DataView/TableLayoutContent.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/labs/DatePickers/DateTimeField.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 2
+    }
+  },
+  "src/labs/DatePickers/DateTimePicker.browser.test.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 1
+    }
+  },
+  "src/labs/GroupPicker.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 1
+    },
+    "memoized-props/no-new-object-as-prop": {
+      "count": 9
+    }
+  },
+  "src/labs/OdysseyPickers/PickerWithOptionAdornment.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/labs/PaginatedTable.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 2
+    }
+  },
+  "src/labs/UserProfile.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/ui-shell/SideNav/SideNavItemContent.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 3
+    }
+  },
+  "src/ui-shell/SideNav/SideNavToggleButton.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 1
+    }
+  },
+  "src/ui-shell/SideNav/SortableList/SortableItem.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/ui-shell/SideNav/SortableList/SortableList.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 3
+    },
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/useAutocomplete.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 1
+    },
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  },
+  "src/useColorScheme.browser.test.tsx": {
+    "memoized-props/no-new-function-as-prop": {
+      "count": 3
+    }
+  }
+}

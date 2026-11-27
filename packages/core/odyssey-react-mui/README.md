@@ -153,6 +153,19 @@ Components are published in an ESM format transpiled for the modern browsers wit
 
 [1]: https://help.okta.com/en/prod/Content/Topics/Miscellaneous/Platforms_Browser_OS_Support.htm
 
+## Unique IDs
+
+`createUniqueId()` creates a short ID using `Math.random()` by default. Use `createUniqueId({ isUuid: true })` for a UUID v4 when an identifier is shared between independently bundled apps. Existing `useUniqueId()` calls keep their short-ID behavior. `createFullscreenId()` and `useFullscreenId()` use UUID mode automatically and preserve the `odyssey-fullscreen-` prefix.
+
+```ts
+import { createUniqueId } from "@okta/odyssey-react-mui";
+
+const localComponentId = createUniqueId();
+const crossAppId = createUniqueId({ isUuid: true });
+```
+
+UUID mode uses the browser's [`crypto.randomUUID()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID) in a secure context, such as HTTPS or localhost. Browsers hide `randomUUID` on a plain HTTP origin, so there UUID mode builds the same UUID v4 from [`crypto.getRandomValues()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues), which every context has. UUID mode does not fall back to a short ID.
+
 ## Message bus
 
 `@okta/odyssey-react-mui/message-bus` sends typed, versioned messages between Odyssey apps and Unified UI Shell when each one bundles its own copy of Odyssey. The apps on a page share only `window`, so messages travel over `window.postMessage` and every received message is checked. Nothing on this subpath imports React or MUI, so an app not built with React can use it.

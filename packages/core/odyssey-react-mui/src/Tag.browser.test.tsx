@@ -85,6 +85,7 @@ describe(Tag.displayName!, () => {
     await expect(container).toBeAccessible();
 
     const tag = page.getByRole("button", { name: /^Label/ });
+    await expect.element(tag).toHaveProperty("tagName", "BUTTON");
     await expect.element(tag).toHaveAttribute("aria-keyshortcuts", "Backspace");
     await expect.element(tag).toHaveAttribute("tabindex", "0");
 
@@ -108,6 +109,7 @@ describe(Tag.displayName!, () => {
     );
 
     const tag = page.getByRole("button", { name: "Label" });
+    await expect.element(tag).toHaveProperty("tagName", "BUTTON");
     expect(tag).not.toHaveAttribute("aria-keyshortcuts");
     await expect.element(tag).toHaveAttribute("tabindex", "0");
 
@@ -118,10 +120,16 @@ describe(Tag.displayName!, () => {
   });
 
   test("tag is not reachable via Tab when onClick/onRemove are not provided", async () => {
-    await renderWithOdysseyProvider(<Tag label="Label" />);
+    const { container } = await renderWithOdysseyProvider(
+      <Tag label="Label" />,
+    );
+    await expect(container).toBeAccessible();
 
-    expect(
-      page.getByText("Label", { exact: true }).query()?.closest("div"),
-    ).not.toHaveAttribute("tabindex", "0");
+    const tag = page
+      .getByText("Label", { exact: true })
+      .query()
+      ?.closest("div");
+    expect(tag).not.toHaveAttribute("tabindex", "0");
+    expect(tag).toHaveProperty("tagName", "DIV");
   });
 });

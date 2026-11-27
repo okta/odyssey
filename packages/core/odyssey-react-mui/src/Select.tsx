@@ -39,6 +39,7 @@ import {
   FieldComponentProps,
   FieldComponentRenderProps,
 } from "./FieldComponentProps.js";
+import { useTranslation } from "./i18n.generated/i18n.js";
 import { CheckIcon, CloseCircleFilledIcon } from "./icons.generated/index.js";
 import {
   ComponentControlledState,
@@ -248,6 +249,7 @@ const Select = <
   );
 
   const localInputRef = useRef<HTMLSelectElement>(null);
+  const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const [menuPaperMinWidth, setMenuPaperMinWidth] = useState<
@@ -514,7 +516,7 @@ const Select = <
               odysseyDesignTokens={odysseyDesignTokens}
             >
               <Chips
-                ariaLabel="Selected options"
+                ariaLabel={t("select.selectedoptions.arialabel")}
                 isDismissable={!isReadOnly && !isDisabled}
                 isVisible
               />
@@ -526,9 +528,11 @@ const Select = <
     [
       Chips,
       inputValues,
+      handleMenuOpen,
       hasMultipleChoices,
       isDisabled,
       isReadOnly,
+      menuPaperMinWidth,
       nameOverride,
       odysseyDesignTokens,
       onBlur,
@@ -536,6 +540,7 @@ const Select = <
       onFocus,
       renderedOptions,
       renderValue,
+      t,
       testId,
       translate,
     ],

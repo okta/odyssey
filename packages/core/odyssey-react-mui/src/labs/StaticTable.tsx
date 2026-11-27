@@ -33,6 +33,7 @@ import type {
 } from "./materialReactTableTypes.js";
 
 import { useTranslation } from "../i18n.generated/i18n.js";
+import { useMaterialReactTableLocalization } from "../useMaterialReactTableLocalization.js";
 
 export type StaticTableProps<TData extends DefaultMaterialReactTableData> = {
   columns: MaterialReactTableProps<TData>["columns"];
@@ -56,6 +57,7 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
   ToolbarButtons,
 }: StaticTableProps<TData>) => {
   const { t } = useTranslation();
+  const materialReactTableLocalization = useMaterialReactTableLocalization();
 
   const rowVirtualizerInstanceRef =
     useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
@@ -101,6 +103,7 @@ const StaticTable = <TData extends DefaultMaterialReactTableData>({
   }, [columnFilters, globalFilter]);
 
   const table = useMaterialReactTable({
+    localization: materialReactTableLocalization,
     columns: columns,
     data: data,
     enableBottomToolbar: false,

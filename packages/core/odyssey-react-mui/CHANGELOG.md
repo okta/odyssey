@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.74.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.73.1...v1.74.0) (2026-11-26)
+
+### Bug Fixes
+
+* add useStableCallback, apply to DataView ([#740](https://github.com/atko-eng/odyssey-design-system/issues/740)) ([b4a97e3](https://github.com/atko-eng/odyssey-design-system/commit/b4a97e3788afd05367faf94a661eca337b9a7550))
+* **odyssey-react-mui:** align Banner layout with design spec ([#1005](https://github.com/atko-eng/odyssey-design-system/issues/1005)) ([e570d29](https://github.com/atko-eng/odyssey-design-system/commit/e570d29c2fbf268f63fd562b53d5f60f7e46faab))
+* **odyssey-react-mui:** DataView getRowId for card selection and reorder ([#1215](https://github.com/atko-eng/odyssey-design-system/issues/1215)) ([d432047](https://github.com/atko-eng/odyssey-design-system/commit/d432047fc70f53c02500db873a3539af135397cb))
+* **odyssey-react-mui:** DataView Select all keeps other pages ([#1221](https://github.com/atko-eng/odyssey-design-system/issues/1221)) ([d926e9a](https://github.com/atko-eng/odyssey-design-system/commit/d926e9a0738807f00b5d55484dc9247e2fb1bb57))
+* **odyssey-react-mui:** preserve TagList item semantics ([#635](https://github.com/atko-eng/odyssey-design-system/issues/635)) ([90ec5c3](https://github.com/atko-eng/odyssey-design-system/commit/90ec5c35d0aa6a3a3341cdd47496f5d55a4ec733))
+* translate hardcoded labels ([#1170](https://github.com/atko-eng/odyssey-design-system/issues/1170)) ([3ddc7e3](https://github.com/atko-eng/odyssey-design-system/commit/3ddc7e33a0c36b8ed3e2d6dfea360469fe1bada2))
+
+### Features
+
+* move charts to odyssey-labs ([#1180](https://github.com/atko-eng/odyssey-design-system/issues/1180)) ([af9b6c9](https://github.com/atko-eng/odyssey-design-system/commit/af9b6c96accf11ee6f01949711f6883e8cff5831))
+* **odyssey-react-mui:** add UUID mode ([#1064](https://github.com/atko-eng/odyssey-design-system/issues/1064)) ([17bc37b](https://github.com/atko-eng/odyssey-design-system/commit/17bc37b0f2a43ed2d67f01ae4658ee7f0bfb5496))
+* write impact entries in the PR ([#1196](https://github.com/atko-eng/odyssey-design-system/issues/1196)) ([b90ce1c](https://github.com/atko-eng/odyssey-design-system/commit/b90ce1c3d974dc7f37bb4bdc473ba682e22d5dc8))
+
+
 # [1.73.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.72.0...v1.73.0) (2026-11-12)
 
 ### Bug Fixes

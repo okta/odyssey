@@ -58,8 +58,7 @@ describe(DataFilters.displayName!, () => {
       />,
     );
 
-    // TODO: fix — active filters <ul> has direct role=button children violating list structure (list)
-    await expect(container).toBeAccessible({ disabledRules: ["list"] });
+    await expect(container).toBeAccessible();
 
     const activeFiltersList = page.getByRole("list", {
       name: "Active filters",
@@ -126,8 +125,7 @@ describe(DataFilters.displayName!, () => {
       />,
     );
 
-    // TODO: fix — active filters <ul> has direct role=button children violating list structure (list)
-    await expect(container).toBeAccessible({ disabledRules: ["list"] });
+    await expect(container).toBeAccessible();
 
     const activeFiltersList = page.getByRole("list", {
       name: "Active filters",

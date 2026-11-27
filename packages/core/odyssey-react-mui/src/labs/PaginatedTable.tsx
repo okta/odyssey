@@ -37,6 +37,7 @@ import type {
 
 import { Trans, useTranslation } from "../i18n.generated/i18n.js";
 import { Typography } from "../Typography.js";
+import { useMaterialReactTableLocalization } from "../useMaterialReactTableLocalization.js";
 
 export type PaginatedTableProps<TData extends DefaultMaterialReactTableData> = {
   columns: MaterialReactTableProps<TData>["columns"];
@@ -72,6 +73,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
   ToolbarButtons,
 }: PaginatedTableProps<TData>) => {
   const { t } = useTranslation();
+  const materialReactTableLocalization = useMaterialReactTableLocalization();
 
   const rowVirtualizerInstanceRef =
     useRef<MRT_Virtualizer<HTMLDivElement, HTMLTableRowElement>>(null);
@@ -257,6 +259,7 @@ const PaginatedTable = <TData extends DefaultMaterialReactTableData>({
   );
 
   const table = useMaterialReactTable({
+    localization: materialReactTableLocalization,
     columns: columns,
     data: data,
     enableMultiRowSelection: hasRowSelection,

@@ -14,6 +14,7 @@ import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
 import { Autocomplete } from "./Autocomplete.js";
+import { TranslationProvider } from "./i18n.generated/i18n.js";
 
 type Option = { label: string };
 const options: Option[] = [
@@ -21,6 +22,13 @@ const options: Option[] = [
   { label: "Option 2" },
   { label: "Option 3" },
 ];
+
+// Marker strings no English default contains, so an English label means the component skipped the translation provider. Each test turns off the provider's own `TranslationProvider`, because its effect runs after this one and resets the language to the browser default.
+const translationOverrides = {
+  ar: {
+    "autocomplete.loading": "ar loading",
+  },
+};
 
 describe(Autocomplete.displayName!, () => {
   test("does not crash when hasMultipleChoices changes from undefined to true", async () => {
@@ -109,5 +117,20 @@ describe(Autocomplete.displayName!, () => {
     await expect
       .element(page.getByRole("combobox", { name: "Destination" }))
       .toHaveValue("Opt");
+  });
+
+  test("loading text in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <Autocomplete isLoading label="Label" options={[]} />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await userEvent.click(page.getByRole("combobox"));
+    await expect.element(page.getByText("ar loading")).toBeVisible();
   });
 });

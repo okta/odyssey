@@ -13,7 +13,10 @@
 import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
-import { translate as odysseyTranslate } from "../../i18n.generated/i18n.js";
+import {
+  translate as odysseyTranslate,
+  TranslationProvider,
+} from "../../i18n.generated/i18n.js";
 import {
   ROOMY_HEIGHT,
   ROOMY_WIDTH,
@@ -1029,5 +1032,46 @@ describe(SideNav.displayName!, () => {
 
       expect(onSort).not.toHaveBeenCalled();
     });
+  });
+
+  test("sortable drag handle instructions in a non-English language", async () => {
+    // Marker strings no English default contains, so English text means the component skipped the translation provider. The provider's own `TranslationProvider` is turned off because its effect runs after this one and resets the language.
+    const translationOverrides = {
+      ar: {
+        "navigation.drag.handle.roledescription": "ar sortable",
+        "sortable.list.drag.instructions": "ar drag instructions",
+      },
+    };
+
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <SideNav
+          appName="Header text"
+          sideNavItems={[
+            {
+              id: "workspaces",
+              label: "Workspaces",
+              isDefaultExpanded: true,
+              isSortable: true,
+              nestedNavItems: [{ id: "work", href: "#work", label: "Work" }],
+            },
+          ]}
+        />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    const dragHandle = page.getByRole("button", {
+      name: odysseyTranslate("navigation.drag.handle.label", { label: "Work" }),
+    });
+    await expect
+      .element(dragHandle)
+      .toHaveAccessibleDescription("ar drag instructions");
+    await expect
+      .element(dragHandle)
+      .toHaveAttribute("aria-roledescription", "ar sortable");
   });
 });

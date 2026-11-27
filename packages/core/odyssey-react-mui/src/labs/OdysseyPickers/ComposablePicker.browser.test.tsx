@@ -13,6 +13,7 @@
 import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
+import { TranslationProvider } from "../../i18n.generated/i18n.js";
 import {
   type BaseRenderOptionProps,
   ComposablePicker,
@@ -23,6 +24,9 @@ const options: Option[] = [
   { label: "Alpha", value: "alpha" },
   { label: "Beta", value: "beta" },
 ];
+
+// Marker strings no English default contains, so an English label means the component skipped the translation provider. Each test turns off the provider's own `TranslationProvider`, because its effect runs after this one and resets the language to the browser default.
+const translationOverrides = { ar: { "autocomplete.loading": "ar loading" } };
 
 describe("ComposablePicker", () => {
   test("displays the ComposablePicker", async () => {
@@ -66,5 +70,25 @@ describe("ComposablePicker", () => {
     await expect
       .element(page.getByRole("option", { name: "Beta" }))
       .toBeVisible();
+  });
+
+  test("loading text in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <ComposablePicker
+          isLoading
+          label="picker label"
+          options={[]}
+          renderOption={() => <></>}
+        />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await userEvent.click(page.getByRole("combobox"));
+    await expect.element(page.getByText("ar loading")).toBeVisible();
   });
 });

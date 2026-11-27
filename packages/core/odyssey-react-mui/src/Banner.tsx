@@ -98,6 +98,7 @@ const Banner = ({
 
   return (
     <Alert
+      closeText={t("close.text")}
       data-se={testId}
       onClose={onClose}
       role={role}

@@ -13,6 +13,7 @@
 import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
+import { TranslationProvider } from "../i18n.generated/i18n.js";
 import { GroupPicker, type GroupPickerOptionType } from "./GroupPicker.js";
 
 const engineering: GroupPickerOptionType = {
@@ -28,6 +29,16 @@ const design: GroupPickerOptionType = {
   description: "No counts here",
   id: "design",
   name: "Design",
+};
+
+// Marker strings no English default contains, so an English label means the component skipped the translation provider. Each test turns off the provider's own `TranslationProvider`, because its effect runs after this one and resets the language to the browser default.
+const translationOverrides = {
+  ar: {
+    "autocomplete.loading": "ar loading",
+    "autocomplete.nooptions": "ar no options",
+    "close.text": "ar close",
+    "open.text": "ar open",
+  },
 };
 
 describe(GroupPicker.displayName!, () => {
@@ -66,5 +77,44 @@ describe(GroupPicker.displayName!, () => {
     );
 
     expect(onChange.mock.lastCall?.[1]).toStrictEqual([]);
+  });
+
+  test("no options text and popup button in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <GroupPicker label="Group" onChange={vi.fn()} options={[]} />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await expect
+      .element(page.getByRole("button", { name: "ar open" }))
+      .toBeVisible();
+
+    await userEvent.click(page.getByRole("combobox"));
+
+    await expect.element(page.getByText("ar no options")).toBeVisible();
+    // MUI relabels the popup button from open to close once the list is open.
+    await expect
+      .element(page.getByRole("button", { name: "ar close" }))
+      .toBeVisible();
+  });
+
+  test("loading text in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <GroupPicker isLoading label="Group" onChange={vi.fn()} options={[]} />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await userEvent.click(page.getByRole("combobox"));
+    await expect.element(page.getByText("ar loading")).toBeVisible();
   });
 });

@@ -13,7 +13,19 @@
 import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
+import { TranslationProvider } from "../i18n.generated/i18n.js";
 import { DataTablePagination } from "./DataTablePagination.js";
+
+// Marker strings no English default contains, so an English label means the component skipped the translation provider. Each test turns off the provider's own `TranslationProvider`, because its effect runs after this one and resets the language to the browser default.
+const translationOverrides = {
+  ar: {
+    "datatablepagination.next": "ar next",
+    "datatablepagination.page": "ar page {{currentPage}}",
+    "datatablepagination.previous": "ar previous",
+    "datatablepagination.results": "ar {{currentNumberOfResults}} results",
+    "pagination.loadmore": "ar show more",
+  },
+};
 
 describe(DataTablePagination.displayName!, () => {
   test("paged navigation", async () => {
@@ -52,5 +64,51 @@ describe(DataTablePagination.displayName!, () => {
 
     await userEvent.click(page.getByRole("button", { name: "Show more" }));
     expect(onClickNext).toHaveBeenCalledTimes(1);
+  });
+
+  test("paged labels in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <DataTablePagination
+          currentPage={2}
+          onClickNext={vi.fn()}
+          onClickPrevious={vi.fn()}
+          paginationType="paged"
+        />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await expect.element(page.getByText("ar page 2")).toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: "ar previous" }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: "ar next" }))
+      .toBeVisible();
+  });
+
+  test("load more labels in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <DataTablePagination
+          currentNumberOfResults={25}
+          onClickNext={vi.fn()}
+          paginationType="loadMore"
+        />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await expect
+      .element(page.getByRole("button", { name: "ar show more" }))
+      .toBeVisible();
+    await expect.element(page.getByText("ar 25 results")).toBeVisible();
   });
 });

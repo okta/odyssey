@@ -11,11 +11,15 @@
  */
 
 import { Stack } from "@mui/material";
-import { memo, ReactElement, useMemo } from "react";
+import { Children, memo, type ReactElement } from "react";
 
+import { createOdysseyStyledComponent } from "./createOdysseyStyledComponent.js";
 import { HtmlProps } from "./HtmlProps.js";
 import { Tag } from "./Tag.js";
-import { ChipElementType, TagListContext } from "./TagListContext.js";
+
+const StyledUnorderedList = createOdysseyStyledComponent({ tag: "ul" })({
+  listStyle: "none",
+});
 
 export type TagListProps = {
   /**
@@ -25,31 +29,22 @@ export type TagListProps = {
 } & Pick<HtmlProps, "ariaLabel" | "testId">;
 
 /**
- * A horizontal, wrapping list of Tag elements rendered as a semantic `<ul>`. Use to display a collection of tags associated with an item or entity.
+ * A horizontal, wrapping list of Tag elements rendered as a semantic `<ul>`. Each Tag is contained by a semantic `<li>`. Use to display a collection of tags associated with an item or entity.
  */
 const TagList = ({ ariaLabel, children, testId }: TagListProps) => {
-  const providerValue = useMemo<{
-    chipElementType: ChipElementType;
-  }>(
-    () => ({
-      chipElementType: "li",
-    }),
-    [],
-  );
-
   return (
     <Stack
       aria-label={ariaLabel}
-      component="ul"
+      component={StyledUnorderedList}
       data-se={testId}
       direction="row"
       flexWrap="wrap"
       spacing={2}
       useFlexGap
     >
-      <TagListContext.Provider value={providerValue}>
-        {children}
-      </TagListContext.Provider>
+      {Children.map(children, (tag) => (
+        <li>{tag}</li>
+      ))}
     </Stack>
   );
 };

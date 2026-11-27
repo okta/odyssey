@@ -14,6 +14,7 @@ import type { ThemeOptions } from "@mui/material";
 
 import { alertTitleClasses } from "@mui/material/AlertTitle";
 import { buttonClasses } from "@mui/material/Button";
+import { linkClasses } from "@mui/material/Link";
 import { svgIconClasses } from "@mui/material/SvgIcon";
 
 import type { GetComponentsProps } from "./types.js";
@@ -24,6 +25,12 @@ import {
   InformationCircleFilledIcon,
   WarningFilledIcon,
 } from "../../icons.generated/index.js";
+
+// Design's narrowest comfortable width for the banner's message text (280px at
+// the 14px root size). The link moves under the text rather than squeeze it
+// below this, so how early that happens depends on how long the link is. This
+// is a layout minimum, so it has no spacing token.
+const BANNER_TEXT_MIN_WIDTH = "20rem";
 
 export const alertComponents = ({
   odysseyTokens,
@@ -115,15 +122,13 @@ export const alertComponents = ({
         // Alert variant styling
         ...(ownerState.variant === "banner" && {
           position: "relative",
-          justifyContent: "center",
-          alignItems: "center",
+          // Only the sides move to 24px, to match Callout and Toast. The block padding stays at the root's 16px, so a banner doesn't grow taller.
+          paddingInline: odysseyTokens.Spacing5,
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
           borderRadius: 0,
           borderWidth: 0,
           borderBottomWidth: "1px",
-
-          ...(ownerState.onClose !== undefined && {
-            paddingInline: odysseyTokens.Spacing6,
-          }),
         }),
         ...(ownerState.variant === "callout" && {
           borderRadius: odysseyTokens.BorderRadiusMain,
@@ -145,12 +150,15 @@ export const alertComponents = ({
       }),
       action: ({ ownerState }) => ({
         ...(ownerState.variant === "banner" && {
+          alignSelf: "flex-start",
+          flexShrink: 0,
           padding: 0,
-          marginInlineEnd: 0,
-          insetBlockStart: "50%",
-          insetInlineEnd: odysseyTokens.Spacing2,
-          position: "absolute",
-          transform: "translateY(-50%)",
+          // Cancels the close button's own padding horizontally so its visible
+          // icon sits on the banner's padding edge and keeps the same item gap
+          // from the link as every other element. Vertically the padded button
+          // is already one text line tall, so it centers on the first line.
+          marginBlock: 0,
+          marginInline: `calc(-1 * ${odysseyTokens.Spacing1})`,
         }),
         ...(ownerState.variant === "toast" && {
           padding: 0,
@@ -204,8 +212,32 @@ export const alertComponents = ({
         overflow: "visible",
         ...(ownerState.variant === "banner" && {
           display: "flex",
-          justifyContent: "space-between",
-          gap: odysseyTokens.Spacing4,
+          flexGrow: 1,
+          flexWrap: "wrap",
+          alignItems: "flex-start",
+          columnGap: odysseyTokens.Spacing4,
+          rowGap: odysseyTokens.Spacing2,
+          minWidth: 0,
+
+          // The browser wraps the link onto its own line once the text's
+          // minimum, the gap, and the link's full one-line width no longer fit
+          // side by side, so a short link stays beside the text longer than a
+          // long one does.
+          //
+          // The text hugs its content so a short message keeps the link next
+          // to it on a wide banner. A readable line length is a recommendation
+          // for the message's author, not a limit the banner enforces, so a
+          // long message fills the available width.
+          [`& .${alertTitleClasses.root}`]: {
+            flex: `1 1 ${BANNER_TEXT_MIN_WIDTH}`,
+            maxWidth: "max-content",
+            minWidth: 0,
+            overflowWrap: "anywhere",
+          },
+          [`& .${linkClasses.root}`]: {
+            flex: "0 1 auto",
+            minWidth: 0,
+          },
         }),
         ...(ownerState.variant === "toast" && {
           flexGrow: 1,

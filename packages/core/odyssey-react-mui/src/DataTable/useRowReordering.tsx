@@ -16,7 +16,12 @@ import { Dispatch, KeyboardEvent, SetStateAction } from "react";
 import { useTranslation } from "../i18n.generated/i18n.js";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
 import { DataTableProps } from "./DataTable.js";
-import { reorderDataRowsLocally } from "./reorderDataRowsLocally.js";
+import {
+  type GetDataRowId,
+  getRawRowId,
+  getTableRowId,
+  reorderDataRowsLocally,
+} from "./reorderDataRowsLocally.js";
 
 export const useRowReordering = <TData extends MRT_RowData>({
   totalRows,
@@ -25,11 +30,17 @@ export const useRowReordering = <TData extends MRT_RowData>({
   setData,
   draggingRow,
   setDraggingRow,
+  getRowId = getRawRowId,
   resultsPerPage,
   page,
 }: {
   data: TData[];
   draggingRow?: MRT_Row<TData> | null;
+  /**
+   * The `getRowId` the table was given. Every reorder path identifies a row by the id it returns, and `onReorderRows` receives that id.
+   * @default getRawRowId
+   */
+  getRowId?: GetDataRowId<TData>;
   onReorderRows: DataTableProps["onReorderRows"];
   page: number;
   resultsPerPage: number;
@@ -57,6 +68,7 @@ export const useRowReordering = <TData extends MRT_RowData>({
 
     const newData = reorderDataRowsLocally({
       currentData: data,
+      getRowId,
       rowId,
       newRowIndex,
     });
@@ -64,6 +76,10 @@ export const useRowReordering = <TData extends MRT_RowData>({
     setData(newData);
     onReorderRows?.({ rowId, newRowIndex });
   };
+
+  // The layouts take a row menu's id from here rather than from their own getRowId, so the id a menu sends is always one updateRowOrder can find, even when a caller leaves getRowId out of this hook.
+  const getReorderRowId = ({ index, row }: { index: number; row: TData }) =>
+    getTableRowId({ getRowId, index, row });
 
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const dragHandleStyles = {
@@ -105,14 +121,18 @@ export const useRowReordering = <TData extends MRT_RowData>({
     return undefined;
   };
 
-  const setHoveredRow = (table: MRT_TableInstance<TData>, id: TData["id"]) => {
-    if (id) {
-      // The `as MRT_Row<TData>` is necessary here to overcome some type/generic issues with the type of `setHoveredRow` defined by MRT. It's not ideal code, but it's the only way that works without a much larger rewrite.
-      const nextRow = table.getRow(id) as MRT_Row<TData>;
+  const setHoveredRow = ({
+    rowIndex,
+    table,
+  }: {
+    rowIndex: number;
+    table: MRT_TableInstance<TData>;
+  }) => {
+    // The row comes from the table's own row model, not from an id rebuilt from `data`, because `table.getRow` throws for an id it does not know, and a caller may give the table a `getRowId` it does not give this hook. The tables turn off the row model's own pagination and sorting, so its rows are `data` in order.
+    const nextRow = table.getRowModel().rows.at(rowIndex);
 
-      if (nextRow) {
-        table.setHoveredRow(nextRow);
-      }
+    if (nextRow && rowIndex >= 0) {
+      table.setHoveredRow(nextRow);
     }
   };
 
@@ -174,16 +194,12 @@ export const useRowReordering = <TData extends MRT_RowData>({
 
         if (isArrowDown || isArrowUp) {
           const nextIndex = isArrowDown ? index + 1 : index - 1;
-          // This is a legacy file, and this type isn't a problem in `DataView` --Kevin Ghadyani
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          setHoveredRow(table, data[nextIndex]?.id);
+          setHoveredRow({ rowIndex: nextIndex, table });
         }
       } else {
         if (isArrowDown || isArrowUp) {
           const nextIndex = isArrowDown ? row.index + 1 : row.index - 1;
-          // This is a legacy file, and this type isn't a problem in `DataView` --Kevin Ghadyani
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          setHoveredRow(table, data[nextIndex]?.id);
+          setHoveredRow({ rowIndex: nextIndex, table });
         }
       }
     } else {
@@ -223,6 +239,7 @@ export const useRowReordering = <TData extends MRT_RowData>({
     dragHandleStyles,
     dragHandleText,
     draggableTableBodyRowClassName,
+    getReorderRowId,
     handleDragHandleKeyDown,
     handleDragHandleOnDragCapture,
     handleDragHandleOnDragEnd,

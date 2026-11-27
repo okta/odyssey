@@ -18,6 +18,7 @@ import { page, userEvent } from "vitest/browser";
 
 import type { FocusHandle } from "./inputUtils.js";
 
+import { TranslationProvider } from "./i18n.generated/i18n.js";
 import { Select } from "./Select.js";
 
 type SelectProps = ComponentProps<typeof Select>;
@@ -55,6 +56,13 @@ const Template = ({
       value={value}
     />
   );
+};
+
+// Marker strings no English default contains, so an English label means the component skipped the translation provider. Each test turns off the provider's own `TranslationProvider`, because its effect runs after this one and resets the language to the browser default.
+const translationOverrides = {
+  ar: {
+    "select.selectedoptions.arialabel": "ar selected options",
+  },
 };
 
 describe(Select.displayName!, () => {
@@ -260,5 +268,21 @@ describe(Select.displayName!, () => {
     inputRef.current?.focus();
 
     await expect.element(page.getByRole("combobox")).toHaveFocus();
+  });
+
+  test("selected options label in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <Template hasMultipleChoices value={["Option A"]} />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await expect
+      .element(page.getByRole("list", { name: "ar selected options" }))
+      .toBeVisible();
   });
 });

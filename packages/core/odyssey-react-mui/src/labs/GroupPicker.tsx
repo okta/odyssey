@@ -27,6 +27,7 @@ import { type FC, HTMLAttributes, memo, useCallback } from "react";
 
 import { AutocompleteProps } from "../Autocomplete.js";
 import { Field } from "../Field.js";
+import { useTranslation } from "../i18n.generated/i18n.js";
 import { GridIcon, GroupIcon, UserIcon } from "../icons.generated/index.js";
 import { useOdysseyDesignTokens } from "../OdysseyDesignTokensContext.js";
 import { Tag } from "../Tag.js";
@@ -74,6 +75,7 @@ const GroupPicker = <
   value,
   testId,
 }: GroupPickerProps<OptionType, HasMultipleChoices, IsCustomValueAllowed>) => {
+  const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const isOptionEqualToValue = useCallback(
@@ -236,6 +238,8 @@ const GroupPicker = <
     <MuiAutocomplete
       // AutoComplete is wrapped in a div within MUI which does not get the disabled attr. So this aria-disabled gets set in the div
       aria-disabled={isDisabled}
+      clearText={t("clear.text")}
+      closeText={t("close.text")}
       data-se={testId}
       disabled={isDisabled}
       filterSelectedOptions={true}
@@ -243,9 +247,12 @@ const GroupPicker = <
       getOptionLabel={getOptionLabel}
       isOptionEqualToValue={isOptionEqualToValue}
       loading={isLoading}
+      loadingText={t("autocomplete.loading")}
       multiple={hasMultipleChoices}
+      noOptionsText={t("autocomplete.nooptions")}
       onChange={onChange}
       onInputChange={onInputChange}
+      openText={t("open.text")}
       options={options}
       readOnly={isReadOnly}
       renderInput={renderInput}

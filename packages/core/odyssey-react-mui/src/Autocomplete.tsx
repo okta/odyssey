@@ -278,6 +278,7 @@ const Autocomplete = <
       id={idOverride}
       isOptionEqualToValue={getIsOptionEqualToValue}
       loading={isLoading}
+      loadingText={t("autocomplete.loading")}
       multiple={hasMultipleChoices}
       noOptionsText={noOptionsText || t("autocomplete.nooptions")}
       onBlur={onBlur}

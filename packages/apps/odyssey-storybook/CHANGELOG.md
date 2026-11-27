@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.74.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.73.1...v1.74.0) (2026-11-26)
+
+### Bug Fixes
+
+* reset sidenav state between UiShell stories ([#1176](https://github.com/atko-eng/odyssey-design-system/issues/1176)) ([e979b01](https://github.com/atko-eng/odyssey-design-system/commit/e979b01754f88fba218a4e4c9596f93b4ab88b61))
+
+### Features
+
+* move charts to odyssey-labs ([#1180](https://github.com/atko-eng/odyssey-design-system/issues/1180)) ([af9b6c9](https://github.com/atko-eng/odyssey-design-system/commit/af9b6c96accf11ee6f01949711f6883e8cff5831))
+
+
 # [1.73.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.72.0...v1.73.0) (2026-11-12)
 
 ### Bug Fixes

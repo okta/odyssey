@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-react-mui",
-  "version": "1.73.1",
+  "version": "1.74.0",
   "nx": {
     "tags": [
       "scope:core"
@@ -208,7 +208,6 @@
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@highcharts/react": "^5.2.2",
     "@mui/icons-material": "^5.18.0",
     "@mui/lab": "^5.0.0-alpha.175",
     "@mui/material": "^5.18.0",
@@ -220,7 +219,6 @@
     "@types/luxon": "^3.4.2",
     "date-fns": "^2.30.0",
     "dom-accessibility-api": "^0.7.0",
-    "highcharts": "^13.0.0",
     "luxon": "^3.4.4",
     "material-react-table": "^2.11.3",
     "react-error-boundary": "^4.1.1",

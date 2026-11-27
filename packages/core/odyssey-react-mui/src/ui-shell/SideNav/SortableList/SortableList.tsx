@@ -104,6 +104,9 @@ export const SortableList = <T extends BaseItem>({
     <DndContext
       accessibility={{
         announcements,
+        screenReaderInstructions: {
+          draggable: t("sortable.list.drag.instructions"),
+        },
         // Portal the drag live region to the document body: SortableList renders inside a semantic <ul>, and an inline role="status" element would be an invalid non-<li> child, breaking the list's accessibility semantics.
         container: typeof document !== "undefined" ? document.body : undefined,
       }}

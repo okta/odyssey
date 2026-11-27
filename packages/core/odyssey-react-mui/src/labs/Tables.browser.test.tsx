@@ -13,6 +13,7 @@
 import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { page, userEvent } from "vitest/browser";
 
+import { TranslationProvider } from "../i18n.generated/i18n.js";
 import { PaginatedTable } from "./PaginatedTable.js";
 import { StaticTable } from "./StaticTable.js";
 
@@ -28,6 +29,16 @@ const columns = [
   { accessorKey: "name", header: "Name" },
   { accessorKey: "role", header: "Role" },
 ];
+
+// Marker strings no English default contains, so an English label means the component skipped the translation provider. Each test turns off the provider's own `TranslationProvider`, because its effect runs after this one and resets the language to the browser default.
+const translationOverrides = {
+  ar: {
+    "table.mrt.gotonextpage": "ar next page",
+    "table.mrt.norecordstodisplay": "ar no records",
+    "table.mrt.rowsperpage": "ar rows per page",
+    "table.mrt.toggleselectrow": "ar select row",
+  },
+};
 
 describe("StaticTable", () => {
   test("rows and global search", async () => {
@@ -51,6 +62,20 @@ describe("StaticTable", () => {
     await expect
       .poll(() => onGlobalFilterChange.mock.lastCall)
       .toStrictEqual(["Ada"]);
+  });
+
+  test("empty state in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <StaticTable columns={columns} data={[]} />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await expect.element(page.getByText("ar no records")).toBeVisible();
   });
 });
 
@@ -99,5 +124,31 @@ describe("PaginatedTable", () => {
     await expect
       .poll(() => onGlobalFilterChange.mock.lastCall)
       .toStrictEqual(["Ada"]);
+  });
+
+  test("selection and pagination labels in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <PaginatedTable
+          columns={columns}
+          data={people}
+          getRowId={(row) => String(row.id)}
+          hasRowSelection
+          rowsPerPage={2}
+        />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await expect
+      .element(page.getByRole("checkbox", { name: "ar select row" }).first())
+      .toBeVisible();
+    await expect.element(page.getByText("ar rows per page")).toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: "ar next page" }))
+      .toBeVisible();
   });
 });

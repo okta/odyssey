@@ -61,23 +61,26 @@ const BulkActionsMenu = <TData extends MRT_RowData>({
 
   const selectedRowCount = Object.values(rowSelection).filter(Boolean).length;
 
-  const selectableRowCount = useMemo(
+  // The selection keeps rows that are not on screen (other pages, rows hidden by search or filters) and can hold disabled rows, so a count of every selected row says nothing about the selectable rows on screen.
+  const isEveryPageRowSelected = useMemo(
     () =>
-      isRowSelectionDisabled
-        ? data.filter((row) => !isRowSelectionDisabled(row)).length
-        : data.length,
-    [data, isRowSelectionDisabled],
+      data
+        .map((row, index) => [getRowId(row, index), row] as const)
+        .filter(([, row]) => !isRowSelectionDisabled?.(row))
+        .every(([rowId]) => rowSelection[rowId]),
+    [data, getRowId, isRowSelectionDisabled, rowSelection],
   );
 
   const handleSelectAll = useCallback(() => {
-    const rows = Object.fromEntries(
+    const pageRowSelection = Object.fromEntries(
       data
         .map((row, index) => [getRowId(row, index), row] as const)
         .filter(([, row]) => !isRowSelectionDisabled?.(row))
         .map(([rowId]) => [rowId, true]),
     );
-    setRowSelection(rows);
-  }, [data, getRowId, isRowSelectionDisabled, setRowSelection]);
+    // `data` is only the current page, and selection persists across pages, so keys from other pages are kept rather than replaced. This matches the header checkbox, which spreads the previous selection too.
+    setRowSelection({ ...rowSelection, ...pageRowSelection });
+  }, [data, getRowId, isRowSelectionDisabled, rowSelection, setRowSelection]);
 
   const handleSelectNone = useCallback(() => {
     setRowSelection({});
@@ -97,8 +100,7 @@ const BulkActionsMenu = <TData extends MRT_RowData>({
       )}
       <Box>
         <Button
-          // >= rather than ===: a controlled rowSelection can carry disabled or off-page rows, so selectedRowCount may exceed the selectable count.
-          isDisabled={selectedRowCount >= selectableRowCount}
+          isDisabled={isEveryPageRowSelected}
           label={t("table.actions.selectall")}
           onClick={handleSelectAll}
           variant="secondary"

@@ -15,6 +15,7 @@ import { page, userEvent } from "vitest/browser";
 
 import { Button } from "../Buttons/Button.js";
 import { MenuItem } from "../Buttons/MenuItem.js";
+import { TranslationProvider } from "../i18n.generated/i18n.js";
 import { type DataTableRowData } from "../index.js";
 import {
   DataTable,
@@ -34,6 +35,16 @@ const sampleColumns: DataTableColumn<DataTableRowData>[] = [
 ];
 
 const getSampleRows: DataTableProps["getData"] = () => sampleRows;
+
+// Marker strings no English default contains, so an English label means the component skipped the translation provider. Each test turns off the provider's own `TranslationProvider`, because its effect runs after this one and resets the language to the browser default.
+const translationOverrides = {
+  ar: {
+    "table.moreactions.arialabel": "ar more actions",
+    "table.mrt.sortbycolumnasc": "ar sort {{column}} asc",
+    "table.mrt.toggleselectall": "ar select all",
+    "table.mrt.toggleselectrow": "ar select row",
+  },
+};
 
 const rowNames = sampleRows.map((row) => row.name);
 
@@ -444,6 +455,97 @@ describe(DataTable.displayName!, () => {
     });
   });
 
+  describe("row reordering with a custom getRowId", () => {
+    // A prefix makes every id differ from row.id, so a path that matches row.id finds no row.
+    const getPrefixedRowId: DataTableProps["getRowId"] = (row) =>
+      `person-${row.id}`;
+
+    const renderReorderableTable = async ({
+      onReorderRows,
+    }: {
+      onReorderRows: DataTableProps["onReorderRows"];
+    }) => {
+      const result = await renderWithOdysseyProvider(
+        <DataTable
+          columns={sampleColumns}
+          getData={getSampleRows}
+          getRowId={getPrefixedRowId}
+          hasRowReordering
+          onReorderRows={onReorderRows}
+          totalRows={3}
+        />,
+      );
+
+      await expect.element(page.getByText("Ada Lovelace")).toBeVisible();
+
+      return result;
+    };
+
+    test("moved with the keyboard", async () => {
+      const onReorderRows = vi.fn();
+      const { container } = await renderReorderableTable({ onReorderRows });
+
+      page
+        .getByRole("button", { name: DRAG_HANDLE_NAME })
+        .first()
+        .element()
+        .focus();
+      await userEvent.keyboard("{Enter}");
+      await userEvent.keyboard("{ArrowDown}");
+      await userEvent.keyboard("{Enter}");
+
+      await vi.waitFor(() => {
+        expect(onReorderRows).toHaveBeenLastCalledWith({
+          rowId: "person-1",
+          newRowIndex: 1,
+        });
+      });
+      await expect
+        .poll(getRowNames)
+        .toStrictEqual(["Grace Hopper", "Ada Lovelace", "Alan Turing"]);
+      await expect(container).toBeAccessible();
+    });
+
+    test("ArrowUp on the first row, then Enter", async () => {
+      const onReorderRows = vi.fn();
+      const { container } = await renderReorderableTable({ onReorderRows });
+
+      page
+        .getByRole("button", { name: DRAG_HANDLE_NAME })
+        .first()
+        .element()
+        .focus();
+      await userEvent.keyboard("{Enter}");
+      await userEvent.keyboard("{ArrowUp}");
+      await userEvent.keyboard("{Enter}");
+
+      expect(onReorderRows).not.toHaveBeenCalled();
+      expect(getRowNames()).toStrictEqual(rowNames);
+      await expect(container).toBeAccessible();
+    });
+
+    test("row action menu Bring to front", async () => {
+      const onReorderRows = vi.fn();
+      const { container } = await renderReorderableTable({ onReorderRows });
+
+      await userEvent.click(
+        page.getByRole("button", { name: "More actions" }).nth(2),
+      );
+      await userEvent.click(
+        page.getByRole("menuitem", { name: "Bring to front" }),
+      );
+
+      expect(onReorderRows).toHaveBeenLastCalledWith({
+        rowId: "person-3",
+        newRowIndex: 0,
+      });
+      await expect
+        .poll(getRowNames)
+        .toStrictEqual(["Alan Turing", "Ada Lovelace", "Grace Hopper"]);
+      await expect(container).toBeAccessible();
+    });
+  });
+
   test("sorting columns", async () => {
     const getData = vi.fn<NonNullable<DataTableProps["getData"]>>(
       () => sampleRows,
@@ -681,5 +783,53 @@ describe(DataTable.displayName!, () => {
     await userEvent.fill(page.getByRole("searchbox"), "zzz");
 
     await expect.element(page.getByText("No matches")).toBeVisible();
+  });
+
+  test("bulk actions button label in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <DataTable
+          bulkActionMenuItems={() => <MenuItem>Delete</MenuItem>}
+          columns={sampleColumns}
+          getData={getSampleRows}
+          hasRowSelection
+        />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await expect
+      .element(page.getByRole("button", { name: "ar more actions" }))
+      .toBeVisible();
+  });
+
+  test("selection and sort labels in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <DataTable
+          columns={sampleColumns}
+          getData={getSampleRows}
+          hasRowSelection
+          hasSorting
+        />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await expect
+      .element(page.getByRole("checkbox", { name: "ar select all" }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("checkbox", { name: "ar select row" }).first())
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("button", { name: "ar sort Name asc" }))
+      .toBeVisible();
   });
 });

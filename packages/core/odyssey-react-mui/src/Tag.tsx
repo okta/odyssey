@@ -12,13 +12,7 @@
 
 import styled from "@emotion/styled";
 import { Chip as MuiChip, ChipProps as MuiChipProps } from "@mui/material";
-import {
-  type ElementType,
-  memo,
-  type ReactElement,
-  useCallback,
-  useContext,
-} from "react";
+import { type ElementType, memo, type ReactElement, useCallback } from "react";
 
 import { HtmlProps } from "./HtmlProps.js";
 import { useTranslation } from "./i18n.generated/i18n.js";
@@ -28,7 +22,6 @@ import {
   DesignTokens,
   useOdysseyDesignTokens,
 } from "./OdysseyDesignTokensContext.js";
-import { TagListContext } from "./TagListContext.js";
 import { useColorScheme } from "./useColorScheme.js";
 import { ContrastMode, useContrastModeContext } from "./useContrastMode.js";
 
@@ -313,7 +306,7 @@ const StyledTag = styled(MuiChip, {
 });
 
 /**
- * A compact label used to categorize or annotate content. Supports optional click and remove interactions, color variants, and icons.
+ * A compact label used to categorize or annotate content. Supports optional click and remove interactions, color variants, and icons. Tags with click or remove interactions render as native buttons.
  */
 const Tag = ({
   colorVariant = "default",
@@ -329,7 +322,6 @@ const Tag = ({
 }: TagProps) => {
   const { t } = useTranslation();
   const odysseyDesignTokens = useOdysseyDesignTokens();
-  const { chipElementType } = useContext(TagListContext);
   const { contrastMode } = useContrastModeContext();
   const isDarkMode = useColorScheme() === "dark";
 
@@ -341,7 +333,7 @@ const Tag = ({
         aria-keyshortcuts={onRemove && !isDisabled ? "Backspace" : undefined}
         clickable={Boolean(onClick)}
         colorVariant={colorVariant}
-        component={chipElementType}
+        component={onClick || onRemove ? "button" : "div"}
         contrastMode={contrastMode}
         data-se={testId}
         deleteIcon={
@@ -361,7 +353,6 @@ const Tag = ({
     ),
     [
       t,
-      chipElementType,
       colorVariant,
       contrastMode,
       icon,
