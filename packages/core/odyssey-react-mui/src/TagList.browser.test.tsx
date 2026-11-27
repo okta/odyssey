@@ -17,18 +17,59 @@ import { Tag } from "./Tag.js";
 import { TagList } from "./TagList.js";
 
 describe(TagList.displayName!, () => {
-  test("tags rendered as list items", async () => {
+  test("plain, clickable, removable, and disabled tags", async () => {
     const { container } = await renderWithOdysseyProvider(
-      <TagList ariaLabel="Filters">
-        <Tag label="First" />
-        <Tag label="Second" />
+      <TagList ariaLabel="Tag states">
+        <Tag label="Plain" testId="plain-tag" />
+        <Tag label="Clickable" onClick={() => {}} testId="clickable-tag" />
+        <Tag label="Removable" onRemove={() => {}} testId="removable-tag" />
+        <Tag
+          isDisabled
+          label="Disabled"
+          onClick={() => {}}
+          onRemove={() => {}}
+          testId="disabled-tag"
+        />
       </TagList>,
     );
 
     await expect(container).toBeAccessible();
+
+    const tagList = page.getByRole("list", { name: "Tag states" });
+    const listItems = tagList.getByRole("listitem");
+    expect(listItems.elements()).toHaveLength(4);
+    expect(tagList.element().querySelectorAll(":scope > li")).toHaveLength(4);
+    expect(
+      container.querySelector('ul > li > div[data-se="plain-tag"]'),
+    ).not.toBeNull();
+    expect(
+      container.querySelector('ul > li > button[data-se="clickable-tag"]'),
+    ).not.toBeNull();
+    expect(
+      container.querySelector('ul > li > button[data-se="removable-tag"]'),
+    ).not.toBeNull();
+    expect(
+      container.querySelector('ul > li > button[data-se="disabled-tag"]'),
+    ).not.toBeNull();
+
     await expect
-      .element(page.getByRole("list", { name: "Filters" }))
+      .element(tagList.getByRole("button", { name: "Clickable", exact: true }))
       .toBeVisible();
-    expect(page.getByRole("listitem").elements()).toHaveLength(2);
+    await expect
+      .element(
+        tagList.getByRole("button", {
+          name: "Removable Remove tag",
+          exact: true,
+        }),
+      )
+      .toBeVisible();
+    await expect
+      .element(
+        tagList.getByRole("button", {
+          name: "Disabled Remove tag",
+          exact: true,
+        }),
+      )
+      .toBeDisabled();
   });
 });

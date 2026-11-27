@@ -35,6 +35,11 @@ export type RowActionsProps<TData extends MRT_RowData> = {
     row?: TData,
   ) => ReactElement<typeof Button> | ReactElement<typeof Fragment>;
   rowActionMenuItems?: (row: TData) => MenuButtonProps["children"];
+  /**
+   * The id `updateRowOrder` receives for this row. Pass the row's `getRowId` value, the id the table and `onReorderRows` know the row by.
+   * @default row.id
+   */
+  rowId?: string;
   rowIndex: number;
   totalRows?: DataTableProps<TData>["totalRows"];
   updateRowOrder?: ({
@@ -50,6 +55,7 @@ const RowActions = <TData extends MRT_RowData>({
   isRowReorderingDisabled,
   row: incomingRow,
   rowActionMenuItems,
+  rowId: rowIdProp,
   rowIndex,
   totalRows,
   updateRowOrder,
@@ -60,32 +66,34 @@ const RowActions = <TData extends MRT_RowData>({
     incomingRow.original ? incomingRow.original : incomingRow
   ) as TData & { id: string };
 
+  const rowId = rowIdProp ?? row.id;
+
   const handleToFrontClick = useCallback(() => {
     if (updateRowOrder) {
-      updateRowOrder({ rowId: row.id, newRowIndex: 0 });
+      updateRowOrder({ rowId, newRowIndex: 0 });
     }
-  }, [row.id, updateRowOrder]);
+  }, [rowId, updateRowOrder]);
 
   const handleForwardClick = useCallback(() => {
     if (updateRowOrder) {
-      updateRowOrder({ rowId: row.id, newRowIndex: Math.max(0, rowIndex - 1) });
+      updateRowOrder({ rowId, newRowIndex: Math.max(0, rowIndex - 1) });
     }
-  }, [row.id, rowIndex, updateRowOrder]);
+  }, [rowId, rowIndex, updateRowOrder]);
 
   const handleBackwardClick = useCallback(() => {
     if (updateRowOrder) {
-      updateRowOrder({ rowId: row.id, newRowIndex: rowIndex + 1 });
+      updateRowOrder({ rowId, newRowIndex: rowIndex + 1 });
     }
-  }, [row.id, rowIndex, updateRowOrder]);
+  }, [rowId, rowIndex, updateRowOrder]);
 
   const handleToBackClick = useCallback(() => {
     if (updateRowOrder) {
       updateRowOrder({
-        rowId: row.id,
+        rowId,
         newRowIndex: totalRows ? totalRows - 1 : rowIndex,
       });
     }
-  }, [row.id, rowIndex, totalRows, updateRowOrder]);
+  }, [rowId, rowIndex, totalRows, updateRowOrder]);
 
   return (
     <>

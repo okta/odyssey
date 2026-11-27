@@ -16,7 +16,8 @@
       "!**/.gherkin-cache/**",
       "!**/.mocks-cache/**",
       "!packages/apps/cartographer-fixture/features/README.md",
-      "!**/cartographer-graph.json"
+      "!**/cartographer-graph.json",
+      "!**/eslint-suppressions.json"
     ],
     "maxSize": 3145728
   },

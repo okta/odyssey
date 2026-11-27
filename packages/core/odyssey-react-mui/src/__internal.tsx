@@ -19,6 +19,8 @@ export * from "./Field.js";
 export * from "./HtmlProps.js";
 export * from "./inputUtils.js";
 
+// AnimationContext
+export { useAnimation } from "./AnimationContext.js";
 // Badge
 export * from "./Badge.js";
 // Buttons
@@ -40,6 +42,8 @@ export * from "./FileUploader/FileUploadPreview.js";
 // FullScreenOverlay
 export * from "./FullScreenOverlay.js";
 export * from "./FullScreenOverlayContext.js";
+// isDeepEqual
+export * from "./isDeepEqual.js";
 // Miscellaneous Labs
 export * from "./labs/DataFilters.js";
 export * from "./labs/DataView/BulkActionsMenu.js";
@@ -65,4 +69,7 @@ export * from "./OdysseyDesignTokensContext.js";
 // SearchField
 export * from "./SearchField.js";
 export * from "./tools/createMessageBus.js";
+// Exported so a contribution package's copy of DataView translates Material React Table's own strings with core's keys, rather than each package translating the same strings again.
+export * from "./useMaterialReactTableLocalization.js";
+// Web components
 export * from "./web-component/createReactRootElements.js";

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.74.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.73.1...v1.74.0) (2026-11-26)
+
+### Features
+
+* write impact entries in the PR ([#1196](https://github.com/atko-eng/odyssey-design-system/issues/1196)) ([b90ce1c](https://github.com/atko-eng/odyssey-design-system/commit/b90ce1c3d974dc7f37bb4bdc473ba682e22d5dc8))
+
+
 # [1.73.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.72.0...v1.73.0) (2026-11-12)
 
 ### Features

@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.74.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.73.1...v1.74.0) (2026-11-26)
+
+### Bug Fixes
+
+* add useStableCallback, apply to DataView ([#740](https://github.com/atko-eng/odyssey-design-system/issues/740)) ([b4a97e3](https://github.com/atko-eng/odyssey-design-system/commit/b4a97e3788afd05367faf94a661eca337b9a7550))
+* handle Unknown coverage in Faros publish ([#1166](https://github.com/atko-eng/odyssey-design-system/issues/1166)) ([3883267](https://github.com/atko-eng/odyssey-design-system/commit/3883267b18c3fffd1e123f86aa2f676d1ac62af8))
+* keep Babel-style CJS interop in UMD builds ([#1182](https://github.com/atko-eng/odyssey-design-system/issues/1182)) ([802e204](https://github.com/atko-eng/odyssey-design-system/commit/802e2044e4e37ba5af99bbb874d20898e07cdc55))
+* **odyssey-react-mui:** align Banner layout with design spec ([#1005](https://github.com/atko-eng/odyssey-design-system/issues/1005)) ([e570d29](https://github.com/atko-eng/odyssey-design-system/commit/e570d29c2fbf268f63fd562b53d5f60f7e46faab))
+* **odyssey-react-mui:** DataView getRowId for card selection and reorder ([#1215](https://github.com/atko-eng/odyssey-design-system/issues/1215)) ([d432047](https://github.com/atko-eng/odyssey-design-system/commit/d432047fc70f53c02500db873a3539af135397cb))
+* **odyssey-react-mui:** DataView Select all keeps other pages ([#1221](https://github.com/atko-eng/odyssey-design-system/issues/1221)) ([d926e9a](https://github.com/atko-eng/odyssey-design-system/commit/d926e9a0738807f00b5d55484dc9247e2fb1bb57))
+* **odyssey-react-mui:** preserve TagList item semantics ([#635](https://github.com/atko-eng/odyssey-design-system/issues/635)) ([90ec5c3](https://github.com/atko-eng/odyssey-design-system/commit/90ec5c35d0aa6a3a3341cdd47496f5d55a4ec733))
+* **odyssey-storybook-preset:** turn off motion for Applitools ([#1206](https://github.com/atko-eng/odyssey-design-system/issues/1206)) ([6b43b9e](https://github.com/atko-eng/odyssey-design-system/commit/6b43b9e7c3e760cb36b7b3186950d3c11a33e888))
+* reset sidenav state between UiShell stories ([#1176](https://github.com/atko-eng/odyssey-design-system/issues/1176)) ([e979b01](https://github.com/atko-eng/odyssey-design-system/commit/e979b01754f88fba218a4e4c9596f93b4ab88b61))
+* **storybook-preset:** bundle react in builds ([#1172](https://github.com/atko-eng/odyssey-design-system/issues/1172)) ([ef9af0b](https://github.com/atko-eng/odyssey-design-system/commit/ef9af0b08e421deea06fc8eda3825e6a5015695a))
+* translate hardcoded labels ([#1170](https://github.com/atko-eng/odyssey-design-system/issues/1170)) ([3ddc7e3](https://github.com/atko-eng/odyssey-design-system/commit/3ddc7e33a0c36b8ed3e2d6dfea360469fe1bada2))
+
+### Features
+
+* check visual changes against master locally (Surveyor) ([#1053](https://github.com/atko-eng/odyssey-design-system/issues/1053)) ([d3a9803](https://github.com/atko-eng/odyssey-design-system/commit/d3a9803bec676004ac7719c6b0f284eb207632a2)), closes [#915](https://github.com/atko-eng/odyssey-design-system/issues/915)
+* move charts to odyssey-labs ([#1180](https://github.com/atko-eng/odyssey-design-system/issues/1180)) ([af9b6c9](https://github.com/atko-eng/odyssey-design-system/commit/af9b6c96accf11ee6f01949711f6883e8cff5831))
+* **odyssey-react-mui:** add UUID mode ([#1064](https://github.com/atko-eng/odyssey-design-system/issues/1064)) ([17bc37b](https://github.com/atko-eng/odyssey-design-system/commit/17bc37b0f2a43ed2d67f01ae4658ee7f0bfb5496))
+* **opa-components:** add MultilinePasswordField ([#1201](https://github.com/atko-eng/odyssey-design-system/issues/1201)) ([7732cc9](https://github.com/atko-eng/odyssey-design-system/commit/7732cc974f383902daaada722a5ab7e9602c3242))
+* **opa-components:** add Skeleton ([#1189](https://github.com/atko-eng/odyssey-design-system/issues/1189)) ([ba5538f](https://github.com/atko-eng/odyssey-design-system/commit/ba5538fd64339fc364844c7e58d43a50c7c6bafa))
+* **opa-components:** add Stepper ([#1202](https://github.com/atko-eng/odyssey-design-system/issues/1202)) ([20d159e](https://github.com/atko-eng/odyssey-design-system/commit/20d159e7262c739b23a5becdf5c1921021db4876))
+* **ud-components:** add a "Show edge labels" setting ([#1208](https://github.com/atko-eng/odyssey-design-system/issues/1208)) ([fde9d7d](https://github.com/atko-eng/odyssey-design-system/commit/fde9d7dffbaf0c1ff9934955a47946fa4a3ca38f))
+* **ud-components:** add a "Show one path at a time" setting ([#1209](https://github.com/atko-eng/odyssey-design-system/issues/1209)) ([7988200](https://github.com/atko-eng/odyssey-design-system/commit/7988200519fd9e209a09231b8d5a4ccdbce3a717))
+* **ud-components:** add a conflictPolicy resolver ([#1225](https://github.com/atko-eng/odyssey-design-system/issues/1225)) ([9f3a7ba](https://github.com/atko-eng/odyssey-design-system/commit/9f3a7baf57f960edf6e597c2eb9a47bb3adfa031))
+* **ud-components:** add Customizations popover ([#1207](https://github.com/atko-eng/odyssey-design-system/issues/1207)) ([69771d3](https://github.com/atko-eng/odyssey-design-system/commit/69771d39961cfbea3b3a51d68512a46daeac6eb5))
+* **ud-components:** add getNodePlacement ([#1224](https://github.com/atko-eng/odyssey-design-system/issues/1224)) ([1b7ff44](https://github.com/atko-eng/odyssey-design-system/commit/1b7ff44442f5f4b2509a23a1ca532eb900292728))
+* **ud-components:** add GraphCanvas ([#1181](https://github.com/atko-eng/odyssey-design-system/issues/1181)) ([911d7c8](https://github.com/atko-eng/odyssey-design-system/commit/911d7c8cabb5da01750c44c679e0b4c34a385045))
+* **ud-components:** add GraphCanvas layout config ([#1216](https://github.com/atko-eng/odyssey-design-system/issues/1216)) ([4c5b105](https://github.com/atko-eng/odyssey-design-system/commit/4c5b1051bf5333be1b3945d76d85ddc9dff3206d))
+* **ud-components:** add GraphCanvas node classes ([#1197](https://github.com/atko-eng/odyssey-design-system/issues/1197)) ([7e073c0](https://github.com/atko-eng/odyssey-design-system/commit/7e073c018c0aeafa1cb6a211a5de35916d1aafa1))
+* **ud-components:** add rightToLeft layout ([#1218](https://github.com/atko-eng/odyssey-design-system/issues/1218)) ([b20bd98](https://github.com/atko-eng/odyssey-design-system/commit/b20bd9861363e73cf06f4d7e6b7f221e067d734b))
+* **ud-components:** add vertical layout types ([#1219](https://github.com/atko-eng/odyssey-design-system/issues/1219)) ([5d957b0](https://github.com/atko-eng/odyssey-design-system/commit/5d957b02cc10857a3d68f818731fdfd5928f4ed2))
+* **ud-components:** draw a stack layer behind collated GraphCanvas cards ([#1205](https://github.com/atko-eng/odyssey-design-system/issues/1205)) ([239bfb5](https://github.com/atko-eng/odyssey-design-system/commit/239bfb54def841f9d086429d152fc26906bf46c6))
+* **ud-components:** make GraphControls a toolbar ([#1198](https://github.com/atko-eng/odyssey-design-system/issues/1198)) ([52c6307](https://github.com/atko-eng/odyssey-design-system/commit/52c630750026b18af948afcd293cb1db52f41d5e))
+* **ud-components:** pan selection clear of the action drawer ([#1199](https://github.com/atko-eng/odyssey-design-system/issues/1199)) ([5d45109](https://github.com/atko-eng/odyssey-design-system/commit/5d4510924899264197eb747527570175159c6c25))
+* **ud-components:** show the connections button on hover, on the card's bottom edge ([#1204](https://github.com/atko-eng/odyssey-design-system/issues/1204)) ([ebe0f33](https://github.com/atko-eng/odyssey-design-system/commit/ebe0f338c1fe49350c399155a8806b601cf5dc2a))
+* **ud-components:** sync GraphCanvas with wp-components on master ([#1195](https://github.com/atko-eng/odyssey-design-system/issues/1195)) ([8b97ede](https://github.com/atko-eng/odyssey-design-system/commit/8b97ede2ff84eab3cbf555db917c57220fd141f6))
+* **upgrade-tools:** notify owner channel of PRs ([#1144](https://github.com/atko-eng/odyssey-design-system/issues/1144)) ([f0baf5d](https://github.com/atko-eng/odyssey-design-system/commit/f0baf5d2cf2abeaa7ad2ae20f4f386b165bb21dc))
+* **wp-components:** land the Post RR line ([#1193](https://github.com/atko-eng/odyssey-design-system/issues/1193)) ([2cd940a](https://github.com/atko-eng/odyssey-design-system/commit/2cd940a268fad2222b656a65c4056be55f2b79e7))
+* write impact entries in the PR ([#1196](https://github.com/atko-eng/odyssey-design-system/issues/1196)) ([b90ce1c](https://github.com/atko-eng/odyssey-design-system/commit/b90ce1c3d974dc7f37bb4bdc473ba682e22d5dc8))
+
+
 # [1.73.0](https://github.com/atko-eng/odyssey-design-system/compare/v1.72.0...v1.73.0) (2026-11-12)
 
 ### Bug Fixes

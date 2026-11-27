@@ -14,6 +14,7 @@ import { memo } from "react";
 
 import { Box } from "../Box.js";
 import { Button } from "../Buttons/Button.js";
+import { useTranslation } from "../i18n.generated/i18n.js";
 import { ArrowLeftIcon, ArrowRightIcon } from "../icons.generated/index.js";
 import { Support } from "../Typography.js";
 
@@ -44,19 +45,21 @@ const DataTablePagination = ({
   onClickPrevious,
   paginationType,
 }: DataTablePaginationProps) => {
+  const { t } = useTranslation();
+
   return (
     <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
       {paginationType === "loadMore" ? (
         <>
           <Button
             isDisabled={isNextButtonDisabled}
-            label="Show more"
+            label={t("pagination.loadmore")}
             onClick={onClickNext}
             variant="secondary"
           />
           {currentNumberOfResults && (
             <Support color="textSecondary">
-              {currentNumberOfResults} results
+              {t("datatablepagination.results", { currentNumberOfResults })}
             </Support>
           )}
         </>
@@ -64,7 +67,7 @@ const DataTablePagination = ({
         <>
           <Button
             isDisabled={isPreviousButtonDisabled}
-            label="Previous"
+            label={t("datatablepagination.previous")}
             onClick={onClickPrevious}
             startIcon={<ArrowLeftIcon />}
             variant="secondary"
@@ -72,14 +75,14 @@ const DataTablePagination = ({
           {currentPage && (
             <Box>
               <Support color="textSecondary" component="span">
-                Page {currentPage}
+                {t("datatablepagination.page", { currentPage })}
               </Support>
             </Box>
           )}
           <Button
             endIcon={<ArrowRightIcon />}
             isDisabled={isNextButtonDisabled}
-            label="Next"
+            label={t("datatablepagination.next")}
             onClick={onClickNext}
             variant="secondary"
           />

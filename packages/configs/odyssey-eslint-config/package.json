@@ -1,6 +1,6 @@
 {
   "name": "@okta/odyssey-eslint-config",
-  "version": "1.73.1",
+  "version": "1.74.0",
   "nx": {
     "tags": [
       "scope:tools"
@@ -16,7 +16,9 @@
     "build:clean": "rimraf dist",
     "build:source": "tsc",
     "build": "yarn build:clean && yarn build:source",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "NODE_ENV=test vitest run --reporter=default",
+    "coverage": "NODE_ENV=test vitest run --coverage --reporter=default"
   },
   "dependencies": {
     "@eslint/js": "^9.31.0",
@@ -32,13 +34,17 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-perfectionist": "^4.15.0",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-perf": "3.3.3",
     "typescript-eslint": "^8.46.0"
   },
   "devDependencies": {
+    "@okta/odyssey-test-tooling": "workspace:*",
     "@types/node": "^24.1.0",
+    "@vitest/coverage-v8": "^5.0.5",
     "jiti": "^2.4.2",
     "rimraf": "^6.0.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^5.0.5"
   },
   "peerDependencies": {
     "eslint": "^9.31.0"

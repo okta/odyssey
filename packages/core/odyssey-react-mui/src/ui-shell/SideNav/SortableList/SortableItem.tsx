@@ -226,6 +226,7 @@ export const SortableItem = ({
   label,
   children,
 }: PropsWithChildren<ItemProps>) => {
+  const { t } = useTranslation();
   const {
     attributes,
     isDragging,
@@ -234,7 +235,12 @@ export const SortableItem = ({
     setActivatorNodeRef,
     transform,
     transition,
-  } = useSortable({ id });
+  } = useSortable({
+    attributes: {
+      roleDescription: t("navigation.drag.handle.roledescription"),
+    },
+    id,
+  });
 
   const context: SortableItemContextType = useMemo(
     () => ({

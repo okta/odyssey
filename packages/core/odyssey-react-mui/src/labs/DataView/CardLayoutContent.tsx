@@ -29,6 +29,7 @@ import {
 
 import { Box } from "../../Box.js";
 import { CircularProgress } from "../../CircularProgress.js";
+import { getTableRowId } from "../../DataTable/reorderDataRowsLocally.js";
 import {
   DesignTokens,
   useOdysseyDesignTokens,
@@ -72,6 +73,10 @@ export type CardLayoutContentProps<TData extends MRT_RowData> = {
       "aria-label": string;
       title: string;
     };
+    /**
+     * Returns the id a row's reorder menu sends. Optional so a caller that builds this object itself keeps sending `row.id`.
+     */
+    getReorderRowId?: ({ index, row }: { index: number; row: TData }) => string;
     handleDragHandleKeyDown: ({
       table,
       row,
@@ -101,10 +106,16 @@ type CardLayoutContentComponent = (<TData extends MRT_RowData>(
 ) => JSX.Element) & {
   displayName?: string;
 };
+type HandleRowSelectionChangeArgs<TData extends MRT_RowData> = {
+  row: TData;
+  rowId: string;
+};
 type RowDataCardProps<TData extends MRT_RowData> = {
   currentIndex: number;
-  handleRowSelectionChange: (row: TData) => void;
+  handleRowSelectionChange: (args: HandleRowSelectionChangeArgs<TData>) => void;
+  reorderRowId?: string;
   row: TData;
+  rowId: string;
 } & Pick<
   CardLayoutContentProps<TData>,
   | "cardLayoutOptions"
@@ -171,7 +182,9 @@ const RowDataCard = <TData extends MRT_RowData>({
   isRowReorderingDisabled,
   isRowSelectionDisabled,
   onReorderRows,
+  reorderRowId,
   row,
+  rowId,
   rowReorderingUtilities,
   rowSelection,
   totalRows,
@@ -185,8 +198,8 @@ const RowDataCard = <TData extends MRT_RowData>({
   );
 
   const onSelectionChange = useCallback(
-    () => handleRowSelectionChange(row),
-    [handleRowSelectionChange, row],
+    () => handleRowSelectionChange({ row, rowId }),
+    [handleRowSelectionChange, row, rowId],
   );
 
   const detailPanel = useMemo(
@@ -203,6 +216,7 @@ const RowDataCard = <TData extends MRT_RowData>({
           rowActionMenuItems={
             cardLayoutOptions.rowActionMenuItems as CardLayoutProps<MRT_RowData>["rowActionMenuItems"]
           }
+          rowId={reorderRowId}
           rowIndex={currentIndex}
           totalRows={totalRows}
           updateRowOrder={
@@ -218,6 +232,7 @@ const RowDataCard = <TData extends MRT_RowData>({
       hasRowReordering,
       isRowReorderingDisabled,
       onReorderRows,
+      reorderRowId,
       row,
       rowReorderingUtilities,
       totalRows,
@@ -231,9 +246,9 @@ const RowDataCard = <TData extends MRT_RowData>({
       detailPanel={detailPanel}
       hasSelection={hasRowSelection}
       image={image}
-      isSelected={rowSelection[row.id as number] ?? false}
+      isSelected={rowSelection[rowId] ?? false}
       isSelectionDisabled={isSelectionDisabled}
-      key={row.id as string}
+      key={rowId}
       menuButtonChildren={menuButtonChildren}
       onSelectionChange={onSelectionChange}
       overline={overline}
@@ -250,6 +265,7 @@ const CardLayoutContent = <TData extends MRT_RowData>({
   currentLayout,
   data,
   emptyState,
+  getRowId,
   hasRowReordering,
   hasRowSelection,
   isEmpty,
@@ -268,16 +284,18 @@ const CardLayoutContent = <TData extends MRT_RowData>({
   const odysseyDesignTokens = useOdysseyDesignTokens();
 
   const handleRowSelectionChange = useCallback(
-    (row: TData) => {
+    ({ row, rowId }: HandleRowSelectionChangeArgs<TData>) => {
       if (isRowSelectionDisabled?.(row)) {
         return;
       }
 
       setRowSelection((rowSelection) =>
         Object.fromEntries(
-          row.id in rowSelection
-            ? Object.entries(rowSelection).filter(([key]) => key !== row.id)
-            : Object.entries(rowSelection).concat([[row.id, true]]),
+          rowSelection[rowId]
+            ? Object.entries(rowSelection).filter(([key]) => key !== rowId)
+            : Object.entries(rowSelection)
+                .filter(([key]) => key !== rowId)
+                .concat([[rowId, true]]),
         ),
       );
     },
@@ -304,6 +322,12 @@ const CardLayoutContent = <TData extends MRT_RowData>({
               {data.map((row, index) => {
                 const currentIndex =
                   index + (pagination.pageIndex - 1) * pagination.pageSize;
+                // The table and Select all key the selection with getRowId, so the cards key a row by the getRowId the table was given, through the same fallback the reorder paths use, for a row to read as selected in every layout. DataView's default getRowId passes a numeric id through unconverted, and the toggle compares it with the string keys of the selection object, so it is converted here.
+                const rowId = String(getTableRowId({ getRowId, index, row }));
+                const reorderRowId = rowReorderingUtilities.getReorderRowId?.({
+                  index,
+                  row,
+                });
 
                 return (
                   <MemoizedRowDataCard
@@ -314,9 +338,11 @@ const CardLayoutContent = <TData extends MRT_RowData>({
                     hasRowSelection={hasRowSelection}
                     isRowReorderingDisabled={isRowReorderingDisabled}
                     isRowSelectionDisabled={isRowSelectionDisabled}
-                    key={row.id as string}
+                    key={rowId}
                     onReorderRows={onReorderRows}
+                    reorderRowId={reorderRowId}
                     row={row}
+                    rowId={rowId}
                     rowReorderingUtilities={rowReorderingUtilities}
                     rowSelection={rowSelection}
                     totalRows={totalRows}

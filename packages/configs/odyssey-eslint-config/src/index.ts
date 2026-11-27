@@ -29,6 +29,7 @@ import {
   configs as tsEslintConfigs,
 } from "typescript-eslint";
 
+import { memoizedPropsPlugin } from "./memoizedPropsPlugin.js";
 // import * as headerPlugin from "./utils/headerPlugin.cjs"
 import { headerText, pattern, template } from "./utils/header.js";
 
@@ -199,6 +200,29 @@ const eslintConfig = createTsEslintConfig(
   },
 
   {
+    files: ["**/*.jsx", "**/*.tsx"],
+    name: getPrefixedEslintConfigName("memoized-props"),
+    plugins: {
+      "memoized-props": memoizedPropsPlugin,
+    },
+    // Native elements are not memoized, so a new callback or style object on a `<div>` costs nothing a memoized child would. Only component boundaries are checked.
+    rules: {
+      "memoized-props/no-new-array-as-prop": [
+        "error",
+        { nativeAllowList: "all" },
+      ],
+      "memoized-props/no-new-function-as-prop": [
+        "error",
+        { nativeAllowList: "all" },
+      ],
+      "memoized-props/no-new-object-as-prop": [
+        "error",
+        { nativeAllowList: "all" },
+      ],
+    },
+  },
+
+  {
     extends: [
       ...storybookPluginConfigs["flat/recommended"],
       ...storybookPluginConfigs["flat/addon-interactions"],
@@ -206,6 +230,10 @@ const eslintConfig = createTsEslintConfig(
     ],
     files: ["**/*.stories.tsx"],
     name: getPrefixedEslintConfigName("storybook"),
+    rules: {
+      // Storybook's presets turn this off because a story's `render` can be a lowercase arrow that calls hooks, which React does not treat as a component. Odyssey stories name it `function C()`, so the rule holds there, and the memoization rules rely on `useCallback` and `useMemo` being called from a render.
+      "react-hooks/rules-of-hooks": "error",
+    },
   },
 
   {

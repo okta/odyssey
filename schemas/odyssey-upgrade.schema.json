@@ -20,6 +20,28 @@
           "const": "scoped"
         }
       ]
+    },
+    "slackChannel": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The Slack channel that is told when an upgrade pull request opens, with or without its `#`. Without it, the channel comes from the repository's `i18n.config.json`, then its Terminus record."
+    },
+    "guardian": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The guardian rotation to ping when an upgrade pull request opens, such as `guardian-my-team`. A Slack mention such as `<@U123>` is used as it is. Read only with `slackChannel`."
     }
   },
   "additionalProperties": false,

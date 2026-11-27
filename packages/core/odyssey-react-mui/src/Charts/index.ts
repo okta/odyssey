@@ -10,7 +10,12 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-export { BarChart, type BarChartProps } from "./BarChart.js";
-export { LineChart, type LineChartProps } from "./LineChart.js";
-export type { ChartPoint, ChartSeries } from "./utils/chartTypes.js";
-export { type ChartValueFormat } from "./utils/formatChartValue.js";
+export {
+  BarChart,
+  type BarChartProps,
+  type ChartPoint,
+  type ChartSeries,
+  type ChartValueFormat,
+  LineChart,
+  type LineChartProps,
+} from "./movedToOdysseyLabs.js";

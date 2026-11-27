@@ -177,6 +177,7 @@ const ComposablePicker = <
       id={idOverride}
       isOptionEqualToValue={getIsOptionEqualToValue}
       loading={isLoading}
+      loadingText={t("autocomplete.loading")}
       multiple={hasMultipleChoices}
       noOptionsText={emptyOptionsText}
       onBlur={onBlur}

@@ -1,0 +1,35 @@
+diff --git a/dist/image-finder.js b/dist/image-finder.js
+index 523948ced12b1af43fbfa25d16974811d0f4a01d..ce1b8ededd5e6e5554b871cee10d90c8f4b7d498 100644
+--- a/dist/image-finder.js
++++ b/dist/image-finder.js
+@@ -4,15 +4,15 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.findImages = void 0;
+-var _glob = _interopRequireDefault(require("glob"));
++const _glob = require("glob");
+ var _path = _interopRequireDefault(require("path"));
+ function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+ // $FlowIgnore
+ var difference = (arrA, arrB) => arrA.filter(a => !arrB.includes(a));
+-var IMAGE_FILES = '/**/*.+(tiff|jpeg|jpg|gif|png|bmp)';
++var IMAGE_FILES = '**/*.+(tiff|jpeg|jpg|gif|png|bmp)';
+ var findImages = (expectedDir, actualDir) => {
+-  var expectedImages = _glob.default.sync(`${expectedDir}${IMAGE_FILES}`).map(p => _path.default.relative(expectedDir, p)).map(p => p[0] === _path.default.sep ? p.slice(1) : p);
+-  var actualImages = _glob.default.sync(`${actualDir}${IMAGE_FILES}`).map(p => _path.default.relative(actualDir, p)).map(p => p[0] === _path.default.sep ? p.slice(1) : p);
++  const expectedImages = _glob.globSync(IMAGE_FILES, { cwd: expectedDir }).toSorted();
++  const actualImages = _glob.globSync(IMAGE_FILES, { cwd: actualDir }).toSorted();
+   var deletedImages = difference(expectedImages, actualImages);
+   var newImages = difference(actualImages, expectedImages);
+   return {
+diff --git a/dist/index.js b/dist/index.js
+index 7840af31fecebc14d107efa7151e9433dd0d9f7e..3a5db774f18a92facf35ac8096d5194416b38b43 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1,6 +1,5 @@
+ "use strict";
+ 
+-var _glob = _interopRequireDefault(require("glob"));
+ var _makeDir = _interopRequireDefault(require("make-dir"));
+ var _del = require("del");
+ var _fs = _interopRequireDefault(require("fs"));

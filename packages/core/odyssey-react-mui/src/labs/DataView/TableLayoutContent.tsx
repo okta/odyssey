@@ -47,6 +47,7 @@ import {
   MoreIcon,
 } from "../../icons.generated/index.js";
 import { useOdysseyDesignTokens } from "../../OdysseyDesignTokensContext.js";
+import { useMaterialReactTableLocalization } from "../../useMaterialReactTableLocalization.js";
 import {
   TableLayoutProps,
   TableState,
@@ -104,6 +105,10 @@ export type TableLayoutContentProps<TData extends MRT_RowData> = {
       "aria-label": string;
       title: string;
     };
+    /**
+     * Returns the id a row's reorder menu sends. Optional so a caller that builds this object itself keeps sending `row.id`.
+     */
+    getReorderRowId?: ({ index, row }: { index: number; row: TData }) => string;
     handleDragHandleKeyDown: ({
       table,
       row,
@@ -185,6 +190,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
 
   const odysseyDesignTokens = useOdysseyDesignTokens();
   const { t } = useTranslation();
+  const materialReactTableLocalization = useMaterialReactTableLocalization();
 
   const columnIds = useMemo(() => {
     return columns.map((column) => column.accessorKey) ?? [];
@@ -224,6 +230,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
     draggableTableBodyRowClassName,
     dragHandleStyles,
     dragHandleText,
+    getReorderRowId,
     handleDragHandleKeyDown,
     handleDragHandleOnDragCapture,
     handleDragHandleOnDragEnd,
@@ -252,6 +259,10 @@ const TableLayoutContent = <TData extends MRT_RowData>({
                 rowActionMenuItems={
                   tableLayoutOptions.rowActionMenuItems as TableLayoutProps<MRT_RowData>["rowActionMenuItems"]
                 }
+                rowId={getReorderRowId?.({
+                  index: row.index,
+                  row: row.original,
+                })}
                 rowIndex={currentIndex}
                 totalRows={totalRows}
                 updateRowOrder={
@@ -264,6 +275,7 @@ const TableLayoutContent = <TData extends MRT_RowData>({
       );
     },
     [
+      getReorderRowId,
       hasRowReordering,
       isRowReorderingDisabled,
       onReorderRows,
@@ -485,13 +497,13 @@ const TableLayoutContent = <TData extends MRT_RowData>({
         : true
       : false,
     onRowSelectionChange: setRowSelection,
+    // MRT's default compares the count of every selected key with the count of rows it holds, but the selection keeps rows from other pages when the page changes, so judge "some selected" by the rows on screen.
+    muiSelectAllCheckboxProps: ({ table }) => ({
+      indeterminate:
+        !table.getIsAllRowsSelected() && table.getIsSomePageRowsSelected(),
+    }),
     renderEmptyRowsFallback: emptyStateContainer,
-    localization: {
-      collapse: t("table.rowexpansion.collapse"),
-      collapseAll: t("table.rowexpansion.collapseall"),
-      expand: t("table.rowexpansion.expand"),
-      expandAll: t("table.rowexpansion.expandall"),
-    },
+    localization: materialReactTableLocalization,
   });
 
   return (

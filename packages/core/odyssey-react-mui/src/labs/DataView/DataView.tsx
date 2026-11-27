@@ -42,6 +42,7 @@ import {
 import { Pagination } from "../../Pagination/Pagination.js";
 import { usePagination } from "../../Pagination/usePagination.js";
 import { Typography } from "../../Typography.js";
+import { useStableCallback } from "../../useStableCallback.js";
 import { DataFilters } from "../DataFilters.js";
 import { BulkActionsMenu } from "./BulkActionsMenu.js";
 import { CardLayoutContent } from "./CardLayoutContent.js";
@@ -310,26 +311,45 @@ const DataView = <TData extends MRT_RowData>({
     [getRowIdProp],
   );
 
-  // Update pagination state if props change
+  // A consumer that passes an inline onPaginationChange gives a new function
+  // identity on every render, which would make the notification effect below
+  // run for renders where the pagination did not change and report the
+  // pagination from the previous commit. A consumer that feeds that stale value
+  // back into the currentPage prop makes the prop and this state swap values on
+  // each commit, which never settles.
+  const stableOnPaginationChange = useStableCallback(onPaginationChange);
+
+  // Update pagination state if props change. Keep the previous object when the
+  // values already match, because a new object identity makes the notification
+  // effect below fire for a change that did not happen.
   useEffect(() => {
-    setPagination({
-      pageIndex: currentPage,
-      pageSize: resultsPerPage,
-    });
+    setPagination((previousPagination) =>
+      previousPagination.pageIndex === currentPage &&
+      previousPagination.pageSize === resultsPerPage
+        ? previousPagination
+        : { pageIndex: currentPage, pageSize: resultsPerPage },
+    );
   }, [currentPage, resultsPerPage]);
 
   // Reset pagination if search or filters change
   useEffect(() => {
-    setPagination((prev) => ({
-      pageIndex: 1,
-      pageSize: paginationType == "loadMore" ? resultsPerPage : prev.pageSize,
-    }));
+    setPagination((previousPagination) => {
+      const nextPageSize =
+        paginationType === "loadMore"
+          ? resultsPerPage
+          : previousPagination.pageSize;
+
+      return previousPagination.pageIndex === 1 &&
+        previousPagination.pageSize === nextPageSize
+        ? previousPagination
+        : { pageIndex: 1, pageSize: nextPageSize };
+    });
   }, [filters, paginationType, resultsPerPage, search]);
 
   // Fire onPaginationChange if pagination changes
   useEffect(() => {
-    onPaginationChange?.(pagination);
-  }, [onPaginationChange, pagination]);
+    stableOnPaginationChange(pagination);
+  }, [pagination, stableOnPaginationChange]);
 
   // Fire onColumnVisibilityChange if column visibility changes
   useEffect(() => {
@@ -455,6 +475,7 @@ const DataView = <TData extends MRT_RowData>({
     setData,
     draggingRow,
     setDraggingRow,
+    getRowId,
     resultsPerPage: pagination.pageSize,
     page: pagination.pageIndex,
   });

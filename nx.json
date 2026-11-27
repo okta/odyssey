@@ -6,7 +6,8 @@
       "options": {
         "targetName": "eslint"
       }
-    }
+    },
+    "./packages/platform/odyssey-build-tooling/src/nx-visual-regression-plugin.ts"
   ],
   "pluginsConfig": {
     "@nx/js": {
@@ -75,6 +76,13 @@
         "{projectRoot}/storybook-static"
       ],
       "cache": true
+    },
+    "start:storybook": {
+      "dependsOn": [
+        "^build"
+      ],
+      "continuous": true,
+      "cache": false
     },
     "coverage": {
       "dependsOn": [

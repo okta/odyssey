@@ -59,6 +59,7 @@ import {
 import { paginationTypeValues } from "../Pagination/constants.js";
 import { Pagination } from "../Pagination/Pagination.js";
 import { usePagination } from "../Pagination/usePagination.js";
+import { useMaterialReactTableLocalization } from "../useMaterialReactTableLocalization.js";
 import { densityValues } from "./constants.js";
 import {
   DataTableRowActions,
@@ -384,6 +385,7 @@ const DataTable = ({
   totalRows,
 }: DataTableProps) => {
   const { t } = useTranslation();
+  const materialReactTableLocalization = useMaterialReactTableLocalization();
 
   const [data, setData] = useState<DataTableRowData[]>([]);
   const [pagination, setPagination] = useState({
@@ -446,6 +448,7 @@ const DataTable = ({
     setData,
     draggingRow,
     setDraggingRow,
+    getRowId,
     resultsPerPage: pagination.pageSize,
     page: pagination.pageIndex,
   });
@@ -721,6 +724,7 @@ const DataTable = ({
   );
 
   const dataTable = useMaterialReactTable({
+    localization: materialReactTableLocalization,
     columns: columns,
     data: data,
     getRowId,
@@ -895,7 +899,7 @@ const DataTable = ({
     () => (
       <>
         <MenuButton
-          ariaLabel="More actions"
+          ariaLabel={t("table.moreactions.arialabel")}
           buttonVariant="secondary"
           endIcon={<MoreIcon />}
           isDisabled={Object.keys(rowSelection).length === 0}
@@ -904,7 +908,7 @@ const DataTable = ({
         </MenuButton>
       </>
     ),
-    [bulkActionMenuItems, rowSelection],
+    [bulkActionMenuItems, rowSelection, t],
   );
 
   useEffect(() => {

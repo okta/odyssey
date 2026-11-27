@@ -12,6 +12,8 @@
 
 import { createComposedStorybookMain } from "@okta/odyssey-storybook-preset";
 
+// Every story lives in a package Storybook, Odyssey Core's included. Storybook refuses to start without one local entry, so the host keeps only the landing page.
 export default createComposedStorybookMain({
-  staticDirs: ["../src/static"],
+  leadingRefIds: ["odyssey-core-storybook"],
+  stories: ["../src/Introduction.mdx"],
 });

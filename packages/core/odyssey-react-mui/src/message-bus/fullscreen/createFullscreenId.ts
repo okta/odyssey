@@ -13,10 +13,10 @@
 import { createUniqueId } from "../../createUniqueId.js";
 
 /**
- * Create a new fullscreen id that's unique across every app on the page. Each app bundles its own copy of Odyssey, so a prefix keeps these ids apart from other `createUniqueId` values in the same document.
+ * Creates a fullscreen ID with a UUID v4 so independently bundled apps can generate IDs without a shared registry. The prefix identifies the fullscreen domain.
  */
 export const createFullscreenId = () =>
-  `odyssey-fullscreen-${createUniqueId()}`;
+  `odyssey-fullscreen-${createUniqueId({ isUuid: true })}`;
 
 /**
  * The HTML `id` of the element that fills the screen for a fullscreen id. Deterministic, so a `FullscreenButton` anywhere on the page can point `aria-controls` at the region it controls without being handed an element.

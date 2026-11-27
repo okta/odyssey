@@ -124,7 +124,11 @@ export {
   CircularProgress,
   type CircularProgressProps,
 } from "./CircularProgress.js";
-export { createUniqueId, uniqueIdLength } from "./createUniqueId.js";
+export {
+  createUniqueId,
+  type CreateUniqueIdArgs,
+  uniqueIdLength,
+} from "./createUniqueId.js";
 export { CssBaseline } from "./CssBaseline.js";
 export { densityValues } from "./DataTable/constants.js";
 export {

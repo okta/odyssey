@@ -10,9 +10,13 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import { unstable_useEventCallback } from "@mui/utils";
+import { useEffect, useLayoutEffect, useRef } from "react";
 
-const noop = () => undefined;
+/**
+ * `useLayoutEffect` prints a warning when it runs on the server, because the server has no layout to read.
+ */
+const useIsomorphicLayoutEffect =
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 /**
  * Returns a callback with a permanent identity that always invokes the most recent version of `callback`.
@@ -40,7 +44,19 @@ export const useStableCallback = <
   CallbackReturn,
 >(
   callback?: (...callbackArguments: CallbackArguments) => CallbackReturn,
-) =>
-  unstable_useEventCallback<CallbackArguments, CallbackReturn | undefined>(
-    callback ?? noop,
-  );
+) => {
+  const latestCallbackReference = useRef(callback);
+
+  useIsomorphicLayoutEffect(() => {
+    latestCallbackReference.current = callback;
+  });
+
+  return useRef(
+    (...callbackArguments: CallbackArguments): CallbackReturn | undefined => {
+      // Read the callback into a variable first, so the call does not bind `this` to the ref.
+      const latestCallback = latestCallbackReference.current;
+
+      return latestCallback?.(...callbackArguments);
+    },
+  ).current;
+};

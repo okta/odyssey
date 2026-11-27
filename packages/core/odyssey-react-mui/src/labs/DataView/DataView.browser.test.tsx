@@ -14,15 +14,17 @@ import type { RenderResult } from "vitest-browser-react";
 
 import { renderWithOdysseyProvider } from "@okta/odyssey-test-tooling/browser";
 import { MRT_RowSelectionState } from "material-react-table";
-import { type ReactElement, useState } from "react";
+import { type ReactElement, useCallback, useState } from "react";
 import { page, userEvent } from "vitest/browser";
 
 import { Button } from "../../Buttons/Button.js";
 import { MenuItem } from "../../Buttons/MenuItem.js";
 import { EmptyState } from "../../EmptyState.js";
+import { TranslationProvider } from "../../i18n.generated/i18n.js";
 import { DataTableRowData } from "../../index.js";
 import {
   type CardLayoutProps,
+  type DataLayout,
   type TableLayoutProps,
 } from "./componentTypes.js";
 import { DataTable } from "./DataTable.js";
@@ -40,6 +42,10 @@ import {
   reorderData,
 } from "./testSupportData.js";
 
+const PING_PONG_LAYOUTS: DataLayout[] = ["table"];
+
+const PING_PONG_TABLE_OPTIONS = { columns };
+
 const getData = ({ ...props }) => {
   return filterData({ data, ...props });
 };
@@ -53,6 +59,14 @@ const gridItemProps: CardLayoutProps<Person>["itemProps"] = (row) => ({
   title: row.name,
   overline: "Grid card",
 });
+
+// Marker strings no English default contains, so an English label means the component skipped the translation provider. Each test turns off the provider's own `TranslationProvider`, because its effect runs after this one and resets the language to the browser default.
+const translationOverrides = {
+  ar: {
+    "table.mrt.toggleselectall": "ar select all",
+    "table.mrt.toggleselectrow": "ar select row",
+  },
+};
 
 const renderDataView = async (ui: ReactElement): Promise<RenderResult> => {
   const result = await renderWithOdysseyProvider(ui);
@@ -509,6 +523,140 @@ describe("DataView", { timeout: 10000 }, () => {
         .toHaveTextContent("1 selected");
     });
 
+    describe("cards with a custom getRowId", () => {
+      // A prefix makes every key differ from row.id, so a card that reads or writes row.id finds no match.
+      const getPrefixedRowId = (row: Person) => `person-${row.id}`;
+
+      test("Select all clicked", async () => {
+        const { container } = await renderDataView(
+          <DataView
+            availableLayouts={["grid"]}
+            cardLayoutOptions={{
+              itemProps: gridItemProps,
+            }}
+            getData={getData}
+            getRowId={getPrefixedRowId}
+            hasRowSelection
+          />,
+        );
+
+        await userEvent.click(page.getByRole("button", { name: "Select all" }));
+
+        await expect
+          .element(page.getByRole("button", { name: "More actions" }).first())
+          .toHaveTextContent(`${data.length} selected`);
+        await expect
+          .poll(() =>
+            page
+              .getByRole("checkbox")
+              .elements()
+              .map((checkbox) => (checkbox as HTMLInputElement).checked),
+          )
+          .toStrictEqual(data.map(() => true));
+
+        await expect(container).toBeAccessible();
+      });
+
+      test("Select all clicked, then one card unchecked", async () => {
+        const onRowSelectionChange = vi.fn();
+
+        const { container } = await renderDataView(
+          <DataView
+            availableLayouts={["grid"]}
+            cardLayoutOptions={{
+              itemProps: gridItemProps,
+            }}
+            getData={getData}
+            getRowId={getPrefixedRowId}
+            hasRowSelection
+            onRowSelectionChange={onRowSelectionChange}
+          />,
+        );
+
+        await userEvent.click(page.getByRole("button", { name: "Select all" }));
+        await userEvent.click(page.getByRole("checkbox").nth(0));
+
+        await expect
+          .element(page.getByRole("button", { name: "More actions" }).first())
+          .toHaveTextContent(`${data.length - 1} selected`);
+        await expect
+          .element(page.getByRole("checkbox").nth(0))
+          .not.toBeChecked();
+        expect(onRowSelectionChange).toHaveBeenLastCalledWith(
+          Object.fromEntries(
+            data.slice(1).map((person) => [getPrefixedRowId(person), true]),
+          ),
+        );
+
+        await expect(container).toBeAccessible();
+      });
+
+      test("a card checked, then the layout switched to table", async () => {
+        const { container } = await renderDataView(
+          <DataView
+            availableLayouts={["grid", "table"]}
+            cardLayoutOptions={{
+              itemProps: gridItemProps,
+            }}
+            getData={getData}
+            getRowId={getPrefixedRowId}
+            hasRowSelection
+            tableLayoutOptions={{
+              columns,
+            }}
+          />,
+        );
+
+        await userEvent.click(page.getByRole("checkbox").nth(0));
+        await userEvent.click(page.getByRole("button", { name: "Layout" }));
+        await userEvent.click(page.getByRole("menuitem", { name: "Table" }));
+        // The layout menu stays open after a choice, and an open menu hides the rest of the page from role queries.
+        await userEvent.keyboard("{Escape}");
+        await expect.element(page.getByRole("menu")).not.toBeInTheDocument();
+
+        // nth(0) is the table's header select-all checkbox; nth(1) is the first data row.
+        await expect.element(page.getByRole("checkbox").nth(1)).toBeChecked();
+        await expect
+          .element(page.getByRole("button", { name: "More actions" }).first())
+          .toHaveTextContent("1 selected");
+
+        await expect(container).toBeAccessible();
+      });
+    });
+
+    test("a card with a numeric id checked, then unchecked", async () => {
+      // DataView's default getRowId returns a numeric id unconverted, while the keys of the selection object are always strings.
+      const numericIdData = data.map((person, index) => ({
+        ...person,
+        id: index + 1,
+      }));
+
+      await renderDataView(
+        <DataView
+          availableLayouts={["grid"]}
+          cardLayoutOptions={{
+            itemProps: (row: (typeof numericIdData)[number]) => ({
+              title: row.name,
+            }),
+          }}
+          getData={() => numericIdData}
+          hasRowSelection
+        />,
+      );
+
+      await userEvent.click(page.getByRole("checkbox").nth(0));
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }).first())
+        .toHaveTextContent("1 selected");
+
+      await userEvent.click(page.getByRole("checkbox").nth(0));
+
+      await expect.element(page.getByRole("checkbox").nth(0)).not.toBeChecked();
+      await expect
+        .element(page.getByRole("button", { name: "Select none" }))
+        .toHaveAttribute("aria-disabled", "true");
+    });
+
     test("can select all card rows", async () => {
       await renderDataView(
         <DataView
@@ -643,6 +791,299 @@ describe("DataView", { timeout: 10000 }, () => {
         .toHaveTextContent(`Selected ${data.length}`);
     });
 
+    test("Select all on one page after selecting a row on another page", async () => {
+      const { container } = await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          hasRowSelection
+          paginationType="paged"
+          resultsPerPage={5}
+          tableLayoutOptions={{
+            columns,
+          }}
+          totalRows={data.length}
+        />,
+      );
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("button", { name: "Next page" }));
+      await expect.element(page.getByText(data[5].name)).toBeVisible();
+
+      // Page 2 holds only the sixth row, so nth(1) is that row's checkbox.
+      await userEvent.click(page.getByRole("checkbox").nth(1));
+
+      const selectionButton = page.getByRole("button", {
+        name: "More actions",
+      });
+      await expect.element(selectionButton).toHaveTextContent("1 selected");
+
+      await userEvent.click(
+        page.getByRole("button", { name: "Previous page" }),
+      );
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+
+      await userEvent.click(page.getByRole("button", { name: "Select all" }));
+
+      await expect
+        .element(selectionButton)
+        .toHaveTextContent(`${data.length} selected`);
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("button", { name: "Next page" }));
+      await expect.element(page.getByText(data[5].name)).toBeVisible();
+
+      await expect.element(page.getByRole("checkbox").nth(1)).toBeChecked();
+      await expect(container).toBeAccessible();
+    });
+
+    test("Select all with a controlled rowSelection holding an off-page row", async () => {
+      const mockOnRowSelectionChange = vi.fn();
+
+      const { container } = await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          hasRowSelection
+          onRowSelectionChange={mockOnRowSelectionChange}
+          paginationType="paged"
+          resultsPerPage={5}
+          rowSelection={{
+            [data[1].id]: false,
+            [data[5].id]: true,
+            "no-longer-listed": false,
+          }}
+          tableLayoutOptions={{
+            columns,
+          }}
+          totalRows={data.length}
+        />,
+      );
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("button", { name: "Select all" }));
+
+      expect(mockOnRowSelectionChange).toHaveBeenLastCalledWith({
+        [data[0].id]: true,
+        [data[1].id]: true,
+        [data[2].id]: true,
+        [data[3].id]: true,
+        [data[4].id]: true,
+        [data[5].id]: true,
+        "no-longer-listed": false,
+      });
+      await expect(container).toBeAccessible();
+    });
+
+    test("Select all with a disabled row on the page and an off-page row selected", async () => {
+      const mockOnRowSelectionChange = vi.fn();
+
+      const { container } = await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          hasRowSelection
+          initialRowSelection={{ [data[5].id]: true }}
+          isRowSelectionDisabled={(row) => row.id === data[0].id}
+          onRowSelectionChange={mockOnRowSelectionChange}
+          paginationType="paged"
+          resultsPerPage={5}
+          tableLayoutOptions={{
+            columns,
+          }}
+          totalRows={data.length}
+        />,
+      );
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("button", { name: "Select all" }));
+
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent(`${data.length - 1} selected`);
+      expect(mockOnRowSelectionChange).toHaveBeenLastCalledWith({
+        [data[1].id]: true,
+        [data[2].id]: true,
+        [data[3].id]: true,
+        [data[4].id]: true,
+        [data[5].id]: true,
+      });
+      await expect(container).toBeAccessible();
+    });
+
+    test("Select all on each page in turn", async () => {
+      const { container } = await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          hasRowSelection
+          paginationType="paged"
+          resultsPerPage={5}
+          tableLayoutOptions={{
+            columns,
+          }}
+          totalRows={data.length}
+        />,
+      );
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("button", { name: "Select all" }));
+
+      const selectionButton = page.getByRole("button", {
+        name: "More actions",
+      });
+      await expect.element(selectionButton).toHaveTextContent("5 selected");
+
+      await userEvent.click(page.getByRole("button", { name: "Next page" }));
+      await expect.element(page.getByText(data[5].name)).toBeVisible();
+
+      await userEvent.click(page.getByRole("button", { name: "Select all" }));
+
+      await expect
+        .element(selectionButton)
+        .toHaveTextContent(`${data.length} selected`);
+      await expect
+        .element(page.getByRole("button", { name: "Select all" }))
+        .toHaveAttribute("aria-disabled", "true");
+      await expect(container).toBeAccessible();
+    });
+
+    test("Select all on a partly selected page after the header checkbox and a row on another page", async () => {
+      const { container } = await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          hasRowSelection
+          paginationType="paged"
+          resultsPerPage={5}
+          tableLayoutOptions={{
+            columns,
+          }}
+          totalRows={data.length}
+        />,
+      );
+      await expect(container).toBeAccessible();
+
+      // nth(0) is the header "select all" checkbox.
+      await userEvent.click(page.getByRole("checkbox").nth(0));
+
+      const selectionButton = page.getByRole("button", {
+        name: "More actions",
+      });
+      await expect.element(selectionButton).toHaveTextContent("5 selected");
+
+      await userEvent.click(page.getByRole("button", { name: "Next page" }));
+      await expect.element(page.getByText(data[5].name)).toBeVisible();
+
+      // Page 2 holds only the sixth row, so nth(1) is that row's checkbox.
+      await userEvent.click(page.getByRole("checkbox").nth(1));
+      await expect
+        .element(selectionButton)
+        .toHaveTextContent(`${data.length} selected`);
+
+      await userEvent.click(
+        page.getByRole("button", { name: "Previous page" }),
+      );
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+
+      await userEvent.click(page.getByRole("checkbox").nth(1));
+      await expect
+        .element(selectionButton)
+        .toHaveTextContent(`${data.length - 1} selected`);
+      // The selection holds as many keys as page 1 has rows, so only an on-screen check shows the header as partial here.
+      await expect
+        .element(page.getByRole("checkbox").nth(0))
+        .toHaveAttribute("data-indeterminate", "true");
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("button", { name: "Select all" }));
+
+      await expect
+        .element(selectionButton)
+        .toHaveTextContent(`${data.length} selected`);
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("button", { name: "Next page" }));
+      await expect.element(page.getByText(data[5].name)).toBeVisible();
+
+      await expect.element(page.getByRole("checkbox").nth(1)).toBeChecked();
+      await expect(container).toBeAccessible();
+    });
+
+    test("Select all on a page with fewer selectable rows than another page", async () => {
+      const { container } = await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasPagination
+          hasRowSelection
+          isRowSelectionDisabled={(row) => row.id === data[5].id}
+          paginationType="paged"
+          resultsPerPage={3}
+          tableLayoutOptions={{
+            columns,
+          }}
+          totalRows={data.length}
+        />,
+      );
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("checkbox").nth(1));
+
+      await userEvent.click(page.getByRole("button", { name: "Next page" }));
+      await expect.element(page.getByText(data[3].name)).toBeVisible();
+      await userEvent.click(page.getByRole("button", { name: "Select all" }));
+
+      await userEvent.click(
+        page.getByRole("button", { name: "Previous page" }),
+      );
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+
+      // Page 1 has three selectable rows and the selection now holds three, but two of page 1's rows are still unchecked.
+      await expect
+        .element(page.getByRole("button", { name: "Select all" }))
+        .toHaveAttribute("aria-disabled", "false");
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent("3 selected");
+      await expect(container).toBeAccessible();
+    });
+
+    test("Select all with a disabled row that is already selected", async () => {
+      const mockOnRowSelectionChange = vi.fn();
+
+      const { container } = await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          initialRowSelection={{ [data[0].id]: true }}
+          isRowSelectionDisabled={(row) => row.id === data[0].id}
+          onRowSelectionChange={mockOnRowSelectionChange}
+          tableLayoutOptions={{
+            columns,
+          }}
+        />,
+      );
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("button", { name: "Select all" }));
+
+      await expect
+        .element(page.getByRole("button", { name: "More actions" }))
+        .toHaveTextContent(`${data.length} selected`);
+      expect(mockOnRowSelectionChange).toHaveBeenLastCalledWith(
+        Object.fromEntries(data.map((row) => [row.id, true])),
+      );
+      await expect.element(page.getByRole("checkbox").nth(1)).toBeChecked();
+      await expect(container).toBeAccessible();
+    });
+
     test("onChangeRowSelection is called when row selection changes", async () => {
       const mockOnRowSelectionChange = vi.fn();
 
@@ -744,6 +1185,197 @@ describe("DataView", { timeout: 10000 }, () => {
       expect(mockOnRowSelectionChange).toHaveBeenLastCalledWith({
         [data[0].id]: true,
         [data[1].id]: true,
+      });
+    });
+
+    describe("selection that includes rows that are not selectable on screen", () => {
+      // Five rows per page leaves the last row of the six-row fixture on page 2, so a selection can hold a row that is not on screen.
+      const resultsPerPage = 5;
+      const offPageRow = data[resultsPerPage];
+
+      test("some rows on the page selected, with the same total as the page size", async () => {
+        const { container } = await renderDataView(
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            hasRowSelection
+            resultsPerPage={resultsPerPage}
+            rowSelection={Object.fromEntries(
+              data.slice(1).map((person) => [person.id, true]),
+            )}
+            tableLayoutOptions={{
+              columns,
+            }}
+            totalRows={data.length}
+          />,
+        );
+
+        // nth(0) is the header "select all" checkbox. MUI exposes the partial state only through this attribute, not the native `indeterminate` property.
+        await expect
+          .element(page.getByRole("checkbox").nth(0))
+          .toHaveAttribute("data-indeterminate", "true");
+        await expect
+          .element(page.getByRole("checkbox").nth(0))
+          .not.toBeChecked();
+        await expect
+          .element(page.getByRole("button", { name: "Select all" }))
+          .toHaveAttribute("aria-disabled", "false");
+
+        await expect(container).toBeAccessible();
+      });
+
+      test("only a row on another page selected", async () => {
+        const { container } = await renderDataView(
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            hasRowSelection
+            resultsPerPage={resultsPerPage}
+            rowSelection={{ [offPageRow.id]: true }}
+            tableLayoutOptions={{
+              columns,
+            }}
+            totalRows={data.length}
+          />,
+        );
+
+        await expect
+          .element(page.getByRole("checkbox").nth(0))
+          .toHaveAttribute("data-indeterminate", "false");
+        await expect
+          .element(page.getByRole("checkbox").nth(0))
+          .not.toBeChecked();
+        await expect
+          .element(page.getByRole("button", { name: "Select all" }))
+          .toHaveAttribute("aria-disabled", "false");
+
+        await expect(container).toBeAccessible();
+      });
+
+      test("every row on the page selected, plus a row on another page", async () => {
+        const { container } = await renderDataView(
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            hasRowSelection
+            resultsPerPage={resultsPerPage}
+            rowSelection={Object.fromEntries(
+              data.map((person) => [person.id, true]),
+            )}
+            tableLayoutOptions={{
+              columns,
+            }}
+            totalRows={data.length}
+          />,
+        );
+
+        await expect
+          .element(page.getByRole("checkbox").nth(0))
+          .toHaveAttribute("data-indeterminate", "false");
+        await expect.element(page.getByRole("checkbox").nth(0)).toBeChecked();
+        await expect
+          .element(page.getByRole("button", { name: "Select all" }))
+          .toHaveAttribute("aria-disabled", "true");
+
+        await expect(container).toBeAccessible();
+      });
+
+      test("every selectable row on the page selected, with a disabled row and a row on another page", async () => {
+        const { container } = await renderDataView(
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            hasRowSelection
+            isRowSelectionDisabled={(row) => row.id === data[0].id}
+            resultsPerPage={resultsPerPage}
+            rowSelection={Object.fromEntries(
+              data.slice(1).map((person) => [person.id, true]),
+            )}
+            tableLayoutOptions={{
+              columns,
+            }}
+            totalRows={data.length}
+          />,
+        );
+
+        await expect
+          .element(page.getByRole("checkbox").nth(0))
+          .toHaveAttribute("data-indeterminate", "false");
+        await expect.element(page.getByRole("checkbox").nth(0)).toBeChecked();
+        await expect
+          .element(page.getByRole("button", { name: "Select all" }))
+          .toHaveAttribute("aria-disabled", "true");
+
+        await expect(container).toBeAccessible();
+      });
+
+      test("only a disabled row selected", async () => {
+        const { container } = await renderDataView(
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            hasRowSelection
+            isRowSelectionDisabled={(row) => row.id === data[0].id}
+            resultsPerPage={resultsPerPage}
+            rowSelection={{ [data[0].id]: true }}
+            tableLayoutOptions={{
+              columns,
+            }}
+            totalRows={data.length}
+          />,
+        );
+
+        await expect
+          .element(page.getByRole("checkbox").nth(0))
+          .toHaveAttribute("data-indeterminate", "false");
+        await expect
+          .element(page.getByRole("checkbox").nth(0))
+          .not.toBeChecked();
+        await expect
+          .element(page.getByRole("button", { name: "Select all" }))
+          .toHaveAttribute("aria-disabled", "false");
+
+        await expect(container).toBeAccessible();
+      });
+
+      test("a row selected on the first page, then the second page opened, with DataView owning the selection", async () => {
+        const { container } = await renderDataView(
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            hasPagination
+            hasRowSelection
+            resultsPerPage={resultsPerPage}
+            tableLayoutOptions={{
+              columns,
+            }}
+            totalRows={data.length}
+          />,
+        );
+
+        await userEvent.click(page.getByRole("checkbox").nth(1));
+        await userEvent.click(page.getByRole("button", { name: "Next page" }));
+
+        await expect.element(page.getByText(offPageRow.name)).toBeVisible();
+        await expect
+          .element(page.getByRole("button", { name: "More actions" }).first())
+          .toHaveTextContent("1 selected");
+        await expect
+          .element(page.getByRole("checkbox").nth(0))
+          .toHaveAttribute("data-indeterminate", "false");
+        await expect
+          .element(page.getByRole("checkbox").nth(0))
+          .not.toBeChecked();
+        await expect
+          .element(page.getByRole("button", { name: "Select all" }))
+          .toHaveAttribute("aria-disabled", "false");
+
+        await expect(container).toBeAccessible();
       });
     });
   });
@@ -914,6 +1546,228 @@ describe("DataView", { timeout: 10000 }, () => {
             .getByRole("cell", { name: data[5].name, exact: true }),
         )
         .toBeVisible();
+    });
+
+    describe("with a custom getRowId", () => {
+      // A prefix makes every id differ from row.id, so a path that sends or matches row.id finds no row.
+      const getPrefixedRowId = (row: Person) => `person-${row.id}`;
+
+      // The drag handle's accessible name goes on with keyboard instructions after "Drag row", so only its start is matched.
+      const DRAG_HANDLE_NAME = /^Drag row/;
+
+      const rowNames = data.map((row) => row.name);
+
+      const getRowNames = () =>
+        page
+          .getByRole("rowgroup")
+          .nth(1)
+          .getByRole("cell")
+          .elements()
+          .map((cell) => cell.textContent)
+          .filter((text) => rowNames.includes(text));
+
+      const renderReorderableTable = async ({
+        onReorderRows,
+      }: {
+        onReorderRows: (args: DataOnReorderRowsType) => void;
+      }) =>
+        renderDataView(
+          <DataView
+            availableLayouts={["table"]}
+            getData={getData}
+            getRowId={getPrefixedRowId}
+            hasRowReordering
+            onReorderRows={onReorderRows}
+            tableLayoutOptions={{
+              columns,
+            }}
+            totalRows={data.length}
+          />,
+        );
+
+      test("drag handle moved with the keyboard", async () => {
+        const onReorderRows = vi.fn();
+
+        const { container } = await renderReorderableTable({ onReorderRows });
+
+        page
+          .getByRole("button", { name: DRAG_HANDLE_NAME })
+          .first()
+          .element()
+          .focus();
+        await userEvent.keyboard(" ");
+        await userEvent.keyboard("{ArrowDown}");
+        await userEvent.keyboard(" ");
+
+        await vi.waitFor(() => {
+          expect(onReorderRows).toHaveBeenLastCalledWith({
+            rowId: "person-1",
+            newRowIndex: 1,
+          });
+        });
+        expect(onReorderRows).toHaveBeenCalledTimes(1);
+        await expect
+          .poll(getRowNames)
+          .toStrictEqual([
+            data[1].name,
+            data[0].name,
+            data[2].name,
+            data[3].name,
+            data[4].name,
+            data[5].name,
+          ]);
+        await expect(container).toBeAccessible();
+      });
+
+      test("drag handle dragged with the mouse", async () => {
+        const onReorderRows = vi.fn();
+
+        const { container } = await renderReorderableTable({ onReorderRows });
+
+        await userEvent.dragAndDrop(
+          page.getByRole("button", { name: DRAG_HANDLE_NAME }).first(),
+          page.getByRole("row").nth(3),
+        );
+
+        await vi.waitFor(() => {
+          expect(onReorderRows).toHaveBeenLastCalledWith({
+            rowId: "person-1",
+            newRowIndex: 2,
+          });
+        });
+        await expect
+          .poll(getRowNames)
+          .toStrictEqual([
+            data[1].name,
+            data[2].name,
+            data[0].name,
+            data[3].name,
+            data[4].name,
+            data[5].name,
+          ]);
+        await expect(container).toBeAccessible();
+      });
+
+      test("table row menu Send to back", async () => {
+        const onReorderRows = vi.fn();
+
+        const { container } = await renderReorderableTable({ onReorderRows });
+
+        await userEvent.click(
+          page.getByRole("button", { name: "More actions" }).first(),
+        );
+        await userEvent.click(
+          page.getByRole("menuitem", { name: "Send to back" }),
+        );
+
+        expect(onReorderRows).toHaveBeenLastCalledWith({
+          rowId: "person-1",
+          newRowIndex: data.length - 1,
+        });
+        await expect
+          .poll(getRowNames)
+          .toStrictEqual([
+            data[1].name,
+            data[2].name,
+            data[3].name,
+            data[4].name,
+            data[5].name,
+            data[0].name,
+          ]);
+        await expect(container).toBeAccessible();
+      });
+
+      test("grid card menu Bring forward", async () => {
+        const onReorderRows = vi.fn();
+
+        const { container } = await renderDataView(
+          <DataView
+            availableLayouts={["grid"]}
+            cardLayoutOptions={{
+              itemProps: gridItemProps,
+            }}
+            getData={getData}
+            getRowId={getPrefixedRowId}
+            hasRowReordering
+            onReorderRows={onReorderRows}
+            totalRows={data.length}
+          />,
+        );
+
+        await userEvent.click(
+          page.getByRole("button", { name: "More actions" }).nth(1),
+        );
+        await userEvent.click(
+          page.getByRole("menuitem", { name: "Bring forward" }),
+        );
+
+        expect(onReorderRows).toHaveBeenLastCalledWith({
+          rowId: "person-2",
+          newRowIndex: 0,
+        });
+        await expect
+          .poll(() =>
+            page
+              .getByRole("listitem")
+              .elements()
+              .map((card) => card.textContent),
+          )
+          .toStrictEqual(
+            [data[1], data[0], data[2], data[3], data[4], data[5]].map(
+              (row) => `Grid card${row.name}`,
+            ),
+          );
+        await expect(container).toBeAccessible();
+      });
+    });
+
+    test("numeric ids with the default getRowId, moved with the keyboard", async () => {
+      type NumericIdPerson = Omit<Person, "id"> & { id: number };
+
+      const numericIdData: NumericIdPerson[] = data.map((row) => ({
+        ...row,
+        id: Number(row.id),
+      }));
+      const numericIdColumns: DataTableColumn<NumericIdPerson>[] = [
+        { accessorKey: "name", header: "Name" },
+      ];
+      const onReorderRows = vi.fn();
+
+      await renderDataView(
+        <DataView
+          availableLayouts={["table"]}
+          getData={() => numericIdData}
+          hasRowReordering
+          onReorderRows={onReorderRows}
+          tableLayoutOptions={{
+            columns: numericIdColumns,
+          }}
+          totalRows={numericIdData.length}
+        />,
+      );
+
+      page
+        .getByRole("button", { name: /^Drag row/ })
+        .first()
+        .element()
+        .focus();
+      await userEvent.keyboard(" ");
+      await userEvent.keyboard("{ArrowDown}");
+      await userEvent.keyboard(" ");
+
+      // DataView's default getRowId passes a numeric id through unconverted, so onReorderRows receives a number.
+      await vi.waitFor(() => {
+        expect(onReorderRows).toHaveBeenLastCalledWith({
+          rowId: 1,
+          newRowIndex: 1,
+        });
+      });
+      await expect
+        .element(page.getByRole("row").nth(1))
+        .toHaveTextContent(data[1].name);
+      await expect
+        .element(page.getByRole("row").nth(2))
+        .toHaveTextContent(data[0].name);
     });
 
     test("can expand table rows", async () => {
@@ -1358,6 +2212,72 @@ describe("DataView", { timeout: 10000 }, () => {
       await expect.element(prevPageButton).not.toBeDisabled();
       await expect.element(nextPageButton).toBeDisabled();
     });
+
+    test("inline onPaginationChange while the consumer resets currentPage during render", async () => {
+      function PingPongHarness() {
+        const [filterCount, setFilterCount] = useState(0);
+        const [currentPage, setCurrentPage] = useState(1);
+        const [previousFilterCount, setPreviousFilterCount] =
+          useState(filterCount);
+
+        // Resetting state during render when an input changes is a documented React pattern, so DataView must not need the reset moved into an effect.
+        if (previousFilterCount !== filterCount) {
+          setPreviousFilterCount(filterCount);
+
+          if (currentPage !== 1) {
+            setCurrentPage(1);
+          }
+        }
+
+        const changeFilter = useCallback(
+          () => setFilterCount((count) => count + 1),
+          [],
+        );
+
+        return (
+          <>
+            <Button
+              label="Change filter"
+              onClick={changeFilter}
+              variant="primary"
+            />
+
+            <DataView
+              availableLayouts={PING_PONG_LAYOUTS}
+              currentPage={currentPage}
+              getData={getData}
+              hasPagination
+              // eslint-disable-next-line memoized-props/no-new-function-as-prop -- asserts DataView handles a new onPaginationChange identity on every render
+              onPaginationChange={({ pageIndex }) => setCurrentPage(pageIndex)}
+              paginationType="paged"
+              resultsPerPage={2}
+              tableLayoutOptions={PING_PONG_TABLE_OPTIONS}
+            />
+          </>
+        );
+      }
+
+      const { container } = await renderDataView(<PingPongHarness />);
+
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(page.getByRole("button", { name: "Next page" }));
+
+      await expect.element(page.getByText(data[2].name)).toBeVisible();
+      await expect(container).toBeAccessible();
+
+      await userEvent.click(
+        page.getByRole("button", { name: "Change filter" }),
+      );
+
+      await expect.element(page.getByText(data[0].name)).toBeVisible();
+      await expect
+        .element(page.getByText(data[2].name))
+        .not.toBeInTheDocument();
+
+      await expect(container).toBeAccessible();
+    });
   });
 
   describe("Controlled state props", () => {
@@ -1767,6 +2687,30 @@ describe(DataTable.displayName!, () => {
       .toBeVisible();
     await expect
       .element(page.getByRole("button", { name: "More actions" }).first())
+      .toBeVisible();
+  });
+
+  test("selection labels in a non-English language", async () => {
+    await renderWithOdysseyProvider(
+      <TranslationProvider<"ar">
+        languageCode="ar"
+        translationOverrides={translationOverrides}
+      >
+        <DataView
+          availableLayouts={["table"]}
+          getData={getData}
+          hasRowSelection
+          tableLayoutOptions={{ columns }}
+        />
+      </TranslationProvider>,
+      { providerProps: { hasTranslationProvider: false } },
+    );
+
+    await expect
+      .element(page.getByRole("checkbox", { name: "ar select all" }))
+      .toBeVisible();
+    await expect
+      .element(page.getByRole("checkbox", { name: "ar select row" }).first())
       .toBeVisible();
   });
 });

@@ -1,0 +1,7 @@
+{
+  "src/getTranslationServices.browser.test.tsx": {
+    "memoized-props/no-new-object-as-prop": {
+      "count": 1
+    }
+  }
+}

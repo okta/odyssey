@@ -45,4 +45,57 @@ describe(reorderDataRowsLocally.name, () => {
       }),
     ).toStrictEqual([{ id: "a" }, { id: "b" }, { id: "c" }]);
   });
+
+  test("rowId taken from a getRowId", () => {
+    expect(
+      reorderDataRowsLocally({
+        currentData: [{ id: "a" }, { id: "b" }, { id: "c" }],
+        getRowId: (row) => `row-${row.id}`,
+        rowId: "row-c",
+        newRowIndex: 0,
+      }),
+    ).toStrictEqual([{ id: "c" }, { id: "a" }, { id: "b" }]);
+  });
+
+  test("a raw row.id with a getRowId given", () => {
+    expect(
+      reorderDataRowsLocally({
+        currentData: [{ id: "a" }, { id: "b" }, { id: "c" }],
+        getRowId: (row) => `row-${row.id}`,
+        rowId: "c",
+        newRowIndex: 0,
+      }),
+    ).toStrictEqual([{ id: "a" }, { id: "b" }, { id: "c" }]);
+  });
+
+  test("a numeric id with a string rowId", () => {
+    expect(
+      reorderDataRowsLocally({
+        currentData: [{ id: 1 }, { id: 2 }, { id: 3 }],
+        rowId: "3",
+        newRowIndex: 0,
+      }),
+    ).toStrictEqual([{ id: 3 }, { id: 1 }, { id: 2 }]);
+  });
+
+  test("a getRowId that returns nothing", () => {
+    expect(
+      reorderDataRowsLocally({
+        currentData: [{ name: "a" }, { name: "b" }, { name: "c" }],
+        getRowId: () => undefined as unknown as string,
+        rowId: "2",
+        newRowIndex: 0,
+      }),
+    ).toStrictEqual([{ name: "c" }, { name: "a" }, { name: "b" }]);
+  });
+
+  test("rows with no id and no getRowId", () => {
+    expect(
+      reorderDataRowsLocally({
+        currentData: [{ name: "a" }, { name: "b" }, { name: "c" }],
+        rowId: "2",
+        newRowIndex: 0,
+      }),
+    ).toStrictEqual([{ name: "c" }, { name: "a" }, { name: "b" }]);
+  });
 });

@@ -10,65 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import type { Preview } from "@storybook/react-vite";
-
-import {
-  ABSOLUTE_MINIMUM_HEIGHT,
-  ABSOLUTE_MINIMUM_WIDTH,
-} from "@okta/odyssey-react-mui";
-import basePreview, {
+export {
+  default,
   globalTypes,
 } from "@okta/odyssey-storybook-preset/preview";
-
-import {
-  STANDARD_APPLITOOLS_HEIGHT,
-  STANDARD_APPLITOOLS_WIDTH,
-} from "../src/tools/applitoolsBrowserSize.js";
-
-export { globalTypes };
-
-// The host extends the shared preset preview with its own story ordering and the single-axis Applitools reflow viewports its remaining stories rely on for visual regression. Both move into the preset (or per-package VRT config) as the fleet migrates; kept here so the host behaves exactly as before today.
-const preview = {
-  ...basePreview,
-
-  parameters: {
-    ...basePreview.parameters,
-
-    options: {
-      storySort: {
-        method: "alphabetical",
-        order: [
-          "Introduction (README)",
-          "Docs",
-          "Odyssey Core",
-          "Unified UI Shell",
-        ],
-        locales: "en",
-      },
-    },
-
-    viewport: {
-      options: {
-        ...basePreview.parameters.viewport.options,
-        compactHeight: {
-          name: `Compact height (${STANDARD_APPLITOOLS_WIDTH}×${ABSOLUTE_MINIMUM_HEIGHT})`,
-          styles: {
-            height: `${ABSOLUTE_MINIMUM_HEIGHT}px`,
-            width: `${STANDARD_APPLITOOLS_WIDTH}px`,
-          },
-          type: "other",
-        },
-        compactWidth: {
-          name: `Compact width (${ABSOLUTE_MINIMUM_WIDTH}×${STANDARD_APPLITOOLS_HEIGHT})`,
-          styles: {
-            height: `${STANDARD_APPLITOOLS_HEIGHT}px`,
-            width: `${ABSOLUTE_MINIMUM_WIDTH}px`,
-          },
-          type: "mobile",
-        },
-      },
-    },
-  },
-} satisfies Preview;
-
-export default preview;
